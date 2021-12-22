@@ -1,0 +1,10 @@
+$image_border_radius: 4px;
+$image_width: 300px;
+.feature__image {
+  width: $image_width;
+  border-radius: $image_border_radius;
+}
+
+.block-type--feature {
+  margin-bottom: 30px !important;
+}

@@ -1,0 +1,96 @@
+$text_color: #e74e25;
+$background_color: #0e1b20;
+$hide_on_desktop: false;
+$position: overlay;
+$hide_on_mobile: false;
+$mobile_header_dropdown_color: #fbf5e4;
+$mobile_header_text_color: "";
+$mobile_text_alignment: center;
+$font_size_desktop: 18px;
+$font_size_mobile: 16px;
+$logo_width: 120px;
+$btn_background_color: #e74e25;
+$btn_text_color: #fbf5e4;
+$btn_border_radius: 50px;
+
+.header {
+  font-size: $font_size_mobile;
+  background-color: $background_color;
+}
+.header-mobile {
+  background-color: $background_color;
+}
+.header a.link-list__link {
+  color: $text_color !important;
+}
+.header a.link-list__link:hover {
+  color: $text_color;
+}
+.header .dropdown__trigger {
+  color: $text_color !important;
+}
+.header .dropdown__trigger:hover {
+  color: $text_color;
+}
+.header .dropdown__item a {
+  color: $text_color;
+}
+.header .user__login a {
+  color: $text_color !important;
+}
+.header .hamburger__slice {
+  background-color: $text_color;
+}
+@media (min-width: 768px) {
+  .header {
+    font-size: $font_size_desktop;
+  }
+  .header .dropdown__menu {
+    background-color: $background_color;
+  }
+}
+@media (max-width: 767px) {
+  .header a.link-list__link {
+    text-align: $mobile_text_alignment;
+    color: $mobile_header_text_color;
+  }
+  .header .dropdown__item a {
+    text-align: $mobile_text_alignment;
+    color: $mobile_header_text_color;
+  }
+  .header .user__login a {
+    text-align: $mobile_text_alignment;
+    color: $mobile_header_text_color;
+  }
+  .header--overlay .header__content--mobile {
+    padding: 20px 0;
+  }
+  // {% if section.settings.background_color != section.settings.mobile_header_dropdown_color %}
+  //   .header__content--mobile  {
+  //     padding: 20px 0;
+  //   }
+  // {% endif %}
+  .header__content--mobile {
+    text-align: $mobile_text_alignment;
+    background-color: $mobile_header_dropdown_color;
+  }
+}
+//imglogo
+.header .logo__image {
+  background-color: #0e1b20;
+  line-height: 1;
+  display: block;
+  width: $logo_width;
+}
+
+.header .btn {
+  border-color: $btn_background_color !important;
+  border-radius: $btn_border_radius;
+  color: $btn_text_color;
+  background-color: $btn_background_color;
+}
+
+.header .btn-outline {
+  color: $btn_background_color !important;
+  background: transparent;
+}
