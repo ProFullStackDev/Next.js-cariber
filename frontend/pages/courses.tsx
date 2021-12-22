@@ -115,7 +115,7 @@ export default function Courses() {
     ]
 
     return (
-        <div>
+        <div className="bg-img">
             <Header></Header>
             <div className="sizer ">
                 <div className="container ">
@@ -138,7 +138,7 @@ export default function Courses() {
                         {features.map((v, i) => {
                             return (
                                 <div key={i} kjb-settings-id="sections_1612934128394_blocks_1612934128393_1_settings_width" id="block-1612934128393_1" className="block-type--feature text-center col-3">
-                                    <div className="block box-shadow-large background-light aos-init aos-animate" data-aos="none" data-aos-delay="0" data-aos-duration="0">
+                                    <div className="block box-shadow-large background-light aos-init aos-animate" data-aos="none" data-aos-delay="0" data-aos-duration="0" style={{backgroundColor: "#ffffff", borderRadius: "4px"}}>
                                         <div kjb-settings-id="sections_1612934128394_blocks_1612934128393_1_settings_width" id="block-1612934128393_1" className="block-type--featuretext-centercol-3" data-reveal-event="" data-reveal-offset="" data-reveal-units="seconds">
                                             <div className="feature">
                                                 <a href={v.link}>

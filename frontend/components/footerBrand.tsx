@@ -1,4 +1,4 @@
-export default function FooterBeand() {
+export default function FooterBrand() {
     return (
         <div className="footer-beand">
             <div kjb-settings-id="sections_1615023875304_settings_background_color" className="section background-dark" data-reveal-event="" data-reveal-offset="" data-reveal-units="seconds">
