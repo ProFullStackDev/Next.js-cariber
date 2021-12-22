@@ -1,5 +1,6 @@
 $image-border-radius: 4px;
 $image-width: 300px;
+$feature-height: 272.05px;
 
 .feature--image {
   width: $image-width;
@@ -7,10 +8,13 @@ $image-width: 300px;
 }
 
 .block-type--feature {
+  height: $feature-height;
   margin-bottom: 30px !important;
 }
 
-.bg-img {
-  background-image: url(https://kajabi-storefronts-production.kajabi-cdn.com/kajabi-storefronts-production/themes/3617585/settings-images/zcyoCkKlSnurUp9sR2M5-file.jpg);
+.bg-courses {
+  background-image: url(https://kajabi-storefronts-production.kajabi-cdn.com/kajabi-storefronts-production/themes/3617585/settings_images/zcyoCkKlSnurUp9sR2M5_file.jpg);
   background-position: top;
+  background-size: cover;
+  background-attachment: fixed;
 }

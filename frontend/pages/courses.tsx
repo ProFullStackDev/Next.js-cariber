@@ -115,7 +115,7 @@ export default function Courses() {
     ]
 
     return (
-        <div className="bg-img">
+        <div className="bg-courses">
             <Header/>
             <div className="sizer">
                 <div className="container">
@@ -139,7 +139,7 @@ export default function Courses() {
                             return (
                                 <div key={i} className="block-type--feature text-center col-3">
                                     <div className="block box-shadow-large background-light aos-init aos-animate" data-aos="none" data-aos-delay="0" data-aos-duration="0" style={{backgroundColor: "#ffffff", borderRadius: "4px"}}>
-                                        <div className="block-type--featuretext-centercol-3">
+                                        <div style={{padding: "15px"}}>
                                             <div className="feature">
                                                 <a href={v.link}>
                                                     <img className="feature--image" src={v.img} alt=""></img>
