@@ -1,96 +1,106 @@
-$text_color: #e74e25;
-$background_color: #0e1b20;
-$hide_on_desktop: false;
+$text-color: #e74e25;
+$background-color: #0e1b20;
+$hide-on-desktop: false;
 $position: overlay;
-$hide_on_mobile: false;
-$mobile_header_dropdown_color: #fbf5e4;
-$mobile_header_text_color: "";
-$mobile_text_alignment: center;
-$font_size_desktop: 18px;
-$font_size_mobile: 16px;
-$logo_width: 120px;
-$btn_background_color: #e74e25;
-$btn_text_color: #fbf5e4;
-$btn_border_radius: 50px;
+$hide-on-mobile: false;
+$mobile-header-dropdown-color: #fbf5e4;
+$mobile-header-text-color: "";
+$mobile-text-alignment: center;
+$font-size-desktop: 18px;
+$font-size-mobile: 16px;
+$logo-width: 120px;
+$btn-background-color: #e74e25;
+$btn-text-color: #fbf5e4;
+$btn-border-radius: 50px;
 
 .header {
-  font-size: $font_size_mobile;
-  background-color: $background_color;
+  font-size: $font-size-mobile;
+  background-color: $background-color;
 }
+
 .header-mobile {
-  background-color: $background_color;
+  background-color: $background-color;
 }
-.header a.link-list__link {
-  color: $text_color !important;
+
+.header a.link-list--link {
+  color: $text-color !important;
 }
-.header a.link-list__link:hover {
-  color: $text_color;
+
+.header a.link-list--link:hover {
+  color: $text-color;
 }
-.header .dropdown__trigger {
-  color: $text_color !important;
+
+.header .dropdown--trigger {
+  color: $text-color !important;
 }
-.header .dropdown__trigger:hover {
-  color: $text_color;
+
+.header .dropdown--trigger:hover {
+  color: $text-color;
 }
-.header .dropdown__item a {
-  color: $text_color;
+
+.header .dropdown--item a {
+  color: $text-color;
 }
-.header .user__login a {
-  color: $text_color !important;
+
+.header .user--login a {
+  color: $text-color !important;
 }
-.header .hamburger__slice {
-  background-color: $text_color;
+
+.header .hamburger--slice {
+  background-color: $text-color;
 }
+
 @media (min-width: 768px) {
   .header {
-    font-size: $font_size_desktop;
+    font-size: $font-size-desktop;
   }
-  .header .dropdown__menu {
-    background-color: $background_color;
+
+  .header .dropdown--menu {
+    background-color: $background-color;
   }
 }
+
 @media (max-width: 767px) {
-  .header a.link-list__link {
-    text-align: $mobile_text_alignment;
-    color: $mobile_header_text_color;
+  .header a.link-list--link {
+    text-align: $mobile-text-alignment;
+    color: $mobile-header-text-color;
   }
-  .header .dropdown__item a {
-    text-align: $mobile_text_alignment;
-    color: $mobile_header_text_color;
+
+  .header .dropdown--item a {
+    text-align: $mobile-text-alignment;
+    color: $mobile-header-text-color;
   }
-  .header .user__login a {
-    text-align: $mobile_text_alignment;
-    color: $mobile_header_text_color;
+
+  .header .user--login a {
+    text-align: $mobile-text-alignment;
+    color: $mobile-header-text-color;
   }
-  .header--overlay .header__content--mobile {
+
+  .header--overlay .header--content--mobile {
     padding: 20px 0;
   }
-  // {% if section.settings.background_color != section.settings.mobile_header_dropdown_color %}
-  //   .header__content--mobile  {
-  //     padding: 20px 0;
-  //   }
-  // {% endif %}
-  .header__content--mobile {
-    text-align: $mobile_text_alignment;
-    background-color: $mobile_header_dropdown_color;
+
+  .header--content--mobile {
+    text-align: $mobile-text-alignment;
+    background-color: $mobile-header-dropdown-color;
   }
 }
-//imglogo
-.header .logo__image {
+
+.header .logo--image {
   background-color: #0e1b20;
   line-height: 1;
   display: block;
-  width: $logo_width;
+  width: $logo-width;
 }
 
 .header .btn {
-  border-color: $btn_background_color !important;
-  border-radius: $btn_border_radius;
-  color: $btn_text_color;
-  background-color: $btn_background_color;
+  border-color: $btn-background-color !important;
+  border-radius: $btn-border-radius;
+  color: $btn-text-color;
+  background-color: $btn-background-color;
 }
 
 .header .btn-outline {
-  color: $btn_background_color !important;
+  color: $btn-background-color !important;
   background: transparent;
 }

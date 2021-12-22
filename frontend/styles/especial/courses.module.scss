@@ -1,8 +1,9 @@
-$image_border_radius: 4px;
-$image_width: 300px;
-.feature__image {
-  width: $image_width;
-  border-radius: $image_border_radius;
+$image-border-radius: 4px;
+$image-width: 300px;
+
+.feature--image {
+  width: $image-width;
+  border-radius: $image-border-radius;
 }
 
 .block-type--feature {
@@ -10,6 +11,6 @@ $image_width: 300px;
 }
 
 .bg-img {
-  background-image: url(https://kajabi-storefronts-production.kajabi-cdn.com/kajabi-storefronts-production/themes/3617585/settings_images/zcyoCkKlSnurUp9sR2M5_file.jpg);
+  background-image: url(https://kajabi-storefronts-production.kajabi-cdn.com/kajabi-storefronts-production/themes/3617585/settings-images/zcyoCkKlSnurUp9sR2M5-file.jpg);
   background-position: top;
 }
