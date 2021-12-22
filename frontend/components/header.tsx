@@ -1,13 +1,13 @@
 import Link from 'next/link'
 import Image from 'next/image'
 
-interface menu {
+interface Menu {
   url: string,
   name: string
 }
 
 export default function Header() {
-  const menu: menu[] = [
+  const menu: Menu[] = [
     { url: '/courses', name: 'คอร์สทั้งหมด' },
     { url: '/blog', name: 'บทความ' },
     { url: '/review', name: 'รีวิว' }

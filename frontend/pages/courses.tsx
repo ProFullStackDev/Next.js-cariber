@@ -1,7 +1,7 @@
 import Footer from "../components/footer"
 import Header from "../components/header"
 
-interface feature {
+interface Feature {
     img: string,
     link: string,
     name: string,
@@ -9,7 +9,7 @@ interface feature {
 }
 
 export default function Courses() {
-    const features: feature[] = [
+    const features: Feature[] = [
         {
             img: "https://kajabi-storefronts-production.kajabi-cdn.com/kajabi-storefronts-production/themes/3617585/settings_images/hDwO723fRluyELoUEVT7__V2.jpg",
             link: "https://www.cariber.co/maneerut-anulomsombut",
