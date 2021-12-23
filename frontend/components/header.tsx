@@ -26,10 +26,10 @@ export default function Header() {
             </a>
             <div className="header-block header-switch-content header-block-menu media-body">
               <div className="link-list justify-content-right">
-                {menu.map((v, i) => {
+                {menu.map((value, index) => {
                   return (
-                    <a key={i} className="link-list-link" href={v.url} rel="noopener">
-                      {v.name}
+                    <a key={index} className="link-list-link" href={value.url} rel="noopener">
+                      {value.name}
                     </a>
                   )
                 })}

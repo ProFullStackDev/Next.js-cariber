@@ -144,16 +144,16 @@ export default function Courses() {
               </div>
             </div>
             <div className="block-break"></div>
-            {features.map((v, i) => {
+            {features.map((value, index) => {
               return (
-                <div key={i} className="block-type-feature text-center col-3">
+                <div key={index} className="block-type-feature text-center col-3">
                   <div className="block box-shadow-large background-light aos-init aos-animate"
                     style={{ backgroundColor: "#ffffff", borderRadius: "4px" }}>
                     <div style={{ padding: "15px" }}>
                       <div className="feature">
-                        <a href={v.link}>
+                        <a href={value.link}>
                           <Image className="feature-image"
-                            src={v.img}
+                            src={value.img}
                             alt=""
                             width={262.5}
                             height={147.65} />
@@ -163,7 +163,7 @@ export default function Courses() {
                             <a href="/thakorn-piyapan">
                               <span style={{ color: '#223f99' }}>
                                 <strong>
-                                  {v.name}
+                                  {value.name}
                                 </strong>
                               </span>
                             </a>
@@ -171,7 +171,7 @@ export default function Courses() {
                           <h6 style={{ textAlign: 'center' }}>
                             <a href="/thakorn-piyapan">
                               <strong>
-                                {v.career}
+                                {value.career}
                               </strong>
                             </a>
                           </h6>
