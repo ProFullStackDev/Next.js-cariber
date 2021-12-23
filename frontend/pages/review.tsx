@@ -22,15 +22,15 @@ export default function Review() {
                                 </div>
                             </div>
                         </div>
-                        <div id="block-vision" className="block-type--text text-center col-7" style={{ marginBottom: 50 }}>
+                        <div id="block-titel" className="block-type--text text-center col-7" style={{ marginBottom: 50 }}>
                             <div className="block box-shadow-large background-unrecognized aos-init aos-animate">
                                 <h1>
-                                    <span style={{ color: '#e74e25', fontSize: 80 }}>
+                                    <span style={{ color: '#e74e25' }}>
                                         Wall of Love
                                     </span>
                                 </h1>
                                 <h4>
-                                    <span style={{ color: '#e74e25', fontSize: 20 }}>
+                                    <span style={{ color: '#e74e25' }}>
                                         ผู้เรียนมีความเห็นอย่างไรกับ Cariber
                                     </span>
                                 </h4>

@@ -2,8 +2,22 @@
     background-color: #fbf5e4;
 }
 
-#block-vision .block {
+#block-titel .block {
     padding: 30px;
+}
+
+#block-titel h1 {
+    font-size: 80px;
+    @media (max-width: 768px) {
+        font-size: 28px;
+    }
+}
+
+#block-titel h4 {
+    font-size: 20px;
+    @media (max-width: 768px) {
+        font-size: 18px;
+    }
 }
 
 #block-person-1 .block {
