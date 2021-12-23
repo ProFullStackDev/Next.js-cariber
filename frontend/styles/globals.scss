@@ -4400,6 +4400,10 @@ div[id^="section-"] {
 
 .image {
   position: relative;
+
+  @media (max-width: 768px) {
+    margin-top: 50px;
+  }
 }
 
 .image--overlay {
@@ -4526,6 +4530,6 @@ a,
   font-family: "MyFont", sans-serif;
 }
 
-.bg-courses{
+.bg-courses {
   background-color: #0d95e8;
 }

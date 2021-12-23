@@ -1,13 +1,16 @@
 import type { NextPage } from 'next'
-import Head from 'next/head'
-import Script from 'next/script'
+import { useEffect } from 'react'
+import { useRouter } from 'next/router'
 
 const Index: NextPage = () => {
+  const router = useRouter()
+
+  useEffect(() => {
+    router.push('/courses')
+  })
+
   return (
     <div>
-      <Head>
-        {/* <Script src="https://kit.fontawesome.com/1b1fb3f1fb.js" crossOrigin="anonymous"></Script> */}
-      </Head>
     </div>
   )
 }

@@ -1,6 +1,3 @@
-import Link from 'next/link'
-import Image from 'next/image'
-
 interface Menu {
   url: string,
   name: string
@@ -10,7 +7,7 @@ export default function Header() {
   const menu: Menu[] = [
     { url: '/courses', name: 'คอร์สทั้งหมด' },
     { url: '/blog', name: 'บทความ' },
-    { url: '/review', name: 'รีวิว' }
+    { url: '/review', name: 'รีวิว' },
   ];
 
   return (
@@ -19,7 +16,8 @@ export default function Header() {
         <div className="header--content header--content--desktop background-dark">
           <div className="container header--container media">
             <a className="logo" href="">
-              <img className="logo--image" src="https://kajabi-storefronts-production.kajabi-cdn.com/kajabi-storefronts-production/themes/3617585/settings_images/gloao1YVR4yKwUK3mHDJ_Logo-01-05.png"/>
+              <img className="logo--image"
+                src="https://kajabi-storefronts-production.kajabi-cdn.com/kajabi-storefronts-production/themes/3617585/settings_images/gloao1YVR4yKwUK3mHDJ_Logo-01-05.png" />
             </a>
             <div className="header--block header--switch-content header--block--menu media--body">
               <div className="link-list justify-content-right">
@@ -33,11 +31,17 @@ export default function Header() {
               </div>
             </div>
             <div className="header--block header--switch-content header--block--cta">
-              <a className="btn btn-small btn-solid btn- background-dark" href="{{ block.settings.btn-action }}"> ซื้อแพ็กเกจรายปี </a>
+              <a className="btn btn-small btn-solid btn- background-dark" href="">
+                ซื้อแพ็กเกจรายปี
+              </a>
             </div>
             <div className="header--block header--switch-content header--block--user header--block--mr0">
               <div className="user">
-                <span className="user--login"><a href="/login">เข้าสู่ระบบ</a></span>
+                <span className="user--login">
+                  <a href="/login">
+                    เข้าสู่ระบบ
+                  </a>
+                </span>
               </div>
             </div>
             <div className="hamburger hidden--desktop">
@@ -50,8 +54,7 @@ export default function Header() {
             </div>
           </div>
         </div>
-        <div className="header--content header--content--mobile background-{{ section.settings.mobile-header-dropdown-color | color-scheme-class }}"></div>
       </div>
-    </header >
+    </header>
   )
 }

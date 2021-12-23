@@ -56,22 +56,6 @@ $social-icons-background-color: #ffffff;
     background-color: $background-color;
 }
 
-//   {% if section.settings.vertical-layout == true %}
-//     .powered-by {
-//       text-align: center;
-//       padding-top: 0;
-//     }
-//   {% endif %}
-//   {% if colorSchemeClass == "dark" %}
-//     .powered-by a {
-//       color: #fff;
-//     }
-//   {% else %}
-//     .powered-by a {
-//       color: {{ settings.color-body }};
-//     }
-//   {% endif %}
-
 .footer .logo--image {
     line-height: 1;
     display: block;
