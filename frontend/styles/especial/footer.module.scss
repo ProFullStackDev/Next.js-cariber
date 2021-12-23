@@ -1,0 +1,75 @@
+$text-color: #fbf5e3;
+$background-color: #0e1b20;
+$hide-on-desktop: false;
+$vertical-layout: false;
+$hide-on-mobile: false;
+$font-size-desktop: 16px;
+$font-size-mobile: 14px;
+$logo-text-color: "";
+$logo-width: 40px;
+$social-icons-text-color: #fbf5e3;
+$social-icons-background-color: #ffffff;
+
+#section-footer {
+    -webkit-box-flex: 1;
+    -ms-flex-positive: 1;
+    flex-grow: 1;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+}
+
+.footer {
+    -webkit-box-flex: 1;
+    -ms-flex-positive: 1;
+    flex-grow: 1;
+}
+
+.footer,
+.footer-block {
+    font-size: $font-size-mobile;
+    color: $text-color;
+    background-color: $background-color;
+}
+
+.footer .logo-text {
+    color: $logo-text-color;
+}
+
+.footer a.link-list-link {
+    color: $text-color;
+}
+
+.footer .link-list-link:hover {
+    color: $text-color;
+}
+
+@media (min-width: 768px) {
+
+    .footer,
+    .footer-block {
+        font-size: $font-size-desktop;
+    }
+}
+
+.powered-by {
+    background-color: $background-color;
+}
+
+.footer .logo-image {
+    line-height: 1;
+    display: block;
+    width: $logo-width;
+}
+
+.footer .social-icons-icon {
+    color: $social-icons-text-color !important;
+}
+
+.footer .social-icons-round .social-icons-icon {
+    background-color: $social-icons-background-color;
+}
+
+.footer .social-icons-square .social-icons-icon {
+    background-color: $social-icons-background-color;
+}
