@@ -1,20 +1,24 @@
+import Image from "next/image"
+
 export default function FooterBrand() {
   return (
-    <div className="footer-beand">
+    <div className="footer-brand">
       <div className="section background-dark">
         <div className="sizer">
           <div className="container">
             <div className="row align-items-center justify-content-center">
-              <div className="block-type--image text-col-5">
+              <div className="block-type-image text-col-5">
                 <div className="block box-shadow-none background-unrecognized aos-init aos-animate">
                   <div className="image">
-                    <img className="image--image"
+                    <Image className="image-image"
                       src="https://kajabi-storefronts-production.kajabi-cdn.com/kajabi-storefronts-production/themes/3617585/settings_images/gVlhJnIUTLejFrFp11ai_Logo-01-05.png"
-                      alt="" />
+                      alt=""
+                      width={450}
+                      height={156.967} />
                   </div>
                 </div>
               </div>
-              <div className="block-type--text text-left col-6">
+              <div className="block-type-text text-left col-6">
                 <p style={{ fontSize: "18px" }}>
                   <strong>
                     <span style={{ color: "#fbf5e3" }}>

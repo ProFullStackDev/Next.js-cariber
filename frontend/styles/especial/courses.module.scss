@@ -2,12 +2,16 @@ $image-border-radius: 4px;
 $image-width: 300px;
 $feature-height: 272.05px;
 
-.feature--image {
+.feature-image {
   width: $image-width;
   border-radius: $image-border-radius;
 }
 
-.block-type--feature {
+.feature-text {
+  margin-top: 10px !important;
+}
+
+.block-type-feature {
   height: $feature-height;
   margin-bottom: 30px !important;
 }

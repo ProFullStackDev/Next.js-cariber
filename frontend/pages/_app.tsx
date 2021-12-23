@@ -9,9 +9,9 @@ function MyApp({ Component, pageProps }: AppProps) {
       <Head>
         <script src="https://kit.fontawesome.com/1b1fb3f1fb.js" crossOrigin="anonymous"></script>
       </Head>
-      <body>
-        <Component {...pageProps} />
-      </body>
+      <div>
+      <Component {...pageProps} />
+      </div>
     </React.Fragment>
   )
 }

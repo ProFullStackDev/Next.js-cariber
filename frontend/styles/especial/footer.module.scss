@@ -26,28 +26,28 @@ $social-icons-background-color: #ffffff;
 }
 
 .footer,
-.footer--block {
+.footer-block {
     font-size: $font-size-mobile;
     color: $text-color;
     background-color: $background-color;
 }
 
-.footer .logo--text {
+.footer .logo-text {
     color: $logo-text-color;
 }
 
-.footer a.link-list--link {
+.footer a.link-list-link {
     color: $text-color;
 }
 
-.footer .link-list--link:hover {
+.footer .link-list-link:hover {
     color: $text-color;
 }
 
 @media (min-width: 768px) {
 
     .footer,
-    .footer--block {
+    .footer-block {
         font-size: $font-size-desktop;
     }
 }
@@ -56,20 +56,20 @@ $social-icons-background-color: #ffffff;
     background-color: $background-color;
 }
 
-.footer .logo--image {
+.footer .logo-image {
     line-height: 1;
     display: block;
     width: $logo-width;
 }
 
-.footer .social-icons--icon {
+.footer .social-icons-icon {
     color: $social-icons-text-color !important;
 }
 
-.footer .social-icons--round .social-icons--icon {
+.footer .social-icons-round .social-icons-icon {
     background-color: $social-icons-background-color;
 }
 
-.footer .social-icons--square .social-icons--icon {
+.footer .social-icons-square .social-icons-icon {
     background-color: $social-icons-background-color;
 }
