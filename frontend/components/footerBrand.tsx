@@ -22,7 +22,7 @@ export default function FooterBrand() {
                 <p style={{ fontSize: "18px" }}>
                   <strong>
                     <span style={{ color: "#fbf5e3" }}>
-                      Cariber&nbsp;แพลตฟอร์มการเรียนรู้บนแนวคิด "ความสำเร็จที่เรียนรู้ได้"&nbsp;&nbsp;
+                      Cariber&nbsp;แพลตฟอร์มการเรียนรู้บนแนวคิด &quot;ความสำเร็จที่เรียนรู้ได้&quot; &nbsp;&nbsp;
                     </span>
                   </strong>
                 </p>

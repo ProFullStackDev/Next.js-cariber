@@ -1,16 +1,14 @@
 import '../styles/globals.scss'
 import type { AppProps } from 'next/app'
 import React from 'react'
-import Head from 'next/head'
+import Script from 'next/script'
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <React.Fragment>
-      <Head>
-        <script src="https://kit.fontawesome.com/1b1fb3f1fb.js" crossOrigin="anonymous"></script>
-      </Head>
+      <Script src="https://kit.fontawesome.com/1b1fb3f1fb.js" crossOrigin="anonymous"></Script>
       <div>
-      <Component {...pageProps} />
+        <Component {...pageProps} />
       </div>
     </React.Fragment>
   )
