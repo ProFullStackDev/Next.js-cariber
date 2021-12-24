@@ -8,6 +8,7 @@
 
 #block-titel h1 {
     font-size: 80px;
+
     @media (max-width: 768px) {
         font-size: 28px;
     }
@@ -15,9 +16,14 @@
 
 #block-titel h4 {
     font-size: 20px;
+
     @media (max-width: 768px) {
         font-size: 18px;
     }
+}
+
+#block-person-1 .block-type--image {
+    margin: auto;
 }
 
 #block-person-1 .block {
@@ -25,6 +31,18 @@
     border-radius: 10px;
     background-color: #ffffff;
     padding: 30px;
+    margin: auto;
+}
+
+#block-person-1 .row {
+    @media (max-width: 768px) {
+        display: block
+    }
+}
+
+#block-person-1 .container {
+padding-left: 75px;
+padding-right: 75px;
 }
 
 #block-person-1 .frame {
@@ -32,5 +50,46 @@
     margin-right: 0px;
     margin-bottom: 0px;
     margin-left: 0px;
-    padding: 30px;
+    @media (max-width: 768px) {
+        text-align: center !important;
+    }
+}
+
+#block-person-1 .image {
+    @media (max-width: 768px) {
+        margin: 0px;
+    }
+}
+
+#block-person-1 .container {
+    @media (max-width: 768px) {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+}
+
+#block-person-1 p {
+    font-size: 14px;
+    margin: 0px;
+}
+
+#block-person-1 a:hover {
+    -webkit-filter: brightness(115%);
+    filter: brightness(115%);
+}
+
+#block-person-1 .block-text {
+    padding-top: 5px;
+    padding-bottom: 0px;
+    padding-left: 5%;
+    padding-right: 0px;
+    margin-left: -30px;
+    @media (max-width: 768px) {
+        width: 100%;
+        padding: 0px;
+        margin-top: 20px;
+        margin-bottom: 0px;
+        margin-left: 0px;
+        margin-right: 0px;
+    }
 }
