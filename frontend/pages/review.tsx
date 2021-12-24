@@ -1,9 +1,8 @@
 import Footer from "../components/footer";
 import Header from "../components/header";
 import Image from "next/image";
-import { Value } from "sass";
 
-interface SectionFeature {
+interface FeatureCariber {
   image: string,
   name: string,
   career: string,
@@ -11,8 +10,15 @@ interface SectionFeature {
   from: string,
 }
 
+interface FeatureShopee {
+  name: string,
+  ratings: string,
+  review: string,
+  from: string,
+}
+
 export default function Review() {
-  const sectionFeatureFirst: SectionFeature[] = [
+  const featureCariberFirst: FeatureCariber[] = [
     {
       image: "https://kajabi-storefronts-production.kajabi-cdn.com/kajabi-storefronts-production/themes/2148484577/settings_images/jDkGaLJSNKAvuAFj59Dw_03.webp",
       name: "นิกส์ อรรถพล",
@@ -43,7 +49,7 @@ export default function Review() {
     },
   ]
 
-  const sectionFeatureSecond: SectionFeature[] = [
+  const featureCariberSecond: FeatureCariber[] = [
     {
       image: "https://kajabi-storefronts-production.kajabi-cdn.com/kajabi-storefronts-production/themes/2148484577/settings_images/7PTP7gsKQt6itd3pvBgE__.webp",
       name: "ณัฐชา คาลเกน",
@@ -99,6 +105,81 @@ export default function Review() {
       career: "Managing Director, Moonshot Digital | Digital PR & Content Agency",
       review: "ช่วยให้ confirm ได้ว่าสิ่งที่เราคิดอันไหนบ้างที่ตรงกับสิ่งที่ thought leader ต่างๆ คิด",
       from: "Cariber",
+    },
+  ]
+
+  const featureShopee: FeatureShopee[] = [
+    {
+      name: "phanrapeevarakul",
+      ratings: "⭐️⭐️⭐️⭐️⭐️",
+      review: "เจ้าหน้าที่ตอบไวมาก คอสดีมากค่ะ แค่ฟังคุณบรรยงค์ ท่านเดียวก็ถือว่าคุ้มค่ามากๆแล้วค่ะ ขอให้มีspeakerท่านอื่นๆตามมาอีกเยอะๆนะคะ 👏🏻👏🏻👏🏻👏🏻🎀🎀🎀🎀🎀🎀🧡🧡🧡🧡🧡❤️❤️❤️❤️❤️❤️❤️💕💕💕💕💕💕💕💕",
+      from: "Shopee",
+    },
+    {
+      name: "bellnapasorn",
+      ratings: "⭐️⭐️⭐️⭐️⭐️",
+      review: "ดีนะคะ ลองเรียนแล้วได้ไอเดียในการทำงาน/ทำธุรกิจเยอะเลยค่ะ ราคาถือว่าคุ้มมากสำหรับการได้ฟังผู้บริหารระดับนี้ ตัวโปรแกรมเรียนใช้ง่ายดีค่ะ ขอบคุณที่พัฒนาอะไรดีๆแบบนี้นะคะ🙏🏻😊",
+      from: "Shopee",
+    },
+    {
+      name: "thantada",
+      ratings: "⭐️⭐️⭐️⭐️⭐️",
+      review: "การสั่งซื้อรวดเร็วมาก แปปเดียว ได้ดูแล้ว, ดูจากรายชื่อวิทยากรแล้วน่าดู แถวยังมีการอัพเดทเรื่อยๆอีก น่าจะเป็นประโยชน์ไม่มากก็น้อย",
+      from: "Shopee",
+    },
+    {
+      name: "kittinjinawong",
+      ratings: "⭐️⭐️⭐️⭐️⭐️",
+      review: "คอร์สเรียนดีมาก การตัดต่อดีแบ่งเป็นตอนชัดเจนง่ายต่อการกลับมาฟังใหม่ คุ้มค่ามาก ๆ ครับ แนะนำให้ทุกคนได้เรียน",
+      from: "Shopee",
+    },
+    {
+      name: "zizzizeeintph",
+      ratings: "⭐️⭐️⭐️⭐️⭐️",
+      review: "คุ้มค่ามากๆ คอร์สกระชับ ได้ใจความ ตรงประเด็น เต็มไปด้วยวิทยากรที่ลงสนามจริง มีประสบการณ์มาสอน รอติดตามต่อไปค่ะ",
+      from: "Shopee",
+    },
+    {
+      name: "kingkongba08",
+      ratings: "⭐️⭐️⭐️⭐️⭐️",
+      review: "คอร์สดีมากครับ ระดับผู้บริหารมาสอนเองเลย สุดยอดมาก",
+      from: "Shopee",
+    },
+    {
+      name: "kmeenn",
+      ratings: "⭐️⭐️⭐️⭐️⭐️",
+      review: "คุณแอดมินตอบไวมากเลยค่ะ ภาพวิดีโอคมชัดมาก คุ้มค่าแล้วก็คุณภาพเกินราคามาก",
+      from: "Shopee",
+    },
+    {
+      name: "thaikhamth",
+      ratings: "⭐️⭐️⭐️⭐️⭐️",
+      review: "เป็นคลังความรู้ที่คุ้มค่ามากๆ การดำเนินเรื่องน่าติดตามน่าสนใจ คุ้มค่ามากๆเมื่อเทียบกับราคา",
+      from: "Shopee",
+    },
+    {
+      name: "raweeoyl",
+      ratings: "⭐️⭐️⭐️⭐️⭐️",
+      review: "คอร์สดี ตัดต่อเนื้อหามาดี ทำเป็นตอนสั้นๆ เข้าใจง่าย ได้ประโยชน์มาก ราคานี้ถือว่าคุ้มมากๆ และยังจะมีคนมาเพิ่มอีกเรื่อยๆ",
+      from: "Shopee",
+    },
+    {
+      name: "mkrissada",
+      ratings: "⭐️⭐️⭐️⭐️⭐️",
+      review: "ได้รับเมล์รหัสการเข้าเรียนรวดเร็วมาก",
+      from: "Shopee",
+    },
+    {
+      name: "suphischa.toey",
+      ratings: "⭐️⭐️⭐️⭐️⭐️",
+      review: "เนื้อหาดีมาก ภาพคมชัด ได้ความรู้ประสบการณ์มาปรับใช้คะ แอดมินตอบเร็วดีคะ",
+      from: "Shopee",
+    },
+    {
+      name: "hommetfc",
+      ratings: "⭐️⭐️⭐️⭐️⭐️",
+      review: "ราคานี้ ดูได้ทั้งปี คุ้มมากค่ะ",
+      from: "Shopee",
     },
   ]
 
@@ -189,7 +270,7 @@ export default function Review() {
       <div className="section-feature-1">
         <div className="container">
           <div className="justify-content-center grid-container">
-            {sectionFeatureFirst.map((value, index) => {
+            {featureCariberFirst.map((value, index) => {
               return (
                 <div key={index} className="block-type-feature text-left col-3">
                   <div className="block box-shadow-large background-light aos-init aos-animate">
@@ -234,7 +315,7 @@ export default function Review() {
                 </div>
               )
             })}
-            {sectionFeatureSecond.map((value, index) => {
+            {featureCariberSecond.map((value, index) => {
               return (
                 <div key={index} className="block-type-feature text-left col-3">
                   <div className="block box-shadow-large background-light aos-init aos-animate">
@@ -257,6 +338,45 @@ export default function Review() {
                               {value.career}
                             </em>
                           </span>
+                        </p>
+                        <p>
+                          <br />
+                          <span style={{ color: "#0e1b20" }}>
+                            &quot;
+                            {value.review}
+                            &quot;
+                          </span>
+                        </p>
+                        <p>
+                          <strong>
+                            <span style={{ color: "#e74e25" }}>
+                              {value.from}
+                            </span>
+                          </strong>
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )
+            })}
+            {featureShopee.map((value, index) => {
+              return (
+                <div key={index} className="block-type-feature text-left col-3">
+                  <div className="block box-shadow-large background-light aos-init aos-animate">
+                    <div className="feature">
+                      <div className="feature-text">
+                        <h4>
+                          <span style={{ color: "#ed9081" }}>
+                            {value.name}
+                          </span>
+                        </h4>
+                        <p style={{margin: 0}}>
+                          <strong>
+                            <span style={{ color: "#0e1b20" }}>
+                              Ratings : {value.ratings}
+                            </span>
+                          </strong>
                         </p>
                         <p>
                           <br />
