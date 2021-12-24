@@ -1,0 +1,37 @@
+{
+  "kind": "collectionType",
+  "collectionName": "episodes",
+  "info": {
+    "singularName": "episode",
+    "pluralName": "episodes",
+    "displayName": "Episode",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "video": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "videos"
+      ]
+    },
+    "course": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::course.course",
+      "inversedBy": "episodes"
+    },
+    "description": {
+      "type": "text"
+    }
+  }
+}
