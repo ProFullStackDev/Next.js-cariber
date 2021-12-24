@@ -1,0 +1,13 @@
+.idea/
+.vscode/
+db.sqlite3
+node_modules/
+.coverage
+.postgres_data/
+_docker_volumes/
+__pycache__
+
+.DS_Store
+*.log
+/.next/
+/out/
