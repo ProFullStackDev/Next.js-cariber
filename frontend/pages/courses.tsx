@@ -3,7 +3,7 @@ import Header from "../components/header"
 import Image from "next/image"
 
 interface Feature {
-  img: string,
+  image: string,
   link: string,
   name: string,
   career: string,
@@ -12,103 +12,103 @@ interface Feature {
 export default function Courses() {
   const features: Feature[] = [
     {
-      img: "https://kajabi-storefronts-production.kajabi-cdn.com/kajabi-storefronts-production/themes/3617585/settings_images/hDwO723fRluyELoUEVT7__V2.jpg",
+      image: "https://kajabi-storefronts-production.kajabi-cdn.com/kajabi-storefronts-production/themes/3617585/settings_images/hDwO723fRluyELoUEVT7__V2.jpg",
       link: "https://www.cariber.co/maneerut-anulomsombut",
       name: "คุณฐากร ปิยะพันธ์",
       career: "Employee Survival Guide"
     },
     {
-      img: "https://kajabi-storefronts-production.kajabi-cdn.com/kajabi-storefronts-production/themes/3617585/settings_images/IpuwFDA2SaCvTK2PTENL__V2.jpg",
+      image: "https://kajabi-storefronts-production.kajabi-cdn.com/kajabi-storefronts-production/themes/3617585/settings_images/IpuwFDA2SaCvTK2PTENL__V2.jpg",
       link: "https://www.cariber.co/maneerut-anulomsombut",
       name: "คุณมณีรัตน์ อนุโลมสมบัติ",
       career: "Scale People, Scale Company"
     },
     {
-      img: "https://kajabi-storefronts-production.kajabi-cdn.com/kajabi-storefronts-production/themes/3617585/settings_images/195AwCRCR3uvRhd5USc3_file.jpg",
+      image: "https://kajabi-storefronts-production.kajabi-cdn.com/kajabi-storefronts-production/themes/3617585/settings_images/195AwCRCR3uvRhd5USc3_file.jpg",
       link: "https://www.cariber.co/maneerut-anulomsombut",
       name: "คุณบรรยง พงษ์พานิช",
       career: "The Art of Decision Making"
     },
     {
-      img: "https://kajabi-storefronts-production.kajabi-cdn.com/kajabi-storefronts-production/themes/3617585/settings_images/FI7e8TMJQsGRBJ9WQ1zp_SeaTalk_IMG_1618167619_Cropped_2.jpg",
+      image: "https://kajabi-storefronts-production.kajabi-cdn.com/kajabi-storefronts-production/themes/3617585/settings_images/FI7e8TMJQsGRBJ9WQ1zp_SeaTalk_image_1618167619_Cropped_2.jpg",
       link: "https://www.cariber.co/maneerut-anulomsombut",
       name: "คุณสาธิต กาลวันตวานิช",
       career: "The Power of Creative and Critical Thinking"
     },
     {
-      img: "https://kajabi-storefronts-production.kajabi-cdn.com/kajabi-storefronts-production/themes/3617585/settings_images/hDwO723fRluyELoUEVT7__V2.jpg",
+      image: "https://kajabi-storefronts-production.kajabi-cdn.com/kajabi-storefronts-production/themes/3617585/settings_images/hDwO723fRluyELoUEVT7__V2.jpg",
       link: "https://www.cariber.co/maneerut-anulomsombut",
       name: "คุณฐากร ปิยะพันธ์",
       career: "Employee Survival Guide"
     },
     {
-      img: "https://kajabi-storefronts-production.kajabi-cdn.com/kajabi-storefronts-production/themes/3617585/settings_images/IpuwFDA2SaCvTK2PTENL__V2.jpg",
+      image: "https://kajabi-storefronts-production.kajabi-cdn.com/kajabi-storefronts-production/themes/3617585/settings_images/IpuwFDA2SaCvTK2PTENL__V2.jpg",
       link: "https://www.cariber.co/maneerut-anulomsombut",
       name: "คุณมณีรัตน์ อนุโลมสมบัติ",
       career: "Scale People, Scale Company"
     },
     {
-      img: "https://kajabi-storefronts-production.kajabi-cdn.com/kajabi-storefronts-production/themes/3617585/settings_images/195AwCRCR3uvRhd5USc3_file.jpg",
+      image: "https://kajabi-storefronts-production.kajabi-cdn.com/kajabi-storefronts-production/themes/3617585/settings_images/195AwCRCR3uvRhd5USc3_file.jpg",
       link: "https://www.cariber.co/maneerut-anulomsombut",
       name: "คุณบรรยง พงษ์พานิช",
       career: "The Art of Decision Making"
     },
     {
-      img: "https://kajabi-storefronts-production.kajabi-cdn.com/kajabi-storefronts-production/themes/3617585/settings_images/FI7e8TMJQsGRBJ9WQ1zp_SeaTalk_IMG_1618167619_Cropped_2.jpg",
+      image: "https://kajabi-storefronts-production.kajabi-cdn.com/kajabi-storefronts-production/themes/3617585/settings_images/FI7e8TMJQsGRBJ9WQ1zp_SeaTalk_image_1618167619_Cropped_2.jpg",
       link: "https://www.cariber.co/maneerut-anulomsombut",
       name: "คุณสาธิต กาลวันตวานิช",
       career: "The Power of Creative and Critical Thinking"
     },
     {
-      img: "https://kajabi-storefronts-production.kajabi-cdn.com/kajabi-storefronts-production/themes/3617585/settings_images/hDwO723fRluyELoUEVT7__V2.jpg",
+      image: "https://kajabi-storefronts-production.kajabi-cdn.com/kajabi-storefronts-production/themes/3617585/settings_images/hDwO723fRluyELoUEVT7__V2.jpg",
       link: "https://www.cariber.co/maneerut-anulomsombut",
       name: "คุณฐากร ปิยะพันธ์",
       career: "Employee Survival Guide"
     },
     {
-      img: "https://kajabi-storefronts-production.kajabi-cdn.com/kajabi-storefronts-production/themes/3617585/settings_images/IpuwFDA2SaCvTK2PTENL__V2.jpg",
+      image: "https://kajabi-storefronts-production.kajabi-cdn.com/kajabi-storefronts-production/themes/3617585/settings_images/IpuwFDA2SaCvTK2PTENL__V2.jpg",
       link: "https://www.cariber.co/maneerut-anulomsombut",
       name: "คุณมณีรัตน์ อนุโลมสมบัติ",
       career: "Scale People, Scale Company"
     },
     {
-      img: "https://kajabi-storefronts-production.kajabi-cdn.com/kajabi-storefronts-production/themes/3617585/settings_images/195AwCRCR3uvRhd5USc3_file.jpg",
+      image: "https://kajabi-storefronts-production.kajabi-cdn.com/kajabi-storefronts-production/themes/3617585/settings_images/195AwCRCR3uvRhd5USc3_file.jpg",
       link: "https://www.cariber.co/maneerut-anulomsombut",
       name: "คุณบรรยง พงษ์พานิช",
       career: "The Art of Decision Making"
     },
     {
-      img: "https://kajabi-storefronts-production.kajabi-cdn.com/kajabi-storefronts-production/themes/3617585/settings_images/FI7e8TMJQsGRBJ9WQ1zp_SeaTalk_IMG_1618167619_Cropped_2.jpg",
+      image: "https://kajabi-storefronts-production.kajabi-cdn.com/kajabi-storefronts-production/themes/3617585/settings_images/FI7e8TMJQsGRBJ9WQ1zp_SeaTalk_image_1618167619_Cropped_2.jpg",
       link: "https://www.cariber.co/maneerut-anulomsombut",
       name: "คุณสาธิต กาลวันตวานิช",
       career: "The Power of Creative and Critical Thinking"
     },
     {
-      img: "https://kajabi-storefronts-production.kajabi-cdn.com/kajabi-storefronts-production/themes/3617585/settings_images/hDwO723fRluyELoUEVT7__V2.jpg",
+      image: "https://kajabi-storefronts-production.kajabi-cdn.com/kajabi-storefronts-production/themes/3617585/settings_images/hDwO723fRluyELoUEVT7__V2.jpg",
       link: "https://www.cariber.co/maneerut-anulomsombut",
       name: "คุณฐากร ปิยะพันธ์",
       career: "Employee Survival Guide"
     },
     {
-      img: "https://kajabi-storefronts-production.kajabi-cdn.com/kajabi-storefronts-production/themes/3617585/settings_images/IpuwFDA2SaCvTK2PTENL__V2.jpg",
+      image: "https://kajabi-storefronts-production.kajabi-cdn.com/kajabi-storefronts-production/themes/3617585/settings_images/IpuwFDA2SaCvTK2PTENL__V2.jpg",
       link: "https://www.cariber.co/maneerut-anulomsombut",
       name: "คุณมณีรัตน์ อนุโลมสมบัติ",
       career: "Scale People, Scale Company"
     },
     {
-      img: "https://kajabi-storefronts-production.kajabi-cdn.com/kajabi-storefronts-production/themes/3617585/settings_images/195AwCRCR3uvRhd5USc3_file.jpg",
+      image: "https://kajabi-storefronts-production.kajabi-cdn.com/kajabi-storefronts-production/themes/3617585/settings_images/195AwCRCR3uvRhd5USc3_file.jpg",
       link: "https://www.cariber.co/maneerut-anulomsombut",
       name: "คุณบรรยง พงษ์พานิช",
       career: "The Art of Decision Making"
     },
     {
-      img: "https://kajabi-storefronts-production.kajabi-cdn.com/kajabi-storefronts-production/themes/3617585/settings_images/FI7e8TMJQsGRBJ9WQ1zp_SeaTalk_IMG_1618167619_Cropped_2.jpg",
+      image: "https://kajabi-storefronts-production.kajabi-cdn.com/kajabi-storefronts-production/themes/3617585/settings_images/FI7e8TMJQsGRBJ9WQ1zp_SeaTalk_image_1618167619_Cropped_2.jpg",
       link: "https://www.cariber.co/maneerut-anulomsombut",
       name: "คุณสาธิต กาลวันตวานิช",
       career: "The Power of Creative and Critical Thinking"
     },
     {
-      img: "https://kajabi-storefronts-production.kajabi-cdn.com/kajabi-storefronts-production/themes/3617585/settings_images/195AwCRCR3uvRhd5USc3_file.jpg",
+      image: "https://kajabi-storefronts-production.kajabi-cdn.com/kajabi-storefronts-production/themes/3617585/settings_images/195AwCRCR3uvRhd5USc3_file.jpg",
       link: "https://www.cariber.co/maneerut-anulomsombut",
       name: "คุณบรรยง พงษ์พานิช",
       career: "The Art of Decision Making"
@@ -116,7 +116,7 @@ export default function Courses() {
   ]
 
   return (
-    <div className="bg-courses">
+    <div className="bg-courses courses">
       <Header />
       <div className="sizer">
         <div className="container">
@@ -153,7 +153,7 @@ export default function Courses() {
                       <div className="feature">
                         <a href={value.link}>
                           <Image className="feature-image"
-                            src={value.img}
+                            src={value.image}
                             alt=""
                             width={262.5}
                             height={147.65} />
