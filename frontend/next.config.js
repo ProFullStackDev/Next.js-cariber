@@ -6,6 +6,9 @@ module.exports = {
     includePaths: [path.join(__dirname, 'styles')],
   },
   images: {
-    domains: ['kajabi-storefronts-production.kajabi-cdn.com'],
+    domains: [
+      'kajabi-storefronts-production.kajabi-cdn.com',
+      'drive.google.com',
+    ],
   },
 }

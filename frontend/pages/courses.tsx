@@ -30,7 +30,7 @@ export default function Courses() {
       career: "The Art of Decision Making"
     },
     {
-      image: "https://kajabi-storefronts-production.kajabi-cdn.com/kajabi-storefronts-production/themes/3617585/settings_images/FI7e8TMJQsGRBJ9WQ1zp_SeaTalk_image_1618167619_Cropped_2.jpg",
+      image: "https://kajabi-storefronts-production.kajabi-cdn.com/kajabi-storefronts-production/themes/3617585/settings_images/FI7e8TMJQsGRBJ9WQ1zp_SeaTalk_IMG_1618167619_Cropped_2.jpg",
       link: "https://www.cariber.co/maneerut-anulomsombut",
       name: "คุณสาธิต กาลวันตวานิช",
       career: "The Power of Creative and Critical Thinking"
@@ -54,7 +54,7 @@ export default function Courses() {
       career: "The Art of Decision Making"
     },
     {
-      image: "https://kajabi-storefronts-production.kajabi-cdn.com/kajabi-storefronts-production/themes/3617585/settings_images/FI7e8TMJQsGRBJ9WQ1zp_SeaTalk_image_1618167619_Cropped_2.jpg",
+      image: "https://kajabi-storefronts-production.kajabi-cdn.com/kajabi-storefronts-production/themes/3617585/settings_images/FI7e8TMJQsGRBJ9WQ1zp_SeaTalk_IMG_1618167619_Cropped_2.jpg",
       link: "https://www.cariber.co/maneerut-anulomsombut",
       name: "คุณสาธิต กาลวันตวานิช",
       career: "The Power of Creative and Critical Thinking"
@@ -78,7 +78,7 @@ export default function Courses() {
       career: "The Art of Decision Making"
     },
     {
-      image: "https://kajabi-storefronts-production.kajabi-cdn.com/kajabi-storefronts-production/themes/3617585/settings_images/FI7e8TMJQsGRBJ9WQ1zp_SeaTalk_image_1618167619_Cropped_2.jpg",
+      image: "https://kajabi-storefronts-production.kajabi-cdn.com/kajabi-storefronts-production/themes/3617585/settings_images/FI7e8TMJQsGRBJ9WQ1zp_SeaTalk_IMG_1618167619_Cropped_2.jpg",
       link: "https://www.cariber.co/maneerut-anulomsombut",
       name: "คุณสาธิต กาลวันตวานิช",
       career: "The Power of Creative and Critical Thinking"
@@ -102,7 +102,7 @@ export default function Courses() {
       career: "The Art of Decision Making"
     },
     {
-      image: "https://kajabi-storefronts-production.kajabi-cdn.com/kajabi-storefronts-production/themes/3617585/settings_images/FI7e8TMJQsGRBJ9WQ1zp_SeaTalk_image_1618167619_Cropped_2.jpg",
+      image: "https://kajabi-storefronts-production.kajabi-cdn.com/kajabi-storefronts-production/themes/3617585/settings_images/FI7e8TMJQsGRBJ9WQ1zp_SeaTalk_IMG_1618167619_Cropped_2.jpg",
       link: "https://www.cariber.co/maneerut-anulomsombut",
       name: "คุณสาธิต กาลวันตวานิช",
       career: "The Power of Creative and Critical Thinking"

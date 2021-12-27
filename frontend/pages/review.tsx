@@ -1,6 +1,7 @@
 import Footer from "../components/footer";
 import Header from "../components/header";
 import Image from "next/image";
+import { useEffect, useRef, useState } from "react";
 
 interface FeatureCariber {
   image: string,
@@ -17,7 +18,15 @@ interface FeatureShopee {
   from: string,
 }
 
+interface SlideCourse {
+  url: string,
+  image: string,
+}
+
 export default function Review() {
+  const [slideShowIndex, setSlideShowIndex] = useState(0);
+  const timeoutRef = useRef(0);
+  const delay = 5000;
   const featureCariberFirst: FeatureCariber[] = [
     {
       image: "https://kajabi-storefronts-production.kajabi-cdn.com/kajabi-storefronts-production/themes/2148484577/settings_images/jDkGaLJSNKAvuAFj59Dw_03.webp",
@@ -48,7 +57,6 @@ export default function Review() {
       from: "Cariber",
     },
   ]
-
   const featureCariberSecond: FeatureCariber[] = [
     {
       image: "https://kajabi-storefronts-production.kajabi-cdn.com/kajabi-storefronts-production/themes/2148484577/settings_images/7PTP7gsKQt6itd3pvBgE__.webp",
@@ -107,7 +115,6 @@ export default function Review() {
       from: "Cariber",
     },
   ]
-
   const featureShopee: FeatureShopee[] = [
     {
       name: "phanrapeevarakul",
@@ -182,11 +189,73 @@ export default function Review() {
       from: "Shopee",
     },
   ]
+  const slideCourse: SlideCourse[] = [
+    {
+      url: "",
+      image: "https://drive.google.com/uc?id=1l5yFqNeRdUQ5IvEHCeofxP7hCuV5TTn3"
+    },
+    {
+      url: "",
+      image: "https://drive.google.com/uc?id=11v8oQC_ZXCk2lHut04dxywM-FOEoXAw-"
+    },
+    {
+      url: "#",
+      image: "https://drive.google.com/uc?id=1VrOC4Jd4fVAygfVPcBY03S_jUx70lSRc"
+    },
+    {
+      url: "",
+      image: "https://drive.google.com/uc?id=1pPSwpr-FJ1QquXKw3jeNVKcH6XJj0nFT"
+    },
+    {
+      url: "",
+      image: "https://drive.google.com/uc?id=1RRMPltvQsEiZJVeU8V8vY0NT-86O2RDl"
+    },
+    {
+      url: "",
+      image: "https://drive.google.com/uc?id=1lRE0zl0SqoDmjvzIV_m--oJBabibomJX"
+    },
+    {
+      url: "",
+      image: "https://drive.google.com/uc?id=1wB2LDburuPxmjjrbQaCKgunLyOc7UgoX"
+    },
+  ]
+
+  function resetTimeout() {
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+    }
+  }
+
+  function nextSlide() {
+    setSlideShowIndex((index) =>
+      index === slideCourse.length - 4 ? 0 : index + 1
+    )
+  }
+
+  function previousSlide() {
+    setSlideShowIndex((index) =>
+      index === 0 ? slideCourse.length - 4 : index - 1
+    )
+  }
+
+  useEffect(() => {
+    resetTimeout();
+    timeoutRef.current = window.setTimeout(
+      () =>
+        setSlideShowIndex((index) =>
+          index === slideCourse.length - 4 ? 0 : index + 1
+        ),
+      delay
+    );
+    return () => {
+      resetTimeout();
+    }
+  }, [slideCourse.length, slideShowIndex])
 
   return (
     <div className="bg-review review">
       <Header />
-      <div className="section">
+      <div className="section-titel">
         <div className="sizer">
           <div className="container">
             <div className="row align-items-center justify-content-center">
@@ -221,7 +290,7 @@ export default function Review() {
           </div>
         </div>
       </div>
-      <div className="section">
+      <div className="section-person-1">
         <div id="block-person-1">
           <div className="container">
             <div className="frame align-items-center justify-content-center">
@@ -371,7 +440,7 @@ export default function Review() {
                             {value.name}
                           </span>
                         </h4>
-                        <p style={{margin: 0}}>
+                        <p style={{ margin: 0 }}>
                           <strong>
                             <span style={{ color: "#0e1b20" }}>
                               Ratings : {value.ratings}
@@ -402,6 +471,86 @@ export default function Review() {
           </div>
         </div>
       </div>
+      <div className="sections-footer">
+        <div className="sizer ">
+          <div className="container ">
+            <div className="row align-items-center justify-content-center">
+              <div className="block-type-text text-center col-12">
+                <div className="block box-shadow-none background-unrecognized aos-init aos-animate">
+                  <p style={{ fontSize: "40px", textAlign: "center" }}>
+                    <strong>
+                      <span style={{ color: "#e74e25" }}>
+                        สูตรความสำเร็จกับ &quot;ที่สุด&quot; ของประเทศ
+                      </span>
+                    </strong>
+                  </p>
+                  <p style={{ fontSize: "20px", textAlign: "center" }}>
+                    <em>
+                      <strong>
+                        <span style={{ color: "#e74e25" }}>
+                          คอร์สออนไลน์กับผู้บริหาร ผู้นำทางความคิด แบบที่ไม่เคยมีมาก่อน
+                        </span>
+                      </strong>
+                    </em>
+                  </p>
+                </div>
+              </div>
+              <div className="block-type-code text-left col-12">
+                <div className="block box-shadow-none background-unrecognized aos-init aos-animate">
+                  <div id="slideshow" className="container">
+                    <div className="row">
+                      <div className="col-lg-12">
+                        <div id="news-slider" className="owl-carousel owl-theme">
+                          <div className="owl-wrapper-outer">
+                            {slideShowIndex}
+                            {-slideShowIndex * 295}
+                            <div className="owl-wrapper" style={{ transform: `translate3d(${-slideShowIndex * 295}px, 0px, 0px)` }}>
+                              {slideCourse.map((value, index) => {
+                                return (
+                                  <div key={index} className="owl-item" style={{ width: "fit-content" }}>
+                                    <div className="news-grid">
+                                      <div className="news-grid-image">
+                                        <a href={value.url}>
+                                          <Image
+                                            src={value.image}
+                                            alt=""
+                                            width={273.4}
+                                            height={482.4}
+                                          />
+                                        </a>
+                                      </div>
+                                      <div className="news-grid-txt">
+                                        <a href={value.url}>
+                                          ซื้อคอร์สนี้
+                                        </a>
+                                      </div>
+                                    </div>
+                                  </div>
+                                )
+                              })}
+                            </div>
+                          </div>
+                          <div className="owl-controls clickable">
+                            <div className="owl-buttons">
+                              <button className="owl-prev" onClick={previousSlide}>
+
+                              </button>
+                              <button className="owl-next" onClick={nextSlide}>
+                              </button>
+                            </div>
+                          </div>
+                          <div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div >
       <Footer />
     </div >
   )
