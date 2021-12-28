@@ -2,6 +2,7 @@ import Footer from "../components/footer";
 import Header from "../components/header";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
+import next from "next";
 
 interface FeatureCariber {
   image: string,
@@ -191,16 +192,16 @@ export default function Review() {
   ]
   const slideCourse: SlideCourse[] = [
     {
+      url: "#",
+      image: "https://drive.google.com/uc?id=1VrOC4Jd4fVAygfVPcBY03S_jUx70lSRc"
+    },
+    {
       url: "",
       image: "https://drive.google.com/uc?id=1l5yFqNeRdUQ5IvEHCeofxP7hCuV5TTn3"
     },
     {
       url: "",
       image: "https://drive.google.com/uc?id=11v8oQC_ZXCk2lHut04dxywM-FOEoXAw-"
-    },
-    {
-      url: "#",
-      image: "https://drive.google.com/uc?id=1VrOC4Jd4fVAygfVPcBY03S_jUx70lSRc"
     },
     {
       url: "",
@@ -502,8 +503,6 @@ export default function Review() {
                       <div className="col-lg-12">
                         <div id="news-slider" className="owl-carousel owl-theme">
                           <div className="owl-wrapper-outer">
-                            {slideShowIndex}
-                            {-slideShowIndex * 295}
                             <div className="owl-wrapper" style={{ transform: `translate3d(${-slideShowIndex * 295}px, 0px, 0px)` }}>
                               {slideCourse.map((value, index) => {
                                 return (
@@ -520,9 +519,13 @@ export default function Review() {
                                         </a>
                                       </div>
                                       <div className="news-grid-txt">
-                                        <a href={value.url}>
-                                          ซื้อคอร์สนี้
-                                        </a>
+                                        {index < 1 ? (
+                                          <b>Coming Soon</b>
+                                        ) : (
+                                          <a href={value.url}>
+                                            ซื้อคอร์สนี้
+                                          </a>
+                                        )}
                                       </div>
                                     </div>
                                   </div>
@@ -532,10 +535,11 @@ export default function Review() {
                           </div>
                           <div className="owl-controls clickable">
                             <div className="owl-buttons">
-                              <button className="owl-prev" onClick={previousSlide}>
-
+                              <button id="previous" className="owl-prev owl-button" onClick={previousSlide}>
+                                <i className="fas fa-chevron-left" style={{ color: "white" }}></i>
                               </button>
-                              <button className="owl-next" onClick={nextSlide}>
+                              <button id="next" className="owl-next owl-button" onClick={nextSlide}>
+                                <i className="fas fa-chevron-right" style={{ color: "white" }}></i>
                               </button>
                             </div>
                           </div>
