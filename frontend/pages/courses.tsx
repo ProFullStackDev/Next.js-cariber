@@ -1,6 +1,7 @@
 import Footer from "../components/footer"
 import Header from "../components/header"
 import Image from "next/image"
+import FooterBrand from "../components/footerBrand"
 
 interface Feature {
   img: string,
@@ -185,6 +186,7 @@ export default function Courses() {
           </div>
         </div>
       </div>
+      <FooterBrand />
       <Footer />
     </div>
   )

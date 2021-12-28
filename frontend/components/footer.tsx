@@ -4,7 +4,6 @@ import Image from "next/image"
 export default function Footer() {
   return (
     <div>
-      <FooterBrand />
       <div id="section-footer">
         <footer className="footer background-dark">
           <div className="footer-content">

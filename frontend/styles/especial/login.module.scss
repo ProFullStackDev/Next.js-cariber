@@ -1,0 +1,34 @@
+.bg-login {
+  background-image: url(https://kajabi-storefronts-production.kajabi-cdn.com/kajabi-storefronts-production/themes/3617585/settings_images/zcyoCkKlSnurUp9sR2M5_file.jpg);
+  background-position: top;
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+.login {
+  .auth-label {
+    position: relative;
+    display: block;
+    margin-bottom: 0px;
+    text-align: left;
+    color: #000000;
+  }
+
+  .auth-link {
+    margin-top: 30px;
+  }
+
+  .form-btn {
+    color: #fbf5e4;
+    border: 2px solid #e74e25;
+    background-color: #e74e25;
+  }
+
+  a {
+    -webkit-transition: all 0.1s;
+    -o-transition: all 0.1s;
+    transition: all 0.1s;
+    text-decoration: none;
+    color: #e74c3c;
+  }
+}
