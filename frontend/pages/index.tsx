@@ -18,6 +18,13 @@ interface ShopeeReview {
   date: string,
 }
 
+interface MyStudent {
+  image: string,
+  alt: string,
+  width: number,
+  height: number,
+}
+
 const Index: NextPage = () => {
   const features: Feature[] = [
     {
@@ -45,7 +52,6 @@ const Index: NextPage = () => {
       review: "ได้พัฒนาตัวเองในหลายๆด้าน โดยที่ไม่ต้องเสียเวลาในการหาข้อมูลเยอะ เพราะได้เรียนจากผู้สอนเก่ง ๆ"
     },
   ]
-
   const shopeeReviews: ShopeeReview[] = [
     {
       rating: "⭐️⭐️⭐️⭐️⭐️",
@@ -70,6 +76,62 @@ const Index: NextPage = () => {
       review: "โปรโมชั่น ดีมากกก 1 ปี กับโค้ชที่ระดับคุณภาพพพพพ เห็นคอร์สนี้ตอนฟัง the standard ใน YouTube เลย คือตัดสินใจซื้อแทบจะทันที เพราะเหล่าโค้ชที่มาพูดคือดีอ่ะ",
       name: "danut_nammon22",
       date: "17-Sep-2021",
+    },
+  ]
+  const myStudent: MyStudent[] = [
+    {
+      image: "https://kajabi-storefronts-production.kajabi-cdn.com/kajabi-storefronts-production/themes/3625250/settings_images/qzxHyJMFTfOmILNFhb6T_download.webp",
+      alt: "SCB ไทยพาณิชย์",
+      width: 165,
+      height: 64.983
+    },
+    {
+      image: "https://kajabi-storefronts-production.kajabi-cdn.com/kajabi-storefronts-production/themes/3625250/settings_images/9llBm1GbTz6AGJYoCIzp_1280px-KPMG.svg.webp",
+      alt: "KPMG",
+      width: 165,
+      height: 64.2
+    },
+    {
+      image: "https://kajabi-storefronts-production.kajabi-cdn.com/kajabi-storefronts-production/themes/3625250/settings_images/n62yCBIVTUSvvmvZMKir_logo-bangkok-hospital.webp",
+      alt: "โรงพยาบาลกรุงเทพ",
+      width: 262.5,
+      height: 59.2167
+    },
+    {
+      image: "https://kajabi-storefronts-production.kajabi-cdn.com/kajabi-storefronts-production/themes/3625250/settings_images/XaUjDtZsSd6AUgDhzwuw_pngwing.com.webp",
+      alt: "Grab",
+      width: 165,
+      height: 66.1333
+    },
+    {
+      image: "https://kajabi-storefronts-production.kajabi-cdn.com/kajabi-storefronts-production/themes/3625250/settings_images/gtLXf7CnTAmPaqf26cTq_set_1.webp",
+      alt: "SET",
+      width: 165,
+      height: 96.6833
+    },
+    {
+      image: "https://kajabi-storefronts-production.kajabi-cdn.com/kajabi-storefronts-production/themes/3625250/settings_images/7Nke3JTkSXiG3wnGIYTy_kisspng-charoen-pokphand-foods-charoen-pokphand-group-comp-options-5b7cbd27d8fc86.1314960015349015438888.webp",
+      alt: "CP",
+      width: 165,
+      height: 165
+    },
+    {
+      image: "https://kajabi-storefronts-production.kajabi-cdn.com/kajabi-storefronts-production/themes/3625250/settings_images/Mzj2K8OXRNNsVw0hW3fw_Isuzu-Logo-New.webp",
+      alt: "ISUZU",
+      width: 165,
+      height: 45.4667
+    },
+    {
+      image: "https://kajabi-storefronts-production.kajabi-cdn.com/kajabi-storefronts-production/themes/3625250/settings_images/fL9HBuYsTnFdNjYxFww7_Daco_4729935.webp",
+      alt: "Shopee",
+      width: 262.5,
+      height: 86.4833
+    },
+    {
+      image: "https://kajabi-storefronts-production.kajabi-cdn.com/kajabi-storefronts-production/themes/3625250/settings_images/Bisqh2vyTtatL2wlvA2i_PikPng.com_pwc-logo-png_2048457.webp",
+      alt: "pwc",
+      width: 165,
+      height: 125.55
     },
   ]
 
@@ -354,6 +416,40 @@ const Index: NextPage = () => {
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+      </div>
+      <div className="sizer background-light">
+        <div className="container">
+          <div className="row align-items-center justify-content-center">
+            <div className="block-type-text text-left col-6">
+              <div className="block box-shadow-none" >
+                <p style={{ fontSize: "36px", textAlign: "center" }}>
+                  <strong>
+                    <span style={{ color: "#e74e25" }}>
+                      ผู้เรียนของเรา
+                    </span>
+                  </strong>
+                </p>
+              </div>
+            </div>
+            <div className="block-break"></div>
+            {myStudent.map((value, index) => {
+              return (
+                <div key={index} className="block-type-image col-2">
+                  <div className="block box-shadow-none">
+                    <div className="image">
+                      <Image className="image-image"
+                        src={value.image}
+                        alt={value.alt}
+                        width={value.width}
+                        height={value.height}
+                      />
+                    </div>
+                  </div>
+                </div>
+              )
+            })}
           </div>
         </div>
       </div>
