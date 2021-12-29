@@ -16,91 +16,77 @@ $btn-border-radius: 50px;
 .header {
   font-size: $font-size-mobile;
   background-color: $background-color;
+
+  a.link-list-link {
+    color: $text-color !important;
+  }
+
+  a.link-list-link:hover {
+    color: $text-color;
+  }
+
+  .dropdown-trigger {
+    color: $text-color !important;
+  }
+
+  .dropdown-trigger:hover {
+    color: $text-color;
+  }
+
+  .dropdown-item a {
+    color: $text-color;
+  }
+
+  .user-login a {
+    color: $text-color !important;
+  }
+
+  .hamburger-slice {
+    background-color: $text-color;
+  }
+
+  @media (min-width: 768px) {
+    font-size: $font-size-desktop;
+
+    .dropdown-menu {
+      background-color: $background-color;
+    }
+  }
+
+  @media (max-width: 767px) {
+    a.link-list-link {
+      text-align: $mobile-text-alignment;
+      color: $mobile-header-text-color;
+    }
+
+    .dropdown-item a {
+      text-align: $mobile-text-alignment;
+      color: $mobile-header-text-color;
+    }
+
+    .user-login a {
+      text-align: $mobile-text-alignment;
+      color: $mobile-header-text-color;
+    }
+
+    .header-overlay .header-content-mobile {
+      padding: 20px 0;
+    }
+
+    .header-content-mobile {
+      text-align: $mobile-text-alignment;
+      background-color: $mobile-header-dropdown-color;
+    }
+  }
+
+  .logo-image {
+    background-color: #0e1b20;
+    line-height: 1;
+    display: block;
+    width: $logo-width;
+  }
 }
 
 .header-mobile {
   background-color: $background-color;
-}
-
-.header a.link-list-link {
-  color: $text-color !important;
-}
-
-.header a.link-list-link:hover {
-  color: $text-color;
-}
-
-.header .dropdown-trigger {
-  color: $text-color !important;
-}
-
-.header .dropdown-trigger:hover {
-  color: $text-color;
-}
-
-.header .dropdown-item a {
-  color: $text-color;
-}
-
-.header .user-login a {
-  color: $text-color !important;
-}
-
-.header .hamburger-slice {
-  background-color: $text-color;
-}
-
-@media (min-width: 768px) {
-  .header {
-    font-size: $font-size-desktop;
-  }
-
-  .header .dropdown-menu {
-    background-color: $background-color;
-  }
-}
-
-@media (max-width: 767px) {
-  .header a.link-list-link {
-    text-align: $mobile-text-alignment;
-    color: $mobile-header-text-color;
-  }
-
-  .header .dropdown-item a {
-    text-align: $mobile-text-alignment;
-    color: $mobile-header-text-color;
-  }
-
-  .header .user-login a {
-    text-align: $mobile-text-alignment;
-    color: $mobile-header-text-color;
-  }
-
-  .header-overlay .header-content-mobile {
-    padding: 20px 0;
-  }
-
-  .header-content-mobile {
-    text-align: $mobile-text-alignment;
-    background-color: $mobile-header-dropdown-color;
-  }
-}
-
-.header .logo-image {
-  background-color: #0e1b20;
-  line-height: 1;
-  display: block;
-  width: $logo-width;
-}
-
-.header .btn {
-  border-color: $btn-background-color !important;
-  border-radius: $btn-border-radius;
-  color: $btn-text-color;
-  background-color: $btn-background-color;
-}
-
-.header .btn-outline {
-  color: $btn-background-color !important;
-  background: transparent;
 }

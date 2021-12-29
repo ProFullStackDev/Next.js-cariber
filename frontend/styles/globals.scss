@@ -2,6 +2,8 @@
 @import "./especial/courses.module.scss";
 @import "./especial/footer.module.scss";
 @import "./especial/footerBrand.module.scss";
+@import "./especial/index.module.scss";
+@import url('https://fonts.googleapis.com/css2?family=Prompt:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
 $frequency: 0;
 $show-grid: false;
@@ -62,6 +64,7 @@ $two-step-button-text: Get Started;
 $two-step-full-screen: false;
 $two-step-play-button: true;
 $font-size-body-mobile: 16px;
+$background-dark-color: #0e1b20;
 $two-step-button-style: solid;
 $two-step-button-width: full;
 $font-size-body-desktop: 18px;
@@ -3148,6 +3151,7 @@ strong {
 /* Dynamic Backgrounds */
 .background-dark {
   color: #ffffff;
+  background-color: $background-dark-color;
 }
 
 .background-dark h1,
@@ -4520,7 +4524,7 @@ ol,
 a,
 .btn,
 .form-btn {
-  font-family: "MyFont", sans-serif;
+  font-family: "Prompt", sans-serif;
 }
 
 .bg-courses {
@@ -4529,4 +4533,16 @@ a,
 
 .image-image {
   border-radius: $border-radius;
+}
+
+.btn {
+  border-color: $btn-background-color !important;
+  border-radius: $btn-border-radius;
+  color: $btn-text-color;
+  background-color: $btn-background-color !important;
+}
+
+.btn-outline {
+  color: $btn-background-color !important;
+  background: transparent;
 }
