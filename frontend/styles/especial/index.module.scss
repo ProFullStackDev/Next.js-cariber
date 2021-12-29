@@ -5,4 +5,15 @@
     margin-bottom: 0;
     color: #ed9081;
   }
+
+  .feature-text {
+    font-size: 16px;
+    line-height: 1.1;
+  }
+
+  .container {
+    max-width: calc(1260px + -20px + -20px);
+    padding-right: 10px;
+    padding-left: 10px;
+  }
 }

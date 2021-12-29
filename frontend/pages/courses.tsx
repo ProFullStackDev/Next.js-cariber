@@ -122,7 +122,7 @@ export default function Courses() {
         <div className="container">
           <div className="row align-items-center">
             <div className="block-type-image text-col-12" style={{ marginBottom: 0 }}>
-              <div className="block box-shadow-none background-unrecognized aos-init aos-animate">
+              <div className="block box-shadow-none background-unrecognized">
                 <div className="image">
                   <a href="https://checkout.cariber.co/?add-to-cart=685&amp;cfp=bGFyZ2ViYW5uZXJfY291cnNlcw==">
                     <Image className="image-image"
@@ -135,7 +135,7 @@ export default function Courses() {
               </div>
             </div>
             <div className="block-type-text text-left col-12">
-              <div className="block box-shadow-none background-unrecognized aos-init aos-animate">
+              <div className="block box-shadow-none background-unrecognized">
                 <h2 style={{ textAlign: 'center' }}>
                   <span style={{ color: '#e74e25' }}>
                     คอร์สทั้งหมด
@@ -147,7 +147,7 @@ export default function Courses() {
             {features.map((value, index) => {
               return (
                 <div key={index} className="block-type-feature text-center col-3">
-                  <div className="block box-shadow-large background-light aos-init aos-animate"
+                  <div className="block box-shadow-large background-light"
                     style={{ backgroundColor: "#ffffff", borderRadius: "4px" }}>
                     <div style={{ padding: "15px" }}>
                       <div className="feature">
