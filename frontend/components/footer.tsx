@@ -1,4 +1,4 @@
-import Image from "next/image"
+import Img from "./image"
 
 export default function Footer() {
   return (
@@ -8,8 +8,8 @@ export default function Footer() {
           <div className="footer-content">
             <div className="container footer-container media">
               <div className="footer-block ">
-                <a className="logo" href="" style={{width: 40, height: 39.9667}}>
-                  <Image className="logo-image"
+                <a className="logo" href="" style={{ width: 40, height: 39.9667 }}>
+                  <Img className="logo-image"
                     src="https://kajabi-storefronts-production.kajabi-cdn.com/kajabi-storefronts-production/themes/3617585/settings_images/O14Sjd9QSvma4oiA4RfT_file.jpg"
                     alt="Footer Logo"
                     width={40}

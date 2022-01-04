@@ -2,23 +2,25 @@ $image-border-radius: 4px;
 $image-width: 300px;
 $feature-height: 272.05px;
 
-.feature-image {
-  width: $image-width;
-  border-radius: $image-border-radius;
-}
-
-.feature-text {
-  margin-top: 10px !important;
-}
-
-.block-type-feature {
-  height: $feature-height;
-  margin-bottom: 30px !important;
-}
-
 .bg-courses {
-  background-image: url(https://kajabi-storefronts-production.kajabi-cdn.com/kajabi-storefronts-production/themes/3617585/settings_images/zcyoCkKlSnurUp9sR2M5_file.jpg);
+  background-image: url("../../public/courses/background.jpg");
   background-position: top;
   background-size: cover;
   background-attachment: fixed;
+}
+
+.courses {
+  .feature-image {
+    width: $image-width;
+    border-radius: $image-border-radius;
+  }
+
+  .feature-text {
+    margin-top: 10px !important;
+  }
+
+  .block-type-feature {
+    height: $feature-height;
+    margin-bottom: 30px !important;
+  }
 }
