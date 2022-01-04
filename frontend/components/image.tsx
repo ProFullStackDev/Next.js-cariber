@@ -1,7 +1,7 @@
-import Image from "next/image"
+import Image, { ImageProps } from "next/image"
 
-export default function Img(props: any) {
-  const cloudflareImageLoader = ({ src, width, quality }: { src: any, width: any, quality: any }) => {
+export default function Img(props: ImageProps) {
+  const cloudflareImageLoader = ({ src, width, quality }: ImageProps) => {
     if (!quality) {
       quality = 75
     }
