@@ -1,4 +1,4 @@
-import Image from "next/image"
+import Img from "./image"
 
 interface Menu {
   url: string,
@@ -18,9 +18,9 @@ export default function Header() {
         <div className="header-content header-content-desktop background-dark">
           <div className="container header-container media" style={{height: "43.5px"}}>
             <a className="logo" href="" style={{width: 120, height: 41.8833}}>
-              <Image className="logo-image"
+              <Img className="logo-image"
                 src="https://kajabi-storefronts-production.kajabi-cdn.com/kajabi-storefronts-production/themes/3617585/settings_images/gloao1YVR4yKwUK3mHDJ_Logo-01-05.png"
-                alt=""
+                alt="Header Logo"
                 width={120}
                 height={41.8833} />
             </a>

@@ -2,6 +2,7 @@
 @import "./especial/courses.module.scss";
 @import "./especial/footer.module.scss";
 @import "./especial/footerBrand.module.scss";
+@import "./especial/review.module.scss";
 
 $frequency: 0;
 $show-grid: false;
@@ -1702,7 +1703,6 @@ body.compensate-for-scrollbar {
 }
 
 .fancybox-container {
-  -webkit-backface-visibility: hidden;
   height: 100%;
   left: 0;
   outline: 0;
@@ -1821,7 +1821,6 @@ body.compensate-for-scrollbar {
 }
 
 .fancybox-slide {
-  -webkit-backface-visibility: hidden;
   display: none;
   height: 100%;
   left: 0;
@@ -1887,7 +1886,6 @@ body.compensate-for-scrollbar {
 .fancybox-slide-image .fancybox-content {
   -webkit-animation-timing-function: cubic-bezier(0.5, 0, 0.14, 1);
   animation-timing-function: cubic-bezier(0.5, 0, 0.14, 1);
-  -webkit-backface-visibility: hidden;
   background: transparent;
   background-repeat: no-repeat;
   background-size: 100% 100%;
