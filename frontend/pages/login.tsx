@@ -1,6 +1,6 @@
 import Footer from "../components/footer";
 import Header from "../components/header";
-import Image from "next/image";
+import Img from "../components/image";
 
 export default function Login() {
   return (
@@ -12,8 +12,8 @@ export default function Login() {
             <div className="col-6 text-center">
               <div className="auth-content">
                 <div className="auth-image">
-                  <Image
-                    src="https://kajabi-storefronts-production.kajabi-cdn.com/kajabi-storefronts-production/themes/3625250/settings_images/ACVU5ScLT32Ts3CDFaaz_Cover_Facebook-02-01.jpg"
+                  <Img
+                    src="/login/image-title.jpg"
                     alt=""
                     width={615}
                     height={274.183}

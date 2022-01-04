@@ -20,7 +20,7 @@ export default function Header() {
           <div className="container header-container media" style={{height: "43.5px"}}>
             <a className="logo" href="" style={{width: 120, height: 41.8833}}>
               <Img className="logo-image"
-                src="https://kajabi-storefronts-production.kajabi-cdn.com/kajabi-storefronts-production/themes/3617585/settings_images/gloao1YVR4yKwUK3mHDJ_Logo-01-05.png"
+                src="/header/header-logo.png"
                 alt="Header Logo"
                 width={120}
                 height={41.8833} />
