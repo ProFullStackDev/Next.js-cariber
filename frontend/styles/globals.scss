@@ -3118,23 +3118,6 @@ strong {
   box-shadow: 0 10px 40px 0 rgba(0, 0, 0, 0.1);
 }
 
-.accordion .accordion-title:after {
-  font-family: "Font Awesome 5 Free";
-  font-weight: 900;
-  font-style: normal;
-  font-variant: normal;
-  display: inline-block;
-  padding-right: 15px;
-  content: "\f068";
-  color: $color-primary;
-  -webkit-font-smoothing: antialiased;
-  text-rendering: auto;
-}
-
-.accordion .accordion-title.collapsed:after {
-  content: "\f067";
-}
-
 .announcement {
   font-size: $font-size-body-mobile;
   display: block;
@@ -3271,6 +3254,11 @@ strong {
 .block {
   width: 100%;
   height: 100%;
+
+  @media (max-width: 768px) {
+    display: flex;
+    justify-content: center;
+  }
 }
 
 .block-break {
@@ -4398,10 +4386,6 @@ div[id^="section-"] {
 .image {
   position: relative;
   height: inherit;
-
-  @media (max-width: 768px) {
-    margin-top: 50px;
-  }
 }
 
 .image-overlay {
@@ -4550,4 +4534,8 @@ a,
 
 .block-type-feature {
   height: auto;
+}
+
+.background-white {
+  background-color: #ffffff;
 }

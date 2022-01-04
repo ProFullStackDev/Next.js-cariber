@@ -3,6 +3,7 @@ import { useEffect } from 'react'
 import Header from '../components/header'
 import Footer from '../components/footer'
 import Image from 'next/image'
+import Accordion from '../components/index/accordion'
 
 interface Feature {
   image: string,
@@ -23,6 +24,11 @@ interface MyStudent {
   alt: string,
   width: number,
   height: number,
+}
+
+interface FrequentlyAskedQuestion {
+  title: string,
+  description: string[],
 }
 
 const Index: NextPage = () => {
@@ -78,7 +84,7 @@ const Index: NextPage = () => {
       date: "17-Sep-2021",
     },
   ]
-  const myStudent: MyStudent[] = [
+  const myStudents: MyStudent[] = [
     {
       image: "https://kajabi-storefronts-production.kajabi-cdn.com/kajabi-storefronts-production/themes/3625250/settings_images/qzxHyJMFTfOmILNFhb6T_download.webp",
       alt: "SCB ไทยพาณิชย์",
@@ -132,6 +138,57 @@ const Index: NextPage = () => {
       alt: "pwc",
       width: 165,
       height: 125.55
+    },
+  ]
+  const frequentlyAskedQuestions: FrequentlyAskedQuestion[] = [
+    {
+      title: "Cariber คืออะไร?",
+      description: [
+        "Cariber คือแพลตฟอร์มการเรียนรู้ที่เปิดโอกาสให้ทุกคนได้เข้าถึงความรู้และประสบการณ์",
+        "จากผู้นำองค์กรและผู้เชี่ยวชาญในทุกแวดวง ไร้ข้อจำกัดด้านสถานที่และเวลา",
+        "ในราคาเอื้อมถึงแต่ยังคงคุณภาพ พร้อมต่อยอดเส้นทางอาชีพได้จริง"
+      ]
+    },
+    {
+      title: "รูปแบบการสมัครคอร์ส Cariber?",
+      description: [
+        "Cariber มีคอร์สเรียน 2 รูปแบบให้คุณได้เลือกสมัคร",
+        "1. หนึ่งคอร์ส: เรียนได้เฉพาะคอร์สที่ซื้อราคา 2,000 บาท เรียนซ้ำได้ไม่จำกัดจำนวนครั้ง ตลอด 1 ปี เต็ม",
+        "2.แพ็กเกจรายปี: เรียนได้ทุกคอร์สจากทุกผู้สอนทุกคนบนแพลตฟอร์ม Cariber ได้ไม่จำกัด ตลอด 1 ปีเต็ม ราคา 5,000 บาท"
+      ]
+    },
+    {
+      title: "รูปแบบไหนที่เหมาะกับคุณ?",
+      description: [
+        "หากยังไม่แน่ใจว่ารูปแบบไหนที่ใช่คุณ ลองอ่านรายละเอียดด้านล่างนี้เพื่อประกอบการตัดสินใจ:",
+        "หากคุณสนใจคอร์สไหนเป็นพิเศษ เราขอแนะนำการซื้อเป็นรายคอร์ส",
+        "แต่ถ้าหากคุณชอบความคุ้มค่าและต้องการพัฒนาตนเองอยู่ตลอดเวลา เราขอแนะนำแพ็กเกจรายปี เพราะคุณจะสามารถเข้าเรียนได้ทุกคอร์สตลอด 1 ปี"
+      ]
+    },
+    {
+      title: "รับชม Cariber ได้ผ่านช่องทางไหนบ้าง?",
+      description: [
+        "สามารถเข้าเรียนคอร์ส Cariber ผ่านคอมพิวเตอร์ สมาร์ตโฟน แท็บเล็ตหรือสมาร์ตทีวี"
+      ]
+    },
+    {
+      title: "รับชม Cariber ได้ผ่านช่องทางไหนบ้าง?",
+      description: [
+        "ผู้ใช้งานแพ็กเกจรายปีที่ทำการซื้อและชำระเงินผ่านบัตรเครดิต/เดบิตตั้งแต่วันที่ 15 กรกฎาคม 2564 เป็นต้นไป จะถูกต่ออายุและหักชำระโดยอัตโนมัติทุกปี",
+        "หากคุณประสงค์จะยกเลิกการต่ออายุอัตโนมัติแพ็กเกจรายปี โปรดติดต่อเราที่: contact@cariber.co"
+      ]
+    },
+    {
+      title: "Cariber รวมภาษีมูลค่าเพิ่มหรือยัง?",
+      description: [
+        "ราคาคอร์สเรียนและแพ็กเกจรายปี รวมภาษีมูลค่าเพิ่มแล้ว"
+      ]
+    },
+    {
+      title: "แพ็กเกจรายปีสามารถใช้ได้กี่ท่าน?",
+      description: [
+        "แพ็กเกจรายปี สงวนสิทธิสำหรับการใช้งานส่วนบุคคล ต่อ 1 ผู้ใช้งานเท่านั้น หากพบว่ามีการละเมิดการใช้งานร่วมกัน ทางบริษัทขอสงวนสิทธิระงับการใช้งานโดยไม่ต้องแจ้งให้ทราบล่วงหน้า"
+      ]
     },
   ]
 
@@ -434,9 +491,9 @@ const Index: NextPage = () => {
               </div>
             </div>
             <div className="block-break"></div>
-            {myStudent.map((value, index) => {
+            {myStudents.map((value, index) => {
               return (
-                <div key={index} className="block-type-image col-2">
+                <div key={index} className="block-type-image col-2" style={{ marginRight: "5px" }}>
                   <div className="block box-shadow-none">
                     <div className="image">
                       <Image className="image-image"
@@ -448,6 +505,28 @@ const Index: NextPage = () => {
                     </div>
                   </div>
                 </div>
+              )
+            })}
+          </div>
+        </div>
+      </div>
+      <div className="sizer background-light">
+        <div className="container">
+          <div className="row align-items-start justify-content-center">
+            <div className="block-type-text text-left col-8">
+              <div className="block box-shadow-none">
+                <p style={{ fontSize: "36px", textAlign: "center" }}>
+                  <strong>
+                    <span style={{ color: "#e74e25" }}>
+                      คำถามที่พบบ่อย
+                    </span>
+                  </strong>
+                </p>
+              </div>
+            </div>
+            {frequentlyAskedQuestions.map((value, index) => {
+              return (
+                <Accordion key={index} title={value.title} description={value.description}></Accordion>
               )
             })}
           </div>
