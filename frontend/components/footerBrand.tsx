@@ -11,7 +11,7 @@ export default function FooterBrand() {
                 <div className="block box-shadow-none background-unrecognized aos-init aos-animate">
                   <div className="image">
                     <Img className="image-image"
-                      src="https://kajabi-storefronts-production.kajabi-cdn.com/kajabi-storefronts-production/themes/3617585/settings_images/gVlhJnIUTLejFrFp11ai_Logo-01-05.png"
+                      src="footerBrand/footer-brand-logo.png"
                       alt="Brand Logo"
                       width={450}
                       height={156.967} />

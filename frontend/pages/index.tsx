@@ -6,7 +6,7 @@ const Index: NextPage = () => {
   const router = useRouter()
 
   useEffect(() => {
-    router.push('/review')
+    router.push('/login')
   })
 
   return (

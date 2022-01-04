@@ -1,3 +1,4 @@
+import Link from "next/link";
 import Img from "./image"
 
 interface Menu {
@@ -13,13 +14,13 @@ export default function Header() {
   ];
 
   return (
-    <header className="header header-overlay">
+    <header className="header">
       <div className="header-wrap">
         <div className="header-content header-content-desktop background-dark">
           <div className="container header-container media" style={{height: "43.5px"}}>
             <a className="logo" href="" style={{width: 120, height: 41.8833}}>
               <Img className="logo-image"
-                src="https://kajabi-storefronts-production.kajabi-cdn.com/kajabi-storefronts-production/themes/3617585/settings_images/gloao1YVR4yKwUK3mHDJ_Logo-01-05.png"
+                src="/header/header-logo.png"
                 alt="Header Logo"
                 width={120}
                 height={41.8833} />
@@ -43,9 +44,9 @@ export default function Header() {
             <div className="header-block header-switch-content header-block-user header-block-mr0">
               <div className="user">
                 <span className="user-login">
-                  <a href="/login">
+                  <Link href="/login">
                     เข้าสู่ระบบ
-                  </a>
+                  </Link>
                 </span>
               </div>
             </div>

@@ -1,7 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Prompt:wght@200;400&display=swap');
 @import "./especial/header.module.scss";
 @import "./especial/courses.module.scss";
 @import "./especial/footer.module.scss";
 @import "./especial/footerBrand.module.scss";
+@import "./especial/login.module.scss";
 @import "./especial/review.module.scss";
 
 $frequency: 0;
@@ -27,7 +29,7 @@ $two-step-text: "<h4>Amazing Feature</h4>\r\n<p>Lorem ipsum dolor sit amet, metu
 $two-step-image: "";
 $two-step-video: "";
 $modal-auto-play: false;
-$font-family-body: Raleway;
+$font-family-body: "Prompt";
 $font-weight-body: 400;
 $line-height-body: 1.6;
 $modal-img-action: "";
@@ -4014,7 +4016,7 @@ div[id^="section-"] {
 }
 
 .sizer {
-  padding-top: 130px;
+  padding-top: 40px;
   padding-bottom: 40px;
 }
 
@@ -4518,7 +4520,7 @@ ol,
 a,
 .btn,
 .form-btn {
-  font-family: "MyFont", sans-serif;
+  font-family: $font-family-body, sans-serif;
 }
 
 .bg-courses {
