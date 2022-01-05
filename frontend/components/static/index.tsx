@@ -1,4 +1,4 @@
-import { Feature, ShopeeReview, MyStudent, FrequentlyAskedQuestion, CoursesSoon, CoursesLatest } from "../../pages/index"
+import { Feature, ShopeeReview, MyStudent, FrequentlyAskedQuestion, CoursesSoon, CoursesLatest } from "./interface"
 
 export const features: Feature[] = [
   {

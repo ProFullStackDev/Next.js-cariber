@@ -4,8 +4,7 @@ export default function Accordion({ title, description }: { title?: string, desc
   const [displayDescription, setDisplayDescription] = useState("none");
 
   function switchDisplay() {
-    displayDescription == "none" ? setDisplayDescription("block") : setDisplayDescription("none")
-    console.log(displayDescription)
+    displayDescription === "none" ? setDisplayDescription("block") : setDisplayDescription("none")
   }
 
   return (
@@ -16,7 +15,7 @@ export default function Accordion({ title, description }: { title?: string, desc
             <h5 className="media-body">
               {title}
             </h5>
-            {displayDescription == "none" ?
+            {displayDescription === "none" ?
               (<i className="fas fa-chevron-right" style={{ color: "#e74e25 " }}></i>) :
               (<i className="fas fa-chevron-down" style={{ color: "#e74e25 " }}></i>)}
           </div>

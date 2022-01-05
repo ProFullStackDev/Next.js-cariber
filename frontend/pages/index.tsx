@@ -9,43 +9,6 @@ import * as staticDataReview from "../components/static/review"
 import * as staticData from "../components/static/index"
 import FooterBrand from '../components/footerBrand'
 
-export interface Feature {
-  image: string,
-  name: string,
-  career: string,
-  review: string,
-}
-
-export interface ShopeeReview {
-  rating: string,
-  review: string,
-  name: string,
-  date: string,
-}
-
-export interface MyStudent {
-  image: string,
-  alt: string,
-  width: number,
-  height: number,
-}
-
-export interface CoursesSoon {
-  image: string,
-  alt: string,
-}
-
-export interface FrequentlyAskedQuestion {
-  title: string,
-  description: string[],
-}
-
-export interface CoursesLatest {
-  image: string,
-  alt: string,
-  link: string
-}
-
 const Index: NextPage = () => {
   const features = staticData.features
   const shopeeReviews = staticData.shopeeReviews

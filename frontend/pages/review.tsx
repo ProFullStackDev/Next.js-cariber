@@ -5,21 +5,6 @@ import FooterBrand from "../components/footerBrand";
 import * as staticData from "../components/static/review"
 import SlideCourse from "../components/slideCourse";
 
-export interface FeatureCariber {
-  image: string,
-  name: string,
-  career: string,
-  review: string,
-  from: string,
-}
-
-export interface FeatureShopee {
-  name: string,
-  ratings: string,
-  review: string,
-  from: string,
-}
-
 export default function Review() {
   const featureCariberFirst = staticData.featureCariberFirst
   const featureCariberSecond = staticData.featureCariberSecond
