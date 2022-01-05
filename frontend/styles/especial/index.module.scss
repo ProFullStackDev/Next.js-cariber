@@ -11,12 +11,6 @@
     line-height: 1.1;
   }
 
-  .container {
-    max-width: calc(1260px + -20px + -20px);
-    padding-right: 10px;
-    padding-left: 10px;
-  }
-
   .qa-block {
     padding-top: 9px;
     padding-right: 30px;
@@ -44,5 +38,12 @@
 
   .block-type-accordion{
     padding: 10px 15px 10px 15px;
+  }
+
+  .block {
+    @media (max-width: 768px) {
+      display: flex;
+      justify-content: center;
+    }
   }
 }

@@ -1,50 +1,30 @@
-import { useEffect, useRef, useState } from "react";
 import Footer from "../components/footer";
 import Header from "../components/header";
 import Img from "../components/image";
 import FooterBrand from "../components/footerBrand";
 import * as staticData from "../static/review"
+import SlideCourse from "../components/slideCourse";
+
+export interface FeatureCariber {
+  image: string,
+  name: string,
+  career: string,
+  review: string,
+  from: string,
+}
+
+export interface FeatureShopee {
+  name: string,
+  ratings: string,
+  review: string,
+  from: string,
+}
 
 export default function Review() {
-  const [slideShowIndex, setSlideShowIndex] = useState(0);
-  const timeoutRef = useRef(0);
-  const delay = 5000;
   const featureCariberFirst = staticData.featureCariberFirst
   const featureCariberSecond = staticData.featureCariberSecond
   const featureShopee = staticData.featureShopee
   const slideCourse = staticData.slideCourse
-
-  function resetTimeout() {
-    if (timeoutRef.current) {
-      clearTimeout(timeoutRef.current);
-    }
-  }
-
-  function nextSlide() {
-    setSlideShowIndex((index) =>
-      index === slideCourse.length - 4 ? 0 : index + 1
-    )
-  }
-
-  function previousSlide() {
-    setSlideShowIndex((index) =>
-      index === 0 ? slideCourse.length - 4 : index - 1
-    )
-  }
-
-  useEffect(() => {
-    resetTimeout();
-    timeoutRef.current = window.setTimeout(
-      () =>
-        setSlideShowIndex((index) =>
-          index === slideCourse.length - 4 ? 0 : index + 1
-        ),
-      delay
-    );
-    return () => {
-      resetTimeout();
-    }
-  }, [slideCourse.length, slideShowIndex])
 
   return (
     <div className="bg-review review">
@@ -54,7 +34,7 @@ export default function Review() {
           <div className="container">
             <div className="row align-items-center justify-content-center">
               <div className="block-type-image text-col-12" style={{ marginBottom: 40 }}>
-                <div className="block box-shadow-none background-unrecognized aos-init aos-animate">
+                <div className="block box-shadow-none background-unrecognized">
                   <div className="image">
                     <a href="https://checkout.cariber.co/?add-to-cart=685&amp;cfp=bGFyZ2ViYW5uZXJfY291cnNlcw==">
                       <Img className="image-image"
@@ -67,7 +47,7 @@ export default function Review() {
                 </div>
               </div>
               <div id="block-titel" className="block-type-text text-center col-7" style={{ marginBottom: 50 }}>
-                <div className="block box-shadow-large background-unrecognized aos-init aos-animate">
+                <div className="block box-shadow-large background-unrecognized">
                   <h1>
                     <span style={{ color: '#e74e25' }}>
                       Wall of Love
@@ -89,7 +69,7 @@ export default function Review() {
           <div className="container">
             <div className="frame align-items-center justify-content-center">
               <div className="block-type-image text-col-11">
-                <div className="row block box-shadow-large background-light aos-init aos-animate" >
+                <div className="row block box-shadow-large background-light" >
                   <Img className="image-image"
                     src="/review/person-1.webp"
                     alt="หนุ่มเมืองจันท์"
@@ -135,8 +115,8 @@ export default function Review() {
           <div className="justify-content-center grid-container">
             {featureCariberFirst.map((value, index) => {
               return (
-                <div key={index} className="block-type-feature text-left col-3">
-                  <div className="block box-shadow-large background-light aos-init aos-animate">
+                <div key={index} className="block-type-feature text-left col-12">
+                  <div className="block box-shadow-large background-light">
                     <div className="feature">
                       <Img className="feature-image"
                         src={value.image}
@@ -180,8 +160,8 @@ export default function Review() {
             })}
             {featureCariberSecond.map((value, index) => {
               return (
-                <div key={index} className="block-type-feature text-left col-3">
-                  <div className="block box-shadow-large background-light aos-init aos-animate">
+                <div key={index} className="block-type-feature text-left col-12">
+                  <div className="block box-shadow-large background-light">
                     <div className="feature">
                       <Img className="feature-image"
                         src={value.image}
@@ -225,8 +205,8 @@ export default function Review() {
             })}
             {featureShopee.map((value, index) => {
               return (
-                <div key={index} className="block-type-feature text-left col-3">
-                  <div className="block box-shadow-large background-light aos-init aos-animate">
+                <div key={index} className="block-type-feature text-left col-12">
+                  <div className="block box-shadow-large background-light">
                     <div className="feature">
                       <div className="feature-text">
                         <h4>
@@ -270,7 +250,7 @@ export default function Review() {
           <div className="container ">
             <div className="row align-items-center justify-content-center">
               <div className="block-type-text text-center col-12">
-                <div className="block box-shadow-none background-unrecognized aos-init aos-animate">
+                <div className="block box-shadow-none background-unrecognized">
                   <p style={{ fontSize: "40px", textAlign: "center" }}>
                     <strong>
                       <span style={{ color: "#e74e25" }}>
@@ -290,59 +270,7 @@ export default function Review() {
                 </div>
               </div>
               <div className="block-type-code text-left col-12">
-                <div className="block box-shadow-none background-unrecognized aos-init aos-animate">
-                  <div id="slideshow" className="container">
-                    <div className="row">
-                      <div className="col-lg-12">
-                        <div id="news-slider" className="owl-carousel owl-theme">
-                          <div className="owl-wrapper-outer">
-                            <div className="owl-wrapper" style={{ transform: `translate3d(${-slideShowIndex * 295}px, 0px, 0px)` }}>
-                              {slideCourse.map((value, index) => {
-                                return (
-                                  <div key={index} className="owl-item" style={{ width: "fit-content" }}>
-                                    <div className="news-grid">
-                                      <div className="news-grid-image">
-                                        <a href={value.url}>
-                                          <Img
-                                            src={value.image}
-                                            alt="Slide Course"
-                                            width={273.4}
-                                            height={482.4}
-                                          />
-                                        </a>
-                                      </div>
-                                      <div className="news-grid-txt">
-                                        {index < 1 ? (
-                                          <b>Coming Soon</b>
-                                        ) : (
-                                          <a href={value.url}>
-                                            ซื้อคอร์สนี้
-                                          </a>
-                                        )}
-                                      </div>
-                                    </div>
-                                  </div>
-                                )
-                              })}
-                            </div>
-                          </div>
-                          <div className="owl-controls clickable">
-                            <div className="owl-buttons">
-                              <button id="previous" className="owl-prev owl-button" onClick={previousSlide}>
-                                <i className="fas fa-chevron-left" style={{ color: "white" }}></i>
-                              </button>
-                              <button id="next" className="owl-next owl-button" onClick={nextSlide}>
-                                <i className="fas fa-chevron-right" style={{ color: "white" }}></i>
-                              </button>
-                            </div>
-                          </div>
-                          <div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+              <SlideCourse slideCourse={slideCourse} slideView={4} imageWidth={273.4} imageHeight={482.4}></SlideCourse>
               </div>
             </div>
           </div>

@@ -10,7 +10,7 @@ export default function Footer() {
               <div className="footer-block ">
                 <a className="logo" href="" style={{ width: 40, height: 39.9667 }}>
                   <Img className="logo-image"
-                    src="footer/footer-logo.jpg"
+                    src="/footer/footer-logo.jpg"
                     alt="Footer Logo"
                     width={40}
                     height={39.9667} />

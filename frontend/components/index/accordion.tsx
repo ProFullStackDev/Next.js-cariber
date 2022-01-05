@@ -3,7 +3,7 @@ import { MouseEventHandler, useState } from "react";
 export default function Accordion({ title, description }: { title?: string, description?: string[] }) {
   const [displayDescription, setDisplayDescription] = useState("none");
 
-  const switchDisplay: MouseEventHandler<HTMLDivElement> = () => {
+  function switchDisplay() {
     displayDescription == "none" ? setDisplayDescription("block") : setDisplayDescription("none")
     console.log(displayDescription)
   }

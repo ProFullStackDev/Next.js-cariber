@@ -1,22 +1,5 @@
-interface FeatureCariber {
-  image: string,
-  name: string,
-  career: string,
-  review: string,
-  from: string,
-}
-
-interface FeatureShopee {
-  name: string,
-  ratings: string,
-  review: string,
-  from: string,
-}
-
-interface SlideCourse {
-  url: string,
-  image: string,
-}
+import { SlideCourse } from "../components/slideCourse"
+import { FeatureCariber, FeatureShopee } from "../pages/review"
 
 export const featureCariberFirst: FeatureCariber[] = [
   {
@@ -182,31 +165,31 @@ export const featureShopee: FeatureShopee[] = [
 ]
 export const slideCourse: SlideCourse[] = [
   {
-    url: "#",
+    link: "#",
     image: "/review/slideshow-1.jpg"
   },
   {
-    url: "",
+    link: "",
     image: "/review/slideshow-2.jpg"
   },
   {
-    url: "",
+    link: "",
     image: "/review/slideshow-3.jpg"
   },
   {
-    url: "",
+    link: "",
     image: "/review/slideshow-4.jpg"
   },
   {
-    url: "",
+    link: "",
     image: "/review/slideshow-5.jpg"
   },
   {
-    url: "",
+    link: "",
     image: "/review/slideshow-6.jpg"
   },
   {
-    url: "",
+    link: "",
     image: "/review/slideshow-7.jpg"
   },
 ]
