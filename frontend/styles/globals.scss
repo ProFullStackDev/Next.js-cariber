@@ -2688,11 +2688,6 @@ img {
 }
 
 @media (min-width: 768px) {
-  .row {
-    margin-right: -15px;
-    margin-left: -15px;
-  }
-
   [class*="col-"] {
     padding: 15px;
   }
@@ -4621,6 +4616,6 @@ a,
   }
 }
 
-strong{
+strong {
   font-weight: 500;
 }
