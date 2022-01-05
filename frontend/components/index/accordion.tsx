@@ -13,7 +13,7 @@ export default function Accordion({ title, description }: { title?: string, desc
       <div className="qa-block box-shadow-medium background-white">
         <div className="accordion">
           <div className="accordion-title media align-items-center collapsed">
-            <h5 className="media-body" style={{ fontSize: "18px" }}>
+            <h5 className="media-body">
               {title}
             </h5>
             {displayDescription == "none" ?
@@ -25,12 +25,12 @@ export default function Accordion({ title, description }: { title?: string, desc
               {
                 description?.map((value, index) => {
                   return (
-                    <h6 key={index}>
-                      <span style={{ fontWeight: "400", fontSize: "16px" }}>
+                    <h5 key={index}>
+                      <span style={{ fontWeight: "400" }}>
                         {value}
                       </span>
                       <br />
-                    </h6>
+                    </h5>
                   )
                 })
               }

@@ -123,20 +123,19 @@ const Index: NextPage = () => {
             <div className="row align-items-center justify-content-center">
               <div className="block-type-text text-left col-12">
                 <div className="block box-shadow-none">
-                  <h3 style={{ fontSize: "34px", textAlign: "center" }}>
+                  <h2 style={{ textAlign: "center" }}>
                     <strong>
                       <span style={{ color: "#e74e25" }}>
                         ปีใหม่นี้ยกระดับให้คุณเป็นคนใหม่ เรียนรู้กับ &lsquo;ผู้นำตัวจริง&rsquo; จากทุกวงการ<br />
                         แพ็กเกจรายปี ที่คุณจ่ายครั้งเดียว เข้าชมผู้สอนได้ทุกท่าน<br />
                       </span>
                     </strong>
-                  </h3>
+                  </h2>
                 </div>
               </div>
               <div className="block-type-feature text-center col-5">
                 <div className="block box-shadow-none">
-                  <div className="feature" style={{ display: "flex", flexDirection: "column", justifyContent: "center" }}>
-                    <div>
+                  <div className="feature" style={{ display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center" }}>
                       <Img className="feature-image"
                         src="/index/yearly-subscription.jpg"
                         width={400}
@@ -146,12 +145,11 @@ const Index: NextPage = () => {
                       <a className="btn btn-solid btn-medium btn-auto" href="https://checkout.cariber.co/?add-to-cart=685&cfp=YmFubmVyK3NsaWRlc2hvd19ob21l">
                         สมัครเลย
                       </a>
-                    </div>
                   </div>
                 </div>
               </div>
               <div className="block-type-code text-left col-6">
-                <SlideCourse slideCourse={slideCourse} slideView={2} imageWidth={247.5} imageHeight={400}></SlideCourse>
+                <SlideCourse slideCourse={slideCourse} slideView={2} imageWidth={220} imageHeight={400}></SlideCourse>
               </div>
             </div>
           </div>
@@ -291,11 +289,11 @@ const Index: NextPage = () => {
           <div className="row align-items-center justify-content-center">
             <div className="block-type-text text-center col-12">
               <div className="block box-shadow-none">
-                <h2>
-                  <span style={{ fontSize: "45px", color: "#e74e25" }}>
+                <h1>
+                  <span style={{ color: "#e74e25" }}>
                     คอร์สเปิดตัวล่าสุด
                   </span>
-                </h2>
+                </h1>
               </div>
             </div>
             {coursesLatest.map((value, index) => {
@@ -320,11 +318,11 @@ const Index: NextPage = () => {
             }
             <div className="block-type-text text-center col-12">
               <div className="block box-shadow-none">
-                <h2>
-                  <span style={{ fontSize: "45px", color: "#e74e25" }}>
+                <h1>
+                  <span style={{ color: "#e74e25" }}>
                     คอร์สที่กำลังจะเปิดตัว
                   </span>
-                </h2>
+                </h1>
               </div>
             </div>
             {
@@ -522,13 +520,11 @@ const Index: NextPage = () => {
           <div className="row align-items-start justify-content-center">
             <div className="block-type-text text-left col-8">
               <div className="block box-shadow-none">
-                <p style={{ fontSize: "36px", textAlign: "center" }}>
-                  <strong>
-                    <span style={{ color: "#e74e25" }}>
-                      คำถามที่พบบ่อย
-                    </span>
-                  </strong>
-                </p>
+                <h2 style={{ textAlign: "center" }}>
+                  <span style={{ color: "#e74e25" }}>
+                    คำถามที่พบบ่อย
+                  </span>
+                </h2>
               </div>
             </div>
             {frequentlyAskedQuestions.map((value, index) => {

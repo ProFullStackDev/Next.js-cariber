@@ -44,22 +44,22 @@ $modal-button-style: solid;
 $modal-button-width: full;
 $two-step-auto-play: false;
 $font-family-heading: Quattrocento;
-$font-size-h1-mobile: 36px;
-$font-size-h2-mobile: 30px;
-$font-size-h3-mobile: 24px;
-$font-size-h4-mobile: 20px;
-$font-size-h5-mobile: 18px;
+$font-size-h1-mobile: 30px;
+$font-size-h2-mobile: 24px;
+$font-size-h3-mobile: 20px;
+$font-size-h4-mobile: 18px;
+$font-size-h5-mobile: 16px;
 $font-size-h6-mobile: 12px;
 $font-weight-heading: 700;
 $line-height-heading: 1.2;
 $modal-border-radius: 4;
 $two-step-img-action: "";
 $two-step-media-type: video;
-$font-size-h1-desktop: 88px;
-$font-size-h2-desktop: 36px;
-$font-size-h3-desktop: 30px;
-$font-size-h4-desktop: 24px;
-$font-size-h5-desktop: 20px;
+$font-size-h1-desktop: 36px;
+$font-size-h2-desktop: 30px;
+$font-size-h3-desktop: 24px;
+$font-size-h4-desktop: 20px;
+$font-size-h5-desktop: 18px;
 $font-size-h6-desktop: 12px;
 $modal-video-settings: false;
 $two-step-button-text: Get Started;
@@ -4614,8 +4614,4 @@ a,
     text-decoration-line: none;
     transition: .5s;
   }
-}
-
-strong {
-  font-weight: 500;
 }

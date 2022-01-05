@@ -270,7 +270,7 @@ export default function Review() {
                 </div>
               </div>
               <div className="block-type-code text-left col-12">
-              <SlideCourse slideCourse={slideCourse} slideView={4} imageWidth={273.4} imageHeight={482.4}></SlideCourse>
+              <SlideCourse slideCourse={slideCourse} slideView={4} imageWidth={258} imageHeight={470}></SlideCourse>
               </div>
             </div>
           </div>

@@ -137,10 +137,8 @@ export default function Courses() {
             </div>
             <div className="block-type-text text-left col-12">
               <div className="block box-shadow-none background-unrecognized">
-                <h2 style={{ textAlign: 'center' }}>
-                  <span style={{ color: '#e74e25' }}>
+                <h2 style={{ textAlign: 'center', color: '#e74e25' }}>
                     คอร์สทั้งหมด
-                  </span>
                 </h2>
               </div>
             </div>
