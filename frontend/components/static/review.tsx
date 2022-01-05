@@ -1,5 +1,5 @@
-import { SlideCourse } from "../components/slideCourse"
-import { FeatureCariber, FeatureShopee } from "../pages/review"
+import { SlideCourse } from "../slideCourse"
+import { FeatureCariber, FeatureShopee } from "../../pages/review"
 
 export const featureCariberFirst: FeatureCariber[] = [
   {

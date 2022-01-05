@@ -5,8 +5,8 @@ import Accordion from '../components/index/accordion'
 import Link from 'next/link'
 import Img from '../components/image'
 import SlideCourse from '../components/slideCourse'
-import * as staticDataReview from "../static/review"
-import * as staticData from "../static/index"
+import * as staticDataReview from "../components/static/review"
+import * as staticData from "../components/static/index"
 import FooterBrand from '../components/footerBrand'
 
 export interface Feature {

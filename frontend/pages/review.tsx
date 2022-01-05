@@ -2,7 +2,7 @@ import Footer from "../components/footer";
 import Header from "../components/header";
 import Img from "../components/image";
 import FooterBrand from "../components/footerBrand";
-import * as staticData from "../static/review"
+import * as staticData from "../components/static/review"
 import SlideCourse from "../components/slideCourse";
 
 export interface FeatureCariber {
