@@ -4,6 +4,7 @@ import Header from '../components/header'
 import Footer from '../components/footer'
 import Image from 'next/image'
 import Accordion from '../components/index/accordion'
+import Link from 'next/link'
 
 interface Feature {
   image: string,
@@ -461,9 +462,11 @@ const Index: NextPage = () => {
                             </span>
                           </h5>
                         </div>
-                        <a className="btn btn-solid btn-small btn-auto" href="/review" style={{ margin: "0px" }}>
-                          คลิกเพื่อดูรีวิวทั้งหมด
-                        </a>
+                        <Link href="/review">
+                          <a className="btn btn-solid btn-small btn-auto" style={{ margin: "0px" }}>
+                            คลิกเพื่อดูรีวิวทั้งหมด
+                          </a>
+                        </Link>
                       </div>
                     </div>
                   </div>
