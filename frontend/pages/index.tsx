@@ -135,16 +135,18 @@ const Index: NextPage = () => {
               </div>
               <div className="block-type-feature text-center col-5">
                 <div className="block box-shadow-none">
-                  <div className="feature">
-                    <Img className="feature-image"
-                      src="/index/yearly-subscription.jpg"
-                      width={400}
-                      height={400}
-                      alt="Yearly Subscription"
-                    />
-                    <a className="btn btn-solid btn-medium btn-auto" href="https://checkout.cariber.co/?add-to-cart=685&amp;cfp=YmFubmVyK3NsaWRlc2hvd19ob21l">
-                      สมัครเลย
-                    </a>
+                  <div className="feature" style={{ display: "flex", flexDirection: "column", justifyContent: "center" }}>
+                    <div>
+                      <Img className="feature-image"
+                        src="/index/yearly-subscription.jpg"
+                        width={400}
+                        height={400}
+                        alt="Yearly Subscription"
+                      />
+                      <a className="btn btn-solid btn-medium btn-auto" href="https://checkout.cariber.co/?add-to-cart=685&cfp=YmFubmVyK3NsaWRlc2hvd19ob21l">
+                        สมัครเลย
+                      </a>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -243,65 +245,106 @@ const Index: NextPage = () => {
       </div>
       <div className="background-light">
         <div className="sizer">
-          <div className="container container-full">
-            <div className="row align-items-center justify-content-center">
-              <div className="block-type-text text-center col-12">
-                <div className="block box-shadow-none">
-                  <h2>
-                    <span style={{ fontSize: "45px", color: "#e74e25" }}>
-                      คอร์สเปิดตัวล่าสุด
+          <div className="row align-items-center justify-content-center">
+            <div className="block-type-text text-center col-3">
+              <div className="block box-shadow-none" style={{ flexDirection: "column", alignItems: "center" }}>
+                <p style={{ fontSize: "30px" }}>
+                  <strong>
+                    <span style={{ color: "#e74e25" }}>
+                      สูตรความสำเร็จกับ
+                      <br />
+                      &quot;ที่สุด&quot; ของประเทศ
                     </span>
-                  </h2>
+                  </strong>
+                </p>
+                <p style={{ fontSize: "20px" }}>
+                  <em>
+                    <strong>
+                      <span style={{ color: "#e74e25" }}>
+                        คอร์สออนไลน์กับผู้บริหาร ผู้นำทางความคิด แบบที่ไม่เคยมีมาก่อน
+                      </span>
+                    </strong>
+                  </em>
+                </p>
+                <Img className="feature-image"
+                  src="/index/yearly-subscription-1.jpg"
+                  width={329.6}
+                  height={211.55}
+                />
+                <a className="btn btn-solid btn-medium btn-auto" href="https://checkout.cariber.co/?add-to-cart=685&cfp=eWVhcmx5YmFubm5lcl9kZXNrdG9wXw==">
+                  ซื้อแพ็กเกจรายปี
+                </a>
+              </div>
+            </div>
+            <div className="block-type-video col-7">
+              <div className="block box-shadow-none">
+                <div className="video">
+                  <video width="100%" controls loop={true} muted={true} autoPlay={true} style={{ borderRadius: "4px" }}>
+                    <source src="/index/cariber-video.mp4" type="video/mp4" />
+                  </video>
                 </div>
               </div>
-              {coursesLatest.map((value, index) => {
+            </div>
+          </div>
+        </div>
+        <div className="sizer">
+          <div className="row align-items-center justify-content-center">
+            <div className="block-type-text text-center col-12">
+              <div className="block box-shadow-none">
+                <h2>
+                  <span style={{ fontSize: "45px", color: "#e74e25" }}>
+                    คอร์สเปิดตัวล่าสุด
+                  </span>
+                </h2>
+              </div>
+            </div>
+            {coursesLatest.map((value, index) => {
+              return (
+                <div key={index} className="block-type-feature text-center col-6">
+                  <div className="block box-shadow-none">
+                    <div className="feature">
+                      <Img className="feature-image"
+                        src={value.image}
+                        alt={value.alt}
+                        width={600}
+                        height={337.5}
+                      />
+                      <Link href={value.link}>
+                        <a className="btn btn-solid btn-small btn-auto" >ดูรายละเอียดคอร์ส</a>
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+              )
+            })
+            }
+            <div className="block-type-text text-center col-12">
+              <div className="block box-shadow-none">
+                <h2>
+                  <span style={{ fontSize: "45px", color: "#e74e25" }}>
+                    คอร์สที่กำลังจะเปิดตัว
+                  </span>
+                </h2>
+              </div>
+            </div>
+            {
+              coursesSoon.map((value, index) => {
                 return (
-                  <div key={index} className="block-type-feature text-center col-6">
+                  <div key={index} className="block-type-image col-3">
                     <div className="block box-shadow-none">
-                      <div className="feature">
-                        <Img className="feature-image"
+                      <div className="image">
+                        <Img className="image-image"
                           src={value.image}
                           alt={value.alt}
-                          width={600}
-                          height={337.5}
+                          width={349.6}
+                          height={196.733}
                         />
-                        <Link href={value.link}>
-                          <a className="btn btn-solid btn-small btn-auto" >ดูรายละเอียดคอร์ส</a>
-                        </Link>
                       </div>
                     </div>
                   </div>
                 )
               })
-              }
-              <div className="block-type-text text-center col-12">
-                <div className="block box-shadow-none">
-                  <h2>
-                    <span style={{ fontSize: "45px", color: "#e74e25" }}>
-                      คอร์สที่กำลังจะเปิดตัว
-                    </span>
-                  </h2>
-                </div>
-              </div>
-              {
-                coursesSoon.map((value, index) => {
-                  return (
-                    <div key={index} className="block-type-image col-3">
-                      <div className="block box-shadow-none">
-                        <div className="image">
-                          <Img className="image-image"
-                            src={value.image}
-                            alt={value.alt}
-                            width={349.6}
-                            height={196.733}
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  )
-                })
-              }
-            </div>
+            }
           </div>
         </div>
       </div>

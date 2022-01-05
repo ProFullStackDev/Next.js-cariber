@@ -9,7 +9,7 @@ interface Menu {
 export default function Header() {
   const menu: Menu[] = [
     { url: '/courses', name: 'คอร์สทั้งหมด' },
-    { url: '/blog', name: 'บทความ' },
+    { url: 'https://blog.cariber.co/', name: 'บทความ' },
     { url: '/review', name: 'รีวิว' },
   ];
 

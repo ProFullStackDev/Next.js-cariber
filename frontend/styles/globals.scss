@@ -4112,6 +4112,7 @@ div[id^="section-"] {
 .feature-image {
   display: inline-block;
   margin: 0px;
+  border-radius: 4px;
 }
 
 .feature .btn {
@@ -4618,4 +4619,8 @@ a,
     text-decoration-line: none;
     transition: .5s;
   }
+}
+
+strong{
+  font-weight: 500;
 }
