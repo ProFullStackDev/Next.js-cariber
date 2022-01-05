@@ -1,5 +1,5 @@
 import type { NextPage } from 'next'
-import { useEffect } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import Header from '../components/header'
 import Footer from '../components/footer'
 import Image from 'next/image'
@@ -32,6 +32,9 @@ interface FrequentlyAskedQuestion {
 }
 
 const Index: NextPage = () => {
+  const [slideShowIndex, setSlideShowIndex] = useState(0);
+  const timeoutRef = useRef(0);
+  const delay = 5000;
   const features: Feature[] = [
     {
       image: "https://kajabi-storefronts-production.kajabi-cdn.com/kajabi-storefronts-production/themes/3625250/settings_images/gSObK5T7SMiVlxNr30ES_03.webp",
@@ -251,6 +254,41 @@ const Index: NextPage = () => {
                     width={855.733}
                     height={434.817}
                   />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="background-light">
+        <div className="sizer">
+          <div className="container">
+            <div className="row align-items-center justify-content-center">
+              <div className="block-type-text text-left col-12">
+                <div className="block box-shadow-none">
+                  <h3 style={{ fontSize: "34px", textAlign: "center" }}>
+                    <strong>
+                      <span style={{ color: "#e74e25" }}>
+                        ปีใหม่นี้ยกระดับให้คุณเป็นคนใหม่ เรียนรู้กับ &lsquo;ผู้นำตัวจริง&rsquo; จากทุกวงการ<br />
+                        แพ็กเกจรายปี ที่คุณจ่ายครั้งเดียว เข้าชมผู้สอนได้ทุกท่าน<br />
+                      </span>
+                    </strong>
+                  </h3>
+                </div>
+              </div>
+              <div className="block-type-feature text-center col-5">
+                <div className="block box-shadow-none">
+                  <div className="feature">
+                    <Image className="feature-image"
+                      src="/index/yearly-subscription.jpg"
+                      width={400}
+                      height={400}
+                      alt="Yearly Subscription"
+                    />
+                    <a className="btn btn--solid btn--medium btn--auto" href="https://checkout.cariber.co/?add-to-cart=685&amp;cfp=YmFubmVyK3NsaWRlc2hvd19ob21l">
+                      สมัครเลย
+                    </a>
+                  </div>
                 </div>
               </div>
             </div>
