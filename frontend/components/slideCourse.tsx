@@ -33,13 +33,13 @@ export default function SlideCourse({ slideCourse, slideView, imageWidth, imageH
 
   function nextSlide() {
     setSlideShowIndex((index) =>
-      index === slideCourse.length - slideViewLocal ? 0 : index + 1
+      index >= slideCourse.length - slideViewLocal ? 0 : index + 1
     )
   }
 
   function previousSlide() {
     setSlideShowIndex((index) =>
-      index === 0 ? slideCourse.length - slideViewLocal : index - 1
+      index <= 0 ? slideCourse.length - slideViewLocal : index - 1
     )
   }
 
@@ -56,7 +56,7 @@ export default function SlideCourse({ slideCourse, slideView, imageWidth, imageH
     timeoutRef.current = window.setTimeout(
       () =>
         setSlideShowIndex((index) =>
-          index === slideCourse.length - slideViewLocal ? 0 : index + 1
+          index >= slideCourse.length - slideViewLocal ? 0 : index + 1
         ),
       delay
     );
@@ -72,7 +72,7 @@ export default function SlideCourse({ slideCourse, slideView, imageWidth, imageH
           <div className="col-lg-12" ref={refFrame}>
             <div id="news-slider" className="owl-carousel owl-theme">
               <div className="owl-wrapper-outer">
-                <div className="owl-wrapper" style={{ transform: `translate3d(${-slideShowIndex * (itemFrameWidth)}px, 0px, 0px)` }}>
+                <div className="owl-wrapper" style={{ transform: `translate3d(${-slideShowIndex * (itemFrameWidth) - 10}px, 0px, 0px)` }}>
                   {slideCourse.map((value, index) => {
                     return (
                       <div key={index} className="owl-item" ref={refItemFrame} style={{ width: "fit-content" }}>
