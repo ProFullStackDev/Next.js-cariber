@@ -44,14 +44,6 @@ export default function SlideCourse({ slideCourse, slideView, imageWidth, imageH
   }
 
   useEffect(() => {
-    refFrame.current && setFrameWidth(refFrame.current.offsetWidth)
-    refItemFrame.current && setItemFrameWidth(refItemFrame.current.offsetWidth)
-    frameWidth >= 1150 / 1.5 && setSlideViewLocal(4)
-    frameWidth < 1150 / 1.5 && setSlideViewLocal(3)
-    frameWidth < 1150 / 2 && setSlideViewLocal(2)
-    frameWidth < 1150 / 3 && setSlideViewLocal(1)
-    setImageWidthLocal(0.97252173913 * (frameWidth / slideViewLocal) - 20)
-    setImageHeightLocal(1.6347826087 * (frameWidth / slideViewLocal))
     resetTimeout();
     timeoutRef.current = window.setTimeout(
       () =>
@@ -60,6 +52,18 @@ export default function SlideCourse({ slideCourse, slideView, imageWidth, imageH
         ),
       delay
     );
+    window.addEventListener('resize', function () {
+      refFrame.current && setFrameWidth(refFrame.current.offsetWidth)
+      refItemFrame.current && setItemFrameWidth(refItemFrame.current.offsetWidth)
+    });
+    refFrame.current && setFrameWidth(refFrame.current.offsetWidth)
+    refItemFrame.current && setItemFrameWidth(refItemFrame.current.offsetWidth)
+    frameWidth >= 1150 / 1.5 && setSlideViewLocal(4)
+    frameWidth < 1150 / 1.5 && setSlideViewLocal(3)
+    frameWidth < 1150 / 2 && setSlideViewLocal(2)
+    frameWidth < 1150 / 3 && setSlideViewLocal(1)
+    setImageWidthLocal(0.97252173913 * (frameWidth / slideViewLocal) - 20)
+    setImageHeightLocal(1.6347826087 * (frameWidth / slideViewLocal))
     return () => {
       resetTimeout();
     }
