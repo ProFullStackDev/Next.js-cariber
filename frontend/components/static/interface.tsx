@@ -19,7 +19,7 @@ export interface MyStudent {
   height: number,
 }
 
-export interface CoursesSoon {
+export interface CourseSoon {
   image: string,
   alt: string,
 }
@@ -29,7 +29,7 @@ export interface FrequentlyAskedQuestion {
   description: string[],
 }
 
-export interface CoursesLatest {
+export interface CourseLatest {
   image: string,
   alt: string,
   link: string

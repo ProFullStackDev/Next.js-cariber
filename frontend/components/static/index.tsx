@@ -1,4 +1,4 @@
-import { Feature, ShopeeReview, MyStudent, FrequentlyAskedQuestion, CoursesSoon, CoursesLatest } from "./interface"
+import { Feature, ShopeeReview, MyStudent, FrequentlyAskedQuestion, CourseSoon, CourseLatest } from "./interface"
 
 export const features: Feature[] = [
   {
@@ -159,7 +159,7 @@ export const frequentlyAskedQuestions: FrequentlyAskedQuestion[] = [
     ]
   },
 ]
-export const coursesSoon: CoursesSoon[] = [
+export const coursesSoon: CourseSoon[] = [
   {
     image: "/index/kosol-sapprasert.jpg",
     alt: "ดร.โกศล ทรัพย์ประเสริฐ"
@@ -177,7 +177,7 @@ export const coursesSoon: CoursesSoon[] = [
     alt: "รศ.พญ. นฤชา จิรกาลวสาน"
   },
 ]
-export const coursesLatest: CoursesLatest[] = [
+export const coursesLatest: CourseLatest[] = [
   {
     image: "/index/yuttana-boonom.jpg",
     alt: "ยุทธนา บุญอ้อม",

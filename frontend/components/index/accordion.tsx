@@ -1,4 +1,4 @@
-import { MouseEventHandler, useState } from "react";
+import { useState } from "react";
 
 export default function Accordion({ title, description }: { title?: string, description?: string[] }) {
   const [displayDescription, setDisplayDescription] = useState("none");

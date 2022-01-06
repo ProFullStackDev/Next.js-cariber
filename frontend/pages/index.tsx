@@ -2,12 +2,15 @@ import type { NextPage } from 'next'
 import Header from '../components/header'
 import Footer from '../components/footer'
 import Accordion from '../components/index/accordion'
-import Link from 'next/link'
 import Img from '../components/image'
 import SlideCourse from '../components/slideCourse'
 import * as staticDataReview from "../components/static/review"
 import * as staticData from "../components/static/index"
 import FooterBrand from '../components/footerBrand'
+import ShopeeReviews from '../components/index/shopeeReviews'
+import Specific from '../components/index/specific'
+import Mystudent from '../components/index/myStudent'
+import CoursesUpdate from '../components/index/coursesUpdate'
 
 const Index: NextPage = () => {
   const features = staticData.features
@@ -99,20 +102,20 @@ const Index: NextPage = () => {
               <div className="block-type-feature text-center col-5">
                 <div className="block box-shadow-none">
                   <div className="feature" style={{ display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center" }}>
-                      <Img className="feature-image"
-                        src="/index/yearly-subscription.jpg"
-                        width={400}
-                        height={400}
-                        alt="Yearly Subscription"
-                      />
-                      <a className="btn btn-solid btn-medium btn-auto" href="https://checkout.cariber.co/?add-to-cart=685&cfp=YmFubmVyK3NsaWRlc2hvd19ob21l">
-                        สมัครเลย
-                      </a>
+                    <Img className="feature-image"
+                      src="/index/yearly-subscription.jpg"
+                      width={400}
+                      height={400}
+                      alt="Yearly Subscription"
+                    />
+                    <a className="btn btn-solid btn-medium btn-auto" href="https://checkout.cariber.co/?add-to-cart=685&cfp=YmFubmVyK3NsaWRlc2hvd19ob21l">
+                      สมัครเลย
+                    </a>
                   </div>
                 </div>
               </div>
               <div className="block-type-code text-left col-6">
-                <SlideCourse slideCourse={slideCourse} slideView={2} imageWidth={220} imageHeight={400}></SlideCourse>
+                <SlideCourse slideCourse={slideCourse} slideView={2} imageWidth={220} imageHeight={400} />
               </div>
             </div>
           </div>
@@ -121,86 +124,7 @@ const Index: NextPage = () => {
       <div className="background-dark">
         <div className="sizer">
           <div className="container">
-            <div className="row align-items-center justify-content-center text-center">
-              <div className="block-type-image col-1">
-                <div className="block box-shadow-none">
-                  <div className="image">
-                    <Img className="image-image"
-                      src="/index/book.webp"
-                      alt="กว่า 168 บทเรียน จากผู้เชี่ยวชาญ"
-                      width={70.0333}
-                      height={70.0333}
-                    />
-                  </div>
-                </div>
-              </div>
-              <div className="block-type-text text-left col-2">
-                <div className="block box-shadow-none">
-                  <h5>
-                    <span style={{ fontWeight: "400" }}>
-                      กว่า 168 บทเรียน
-                    </span>
-                  </h5>
-                  <h5>
-                    <span style={{ fontWeight: "400" }}>
-                      จากผู้เชี่ยวชาญ
-                    </span>
-                  </h5>
-                </div>
-              </div>
-              <div className="block-type-image col-1">
-                <div className="block box-shadow-none">
-                  <div className="image">
-                    <Img className="image-image"
-                      src="/index/hourglass.webp"
-                      alt="เต็มอิ่มกับคอร์สเรียน กว่า 31 ชั่วโมง"
-                      width={70.0333}
-                      height={70.0333}
-                    />
-                  </div>
-                </div>
-              </div>
-              <div className="block-type-text text-left col-2">
-                <div className="block box-shadow-none">
-                  <h5>
-                    <span style={{ fontWeight: "400" }}>
-                      เต็มอิ่มกับคอร์สเรียน
-                    </span>
-                  </h5>
-                  <h5>
-                    <span style={{ fontWeight: "400" }}>
-                      กว่า 31 ชั่วโมง
-                    </span>
-                  </h5>
-                </div>
-              </div>
-              <div className="block-type-image col-1">
-                <div className="block box-shadow-none">
-                  <div className="image">
-                    <Img className="image-image"
-                      src="/index/person.webp"
-                      alt="เต็มอิ่มกับคอร์สเรียน กว่า 31 ชั่วโมง"
-                      width={70.0333}
-                      height={70.0333}
-                    />
-                  </div>
-                </div>
-              </div>
-              <div className="block-type-text text-left col-2">
-                <div className="block box-shadow-none">
-                  <h5>
-                    <span style={{ fontWeight: "400" }}>
-                      อัพเดทคอร์สใหม่
-                    </span>
-                  </h5>
-                  <h5>
-                    <span style={{ fontWeight: "400" }}>
-                      ตลอดทั้งปี
-                    </span>
-                  </h5>
-                </div>
-              </div>
-            </div>
+            <Specific />
           </div>
         </div>
       </div>
@@ -249,64 +173,7 @@ const Index: NextPage = () => {
           </div>
         </div>
         <div className="sizer">
-          <div className="row align-items-center justify-content-center">
-            <div className="block-type-text text-center col-12">
-              <div className="block box-shadow-none">
-                <h1>
-                  <span style={{ color: "#e74e25" }}>
-                    คอร์สเปิดตัวล่าสุด
-                  </span>
-                </h1>
-              </div>
-            </div>
-            {coursesLatest.map((value, index) => {
-              return (
-                <div key={index} className="block-type-feature text-center col-6">
-                  <div className="block box-shadow-none">
-                    <div className="feature">
-                      <Img className="feature-image"
-                        src={value.image}
-                        alt={value.alt}
-                        width={600}
-                        height={337.5}
-                      />
-                      <Link href={value.link}>
-                        <a className="btn btn-solid btn-small btn-auto" >ดูรายละเอียดคอร์ส</a>
-                      </Link>
-                    </div>
-                  </div>
-                </div>
-              )
-            })
-            }
-            <div className="block-type-text text-center col-12">
-              <div className="block box-shadow-none">
-                <h1>
-                  <span style={{ color: "#e74e25" }}>
-                    คอร์สที่กำลังจะเปิดตัว
-                  </span>
-                </h1>
-              </div>
-            </div>
-            {
-              coursesSoon.map((value, index) => {
-                return (
-                  <div key={index} className="block-type-image col-3">
-                    <div className="block box-shadow-none">
-                      <div className="image">
-                        <Img className="image-image"
-                          src={value.image}
-                          alt={value.alt}
-                          width={349.6}
-                          height={196.733}
-                        />
-                      </div>
-                    </div>
-                  </div>
-                )
-              })
-            }
-          </div>
+          <CoursesUpdate coursesSoon={coursesSoon} coursesLatest={coursesLatest} />
         </div>
       </div>
       <div className="background-dark">
@@ -362,120 +229,13 @@ const Index: NextPage = () => {
         </div>
         <div className="sizer" style={{ paddingTop: "20px" }}>
           <div className="container">
-            <div className="row align-items-start justify-content-between">
-              <div className="block-type-feature text-center col-3">
-                <div className="block box-shadow-none">
-                  <div className="feature">
-                    <Img className="feature-image"
-                      src="/index/shopee.png"
-                      alt="Shopee Review"
-                      width={200}
-                      height={65.9}
-                    />
-                    <div className="feature-text">
-                      <h5 style={{ textAlign: "center" }}>
-                        <span style={{ color: "#fbf5e4" }}>
-                          4.9 stars rating
-                        </span>
-                      </h5>
-                      <h5 style={{ textAlign: "center", marginBottom: "30px" }}>
-                        <strong>
-                          <span style={{ color: "#0e1b20" }}>
-                            ⭐️⭐️⭐️⭐️⭐️
-                          </span>
-                        </strong>
-                      </h5>
-                      <h5>
-                        <span style={{ color: "#e74e25" }}>
-                          จากทั้งหมด 207 รีวิวใน Shopee
-                        </span>
-                      </h5>
-                    </div>
-                    <Link href="/review">
-                      <a className="btn btn-solid btn-small btn-auto" style={{ margin: "0px" }}>
-                        คลิกเพื่อดูรีวิวทั้งหมด
-                      </a>
-                    </Link>
-                  </div>
-                </div>
-              </div>
-              {shopeeReviews.map((value, index) => {
-                return (
-                  <div key={index} className="block-type-feature text-center col-2">
-                    <div className="block box-shadow-none">
-                      <div className="feature">
-                        <div className="feature-text">
-                          <h5 style={{ textAlign: "center" }}>
-                            <strong>
-                              <span style={{ color: "#0e1b20" }}>
-                                {value.rating}
-                              </span>
-                            </strong>
-                          </h5>
-                          <p style={{ textAlign: "center" }}>
-                            <span style={{ color: "#fbf5e4" }}>
-                              &quot;{value.review}&quot;
-                            </span>
-                          </p>
-                          <h6 style={{ textAlign: "center", fontSize: "16px" }}>
-                            <em>
-                              <span style={{ color: "#e74e25" }}>
-                                <strong>
-                                  {value.name}
-                                </strong>
-                              </span>
-                            </em>
-                            <br />
-                            <em>
-                              <span style={{ color: "#e74e25" }}>
-                                <strong>
-                                  {value.date}
-                                </strong>
-                              </span>
-                            </em>
-                          </h6>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                )
-              })}
-            </div>
+            <ShopeeReviews shopeeReviews={shopeeReviews} />
           </div>
         </div>
       </div>
       <div className="sizer background-light">
         <div className="container">
-          <div className="row align-items-center justify-content-center">
-            <div className="block-type-text text-left col-6">
-              <div className="block box-shadow-none" >
-                <p style={{ fontSize: "36px", textAlign: "center" }}>
-                  <strong>
-                    <span style={{ color: "#e74e25" }}>
-                      ผู้เรียนของเรา
-                    </span>
-                  </strong>
-                </p>
-              </div>
-            </div>
-            <div className="block-break"></div>
-            {myStudents.map((value, index) => {
-              return (
-                <div key={index} className="block-type-image col-2" style={{ marginRight: "5px" }}>
-                  <div className="block box-shadow-none">
-                    <div className="image">
-                      <Img className="image-image"
-                        src={value.image}
-                        alt={value.alt}
-                        width={value.width}
-                        height={value.height}
-                      />
-                    </div>
-                  </div>
-                </div>
-              )
-            })}
-          </div>
+          <Mystudent myStudents={myStudents} />
         </div>
       </div>
       <div className="sizer background-light">
@@ -492,7 +252,7 @@ const Index: NextPage = () => {
             </div>
             {frequentlyAskedQuestions.map((value, index) => {
               return (
-                <Accordion key={index} title={value.title} description={value.description}></Accordion>
+                <Accordion key={index} title={value.title} description={value.description} />
               )
             })}
           </div>
