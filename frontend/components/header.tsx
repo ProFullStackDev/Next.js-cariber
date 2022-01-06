@@ -9,7 +9,7 @@ interface Menu {
 export default function Header() {
   const menu: Menu[] = [
     { url: '/courses', name: 'คอร์สทั้งหมด' },
-    { url: '/blog', name: 'บทความ' },
+    { url: 'https://blog.cariber.co/', name: 'บทความ' },
     { url: '/review', name: 'รีวิว' },
   ];
 
@@ -17,14 +17,16 @@ export default function Header() {
     <header className="header">
       <div className="header-wrap">
         <div className="header-content header-content-desktop background-dark">
-          <div className="container header-container media" style={{height: "43.5px"}}>
-            <a className="logo" href="" style={{width: 120, height: 41.8833}}>
-              <Img className="logo-image"
-                src="/header/header-logo.png"
-                alt="Header Logo"
-                width={120}
-                height={41.8833} />
-            </a>
+          <div className="container header-container media" style={{ height: "43.5px" }}>
+            <Link href="/" >
+              <a className="logo" style={{ width: 120, height: 41.8833 }}>
+                <Img className="logo-image"
+                  src="/header/header-logo.png"
+                  alt="Header Logo"
+                  width={120}
+                  height={41.8833} />
+              </a>
+            </Link>
             <div className="header-block header-switch-content header-block-menu media-body">
               <div className="link-list justify-content-right">
                 {menu.map((value, index) => {
