@@ -5,7 +5,11 @@ export default function Img(props: ImageProps) {
     if (!quality) {
       quality = 75
     }
-    return `https://${process.env.NEXT_PUBLIC_WORKERS}?width=${width}&quality=${quality}&image=https://${process.env.NEXT_PUBLIC_DOMAINS}${src}`
+    const path = `https://${process.env.NEXT_PUBLIC_WORKERS}?width=${width}&quality=${quality}&image=`;
+    if (src instanceof String && src.includes('http')) {
+      return `${path}${src}`
+    }
+    return `${path}https://${process.env.NEXT_PUBLIC_DOMAINS}${src}`
   }
 
   if (process.env.NODE_ENV === 'development') {
