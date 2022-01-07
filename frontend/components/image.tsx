@@ -6,7 +6,7 @@ export default function Img(props: ImageProps) {
       quality = 75
     }
     const path = `https://${process.env.NEXT_PUBLIC_WORKERS}?width=${width}&quality=${quality}&image=`;
-    if (src instanceof String && src.includes('http')) {
+    if ((src as String).includes('http')) {
       return `${path}${src}`
     }
     return `${path}https://${process.env.NEXT_PUBLIC_DOMAINS}${src}`
