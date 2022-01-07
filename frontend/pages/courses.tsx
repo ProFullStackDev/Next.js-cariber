@@ -2,120 +2,11 @@ import Img from "../components/image"
 import Footer from "../components/footer"
 import Header from "../components/header"
 import FooterBrand from "../components/footerBrand"
+import { strapi, strapiApi } from "../models/content"
+import { Course } from "../models/courses"
+import { ResponseData } from "../models/data"
 
-interface Feature {
-  image: string,
-  link: string,
-  name: string,
-  career: string,
-}
-
-export default function Courses() {
-  const features: Feature[] = [
-    {
-      image: "/courses/feature-1.jpg",
-      link: "#",
-      name: "คุณฐากร ปิยะพันธ์",
-      career: "Employee Survival Guide"
-    },
-    {
-      image: "/courses/feature-2.jpg",
-      link: "#",
-      name: "คุณมณีรัตน์ อนุโลมสมบัติ",
-      career: "Scale People, Scale Company"
-    },
-    {
-      image: "/courses/feature-3.jpg",
-      link: "#",
-      name: "คุณบรรยง พงษ์พานิช",
-      career: "The Art of Decision Making"
-    },
-    {
-      image: "/courses/feature-4.jpg",
-      link: "#",
-      name: "คุณสาธิต กาลวันตวานิช",
-      career: "The Power of Creative and Critical Thinking"
-    },
-    {
-      image: "/courses/feature-5.jpg",
-      link: "#",
-      name: "คุณภาณุ อิงคะวัต",
-      career: "Branding Formula"
-    },
-    {
-      image: "/courses/feature-6.jpg",
-      link: "#",
-      name: "คุณกวีวุฒิ เต็มภูวภัทร",
-      career: "The Secrets of Habit Transformation"
-    },
-    {
-      image: "/courses/feature-7.jpg",
-      link: "#",
-      name: "คุณวรวุฒิ อุ่นใจ",
-      career: "Decoding SME Success"
-    },
-    {
-      image: "/courses/feature-8.jpg",
-      link: "#",
-      name: "คุณรวิศ หาญอุตสาหะ",
-      career: "The Art of Sales and Persuasion"
-    },
-    {
-      image: "/courses/feature-9.webp",
-      link: "#",
-      name: "คุณอรรถสิทธิ์ พัฒนเสถียรกุล",
-      career: "The Taste of Home Cooking"
-    },
-    {
-      image: "/courses/feature-10.jpg",
-      link: "#",
-      name: "คุณพงศ์สุข หิรัญพฤกษ์",
-      career: "The Mastery of Communication"
-    },
-    {
-      image: "/courses/feature-11.jpg",
-      link: "#",
-      name: "คุณบรรจง ปิสัญธนะกูล",
-      career: "The Craft of Filmmaking"
-    },
-    {
-      image: "/courses/feature-12.jpg",
-      link: "#",
-      name: "คุณศิริวัฒน์ วงศ์จารุกร",
-      career: "Win by Rules, Succeed by Design"
-    },
-    {
-      image: "/courses/feature-13.jpg",
-      link: "#",
-      name: "คุณยุทธนา บุญอ้อม",
-      career: "The Beauty of Creation"
-    },
-    {
-      image: "/courses/feature-14.jpg",
-      link: "#",
-      name: "คุณเกียรติศักดิ์ เสนาเมือง",
-      career: "The Art of Football Tactics"
-    },
-    {
-      image: "/courses/feature-15.jpg",
-      link: "#",
-      name: "คุณพชร อารยะการกุล",
-      career: "Strategy To Win"
-    },
-    {
-      image: "/courses/feature-16.jpg",
-      link: "#",
-      name: "คุณณัฏฐ์ เพิ่มทรัพย์",
-      career: "The Essentials of Coaching"
-    },
-    {
-      image: "/courses/feature-17.jpg",
-      link: "#",
-      name: "รศ.พญ. นฤชา จิรกาลวสาน",
-      career: "The Science of Sleep"
-    },
-  ]
-
+export default function Courses({ courses }: { courses: ResponseData<Course> }) {
   return (
     <div className="bg-courses courses">
       <Header />
@@ -138,22 +29,22 @@ export default function Courses() {
             <div className="block-type-text text-left col-12">
               <div className="block box-shadow-none background-unrecognized">
                 <h2 style={{ textAlign: 'center', color: '#e74e25' }}>
-                    คอร์สทั้งหมด
+                  คอร์สทั้งหมด
                 </h2>
               </div>
             </div>
             <div className="block-break"></div>
-            {features.map((value, index) => {
+            {courses ? courses.data.map((value) => {
               return (
-                <div key={index} className="block-type-feature text-center col-3">
+                <div key={value.id} className="block-type-feature text-center col-3">
                   <div className="block box-shadow-large background-light"
                     style={{ backgroundColor: "#ffffff", borderRadius: "4px" }}>
                     <div style={{ padding: "15px" }}>
                       <div className="feature">
-                        <a href={value.link}>
+                        <a href='#'>
                           <Img className="feature-image"
-                            src={value.image}
-                            alt={value.name}
+                            src={strapi + value.attributes.thumbnail.data.attributes.url}
+                            alt={value.attributes.thumbnail.data.attributes.name}
                             width={262.5}
                             height={147.65} />
                         </a>
@@ -162,7 +53,7 @@ export default function Courses() {
                             <a href="/thakorn-piyapan">
                               <span style={{ color: '#223f99' }}>
                                 <strong>
-                                  {value.name}
+                                  {value.attributes.speaker_name}
                                 </strong>
                               </span>
                             </a>
@@ -170,7 +61,7 @@ export default function Courses() {
                           <h6 style={{ textAlign: 'center' }}>
                             <a href="/thakorn-piyapan">
                               <strong>
-                                {value.career}
+                                {value.attributes.course_name}
                               </strong>
                             </a>
                           </h6>
@@ -180,7 +71,9 @@ export default function Courses() {
                   </div>
                 </div>
               )
-            })}
+            }) : (
+                <div className="text-center w-100">ไม่พบคอร์ส</div>
+              )}
           </div>
         </div>
       </div>
@@ -189,3 +82,18 @@ export default function Courses() {
     </div>
   )
 }
+
+export async function getStaticProps() {
+  try {
+    const response = await fetch(strapiApi + '/courses?populate=*');
+    const data = await response.json() as ResponseData<Course>;
+    return { props: { courses: data } }
+  } catch (error) {
+    console.error(error);
+    return {
+      props: {
+        data: JSON.stringify(error)
+      }
+    };
+  }
+};
