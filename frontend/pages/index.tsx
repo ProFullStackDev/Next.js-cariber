@@ -11,9 +11,10 @@ import ShopeeReviews from '../components/index/shopeeReviews'
 import Specific from '../components/index/specific'
 import Mystudent from '../components/index/myStudent'
 import CoursesUpdate from '../components/index/coursesUpdate'
+import ReviewStudents from '../components/reviewStudents'
 
 const Index: NextPage = () => {
-  const features = staticData.features
+  const reviews = staticDataReview.reviewsCariberFirst
   const shopeeReviews = staticData.shopeeReviews
   const myStudents = staticData.myStudents
   const frequentlyAskedQuestions = staticData.frequentlyAskedQuestions
@@ -177,56 +178,7 @@ const Index: NextPage = () => {
         </div>
       </div>
       <div className="background-dark">
-        <div className="sizer" style={{ paddingTop: "20px" }}>
-          <div className="container">
-            <div className="row align-items-start justify-content-between">
-              <div className="block-type-text text-left col-12">
-                <div className="block box-shadow-none">
-                  <p style={{ fontSize: "36px", textAlign: "center" }}>
-                    <strong>
-                      <span style={{ color: "#e74e25" }}>
-                        รีวิวจากผู้เรียน
-                      </span>
-                    </strong>
-                  </p>
-                </div>
-              </div>
-              {features.map((value, index) => {
-                return (
-                  <div key={index} className="block-type-feature text-center col-2">
-                    <div className="block box-shadow-none">
-                      <div className="feature">
-                        <Img className="feature-image"
-                          src={value.image}
-                          alt=''
-                          width={175}
-                          height={185.917}
-                        />
-                        <div className="feature-text">
-                          <p style={{ textAlign: "center" }}>
-                            <span style={{ color: "#fbf5e4" }}>
-                              &quot;{value.review}&quot;
-                            </span>
-                          </p>
-                          <h4>
-                            <span style={{ color: "#ed9081" }}>
-                              {value.name}
-                            </span>
-                          </h4>
-                          <span style={{ color: "#e74e25" }}>
-                            <em>
-                              {value.career}
-                            </em>
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                )
-              })}
-            </div>
-          </div>
-        </div>
+        <ReviewStudents />
         <div className="sizer" style={{ paddingTop: "20px" }}>
           <div className="container">
             <ShopeeReviews shopeeReviews={shopeeReviews} />

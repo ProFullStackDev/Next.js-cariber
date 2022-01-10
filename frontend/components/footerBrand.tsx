@@ -22,7 +22,7 @@ export default function FooterBrand() {
                 <p style={{ fontSize: "18px" }}>
                   <strong>
                     <span style={{ color: "#fbf5e3" }}>
-                      Cariber&nbsp;แพลตฟอร์มการเรียนรู้บนแนวคิด &quot;ความสำเร็จที่เรียนรู้ได้&quot; &nbsp;&nbsp;
+                      Cariber แพลตฟอร์มการเรียนรู้บนแนวคิด &quot;ความสำเร็จที่เรียนรู้ได้&quot;
                     </span>
                   </strong>
                 </p>
@@ -34,7 +34,7 @@ export default function FooterBrand() {
                     วามรู้พร้อมถอดบทเรียนจากประสบการณ์ตรงให้ทุกคนฟัง ว่ากว่าจะมายืนบนจุดที่เรียกว่าควา
                   </span>
                   <span style={{ fontWeight: "300", color: "#fbf5e3" }}>
-                    มสำเร็จ พวกเขาต้องผ่านบททดสอบอะไรมาบ้าง แล้วประสบการณ์ที่ผ่านมา สอนอะไรให้กับพวกเขา&nbsp;
+                    มสำเร็จ พวกเขาต้องผ่านบททดสอบอะไรมาบ้าง แล้วประสบการณ์ที่ผ่านมา สอนอะไรให้กับพวกเขา
                   </span>
                 </p>
               </div>

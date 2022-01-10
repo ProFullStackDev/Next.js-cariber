@@ -1,6 +1,6 @@
-import { Feature, ShopeeReview, MyStudent, FrequentlyAskedQuestion, CourseSoon, CourseLatest } from "./interface"
+import { Feature, ShopeeReview, MyStudent, Accordion, CourseSoon, CourseLatest } from "./interface"
 
-export const features: Feature[] = [
+export const reviews: Feature[] = [
   {
     image: "/review/review-1.webp",
     name: "นิกส์ อรรถพล",
@@ -108,7 +108,7 @@ export const myStudents: MyStudent[] = [
     height: 125.55
   },
 ]
-export const frequentlyAskedQuestions: FrequentlyAskedQuestion[] = [
+export const frequentlyAskedQuestions: Accordion[] = [
   {
     title: "Cariber คืออะไร?",
     description: [

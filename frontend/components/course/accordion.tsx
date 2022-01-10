@@ -8,23 +8,23 @@ export default function Accordion({ title, description }: { title?: string, desc
   }
 
   return (
-    <div className="block-type-accordion text-left col-8" onClick={switchDisplay}>
-      <div className="accordion-frame box-shadow-medium background-white">
+    <div className="block-type-accordion text-left col-4" onClick={switchDisplay}>
+      <div className="accordion-frame box-shadow-medium" style={{ backgroundColor: "#243941", borderRadius: "4px" }}>
         <div className="accordion">
           <div className="accordion-title media align-items-center collapsed">
-            <h5 className="media-body">
+            <h5 className="media-body" style={{fontSize: "16px"}}>
               {title}
             </h5>
             {displayDescription === "none" ?
-              (<i className="fas fa-chevron-right" style={{ color: "#e74e25 " }}></i>) :
-              (<i className="fas fa-chevron-down" style={{ color: "#e74e25 " }}></i>)}
+              (<i className="fas fa-chevron-right"></i>) :
+              (<i className="fas fa-chevron-down"></i>)}
           </div>
           <div className="accordion-collapse" style={{ display: displayDescription }}>
             <div className="accordion-body">
               {
                 description?.map((value, index) => {
                   return (
-                    <h5 key={index}>
+                    <h5 key={index} style={{fontSize: "14px"}}>
                       <span style={{ fontWeight: "400" }}>
                         {value}
                       </span>
