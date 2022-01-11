@@ -163,7 +163,7 @@ export const reviewsShopee: FeatureShopee[] = [
     from: "Shopee",
   },
 ]
-export const slideCourse: SlideCourse[] = [
+export const slideCourses: SlideCourse[] = [
   {
     link: "#",
     image: "/review/slideshow-1.jpg"

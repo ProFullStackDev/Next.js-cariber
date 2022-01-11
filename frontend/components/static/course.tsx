@@ -1,6 +1,6 @@
-import { Accordion, InterestingTopic } from "./interface";
+import { CardDescription, InterestingTopic } from "./interface";
 
-export const episodes: Accordion[] = [
+export const episodes: CardDescription[] = [
   {
     title: "EP01: รู้จักกับ “คุณเกียรติศักดิ์ เสนาเมือง”",
     description: ["ทำความรู้จัก โค้ชซิโก้ เกียรติศักดิ์ กับเส้นทางกว่าจะเป็นนักฟุตบอลระดับทีมชาติไทย จากวันที่ใช้หัวใจที่หลงใหลในฟุตบอลนำทางชีวิตสู่ศูนย์หน้าระดับตำนานผู้ทำ ประตูสูงสุดในนามทีมชาติอันดับ 16 ของโลก และโค้ชผู้นำพาทีมชาติไทยกู้ศรัทธาจากแฟนบอลจนสร้างประวัติศาสตร์คว้าแชมป์ แชมป์อาเซียนคัพได้ถึง 2 สมัย"]

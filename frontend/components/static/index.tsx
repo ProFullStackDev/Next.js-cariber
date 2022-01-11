@@ -1,4 +1,4 @@
-import { Feature, ShopeeReview, MyStudent, Accordion, CourseSoon, CourseLatest } from "./interface"
+import { Feature, ShopeeReview, MyStudent, CardDescription, CourseSoon, CourseLatest } from "./interface"
 
 export const reviews: Feature[] = [
   {
@@ -108,7 +108,7 @@ export const myStudents: MyStudent[] = [
     height: 125.55
   },
 ]
-export const frequentlyAskedQuestions: Accordion[] = [
+export const frequentlyAskedQuestions: CardDescription[] = [
   {
     title: "Cariber คืออะไร?",
     description: [

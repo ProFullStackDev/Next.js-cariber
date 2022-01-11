@@ -24,7 +24,7 @@ export interface CourseSoon {
   alt: string,
 }
 
-export interface Accordion {
+export interface CardDescription {
   title: string,
   description: string[],
 }

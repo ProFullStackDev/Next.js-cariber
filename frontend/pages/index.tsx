@@ -18,7 +18,7 @@ const Index: NextPage = () => {
   const shopeeReviews = staticData.shopeeReviews
   const myStudents = staticData.myStudents
   const frequentlyAskedQuestions = staticData.frequentlyAskedQuestions
-  const slideCourse = staticDataReview.slideCourse
+  const slideCourses = staticDataReview.slideCourses
   const coursesSoon = staticData.coursesSoon
   const coursesLatest = staticData.coursesLatest
 
@@ -116,7 +116,7 @@ const Index: NextPage = () => {
                 </div>
               </div>
               <div className="block-type-code text-left col-6">
-                <SlideCourse slideCourse={slideCourse} slideView={2} imageWidth={220} imageHeight={400} />
+                <SlideCourse slideCourses={slideCourses} slideView={2} imageWidth={220} imageHeight={400} />
               </div>
             </div>
           </div>

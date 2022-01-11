@@ -8,17 +8,41 @@ import ReviewStudents from "../components/reviewStudents"
 import SlideCourse from "../components/slideCourse"
 import * as staticDataReview from "../components/static/review"
 import * as staticData from "../components/static/course"
+import { InterestingTopic, CardDescription } from "../components/static/interface"
+
+export interface CourseData {
+  yearlySubscriptionImage: string,
+  yearlySubscriptionImageMobile: string,
+  singleCourseImage: string,
+  video: string,
+  videoPoster: string,
+  fullName: string,
+  personalHistoryImage: string,
+  interestingTopics: InterestingTopic[],
+  suitableFor: string[],
+  totalHours: string,
+  totalEpisodes: string,
+  episodes: CardDescription[],
+  singleCoursePersonalImage: string
+}
 
 export default function Course() {
-  const router = useRouter()
-  const courseId = router.query.course
-  const slideCourse = staticDataReview.slideCourse
-  const episodes = staticData.episodes
-  const suitable = staticData.suitable
-  const interestingTopics = staticData.interestingTopics
-  const totalEpisodes = "9"
-  const totalHours = "1:51"
-  const name = "เกียรติศักดิ์ เสนาเมือง"
+  const slideCourses = staticDataReview.slideCourses
+  const courseData: CourseData = {
+    yearlySubscriptionImage: "/course/yearly-subscription.jpg",
+    yearlySubscriptionImageMobile: "/course/yearly-subscription-mobile.jpg",
+    singleCourseImage: "/course/single-courese.jpg",
+    video: "/index/cariber-video.mp4",
+    videoPoster: "/course/poster.jpg",
+    fullName: "เกียรติศักดิ์ เสนาเมือง",
+    personalHistoryImage: "/course/information.jpg",
+    interestingTopics: staticData.interestingTopics,
+    suitableFor: staticData.suitable,
+    totalHours: "1:51",
+    totalEpisodes: "9",
+    episodes: staticData.episodes,
+    singleCoursePersonalImage: "/course/singlebanner.jpg"
+  }
 
   return (
     <div>
@@ -31,7 +55,7 @@ export default function Course() {
                 <div className="image">
                   <a href="https://checkout.cariber.co?add-to-cart=685&cfp=dG9weWVhcmx5YmFubm5lcl9kZXNrdG9wX0M6L1VzZXJzL2luemVlL09uZURyaXZlJTIwLSUyMFVuaXZlcnNpdHklMjBvZiUyMFBoYXlhby9DYXJpYmVyJTIwZG91Y3VtZW50L3NhdmUlMjBwYWdlLyVFMCVCOCU4NCVFMCVCOCVBRCVFMCVCOCVBMyVFMCVCOSU4QyVFMCVCOCVBQSVFMCVCOCVBRCVFMCVCOCVBRCVFMCVCOCU5OSVFMCVCOSU4NCVFMCVCOCVBNSVFMCVCOCU5OSVFMCVCOSU4QyVFMCVCOCU4MSVFMCVCOCVCMSVFMCVCOCU5QSVFMCVCOCU4QiVFMCVCOCVCNCVFMCVCOSU4MiVFMCVCOCU4MSVFMCVCOSU4OSUyMCVFMCVCOSU4MCVFMCVCOCU4MSVFMCVCOCVCNSVFMCVCOCVBMiVFMCVCOCVBMyVFMCVCOCU5NSVFMCVCOCVCNCVFMCVCOCVBOCVFMCVCOCVCMSVFMCVCOCU4MSVFMCVCOCU5NCVFMCVCOCVCNCVFMCVCOSU4QyUyMCVFMCVCOSU4MCVFMCVCOCVBQSVFMCVCOCU5OSVFMCVCOCVCMiVFMCVCOSU4MCVFMCVCOCVBMSVFMCVCOCVCNyVFMCVCOCVBRCVFMCVCOCU4NyUyMEtpYXRpc3VrJTIwU2VuYW11YW5nLmh0bWw=">
                     <Img className="image-image"
-                      src="/course/yearly-subscription.jpg"
+                      src={courseData.yearlySubscriptionImage}
                       width={384.6}
                       height={246.85}
                     />
@@ -40,7 +64,7 @@ export default function Course() {
                 <div className="image">
                   <a href="https://checkout.cariber.co/?add-to-cart=74465&cfp=dG9wc2luZ2xlYmFubm5lcl9kZXNrdG9wX2tpYXRpc3VrLXNlbmFtdWFuZw==">
                     <Img className="image-image"
-                      src="/course/single-courese.jpg"
+                      src={courseData.singleCourseImage}
                       width={384.6}
                       height={246.85}
                     />
@@ -51,9 +75,24 @@ export default function Course() {
             <div className="block-type-video col-8">
               <div className="block box-shadow-none">
                 <div className="video">
-                  <video width="100%" controls poster="/course/poster.jpg" muted style={{ borderRadius: "4px" }}>
-                    <source src="/index/cariber-video.mp4" type="video/mp4" />
+                  <video width="100%" controls poster={courseData.videoPoster} muted style={{ borderRadius: "4px" }}>
+                    <source src={courseData.video} type="video/mp4" />
                   </video>
+                </div>
+              </div>
+            </div>
+            <div className="block-type-video col-8 lg-none">
+              <div className="block box-shadow-none">
+                <div className="image" style={{ textAlign: "center" }}>
+                  <a href="https://shp.ee/ncpeyxv">
+                    <Img className="feature-image"
+                      src={courseData.yearlySubscriptionImage}
+                      width={623.333}
+                      height={400} />
+                  </a>
+                  <a className="btn btn-medium btn-solid btn-auto background-dark" href="https://shp.ee/ncpeyxv" >
+                    ซื้อผ่าน Shopee เลย
+                  </a>
                 </div>
               </div>
             </div>
@@ -64,10 +103,10 @@ export default function Course() {
             <div className="row align-items-center justify-content-center">
               <div className="block-type-text text-left col-11">
                 <div className="block box-shadow-none">
-                  <h3 style={{textAlign: "center", margin: "0px" }}>
+                  <h3 style={{ textAlign: "center", margin: "0px" }}>
                     <span style={{ color: "#ed9081" }}>
                       <strong>
-                        รู้จักคุณ{name}
+                        รู้จักคุณ{courseData.fullName}
                       </strong>
                     </span>
                   </h3>
@@ -77,7 +116,7 @@ export default function Course() {
                 <div className="block box-shadow-none">
                   <div className="image">
                     <Img className="image-image"
-                      src="/course/information.jpg"
+                      src={courseData.personalHistoryImage}
                       width={995.6}
                       height={667.75}
                     />
@@ -96,7 +135,7 @@ export default function Course() {
                 </div>
               </div>
               <div className="block-break"></div>
-              {interestingTopics.map((value, index) => {
+              {courseData.interestingTopics.map((value, index) => {
                 return (
                   <div key={index} className="block-type-feature text-center col-2">
                     <div className="block box-shadow-none">
@@ -137,7 +176,7 @@ export default function Course() {
               </div>
               <div className="block-type-text text-left col-10">
                 <div className="block box-shadow-none">
-                  {suitable.map((value, index) => {
+                  {courseData.suitableFor.map((value, index) => {
                     return (
                       <p key={index} style={{ textAlign: "left", paddingLeft: "30px", fontWeight: "normal" }}>
                         <strong>
@@ -155,16 +194,16 @@ export default function Course() {
               </div>
               <div className="block-type-text text-left col-10">
                 <div className="block box-shadow-none">
-                  <h1 style={{textAlign: "center" }}>
+                  <h1 style={{ textAlign: "center" }}>
                     <strong>
                       <span style={{ color: "#fbf5e4" }}>
-                        ⌛ {totalHours} ชั่วโมง &nbsp;&nbsp;&nbsp; 📚 {totalEpisodes} บทเรียน
+                        ⌛ {courseData.totalHours} ชั่วโมง &nbsp;&nbsp;&nbsp; 📚 {courseData.totalEpisodes} บทเรียน
                       </span>
                     </strong>
                   </h1>
                 </div>
               </div>
-              {episodes.map((value, index) => {
+              {courseData.episodes.map((value, index) => {
                 return (
                   <Accordion key={index} title={value.title} description={value.description} />
                 )
@@ -188,13 +227,30 @@ export default function Course() {
                 </div>
               </div>
               <div className="block-type-code text-left col-7">
-                <div className="block box-shadow-none">
+                <div className="block box-shadow-none md-none">
                   <div id="yearlybanner" className="feature" style={{ textAlign: "center" }}>
                     <a href="https://checkout.cariber.co?add-to-cart=685&cfp=eWVhcmx5YmFubm5lcl9kZXNrdG9wX0M6L1VzZXJzL2luemVlL09uZURyaXZlJTIwLSUyMFVuaXZlcnNpdHklMjBvZiUyMFBoYXlhby9DYXJpYmVyJTIwZG91Y3VtZW50L3NhdmUlMjBwYWdlLyVFMCVCOCU4NCVFMCVCOCVBRCVFMCVCOCVBMyVFMCVCOSU4QyVFMCVCOCVBQSVFMCVCOCVBRCVFMCVCOCVBRCVFMCVCOCU5OSVFMCVCOSU4NCVFMCVCOCVBNSVFMCVCOCU5OSVFMCVCOSU4QyVFMCVCOCU4MSVFMCVCOCVCMSVFMCVCOCU5QSVFMCVCOCU4QiVFMCVCOCVCNCVFMCVCOSU4MiVFMCVCOCU4MSVFMCVCOSU4OSUyMCVFMCVCOSU4MCVFMCVCOCU4MSVFMCVCOCVCNSVFMCVCOCVBMiVFMCVCOCVBMyVFMCVCOCU5NSVFMCVCOCVCNCVFMCVCOCVBOCVFMCVCOCVCMSVFMCVCOCU4MSVFMCVCOCU5NCVFMCVCOCVCNCVFMCVCOSU4QyUyMCVFMCVCOSU4MCVFMCVCOCVBQSVFMCVCOCU5OSVFMCVCOCVCMiVFMCVCOSU4MCVFMCVCOCVBMSVFMCVCOCVCNyVFMCVCOCVBRCVFMCVCOCU4NyUyMEtpYXRpc3VrJTIwU2VuYW11YW5nLmh0bWw=">
                       <Img id="block-yearly-img"
                         className="feature-image"
-                        src="/course/yearly-subscription.jpg"
+                        src={courseData.yearlySubscriptionImage}
                         width={623.183}
+                        height={400}
+                      />
+                    </a>
+                    <a className="btn btn-medium btn-solid btn-auto background-dark"
+                      href="https://checkout.cariber.co?add-to-cart=685&amp;cfp=eWVhcmx5YmFubm5lcl9kZXNrdG9wX0M6L1VzZXJzL2luemVlL09uZURyaXZlJTIwLSUyMFVuaXZlcnNpdHklMjBvZiUyMFBoYXlhby9DYXJpYmVyJTIwZG91Y3VtZW50L3NhdmUlMjBwYWdlLyVFMCVCOCU4NCVFMCVCOCVBRCVFMCVCOCVBMyVFMCVCOSU4QyVFMCVCOCVBQSVFMCVCOCVBRCVFMCVCOCVBRCVFMCVCOCU5OSVFMCVCOSU4NCVFMCVCOCVBNSVFMCVCOCU5OSVFMCVCOSU4QyVFMCVCOCU4MSVFMCVCOCVCMSVFMCVCOCU5QSVFMCVCOCU4QiVFMCVCOCVCNCVFMCVCOSU4MiVFMCVCOCU4MSVFMCVCOSU4OSUyMCVFMCVCOSU4MCVFMCVCOCU4MSVFMCVCOCVCNSVFMCVCOCVBMiVFMCVCOCVBMyVFMCVCOCU5NSVFMCVCOCVCNCVFMCVCOCVBOCVFMCVCOCVCMSVFMCVCOCU4MSVFMCVCOCU5NCVFMCVCOCVCNCVFMCVCOSU4QyUyMCVFMCVCOSU4MCVFMCVCOCVBQSVFMCVCOCU5OSVFMCVCOCVCMiVFMCVCOSU4MCVFMCVCOCVBMSVFMCVCOCVCNyVFMCVCOCVBRCVFMCVCOCU4NyUyMEtpYXRpc3VrJTIwU2VuYW11YW5nLmh0bWw="
+                      id="block-yearly-button">
+                      ซื้อแพ็กเกจรายปี
+                    </a>
+                  </div>
+                </div>
+                <div className="block box-shadow-none lg-none">
+                  <div id="yearlybanner" className="feature" style={{ textAlign: "center" }}>
+                    <a href="https://checkout.cariber.co?add-to-cart=685&cfp=eWVhcmx5YmFubm5lcl9kZXNrdG9wX0M6L1VzZXJzL2luemVlL09uZURyaXZlJTIwLSUyMFVuaXZlcnNpdHklMjBvZiUyMFBoYXlhby9DYXJpYmVyJTIwZG91Y3VtZW50L3NhdmUlMjBwYWdlLyVFMCVCOCU4NCVFMCVCOCVBRCVFMCVCOCVBMyVFMCVCOSU4QyVFMCVCOCVBQSVFMCVCOCVBRCVFMCVCOCVBRCVFMCVCOCU5OSVFMCVCOSU4NCVFMCVCOCVBNSVFMCVCOCU5OSVFMCVCOSU4QyVFMCVCOCU4MSVFMCVCOCVCMSVFMCVCOCU5QSVFMCVCOCU4QiVFMCVCOCVCNCVFMCVCOSU4MiVFMCVCOCU4MSVFMCVCOSU4OSUyMCVFMCVCOSU4MCVFMCVCOCU4MSVFMCVCOCVCNSVFMCVCOCVBMiVFMCVCOCVBMyVFMCVCOCU5NSVFMCVCOCVCNCVFMCVCOCVBOCVFMCVCOCVCMSVFMCVCOCU4MSVFMCVCOCU5NCVFMCVCOCVCNCVFMCVCOSU4QyUyMCVFMCVCOSU4MCVFMCVCOCVBQSVFMCVCOCU5OSVFMCVCOCVCMiVFMCVCOSU4MCVFMCVCOCVBMSVFMCVCOCVCNyVFMCVCOCVBRCVFMCVCOCU4NyUyMEtpYXRpc3VrJTIwU2VuYW11YW5nLmh0bWw=">
+                      <Img id="block-yearly-img"
+                        className="feature-image"
+                        src={courseData.yearlySubscriptionImageMobile}
+                        width={400}
                         height={400}
                       />
                     </a>
@@ -211,7 +267,7 @@ export default function Course() {
                   <div id="singlebanner" className="feature" style={{ display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center" }}>
                     <a href="https://checkout.cariber.co/?add-to-cart=74465&cfp=c2luZ2xlYmFubm5lcl9kZXNrdG9wX2tpYXRpc3VrLXNlbmFtdWFuZw==">
                       <Img id="block-single-img"
-                        src="/course/singlebanner.jpg"
+                        src={courseData.singleCoursePersonalImage}
                         className="feature-image"
                         width={400}
                         height={400}
@@ -235,7 +291,7 @@ export default function Course() {
                 </div>
               </div>
               <div className="block-type-code text-left col-12">
-                <SlideCourse slideCourse={slideCourse} slideView={4} imageWidth={235} imageHeight={470.533} />
+                <SlideCourse slideCourses={slideCourses} slideView={4} imageWidth={235} imageHeight={470.533} />
               </div>
             </div>
           </div>

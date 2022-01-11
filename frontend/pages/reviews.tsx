@@ -9,7 +9,7 @@ export default function Review() {
   const reviewsCariberFirst = staticData.reviewsCariberFirst
   const reviewsCariberSecond = staticData.reviewsCariberSecond
   const reviewsShopee = staticData.reviewsShopee
-  const slideCourse = staticData.slideCourse
+  const slideCourses = staticData.slideCourses
 
   return (
     <div className="bg-review review">
@@ -255,7 +255,7 @@ export default function Review() {
                 </div>
               </div>
               <div className="block-type-code text-left col-12">
-                <SlideCourse slideCourse={slideCourse} slideView={4} imageWidth={258} imageHeight={470} />
+                <SlideCourse slideCourses={slideCourses} slideView={4} imageWidth={258} imageHeight={470} />
               </div>
             </div>
           </div>

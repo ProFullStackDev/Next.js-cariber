@@ -4644,6 +4644,12 @@ a,
   cursor: pointer;
 }
 
+@media (min-width: 768px) {
+  .lg-none {
+    display: none;
+  }
+}
+
 @media (max-width: 768px) {
   .md-none {
     display: none;
