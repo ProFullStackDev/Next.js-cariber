@@ -5,6 +5,7 @@ import FooterBrand from "../components/footerBrand"
 import { strapi, strapiApi } from "../models/content"
 import { Course } from "../models/courses"
 import { ResponseData } from "../models/data"
+import Link from "next/link"
 
 export default function Courses({ courses }: { courses: ResponseData<Course> }) {
   return (
@@ -28,7 +29,7 @@ export default function Courses({ courses }: { courses: ResponseData<Course> }) 
             </div>
             <div className="block-type-text text-left col-12">
               <div className="block box-shadow-none background-unrecognized">
-                <h2 style={{ textAlign: 'center', color: '#e74e25' }}>
+                <h2 style={{ textAlign: "center", color: "#e74e25" }}>
                   คอร์สทั้งหมด
                 </h2>
               </div>
@@ -41,29 +42,29 @@ export default function Courses({ courses }: { courses: ResponseData<Course> }) 
                     style={{ backgroundColor: "#ffffff", borderRadius: "4px" }}>
                     <div style={{ padding: "15px" }}>
                       <div className="feature">
-                        <a href='#'>
+                        <Link href="/thakorn-piyapan" passHref={true}>
                           <Img className="feature-image"
                             src={strapi + value.attributes.thumbnail.data.attributes.url}
                             alt={value.attributes.thumbnail.data.attributes.name}
                             width={262.5}
                             height={147.65} />
-                        </a>
+                        </Link>
                         <div className="feature-text">
-                          <h5 style={{ textAlign: 'center' }}>
-                            <a href="/thakorn-piyapan">
-                              <span style={{ color: '#223f99' }}>
+                          <h5 style={{ textAlign: "center" }}>
+                            <Link href="/thakorn-piyapan" passHref={true}>
+                              <span style={{ color: "#223f99" }}>
                                 <strong>
                                   {value.attributes.speaker_name}
                                 </strong>
                               </span>
-                            </a>
+                            </Link>
                           </h5>
-                          <h6 style={{ textAlign: 'center' }}>
-                            <a href="/thakorn-piyapan">
+                          <h6 style={{ textAlign: "center" }}>
+                            <Link href="/thakorn-piyapan" passHref={true}>
                               <strong>
                                 {value.attributes.course_name}
                               </strong>
-                            </a>
+                            </Link>
                           </h6>
                         </div>
                       </div>
@@ -85,7 +86,7 @@ export default function Courses({ courses }: { courses: ResponseData<Course> }) 
 
 export async function getStaticProps() {
   try {
-    const response = await fetch(strapiApi + '/courses?populate=*');
+    const response = await fetch(strapiApi + "/courses?populate=*");
     const data = await response.json() as ResponseData<Course>;
     return { props: { courses: data } }
   } catch (error) {

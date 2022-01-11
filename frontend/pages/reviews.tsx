@@ -6,10 +6,10 @@ import * as staticData from "../components/static/review"
 import SlideCourse from "../components/slideCourse";
 
 export default function Review() {
-  const featureCariberFirst = staticData.featureCariberFirst
-  const featureCariberSecond = staticData.featureCariberSecond
-  const featureShopee = staticData.featureShopee
-  const slideCourse = staticData.slideCourse
+  const reviewsCariberFirst = staticData.reviewsCariberFirst
+  const reviewsCariberSecond = staticData.reviewsCariberSecond
+  const reviewsShopee = staticData.reviewsShopee
+  const slideCourses = staticData.slideCourses
 
   return (
     <div className="bg-review review">
@@ -98,7 +98,7 @@ export default function Review() {
       <div className="section-feature-1">
         <div className="container">
           <div className="justify-content-center grid-container">
-            {featureCariberFirst.map((value, index) => {
+            {reviewsCariberFirst.map((value, index) => {
               return (
                 <div key={index} className="block-type-feature text-left col-12">
                   <div className="block box-shadow-large background-light">
@@ -143,7 +143,7 @@ export default function Review() {
                 </div>
               )
             })}
-            {featureCariberSecond.map((value, index) => {
+            {reviewsCariberSecond.map((value, index) => {
               return (
                 <div key={index} className="block-type-feature text-left col-12">
                   <div className="block box-shadow-large background-light">
@@ -188,7 +188,7 @@ export default function Review() {
                 </div>
               )
             })}
-            {featureShopee.map((value, index) => {
+            {reviewsShopee.map((value, index) => {
               return (
                 <div key={index} className="block-type-feature text-left col-12">
                   <div className="block box-shadow-large background-light">
@@ -255,7 +255,7 @@ export default function Review() {
                 </div>
               </div>
               <div className="block-type-code text-left col-12">
-                <SlideCourse slideCourse={slideCourse} slideView={4} imageWidth={258} imageHeight={470} />
+                <SlideCourse slideCourses={slideCourses} slideView={4} imageWidth={258} imageHeight={470} />
               </div>
             </div>
           </div>

@@ -1,3 +1,4 @@
+import Link from "next/link";
 import Footer from "../components/footer";
 import Header from "../components/header";
 import Img from "../components/image";
@@ -45,7 +46,7 @@ export default function Login() {
                     เข้าสู่ระบบ
                   </button>
                   <div className="auth-link">
-                    <a href="/password/new">ลืมรหัสผ่าน</a>
+                    <Link href="/password/new">ลืมรหัสผ่าน</Link>
                   </div>
                 </form>
               </div>

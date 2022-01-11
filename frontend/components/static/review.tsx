@@ -1,7 +1,7 @@
 import { SlideCourse } from "../slideCourse"
 import { FeatureCariber, FeatureShopee } from "./interface"
 
-export const featureCariberFirst: FeatureCariber[] = [
+export const reviewsCariberFirst: FeatureCariber[] = [
   {
     image: "/review/review-1.webp",
     name: "นิกส์ อรรถพล",
@@ -31,7 +31,7 @@ export const featureCariberFirst: FeatureCariber[] = [
     from: "Cariber",
   },
 ]
-export const featureCariberSecond: FeatureCariber[] = [
+export const reviewsCariberSecond: FeatureCariber[] = [
   {
     image: "/review/review-5.webp",
     name: "ณัฐชา คาลเกน",
@@ -89,7 +89,7 @@ export const featureCariberSecond: FeatureCariber[] = [
     from: "Cariber",
   },
 ]
-export const featureShopee: FeatureShopee[] = [
+export const reviewsShopee: FeatureShopee[] = [
   {
     name: "phanrapeevarakul",
     ratings: "⭐️⭐️⭐️⭐️⭐️",
@@ -163,7 +163,7 @@ export const featureShopee: FeatureShopee[] = [
     from: "Shopee",
   },
 ]
-export const slideCourse: SlideCourse[] = [
+export const slideCourses: SlideCourse[] = [
   {
     link: "#",
     image: "/review/slideshow-1.jpg"

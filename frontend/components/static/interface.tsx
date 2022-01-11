@@ -24,7 +24,7 @@ export interface CourseSoon {
   alt: string,
 }
 
-export interface FrequentlyAskedQuestion {
+export interface CardDescription {
   title: string,
   description: string[],
 }
@@ -48,4 +48,9 @@ export interface FeatureShopee {
   ratings: string,
   review: string,
   from: string,
+}
+
+export interface InterestingTopic{
+  image: string,
+  name: string,
 }
