@@ -1,3 +1,4 @@
+import Link from "next/link"
 import Img from "./image"
 
 export default function Footer() {
@@ -26,14 +27,16 @@ export default function Footer() {
                   <a className="link-list-link" href="https://www.cariber.co/privacy-policy" rel="noopener">
                     นโยบายความเป็นส่วนตัว
                   </a>
-                  <a className="link-list-link" href="https://www.cariber.co/terms-conditions" rel="noopener">
-                    เงื่อนไขการใช้งาน
-                  </a>
+                  <Link href="/terms-conditions ">
+                    <a className="link-list-link">
+                      เงื่อนไขการใช้งาน
+                    </a>
+                  </Link>
+                  <span style={{ color: '#fbf5e3' }}>
+                    contact@cariber.co
+                  </span>
                 </div>
               </div>
-              <span style={{ color: '#fbf5e3' }}>
-                contact@cariber.co
-              </span>
               <div className="footer-block ">
                 <div className="social-icons social-icons-">
                   <a className="social-icons-icon" href="https://www.facebook.com/cariberofficial">
