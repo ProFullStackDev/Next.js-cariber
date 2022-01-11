@@ -6,6 +6,7 @@
 @import "./especial/index.module.scss";
 @import "./especial/login.module.scss";
 @import "./especial/review.module.scss";
+@import "./especial/reviewStudents.module.scss";
 
 $frequency: 0;
 $show-grid: false;
@@ -2883,67 +2884,67 @@ body {
 
 h1,
 .h1 {
-  font-family: $font-family-heading;
-  font-weight: $font-weight-heading;
-  line-height: $line-height-heading;
+  font-family: $font-family-body;
+  font-weight: $font-weight-body;
+  line-height: $line-height-body;
   margin-top: 0;
   margin-bottom: 0.5rem;
-  color: $color-heading;
+  color: $color-body;
   font-size: $font-size-h1-mobile;
 }
 
 h2,
 .h2 {
-  font-family: $font-family-heading;
-  font-weight: $font-weight-heading;
-  line-height: $line-height-heading;
+  font-family: $font-family-body;
+  font-weight: $font-weight-body;
+  line-height: $line-height-body;
   margin-top: 0;
   margin-bottom: 0.5rem;
-  color: $color-heading;
+  color: $color-body;
   font-size: $font-size-h2-mobile;
 }
 
 h3,
 .h3 {
-  font-family: $font-family-heading;
-  font-weight: $font-weight-heading;
-  line-height: $line-height-heading;
+  font-family: $font-family-body;
+  font-weight: $font-weight-body;
+  line-height: $line-height-body;
   margin-top: 0;
   margin-bottom: 0.5rem;
-  color: $color-heading;
+  color: $color-body;
   font-size: $font-size-h3-mobile;
 }
 
 h4,
 .h4 {
-  font-family: $font-family-heading;
-  font-weight: $font-weight-heading;
-  line-height: $line-height-heading;
+  font-family: $font-family-body;
+  font-weight: $font-weight-body;
+  line-height: $line-height-body;
   margin-top: 0;
   margin-bottom: 0.5rem;
-  color: $color-heading;
+  color: $color-body;
   font-size: $font-size-h4-mobile;
 }
 
 h5,
 .h5 {
-  font-family: $font-family-heading;
-  font-weight: $font-weight-heading;
-  line-height: $line-height-heading;
+  font-family: $font-family-body;
+  font-weight: $font-weight-body;
+  line-height: $line-height-body;
   margin-top: 0;
   margin-bottom: 0.5rem;
-  color: $color-heading;
+  color: $color-body;
   font-size: $font-size-h5-mobile;
 }
 
 h6,
 .h6 {
-  font-family: $font-family-heading;
-  font-weight: $font-weight-heading;
-  line-height: $line-height-heading;
+  font-family: $font-family-body;
+  font-weight: $font-weight-body;
+  line-height: $line-height-body;
   margin-top: 0;
   margin-bottom: 0.5rem;
-  color: $color-heading;
+  color: $color-body;
   font-size: $font-size-h6-mobile;
 }
 
@@ -3874,6 +3875,7 @@ img {
   -webkit-box-flex: 1;
   -ms-flex: 1;
   flex: 1;
+  margin: 0px;
 }
 
 .modal {
@@ -4618,4 +4620,38 @@ a,
 
 .w-100 {
   width: 100%;
+}
+
+.accordion-title {
+  height: fit-content;
+}
+
+.accordion-body {
+  padding-top: 24px;
+}
+
+.block-type-accordion {
+  padding: 10px 15px 10px 15px;
+}
+
+.accordion {
+  padding-top: 9px;
+  padding-right: 30px;
+  padding-bottom: 9px;
+  padding-left: 30px;
+  border: 4px none #e74e25;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+@media (min-width: 768px) {
+  .lg-none {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .md-none {
+    display: none;
+  }
 }

@@ -10,7 +10,7 @@ export default function Header() {
   const menu: Menu[] = [
     { url: '/courses', name: 'คอร์สทั้งหมด' },
     { url: 'https://blog.cariber.co/', name: 'บทความ' },
-    { url: '/review', name: 'รีวิว' },
+    { url: '/reviews', name: 'รีวิว' },
   ];
 
   return (
