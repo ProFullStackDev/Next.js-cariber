@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export default function Accordion({ title, description }: { title?: string, description?: string[] }) {
+export default function AccordionCourse({ title, description }: { title: string, description: string[] }) {
   const [displayDescription, setDisplayDescription] = useState("none");
 
   function switchDisplay() {
