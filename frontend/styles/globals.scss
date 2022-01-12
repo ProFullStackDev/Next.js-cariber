@@ -7,6 +7,7 @@
 @import "./especial/login.module.scss";
 @import "./especial/review.module.scss";
 @import "./especial/reviewStudents.module.scss";
+@import "./especial/courseDetail.module.scss";
 
 $frequency: 0;
 $show-grid: false;
@@ -50,7 +51,7 @@ $font-size-h2-mobile: 24px;
 $font-size-h3-mobile: 20px;
 $font-size-h4-mobile: 18px;
 $font-size-h5-mobile: 16px;
-$font-size-h6-mobile: 12px;
+$font-size-h6-mobile: 14px;
 $font-weight-heading: 700;
 $line-height-heading: 1.2;
 $modal-border-radius: 4;
@@ -61,7 +62,7 @@ $font-size-h2-desktop: 30px;
 $font-size-h3-desktop: 24px;
 $font-size-h4-desktop: 20px;
 $font-size-h5-desktop: 18px;
-$font-size-h6-desktop: 12px;
+$font-size-h6-desktop: 16px;
 $modal-video-settings: false;
 $two-step-button-text: Get Started;
 $two-step-full-screen: false;

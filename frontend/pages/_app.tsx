@@ -10,7 +10,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       <Script src="https://kit.fontawesome.com/1b1fb3f1fb.js" crossOrigin="anonymous"></Script>
       <Head>
         <title>Cariber</title>
-        <link rel = "icon" href ="/title-icon.png" type = "image/x-icon"></link>
+        <link rel="icon" href="/title-icon.png" type="image/x-icon"></link>
       </Head>
       <div>
         <Component {...pageProps} />
