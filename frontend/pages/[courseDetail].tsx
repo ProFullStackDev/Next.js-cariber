@@ -52,20 +52,21 @@ export default function CourseDetail() {
       <Header />
       <div className="tb-sizer">
         <CourseHeader yearlySubscriptionImage={courseData.yearlySubscriptionImage}
-          yearlySubscriptionImageMobile={courseData.yearlySubscriptionImageMobile}
-          singleCourseImage={courseData.singleCourseImage}
-          video={courseData.video}
-          videoPoster={courseData.videoPoster} />
-        <IntroductionPersonal
-          fullName={courseData.fullName}
-          personalHistoryImage={courseData.personalHistoryImage} />
+                      yearlySubscriptionImageMobile={courseData.yearlySubscriptionImageMobile}
+                      singleCourseImage={courseData.singleCourseImage}
+                      video={courseData.video}
+                      videoPoster={courseData.videoPoster} />
+        <IntroductionPersonal fullName={courseData.fullName}
+                              personalHistoryImage={courseData.personalHistoryImage} />
         <InterestingTopic interestingTopics={courseData.interestingTopics} />
         <Suitable suitables={courseData.suitableFor} />
         <Episode totalHours={courseData.totalHours}
-          totalEpisodes={courseData.totalEpisodes}
-          episodes={courseData.episodes} />
+                 totalEpisodes={courseData.totalEpisodes}
+                 episodes={courseData.episodes} />
       </div>
-      <Sale singleCoursePersonalImage={courseData.singleCoursePersonalImage} yearlySubscriptionImage={courseData.yearlySubscriptionImage} yearlySubscriptionImageMobile={courseData.yearlySubscriptionImageMobile} />
+      <Sale singleCoursePersonalImage={courseData.singleCoursePersonalImage}
+            yearlySubscriptionImage={courseData.yearlySubscriptionImage}
+            yearlySubscriptionImageMobile={courseData.yearlySubscriptionImageMobile} />
       <div className="background-light">
         <div className="sizer">
           <div className="container">

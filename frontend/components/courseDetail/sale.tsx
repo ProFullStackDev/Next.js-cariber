@@ -1,7 +1,9 @@
 import Img from "../image";
 import { SaleCourseDetail } from "../static/interface"
 
-export default function Sale({ yearlySubscriptionImage, yearlySubscriptionImageMobile, singleCoursePersonalImage }: SaleCourseDetail) {
+export default function Sale({ yearlySubscriptionImage, 
+                               yearlySubscriptionImageMobile, 
+                               singleCoursePersonalImage }: SaleCourseDetail) {
   return (
     <div className="background-light">
       <div className="sizer" style={{paddingBottom: "0px"}}>

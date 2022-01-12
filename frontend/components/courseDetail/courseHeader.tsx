@@ -1,10 +1,13 @@
 import Img from "../image";
 import { CourseHeaderCourseDetail } from "../static/interface"
 
-export default function CourseHeader({ yearlySubscriptionImage, singleCourseImage, videoPoster, video }: CourseHeaderCourseDetail) {
+export default function CourseHeader({ yearlySubscriptionImage,
+                                       singleCourseImage,
+                                       videoPoster,
+                                       video }: CourseHeaderCourseDetail) {
   return (
     <div className="background-dark">
-      <div className="sizer" style={{paddingTop: "0px"}}>
+      <div className="sizer" style={{ paddingTop: "0px" }}>
         <div className="row align-items-center justify-content-center">
           <div className="block-type-code text-left col-3 md-none" style={{ padding: "0px" }}>
             <div className="block box-shadow-none">
