@@ -1,7 +1,7 @@
 import Img from "../image"
-import { InterestingTopicCourse } from "../static/interface"
+import { InterestingTopicCourseDetail } from "../static/interface"
 
-export default function InterestingTopic({ interestingTopics }: { interestingTopics: InterestingTopicCourse[] }) {
+export default function InterestingTopic({ interestingTopics }: { interestingTopics: InterestingTopicCourseDetail[] }) {
   return (
     <div className="background-dark">
       <div className="container">

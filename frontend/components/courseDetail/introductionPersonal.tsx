@@ -1,7 +1,7 @@
 import Img from "../image";
-import { IntroductionPersonalCourse } from "../static/interface"
+import { IntroductionPersonalCourseDetail } from "../static/interface"
 
-export default function IntroductionPersonal({ fullName, personalHistoryImage }: IntroductionPersonalCourse) {
+export default function IntroductionPersonal({ fullName, personalHistoryImage }: IntroductionPersonalCourseDetail) {
   return (
     <div className="background-dark">
       <div className="row align-items-center justify-content-center">
