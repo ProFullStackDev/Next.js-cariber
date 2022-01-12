@@ -6,13 +6,13 @@ import SlideCourse from "../components/slideCourse"
 import * as staticDataReview from "../components/static/review"
 import * as staticData from "../components/static/course"
 import { InterestingTopicCourse, CardDescription } from "../components/static/interface"
-import CourseHeader from "../components/course/CourseHeader"
-import IntroductionPersonal from "../components/course/introductionPersonal"
-import Episode from "../components/course/episode"
-import InterestingTopic from "../components/course/interestingTopic"
-import Suitable from "../components/course/suitable"
+import IntroductionPersonal from "../components/course-detail/introductionPersonal"
+import Episode from "../components/course-detail/episode"
+import InterestingTopic from "../components/course-detail/interestingTopic"
+import Suitable from "../components/course-detail/suitable"
+import CourseHeader from "../components/course-detail/courseHeader"
 
-export interface CourseData {
+export interface CourseDetailData {
   yearlySubscriptionImage: string,
   yearlySubscriptionImageMobile: string,
   singleCourseImage: string,
@@ -28,9 +28,9 @@ export interface CourseData {
   singleCoursePersonalImage: string
 }
 
-export default function Course() {
+export default function CourseDetail() {
   const slideCourses = staticDataReview.slideCourses
-  const courseData: CourseData = {
+  const courseData: CourseDetailData = {
     yearlySubscriptionImage: "/course/yearly-subscription.jpg",
     yearlySubscriptionImageMobile: "/course/yearly-subscription-mobile.jpg",
     singleCourseImage: "/course/single-courese.jpg",
@@ -47,21 +47,23 @@ export default function Course() {
   }
 
   return (
-    <div>
+    <div className="course-detail">
       <Header />
-      <CourseHeader yearlySubscriptionImage={courseData.yearlySubscriptionImage}
-        yearlySubscriptionImageMobile={courseData.yearlySubscriptionImageMobile}
-        singleCourseImage={courseData.singleCourseImage}
-        video={courseData.video}
-        videoPoster={courseData.videoPoster} />
-      <IntroductionPersonal
-        fullName={courseData.fullName}
-        personalHistoryImage={courseData.personalHistoryImage} />
-      <InterestingTopic interestingTopics={courseData.interestingTopics} />
-      <Suitable suitables={courseData.suitableFor} />
-      <Episode totalHours={courseData.totalHours}
-        totalEpisodes={courseData.totalEpisodes}
-        episodes={courseData.episodes} />
+      <div className="tb-sizer">
+        <CourseHeader yearlySubscriptionImage={courseData.yearlySubscriptionImage}
+          yearlySubscriptionImageMobile={courseData.yearlySubscriptionImageMobile}
+          singleCourseImage={courseData.singleCourseImage}
+          video={courseData.video}
+          videoPoster={courseData.videoPoster} />
+        <IntroductionPersonal
+          fullName={courseData.fullName}
+          personalHistoryImage={courseData.personalHistoryImage} />
+        <InterestingTopic interestingTopics={courseData.interestingTopics} />
+        <Suitable suitables={courseData.suitableFor} />
+        <Episode totalHours={courseData.totalHours}
+          totalEpisodes={courseData.totalEpisodes}
+          episodes={courseData.episodes} />
+      </div>
       <div className="background-light">
         <div className="sizer">
           <div className="container">
