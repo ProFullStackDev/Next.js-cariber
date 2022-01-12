@@ -14,7 +14,6 @@ import CoursesUpdate from '../components/index/coursesUpdate'
 import ReviewStudents from '../components/reviewStudents'
 
 const Index: NextPage = () => {
-  const reviews = staticDataReview.reviewsCariberFirst
   const shopeeReviews = staticData.shopeeReviews
   const myStudents = staticData.myStudents
   const frequentlyAskedQuestions = staticData.frequentlyAskedQuestions
