@@ -1,0 +1,23 @@
+{
+  "collectionName": "components_components_special_ep_components",
+  "info": {
+    "displayName": "Special EP Component",
+    "icon": "eye"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "description": {
+      "type": "text"
+    },
+    "video": {
+      "allowedTypes": [
+        "videos"
+      ],
+      "type": "media",
+      "multiple": false
+    }
+  }
+}

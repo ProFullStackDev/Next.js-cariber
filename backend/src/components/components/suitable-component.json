@@ -1,0 +1,15 @@
+{
+  "collectionName": "components_components_suitable_components",
+  "info": {
+    "displayName": "Suitable Component",
+    "icon": "check"
+  },
+  "options": {},
+  "attributes": {
+    "items": {
+      "type": "component",
+      "repeatable": true,
+      "component": "course-detail-component.suitable"
+    }
+  }
+}

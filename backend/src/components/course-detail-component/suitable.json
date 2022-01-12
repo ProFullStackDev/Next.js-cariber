@@ -1,0 +1,13 @@
+{
+  "collectionName": "components_course_detail_component_suitables",
+  "info": {
+    "displayName": "suitable",
+    "icon": "check-circle"
+  },
+  "options": {},
+  "attributes": {
+    "label": {
+      "type": "string"
+    }
+  }
+}
