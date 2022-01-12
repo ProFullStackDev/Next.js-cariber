@@ -11,35 +11,6 @@
     line-height: 1.1;
   }
 
-  .qa-block {
-    padding-top: 9px;
-    padding-right: 30px;
-    padding-bottom: 9px;
-    padding-left: 30px;
-    border: 4px none #e74e25;
-    border-radius: 4px;
-  }
-
-  .media-body {
-    margin: 0px;
-  }
-
-  .accordion-title {
-    height: fit-content;
-  }
-
-  .accordion-body {
-    padding-top: 24px;
-  }
-
-  .qa-block {
-    cursor: pointer;
-  }
-
-  .block-type-accordion{
-    padding: 10px 15px 10px 15px;
-  }
-
   .block {
     @media (max-width: 768px) {
       display: flex;

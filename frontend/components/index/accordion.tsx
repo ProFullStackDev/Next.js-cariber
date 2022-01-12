@@ -9,7 +9,7 @@ export default function Accordion({ title, description }: { title?: string, desc
 
   return (
     <div className="block-type-accordion text-left col-8" onClick={switchDisplay}>
-      <div className="qa-block box-shadow-medium background-white">
+      <div className="accordion-frame box-shadow-medium background-white">
         <div className="accordion">
           <div className="accordion-title media align-items-center collapsed">
             <h5 className="media-body">

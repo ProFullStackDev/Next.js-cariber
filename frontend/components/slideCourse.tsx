@@ -7,13 +7,13 @@ export interface SlideCourse {
 }
 
 interface SlideCourseProps {
-  slideCourse: SlideCourse[],
+  slideCourses: SlideCourse[],
   slideView: number,
   imageWidth: number,
   imageHeight: number
 }
 
-export default function SlideCourse({ slideCourse, slideView, imageWidth, imageHeight }: SlideCourseProps) {
+export default function SlideCourse({ slideCourses, slideView, imageWidth, imageHeight }: SlideCourseProps) {
   const [slideViewLocal, setSlideViewLocal] = useState(slideView);
   const [imageWidthLocal, setImageWidthLocal] = useState(imageWidth);
   const [imageHeightLocal, setImageHeightLocal] = useState(imageHeight);
@@ -33,13 +33,13 @@ export default function SlideCourse({ slideCourse, slideView, imageWidth, imageH
 
   function nextSlide() {
     setSlideShowIndex((index) =>
-      index >= slideCourse.length - slideViewLocal ? 0 : index + 1
+      index >= slideCourses.length - slideViewLocal ? 0 : index + 1
     )
   }
 
   function previousSlide() {
     setSlideShowIndex((index) =>
-      index <= 0 ? slideCourse.length - slideViewLocal : index - 1
+      index <= 0 ? slideCourses.length - slideViewLocal : index - 1
     )
   }
 
@@ -48,7 +48,7 @@ export default function SlideCourse({ slideCourse, slideView, imageWidth, imageH
     timeoutRef.current = window.setTimeout(
       () =>
         setSlideShowIndex((index) =>
-          index >= slideCourse.length - slideViewLocal ? 0 : index + 1
+          index >= slideCourses.length - slideViewLocal ? 0 : index + 1
         ),
       delay
     );
@@ -67,7 +67,7 @@ export default function SlideCourse({ slideCourse, slideView, imageWidth, imageH
     return () => {
       resetTimeout();
     }
-  }, [frameWidth, slideCourse.length, slideViewLocal, slideShowIndex])
+  }, [frameWidth, slideCourses.length, slideViewLocal, slideShowIndex])
 
   return (
     <div className="block box-shadow-none background-unrecognized">
@@ -77,7 +77,7 @@ export default function SlideCourse({ slideCourse, slideView, imageWidth, imageH
             <div id="news-slider" className="owl-carousel owl-theme">
               <div className="owl-wrapper-outer">
                 <div className="owl-wrapper" style={{ transform: `translate3d(${-slideShowIndex * (itemFrameWidth) - 10}px, 0px, 0px)` }}>
-                  {slideCourse.map((value, index) => {
+                  {slideCourses.map((value, index) => {
                     return (
                       <div key={index} className="owl-item" ref={refItemFrame} style={{ width: "fit-content" }}>
                         <div className="news-grid">

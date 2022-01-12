@@ -24,7 +24,7 @@ export interface CourseSoon {
   alt: string,
 }
 
-export interface FrequentlyAskedQuestion {
+export interface CardDescription {
   title: string,
   description: string[],
 }
@@ -48,4 +48,34 @@ export interface FeatureShopee {
   ratings: string,
   review: string,
   from: string,
+}
+
+export interface InterestingTopicCourseDetail {
+  image: string,
+  name: string,
+}
+
+export interface CourseHeaderCourseDetail {
+  yearlySubscriptionImage: string,
+  yearlySubscriptionImageMobile: string,
+  singleCourseImage: string,
+  video: string,
+  videoPoster: string,
+}
+
+export interface IntroductionPersonalCourseDetail {
+  fullName: string,
+  personalHistoryImage: string,
+}
+
+export interface EpisodeCourseDetail {
+  totalHours: string,
+  totalEpisodes: string,
+  episodes: CardDescription[],
+}
+
+export interface SaleCourseDetail {
+  yearlySubscriptionImage: string,
+  yearlySubscriptionImageMobile: string,
+  singleCoursePersonalImage: string,
 }
