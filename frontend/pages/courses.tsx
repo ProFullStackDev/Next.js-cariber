@@ -40,41 +40,35 @@ export default function Courses({ courses }: { courses: ResponseData<Course> }) 
                 <div key={value.id} className="block-type-feature text-center col-3">
                   <div className="block box-shadow-large background-light"
                     style={{ backgroundColor: "#ffffff", borderRadius: "4px" }}>
-                    <div style={{ padding: "15px" }}>
-                      <div className="feature">
-                        <Link href="/thakorn-piyapan" passHref={true}>
+                    <Link href="/test-url" passHref={true}>
+                      <div style={{ padding: "15px", cursor: "pointer" }}>
+                        <div className="feature">
                           <Img className="feature-image"
                             src={strapi + value.attributes.thumbnail.data.attributes.url}
                             alt={value.attributes.thumbnail.data.attributes.name}
                             width={262.5}
                             height={147.65} />
-                        </Link>
-                        <div className="feature-text">
-                          <h5 style={{ textAlign: "center" }}>
-                            <Link href="/thakorn-piyapan" passHref={true}>
+                          <div className="feature-text">
+                            <h5 style={{ textAlign: "center" }}>
                               <span style={{ color: "#223f99" }}>
                                 <strong>
                                   {value.attributes.speaker_name}
                                 </strong>
                               </span>
-                            </Link>
-                          </h5>
-                          <h6 style={{ textAlign: "center" }}>
-                            <Link href="/thakorn-piyapan" passHref={true}>
-                              <strong>
+                            </h5>
+                            <h6 style={{ fontSize: "12px", textAlign: "center" }}>
                                 {value.attributes.course_name}
-                              </strong>
-                            </Link>
-                          </h6>
+                            </h6>
+                          </div>
                         </div>
                       </div>
-                    </div>
+                    </Link>
                   </div>
                 </div>
               )
             }) : (
-                <div className="text-center w-100">ไม่พบคอร์ส</div>
-              )}
+              <div className="text-center w-100">ไม่พบคอร์ส</div>
+            )}
           </div>
         </div>
       </div>
