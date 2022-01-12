@@ -1,7 +1,7 @@
 
 
 module.exports = {
-    '* * * * *': async () => {
+    '0 * * * *': async () => {
         const draftToPublish = await strapi.entityService.findMany('api::course.course', {
             filters: {
               $and: [
@@ -26,7 +26,7 @@ module.exports = {
             });
         }));
     },
-    '* * * * *': async () => {
+    '0 * * * *': async () => {
         const draftToPublish = await strapi.entityService.findMany('api::episode.episode', {
             filters: {
               $and: [
