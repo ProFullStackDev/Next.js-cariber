@@ -1,0 +1,35 @@
+{
+  "kind": "singleType",
+  "collectionName": "annual_promotions",
+  "info": {
+    "singularName": "annual-promotion",
+    "pluralName": "annual-promotions",
+    "displayName": "Annual Promotion",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "url": {
+      "type": "string",
+      "required": true
+    },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "image_with_button": {
+      "allowedTypes": [
+        "images"
+      ],
+      "type": "media",
+      "multiple": false
+    }
+  }
+}
