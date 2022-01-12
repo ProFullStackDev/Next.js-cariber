@@ -18,7 +18,7 @@ export default function Suitable({ suitables }: { suitables: string[] }) {
             <div className="block box-shadow-none">
               {suitables.map((value, index) => {
                 return (
-                  <p key={index} style={{ textAlign: "left", paddingLeft: "30px", fontWeight: "normal" }}>
+                  <h6 key={index} style={{ textAlign: "left", paddingLeft: "30px", fontWeight: "normal" }}>
                     <strong>
                       <span style={{ color: "#ed9081" }}>
                         ✓ &nbsp;
@@ -27,7 +27,7 @@ export default function Suitable({ suitables }: { suitables: string[] }) {
                         {value}
                       </span>
                     </strong>
-                  </p>
+                  </h6>
                 )
               })}
             </div>

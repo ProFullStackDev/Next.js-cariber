@@ -11,6 +11,9 @@ import Episode from "../components/course-detail/episode"
 import InterestingTopic from "../components/course-detail/interestingTopic"
 import Suitable from "../components/course-detail/suitable"
 import CourseHeader from "../components/course-detail/courseHeader"
+import UpperHeader from "../components/course-detail/upperHeader"
+import YoutubeEP from "../components/course-detail/youtubeEP"
+import Sale from "../components/course-detail/sale"
 
 export interface CourseDetailData {
   yearlySubscriptionImage: string,
@@ -50,11 +53,13 @@ export default function CourseDetail() {
     <div className="course-detail">
       <Header />
       <div className="tb-sizer">
+        <UpperHeader />
         <CourseHeader yearlySubscriptionImage={courseData.yearlySubscriptionImage}
           yearlySubscriptionImageMobile={courseData.yearlySubscriptionImageMobile}
           singleCourseImage={courseData.singleCourseImage}
           video={courseData.video}
           videoPoster={courseData.videoPoster} />
+        <YoutubeEP />
         <IntroductionPersonal
           fullName={courseData.fullName}
           personalHistoryImage={courseData.personalHistoryImage} />
@@ -64,10 +69,20 @@ export default function CourseDetail() {
           totalEpisodes={courseData.totalEpisodes}
           episodes={courseData.episodes} />
       </div>
+      <Sale singleCoursePersonalImage={courseData.singleCoursePersonalImage} yearlySubscriptionImage={courseData.yearlySubscriptionImage} yearlySubscriptionImageMobile={courseData.yearlySubscriptionImageMobile} />
       <div className="background-light">
         <div className="sizer">
           <div className="container">
             <div className="row align-items-center justify-content-center">
+              <div className="block-type-text text-center col-12" style={{ padding: "0px", marginTop: "20px" }}>
+                <div className="block box-shadow-none">
+                  <h2 className="font-md-20" style={{ textAlign: "center" }}>
+                    <span style={{ color: "#e74e25" }}>
+                      คอร์สอื่น ๆ จาก &quot;ที่สุด&quot; ของประเทศอีกมากมาย
+                    </span>
+                  </h2>
+                </div>
+              </div>
               <div className="block-type-code text-left col-12">
                 <SlideCourse slideCourses={slideCourses} slideView={4} imageWidth={235} imageHeight={470.533} />
               </div>
