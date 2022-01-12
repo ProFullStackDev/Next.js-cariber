@@ -9,7 +9,7 @@ import Link from "next/link"
 
 export default function Courses({ courses }: { courses: ResponseData<Course> }) {
   return (
-    <div className="bg-image courses">
+    <div className="bg-courses courses">
       <Header />
       <div className="sizer">
         <div className="container">
@@ -40,35 +40,41 @@ export default function Courses({ courses }: { courses: ResponseData<Course> }) 
                 <div key={value.id} className="block-type-feature text-center col-3">
                   <div className="block box-shadow-large background-light"
                     style={{ backgroundColor: "#ffffff", borderRadius: "4px" }}>
-                    <Link href="/test-url" passHref={true}>
-                      <div style={{ padding: "15px", cursor: "pointer" }}>
-                        <div className="feature">
+                    <div style={{ padding: "15px" }}>
+                      <div className="feature">
+                        <Link href="/thakorn-piyapan" passHref={true}>
                           <Img className="feature-image"
                             src={strapi + value.attributes.thumbnail.data.attributes.url}
                             alt={value.attributes.thumbnail.data.attributes.name}
                             width={262.5}
                             height={147.65} />
-                          <div className="feature-text">
-                            <h5 style={{ textAlign: "center" }}>
+                        </Link>
+                        <div className="feature-text">
+                          <h5 style={{ textAlign: "center" }}>
+                            <Link href="/thakorn-piyapan" passHref={true}>
                               <span style={{ color: "#223f99" }}>
                                 <strong>
                                   {value.attributes.speaker_name}
                                 </strong>
                               </span>
-                            </h5>
-                            <h6 style={{ fontSize: "12px", textAlign: "center" }}>
+                            </Link>
+                          </h5>
+                          <h6 style={{ textAlign: "center" }}>
+                            <Link href="/thakorn-piyapan" passHref={true}>
+                              <strong>
                                 {value.attributes.course_name}
-                            </h6>
-                          </div>
+                              </strong>
+                            </Link>
+                          </h6>
                         </div>
                       </div>
-                    </Link>
+                    </div>
                   </div>
                 </div>
               )
             }) : (
-              <div className="text-center w-100">ไม่พบคอร์ส</div>
-            )}
+                <div className="text-center w-100">ไม่พบคอร์ส</div>
+              )}
           </div>
         </div>
       </div>
