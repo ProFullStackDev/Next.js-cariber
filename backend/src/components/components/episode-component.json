@@ -1,0 +1,15 @@
+{
+  "collectionName": "components_components_episode_components",
+  "info": {
+    "displayName": "Episode Component",
+    "icon": "play"
+  },
+  "options": {},
+  "attributes": {
+    "episodes": {
+      "type": "component",
+      "repeatable": true,
+      "component": "course-detail-component.episode"
+    }
+  }
+}
