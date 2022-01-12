@@ -2,13 +2,6 @@ $image-border-radius: 4px;
 $image-width: 300px;
 $feature-height: 272.05px;
 
-.bg-courses {
-  background-image: url("../../public/courses/background.jpg");
-  background-position: top;
-  background-size: cover;
-  background-attachment: fixed;
-}
-
 .courses {
   .feature-image {
     width: $image-width;

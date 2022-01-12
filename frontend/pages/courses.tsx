@@ -9,7 +9,7 @@ import Link from "next/link"
 
 export default function Courses({ courses }: { courses: ResponseData<Course> }) {
   return (
-    <div className="bg-courses courses">
+    <div className="bg-image courses">
       <Header />
       <div className="sizer">
         <div className="container">
