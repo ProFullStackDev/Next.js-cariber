@@ -56,7 +56,7 @@ export default function Courses({ courses }: { courses: ResponseData<Course> }) 
                                 </strong>
                               </span>
                             </h5>
-                            <h6 style={{ textAlign: "center" }}>
+                            <h6 style={{ fontSize: "12px", textAlign: "center" }}>
                                 {value.attributes.course_name}
                             </h6>
                           </div>

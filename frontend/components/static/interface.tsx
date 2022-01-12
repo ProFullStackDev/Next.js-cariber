@@ -50,12 +50,12 @@ export interface FeatureShopee {
   from: string,
 }
 
-export interface InterestingTopicCourse {
+export interface InterestingTopicCourseDetail {
   image: string,
   name: string,
 }
 
-export interface CourseHeaderCourse {
+export interface CourseHeaderCourseDetail {
   yearlySubscriptionImage: string,
   yearlySubscriptionImageMobile: string,
   singleCourseImage: string,
@@ -63,18 +63,18 @@ export interface CourseHeaderCourse {
   videoPoster: string,
 }
 
-export interface IntroductionPersonalCourse {
+export interface IntroductionPersonalCourseDetail {
   fullName: string,
   personalHistoryImage: string,
 }
 
-export interface EpisodeCourse {
+export interface EpisodeCourseDetail {
   totalHours: string,
   totalEpisodes: string,
   episodes: CardDescription[],
 }
 
-export interface SaleCourse {
+export interface SaleCourseDetail {
   yearlySubscriptionImage: string,
   yearlySubscriptionImageMobile: string,
   singleCoursePersonalImage: string,

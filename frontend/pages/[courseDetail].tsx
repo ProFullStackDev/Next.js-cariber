@@ -4,16 +4,14 @@ import Header from "../components/header"
 import ReviewStudents from "../components/reviewStudents"
 import SlideCourse from "../components/slideCourse"
 import * as staticDataReview from "../components/static/review"
-import * as staticData from "../components/static/course"
-import { InterestingTopicCourse, CardDescription } from "../components/static/interface"
-import IntroductionPersonal from "../components/course-detail/introductionPersonal"
-import Episode from "../components/course-detail/episode"
-import InterestingTopic from "../components/course-detail/interestingTopic"
-import Suitable from "../components/course-detail/suitable"
-import CourseHeader from "../components/course-detail/courseHeader"
-import UpperHeader from "../components/course-detail/upperHeader"
-import YoutubeEP from "../components/course-detail/youtubeEP"
-import Sale from "../components/course-detail/sale"
+import * as staticData from "../components/static/courseDetail"
+import { InterestingTopicCourseDetail, CardDescription } from "../components/static/interface"
+import IntroductionPersonal from "../components/courseDetail/introductionPersonal"
+import Episode from "../components/courseDetail/episode"
+import InterestingTopic from "../components/courseDetail/interestingTopic"
+import Suitable from "../components/courseDetail/suitable"
+import CourseHeader from "../components/courseDetail/courseHeader"
+import Sale from "../components/courseDetail/sale"
 
 export interface CourseDetailData {
   yearlySubscriptionImage: string,
@@ -23,7 +21,7 @@ export interface CourseDetailData {
   videoPoster: string,
   fullName: string,
   personalHistoryImage: string,
-  interestingTopics: InterestingTopicCourse[],
+  interestingTopics: InterestingTopicCourseDetail[],
   suitableFor: string[],
   totalHours: string,
   totalEpisodes: string,
@@ -34,32 +32,30 @@ export interface CourseDetailData {
 export default function CourseDetail() {
   const slideCourses = staticDataReview.slideCourses
   const courseData: CourseDetailData = {
-    yearlySubscriptionImage: "/course/yearly-subscription.jpg",
-    yearlySubscriptionImageMobile: "/course/yearly-subscription-mobile.jpg",
-    singleCourseImage: "/course/single-courese.jpg",
-    video: "/index/cariber-video.mp4",
-    videoPoster: "/course/poster.jpg",
+    yearlySubscriptionImage: "/courseDetail/yearly-subscription.jpg",
+    yearlySubscriptionImageMobile: "/courseDetail/yearly-subscription-mobile.jpg",
+    singleCourseImage: "/courseDetail/single-courese.jpg",
+    video: "/courseDetail/kiatisuk-senamuang-videos.mp4",
+    videoPoster: "/courseDetail/poster.jpg",
     fullName: "เกียรติศักดิ์ เสนาเมือง",
-    personalHistoryImage: "/course/information.jpg",
+    personalHistoryImage: "/courseDetail/information.jpg",
     interestingTopics: staticData.interestingTopics,
     suitableFor: staticData.suitable,
     totalHours: "1:51",
     totalEpisodes: "9",
     episodes: staticData.episodes,
-    singleCoursePersonalImage: "/course/singlebanner.jpg"
+    singleCoursePersonalImage: "/courseDetail/singlebanner.jpg"
   }
 
   return (
     <div className="course-detail">
       <Header />
       <div className="tb-sizer">
-        <UpperHeader />
         <CourseHeader yearlySubscriptionImage={courseData.yearlySubscriptionImage}
           yearlySubscriptionImageMobile={courseData.yearlySubscriptionImageMobile}
           singleCourseImage={courseData.singleCourseImage}
           video={courseData.video}
           videoPoster={courseData.videoPoster} />
-        <YoutubeEP />
         <IntroductionPersonal
           fullName={courseData.fullName}
           personalHistoryImage={courseData.personalHistoryImage} />

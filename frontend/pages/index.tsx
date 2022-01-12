@@ -116,7 +116,7 @@ const Index: NextPage = () => {
                 </div>
               </div>
               <div className="block-type-code text-left col-6">
-                <SlideCourse slideCourses={slideCourses} slideView={2} imageWidth={220} imageHeight={400} />
+                <SlideCourse slideCourses={slideCourses} slideView={2} imageWidth={232.85} imageHeight={425.05} />
               </div>
             </div>
           </div>
