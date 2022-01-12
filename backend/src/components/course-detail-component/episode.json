@@ -1,0 +1,19 @@
+{
+  "collectionName": "components_course_detail_component_episodes",
+  "info": {
+    "displayName": "Episode Preview",
+    "icon": "play-circle",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "unique": false,
+      "required": true
+    },
+    "description": {
+      "type": "text"
+    }
+  }
+}

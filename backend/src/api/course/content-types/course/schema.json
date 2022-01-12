@@ -35,12 +35,6 @@
     },
     "asset_download": {
       "type": "string"
-    },
-    "episodes": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::episode.episode",
-      "mappedBy": "course"
     }
   }
 }

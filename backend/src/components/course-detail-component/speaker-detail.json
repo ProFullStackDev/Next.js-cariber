@@ -1,0 +1,24 @@
+{
+  "collectionName": "components_course_detail_component_speaker_details",
+  "info": {
+    "displayName": "Speaker Detail",
+    "icon": "grin"
+  },
+  "options": {},
+  "attributes": {
+    "position": {
+      "type": "string"
+    },
+    "image": {
+      "allowedTypes": [
+        "images"
+      ],
+      "type": "media",
+      "multiple": false,
+      "required": true
+    },
+    "department": {
+      "type": "string"
+    }
+  }
+}

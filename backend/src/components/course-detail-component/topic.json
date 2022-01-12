@@ -1,0 +1,22 @@
+{
+  "collectionName": "components_course_detail_component_topics",
+  "info": {
+    "displayName": "Topic",
+    "icon": "comment"
+  },
+  "options": {},
+  "attributes": {
+    "label": {
+      "type": "string",
+      "required": true
+    },
+    "image": {
+      "allowedTypes": [
+        "images"
+      ],
+      "type": "media",
+      "multiple": false,
+      "required": true
+    }
+  }
+}
