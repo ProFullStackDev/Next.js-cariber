@@ -44,28 +44,28 @@ export default function Courses({ courses }: { courses: ResponseData<Course> }) 
                       <div className="feature">
                         <Link href="/thakorn-piyapan" passHref={true}>
                           <a>
-                          <Img className="feature-image"
-                            src={strapi + value.attributes.thumbnail.data.attributes.url}
-                            alt={value.attributes.thumbnail.data.attributes.name}
-                            width={262.5}
-                            height={147.65} />
+                            <Img className="feature-image"
+                              src={strapi + value.attributes.thumbnail.data.attributes.url}
+                              alt={value.attributes.thumbnail.data.attributes.name}
+                              width={262.5}
+                              height={147.65} />
                           </a>
                         </Link>
                         <div className="feature-text">
                           <h5 style={{ textAlign: "center" }}>
                             <Link href="/thakorn-piyapan" passHref={true}>
                               <a>
-                              <span style={{ color: "#223f99" }}>
-                                <strong>
-                                  {value.attributes.speaker_name}
-                                </strong>
-                              </span>
+                                <span style={{ color: "#223f99" }}>
+                                  <strong>
+                                    {value.attributes.speaker_name}
+                                  </strong>
+                                </span>
                               </a>
                             </Link>
                           </h5>
                           <p style={{ textAlign: "center", fontSize: "12px" }}>
                             <Link href="/thakorn-piyapan" passHref={true}>
-                                {value.attributes.course_name}
+                              {value.attributes.course_name}
                             </Link>
                           </p>
                         </div>
@@ -75,8 +75,8 @@ export default function Courses({ courses }: { courses: ResponseData<Course> }) 
                 </div>
               )
             }) : (
-                <div className="text-center w-100">ไม่พบคอร์ส</div>
-              )}
+              <div className="text-center w-100">ไม่พบคอร์ส</div>
+            )}
           </div>
         </div>
       </div>
@@ -90,6 +90,9 @@ export async function getStaticProps() {
   try {
     const response = await fetch(strapiApi + "/courses?populate=*");
     const data = await response.json() as ResponseData<Course>;
+    if (!data) {
+      return { notFound: true };
+    }
     return { props: { courses: data } }
   } catch (error) {
     console.error(error);
