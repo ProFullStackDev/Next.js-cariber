@@ -22,7 +22,7 @@
       "unique": true,
       "required": true
     },
-    "thumbnail": {
+    "thumbnail_image": {
       "type": "media",
       "multiple": false,
       "required": false,
@@ -30,11 +30,34 @@
         "images"
       ]
     },
+    "thumbnail_video": {
+      "type": "media",
+      "multiple": true,
+      "required": false,
+      "allowedTypes": [
+        "videos"
+      ]
+    },
     "description": {
-      "type": "text"
+      "type": "richtext"
+    },
+    "episodes": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::episode.episode",
+      "mappedBy": "course"
+    },
+    "publish_date": {
+      "type": "datetime"
     },
     "asset_download": {
       "type": "string"
+    },
+    "course_detail": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::course-detail.course-detail",
+      "inversedBy": "course"
     }
   }
 }
