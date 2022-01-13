@@ -33,21 +33,31 @@ export default function Library() {
                 <div className="resume-course box-shadow-none">
                   <div className="resume-course-positioner">
                     <a className="resume-course-content" href="#">
-                      <div className="resume-course-text">
-                        <h5 className="resume-course-status" style={{ margin: "0px" }}>
+                      <div className="resume-course-text md-none">
+                        <h6 className="resume-course-status" style={{ margin: "0px" }}>
                           <strong>
                             เรียนคอร์สต่อ
                           </strong>
-                        </h5>
+                        </h6>
                         <p className="resume-course-title" style={{ margin: "0px" }}>
                           Strategy to Win - EP02: กลยุทธ์ทางธุรกิจ
                         </p>
                       </div>
-                      <div className="resume-course__image">
+                      <div className="resume-course-image">
                         <Img src="/library/watch-continue.jpg"
-                          width={175}
-                          height={98.4333}
+                          width={700}
+                          height={400}
                         />
+                      </div>
+                      <div className="resume-course-text lg-none">
+                        <h6 className="resume-course-status" style={{ margin: "0px" }}>
+                          <strong>
+                            เรียนคอร์สต่อ
+                          </strong>
+                        </h6>
+                        <p className="resume-course-title" style={{ margin: "0px" }}>
+                          Strategy to Win - EP02: กลยุทธ์ทางธุรกิจ
+                        </p>
                       </div>
                     </a>
                   </div>

@@ -4668,3 +4668,26 @@ a,
 .none {
   display: none;
 }
+
+.pag {
+  font-weight: 700;
+  position: relative;
+  width: 100%;
+  margin: 30px 0;
+  text-align: center;
+
+  a:hover {
+    color: #e74c3c;
+    -webkit-filter: brightness(115%);
+    filter: brightness(115%);
+  }
+
+  .page-active {
+    color: #e74c3c;
+  }
+
+  a.disabled {
+    pointer-events: none;
+    cursor: default;
+  }
+}
