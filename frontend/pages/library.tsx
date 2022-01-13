@@ -1,7 +1,9 @@
+import { useRouter } from "next/router";
 import Footer from "../components/footer";
 import FooterBrand from "../components/footerBrand";
 import Header from "../components/header";
 import Img from "../components/image";
+import Pagination from "../components/pagination";
 import * as staticData from "../components/static/library"
 
 export interface MyCourse {
@@ -12,12 +14,13 @@ export interface MyCourse {
 }
 
 export default function Library() {
+  const router = useRouter()
   const myCourse = staticData.myCourse
 
   return (
     <div className="bg-image library">
       <Header />
-      <div className="sizer">
+      <div className="sizer" style={{ paddingBottom: "80px" }}>
         <div className="container">
           <div className="row products-list">
             <div className="col-12 products-col">
@@ -27,7 +30,7 @@ export default function Library() {
                     คอร์สของฉัน
                   </strong>
                 </h4>
-                <div className="resume-course box-shadow-none ">
+                <div className="resume-course box-shadow-none">
                   <div className="resume-course-positioner">
                     <a className="resume-course-content" href="#">
                       <div className="resume-course-text">
@@ -55,37 +58,39 @@ export default function Library() {
               {myCourse.map((value, index) => {
                 return (
                   <div key={`mycourse ${index}`} className="col-12 products-col">
-                    <div className="product product-4 box-shadow-medium  background-light" style={{height: "100%"}}>
-                      <a href="#">
-                        <div className="product-image">
-                          <Img src={value.image}
-                            width={700}
-                            height={400}
-                          />
-                        </div>
-                      </a>
-                      <div className="product-content">
-                        <div className="product-info">
-                          <a href="#">
-                            <h4 className="product-title">
-                              <strong>
-                                {value.title}
-                              </strong>
-                            </h4>
-                          </a>
-                          <div className="progress">
-                            <div className="progress-outer">
-                              <div className="progress-inner" style={{ width: `${value.progress}%` }} />
-                            </div>
+                    <div className="product product-4 box-shadow-medium  background-light" style={{ height: "100%" }}>
+                      <div className="product-content" style={{ height: "100%" }}>
+                        <a href="#">
+                          <div className="product-image">
+                            <Img src={value.image}
+                              width={700}
+                              height={400}
+                            />
                           </div>
-                          <p className="product-body">
-                            {value.description}
-                          </p>
-                        </div>
-                        <div className="product-button">
-                          <a className="btn btn-solid btn-small btn-full" href="#">
-                            รับชมเลย
-                          </a>
+                        </a>
+                        <div style={{ padding: "30px" }}>
+                          <div className="product-info" >
+                            <a href="#">
+                              <h4 className="product-title">
+                                <strong>
+                                  {value.title}
+                                </strong>
+                              </h4>
+                            </a>
+                            <div className="progress">
+                              <div className="progress-outer">
+                                <div className="progress-inner" style={{ width: `${value.progress}%` }} />
+                              </div>
+                            </div>
+                            <p className="product-body">
+                              {value.description}
+                            </p>
+                          </div>
+                          <div className="product-button">
+                            <a className="btn btn-box btn-solid btn-small btn-full" href="#">
+                              รับชมเลย
+                            </a>
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -93,6 +98,7 @@ export default function Library() {
                 )
               })}
             </div>
+            <Pagination totalItem={myCourse.length} itemPerPage={9} activePage={Number(router.query.page)} />
           </div>
         </div>
       </div>

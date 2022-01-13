@@ -1,5 +1,33 @@
+.library {
+  .pag {
+    font-weight: 700;
+    position: relative;
+    width: 100%;
+    margin: 30px 0;
+    text-align: center;
 
-.library{
+    a:hover {
+      color: #e74c3c;
+      -webkit-filter: brightness(115%);
+      filter: brightness(115%);
+    }
+
+    .page-active {
+      color: #e74c3c;
+    }
+
+    a.disabled {
+      pointer-events: none;
+      cursor: default;
+    }
+  }
+
+  .pag-link {
+    display: inline-block;
+    margin: 0 10px;
+    color: #000000;
+  }
+
   .product {
     border: 1px ridge #e74e25;
     border-radius: 4px;
@@ -16,7 +44,6 @@
     -webkit-box-flex: 1;
     -ms-flex: 1;
     flex: 1;
-    padding: 30px;
     justify-content: space-between;
   }
 
@@ -24,8 +51,8 @@
     height: 10px;
     background-color: #ed9081;
   }
-  
-  .btn {
+
+  .btn-box {
     border-radius: 4px !important;
   }
 
