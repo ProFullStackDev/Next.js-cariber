@@ -38,6 +38,9 @@
     },
     "publish_date": {
       "type": "datetime"
+    },
+    "link_video": {
+      "type": "string"
     }
   }
 }

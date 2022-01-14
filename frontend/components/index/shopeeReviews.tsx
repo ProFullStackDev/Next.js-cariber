@@ -33,7 +33,7 @@ export default function ShopeeReviews({ shopeeReviews }: { shopeeReviews: Shopee
                 </span>
               </h5>
             </div>
-            <Link href="/review">
+            <Link href="/reviews">
               <a className="btn btn-solid btn-small btn-auto" style={{ margin: "0px" }}>
                 คลิกเพื่อดูรีวิวทั้งหมด
               </a>

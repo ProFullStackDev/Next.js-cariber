@@ -4,18 +4,16 @@ import Header from "../../components/header"
 import FooterBrand from "../../components/footerBrand"
 import { strapi, strapiApi } from "../../models/content"
 import { Course } from "../../models/courses"
-import { Data, ResponseData } from "../../models/data"
+import { ResponseData } from "../../models/data"
 import { VideoPlayer } from '../../components/video-player';
-import { useState } from "react"
+import { useState } from "react";
+import { episodes } from "../../components/static/courseDetail"
 
-export default function Library(course: Data<Course>) {
+export default function Library(course: Course) {
   // mockUserId: string = '123';
   // mockVideoId: string = '6b9c94923b3b25dffbdcd69febb5b846';
-    const { id, attributes } = course;
     const [ mockmockVideoIdUserId, setMockVideoId ] = useState('6b9c94923b3b25dffbdcd69febb5b846');
     const [ mockUserId, setmockUserId ] = useState('123');
-    console.log(course);
-    
 
     return (
         <>
@@ -38,17 +36,17 @@ export default function Library(course: Data<Course>) {
           }}/>
         </header>
         <Header />
-        <div className="container">
-          <div>
-            <div>{attributes?.description}</div>
-            <VideoPlayer key={mockmockVideoIdUserId} videoId={mockmockVideoIdUserId}/>
-          </div>
-          <div>
-            Asset Download
-            {/* { attributes.asset_download } */}
-            <button>Download Asset</button>
-          </div>
-        </div>
+        ชื่อคอร์ส : {course.course_name}
+        description: {course.description}
+        { course? course.episodes.map((value) => {
+           <div>
+              รายชื่อตอน
+           </div>
+          {value.episode_name}
+          {value.episode_descriptions}
+          <VideoPlayer key={mockmockVideoIdUserId} videoId={value.link_video}/>
+        }):<></>}
+        
         </>
     );
 };
@@ -67,7 +65,7 @@ export async function getStaticProps(context: any) {
 
 export async function getStaticPaths() {
     const allPosts = await getAllCourses()
-    const paths = allPosts?.map((course: Data<Course>) => {    
+    const paths = allPosts?.map((course: Course) => {    
         return {
             params: {
                 cid: course.id ,
