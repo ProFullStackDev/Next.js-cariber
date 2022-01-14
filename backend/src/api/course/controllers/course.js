@@ -14,7 +14,7 @@ module.exports = createCoreController(modelUid, ({ strapi }) => ({
       const { query } = ctx;
   
       const { results, meta } = await strapi.service(modelUid).find({
-        ...getFullPopulateObject(modelUid),
+        ...getFullPopulateObject(modelUid, 4),
         ...query,
       });
   
