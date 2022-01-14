@@ -9,6 +9,7 @@
 @import "./especial/reviewStudents.module.scss";
 @import "./especial/library.module.scss";
 @import "./especial/courseDetail.module.scss";
+@import "./especial/products.module.scss";
 
 $frequency: 0;
 $show-grid: false;
@@ -3871,6 +3872,9 @@ img {
   -webkit-box-align: start;
   -ms-flex-align: start;
   align-items: flex-start;
+  @media (max-width: 768px) {
+    display: block;
+  }
 }
 
 .media-body {
@@ -4658,7 +4662,7 @@ a,
   }
 }
 
-.bg-image {
+.background-image {
   background-image: url("/background-image.jpg");
   background-position: top;
   background-size: cover;
@@ -4690,4 +4694,14 @@ a,
     pointer-events: none;
     cursor: default;
   }
+}
+
+.btn-box {
+  border-radius: 4px !important;
+}
+
+.pag-link {
+  display: inline-block;
+  margin: 0 10px;
+  color: #000000;
 }

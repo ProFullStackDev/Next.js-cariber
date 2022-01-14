@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { useRouter } from "next/router";
 import Footer from "../components/footer";
 import FooterBrand from "../components/footerBrand";
@@ -11,6 +12,7 @@ export interface MyCourse {
   title: string,
   progress: number,
   description: string,
+  path: string
 }
 
 export default function Library() {
@@ -18,7 +20,7 @@ export default function Library() {
   const myCourse = staticData.myCourse
 
   return (
-    <div className="bg-image library">
+    <div className="background-image library">
       <Header />
       <div className="sizer" style={{ paddingBottom: "80px" }}>
         <div className="container">
@@ -70,23 +72,27 @@ export default function Library() {
                   <div key={`mycourse ${index}`} className="col-12 products-col">
                     <div className="product product-4 box-shadow-medium  background-light" style={{ height: "100%" }}>
                       <div className="product-content" style={{ height: "100%" }}>
-                        <a href="#">
-                          <div className="product-image">
-                            <Img src={value.image}
-                              width={700}
-                              height={400}
-                            />
-                          </div>
-                        </a>
+                        <Link href={value.path} passHref={true}>
+                          <a>
+                            <div className="product-image">
+                              <Img src={value.image}
+                                width={700}
+                                height={400}
+                              />
+                            </div>
+                          </a>
+                        </Link>
                         <div style={{ padding: "30px" }}>
                           <div className="product-info" >
-                            <a href="#">
-                              <h4 className="product-title">
-                                <strong>
-                                  {value.title}
-                                </strong>
-                              </h4>
-                            </a>
+                            <Link href={value.path} passHref={true}>
+                              <a>
+                                <h4 className="product-title">
+                                  <strong>
+                                    {value.title}
+                                  </strong>
+                                </h4>
+                              </a>
+                            </Link>
                             <div className="progress">
                               <div className="progress-outer">
                                 <div className="progress-inner" style={{ width: `${value.progress}%` }} />
@@ -97,9 +103,11 @@ export default function Library() {
                             </p>
                           </div>
                           <div className="product-button">
-                            <a className="btn btn-box btn-solid btn-small btn-full" href="#">
-                              รับชมเลย
-                            </a>
+                            <Link href={value.path} passHref={true}>
+                              <a className="btn btn-box btn-solid btn-small btn-full">
+                                รับชมเลย
+                              </a>
+                            </Link>
                           </div>
                         </div>
                       </div>

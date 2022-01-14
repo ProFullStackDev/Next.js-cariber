@@ -1,0 +1,134 @@
+.products {
+  [class*="col-"] {
+    @media (max-width: 768px) {
+      padding: 0px;
+    }
+  }
+
+  .check-item{
+    text-align: right;
+    @media (max-width: 768px) {
+      text-align: left;
+    }
+  }
+
+  .md-pd-tb-10{
+    @media (max-width: 768px) {
+      padding: 10px 0px 10px 0px;
+    }
+  }
+
+  .panel-copy {
+    margin-top: 15px;
+    font-size: 0.875rem;
+    color: #0e1b20;
+    font-weight: 300
+  }
+
+  .instructor-title {
+    color: #e74e25;
+  }
+
+  .instructor-name {
+    color: black;
+  }
+
+  .instructor-image {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    margin-top: .5rem;
+    margin-bottom: .5rem;
+  }
+
+  .panel {
+    background-color: white;
+    margin-bottom: 2rem;
+  }
+
+  .panel-heading {
+    color: black;
+  }
+
+  .media-middle {
+    align-self: center !important;
+  }
+
+  .media-left {
+    padding-right: 20px;
+  }
+
+  .syllabus-item {
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .progress-inner {
+    height: 10px;
+    background-color: #ed9081;
+  }
+
+  .progress-outer {
+    overflow: hidden;
+    width: 100%;
+    height: 5px;
+    border-radius: 5px;
+    background-color: #eeeeee;
+  }
+
+  .progress {
+    margin: auto 0px auto 0px;
+  }
+
+  .syllabus-text {
+    margin-top: .25rem;
+    margin-bottom: 0;
+    font-size: 0.875rem;
+    opacity: .5;
+    color: #0e1b20;
+  }
+
+  .syllabus-title {
+    color: black;
+    margin: 0px;
+  }
+
+  .panel-body {
+    padding: 30px;
+  }
+
+  .panel-card-body {
+    padding: 30px;
+    justify-content: center;
+  }
+
+  .background-products {
+    background-image: url("/products/background-products.jpg");
+    background-position: center center;
+    background-repeat: no-repeat;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+  }
+
+  .background-products-overlap {
+    background: rgba(0, 0, 0, .5);
+    color: white !important;
+    text-align: center;
+  }
+
+  .text-white {
+    color: white !important;
+  }
+
+  .content-center {
+    justify-content: center;
+    display: flex;
+  }
+
+  .syllabus-heading {
+    color: black;
+    margin-bottom: 8px;
+  }
+}

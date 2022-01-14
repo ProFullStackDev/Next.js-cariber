@@ -79,3 +79,10 @@ export interface SaleCourseDetail {
   yearlySubscriptionImageMobile: string,
   singleCoursePersonalImage: string,
 }
+
+export interface Product {
+  image: string,
+  title: string,
+  description: string,
+  progress: number
+}
