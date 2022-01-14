@@ -38,7 +38,7 @@ export default function Library(course: Course) {
         <Header />
         ชื่อคอร์ส : {course.course_name}
         description: {course.description}
-        { course? course.episodes.map((value) => {
+        { course? course.episodes?.map((value) => {
            <div>
               รายชื่อตอน
            </div>

@@ -41,7 +41,7 @@ export default function Library({ courses }: { courses: ResponseData<Course> }) 
                               </a>
                               <div style={{ padding: "30px" }}>
                                 <div className="product-info" >
-                                  <Link href={`/library/${value.id}`}>
+                                  <Link href={`/library/${value.id}`} passHref={true}>
                                     <h4 className="product-title">
                                       <strong>
                                         {value.course_name}
@@ -83,8 +83,6 @@ export async function getStaticProps() {
   try {
     const response = await fetch(strapiApi + "/courses");
     const data = await response.json() as ResponseData<Course>;
-    console.log(data);
-    
     return { props: { courses: data } }
   } catch (error) {
     console.error(error);
