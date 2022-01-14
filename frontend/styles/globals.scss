@@ -7,6 +7,7 @@
 @import "./especial/login.module.scss";
 @import "./especial/review.module.scss";
 @import "./especial/reviewStudents.module.scss";
+@import "./especial/library.module.scss";
 @import "./especial/courseDetail.module.scss";
 
 $frequency: 0;
@@ -4654,5 +4655,39 @@ a,
 @media (max-width: 768px) {
   .md-none {
     display: none;
+  }
+}
+
+.bg-image {
+  background-image: url("/background-image.jpg");
+  background-position: top;
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+.none {
+  display: none;
+}
+
+.pag {
+  font-weight: 700;
+  position: relative;
+  width: 100%;
+  margin: 30px 0;
+  text-align: center;
+
+  a:hover {
+    color: #e74c3c;
+    -webkit-filter: brightness(115%);
+    filter: brightness(115%);
+  }
+
+  .page-active {
+    color: #e74c3c;
+  }
+
+  a.disabled {
+    pointer-events: none;
+    cursor: default;
   }
 }

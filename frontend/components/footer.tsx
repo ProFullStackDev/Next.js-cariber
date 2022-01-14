@@ -9,13 +9,15 @@ export default function Footer() {
           <div className="footer-content">
             <div className="container footer-container media">
               <div className="footer-block ">
-                <a className="logo" href="" style={{ width: 40, height: 39.9667 }}>
+                <Link href="/">
+                <a className="logo" style={{ width: 40, height: 39.9667 }}>
                   <Img className="logo-image"
                     src="/footer/footer-logo.jpg"
                     alt="Footer Logo"
                     width={40}
                     height={39.9667} />
                 </a>
+                </Link>
               </div>
               <div className="footer-block ">
                 <span>
@@ -24,15 +26,20 @@ export default function Footer() {
               </div>
               <div className="footer-block media-body">
                 <div className="link-list justify-content-right">
-                  <a className="link-list-link" href="https://www.cariber.co/privacy-policy" rel="noopener">
-                    นโยบายความเป็นส่วนตัว
-                  </a>
-                  <Link href="/terms-conditions ">
+                  <Link href="/#">
+                    <a className="link-list-link">
+                      นโยบายความเป็นส่วนตัว
+                    </a>
+                  </Link>
+                  <Link href="/terms-conditions">
                     <a className="link-list-link">
                       เงื่อนไขการใช้งาน
                     </a>
                   </Link>
-                  <span style={{ color: '#fbf5e3' }}>
+                  <span className="link-list-link">
+                    Tel. 095-754-7424
+                  </span>
+                  <span className="link-list-link">
                     contact@cariber.co
                   </span>
                 </div>

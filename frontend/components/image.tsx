@@ -12,6 +12,16 @@ export default function Img(props: ImageProps) {
     return `${path}https://${process.env.NEXT_PUBLIC_DOMAINS}${src}`
   }
 
+  if (props.src.toString().includes("strapi-dev.cariber.coundefined")) {
+    return <Image src="/image-not-found.png"
+      unoptimized={true}
+      width={props.width}
+      height={props.height}
+      loader={cloudflareImageLoader}
+      objectFit="contain"
+      alt={props.alt} />
+  }
+
   if (process.env.NODE_ENV === 'development') {
     return <Image unoptimized={true} {...props} alt={props.alt} />
   } else {
