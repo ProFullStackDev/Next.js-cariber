@@ -1,5 +1,3 @@
-import { Data } from "./data";
-
 export interface Course {
   id: number;
   speaker_name: string;
