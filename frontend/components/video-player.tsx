@@ -122,7 +122,7 @@ export const VideoPlayer = (props: IVideoPlayerProps) => {
 
   return (
     <>
-      Total seconds viewed = {totalSecondWatched || 0}<br/>
+      {/* Total seconds viewed = {totalSecondWatched || 0}<br/> */}
       <div style={{width: '600px', height: '400px'}}>
         <Stream
           controls

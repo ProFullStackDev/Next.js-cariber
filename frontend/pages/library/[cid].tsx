@@ -10,11 +10,11 @@ import { useState } from "react";
 import { episodes } from "../../components/static/courseDetail"
 
 export default function Library(course: Course) {
+  console.log(course);
+  const [  video, setVideo ] = useState('')
   // mockUserId: string = '123';
   // mockVideoId: string = '6b9c94923b3b25dffbdcd69febb5b846';
-    const [ mockmockVideoIdUserId, setMockVideoId ] = useState('6b9c94923b3b25dffbdcd69febb5b846');
     const [ mockUserId, setmockUserId ] = useState('123');
-
     return (
         <>
         <header>
@@ -36,17 +36,20 @@ export default function Library(course: Course) {
           }}/>
         </header>
         <Header />
-        ชื่อคอร์ส : {course.course_name}
-        description: {course.description}
-        { course? course.episodes?.map((value) => {
-           <div>
-              รายชื่อตอน
-           </div>
-          {value.episode_name}
-          {value.episode_descriptions}
-          <VideoPlayer key={mockmockVideoIdUserId} videoId={value.link_video}/>
-        }):<></>}
-        
+        ชื่อคอร์ส : {course.course_name}<br/>
+        description: {course.description}<br/>
+        รายชื่อตอน
+        { course? course.episodes?.map((value, index) => {
+          return (
+            <>
+              <div>
+                <button key={index} onClick={()=>setVideo(value.link_video)}  >EP {index+1}  </button>{value.episode_name}
+              </div>
+              {value.episode_descriptions}
+            </>
+          )
+        }):<>SADASDSADSADA</>}
+        <VideoPlayer key={video}  videoId={video}/>
         </>
     );
 };
