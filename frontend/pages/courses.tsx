@@ -42,7 +42,7 @@ export default function Courses({ courses }: { courses: ResponseData<Course> }) 
                     style={{ backgroundColor: "#ffffff", borderRadius: "4px" }}>
                     <div style={{ padding: "15px" }}>
                       <div className="feature">
-                        <Link href="/thakorn-piyapan" passHref={true}>
+                        <Link href="/thakorn-piyapan">
                           <a>
                             <Img className="feature-image"
                               src={strapi + value.attributes.thumbnail.data.attributes.url}
@@ -52,8 +52,8 @@ export default function Courses({ courses }: { courses: ResponseData<Course> }) 
                           </a>
                         </Link>
                         <div className="feature-text">
-                          <h5 style={{ textAlign: "center" }}>
-                            <Link href="/thakorn-piyapan" passHref={true}>
+                          <h5>
+                            <Link href="/thakorn-piyapan">
                               <a>
                                 <span style={{ color: "#223f99" }}>
                                   <strong>
@@ -63,9 +63,11 @@ export default function Courses({ courses }: { courses: ResponseData<Course> }) 
                               </a>
                             </Link>
                           </h5>
-                          <p style={{ textAlign: "center", fontSize: "12px" }}>
-                            <Link href="/thakorn-piyapan" passHref={true}>
+                          <p style={{ fontSize: "12px" }}>
+                            <Link href="/thakorn-piyapan">
+                              <a>
                               {value.attributes.course_name}
+                              </a>
                             </Link>
                           </p>
                         </div>
@@ -90,9 +92,6 @@ export async function getStaticProps() {
   try {
     const response = await fetch(strapiApi + "/courses?populate=*");
     const data = await response.json() as ResponseData<Course>;
-    if (!data) {
-      return { notFound: true };
-    }
     return { props: { courses: data } }
   } catch (error) {
     console.error(error);

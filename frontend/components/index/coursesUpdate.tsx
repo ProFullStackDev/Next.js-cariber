@@ -18,7 +18,7 @@ export default function CoursesUpdate({ coursesSoon, coursesLatest }: { coursesS
         return (
           <div key={index} className="block-type-feature text-center col-6">
             <div className="block box-shadow-none">
-              <div className="feature">
+              <div className="feature" style={{ display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center" }}>
                 <Img className="feature-image"
                   src={value.image}
                   alt={value.alt}

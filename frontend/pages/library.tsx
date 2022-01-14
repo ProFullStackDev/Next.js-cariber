@@ -108,7 +108,7 @@ export default function Library() {
                 )
               })}
             </div>
-            <Pagination totalItem={myCourse.length} itemPerPage={9} activePage={Number(router.query.page)} />
+            <Pagination page={Number(router.query.page)} pageCount={1} />
           </div>
         </div>
       </div>
