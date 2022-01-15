@@ -1,11 +1,12 @@
-import Img from "../../components/image"
-import Footer from "../../components/footer"
-import Header from "../../components/header"
-import FooterBrand from "../../components/footerBrand"
-import { strapi, strapiApi } from "../../models/content"
-import { Course } from "../../models/courses"
-import { ResponseData } from "../../models/data"
+import Img from "../components/image"
+import Footer from "../components/footer"
+import Header from "../components/header"
+import FooterBrand from "../components/footerBrand"
+import { strapi, strapiApi } from "../models/content"
+import { Course } from "../models/courses"
+import { ResponseData } from "../models/data"
 import Link from "next/link"
+import { getAllCourse } from "../lib/course"
 
 
 export default function Library({ courses }: { courses: ResponseData<Course> }) {
@@ -83,8 +84,6 @@ export async function getStaticProps() {
   try {
     const response = await fetch(strapiApi + "/courses");
     const data = await response.json() as ResponseData<Course>;
-    console.log(data);
-    
     return { props: { courses: data } }
   } catch (error) {
     console.error(error);
