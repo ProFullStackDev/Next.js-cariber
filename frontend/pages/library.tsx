@@ -6,7 +6,6 @@ import { strapi, strapiApi } from "../models/content"
 import { Course } from "../models/courses"
 import { ResponseData } from "../models/data"
 import Link from "next/link"
-import { getAllCourse } from "../lib/course"
 
 
 export default function Library({ courses }: { courses: ResponseData<Course> }) {
