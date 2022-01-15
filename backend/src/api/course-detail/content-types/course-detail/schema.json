@@ -57,7 +57,7 @@
       "type": "relation",
       "relation": "oneToOne",
       "target": "api::course.course",
-      "mappedBy": "course_detail"
+      "inversedBy": "course_detail"
     }
   }
 }
