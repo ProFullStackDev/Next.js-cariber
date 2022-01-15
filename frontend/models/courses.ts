@@ -11,10 +11,24 @@ export interface Course {
   thumbnail_image: Thumbnail;
   thumbnail_video: Thumbnail;
   course_detail: string;
+  episodes: Episode[];
 }
 
 export interface Thumbnail {
   id: number;
   name: string;
+  url: string;
+}
+
+export interface Episode {
+  id: number;
+  episode_name: string;
+  episode_descriptions: string;
+  link_video: string;
+  video: Video[]
+}
+
+export interface Video{
+  id: number;
   url: string;
 }
