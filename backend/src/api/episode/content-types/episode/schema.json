@@ -24,12 +24,6 @@
         "videos"
       ]
     },
-    "course": {
-      "type": "relation",
-      "relation": "manyToOne",
-      "target": "api::course.course",
-      "inversedBy": "episodes"
-    },
     "episode_name": {
       "type": "string"
     },
@@ -38,6 +32,15 @@
     },
     "publish_date": {
       "type": "datetime"
+    },
+    "link_video": {
+      "type": "string"
+    },
+    "course": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::course.course",
+      "inversedBy": "episodes"
     }
   }
 }

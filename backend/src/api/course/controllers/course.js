@@ -16,13 +16,36 @@ module.exports = createCoreController(modelUid, ({ strapi }) => ({
       const { results, meta } = await strapi.service(modelUid).find({
         ...getFullPopulateObject(modelUid, 4),
         ...query,
+        sort: 'id'
       });
   
       const sanitizedEntities = await this.sanitizeOutput(results, ctx);
-  
       return {
         data: sanitizedEntities,
         meta,
       };
     },
+    async findOne(ctx) {
+      const { id } = ctx.params;
+      const { query } = ctx;
+      const episodes_entity = await strapi.entityService.findMany('api::episode.episode', {
+        filters: {
+          $and: [
+            { 
+              course: {
+                id: id
+              }
+            }
+          ],
+        },
+      });
+      const entity = await strapi.service(modelUid).findOne(id, {
+        ...getFullPopulateObject(modelUid),
+        ...query,
+      });
+      const sanitizedEntity = await this.sanitizeOutput(entity, ctx);
+      return {
+        data: {...sanitizedEntity,episodes:episodes_entity}
+      };
+    }
   }));

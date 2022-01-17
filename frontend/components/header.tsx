@@ -8,10 +8,11 @@ interface Menu {
 
 export default function Header() {
   const menu: Menu[] = [
-    { url: "/library", name: "คอร์สของฉัน" },
-    { url: "/courses", name: "คอร์สทั้งหมด" },
-    { url: "https://blog.cariber.co/", name: "บทความ" },
-    { url: "/reviews", name: "รีวิว" },
+    { url: '/library', name: 'คอร์สของฉัน' },
+    { url: '/courses', name: 'คอร์สทั้งหมด' },
+    { url: 'https://blog.cariber.co/', name: 'บทความ' },
+    { url: '/reviews', name: 'รีวิว' },
+    
   ];
 
   return (
