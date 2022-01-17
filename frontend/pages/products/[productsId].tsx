@@ -1,5 +1,4 @@
 import { useRouter } from "next/router";
-import { useEffect } from "react";
 import Footer from "../../components/footer";
 import Header from "../../components/header";
 import Img from "../../components/image";
@@ -121,7 +120,7 @@ export default function Products() {
                 </div>
                 <div className="panel">
                   <div className="panel-card-body">
-                    <div className="media" style={{display: "flex"}}>
+                    <div className="media" style={{ display: "flex" }}>
                       <div className="media-left">
                         <Img className="instructor-image"
                           src="https://kajabi-storefronts-production.kajabi-cdn.com/kajabi-storefronts-production/themes/2149288781/settings_images/akMdVuX4TrWwSnAAQ9Ai_EP14-SQ.jpg"
