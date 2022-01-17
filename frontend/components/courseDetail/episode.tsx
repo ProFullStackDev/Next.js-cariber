@@ -1,5 +1,5 @@
 import { EpisodeCourseDetail } from "../static/interface"
-import AccordionCourse from "./accordionCourseDetail"
+import Accordion, { Color } from "../accordion"
 
 export default function Episode({ totalHours, totalEpisodes, episodes }: EpisodeCourseDetail) {
   return (
@@ -19,7 +19,7 @@ export default function Episode({ totalHours, totalEpisodes, episodes }: Episode
           </div>
           {episodes.map((value, index) => {
             return (
-              <AccordionCourse key={index} title={value.title} description={value.description} />
+              <Accordion key={index} title={value.title} description={value.description} col={4} color={Color.dark} />
             )
           })}
         </div>

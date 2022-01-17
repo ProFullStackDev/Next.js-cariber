@@ -1,7 +1,7 @@
 import type { NextPage } from 'next'
 import Header from '../components/header'
 import Footer from '../components/footer'
-import Accordion from '../components/index/accordion'
+import Accordion, { Color } from '../components/accordion'
 import Img from '../components/image'
 import SlideCourse from '../components/slideCourse'
 import * as staticDataReview from "../components/static/review"
@@ -203,7 +203,7 @@ const Index: NextPage = () => {
             </div>
             {frequentlyAskedQuestions.map((value, index) => {
               return (
-                <Accordion key={index} title={value.title} description={value.description} />
+                <Accordion key={index} title={value.title} description={value.description} col={8} color={Color.light} />
               )
             })}
           </div>

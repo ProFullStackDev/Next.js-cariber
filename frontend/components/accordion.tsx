@@ -1,6 +1,18 @@
 import { useState } from "react";
 
-export default function Accordion({ title, description }: { title?: string, description?: string[] }) {
+export enum Color {
+  light = "light",
+  dark = "dark"
+}
+
+interface Accordion {
+  title: string,
+  description: string[],
+  col: number,
+  color: Color
+}
+
+export default function Accordion({ title, description, col, color }: Accordion) {
   const [displayDescription, setDisplayDescription] = useState("none");
 
   function switchDisplay() {
@@ -8,23 +20,23 @@ export default function Accordion({ title, description }: { title?: string, desc
   }
 
   return (
-    <div className="block-type-accordion text-left col-8" onClick={switchDisplay}>
-      <div className="accordion-frame box-shadow-medium background-white">
+    <div className={`accordion block-type-accordion text-left col-${col}`} onClick={switchDisplay}>
+      <div className={`accordion-frame box-shadow-medium ${color}`}>
         <div className="accordion">
           <div className="accordion-title media align-items-center collapsed">
-            <h5 className="media-body">
+            <h5 className="media-body" style={{ fontSize: "16px" }}>
               {title}
             </h5>
             {displayDescription === "none" ?
-              (<i className="fas fa-chevron-right" style={{ color: "#e74e25 " }}></i>) :
-              (<i className="fas fa-chevron-down" style={{ color: "#e74e25 " }}></i>)}
+              (<i className="fas fa-chevron-right"></i>) :
+              (<i className="fas fa-chevron-down"></i>)}
           </div>
           <div className="accordion-collapse" style={{ display: displayDescription }}>
             <div className="accordion-body">
               {
                 description?.map((value, index) => {
                   return (
-                    <h5 key={index}>
+                    <h5 key={index} style={{ fontSize: "14px" }}>
                       <span style={{ fontWeight: "400" }}>
                         {value}
                       </span>

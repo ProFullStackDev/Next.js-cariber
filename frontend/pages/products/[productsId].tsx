@@ -64,7 +64,7 @@ export default function Products() {
                             </div>
                             <div className="media-right media-middle col-2">
                               {value.progress ? (
-                                <div className="md-pd-tb-10">
+                                <div className="md-pd-tb-10 md-3cm">
                                   {value.progress === 100 ? (<div className="check-item">
                                     <i className="fa fa-check" style={{ color: "#e74e25;" }}></i>
                                   </div>) : (
@@ -95,8 +95,8 @@ export default function Products() {
               <div className="col-4">
                 <div className="panel">
                   <Img src="/library/my-course-3.jpg"
-                    width={800}
-                    height={400}
+                    width={950}
+                    height={550}
                   />
                   <div className="panel-card-body">
                     <h6 className="panel-heading" >
@@ -145,8 +145,8 @@ export default function Products() {
                 </div>
                 <div className="panel">
                   <Img src="https://kajabi-storefronts-production.kajabi-cdn.com/kajabi-storefronts-production/themes/2148551430/settings_images/0OQQwnj3Qu6NUFJjiA1S_Webstie-01.jpg"
-                    width={800}
-                    height={400}
+                    width={950}
+                    height={550}
                   />
                   <div className="panel-card-body" style={{ textAlign: "center" }}>
                     <h6 className="panel-heading">
