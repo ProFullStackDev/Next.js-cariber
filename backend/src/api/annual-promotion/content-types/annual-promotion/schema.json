@@ -13,7 +13,7 @@
   "pluginOptions": {},
   "attributes": {
     "url": {
-      "type": "string",
+      "type": "text",
       "required": true
     },
     "image": {
@@ -25,11 +25,12 @@
       ]
     },
     "image_with_button": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
       "allowedTypes": [
         "images"
-      ],
-      "type": "media",
-      "multiple": false
+      ]
     }
   }
 }

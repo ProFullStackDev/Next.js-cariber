@@ -26,7 +26,6 @@
     "contents": {
       "type": "dynamiczone",
       "components": [
-        "components.speaker-detail-component",
         "components.topic-component",
         "components.suitable-component",
         "components.episode-component",
@@ -58,6 +57,13 @@
       "relation": "oneToOne",
       "target": "api::course.course",
       "inversedBy": "course_detail"
+    },
+    "speaker_details": {
+      "allowedTypes": [
+        "images"
+      ],
+      "type": "media",
+      "multiple": false
     }
   }
 }
