@@ -16,6 +16,7 @@ module.exports = createCoreController(modelUid, ({ strapi }) => ({
       const { results, meta } = await strapi.service(modelUid).find({
         ...getFullPopulateObject(modelUid, 4),
         ...query,
+        sort: 'id'
       });
   
       const sanitizedEntities = await this.sanitizeOutput(results, ctx);
