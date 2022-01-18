@@ -1,10 +1,10 @@
 import Img from "../image";
-import { CourseHeaderCourseDetail } from "../static/interface"
+import { CourseDetailCourseHeader } from "../static/interface"
 
 export default function CourseHeader({ yearlySubscriptionImage,
                                        singleCourseImage,
                                        videoPoster,
-                                       video }: CourseHeaderCourseDetail) {
+                                       video }: CourseDetailCourseHeader) {
   return (
     <div className="background-dark">
       <div className="sizer" style={{ paddingTop: "0px" }}>

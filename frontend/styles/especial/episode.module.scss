@@ -1,0 +1,129 @@
+.episode {
+  .player-nav {
+    display: block;
+    padding: 20px;
+    height: 78px;
+    background-color: white;
+
+    @media (min-width: 768px) {
+      display: none;
+    }
+
+    a {
+      margin: 0px;
+      font-size: 75%;
+    }
+
+    a.disabled {
+      opacity: .3;
+    }
+    
+    p {
+      text-align: center;
+    }
+
+    .media {
+      align-items: center;
+    }
+  }
+
+  .progress {
+    width: 40%;
+    height: 4px;
+  }
+
+  .progress-inner {
+    background-color: #e74e25;
+  }
+
+  .progress-outer {
+    border-radius: 0px;
+  }
+
+  .track-count.active {
+    color: #e74e25;
+    font-weight: 600;
+  }
+
+  a {
+    background-color: transparent;
+  }
+
+  .track-count {
+    font-size: 0.8125rem;
+    width: 10px;
+    white-space: nowrap;
+  }
+
+  .track {
+    background-color: #343434;
+    padding: 10px 12px;
+    margin: 0;
+    align-items: center;
+  }
+
+  .track-title {
+    font-size: 0.8125rem;
+    margin: 0px;
+  }
+
+  .media-middle {
+    vertical-align: middle;
+  }
+
+  .playlist {
+    font-size: 16px;
+  }
+
+  .media-left {
+    padding-right: 10px;
+    height: 39.3833px;
+  }
+
+  .playlist-title h3 {
+    font-size: 0.75rem;
+    margin: 0 0 0 0;
+    opacity: .6;
+    white-space: nowrap;
+    color: rgb(255, 255, 255);
+  }
+
+  .playlist-title h2 {
+    font-size: 0.875rem;
+    margin: 0 0 0 0;
+    color: white;
+  }
+
+  .playlist-title {
+    padding: 20px 30px;
+  }
+
+  .player {
+    margin-bottom: 30px;
+    position: relative;
+    background: #252525;
+  }
+
+  .player-video {
+    width: 70%;
+    display: inline-block;
+    vertical-align: top;
+
+    @media (max-width: 768px) {
+      width: 100%;
+    }
+  }
+
+  .player-playlist {
+    width: 30%;
+    display: inline-block;
+    top: 0;
+    bottom: 0;
+    position: absolute;
+    overflow: auto;
+
+    @media (max-width: 768px) {
+      display: none;
+    }
+  }
+}

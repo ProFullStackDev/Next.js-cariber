@@ -11,6 +11,7 @@
 @import "./especial/courseDetail.module.scss";
 @import "./especial/products.module.scss";
 @import "./especial/accordion.module.scss";
+@import "./especial/episode.module.scss";
 
 $frequency: 0;
 $show-grid: false;
@@ -4665,11 +4666,11 @@ a,
   .page-active {
     color: #e74c3c;
   }
+}
 
-  a.disabled {
-    pointer-events: none;
-    cursor: default;
-  }
+a.disabled {
+  pointer-events: none;
+  cursor: default;
 }
 
 .btn-box {
@@ -4680,4 +4681,62 @@ a,
   display: inline-block;
   margin: 0 10px;
   color: #000000;
+}
+
+.progress-inner {
+  height: 100%;
+  background-color: #ed9081;
+}
+
+.progress-outer {
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  border-radius: 5px;
+  background-color: #eeeeee;
+}
+
+.progress {
+  height: 4px;
+  margin: auto 0px auto 0px;
+}
+
+.panel-body {
+  padding: 30px;
+}
+
+.panel-card-body {
+  padding: 30px;
+  margin-bottom: 1rem;
+  justify-content: center;
+}
+
+.panel {
+  background-color: white;
+}
+
+.panel-heading {
+  color: black;
+}
+
+.panel-copy {
+  margin-top: 15px;
+  font-size: 0.875rem;
+  color: #0e1b20;
+  font-weight: 300
+}
+
+.panel-title {
+  font-size: 1.875rem;
+  margin-top: 0;
+  color: #0e1b20;
+}
+
+a
+.panel-sub-title {
+  color: #e74e25 !important;
+}
+
+.panel-text {
+  color: black !important;
 }

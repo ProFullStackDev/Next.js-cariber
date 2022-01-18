@@ -5,14 +5,14 @@ export enum Color {
   dark = "dark"
 }
 
-interface Accordion {
+interface AccordionProps {
   title: string,
   description: string[],
   col: number,
   color: Color
 }
 
-export default function Accordion({ title, description, col, color }: Accordion) {
+export default function Accordion({ title, description, col, color }: AccordionProps) {
   const [displayDescription, setDisplayDescription] = useState("none");
 
   function switchDisplay() {

@@ -1,7 +1,7 @@
-import { EpisodeCourseDetail } from "../static/interface"
+import { CourseDetailEpisode } from "../static/interface"
 import Accordion, { Color } from "../accordion"
 
-export default function Episode({ totalHours, totalEpisodes, episodes }: EpisodeCourseDetail) {
+export default function EpisodeAccordion({ totalHours, totalEpisodes, episodes }: CourseDetailEpisode) {
   return (
     <div className="background-dark">
       <div className="container">

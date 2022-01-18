@@ -1,6 +1,20 @@
 .products {
+  .progress {
+    height: 4px;
+  }
+
+  .progress-inner {
+    background-color: #e74e25;
+  }
+
+  .progress-outer {
+    border-radius: 0px;
+  }
+
   .md-3cm {
-    width: 3cm;
+    @media (max-width: 768px) {
+      width: 3cm;
+    }
   }
 
   [class*="col-"] {
@@ -23,13 +37,6 @@
     }
   }
 
-  .panel-copy {
-    margin-top: 15px;
-    font-size: 0.875rem;
-    color: #0e1b20;
-    font-weight: 300
-  }
-
   .instructor-title {
     color: #e74e25;
   }
@@ -44,15 +51,6 @@
     border-radius: 50%;
     margin-top: .5rem;
     margin-bottom: .5rem;
-  }
-
-  .panel {
-    background-color: white;
-    margin-bottom: 2rem;
-  }
-
-  .panel-heading {
-    color: black;
   }
 
   .media-middle {
@@ -74,23 +72,6 @@
     }
   }
 
-  .progress-inner {
-    height: 10px;
-    background-color: #ed9081;
-  }
-
-  .progress-outer {
-    overflow: hidden;
-    width: 100%;
-    height: 5px;
-    border-radius: 5px;
-    background-color: #eeeeee;
-  }
-
-  .progress {
-    margin: auto 0px auto 0px;
-  }
-
   .syllabus-text {
     margin-top: .25rem;
     margin-bottom: 0;
@@ -102,15 +83,6 @@
   .syllabus-title {
     color: black;
     margin: 0px;
-  }
-
-  .panel-body {
-    padding: 30px;
-  }
-
-  .panel-card-body {
-    padding: 30px;
-    justify-content: center;
   }
 
   .background-products {
