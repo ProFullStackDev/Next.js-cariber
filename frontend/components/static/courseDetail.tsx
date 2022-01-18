@@ -1,4 +1,4 @@
-import { CardDescription, InterestingTopicCourseDetail } from "./interface";
+import { CardDescription, CourseDetailInterestingTopic } from "./interface";
 
 export const episodes: CardDescription[] = [
   {
@@ -44,7 +44,7 @@ export const suitable: string[] = [
   "เยาวชนที่มีความต้องการติดทีมชาติ และเรียนรู้แผนการเล่นและแท็กติกในเกมฟุตบอล",
   "คนที่สนใจและชื่นชอบการเล่นฟุตบอล ที่ต้องการพัฒนามุมมองและแนวคิดการเป็นนักกีฬาให้มากขึ้น"
 ]
-export const interestingTopics: InterestingTopicCourseDetail[] = [
+export const interestingTopics: CourseDetailInterestingTopic[] = [
   {
     image: "/courseDetail/interesting-1.png",
     name: "ศาสตร์ของการเป็นโค้ช"

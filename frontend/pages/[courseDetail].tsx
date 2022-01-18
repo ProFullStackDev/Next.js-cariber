@@ -5,9 +5,9 @@ import ReviewStudents from "../components/reviewStudents"
 import SlideCourse from "../components/slideCourse"
 import * as staticDataReview from "../components/static/review"
 import * as staticData from "../components/static/courseDetail"
-import { InterestingTopicCourseDetail, CardDescription } from "../components/static/interface"
+import { CourseDetailInterestingTopic, CardDescription } from "../components/static/interface"
 import IntroductionPersonal from "../components/courseDetail/introductionPersonal"
-import Episode from "../components/courseDetail/episode"
+import EpisodeAccordion from "../components/courseDetail/EpisodeAccordion"
 import InterestingTopic from "../components/courseDetail/interestingTopic"
 import Suitable from "../components/courseDetail/suitable"
 import CourseHeader from "../components/courseDetail/courseHeader"
@@ -21,7 +21,7 @@ export interface CourseDetailData {
   videoPoster: string,
   fullName: string,
   personalHistoryImage: string,
-  interestingTopics: InterestingTopicCourseDetail[],
+  interestingTopics: CourseDetailInterestingTopic[],
   suitableFor: string[],
   totalHours: string,
   totalEpisodes: string,
@@ -60,7 +60,7 @@ export default function CourseDetail() {
                               personalHistoryImage={courseData.personalHistoryImage} />
         <InterestingTopic interestingTopics={courseData.interestingTopics} />
         <Suitable suitables={courseData.suitableFor} />
-        <Episode totalHours={courseData.totalHours}
+        <EpisodeAccordion totalHours={courseData.totalHours}
                  totalEpisodes={courseData.totalEpisodes}
                  episodes={courseData.episodes} />
       </div>

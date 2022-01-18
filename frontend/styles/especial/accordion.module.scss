@@ -1,0 +1,35 @@
+.accordion{
+  .accordion-title {
+    height: fit-content;
+  }
+  
+  .accordion-body {
+    padding-top: 24px;
+  }
+  
+  .block-type-accordion {
+    padding: 10px 15px 10px 15px;
+  }
+  
+  .accordion {
+    padding-top: 9px;
+    padding-right: 30px;
+    padding-bottom: 9px;
+    padding-left: 30px;
+    border: 4px none #e74e25;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  .accordion-frame{
+    border-radius: 4px;
+  }
+
+  .dark{
+    background-color: #243941;
+  }
+
+  .light{
+    background-color: #fff;
+  }
+}

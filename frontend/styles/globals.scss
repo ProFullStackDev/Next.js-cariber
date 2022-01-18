@@ -9,6 +9,9 @@
 @import "./especial/reviewStudents.module.scss";
 @import "./especial/library.module.scss";
 @import "./especial/courseDetail.module.scss";
+@import "./especial/products.module.scss";
+@import "./especial/accordion.module.scss";
+@import "./especial/episode.module.scss";
 
 $frequency: 0;
 $show-grid: false;
@@ -4624,28 +4627,6 @@ a,
   width: 100%;
 }
 
-.accordion-title {
-  height: fit-content;
-}
-
-.accordion-body {
-  padding-top: 24px;
-}
-
-.block-type-accordion {
-  padding: 10px 15px 10px 15px;
-}
-
-.accordion {
-  padding-top: 9px;
-  padding-right: 30px;
-  padding-bottom: 9px;
-  padding-left: 30px;
-  border: 4px none #e74e25;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
 @media (min-width: 768px) {
   .lg-none {
     display: none;
@@ -4658,7 +4639,7 @@ a,
   }
 }
 
-.bg-image {
+.background-image {
   background-image: url("/background-image.jpg");
   background-position: top;
   background-size: cover;
@@ -4685,9 +4666,77 @@ a,
   .page-active {
     color: #e74c3c;
   }
+}
 
-  a.disabled {
-    pointer-events: none;
-    cursor: default;
-  }
+a.disabled {
+  pointer-events: none;
+  cursor: default;
+}
+
+.btn-box {
+  border-radius: 4px !important;
+}
+
+.pag-link {
+  display: inline-block;
+  margin: 0 10px;
+  color: #000000;
+}
+
+.progress-inner {
+  height: 100%;
+  background-color: #ed9081;
+}
+
+.progress-outer {
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  border-radius: 5px;
+  background-color: #eeeeee;
+}
+
+.progress {
+  height: 4px;
+  margin: auto 0px auto 0px;
+}
+
+.panel-body {
+  padding: 30px;
+}
+
+.panel-card-body {
+  padding: 30px;
+  margin-bottom: 1rem;
+  justify-content: center;
+}
+
+.panel {
+  background-color: white;
+}
+
+.panel-heading {
+  color: black;
+}
+
+.panel-copy {
+  margin-top: 15px;
+  font-size: 0.875rem;
+  color: #0e1b20;
+  font-weight: 300
+}
+
+.panel-title {
+  font-size: 1.875rem;
+  margin-top: 0;
+  color: #0e1b20;
+}
+
+a
+.panel-sub-title {
+  color: #e74e25 !important;
+}
+
+.panel-text {
+  color: black !important;
 }
