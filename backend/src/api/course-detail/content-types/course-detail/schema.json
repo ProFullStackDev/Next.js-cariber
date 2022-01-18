@@ -56,14 +56,16 @@
       "type": "relation",
       "relation": "oneToOne",
       "target": "api::course.course",
+      "private": true,
       "inversedBy": "course_detail"
     },
     "speaker_details": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
       "allowedTypes": [
         "images"
-      ],
-      "type": "media",
-      "multiple": false
+      ]
     }
   }
 }
