@@ -20,55 +20,61 @@ $social-icons-background-color: #ffffff;
 }
 
 .footer {
+    .link-list {
+        justify-content: right;
+
+        @media (max-width: 768px) {
+            justify-content: center;
+        }
+    }
+
     -webkit-box-flex: 1;
     -ms-flex-positive: 1;
     flex-grow: 1;
-}
 
-.footer,
-.footer-block {
-    font-size: $font-size-mobile;
-    color: $text-color;
-    background-color: $background-color;
-}
-
-.footer .logo-text {
-    color: $logo-text-color;
-}
-
-.footer a.link-list-link {
-    color: $text-color;
-}
-
-.footer .link-list-link:hover {
-    color: $text-color;
-}
-
-@media (min-width: 768px) {
-    .footer,
     .footer-block {
-        font-size: $font-size-desktop;
+        font-size: $font-size-mobile;
+        color: $text-color;
+        background-color: $background-color;
     }
-}
 
-.powered-by {
-    background-color: $background-color;
-}
+    .logo-text {
+        color: $logo-text-color;
+    }
 
-.footer .logo-image {
-    line-height: 1;
-    display: block;
-    width: $logo-width;
-}
+    a.link-list-link {
+        color: $text-color;
+    }
 
-.footer .social-icons-icon {
-    color: $social-icons-text-color !important;
-}
+    .link-list-link:hover {
+        color: $text-color;
+    }
 
-.footer .social-icons-round .social-icons-icon {
-    background-color: $social-icons-background-color;
-}
+    .footer-block {
+        @media (min-width: 768px) {
+            font-size: $font-size-desktop;
+        }
+    }
 
-.footer .social-icons-square .social-icons-icon {
-    background-color: $social-icons-background-color;
+    .powered-by {
+        background-color: $background-color;
+    }
+
+    .logo-image {
+        line-height: 1;
+        display: block;
+        width: $logo-width;
+    }
+
+    .social-icons-icon {
+        color: $social-icons-text-color !important;
+    }
+
+    .social-icons-round .social-icons-icon {
+        background-color: $social-icons-background-color;
+    }
+
+    .social-icons-square .social-icons-icon {
+        background-color: $social-icons-background-color;
+    }
 }
