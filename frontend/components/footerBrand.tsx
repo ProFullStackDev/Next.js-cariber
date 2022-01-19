@@ -7,7 +7,7 @@ export default function FooterBrand() {
         <div className="sizer">
           <div className="container">
             <div className="row align-items-center justify-content-center">
-              <div className="block-type-image text-col-5">
+              <div className="block-type-image col-5">
                 <div className="block box-shadow-none background-unrecognized aos-init aos-animate">
                   <div className="image">
                     <Img className="image-image"
