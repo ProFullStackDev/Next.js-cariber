@@ -1,0 +1,117 @@
+.products {
+  .progress {
+    height: 4px;
+  }
+
+  .progress-inner {
+    background-color: #e74e25;
+  }
+
+  .progress-outer {
+    border-radius: 0px;
+  }
+
+  .md-3cm {
+    @media (max-width: 768px) {
+      width: 3cm;
+    }
+  }
+
+  [class*="col-"] {
+    @media (max-width: 768px) {
+      padding: 0px;
+    }
+  }
+
+  .check-item {
+    text-align: right;
+
+    @media (max-width: 768px) {
+      text-align: left;
+    }
+  }
+
+  .md-pd-tb-10 {
+    @media (max-width: 768px) {
+      padding: 10px 0px 10px 0px;
+    }
+  }
+
+  .instructor-title {
+    color: #e74e25;
+  }
+
+  .instructor-name {
+    color: black;
+  }
+
+  .instructor-image {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    margin-top: .5rem;
+    margin-bottom: .5rem;
+  }
+
+  .media-middle {
+    align-self: center !important;
+  }
+
+  .media-left {
+    padding-right: 20px;
+  }
+
+  .syllabus-item {
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+
+    .media {
+      @media (max-width: 768px) {
+        display: block;
+      }
+    }
+  }
+
+  .syllabus-text {
+    margin-top: .25rem;
+    margin-bottom: 0;
+    font-size: 0.875rem;
+    opacity: .5;
+    color: #0e1b20;
+  }
+
+  .syllabus-title {
+    color: black;
+    margin: 0px;
+  }
+
+  .background-products {
+    background-image: url("/products/background-products.jpg");
+    background-position: center center;
+    background-repeat: no-repeat;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+  }
+
+  .background-products-overlap {
+    background: rgba(0, 0, 0, .5);
+    color: white !important;
+    text-align: center;
+  }
+
+  .text-white {
+    color: white !important;
+  }
+
+  .content-center {
+    justify-content: center;
+    display: flex;
+  }
+
+  .syllabus-heading {
+    color: black;
+    margin-bottom: 8px;
+  }
+}

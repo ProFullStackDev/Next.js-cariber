@@ -7,7 +7,7 @@ import Head from 'next/head'
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <React.Fragment>
-      <Script src="https://kit.fontawesome.com/1b1fb3f1fb.js" crossOrigin="anonymous"></Script>
+      <Script src="https://kit.fontawesome.com/bce3f035e8.js" crossOrigin="anonymous" />
       <Head>
         <title>Cariber</title>
         <link rel="icon" href="/title-icon.png" type="image/x-icon"></link>

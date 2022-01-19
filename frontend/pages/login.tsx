@@ -5,7 +5,7 @@ import Img from "../components/image";
 
 export default function Login() {
   return (
-    <div className="bg-image login">
+    <div className="background-image login">
       <Header />
       <div className="sizer sizer-full">
         <div className="container">
