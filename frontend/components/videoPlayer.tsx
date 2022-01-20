@@ -1,20 +1,19 @@
-import ReactPlayer from "react-player";
+import { Stream } from '@cloudflare/stream-react';
+import React from 'react';
 
-interface VideoPlayerProps {
-  src: string,
+interface IVideoPlayerProps {
+  videoId: string
 }
 
-export default function VideoPlayer({ src }: VideoPlayerProps) {
+export default function VideoPlayer(props: IVideoPlayerProps) {
+
   return (
     <div className="player-wrapper">
-      <ReactPlayer controls
-        className="react-player"
-        url={src}
-        width="100%"
-        height="100%"
+      <Stream
+        className="cloudflare-player"
+        src={props.videoId}
+        controls
       />
     </div>
-
   )
 }
-

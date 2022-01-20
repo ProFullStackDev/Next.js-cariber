@@ -15,7 +15,7 @@ interface EpisodeProps {
   instructorImage: string
   instructorName: string
   instructorRemark: string
-  videoUrl: string
+  videoId: string
   episodes: ProductEpisode[]
 }
 
@@ -30,7 +30,7 @@ export default function Episode() {
       "“เพราะฟุตบอลเป็นมากกว่ากีฬา”"
     ],
     productName: "The Art of Football Tactics",
-    videoUrl: "https://videodelivery.net/ba36e29c18b8c21b53589a403cd5b09b/manifest/video.m3u8",
+    videoId: "ba36e29c18b8c21b53589a403cd5b09b",
     episodes: staticDataProduct.episodes,
     fileUrl: "https://www.cariber.co/resource_redirect/downloads/sites/163642/themes/2149288781/downloads/5kt5U0rKQeqyuJRSPSkL_Summary_Ep14.pdf",
     instructorImage: "/products/instructor-image.jpg",
@@ -48,7 +48,7 @@ export default function Episode() {
               <div className="col-12">
                 <div className="player">
                   <div className="player-video">
-                    <VideoPlayer src={episode.videoUrl} />
+                    <VideoPlayer videoId={episode.videoId} />
                   </div>
                   <div className="player-nav">
                     <div className="media">
