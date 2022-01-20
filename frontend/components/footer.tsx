@@ -26,7 +26,7 @@ export default function Footer() {
               </div>
               <div className="footer-block media-body">
                 <div className="row link-list">
-                  <Link href="/#">
+                <Link href="/privacy-policy">
                     <a className="link-list-link">
                       นโยบายความเป็นส่วนตัว
                     </a>

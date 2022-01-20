@@ -4741,3 +4741,13 @@ a
 .panel-text {
   color: black !important;
 }
+
+.player-wrapper {
+  position: relative;
+}
+
+.cloudflare-player {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
