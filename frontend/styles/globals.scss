@@ -11,6 +11,7 @@
 @import "./especial/products.module.scss";
 @import "./especial/accordion.module.scss";
 @import "./especial/episode.module.scss";
+@import "./especial/nextInstructorForm.module.scss";
 
 $frequency: 0;
 $show-grid: false;
@@ -4774,4 +4775,15 @@ a .panel-sub-title {
   @media (max-width: 812px) {
     font-size: 28px;
   }
+}
+
+.background-primary-color {
+  background-color: #fbf5e4;
+}
+
+.h-full-center{
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

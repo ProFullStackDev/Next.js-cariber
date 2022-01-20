@@ -1,3 +1,4 @@
+import Link from "next/link";
 import Img from "./image";
 
 interface ProductBlogsProps {
@@ -11,31 +12,31 @@ interface ProductBlogsProps {
 }
 
 export default function ProductBlogs({ productImage,
-                                       productName,
-                                       progressBlog,
-                                       fileUrl,
-                                       instructorImage,
-                                       instructorName,
-                                       instructorRemark }: ProductBlogsProps) {
+  productName,
+  progressBlog,
+  fileUrl,
+  instructorImage,
+  instructorName,
+  instructorRemark }: ProductBlogsProps) {
   return (
     <div className="products col-4">
       {progressBlog && (
         <div className={"panel"}>
-        <Img src={productImage ? productImage : ""}
-          width={950}
-          height={550}
-        />
-        <div className="panel-card-body">
-          <h6 className="panel-heading" >
-            0 of 11 คอร์สรับชมเสร็จสิ้น
-          </h6>
-          <div className="progress">
-            <div className="progress-outer">
-              <div className="progress-inner" style={{ width: `${0}%` }} />
+          <Img src={productImage ? productImage : ""}
+            width={950}
+            height={550}
+          />
+          <div className="panel-card-body">
+            <h6 className="panel-heading" >
+              0 of 11 คอร์สรับชมเสร็จสิ้น
+            </h6>
+            <div className="progress">
+              <div className="progress-outer">
+                <div className="progress-inner" style={{ width: `${0}%` }} />
+              </div>
             </div>
           </div>
         </div>
-      </div>
       )}
       <div className="panel">
         <div className="panel-card-body" style={{ textAlign: "center" }}>
@@ -87,9 +88,11 @@ export default function ProductBlogs({ productImage,
               </span>
             </p>
           </div>
-          <a className="btn btn-box" href="#" style={{ fontSize: "12px" }}>
-            คลิกเพื่อแสดงความคิดเห็น
-          </a>
+          <Link href="/next-instructor-form" passHref={true}>
+            <a className="btn btn-box" href="#" style={{ fontSize: "12px" }}>
+              คลิกเพื่อแสดงความคิดเห็น
+            </a>
+          </Link>
         </div>
       </div>
     </div>
