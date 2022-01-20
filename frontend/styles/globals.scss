@@ -3852,9 +3852,9 @@ img {
 }
 
 .link-list {
-  display: -webkit-box !important;
-  display: -ms-flexbox !important;
-  display: flex !important;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
 }
 
 .logo {
@@ -4347,10 +4347,6 @@ div[id^="section-"] {
   background-color: rgba(0, 0, 0, 0.02);
 }
 
-.header-content-mobile .btn {
-  margin: 10px 20px;
-}
-
 .header-static {
   display: block;
 }
@@ -4520,14 +4516,14 @@ a,
 }
 
 .btn {
-  border-color: $btn-background-color !important;
+  border-color: $btn-background-color;
   border-radius: $btn-border-radius;
   color: $btn-text-color;
-  background-color: $btn-background-color !important;
+  background-color: $btn-background-color;
 }
 
 .btn-outline {
-  color: $btn-background-color !important;
+  color: $btn-background-color;
   background: transparent;
 }
 
@@ -4675,7 +4671,7 @@ a.disabled {
 }
 
 .btn-box {
-  border-radius: 4px !important;
+  border-radius: 4px;
 }
 
 .pag-link {
