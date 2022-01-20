@@ -2,7 +2,6 @@
 @import "./especial/header.module.scss";
 @import "./especial/courses.module.scss";
 @import "./especial/footer.module.scss";
-@import "./especial/footerBrand.module.scss";
 @import "./especial/index.module.scss";
 @import "./especial/login.module.scss";
 @import "./especial/review.module.scss";
@@ -90,6 +89,8 @@ $two-step-small-play-button: true;
 $modal-button-background-color: "";
 $two-step-button-border-radius: 4;
 $two-step-button-background-color: "";
+$border-radius: 4px;
+
 
 [data-aos][data-aos][data-aos-duration="50"],
 body[data-aos-duration="50"] [data-aos] {

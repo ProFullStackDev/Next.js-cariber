@@ -25,8 +25,8 @@ export default function Footer() {
                 </span>
               </div>
               <div className="footer-block media-body">
-                <div className="link-list justify-content-right">
-                  <Link href="/privacy-policy">
+                <div className="row link-list">
+                <Link href="/privacy-policy">
                     <a className="link-list-link">
                       นโยบายความเป็นส่วนตัว
                     </a>
