@@ -2,7 +2,7 @@ import Footer from "../../../components/footer";
 import Header from "../../../components/header";
 import Img from "../../../components/image";
 import { ProductEpisode } from "../../../components/static/interface";
-import { VideoPlayer } from "../../../components/video-player";
+import VideoPlayer from "../../../components/videoPlayer";
 import * as staticDataProduct from "../../../components/static/products";
 import Link from "next/link";
 import ProductBlogs from "../../../components/productBlogs";
@@ -30,7 +30,7 @@ export default function Episode() {
       "“เพราะฟุตบอลเป็นมากกว่ากีฬา”"
     ],
     productName: "The Art of Football Tactics",
-    videoId: "3b7eeb9a034909fa3a5efc39d434a6fe",
+    videoId: "ba36e29c18b8c21b53589a403cd5b09b",
     episodes: staticDataProduct.episodes,
     fileUrl: "https://www.cariber.co/resource_redirect/downloads/sites/163642/themes/2149288781/downloads/5kt5U0rKQeqyuJRSPSkL_Summary_Ep14.pdf",
     instructorImage: "/products/instructor-image.jpg",
@@ -48,7 +48,7 @@ export default function Episode() {
               <div className="col-12">
                 <div className="player">
                   <div className="player-video">
-                    <VideoPlayer key={episode.videoId} videoId={episode.videoId} />
+                    <VideoPlayer videoId={episode.videoId} />
                   </div>
                   <div className="player-nav">
                     <div className="media">
