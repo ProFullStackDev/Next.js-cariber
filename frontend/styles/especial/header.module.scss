@@ -7,6 +7,7 @@ $mobile-header-dropdown-color: #fbf5e4;
 $mobile-header-text-color: "";
 $mobile-text-alignment: center;
 $font-size-desktop: 18px;
+$font-size-ipad: 15px;
 $font-size-mobile: 16px;
 $logo-width: 120px;
 $btn-background-color: #e74e25;
@@ -14,7 +15,6 @@ $btn-text-color: #fbf5e4;
 $btn-border-radius: 50px;
 
 .header {
-  font-size: $font-size-mobile;
   background-color: $background-color;
 
   a.link-list-link {
@@ -45,7 +45,7 @@ $btn-border-radius: 50px;
     background-color: $text-color;
   }
 
-  @media (min-width: 768px) {
+  @media (min-width: 831px) {
     font-size: $font-size-desktop;
 
     .dropdown-menu {
@@ -53,7 +53,14 @@ $btn-border-radius: 50px;
     }
   }
 
+  @media (max-width: 830px) {
+    font-size: $font-size-ipad;
+  }
+
+
   @media (max-width: 767px) {
+    font-size: $font-size-mobile;
+
     a.link-list-link {
       text-align: $mobile-text-alignment;
       color: $mobile-header-text-color;
