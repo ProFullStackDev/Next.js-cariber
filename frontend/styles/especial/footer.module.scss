@@ -77,4 +77,29 @@ $social-icons-background-color: #ffffff;
     .social-icons-square .social-icons-icon {
         background-color: $social-icons-background-color;
     }
+
+    .footer-container> :first-child {
+        margin-left: 0 !important;
+    }
+
+    .footer-container> :last-child {
+        margin-right: 0 !important;
+    }
+
+    .footer-block {
+        margin: 10px 7px;
+    }
+
+    .link-list {
+        display: block;
+        text-align: center;
+    }
+
+    .link-list-link {
+        margin: 5px 10px;
+
+        @media (max-width: 768px) {
+            display: block;
+        }
+    }
 }
