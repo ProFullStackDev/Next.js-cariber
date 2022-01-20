@@ -46,7 +46,7 @@ export default function Login() {
                     เข้าสู่ระบบ
                   </button>
                   <div className="auth-link">
-                    <Link href="/password/new">ลืมรหัสผ่าน</Link>
+                    <Link href="/forgot-password">ลืมรหัสผ่าน</Link>
                   </div>
                 </form>
               </div>

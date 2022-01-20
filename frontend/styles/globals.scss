@@ -4732,8 +4732,7 @@ a.disabled {
   color: #0e1b20;
 }
 
-a
-.panel-sub-title {
+a .panel-sub-title {
   color: #e74e25 !important;
 }
 
@@ -4749,4 +4748,29 @@ a
   position: absolute;
   top: 0;
   left: 0;
+}
+
+.form-btn {
+  color: #fbf5e4;
+  border: 2px solid #e74e25;
+  border-radius: 4px;
+  background-color: #e74e25;
+}
+
+.auth-label {
+  position: relative;
+  display: block;
+  margin-bottom: 0px;
+  text-align: left;
+  color: #000000;
+}
+
+.auth-title {
+  color: #000000;
+  font-size: 80px;
+  font-weight: 700;
+
+  @media (max-width: 812px) {
+    font-size: 28px;
+  }
 }
