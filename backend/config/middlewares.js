@@ -5,7 +5,14 @@ module.exports = [
   'strapi::poweredBy',
   'strapi::logger',
   'strapi::query',
-  'strapi::body',
   'strapi::favicon',
   'strapi::public',
+  {
+    name: "strapi::body",
+    config: {
+      formidable: {
+        maxFileSize: 10 * 1024 * 1024 * 1024,
+      },
+    },
+  },
 ];
