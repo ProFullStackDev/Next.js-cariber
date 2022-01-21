@@ -1,3 +1,8 @@
+export interface TimeZone {
+  value: string,
+  text: string
+}
+
 export interface Feature {
   image: string,
   name: string,
