@@ -1,3 +1,5 @@
+@import "../sizer.scss";
+
 $text-color: #fbf5e3;
 $background-color: #0e1b20;
 $hide-on-desktop: false;
@@ -23,7 +25,7 @@ $social-icons-background-color: #ffffff;
     .link-list {
         justify-content: right;
 
-        @media (max-width: 768px) {
+        @media (max-width: $mobile-size) {
             justify-content: center;
         }
     }
@@ -51,7 +53,7 @@ $social-icons-background-color: #ffffff;
     }
 
     .footer-block {
-        @media (min-width: 768px) {
+        @media (min-width: $mobile-size) {
             font-size: $font-size-desktop;
         }
     }
@@ -98,7 +100,7 @@ $social-icons-background-color: #ffffff;
     .link-list-link {
         margin: 5px 10px;
 
-        @media (max-width: 768px) {
+        @media (max-width: $mobile-size) {
             display: block;
         }
     }

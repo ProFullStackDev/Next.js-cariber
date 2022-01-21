@@ -12,6 +12,7 @@
 @import "./especial/accordion.module.scss";
 @import "./especial/episode.module.scss";
 @import "./especial/nextInstructorForm.module.scss";
+@import "./sizer.scss";
 
 $frequency: 0;
 $show-grid: false;
@@ -2695,7 +2696,7 @@ img {
   margin-bottom: 0;
 }
 
-@media (min-width: 768px) {
+@media (min-width: $mobile-size) {
   [class*="col-"] {
     padding: 15px;
   }
@@ -2883,7 +2884,7 @@ body {
   text-rendering: optimizeLegibility;
 }
 
-@media (min-width: 768px) {
+@media (min-width: $mobile-size) {
   body {
     font-size: $font-size-body-desktop;
   }
@@ -2955,7 +2956,7 @@ h6,
   font-size: $font-size-h6-mobile;
 }
 
-@media (min-width: 768px) {
+@media (min-width: $mobile-size) {
 
   h1,
   .h1 {
@@ -3024,7 +3025,7 @@ strong {
   }
 }
 
-@media (min-width: 768px) {
+@media (min-width: $mobile-size) {
   .hidden-desktop {
     display: none !important;
   }
@@ -3127,7 +3128,7 @@ strong {
   padding: 8px 0;
 }
 
-@media (min-width: 768px) {
+@media (min-width: $mobile-size) {
   .announcement {
     font-size: $font-size-body-desktop;
   }
@@ -3269,7 +3270,7 @@ strong {
   font-family: $font-family-body;
   font-size: 18px;
   font-weight: 700;
-  line-height: 1.5;
+  line-height: 1;
   display: inline-block;
   margin: 8px 8px 0 0;
   padding: 9.5px 30px;
@@ -3302,7 +3303,7 @@ strong {
   font-family: $font-family-body;
   font-size: 18px;
   font-weight: 700;
-  line-height: 1.5;
+  line-height: 1;
   display: inline-block;
   margin: 8px 8px 0 0;
   padding: 9.5px 30px;
@@ -3388,7 +3389,7 @@ strong {
   margin-bottom: 0.75rem;
 }
 
-@media (min-width: 768px) {
+@media (min-width: $mobile-size) {
   .card-body {
     padding: 30px;
   }
@@ -3448,7 +3449,7 @@ strong {
   padding-left: 20px;
 }
 
-@media (min-width: 768px) {
+@media (min-width: $mobile-size) {
   .container {
     padding-right: 40px;
     padding-left: 40px;
@@ -3483,7 +3484,7 @@ strong {
   margin-bottom: 10px;
 }
 
-@media (min-width: 768px) {
+@media (min-width: $mobile-size) {
   .countdown-number {
     font-size: 4rem;
   }
@@ -3725,7 +3726,7 @@ strong {
   height: 50px;
 }
 
-@media (min-width: 768px) {
+@media (min-width: $mobile-size) {
   .form-group label {
     font-size: $font-size-body-desktop;
   }
@@ -3943,7 +3944,7 @@ img {
   animation: open 0.3s cubic-bezier(1, 0, 0, 1);
 }
 
-@media (min-width: 768px) {
+@media (min-width: $mobile-size) {
   .modal {
     padding: 30px;
   }
@@ -4103,7 +4104,7 @@ div[id^="section-"] {
   font-weight: 700;
 }
 
-@media (min-width: 768px) {
+@media (min-width: $mobile-size) {
   .event-title {
     font-size: 4rem;
   }
@@ -4165,7 +4166,7 @@ div[id^="section-"] {
   margin: 5px 10px;
 }
 
-@media (min-width: 768px) {
+@media (min-width: $mobile-size) {
   .footer-container {
     -webkit-box-orient: horizontal;
     -webkit-box-direction: normal;
@@ -4368,7 +4369,7 @@ div[id^="section-"] {
   box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.075);
 }
 
-@media (min-width: 768px) {
+@media (min-width: $mobile-size) {
   .header-content-desktop .header-block {
     display: block;
     margin: 0 10px;
@@ -4429,7 +4430,7 @@ div[id^="section-"] {
   opacity: 0.5;
 }
 
-@media (min-width: 768px) {
+@media (min-width: $mobile-size) {
   .powered-by {
     text-align: right;
   }
@@ -4625,13 +4626,13 @@ a,
   width: 100%;
 }
 
-@media (min-width: 768px) {
+@media (min-width: $mobile-size) {
   .lg-none {
     display: none;
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: $mobile-size) {
   .md-none {
     display: none;
   }
@@ -4768,7 +4769,7 @@ a .panel-sub-title {
   font-size: 80px;
   font-weight: 700;
 
-  @media (max-width: 812px) {
+  @media (max-width: $ipad-size) {
     font-size: 28px;
   }
 }
@@ -4777,7 +4778,7 @@ a .panel-sub-title {
   background-color: #fbf5e4;
 }
 
-.h-full-center{
+.h-full-center {
   height: 100vh;
   display: flex;
   align-items: center;

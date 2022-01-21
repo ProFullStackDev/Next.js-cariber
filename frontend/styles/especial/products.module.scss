@@ -1,3 +1,5 @@
+@import "../sizer.scss";
+
 .products {
   .progress {
     height: 4px;
@@ -12,13 +14,13 @@
   }
 
   .md-3cm {
-    @media (max-width: 768px) {
+    @media (max-width: $mobile-size) {
       width: 3cm;
     }
   }
 
   [class*="col-"] {
-    @media (max-width: 768px) {
+    @media (max-width: $mobile-size) {
       padding: 0px;
     }
   }
@@ -26,13 +28,13 @@
   .check-item {
     text-align: right;
 
-    @media (max-width: 768px) {
+    @media (max-width: $mobile-size) {
       text-align: left;
     }
   }
 
   .md-pd-tb-10 {
-    @media (max-width: 768px) {
+    @media (max-width: $mobile-size) {
       padding: 10px 0px 10px 0px;
     }
   }
@@ -66,7 +68,7 @@
     margin-bottom: 1.5rem;
 
     .media {
-      @media (max-width: 768px) {
+      @media (max-width: $mobile-size) {
         display: block;
       }
     }

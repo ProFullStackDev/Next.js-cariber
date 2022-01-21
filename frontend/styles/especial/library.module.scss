@@ -1,6 +1,8 @@
+@import "../sizer.scss";
+
 .library {
   .resume-course-image {
-    @media (min-width: 768px) {
+    @media (min-width: $mobile-size) {
       width: 175px;
       height: 98.4333px;
     }
@@ -57,7 +59,7 @@
     margin-right: 5%;
     text-align: right;
 
-    @media (max-width: 768px) {
+    @media (max-width: $mobile-size) {
       text-align: left;
       width: 100%;
       margin-right: 0px;
@@ -65,14 +67,14 @@
   }
 
   .grid-container {
-    @media (min-width: 768px) {
+    @media (min-width: $mobile-size) {
       display: grid !important;
       grid-template-columns: 33.33% 33.33% 33.33% !important;
     }
   }
 
   .products-header {
-    @media (min-width: 768px) {
+    @media (min-width: $mobile-size) {
       display: -webkit-box;
       display: -ms-flexbox;
       display: flex;
@@ -90,7 +92,7 @@
   }
 
   .resume-course-positioner {
-    @media (min-width: 768px) {
+    @media (min-width: $mobile-size) {
       display: -webkit-box;
       display: -ms-flexbox;
       display: flex;
@@ -106,7 +108,7 @@
   }
 
   .resume-course-content {
-    @media (min-width: 768px) {
+    @media (min-width: $mobile-size) {
       display: block;
       display: -webkit-box;
       display: -ms-flexbox;
