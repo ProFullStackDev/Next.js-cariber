@@ -23,9 +23,9 @@ export default function Mystudent({ myStudents }: { myStudents: MyStudent[] }) {
               <div className="image">
                 <Img className="image-image"
                   src={value.image}
-                  alt={value.alt}
                   width={value.width}
                   height={value.height}
+                  alt={value.alt}
                 />
               </div>
             </div>

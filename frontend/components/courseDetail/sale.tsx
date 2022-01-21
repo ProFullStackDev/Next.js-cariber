@@ -28,6 +28,7 @@ export default function Sale({ yearlySubscriptionImage,
                       src={yearlySubscriptionImage}
                       width={623.183}
                       height={400}
+                      alt="Cariber Yearly Subscription"
                     />
                   </a>
                   <a className="btn btn-medium btn-solid btn-auto background-dark"
@@ -45,6 +46,7 @@ export default function Sale({ yearlySubscriptionImage,
                       src={yearlySubscriptionImageMobile}
                       width={400}
                       height={400}
+                      alt="Cariber Yearly Subscription"
                     />
                   </a>
                   <a className="btn btn-medium btn-solid btn-auto background-dark"
@@ -64,6 +66,7 @@ export default function Sale({ yearlySubscriptionImage,
                       className="feature-image"
                       width={400}
                       height={400}
+                      alt="Cariber Single Subscription"
                     />
                   </a>
                   <a id="block-single-button"

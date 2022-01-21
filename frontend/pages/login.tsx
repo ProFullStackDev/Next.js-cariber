@@ -15,7 +15,7 @@ export default function Login() {
                 <div className="auth-image">
                   <Img
                     src="/login/image-title.jpg"
-                    alt=""
+                    alt="Cariber Login"
                     width={615}
                     height={274.183}
                   />
@@ -64,6 +64,7 @@ export default function Login() {
                       <Img src="/login/google-icon.svg"
                         width={25}
                         height={25}
+                        alt="Google"
                       />
                       <hr />
                       <p className="text-btn">
@@ -76,6 +77,7 @@ export default function Login() {
                       <Img src="/login/facebook-icon.svg"
                         width={25}
                         height={25}
+                        alt="Facebook"
                       />
                       <hr />
                       <p className="text-btn">

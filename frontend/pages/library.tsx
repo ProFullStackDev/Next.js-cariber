@@ -49,6 +49,7 @@ export default function Library() {
                         <Img src="/library/watch-continue.jpg"
                           width={700}
                           height={400}
+                          alt="กลยุทธ์ทางธุรกิจ"
                         />
                       </div>
                       <div className="resume-course-text lg-none">
@@ -78,6 +79,7 @@ export default function Library() {
                               <Img src={value.image}
                                 width={700}
                                 height={400}
+                                alt={value.title}
                               />
                             </div>
                           </a>

@@ -12,9 +12,10 @@ export default function FooterBrand() {
                   <div className="image">
                     <Img className="image-image"
                       src="/footerBrand/footer-brand-logo.png"
-                      alt="Brand Logo"
                       width={450}
-                      height={156.967} />
+                      height={156.967} 
+                      alt="Brand Logo"
+                      />
                   </div>
                 </div>
               </div>

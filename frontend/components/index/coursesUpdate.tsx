@@ -21,9 +21,9 @@ export default function CoursesUpdate({ coursesSoon, coursesLatest }: { coursesS
               <div className="feature" style={{ display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center" }}>
                 <Img className="feature-image"
                   src={value.image}
-                  alt={value.alt}
                   width={600}
                   height={337.5}
+                  alt={value.alt}
                 />
                 <Link href={value.link}>
                   <a className="btn btn-solid btn-small btn-auto" >ดูรายละเอียดคอร์ส</a>

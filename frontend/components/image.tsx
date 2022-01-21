@@ -12,7 +12,7 @@ export default function Img(props: ImageProps) {
     return `${path}https://${process.env.NEXT_PUBLIC_DOMAINS}${src}`
   }
 
-  if (props.src.toString().includes("strapi-dev.cariber.coundefined")) {
+  if (!props.src || props.src?.toString().includes("strapi-dev.cariber.coundefined")) {
     return <Image src="/image-not-found.png"
       unoptimized={true}
       width={props.width}

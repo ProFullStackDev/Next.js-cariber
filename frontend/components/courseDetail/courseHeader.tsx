@@ -17,6 +17,7 @@ export default function CourseHeader({ yearlySubscriptionImage,
                     src={yearlySubscriptionImage}
                     width={384.6}
                     height={246.85}
+                    alt="Cariber Yearly Subscription"
                   />
                 </a>
               </div>
@@ -26,6 +27,7 @@ export default function CourseHeader({ yearlySubscriptionImage,
                     src={singleCourseImage}
                     width={384.6}
                     height={246.85}
+                    alt="Cariber Single Subscription"
                   />
                 </a>
               </div>
@@ -47,7 +49,9 @@ export default function CourseHeader({ yearlySubscriptionImage,
                   <Img className="feature-image"
                     src={yearlySubscriptionImage}
                     width={623.333}
-                    height={400} />
+                    height={400}
+                    alt="Cariber Yearly Subscription"
+                    />
                 </a>
                 <a className="btn btn-medium btn-solid btn-auto background-dark" href="https://shp.ee/ncpeyxv" >
                   ซื้อผ่าน Shopee เลย

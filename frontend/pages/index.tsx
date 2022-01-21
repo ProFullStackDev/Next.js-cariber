@@ -73,7 +73,7 @@ const Index: NextPage = () => {
                 <div className="image">
                   <Img className="image-image"
                     src="/index/block-title.png"
-                    alt=""
+                    alt="ผู้นำตัวจริง"
                     width={855.733}
                     height={434.817}
                   />
@@ -155,6 +155,7 @@ const Index: NextPage = () => {
                   src="/index/yearly-subscription-1.jpg"
                   width={329.6}
                   height={211.55}
+                  alt="Yearly Subscription"
                 />
                 <a className="btn btn-solid btn-medium btn-auto" href="https://checkout.cariber.co/?add-to-cart=685&cfp=eWVhcmx5YmFubm5lcl9kZXNrdG9wXw==">
                   ซื้อแพ็กเกจรายปี

@@ -8,9 +8,9 @@ export default function Specific() {
           <div className="image">
             <Img className="image-image"
               src="/index/book.webp"
-              alt="กว่า 168 บทเรียน จากผู้เชี่ยวชาญ"
               width={70.0333}
               height={70.0333}
+              alt="กว่า 168 บทเรียน จากผู้เชี่ยวชาญ"
             />
           </div>
         </div>
@@ -34,9 +34,9 @@ export default function Specific() {
           <div className="image">
             <Img className="image-image"
               src="/index/hourglass.webp"
-              alt="เต็มอิ่มกับคอร์สเรียน กว่า 31 ชั่วโมง"
               width={70.0333}
               height={70.0333}
+              alt="เต็มอิ่มกับคอร์สเรียน กว่า 31 ชั่วโมง"
             />
           </div>
         </div>
@@ -60,9 +60,9 @@ export default function Specific() {
           <div className="image">
             <Img className="image-image"
               src="/index/person.webp"
-              alt="เต็มอิ่มกับคอร์สเรียน กว่า 31 ชั่วโมง"
               width={70.0333}
               height={70.0333}
+              alt="อัพเดทคอร์สใหม่ ตลอดทั้งปี"
             />
           </div>
         </div>

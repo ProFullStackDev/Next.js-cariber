@@ -26,9 +26,9 @@ export default function ReviewStudents() {
                   <div className="feature">
                     <Img className="feature-image"
                       src={value.image}
-                      alt=''
                       width={175}
                       height={185.917}
+                      alt={value.name}
                     />
                     <div className="feature-text">
                       <p style={{ textAlign: "center" }}>

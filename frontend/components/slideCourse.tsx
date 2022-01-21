@@ -85,9 +85,9 @@ export default function SlideCourse({ slideCourses, slideView, imageWidth, image
                             <a href={value.link}>
                               <Img
                                 src={value.image}
-                                alt="Slide Course"
                                 width={imageWidthLocal}
                                 height={imageHeightLocal}
+                                alt="Slide Course"
                               />
                             </a>
                           </div>

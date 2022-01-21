@@ -27,6 +27,7 @@ export default function InterestingTopic({ interestingTopics }: { interestingTop
                       src={value.image}
                       width={50}
                       height={50}
+                      alt={value.name}
                     />
                     <div className="feature-text">
                       <p style={{ fontSize: "14px", textAlign: "center" }}>

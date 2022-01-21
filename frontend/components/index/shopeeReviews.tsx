@@ -10,9 +10,9 @@ export default function ShopeeReviews({ shopeeReviews }: { shopeeReviews: Shopee
           <div className="feature">
             <Img className="feature-image"
               src="/index/shopee.png"
-              alt="Shopee Review"
               width={200}
               height={65.9}
+              alt="Shopee Review"
             />
             <div className="feature-text">
               <h5 style={{ textAlign: "center" }}>

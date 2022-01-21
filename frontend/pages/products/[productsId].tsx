@@ -19,18 +19,8 @@ interface ProductProp {
   episodes: ProductEpisode[]
 }
 
-export default function Products() {
+export default function Products({ product }: { product: ProductProp }) {
   const router = useRouter()
-  const product: ProductProp = {
-    productRemark: "เกียรติศักดิ์ เสนาเมือง หรือ ‘ซิโก้’ อดีตนักฟุตบอลและหัวหน้าผู้ฝึกสอนทีมชาติไทย ศูนย์หน้าระดับตำนานผู้ทำประตูสูงสุดในนามทีมชาติอันดับ 16 ของโลก ด้วยจำนวน 71 ประตูใน 134 แมตช์ และโค้ชผู้นำพาทีมชาติไทยกู้ศรัทธาจากแฟนบอลจนสร้างประวัติศาสตร์คว้าแชมป์อาเซียนคัพ หรือ AFF ซูซูกิคัพ ได้ถึง 2 สมัย",
-    productImage: "/library/my-course-3.jpg",
-    productName: "The Art of Football Tactics",
-    fileUrl: "https://www.cariber.co/resource_redirect/downloads/sites/163642/themes/2149288781/downloads/5kt5U0rKQeqyuJRSPSkL_Summary_Ep14.pdf",
-    instructorImage: "/products/instructor-image.jpg",
-    instructorName: "เกียรติศักดิ์ เสนาเมือง",
-    instructorRemark: "เพราะความสำเร็จของฟุตบอลเกิดจากทีมเวิร์ค และกว่าที่จะมาเป็นทีมได้ต้องมีกระบวนการสร้าง",
-    episodes: staticData.episodes
-  }
 
   return (
     <div className="products">
@@ -74,6 +64,7 @@ export default function Products() {
                                   <Img src={value.image}
                                     width={125}
                                     height={80}
+                                    alt={value.title}
                                   />
                                 </div>
                               </div>
@@ -130,4 +121,30 @@ export default function Products() {
       <Footer />
     </div>
   )
+}
+
+export async function getStaticPaths() {
+  return {
+    paths: [
+      { params: { productsId: "the-art-of-football-tactics" } }
+    ],
+    fallback: false
+  };
+}
+
+export async function getStaticProps() {
+  return {
+    props: {
+      product: {
+        productRemark: "เกียรติศักดิ์ เสนาเมือง หรือ ‘ซิโก้’ อดีตนักฟุตบอลและหัวหน้าผู้ฝึกสอนทีมชาติไทย ศูนย์หน้าระดับตำนานผู้ทำประตูสูงสุดในนามทีมชาติอันดับ 16 ของโลก ด้วยจำนวน 71 ประตูใน 134 แมตช์ และโค้ชผู้นำพาทีมชาติไทยกู้ศรัทธาจากแฟนบอลจนสร้างประวัติศาสตร์คว้าแชมป์อาเซียนคัพ หรือ AFF ซูซูกิคัพ ได้ถึง 2 สมัย",
+        productImage: "/library/my-course-3.jpg",
+        productName: "The Art of Football Tactics",
+        fileUrl: "https://www.cariber.co/resource_redirect/downloads/sites/163642/themes/2149288781/downloads/5kt5U0rKQeqyuJRSPSkL_Summary_Ep14.pdf",
+        instructorImage: "/products/instructor-image.jpg",
+        instructorName: "เกียรติศักดิ์ เสนาเมือง",
+        instructorRemark: "เพราะความสำเร็จของฟุตบอลเกิดจากทีมเวิร์ค และกว่าที่จะมาเป็นทีมได้ต้องมีกระบวนการสร้าง",
+        episodes: staticData.episodes
+      }
+    }
+  };
 }

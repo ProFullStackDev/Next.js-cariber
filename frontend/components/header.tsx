@@ -35,9 +35,10 @@ export default function Header() {
               <a className="logo" style={{ width: 120, height: 41.8833 }}>
                 <Img className="logo-image"
                   src="/header/header-logo.png"
-                  alt="Header Logo"
                   width={120}
-                  height={41.8833} />
+                  height={41.8833}
+                  alt="Header Logo"
+                   />
               </a>
             </Link>
             <div className="header-block header-switch-content header-block-menu media-body">

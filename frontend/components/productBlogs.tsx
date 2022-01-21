@@ -25,6 +25,7 @@ export default function ProductBlogs({ productImage,
           <Img src={productImage ? productImage : ""}
             width={950}
             height={550}
+            alt={instructorName}
           />
           <div className="panel-card-body">
             <h6 className="panel-heading" >
@@ -56,6 +57,7 @@ export default function ProductBlogs({ productImage,
                 src={instructorImage}
                 width={60}
                 height={60}
+                alt={instructorName}
               />
             </div>
             <div className="media-body media-middle">
@@ -76,6 +78,7 @@ export default function ProductBlogs({ productImage,
         <Img src="/q-next-instructor.jpg"
           width={950}
           height={550}
+          alt="ผู้สอนในอนาคต"
         />
         <div className="panel-card-body" style={{ textAlign: "center" }}>
           <h6 className="panel-heading">

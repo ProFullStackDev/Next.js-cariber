@@ -23,6 +23,7 @@ export default function IntroductionPersonal({ fullName, personalHistoryImage }:
                 src={personalHistoryImage}
                 width={995.6}
                 height={667.75}
+                alt={fullName}
               />
             </div>
           </div>

@@ -42,7 +42,7 @@ export default function Courses({ courses }: { courses: ResponseData<Course> }) 
                     style={{ backgroundColor: "#ffffff", borderRadius: "4px" }}>
                     <div style={{ padding: "15px" }}>
                       <div className="feature">
-                        <Link href="/thakorn-piyapan">
+                        <Link href="/course/thakorn-piyapan">
                           <a>
                             <Img className="feature-image"
                               src={strapi + value.thumbnail_image?.url}
@@ -53,7 +53,7 @@ export default function Courses({ courses }: { courses: ResponseData<Course> }) 
                         </Link>
                         <div className="feature-text">
                           <h5>
-                            <Link href="/thakorn-piyapan">
+                            <Link href="/course/thakorn-piyapan">
                               <a>
                                 <span style={{ color: "#223f99" }}>
                                   <strong>
@@ -64,7 +64,7 @@ export default function Courses({ courses }: { courses: ResponseData<Course> }) 
                             </Link>
                           </h5>
                           <p style={{ fontSize: "12px" }}>
-                            <Link href="/thakorn-piyapan">
+                            <Link href="/course/thakorn-piyapan">
                               <a>
                               {value.course_name}
                               </a>
