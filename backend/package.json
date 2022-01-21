@@ -17,6 +17,7 @@
     "@types/formidable": "^2.0.3",
     "axios": "^0.24.0",
     "formidable": "^2.0.1",
+    "koa-session2": "^2.2.10",
     "next": "12.0.7",
     "pg": "^8.7.1",
     "react": "17.0.2",
