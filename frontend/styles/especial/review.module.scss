@@ -1,6 +1,4 @@
-.bg-review {
-  background-color: #fbf5e4;
-}
+@import "../sizer.scss";
 
 .review {
   #block-titel .block {
@@ -10,7 +8,7 @@
   #block-titel h1 {
     font-size: 80px;
 
-    @media (max-width: 768px) {
+    @media (max-width: $mobile-size) {
       font-size: 28px;
     }
   }
@@ -18,7 +16,7 @@
   #block-titel h4 {
     font-size: 20px;
 
-    @media (max-width: 768px) {
+    @media (max-width: $mobile-size) {
       font-size: 18px;
     }
   }
@@ -36,7 +34,7 @@
   }
 
   #block-person-1 .row {
-    @media (max-width: 768px) {
+    @media (max-width: $mobile-size) {
       display: block
     }
   }
@@ -52,19 +50,19 @@
     margin-bottom: 0px;
     margin-left: 0px;
 
-    @media (max-width: 768px) {
+    @media (max-width: $mobile-size) {
       text-align: center !important;
     }
   }
 
   #block-person-1 .image {
-    @media (max-width: 768px) {
+    @media (max-width: $mobile-size) {
       margin: 0px;
     }
   }
 
   #block-person-1 .container {
-    @media (max-width: 768px) {
+    @media (max-width: $mobile-size) {
       padding-left: 10px;
       padding-right: 10px;
     }
@@ -87,7 +85,7 @@
     padding-right: 0px;
     margin-left: -30px;
 
-    @media (max-width: 768px) {
+    @media (max-width: $mobile-size) {
       width: 100%;
       padding: 0px;
       margin-top: 20px;
@@ -114,7 +112,7 @@
     }
 
     .grid-container {
-      @media (min-width: 768px) {
+      @media (min-width: $mobile-size) {
         display: grid !important;
         grid-template-columns: 25.6% 25.6% 25.6% 25.6% !important;
       }

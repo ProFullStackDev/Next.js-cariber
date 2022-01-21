@@ -1,3 +1,5 @@
+@import "../sizer.scss";
+
 .index {
   .disclaimer-text {
     font-size: 16px;
@@ -12,7 +14,7 @@
   }
 
   .block {
-    @media (max-width: 768px) {
+    @media (max-width: $mobile-size) {
       display: flex;
       justify-content: center;
     }

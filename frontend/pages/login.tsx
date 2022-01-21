@@ -42,13 +42,48 @@ export default function Login() {
                       </span>
                     </label>
                   </div>
-                  <button id="form-button" className="form-btn btn-solid btn-full btn-small" type="submit">
+                  <button id="form-button" className="form-btn btn-solid btn-full" type="submit">
                     เข้าสู่ระบบ
                   </button>
-                  <div className="auth-link">
-                    <Link href="/password/new">ลืมรหัสผ่าน</Link>
-                  </div>
                 </form>
+                <div className="auth-link">
+                  <Link href="/forgot-password">
+                    ลืมรหัสผ่าน
+                  </Link>
+                </div>
+                <div className="social-registration">
+                  <div className="line-or">
+                    <hr className="col-5" />
+                    <p>
+                      หรือ
+                    </p>
+                    <hr className="col-5" />
+                  </div>
+                  <a className="btn btn-solid btn-full btn-small">
+                    <div className="flex-row">
+                      <Img src="/login/google-icon.svg"
+                        width={25}
+                        height={25}
+                      />
+                      <hr />
+                      <p className="text-btn">
+                        เข้าสู่ระบบด้วย Google
+                      </p>
+                    </div>
+                  </a>
+                  <a className="btn btn-solid btn-full btn-small">
+                    <div className="flex-row">
+                      <Img src="/login/facebook-icon.svg"
+                        width={25}
+                        height={25}
+                      />
+                      <hr />
+                      <p className="text-btn">
+                        เข้าสู่ระบบด้วย Facebook
+                      </p>
+                    </div>
+                  </a>
+                </div>
               </div>
             </div>
           </div>

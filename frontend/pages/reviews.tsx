@@ -12,7 +12,7 @@ export default function Review() {
   const slideCourses = staticData.slideCourses
 
   return (
-    <div className="bg-review review">
+    <div className="background-primary-color review">
       <Header />
       <div className="section-titel">
         <div className="sizer">

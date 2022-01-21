@@ -1,3 +1,5 @@
+@import "../sizer.scss";
+
 .episode {
   .player-nav {
     display: block;
@@ -5,7 +7,7 @@
     height: 78px;
     background-color: white;
 
-    @media (min-width: 768px) {
+    @media (min-width: $mobile-size) {
       display: none;
     }
 
@@ -17,7 +19,7 @@
     a.disabled {
       opacity: .3;
     }
-    
+
     p {
       text-align: center;
     }
@@ -43,10 +45,6 @@
   .track-count.active {
     color: #e74e25;
     font-weight: 600;
-  }
-
-  a {
-    background-color: transparent;
   }
 
   .track-count {
@@ -109,7 +107,7 @@
     display: inline-block;
     vertical-align: top;
 
-    @media (max-width: 768px) {
+    @media (max-width: $mobile-size) {
       width: 100%;
     }
   }
@@ -122,7 +120,7 @@
     position: absolute;
     overflow: auto;
 
-    @media (max-width: 768px) {
+    @media (max-width: $mobile-size) {
       display: none;
     }
   }

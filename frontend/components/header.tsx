@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { useEffect, useState } from "react";
 import Img from "./image"
 
 interface Menu {
@@ -7,13 +8,23 @@ interface Menu {
 }
 
 export default function Header() {
+  const [hamburgerOpened, setHamburgerOpened] = useState(false);
   const menu: Menu[] = [
     { url: '/library', name: 'คอร์สของฉัน' },
     { url: '/courses', name: 'คอร์สทั้งหมด' },
     { url: 'https://blog.cariber.co/', name: 'บทความ' },
     { url: '/reviews', name: 'รีวิว' },
-    
   ];
+
+  useEffect(() => {
+    window.addEventListener('resize', () => {
+      setHamburgerOpened(false)
+    });
+  }, [])
+
+  function switchHamburger() {
+    setHamburgerOpened(!hamburgerOpened)
+  }
 
   return (
     <header className="header">
@@ -54,7 +65,7 @@ export default function Header() {
                 </span>
               </div>
             </div>
-            <div className="hamburger hidden-desktop">
+            <div className={`hamburger hidden-desktop ${hamburgerOpened && "hamburger-opened"}`} onClick={switchHamburger}>
               <div className="hamburger-slices">
                 <div className="hamburger-slice hamburger-slice-1"></div>
                 <div className="hamburger-slice hamburger-slice-2"></div>
@@ -64,7 +75,34 @@ export default function Header() {
             </div>
           </div>
         </div>
+        <div className="header-content header-content-mobile background-dark" style={{ display: `${hamburgerOpened ? "block" : "none"}` }}>
+          <div className="header-block header-switch-content header-block-menu">
+            <div className="link-list">
+              {menu.map((value, index) => {
+                return (
+                  <a key={index} className="link-list-link" href={value.url}>
+                    {value.name}
+                  </a>
+                )
+              })}
+            </div>
+            <div className="header-block header-switch-content header-block-cta">
+              <a className="btn btn-small btn-full" href="https://shp.ee/ncpeyxv">
+                ซื้อแพ็กเกจรายปี
+              </a>
+            </div>
+            <div className="header-block header-switch-content header-block-user">
+              <span className="user-login">
+                <Link href="/login" passHref={true}>
+                  <a>
+                    เข้าสู่ระบบ
+                  </a>
+                </Link>
+              </span>
+            </div>
+          </div>
+        </div>
       </div>
-    </header>
+    </header >
   )
 }
