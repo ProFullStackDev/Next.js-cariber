@@ -24,7 +24,7 @@ export default function CourseDetail({ course }: { course: ResponseData<Course> 
       <Header />
       <div className="tb-sizer">
         <IntroductionPersonal fullName={course.data.course_detail.name}
-          personalHistoryImage={strapiImage(course.data.course_detail.speaker_details.url)} />
+          personalHistoryImage={strapiImage(course.data.course_detail.speaker_details?.url)} />
         {course.data.course_detail.contents.map((value, index) => {
           if (value.__component === "components.topic-component") {
             return (
