@@ -23,7 +23,7 @@ export default function Login() {
                 <form action="">
                   <div className="form-group">
                     <label className="auth-label" form="member-email">
-                      อีเมล
+                      ชื่ออีเมลหรือชื่อผู้ใช้งาน
                     </label>
                     <input id="member-email" className="form-control auth-field" type="text"></input>
                   </div>
@@ -33,24 +33,26 @@ export default function Login() {
                     </label>
                     <input id="member-password" className="form-control auth-field" type="password"></input>
                   </div>
-                  <div className="form-group">
-                    <label>
-                      <input className="boolean optional" type="checkbox" value="1" id="member-remember-me">
-                      </input>
-                      <span className="auth-label" style={{ display: "inline-block" }}>
-                        จดจำรหัสผ่าน
-                      </span>
-                    </label>
-                  </div>
                   <button id="form-button" className="form-btn btn-solid btn-full" type="submit">
                     เข้าสู่ระบบ
                   </button>
+                  <div className="form-group" style={{ padding: "15px 0px 5px 0px" }}>
+                    <label className="jus-between">
+                      <span className="auth-label">
+                        <input className="boolean optional" type="checkbox" value="1" id="member-remember-me">
+                        </input>
+                        จดจำรหัสผ่าน
+                      </span>
+                      <span style={{ justifySelf: "end" }}>
+                        <Link href="/forgot-password" passHref={true}>
+                          <a className="link-colorful">
+                            ลืมรหัสผ่าน
+                          </a>
+                        </Link>
+                      </span>
+                    </label>
+                  </div>
                 </form>
-                <div className="auth-link">
-                  <Link href="/forgot-password">
-                    ลืมรหัสผ่าน
-                  </Link>
-                </div>
                 <div className="social-registration">
                   <div className="line-or">
                     <hr className="col-5" />
@@ -59,7 +61,7 @@ export default function Login() {
                     </p>
                     <hr className="col-5" />
                   </div>
-                  <a className="btn btn-solid btn-full btn-small">
+                  <a className="btn btn-box btn-solid btn-full">
                     <div className="flex-row">
                       <Img src="/login/google-icon.svg"
                         width={25}
@@ -72,7 +74,7 @@ export default function Login() {
                       </p>
                     </div>
                   </a>
-                  <a className="btn btn-solid btn-full btn-small">
+                  <a className="btn btn-box btn-solid btn-full">
                     <div className="flex-row">
                       <Img src="/login/facebook-icon.svg"
                         width={25}
@@ -84,6 +86,11 @@ export default function Login() {
                         เข้าสู่ระบบด้วย Facebook
                       </p>
                     </div>
+                  </a>
+                </div>
+                <div style={{marginTop: "3rem"}}>
+                  <a className="link-colorless" href="#">
+                    สร้างบัญชีผู้ใช้งานใหม่
                   </a>
                 </div>
               </div>
