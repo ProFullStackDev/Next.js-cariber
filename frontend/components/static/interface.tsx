@@ -1,3 +1,5 @@
+import { Episode } from "../../models/courses";
+
 export interface TimeZone {
   value: string,
   text: string
@@ -76,13 +78,14 @@ export interface CourseDetailIntroductionPersonal {
 export interface CourseDetailEpisode {
   totalHours: string,
   totalEpisodes: string,
-  episodes: CardDescription[],
+  episodes: Episode[],
 }
 
 export interface CourseDetailSale {
   yearlySubscriptionImage: string,
   yearlySubscriptionImageMobile: string,
   singleCoursePersonalImage: string,
+  singleCheckoutUrl: string,
 }
 
 export interface ProductEpisode {

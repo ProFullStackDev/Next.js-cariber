@@ -2,12 +2,12 @@ import Img from "../components/image"
 import Footer from "../components/footer"
 import Header from "../components/header"
 import FooterBrand from "../components/footerBrand"
-import { strapi, strapiApi } from "../models/content"
+import { strapiApi, strapiImage } from "../models/content"
 import { Course } from "../models/courses"
-import { ResponseData } from "../models/data"
+import { ResponseDataList } from "../models/data"
 import Link from "next/link"
 
-export default function Courses({ courses }: { courses: ResponseData<Course> }) {
+export default function Courses({ courses }: { courses: ResponseDataList<Course> }) {
   return (
     <div className="background-image courses">
       <Header />
@@ -42,10 +42,10 @@ export default function Courses({ courses }: { courses: ResponseData<Course> }) 
                     style={{ backgroundColor: "#ffffff", borderRadius: "4px" }}>
                     <div style={{ padding: "15px" }}>
                       <div className="feature">
-                        <Link href="/course/thakorn-piyapan">
+                        <Link href={`/course/${value.id}`}>
                           <a>
                             <Img className="feature-image"
-                              src={strapi + value.thumbnail_image?.url}
+                              src={strapiImage(value.thumbnail_image?.url)}
                               alt={value?.thumbnail_image?.name}
                               width={262.5}
                               height={147.65} />
@@ -53,7 +53,7 @@ export default function Courses({ courses }: { courses: ResponseData<Course> }) 
                         </Link>
                         <div className="feature-text">
                           <h5>
-                            <Link href="/course/thakorn-piyapan">
+                            <Link href={`/course/${value.id}`}>
                               <a>
                                 <span style={{ color: "#223f99" }}>
                                   <strong>
@@ -64,7 +64,7 @@ export default function Courses({ courses }: { courses: ResponseData<Course> }) 
                             </Link>
                           </h5>
                           <p style={{ fontSize: "12px" }}>
-                            <Link href="/course/thakorn-piyapan">
+                            <Link href={`/course/${value.id}`}>
                               <a>
                               {value.course_name}
                               </a>
@@ -90,8 +90,8 @@ export default function Courses({ courses }: { courses: ResponseData<Course> }) 
 
 export async function getStaticProps() {
   try {
-    const response = await fetch(strapiApi + '/courses');
-    const data = await response.json() as ResponseData<Course>;
+    const response = await fetch(strapiApi + "/courses");
+    const data = await response.json() as ResponseDataList<Course>;
     return { props: { courses: data } }
   } catch (error) {
     console.error(error);

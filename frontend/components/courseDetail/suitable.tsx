@@ -1,4 +1,6 @@
-export default function Suitable({ suitables }: { suitables: string[] }) {
+import { Item } from "../../models/courses"
+
+export default function Suitable({ suitable }: { suitable: Item[] }) {
   return (
     <div className="background-dark">
       <div className="container">
@@ -15,16 +17,18 @@ export default function Suitable({ suitables }: { suitables: string[] }) {
             </div>
           </div>
           <div className="block-type-text text-left col-10">
-            <div className="block box-shadow-none">
-              {suitables.map((value, index) => {
+            <div className="block box-shadow-none row">
+              {suitable.map((value) => {
                 return (
-                  <h6 key={index} style={{ textAlign: "left", paddingLeft: "30px", fontWeight: "normal" }}>
+                  <h6 key={`suitable-id-${value.id}`}
+                    className={`${value.label.length <= 80 && "col-6"} ${value.label.length > 80 && "col-12"}`}
+                    style={{ padding: "7px 0px 7px 30px" }}>
                     <strong>
                       <span style={{ color: "#ed9081" }}>
                         ✓ &nbsp;
                       </span>
                       <span style={{ color: "#fbf5e4" }}>
-                        {value}
+                        {value.label}
                       </span>
                     </strong>
                   </h6>

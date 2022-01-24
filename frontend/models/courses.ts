@@ -10,8 +10,53 @@ export interface Course {
   publish_date: string;
   thumbnail_image: Thumbnail;
   thumbnail_video: Thumbnail;
-  course_detail: string;
+  course_detail: CourseDetail;
   episodes: Episode[];
+}
+
+export interface CourseDetail {
+  id: number;
+  name: string;
+  total_hours: string;
+  total_lessons: string;
+  order_link: string;
+  header: string;
+  teaser: string;
+  order_image: OrderImage;
+  speaker_details: SpeakerDetails;
+  contents: Contents[];
+}
+
+export interface Contents{
+  __component: string
+  id: number
+  items: Item[]
+  topics: Topics[]
+}
+export interface Topics{
+  id: number;
+  label: string;
+  image: Image;
+}
+
+export interface Image{
+  id: number;
+  url: string;
+}
+
+export interface Item{
+  id: number;
+  label: string;
+}
+
+export interface OrderImage {
+  id: number;
+  url: string;
+}
+
+export interface SpeakerDetails{
+  id: number;
+  url: string;
 }
 
 export interface Thumbnail {

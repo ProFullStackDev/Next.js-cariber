@@ -1,12 +1,13 @@
 import Img from "../image";
 import { CourseDetailSale } from "../static/interface"
 
-export default function Sale({ yearlySubscriptionImage, 
-                               yearlySubscriptionImageMobile, 
-                               singleCoursePersonalImage }: CourseDetailSale) {
+export default function Sale({ yearlySubscriptionImage,
+  yearlySubscriptionImageMobile,
+  singleCoursePersonalImage,
+  singleCheckoutUrl }: CourseDetailSale) {
   return (
     <div className="background-light">
-      <div className="sizer" style={{paddingBottom: "0px"}}>
+      <div className="sizer" style={{ paddingBottom: "0px" }}>
         <div className="container">
           <div className="row align-items-center justify-content-center">
             <div className="block-type-text text-left col-12">
@@ -60,7 +61,7 @@ export default function Sale({ yearlySubscriptionImage,
             <div className="block-type-code text-left col-4">
               <div className="block box-shadow-none">
                 <div id="singlebanner" className="feature" style={{ display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center" }}>
-                  <a href="https://checkout.cariber.co/?add-to-cart=74465&cfp=c2luZ2xlYmFubm5lcl9kZXNrdG9wX2tpYXRpc3VrLXNlbmFtdWFuZw==">
+                  <a href={singleCheckoutUrl}>
                     <Img id="block-single-img"
                       src={singleCoursePersonalImage}
                       className="feature-image"
@@ -71,7 +72,7 @@ export default function Sale({ yearlySubscriptionImage,
                   </a>
                   <a id="block-single-button"
                     className="btn btn-medium btn-solid btn-auto background-dark"
-                    href="https://checkout.cariber.co/?add-to-cart=74465&amp;cfp=c2luZ2xlYmFubm5lcl9kZXNrdG9wX2tpYXRpc3VrLXNlbmFtdWFuZw==">
+                    href={singleCheckoutUrl}>
                     ซื้อเฉพาะคอร์สนี้
                   </a>
                 </div>

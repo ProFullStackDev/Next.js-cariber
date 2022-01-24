@@ -7,14 +7,13 @@ export enum Color {
 
 interface AccordionProps {
   title: string,
-  description: string[],
+  description: string[] | string,
   col: number,
   color: Color
 }
 
 export default function Accordion({ title, description, col, color }: AccordionProps) {
   const [displayDescription, setDisplayDescription] = useState("none");
-
   function switchDisplay() {
     displayDescription === "none" ? setDisplayDescription("block") : setDisplayDescription("none")
   }
@@ -34,7 +33,7 @@ export default function Accordion({ title, description, col, color }: AccordionP
           <div className="accordion-collapse" style={{ display: displayDescription }}>
             <div className="accordion-body">
               {
-                description?.map((value, index) => {
+                typeof description === "object" && description?.map((value, index) => {
                   return (
                     <h5 key={index} style={{ fontSize: "14px" }}>
                       <span style={{ fontWeight: "400" }}>
@@ -44,6 +43,16 @@ export default function Accordion({ title, description, col, color }: AccordionP
                     </h5>
                   )
                 })
+              }
+              {
+                typeof description === "string" && (
+                  <h5 style={{ fontSize: "14px" }}>
+                    <span style={{ fontWeight: "400" }}>
+                      {description}
+                    </span>
+                    <br />
+                  </h5>
+                )
               }
             </div>
           </div>

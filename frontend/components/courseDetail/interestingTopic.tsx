@@ -1,7 +1,8 @@
+import { strapiImage } from "../../models/content"
+import { Topics } from "../../models/courses"
 import Img from "../image"
-import { CourseDetailInterestingTopic } from "../static/interface"
 
-export default function InterestingTopic({ interestingTopics }: { interestingTopics: CourseDetailInterestingTopic[] }) {
+export default function InterestingTopic({ interestingTopics }: { interestingTopics: Topics[] }) {
   return (
     <div className="background-dark">
       <div className="container">
@@ -24,16 +25,16 @@ export default function InterestingTopic({ interestingTopics }: { interestingTop
                 <div className="block box-shadow-none">
                   <div className="feature">
                     <Img className="feature-image"
-                      src={value.image}
+                      src={strapiImage(value.image.url)}
                       width={50}
                       height={50}
-                      alt={value.name}
+                      alt={value.label}
                     />
                     <div className="feature-text">
                       <p style={{ fontSize: "14px", textAlign: "center" }}>
                         <strong>
                           <span style={{ color: "#fbf5e4" }}>
-                            {value.name}
+                            {value.label}
                           </span>
                         </strong>
                       </p>

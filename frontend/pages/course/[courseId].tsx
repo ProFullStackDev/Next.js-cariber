@@ -4,53 +4,47 @@ import Header from "../../components/header"
 import ReviewStudents from "../../components/reviewStudents"
 import SlideCourse from "../../components/slideCourse"
 import * as staticDataReview from "../../components/static/review"
-import * as staticData from "../../components/static/courseDetail"
-import { CourseDetailInterestingTopic, CardDescription } from "../../components/static/interface"
 import IntroductionPersonal from "../../components/courseDetail/introductionPersonal"
 import EpisodeAccordion from "../../components/courseDetail/EpisodeAccordion"
 import InterestingTopic from "../../components/courseDetail/interestingTopic"
 import Suitable from "../../components/courseDetail/suitable"
-import CourseHeader from "../../components/courseDetail/courseHeader"
 import Sale from "../../components/courseDetail/sale"
+import { ResponseData, ResponseDataList } from "../../models/data"
+import { Course } from "../../models/courses"
+import { strapiApi, strapiImage } from "../../models/content"
 
-export interface CourseDetailProps {
-  yearlySubscriptionImage: string,
-  yearlySubscriptionImageMobile: string,
-  singleCourseImage: string,
-  video: string,
-  videoPoster: string,
-  fullName: string,
-  personalHistoryImage: string,
-  interestingTopics: CourseDetailInterestingTopic[],
-  suitableFor: string[],
-  totalHours: string,
-  totalEpisodes: string,
-  episodes: CardDescription[],
-  singleCoursePersonalImage: string
+interface CourseDetailParams {
+  courseId: string
 }
 
-export default function CourseDetail({ course }: { course: CourseDetailProps }) {
+export default function CourseDetail({ course }: { course: ResponseData<Course> }) {
   const slideCourses = staticDataReview.slideCourses
   return (
     <div className="course-detail">
       <Header />
       <div className="tb-sizer">
-        <CourseHeader yearlySubscriptionImage={course.yearlySubscriptionImage}
-          yearlySubscriptionImageMobile={course.yearlySubscriptionImageMobile}
-          singleCourseImage={course.singleCourseImage}
-          video={course.video}
-          videoPoster={course.videoPoster} />
-        <IntroductionPersonal fullName={course.fullName}
-          personalHistoryImage={course.personalHistoryImage} />
-        <InterestingTopic interestingTopics={course.interestingTopics} />
-        <Suitable suitables={course.suitableFor} />
-        <EpisodeAccordion totalHours={course.totalHours}
-          totalEpisodes={course.totalEpisodes}
-          episodes={course.episodes} />
+        <IntroductionPersonal fullName={course.data.course_detail.name}
+          personalHistoryImage={strapiImage(course.data.course_detail.speaker_details.url)} />
+        {course.data.course_detail.contents.map((value, index) => {
+          if (value.__component === "components.topic-component") {
+            return (
+              <InterestingTopic key={index} interestingTopics={value.topics} />
+            )
+          }
+          if (value.__component === "components.suitable-component") {
+            return (
+              <Suitable key={index} suitable={value.items} />
+            )
+          }
+        })}
+        <EpisodeAccordion totalHours={course.data.course_detail.total_hours}
+          totalEpisodes={course.data.course_detail.total_lessons}
+          episodes={course.data.episodes} />
       </div>
-      <Sale singleCoursePersonalImage={course.singleCoursePersonalImage}
-        yearlySubscriptionImage={course.yearlySubscriptionImage}
-        yearlySubscriptionImageMobile={course.yearlySubscriptionImageMobile} />
+      <Sale singleCoursePersonalImage={strapiImage(course.data.course_detail.order_image.url)}
+        yearlySubscriptionImage={""}
+        yearlySubscriptionImageMobile={""}
+        singleCheckoutUrl={course.data.course_detail.order_link} />
       <div className="background-light">
         <div className="sizer">
           <div className="container">
@@ -81,34 +75,19 @@ export default function CourseDetail({ course }: { course: CourseDetailProps }) 
 }
 
 export async function getStaticPaths() {
+  const response = await fetch(strapiApi + '/courses');
+  const data = await response.json() as ResponseDataList<Course>;
+  const paths = data.data.map((value) => {
+    return { params: { courseId: value.id.toString() } }
+  })
   return {
-    paths: [
-      {
-        params: { courseId: "thakorn-piyapan" }
-      }
-    ],
+    paths: paths,
     fallback: false
   };
-}
+};
 
-export async function getStaticProps() {
-  return {
-    props: {
-      course: {
-        yearlySubscriptionImage: "/courseDetail/yearly-subscription.jpg",
-        yearlySubscriptionImageMobile: "/courseDetail/yearly-subscription-mobile.jpg",
-        singleCourseImage: "/courseDetail/single-courese.jpg",
-        video: "/courseDetail/kiatisuk-senamuang-videos.mp4",
-        videoPoster: "/courseDetail/poster.jpg",
-        fullName: "เกียรติศักดิ์ เสนาเมือง",
-        personalHistoryImage: "/courseDetail/information.jpg",
-        interestingTopics: staticData.interestingTopics,
-        suitableFor: staticData.suitable,
-        totalHours: "1:51",
-        totalEpisodes: "9",
-        episodes: staticData.episodes,
-        singleCoursePersonalImage: "/courseDetail/singlebanner.jpg"
-      }
-    }
-  };
+export async function getStaticProps({ params }: { params: CourseDetailParams }) {
+  const response = await fetch(strapiApi + `/courses/${params.courseId}`);
+  const data = await response.json() as ResponseData<Course>;
+  return { props: { course: data } };
 }

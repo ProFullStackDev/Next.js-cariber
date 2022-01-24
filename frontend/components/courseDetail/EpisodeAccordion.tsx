@@ -5,8 +5,8 @@ export default function EpisodeAccordion({ totalHours, totalEpisodes, episodes }
   return (
     <div className="background-dark">
       <div className="container">
-        <div className="row align-items-center justify-content-center">
-          <div className="block-type-text text-left col-10">
+        <div className="row align-items-center">
+          <div className="block-type-text text-left col-12">
             <div className="block box-shadow-none">
               <h1 style={{ textAlign: "center" }}>
                 <strong>
@@ -17,9 +17,9 @@ export default function EpisodeAccordion({ totalHours, totalEpisodes, episodes }
               </h1>
             </div>
           </div>
-          {episodes.map((value, index) => {
+          {episodes && episodes.map((value, index) => {
             return (
-              <Accordion key={index} title={value.title} description={value.description} col={4} color={Color.dark} />
+              <Accordion key={index} title={`EP${index + 1}: ${value.episode_name}`} description={value.episode_descriptions} col={4} color={Color.dark} />
             )
           })}
         </div>
