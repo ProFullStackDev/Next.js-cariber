@@ -13,6 +13,7 @@
     "@cloudflare/stream-react": "^1.5.0",
     "@strapi/plugin-i18n": "4.0.5",
     "@strapi/plugin-users-permissions": "4.0.5",
+    "@strapi/provider-email-sendgrid": "^4.0.5",
     "@strapi/strapi": "4.0.5",
     "@types/formidable": "^2.0.3",
     "axios": "^0.24.0",
