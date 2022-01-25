@@ -1,9 +1,16 @@
 import Link from "next/link";
+import { useRef } from "react";
+import PurchasedCard from "../components/account/purchasedCard";
 import Img from "../components/image";
 import * as staticData from "../components/static/account"
 
 export default function Account() {
   const timeZone = staticData.timeZone
+  const hiddenFileInput = useRef<HTMLInputElement>(null);
+
+  function handleClick() {
+    hiddenFileInput.current && hiddenFileInput.current.click();
+  };
   return (
     <div className="account">
       <div className="site-action-bar site-action-bar-members">
@@ -36,19 +43,19 @@ export default function Account() {
           <div className="col-8 card-form">
             <div className="panel panel-default panel-form">
               <div className="panel-body">
-                <div className="form-group required member_name">
+                <div className="form-group required">
                   <label className="control-label string required" htmlFor="member_name">
                     Full Name
                   </label>
                   <input id="member_name" className="form-control string required" type="text" />
                 </div>
-                <div className="form-group required member_email">
+                <div className="form-group required">
                   <label className="control-label string required" htmlFor="member_email">
                     E-mail
                   </label>
                   <input id="member_email" className="form-control string required" type="text" />
                 </div>
-                <div className="form-group required time_zone">
+                <div className="form-group required">
                   <label className="control-label string required" htmlFor="member_time_zone">
                     Time Zone
                   </label>
@@ -61,7 +68,7 @@ export default function Account() {
                     })}
                   </select>
                 </div>
-                <div className="form-group boolean optional product_update_notification">
+                <div className="form-group boolean optional">
                   <div className="checkbox">
                     <label>
                       <input className="boolean optional" type="checkbox" value="1" name="product_update_notification_" id="product_update_notification" />
@@ -69,7 +76,7 @@ export default function Account() {
                     </label>
                   </div>
                 </div>
-                <div className="form-group boolean optional reply_comment_notification">
+                <div className="form-group boolean optional">
                   <div className="checkbox">
                     <label>
                       <input className="boolean optional" type="checkbox" value="1" name="reply_comment_notification" id="reply_comment_notification" />
@@ -77,7 +84,7 @@ export default function Account() {
                     </label>
                   </div>
                 </div>
-                <div className="form-group boolean optional new_products_and_promotions">
+                <div className="form-group boolean optional">
                   <div className="checkbox">
                     <label>
                       <input className="boolean optional" type="checkbox" value="1" name="new_products_and_promotions" id="new_products_and_promotions" />
@@ -105,12 +112,91 @@ export default function Account() {
                           &nbsp;100x100
                         </strong>
                       </p>
-                      <button type="button" className="btn btn-primary btn-outline filepicker-btn fp-input">
+                      <input type="file" accept="image/*" ref={hiddenFileInput} style={{ display: "none" }} />
+                      <button type="button" onClick={handleClick} className="btn btn-primary btn-outline filepicker-btn fp-input">
                         Change Avatar
                       </button>
                     </div>
                   </div>
                 </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <hr />
+        <div className="row side-by-side">
+          <div className="col-4">
+            <h2 className="title">Social Profile</h2>
+            <p className="subtitle text-light">Edit information displayed publicly in communities.</p>
+          </div>
+          <div className="col-8 card-form">
+            <div className="panel panel-default panel-form">
+              <div className="panel-body">
+                <div className="form-group required">
+                  <label className="control-label string required" htmlFor="member_bio">
+                    Bio
+                  </label>
+                  <textarea id="member_bio" className="form-control string required" />
+                </div>
+                <div className="form-group required">
+                  <label className="control-label string required" htmlFor="member_location">
+                    Location
+                  </label>
+                  <input id="member_location" className="form-control string required" type="text" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <hr />
+        <div className="row side-by-side">
+          <div className="col-4">
+            <h2 className="title">Password</h2>
+            <p className="subtitle text-light">Change your password.</p>
+            <p className="subtitle text-light">Leave this blank to keep your current password.</p>
+          </div>
+          <div className="col-8 card-form">
+            <div className="panel panel-default panel-form">
+              <div className="panel-body">
+                <div className="form-group required">
+                  <label className="control-label string required" htmlFor="member_current_password">
+                    Current Password
+                  </label>
+                  <input id="member_current_password" className="form-control string required" type="text" />
+                  <p className="help-block">
+                    <Link href="/forgot-password" passHref={true}>
+                      <a>
+                        Forgot?
+                      </a>
+                    </Link>
+                  </p>
+                </div>
+                <div className="form-group required">
+                  <label className="control-label string required" htmlFor="member_new_password">
+                    New Password
+                  </label>
+                  <input id="member_new_password" className="form-control string required" type="text" />
+                </div>
+                <div className="form-group required">
+                  <label className="control-label string required" htmlFor="member_verify_password">
+                    Verify Password
+                  </label>
+                  <input id="member_verify_password" className="form-control string required" type="text" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <hr />
+        <div className="row side-by-side">
+          <div className="col-4">
+            <h2 className="title">Purchase History</h2>
+            <p className="subtitle text-light">The Offers you have purchased and the Products you have been granted access to.</p>
+          </div>
+          <div className="col-8 card-form">
+            <div className="panel panel-default panel-form">
+              <div className="panel-body">
+                <PurchasedCard />
               </div>
             </div>
           </div>
