@@ -4793,3 +4793,9 @@ a .panel-sub-title {
 .media-left{
   padding-right: 10px;
 }
+
+.lg-mr-space {
+  @media (min-width: $mobile-size) {
+    margin-right: 15px;
+  }
+}

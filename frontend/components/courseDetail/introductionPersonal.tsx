@@ -1,7 +1,7 @@
 import Img from "../image";
 import { CourseDetailIntroductionPersonal } from "../static/interface"
 
-export default function IntroductionPersonal({ fullName, personalHistoryImage }: CourseDetailIntroductionPersonal) {
+export default function IntroductionPersonal({ fullName, personalHistoryImage, highRatio }: CourseDetailIntroductionPersonal) {
   return (
     <div className="background-dark">
       <div className="row align-items-center justify-content-center">
@@ -22,7 +22,7 @@ export default function IntroductionPersonal({ fullName, personalHistoryImage }:
               <Img className="image-image"
                 src={personalHistoryImage}
                 width={900}
-                height={761.9097}
+                height={900*highRatio}
                 alt={fullName}
               />
             </div>

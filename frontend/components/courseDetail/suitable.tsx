@@ -1,6 +1,7 @@
 import { Item } from "../../models/courses"
 
 export default function Suitable({ suitable }: { suitable: Item[] }) {
+  const halfLine = 60
   return (
     <div className="background-dark">
       <div className="container">
@@ -22,7 +23,7 @@ export default function Suitable({ suitable }: { suitable: Item[] }) {
                 if(value.label){
                   return (
                     <h6 key={`suitable-id-${value.id}`}
-                      className={`${value.label.length <= 80 && "col-6"} ${value.label.length > 80 && "col-12"}`}
+                      className={`${value.label.length <= halfLine && "col-6"} ${value.label.length > halfLine && "col-12"}`}
                       style={{ padding: "7px 0px 7px 30px" }}>
                       <strong>
                         <span style={{ color: "#ed9081" }}>

@@ -43,7 +43,7 @@ export default function Courses({ courses }: { courses: ResponseDataList<Course>
                     <div style={{ padding: "15px" }}>
                       <div className="feature">
                         <Link href={`/course/${value.id}`}>
-                          <a>
+                          <a className={`${!value.course_detail && "disabled"}`}>
                             <Img className="feature-image"
                               src={strapiImage(value.thumbnail_image?.url)}
                               alt={value?.thumbnail_image?.name}
@@ -54,7 +54,7 @@ export default function Courses({ courses }: { courses: ResponseDataList<Course>
                         <div className="feature-text">
                           <h5>
                             <Link href={`/course/${value.id}`}>
-                              <a>
+                              <a className={`${!value.course_detail && "disabled"}`}>
                                 <span style={{ color: "#223f99" }}>
                                   <strong>
                                     {value.speaker_name}
@@ -65,8 +65,8 @@ export default function Courses({ courses }: { courses: ResponseDataList<Course>
                           </h5>
                           <p style={{ fontSize: "12px" }}>
                             <Link href={`/course/${value.id}`}>
-                              <a>
-                              {value.course_name}
+                              <a className={`${!value.course_detail && "disabled"}`}>
+                                {value.course_name}
                               </a>
                             </Link>
                           </p>

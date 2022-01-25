@@ -7,11 +7,18 @@ export default function EpisodeAccordion({ totalHours, totalEpisodes, episodes }
       <div className="container">
         <div className="row align-items-center">
           <div className="block-type-text text-left col-12">
-            <div className="block box-shadow-none">
-              <h1 style={{ textAlign: "center" }}>
+            <div className="row block box-shadow-none justify-content-center">
+              <h1 className="lg-mr-space row justify-content-center">
                 <strong>
                   <span style={{ color: "#fbf5e4" }}>
-                    ⌛ {totalHours} ชั่วโมง &nbsp;&nbsp;&nbsp; 📚 {totalEpisodes} บทเรียน
+                    ⌛ {totalHours} ชั่วโมง
+                  </span>
+                </strong>
+              </h1>
+              <h1 className="row justify-content-center">
+                <strong>
+                  <span style={{ color: "#fbf5e4" }}>
+                    📚 {totalEpisodes} บทเรียน
                   </span>
                 </strong>
               </h1>

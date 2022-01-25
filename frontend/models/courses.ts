@@ -28,10 +28,13 @@ export interface CourseDetail {
 }
 
 export interface Contents{
-  __component: string
-  id: number
-  items: Item[]
-  topics: Topics[]
+  __component: string;
+  id: number;
+  items: Item[];
+  topics: Topics[];
+  title: string;
+  description: string;
+  video_url: string;
 }
 export interface Topics{
   id: number;
@@ -57,6 +60,8 @@ export interface OrderImage {
 export interface SpeakerDetails{
   id: number;
   url: string;
+  width: number;
+  height: number;
 }
 
 export interface Thumbnail {

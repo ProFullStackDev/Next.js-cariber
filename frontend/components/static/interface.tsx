@@ -73,6 +73,7 @@ export interface CourseDetailCourseHeader {
 export interface CourseDetailIntroductionPersonal {
   fullName: string,
   personalHistoryImage: string,
+  highRatio: number,
 }
 
 export interface CourseDetailEpisode {

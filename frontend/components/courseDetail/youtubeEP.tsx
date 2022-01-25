@@ -1,8 +1,24 @@
 import { useEffect, useRef, useState } from "react";
 
-export default function YoutubeEP() {
+interface YoutubeEPProps {
+  id: number;
+  title: string;
+  description: string;
+  video_url: string;
+}
+
+export default function YoutubeEP({ YoutubeEPItems }: { YoutubeEPItems: YoutubeEPProps[] }) {
   const refFrame = useRef<HTMLDivElement>(null);
   const [youtubeFrameWidth, setYoutubeFrameWidth] = useState(0);
+
+  function youtubeIframeLink(url: string){
+    if(url.includes("embed")){
+      return url;
+    }else{
+      const urlList = url.split("/")
+      return "https://www.youtube.com/embed/"+urlList[urlList.length-1];
+    }
+  }
 
   useEffect(() => {
     refFrame.current && setYoutubeFrameWidth(refFrame.current.offsetWidth)
@@ -35,28 +51,34 @@ export default function YoutubeEP() {
                   </h1>
                 </div>
               </div>
-              <div className="block-type-video-embed text-left col-8">
-                <div className="block box-shadow-none" ref={refFrame}>
-                  <div className="responsive-video">
-                    <iframe src="https://www.youtube.com/embed/NQrPMvKOKsk"
-                      sandbox="allow-forms allow-scripts allow-pointer-lock allow-same-origin allow-top-navigation" width="100%" height={youtubeFrameWidth * 0.56249036144} />
+              {YoutubeEPItems.map((value, index) => {
+                return (
+                  <div className="row align-items-center justify-content-center" key={index}>
+                    <div className="block-type-video-embed text-left col-8">
+                      <div className="block box-shadow-none" ref={refFrame}>
+                        <div className="responsive-video">
+                          <iframe src={youtubeIframeLink(value.video_url)}
+                            sandbox="allow-forms allow-scripts allow-pointer-lock allow-same-origin allow-top-navigation" width="100%" height={youtubeFrameWidth * 0.56249036144} />
+                        </div>
+                      </div>
+                    </div>
+                    <div className="block-type-text text-left col-4">
+                      <div className="block box-shadow-none">
+                        <h2>{value.title}</h2>
+                        <p>
+                          {value.description}
+                        </p>
+                      </div>
+                    </div>
                   </div>
-                </div>
-              </div>
-              <div className="block-type-text text-left col-4">
-                <div className="block box-shadow-none">
-                  <h2>วิชาสร้าง (สรรค์)</h2>
-                  <p>
-                    หลายคนอาจคิดว่าการสร้างเทศกาลดนตรี คือการสร้างเวทีสวยๆ หรือโชว์ที่ดี แต่แท้จริงแล้วมันเป็นเพียงยอดภูเขาน้ำแข็งเท่านั้น พบกับเบื้องหลังแนวคิดของการสร้าง ทั้งนิยามการสร้างสรรค์ และคุณสมบัติของนักสร้างที่ดีที่ทุกคนก็เป็นได้ เพราะนักสร้างสรรค์ไม่ใช่คนที่มีพลังพิเศษหรือซุปเปอร์ฮีโร่ แต่เป็นเพียงคนธรรมดาที่กล้าคิด กล้าทำ
-                  </p>
-                </div>
-              </div>
+                )
+              })}
             </div>
           </div>
         </div>
       </div>
       <div className="background-dark">
-        <div className="sizer" style={{paddingBottom: "0px"}}>
+        <div className="sizer" style={{ paddingBottom: "0px" }}>
           <div className="container">
             <div className="row align-items-center justify-content-center">
               <h2 style={{ textAlign: "center" }}>

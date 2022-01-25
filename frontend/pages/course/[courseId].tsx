@@ -9,9 +9,12 @@ import EpisodeAccordion from "../../components/courseDetail/EpisodeAccordion"
 import InterestingTopic from "../../components/courseDetail/interestingTopic"
 import Suitable from "../../components/courseDetail/suitable"
 import Sale from "../../components/courseDetail/sale"
+import UpperHeader from "../../components/courseDetail/upperHeader"
 import { ResponseData, ResponseDataList } from "../../models/data"
 import { Course } from "../../models/courses"
 import { strapiApi, strapiImage } from "../../models/content"
+import YoutubeEP from "../../components/courseDetail/youtubeEP"
+import CourseHeader from "../../components/courseDetail/courseHeader"
 
 interface CourseDetailParams {
   courseId: string
@@ -19,12 +22,27 @@ interface CourseDetailParams {
 
 export default function CourseDetail({ course }: { course: ResponseData<Course> }) {
   const slideCourses = staticDataReview.slideCourses
+  const youtubeEPItems = course.data.course_detail.contents.filter((value) => { return value.__component === "components.special-ep-component" })
   return (
     <div className="course-detail">
       <Header />
       <div className="tb-sizer">
-        <IntroductionPersonal fullName={course.data.course_detail.name}
-          personalHistoryImage={strapiImage(course.data.course_detail.speaker_details?.url)} />
+        {course.data.course_detail.header && (
+          <UpperHeader header={course.data.course_detail.header} />
+        )}
+        <CourseHeader yearlySubscriptionImage={"/courseDetail/yearly-sucscription-lg.png"}
+          yearlySubscriptionImageMobile={"/courseDetail/yearly-sucscription-sm.png"}
+          singleCourseImage={"/courseDetail/single-course.jpg"}
+          video={""}
+          videoPoster={""} />
+        {youtubeEPItems.length > 0 && (
+          <YoutubeEP YoutubeEPItems={youtubeEPItems} />
+        )}
+        {course.data.course_detail.speaker_details?.url && (
+          <IntroductionPersonal fullName={course.data.course_detail.name}
+            personalHistoryImage={strapiImage(course.data.course_detail.speaker_details?.url)} 
+            highRatio={course.data.course_detail.speaker_details.height/course.data.course_detail.speaker_details.width}/>
+        )}
         {course.data.course_detail.contents.map((value, index) => {
           if (value.__component === "components.topic-component") {
             return (
@@ -42,8 +60,8 @@ export default function CourseDetail({ course }: { course: ResponseData<Course> 
           episodes={course.data.episodes} />
       </div>
       <Sale singleCoursePersonalImage={strapiImage(course.data.course_detail.order_image.url)}
-        yearlySubscriptionImage={""}
-        yearlySubscriptionImageMobile={""}
+        yearlySubscriptionImage={"/courseDetail/yearly-sucscription-lg.png"}
+        yearlySubscriptionImageMobile={"/courseDetail/yearly-sucscription-sm.png"}
         singleCheckoutUrl={course.data.course_detail.order_link} />
       <div className="background-light">
         <div className="sizer">
@@ -77,7 +95,10 @@ export default function CourseDetail({ course }: { course: ResponseData<Course> 
 export async function getStaticPaths() {
   const response = await fetch(strapiApi + '/courses');
   const data = await response.json() as ResponseDataList<Course>;
-  const paths = data.data.map((value) => {
+  const dataFilter = (data.data.filter((value) => {
+    return value.course_detail
+  }))
+  const paths = dataFilter.map((value) => {
     return { params: { courseId: value.id.toString() } }
   })
   return {
