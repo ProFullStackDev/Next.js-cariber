@@ -68,6 +68,7 @@ export interface CourseDetailCourseHeader {
   singleCourseImage: string,
   video: string,
   videoPoster: string,
+  singleCheckoutUrl: string
 }
 
 export interface CourseDetailIntroductionPersonal {

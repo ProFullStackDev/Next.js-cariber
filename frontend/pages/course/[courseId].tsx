@@ -34,7 +34,8 @@ export default function CourseDetail({ course }: { course: ResponseData<Course> 
           yearlySubscriptionImageMobile={"/courseDetail/yearly-sucscription-sm.png"}
           singleCourseImage={"/courseDetail/single-course.jpg"}
           video={""}
-          videoPoster={""} />
+          videoPoster={""}
+          singleCheckoutUrl={course.data.course_detail.order_link} />
         {youtubeEPItems.length > 0 && (
           <YoutubeEP YoutubeEPItems={youtubeEPItems} />
         )}

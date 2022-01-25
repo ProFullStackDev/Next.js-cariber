@@ -4,7 +4,8 @@ import { CourseDetailCourseHeader } from "../static/interface"
 export default function CourseHeader({ yearlySubscriptionImage,
                                        singleCourseImage,
                                        videoPoster,
-                                       video }: CourseDetailCourseHeader) {
+                                       video,
+                                       singleCheckoutUrl }: CourseDetailCourseHeader) {
   return (
     <div className="background-dark">
       <div className="sizer" style={{ paddingTop: "0px" }}>
@@ -22,7 +23,7 @@ export default function CourseHeader({ yearlySubscriptionImage,
                 </a>
               </div>
               <div className="image">
-                <a href="https://checkout.cariber.co/?add-to-cart=74465&cfp=dG9wc2luZ2xlYmFubm5lcl9kZXNrdG9wX2tpYXRpc3VrLXNlbmFtdWFuZw==">
+                <a href={singleCheckoutUrl}>
                   <Img className="image-image"
                     src={singleCourseImage}
                     width={384.6}
