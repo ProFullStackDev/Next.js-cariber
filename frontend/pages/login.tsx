@@ -76,11 +76,13 @@ export default function Login() {
                   </a>
                   <a className="btn btn-box btn-solid btn-full">
                     <div className="flex-row">
+                      <div style={{maxHeight: "25px", margin: "auto 0px"}}>
                       <Img src="/login/facebook-icon.svg"
                         width={25}
                         height={25}
                         alt="Facebook"
-                      />
+                        />
+                        </div>
                       <hr />
                       <p className="text-btn">
                         เข้าสู่ระบบด้วย Facebook
