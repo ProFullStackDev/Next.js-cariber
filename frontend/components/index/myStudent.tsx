@@ -6,9 +6,9 @@ export default function Mystudent({ myStudents }: { myStudents: MyStudent[] }) {
     <div className="row align-items-center justify-content-center">
       <div className="block-type-text text-left col-6">
         <div className="block box-shadow-none" >
-          <p style={{ fontSize: "36px", textAlign: "center" }}>
+          <p className="f-s-36 text-center">
             <strong>
-              <span style={{ color: "#e74e25" }}>
+              <span className="color-primary">
                 ผู้เรียนของเรา
               </span>
             </strong>
@@ -18,7 +18,7 @@ export default function Mystudent({ myStudents }: { myStudents: MyStudent[] }) {
       <div className="block-break"></div>
       {myStudents.map((value, index) => {
         return (
-          <div key={index} className="block-type-image col-2" style={{ marginRight: "5px" }}>
+          <div key={index} className="block-type-image col-2 m-r-5">
             <div className="block box-shadow-none">
               <div className="image">
                 <Img className="image-image"

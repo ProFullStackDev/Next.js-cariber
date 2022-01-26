@@ -22,7 +22,7 @@ export default function Library() {
   return (
     <div className="background-image library">
       <Header />
-      <div className="sizer" style={{ paddingBottom: "80px" }}>
+      <div className="sizer p-b-80">
         <div className="container">
           <div className="row products-list">
             <div className="col-12 products-col">
@@ -36,12 +36,12 @@ export default function Library() {
                   <div className="resume-course-positioner">
                     <a className="resume-course-content" href="#">
                       <div className="resume-course-text md-none">
-                        <h6 className="resume-course-status" style={{ margin: "0px" }}>
+                        <h6 className="resume-course-status m-0">
                           <strong>
                             เรียนคอร์สต่อ
                           </strong>
                         </h6>
-                        <p className="resume-course-title" style={{ margin: "0px" }}>
+                        <p className="resume-course-title m-0">
                           Strategy to Win - EP02: กลยุทธ์ทางธุรกิจ
                         </p>
                       </div>
@@ -53,12 +53,12 @@ export default function Library() {
                         />
                       </div>
                       <div className="resume-course-text lg-none">
-                        <h6 className="resume-course-status" style={{ margin: "0px" }}>
+                        <h6 className="resume-course-status m-0">
                           <strong>
                             เรียนคอร์สต่อ
                           </strong>
                         </h6>
-                        <p className="resume-course-title" style={{ margin: "0px" }}>
+                        <p className="resume-course-title m-0">
                           Strategy to Win - EP02: กลยุทธ์ทางธุรกิจ
                         </p>
                       </div>
@@ -71,8 +71,8 @@ export default function Library() {
               {myCourse.map((value, index) => {
                 return (
                   <div key={`mycourse ${index}`} className="col-12 products-col">
-                    <div className="product product-4 box-shadow-medium  background-light" style={{ height: "100%" }}>
-                      <div className="product-content" style={{ height: "100%" }}>
+                    <div className="product product-4 box-shadow-medium  background-light h-max">
+                      <div className="product-content h-max">
                         <Link href={value.path} passHref={true}>
                           <a>
                             <div className="product-image">
@@ -84,7 +84,7 @@ export default function Library() {
                             </div>
                           </a>
                         </Link>
-                        <div style={{ padding: "30px" }}>
+                        <div className="p-30">
                           <div className="product-info" >
                             <Link href={value.path} passHref={true}>
                               <a>

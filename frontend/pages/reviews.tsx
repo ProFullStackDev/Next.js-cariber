@@ -18,7 +18,7 @@ export default function Review() {
         <div className="sizer">
           <div className="container">
             <div className="row align-items-center justify-content-center">
-              <div className="block-type-image text-col-12" style={{ marginBottom: 40 }}>
+              <div className="block-type-image text-col-12 m-b-40">
                 <div className="block box-shadow-none background-unrecognized">
                   <div className="image">
                     <a href="https://checkout.cariber.co/?add-to-cart=685&amp;cfp=bGFyZ2ViYW5uZXJfY291cnNlcw==">
@@ -31,15 +31,15 @@ export default function Review() {
                   </div>
                 </div>
               </div>
-              <div id="block-titel" className="block-type-text text-center col-7" style={{ marginBottom: 50 }}>
+              <div id="block-titel" className="block-type-text text-center col-7 m-b-50">
                 <div className="block box-shadow-large background-unrecognized">
                   <h1>
-                    <span style={{ color: '#e74e25' }}>
+                    <span className="color-primary">
                       Wall of Love
                     </span>
                   </h1>
                   <h4>
-                    <span style={{ color: '#e74e25' }}>
+                    <span className="color-primary">
                       ผู้เรียนมีความเห็นอย่างไรกับ Cariber
                     </span>
                   </h4>
@@ -61,9 +61,9 @@ export default function Review() {
                     width={200}
                     height={200} />
                   <div className="block-text">
-                    <p style={{ marginBottom: 14 }}>
+                    <p className="m-b-14">
                       <strong>
-                        <span style={{ color: '#2c3e50' }}>
+                        <span className="color-grey">
                           &quot;ถ้าข้าพเจ้ามีเวลา 6 ชั่วโมงในการตัดต้นไม้ ข้าพเจ้าจะใช้เวลา 4 ชั่วโมงแรกลับขวานให้คม&quot;
                           <br />
                           เป็นวาทะของ&quot;อับราฮัม ลินคอล์น&quot; อดีตผู้นำสหรัฐอเมริกา
@@ -79,10 +79,11 @@ export default function Review() {
                         </span>
                       </strong>
                     </p>
-                    <h5 style={{ marginBottom: 0 }}>
+                    <h5 className="m-b-0">
                       <strong className="mt-auto">
-                        <span>
-                          <a href="https://www.facebook.com/118209918234524/posts/4271535732901901/?d=n" style={{ color: "#1e4397", fontSize: 16 }}>
+                        <span className="color-darkblue f-s-16">
+                          <a
+                          href="https://www.facebook.com/118209918234524/posts/4271535732901901/?d=n">
                             Facebook page : หนุ่มเมืองจันท์
                           </a>
                         </span>
@@ -111,12 +112,12 @@ export default function Review() {
                       />
                       <div className="feature-text">
                         <h4>
-                          <span style={{ color: "#ed9081" }}>
+                          <span className="color-secondary">
                             {value.name}
                           </span>
                         </h4>
                         <p>
-                          <span style={{ color: "#e74e25" }}>
+                          <span className="color-primary">
                             <em>
                               {value.career}
                             </em>
@@ -124,7 +125,7 @@ export default function Review() {
                         </p>
                         <p>
                           <br />
-                          <span style={{ color: "#0e1b20" }}>
+                          <span className="color-black">
                             &quot;
                             {value.review}
                             &quot;
@@ -132,7 +133,7 @@ export default function Review() {
                         </p>
                         <p>
                           <strong>
-                            <span style={{ color: "#e74e25" }}>
+                            <span className="color-primary">
                               {value.from}
                             </span>
                           </strong>
@@ -156,12 +157,12 @@ export default function Review() {
                       />
                       <div className="feature-text">
                         <h4>
-                          <span style={{ color: "#ed9081" }}>
+                          <span className="color-secondary">
                             {value.name}
                           </span>
                         </h4>
                         <p>
-                          <span style={{ color: "#e74e25" }}>
+                          <span className="color-primary">
                             <em>
                               {value.career}
                             </em>
@@ -169,7 +170,7 @@ export default function Review() {
                         </p>
                         <p>
                           <br />
-                          <span style={{ color: "#0e1b20" }}>
+                          <span className="color-black">
                             &quot;
                             {value.review}
                             &quot;
@@ -177,7 +178,7 @@ export default function Review() {
                         </p>
                         <p>
                           <strong>
-                            <span style={{ color: "#e74e25" }}>
+                            <span className="color-primary">
                               {value.from}
                             </span>
                           </strong>
@@ -195,20 +196,20 @@ export default function Review() {
                     <div className="feature">
                       <div className="feature-text">
                         <h4>
-                          <span style={{ color: "#ed9081" }}>
+                          <span className="color-secondary">
                             {value.name}
                           </span>
                         </h4>
-                        <p style={{ margin: 0 }}>
+                        <p className="m-0">
                           <strong>
-                            <span style={{ color: "#0e1b20" }}>
+                            <span className="color-black">
                               Ratings : {value.ratings}
                             </span>
                           </strong>
                         </p>
                         <p>
                           <br />
-                          <span style={{ color: "#0e1b20" }}>
+                          <span className="color-black">
                             &quot;
                             {value.review}
                             &quot;
@@ -216,7 +217,7 @@ export default function Review() {
                         </p>
                         <p>
                           <strong>
-                            <span style={{ color: "#e74e25" }}>
+                            <span className="color-primary">
                               {value.from}
                             </span>
                           </strong>
@@ -236,17 +237,17 @@ export default function Review() {
             <div className="row align-items-center justify-content-center">
               <div className="block-type-text text-center col-12">
                 <div className="block box-shadow-none background-unrecognized">
-                  <p style={{ fontSize: "40px", textAlign: "center" }}>
+                  <p className="f-s-40 text-center">
                     <strong>
-                      <span style={{ color: "#e74e25" }}>
+                      <span className="color-primary">
                         สูตรความสำเร็จกับ &quot;ที่สุด&quot; ของประเทศ
                       </span>
                     </strong>
                   </p>
-                  <p style={{ fontSize: "20px", textAlign: "center" }}>
+                  <p className="f-s-20 text-center">
                     <em>
                       <strong>
-                        <span style={{ color: "#e74e25" }}>
+                        <span className="color-primary">
                           คอร์สออนไลน์กับผู้บริหาร ผู้นำทางความคิด แบบที่ไม่เคยมีมาก่อน
                         </span>
                       </strong>

@@ -66,6 +66,9 @@
       "allowedTypes": [
         "images"
       ]
+    },
+    "teaser_url": {
+      "type": "string"
     }
   }
 }

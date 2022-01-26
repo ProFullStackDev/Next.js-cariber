@@ -18,12 +18,12 @@ export default function Specific() {
       <div className="block-type-text text-left col-2">
         <div className="block box-shadow-none">
           <h5>
-            <span style={{ fontWeight: "400" }}>
+            <span>
               กว่า 168 บทเรียน
             </span>
           </h5>
           <h5>
-            <span style={{ fontWeight: "400" }}>
+            <span>
               จากผู้เชี่ยวชาญ
             </span>
           </h5>
@@ -44,12 +44,12 @@ export default function Specific() {
       <div className="block-type-text text-left col-2">
         <div className="block box-shadow-none">
           <h5>
-            <span style={{ fontWeight: "400" }}>
+            <span>
               เต็มอิ่มกับคอร์สเรียน
             </span>
           </h5>
           <h5>
-            <span style={{ fontWeight: "400" }}>
+            <span>
               กว่า 31 ชั่วโมง
             </span>
           </h5>
@@ -70,12 +70,12 @@ export default function Specific() {
       <div className="block-type-text text-left col-2">
         <div className="block box-shadow-none">
           <h5>
-            <span style={{ fontWeight: "400" }}>
+            <span>
               อัพเดทคอร์สใหม่
             </span>
           </h5>
           <h5>
-            <span style={{ fontWeight: "400" }}>
+            <span>
               ตลอดทั้งปี
             </span>
           </h5>

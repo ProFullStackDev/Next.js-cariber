@@ -7,8 +7,8 @@ export default function IntroductionPersonal({ fullName, personalHistoryImage, h
       <div className="row align-items-center justify-content-center">
         <div className="block-type-text text-left col-11">
           <div className="block box-shadow-none">
-            <h3 style={{ textAlign: "center", margin: "0px" }}>
-              <span style={{ color: "#ed9081" }}>
+            <h3 className="text-center m-0">
+              <span className="color-secondary">
                 <strong>
                   รู้จัก{fullName}
                 </strong>

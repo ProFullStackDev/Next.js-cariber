@@ -9,9 +9,9 @@ export default function InterestingTopic({ interestingTopics }: { interestingTop
         <div className="row align-items-center justify-content-center">
           <div className="block-type-text text-center col-6">
             <div className="block box-shadow-none">
-              <p style={{ fontSize: "24px", textAlign: "center" }}>
+              <p className="f-s-24 text-center">
                 <strong>
-                  <span style={{ color: "#ed9081" }}>
+                  <span className="color-secondary">
                     หัวข้อที่น่าสนใจ
                   </span>
                 </strong>
@@ -31,9 +31,9 @@ export default function InterestingTopic({ interestingTopics }: { interestingTop
                       alt={value.label}
                     />
                     <div className="feature-text">
-                      <p style={{ fontSize: "14px", textAlign: "center" }}>
+                      <p className="f-s-14 text-canter">
                         <strong>
-                          <span style={{ color: "#fbf5e4" }}>
+                          <span className="color-smooth">
                             {value.label}
                           </span>
                         </strong>

@@ -35,15 +35,15 @@ export default function YoutubeEP({ YoutubeEPItems }: { YoutubeEPItems: YoutubeE
             <div className="row align-items-center justify-content-center">
               <div className="block-type-text text-center col-10">
                 <div className="block box-shadow-none">
-                  <h1 style={{ textAlign: "center" }}>
-                    <span style={{ color: "#e74e25" }}>
+                  <h1 className="text-center">
+                    <span className="color-primary">
                       <strong>
                         Special EP ดูฟรีก่อนใคร
                       </strong>
                     </span>
                   </h1>
-                  <h1 style={{ textAlign: "center" }}>
-                    <span style={{ color: "#0e1b20" }}>
+                  <h1 className="text-center">
+                    <span className="color-black">
                       <strong>
                         คัดบทเรียนเน้นๆมาให้ดูก่อนตัดสินใจ!
                       </strong>
@@ -78,11 +78,11 @@ export default function YoutubeEP({ YoutubeEPItems }: { YoutubeEPItems: YoutubeE
         </div>
       </div>
       <div className="background-dark">
-        <div className="sizer" style={{ paddingBottom: "0px" }}>
+        <div className="sizer p-b-0">
           <div className="container">
             <div className="row align-items-center justify-content-center">
-              <h2 style={{ textAlign: "center" }}>
-                <span style={{ color: "#e74e25" }}>
+              <h2 className="text-center">
+                <span className="color-primary">
                   <strong>
                     ถ้ายังไม่จุใจ เต็มอิ่มกับบทเรียนกว่า 4 ชั่วโมง<br />เล่าผ่านประสบการณ์จริง แบบที่ไม่เคยมีมาก่อน
                   </strong>

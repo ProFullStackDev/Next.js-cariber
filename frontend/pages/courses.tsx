@@ -14,7 +14,7 @@ export default function Courses({ courses }: { courses: ResponseDataList<Course>
       <div className="sizer">
         <div className="container">
           <div className="row align-items-center">
-            <div className="block-type-image text-col-12" style={{ marginBottom: 0 }}>
+            <div className="block-type-image text-col-12 m-b-0">
               <div className="block box-shadow-none background-unrecognized">
                 <div className="image">
                   <a href="https://checkout.cariber.co/?add-to-cart=685&amp;cfp=bGFyZ2ViYW5uZXJfY291cnNlcw==">
@@ -29,7 +29,7 @@ export default function Courses({ courses }: { courses: ResponseDataList<Course>
             </div>
             <div className="block-type-text text-left col-12">
               <div className="block box-shadow-none background-unrecognized">
-                <h2 style={{ textAlign: "center", color: "#e74e25" }}>
+                <h2 className="color-primary text-center">
                   คอร์สทั้งหมด
                 </h2>
               </div>
@@ -38,9 +38,8 @@ export default function Courses({ courses }: { courses: ResponseDataList<Course>
             {courses ? courses.data.map((value) => {
               return (
                 <div key={value.id} className="block-type-feature text-center col-3">
-                  <div className="block box-shadow-large background-light"
-                    style={{ backgroundColor: "#ffffff", borderRadius: "4px" }}>
-                    <div style={{ padding: "15px" }}>
+                  <div className="block box-shadow-large background-white p-12 b-r-4">
+                    <div>
                       <div className="feature">
                         <Link href={`/course/${value.id}`}>
                           <a className={`${!value.course_detail && "disabled"}`}>
@@ -55,7 +54,7 @@ export default function Courses({ courses }: { courses: ResponseDataList<Course>
                           <h5>
                             <Link href={`/course/${value.id}`}>
                               <a className={`${!value.course_detail && "disabled"}`}>
-                                <span style={{ color: "#223f99" }}>
+                                <span className="color-darkblue">
                                   <strong>
                                     {value.speaker_name}
                                   </strong>
@@ -63,7 +62,7 @@ export default function Courses({ courses }: { courses: ResponseDataList<Course>
                               </a>
                             </Link>
                           </h5>
-                          <p style={{ fontSize: "12px" }}>
+                          <p className="f-s-12">
                             <Link href={`/course/${value.id}`}>
                               <a className={`${!value.course_detail && "disabled"}`}>
                                 {value.course_name}

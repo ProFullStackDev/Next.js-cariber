@@ -33,25 +33,25 @@ export default function ProductBlogs({ productImage,
             </h6>
             <div className="progress">
               <div className="progress-outer">
-                <div className="progress-inner" style={{ width: `${0}%` }} />
+                <div className="progress-inner w-0" />
               </div>
             </div>
           </div>
         </div>
       )}
       <div className="panel">
-        <div className="panel-card-body" style={{ textAlign: "center" }}>
+        <div className="panel-card-body text-center">
           <h6 className="panel-heading">
             {productName}
           </h6>
-          <a className="btn btn-box" href={fileUrl} style={{ fontSize: "12px" }}>
+          <a className="btn btn-box f-s-12" href={fileUrl}>
             คลิกเพื่อดาวน์โหลดไฟล์ประกอบ
           </a>
         </div>
       </div>
       <div className="panel">
         <div className="panel-card-body">
-          <div className="media" style={{ display: "flex" }}>
+          <div className="media">
             <div className="media-left">
               <Img className="instructor-image"
                 src={instructorImage}
@@ -80,7 +80,7 @@ export default function ProductBlogs({ productImage,
           height={550}
           alt="ผู้สอนในอนาคต"
         />
-        <div className="panel-card-body" style={{ textAlign: "center" }}>
+        <div className="panel-card-body text-center">
           <h6 className="panel-heading">
             Cariber ใส่ใจกับทุกความคิดเห็นของคุณ
           </h6>
@@ -92,7 +92,7 @@ export default function ProductBlogs({ productImage,
             </p>
           </div>
           <Link href="/next-instructor-form" passHref={true}>
-            <a className="btn btn-box" href="#" style={{ fontSize: "12px" }}>
+            <a className="btn btn-box f-s-12" href="#">
               คลิกเพื่อแสดงความคิดเห็น
             </a>
           </Link>

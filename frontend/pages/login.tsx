@@ -56,14 +56,14 @@ export default function Login() {
                   <button id="form-button" onClick={loginRequest} className="form-btn btn-solid btn-full" type="button">
                     เข้าสู่ระบบ
                   </button>
-                  <div className="form-group" style={{ padding: "15px 0px 5px 0px" }}>
+                  <div className="form-group p-t-15 p-x-0 p-n-5">
                     <label className="jus-between">
                       <span className="auth-label">
                         <input className="boolean optional" type="checkbox" value="1" id="member-remember-me">
                         </input>
                         จดจำรหัสผ่าน
                       </span>
-                      <span style={{ justifySelf: "end" }}>
+                      <span className="justify-end">
                         <Link href="/forgot-password" passHref={true}>
                           <a className="link-colorful">
                             ลืมรหัสผ่าน

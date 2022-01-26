@@ -1,0 +1,82 @@
+$maximum-pixel-space : 100;
+$maximum-pixel-size : 1000;
+
+@for $i from 0 to $maximum-pixel-size {
+  .f-s-#{$i} {
+    font-size: #{$i}px !important;
+  }
+
+  .w-#{$i} {
+    width: #{$i}px !important;
+  }
+
+  .h-#{$i} {
+    height: #{$i}px !important;
+  }
+}
+
+@for $i from 0 to $maximum-pixel-space {
+  .m-#{$i} {
+    margin: #{$i}px !important;
+  }
+
+  .m-x-#{$i} {
+    margin-left: #{$i}px !important;
+    margin-right: #{$i}px !important;
+  }
+
+  .m-y-#{$i} {
+    margin-top: #{$i}px !important;
+    margin-bottom: #{$i}px !important;
+  }
+
+  .m-t-#{$i} {
+    margin-top: #{$i}px !important;
+  }
+
+  .m-r-#{$i} {
+    margin-right: #{$i}px !important;
+  }
+
+  .m-b-#{$i} {
+    margin-bottom: #{$i}px !important;
+  }
+
+  .m-l-#{$i} {
+    margin-left: #{$i}px !important;
+  }
+
+  .p-#{$i} {
+    padding: #{$i}px !important;
+  }
+
+  .p-x-#{$i} {
+    padding-left: #{$i}px !important;
+    padding-right: #{$i}px !important;
+  }
+
+  .p-y-#{$i} {
+    padding-top: #{$i}px !important;
+    padding-bottom: #{$i}px !important;
+  }
+
+  .p-t-#{$i} {
+    padding-top: #{$i}px !important;
+  }
+
+  .p-r-#{$i} {
+    padding-right: #{$i}px !important;
+  }
+
+  .p-b-#{$i} {
+    padding-bottom: #{$i}px !important;
+  }
+
+  .p-l-#{$i} {
+    padding-left: #{$i}px !important;
+  }
+
+  .b-r-#{$i} {
+    border-radius: #{$i}px !important;
+  }
+}

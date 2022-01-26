@@ -49,7 +49,7 @@ export default function Products({ product }: { product: ProductProp }) {
           <div className="container">
             <div className="row">
               <div className="col-8">
-                <div className="panel-body" style={{ backgroundColor: "white" }}>
+                <div className="panel-body background-white">
                   <h5 className="syllabus-heading">
                     {product.productName}
                   </h5>
@@ -80,7 +80,7 @@ export default function Products({ product }: { product: ProductProp }) {
                                 {value.progress ? (
                                   <div className="md-pd-tb-10 md-3cm">
                                     {value.progress === 100 ? (<div className="check-item">
-                                      <i className="fa fa-check" style={{ color: "#e74e25" }}></i>
+                                      <i className="fa fa-check color-primary"></i>
                                     </div>) : (
                                       <div className="progress">
                                         <div className="progress-outer">
@@ -101,7 +101,7 @@ export default function Products({ product }: { product: ProductProp }) {
                     <Pagination page={Number(router.query.page)} pageCount={2} />
                   ) : (
                     <a href="?page=1"
-                      style={{ color: "#e74e25", fontSize: "1rem", cursor: "pointer" }}>
+                      className="color-primary">
                       บทเรียนถัดไป &gt;&gt;&gt;
                     </a>
                   )}

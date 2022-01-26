@@ -68,10 +68,10 @@ export default function CourseDetail({ course }: { course: ResponseData<Course> 
         <div className="sizer">
           <div className="container">
             <div className="row align-items-center justify-content-center">
-              <div className="block-type-text text-center col-12" style={{ padding: "0px", marginTop: "20px" }}>
+              <div className="block-type-text text-center col-12 p-0 m-t-0">
                 <div className="block box-shadow-none">
-                  <h2 className="font-md-20" style={{ textAlign: "center" }}>
-                    <span style={{ color: "#e74e25" }}>
+                  <h2 className="font-md-20 text-center">
+                    <span className="color-primary">
                       คอร์สอื่น ๆ จาก &quot;ที่สุด&quot; ของประเทศอีกมากมาย
                     </span>
                   </h2>
