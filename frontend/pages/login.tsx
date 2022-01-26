@@ -2,8 +2,27 @@ import Link from "next/link";
 import Footer from "../components/footer";
 import Header from "../components/header";
 import Img from "../components/image";
+import { Auth } from "../models/auth";
+import { strapiApiAuth } from "../models/content";
 
 export default function Login() {
+
+  async function loginRequest() {
+    const formData = new FormData();
+    formData.append('identifier', "test_user@codium.co");
+    formData.append('password', "Codium123!");
+    try {
+      const response = await fetch(strapiApiAuth, {
+        method: "POST",
+        body: formData,
+      })
+      const data = await response.json() as Auth
+      console.log(data)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   return (
     <div className="background-image login">
       <Header />
@@ -20,7 +39,7 @@ export default function Login() {
                     height={274.183}
                   />
                 </div>
-                <form action="">
+                <div>
                   <div className="form-group">
                     <label className="auth-label" form="member-email">
                       ชื่ออีเมลหรือชื่อผู้ใช้งาน
@@ -33,7 +52,7 @@ export default function Login() {
                     </label>
                     <input id="member-password" className="form-control auth-field" type="password"></input>
                   </div>
-                  <button id="form-button" className="form-btn btn-solid btn-full" type="submit">
+                  <button id="form-button" onClick={loginRequest} className="form-btn btn-solid btn-full" type="button">
                     เข้าสู่ระบบ
                   </button>
                   <div className="form-group" style={{ padding: "15px 0px 5px 0px" }}>
@@ -52,7 +71,7 @@ export default function Login() {
                       </span>
                     </label>
                   </div>
-                </form>
+                </div>
                 <div className="social-registration">
                   <div className="line-or">
                     <hr className="col-5" />
@@ -76,13 +95,13 @@ export default function Login() {
                   </a>
                   <a className="btn btn-box btn-solid btn-full">
                     <div className="flex-row">
-                      <div style={{maxHeight: "25px", margin: "auto 0px"}}>
-                      <Img src="/login/facebook-icon.svg"
-                        width={25}
-                        height={25}
-                        alt="Facebook"
+                      <div style={{ maxHeight: "25px", margin: "auto 0px" }}>
+                        <Img src="/login/facebook-icon.svg"
+                          width={25}
+                          height={25}
+                          alt="Facebook"
                         />
-                        </div>
+                      </div>
                       <hr />
                       <p className="text-btn">
                         เข้าสู่ระบบด้วย Facebook
@@ -90,7 +109,7 @@ export default function Login() {
                     </div>
                   </a>
                 </div>
-                <div style={{marginTop: "3rem"}}>
+                <div style={{ marginTop: "3rem" }}>
                   <a className="link-colorless" href="#">
                     สร้างบัญชีผู้ใช้งานใหม่
                   </a>
