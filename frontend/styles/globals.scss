@@ -4813,10 +4813,19 @@ a .panel-sub-title {
 
 .popup-register-content {
   width: 30%;
+  width: 600px;
   padding: 20px;
   color: #ffffff;
   background-color: #0e1b20;
   border-color: #e74e25;
+
+  @media (max-width: $ipad-size) {
+    width: 70%;
+  }
+
+  @media (max-width: $mobile-size) {
+    width: 90%;
+  }
 }
 
 .pop-modal .close {
