@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Popup from "reactjs-popup";
 import Footer from "../components/footer";
 import Header from "../components/header";
 import Img from "../components/image";
@@ -109,16 +110,70 @@ export default function Login() {
                     </div>
                   </a>
                 </div>
-                <div style={{ marginTop: "3rem" }}>
-                  <a className="link-colorless" href="#">
-                    สร้างบัญชีผู้ใช้งานใหม่
-                  </a>
+                <div className="m-t-20">
+                  <Popup className="popup-register"
+                    trigger={
+                      <button className="link-colorless" >
+                        สร้างบัญชีผู้ใช้งานใหม่
+                      </button>}
+                    modal
+                    closeOnDocumentClick={false}
+                    position="right center">
+                    {(close: any) => {
+                      return (
+                        <div className="pop-modal">
+                          <button className="close" onClick={close}>
+                            &times;
+                          </button>
+                          <div className="block-type-form text-center">
+                            <div className="block box-shadow-none">
+                              <Img className="logo-image m-b-10"
+                                src="/header/header-logo.png"
+                                width={120}
+                                height={41.8833}
+                                alt="Header Logo"
+                              />
+                              <div className="form">
+                                <form action="">
+                                  <div className="email-field form-group">
+                                    <input id="form_submission_email"
+                                      className="form-control"
+                                      type="email"
+                                      required={true}
+                                      placeholder="อีเมลของคุณ" />
+                                  </div>
+                                  <div className="text-field form-group">
+                                    <input id="form_submission_password"
+                                      className="form-control"
+                                      type="password"
+                                      required={true}
+                                      placeholder="รหัสผ่าน" />
+                                  </div>
+                                  <div className="phone-field form-group">
+                                    <input id="form_submission_phone"
+                                      className="form-control"
+                                      type="tel"
+                                      required={true}
+                                      placeholder="เบอร์โทรศัพท์" />
+                                  </div>
+                                  <button id="form-button" className="btn btn-solid btn-full btn-small" type="submit">
+                                    ลงทะเบียน
+                                  </button>
+                                </form>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      )
+                    }}
+                  </Popup>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
+
       <Footer />
     </div>
   )

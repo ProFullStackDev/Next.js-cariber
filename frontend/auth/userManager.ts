@@ -1,10 +1,21 @@
-export default function UserManager() {
-    function saveToken(token: string) {
+
+export default class UserManager {
+    tokenKey: string = "token";
+
+    constructor() {}
+
+    saveToken(token: string): void {
     }
 
-    function getToken(token: string) {
+    getToken(): string | undefined {
+        return "";
     }
 
-    function destroyToken(token: string) {
+    destroyToken(): void {
+        
+    }
+
+    isLoggedIn(): boolean {
+        return false;
     }
 }

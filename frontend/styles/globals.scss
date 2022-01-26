@@ -15,6 +15,7 @@
 @import "./especial/account.module.scss";
 @import "./especial/404.module.scss";
 @import "./sizer.scss";
+@import "reactjs-popup/dist/index.css";
 
 $frequency: 0;
 $show-grid: false;
@@ -4791,7 +4792,7 @@ a .panel-sub-title {
   border-radius: 50%;
 }
 
-.media-left{
+.media-left {
   padding-right: 10px;
 }
 
@@ -4799,4 +4800,26 @@ a .panel-sub-title {
   @media (min-width: $mobile-size) {
     margin-right: 15px;
   }
+}
+
+.popup-register-content {
+  width: 30%;
+  padding: 20px;
+  color: #ffffff;
+  background-color: #0e1b20;
+  border-color: #e74e25;
+}
+
+.pop-modal .close {
+  cursor: pointer;
+  position: absolute;
+  display: block;
+  padding: 3px 3px;
+  line-height: 15px;
+  right: -10px;
+  top: -10px;
+  font-size: 24px;
+  background: #ffffff;
+  border-radius: 18px;
+  border: 1px solid #cfcece;
 }
