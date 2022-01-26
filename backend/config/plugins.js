@@ -9,5 +9,17 @@ module.exports = ({ env }) => ({
         Bucket: env('AWS_BUCKET_NAME')
       }
     }
+  },
+  email: {
+    config: {
+      provider: 'sendgrid',
+      providerOptions: {
+        apiKey: env('SENDGRID_API_KEY')
+      },
+      settings: {
+        defaultFrom: 'supitcha.b@codium.co',
+        defaultReplyTo: 'supitcha.b@codium.co'
+      }
+    }
   }
 });
