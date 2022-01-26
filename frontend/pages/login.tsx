@@ -110,7 +110,7 @@ export default function Login() {
                     </div>
                   </a>
                 </div>
-                <div className="m-t-20">
+                <div className="m-t-30">
                   <Popup className="popup-register"
                     trigger={
                       <button className="link-colorless" >
@@ -125,15 +125,15 @@ export default function Login() {
                           <button className="close" onClick={close}>
                             &times;
                           </button>
-                          <div className="block-type-form text-center">
+                          <div className="block-type-form h-340 text-center">
                             <div className="block box-shadow-none">
-                              <Img className="logo-image m-b-10"
+                              <Img className="logo-image m-t-2"
                                 src="/header/header-logo.png"
                                 width={120}
                                 height={41.8833}
                                 alt="Header Logo"
                               />
-                              <div className="form">
+                              <div className="form p-t-30">
                                 <form action="">
                                   <div className="email-field form-group">
                                     <input id="form_submission_email"
@@ -150,11 +150,11 @@ export default function Login() {
                                       placeholder="รหัสผ่าน" />
                                   </div>
                                   <div className="phone-field form-group">
-                                    <input id="form_submission_phone"
+                                    <input id="form_submission_confirm_password"
                                       className="form-control"
                                       type="tel"
                                       required={true}
-                                      placeholder="เบอร์โทรศัพท์" />
+                                      placeholder="ยืนยันรหัสผ่าน" />
                                   </div>
                                   <button id="form-button" className="btn btn-solid btn-full btn-small" type="submit">
                                     ลงทะเบียน
@@ -173,7 +173,6 @@ export default function Login() {
           </div>
         </div>
       </div>
-
       <Footer />
     </div>
   )
