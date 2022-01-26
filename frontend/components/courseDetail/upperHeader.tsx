@@ -8,8 +8,8 @@ export default function UpperHeader({ header }: { header: string }) {
             {headerLocal.map((value, index) => {
               if (index <= 0) {
                 return (
-                  <h1 key={index} style={{ textAlign: "center" }}>
-                    <span style={{ color: "#e74e25" }}>
+                  <h1 key={index} className="text-center">
+                    <span className="color-primary">
                       <strong>
                         {value}
                       </strong>
@@ -18,8 +18,8 @@ export default function UpperHeader({ header }: { header: string }) {
                 )
               } else {
                 return (
-                  <h3 key={index} style={{ textAlign: "center" }}>
-                    <span style={{ color: "#fbf5e4" }}>
+                  <h3 key={index} className="text-center">
+                    <span className="color-smooth">
                       {value}
                     </span>
                   </h3>

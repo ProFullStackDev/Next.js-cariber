@@ -8,9 +8,9 @@ export default function CourseHeader({ yearlySubscriptionImage,
                                        singleCheckoutUrl }: CourseDetailCourseHeader) {
   return (
     <div className="background-dark">
-      <div className="sizer" style={{ paddingTop: "0px" }}>
+      <div className="sizer p-t-0">
         <div className="row align-items-center justify-content-center">
-          <div className="block-type-code text-left col-3 md-none" style={{ padding: "0px" }}>
+          <div className="block-type-code text-left col-3 md-none p-0">
             <div className="block box-shadow-none">
               <div className="image">
                 <a href="https://checkout.cariber.co?add-to-cart=685&cfp=dG9weWVhcmx5YmFubm5lcl9kZXNrdG9wX0M6L1VzZXJzL2luemVlL09uZURyaXZlJTIwLSUyMFVuaXZlcnNpdHklMjBvZiUyMFBoYXlhby9DYXJpYmVyJTIwZG91Y3VtZW50L3NhdmUlMjBwYWdlLyVFMCVCOCU4NCVFMCVCOCVBRCVFMCVCOCVBMyVFMCVCOSU4QyVFMCVCOCVBQSVFMCVCOCVBRCVFMCVCOCVBRCVFMCVCOCU5OSVFMCVCOSU4NCVFMCVCOCVBNSVFMCVCOCU5OSVFMCVCOSU4QyVFMCVCOCU4MSVFMCVCOCVCMSVFMCVCOCU5QSVFMCVCOCU4QiVFMCVCOCVCNCVFMCVCOSU4MiVFMCVCOCU4MSVFMCVCOSU4OSUyMCVFMCVCOSU4MCVFMCVCOCU4MSVFMCVCOCVCNSVFMCVCOCVBMiVFMCVCOCVBMyVFMCVCOCU5NSVFMCVCOCVCNCVFMCVCOCVBOCVFMCVCOCVCMSVFMCVCOCU4MSVFMCVCOCU5NCVFMCVCOCVCNCVFMCVCOSU4QyUyMCVFMCVCOSU4MCVFMCVCOCVBQSVFMCVCOCU5OSVFMCVCOCVCMiVFMCVCOSU4MCVFMCVCOCVBMSVFMCVCOCVCNyVFMCVCOCVBRCVFMCVCOCU4NyUyMEtpYXRpc3VrJTIwU2VuYW11YW5nLmh0bWw=">
@@ -37,7 +37,7 @@ export default function CourseHeader({ yearlySubscriptionImage,
           <div className="block-type-video col-8">
             <div className="block box-shadow-none">
               <div className="video">
-                <video width="100%" controls poster={videoPoster} muted style={{ borderRadius: "4px" }}>
+                <video className="b-r-4" width="100%" controls poster={videoPoster} muted>
                   <source src={video} type="video/mp4" />
                 </video>
               </div>
@@ -45,7 +45,7 @@ export default function CourseHeader({ yearlySubscriptionImage,
           </div>
           <div className="block-type-video col-8 lg-none">
             <div className="block box-shadow-none">
-              <div className="image" style={{ textAlign: "center" }}>
+              <div className="image text-center">
                 <a href="https://shp.ee/ncpeyxv">
                   <Img className="feature-image"
                     src={yearlySubscriptionImage}

@@ -5,14 +5,14 @@ export default function ReviewStudents() {
   const reviews = staticDataReview.reviewsCariberFirst
 
   return (
-    <div className="sizer reviewStudents" style={{ paddingTop: "20px" }}>
+    <div className="sizer reviewStudents p-t-20">
       <div className="container">
         <div className="row align-items-start justify-content-between">
           <div className="block-type-text text-left col-12">
             <div className="block box-shadow-none">
-              <h2 style={{ textAlign: "center" }}>
+              <h2 className="text-center">
                 <strong>
-                  <span style={{ color: "#e74e25" }}>
+                  <span className="color-primary">
                     รีวิวจากผู้เรียน
                   </span>
                 </strong>
@@ -31,17 +31,17 @@ export default function ReviewStudents() {
                       alt={value.name}
                     />
                     <div className="feature-text">
-                      <p style={{ textAlign: "center" }}>
-                        <span style={{ color: "#fbf5e4" }}>
+                      <p className="text-center">
+                        <span className="color-smooth">
                           &quot;{value.review}&quot;
                         </span>
                       </p>
                       <h4>
-                        <span style={{ color: "#ed9081" }}>
+                        <span className="color-secondary">
                           {value.name}
                         </span>
                       </h4>
-                      <span style={{ color: "#e74e25" }}>
+                      <span className="color-primary">
                         <em>
                           {value.career}
                         </em>

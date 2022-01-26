@@ -79,7 +79,7 @@ export default function SlideCourse({ slideCourses, slideView, imageWidth, image
                 <div className="owl-wrapper" style={{ transform: `translate3d(${-slideShowIndex * (itemFrameWidth) - 10}px, 0px, 0px)` }}>
                   {slideCourses.map((value, index) => {
                     return (
-                      <div key={index} className="owl-item" ref={refItemFrame} style={{ width: "fit-content" }}>
+                      <div key={index} className="owl-item" ref={refItemFrame}>
                         <div className="news-grid">
                           <div className="news-grid-image">
                             <a href={value.link}>
@@ -109,10 +109,10 @@ export default function SlideCourse({ slideCourses, slideView, imageWidth, image
               <div className="owl-controls clickable">
                 <div className="owl-buttons">
                   <button id="previous" className="owl-prev owl-button" onClick={previousSlide}>
-                    <i className="fas fa-chevron-left" style={{ color: "white" }}></i>
+                    <i className="fas fa-chevron-left color-smooth"></i>
                   </button>
                   <button id="next" className="owl-next owl-button" onClick={nextSlide}>
-                    <i className="fas fa-chevron-right" style={{ color: "white" }}></i>
+                    <i className="fas fa-chevron-right color-smooth"></i>
                   </button>
                 </div>
               </div>

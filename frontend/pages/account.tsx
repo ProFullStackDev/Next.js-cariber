@@ -112,7 +112,7 @@ export default function Account() {
                           &nbsp;100x100
                         </strong>
                       </p>
-                      <input type="file" accept="image/*" ref={hiddenFileInput} style={{ display: "none" }} />
+                      <input className="d-none" type="file" accept="image/*" ref={hiddenFileInput} />
                       <button type="button" onClick={handleClick} className="btn btn-primary btn-outline filepicker-btn fp-input">
                         Change Avatar
                       </button>

@@ -41,7 +41,7 @@ export default function Episode({ episode }: { episode: EpisodeProps }) {
                         </a>
                       </div>
                       <div className="media-body media-middle">
-                        <p style={{ marginBottom: "0px" }}>
+                        <p className="m-b-0">
                           บทเรียน 1 of 10
                         </p>
                       </div>
@@ -72,7 +72,7 @@ export default function Episode({ episode }: { episode: EpisodeProps }) {
                               <div className="media-left media-middle">
                                 {index === 0 ? (
                                   <p className="track-count active">
-                                    <i className="fa fa-play" style={{ color: "#e74e25" }}></i>
+                                    <i className="fa fa-play color-primary"></i>
                                   </p>
                                 ) : (
                                   <p className="track-count">{index + 1}</p>
@@ -101,7 +101,7 @@ export default function Episode({ episode }: { episode: EpisodeProps }) {
                               <div className="media-right media-middle">
                                 {value.progress === 100 && (
                                   <div>
-                                    <i className="fa fa-check" style={{ color: "#e74e25" }}></i>
+                                    <i className="fa fa-check color-primary"></i>
                                   </div>
                                 )}
                               </div>
@@ -133,13 +133,13 @@ export default function Episode({ episode }: { episode: EpisodeProps }) {
                       <span className="panel-text">
                         {episode.episodeDescription.map((value, index) => {
                           return (
-                            <h6 key={index} style={{ color: "black" }}>
+                            <h6 key={index} className="color-black">
                               {value}
                             </h6>
                           )
                         })}
                         <br />
-                        <h6 style={{ color: "black" }}>
+                        <h6 className="color-black">
                           *หากผู้ใดละเมิดนำงานไปเผยแพร่ คัดลอก หรือดัดแปลงไม่ว่าบางส่วนหรือทั้งหมดจะถูกดำเนินคดีตามกฎหมาย
                         </h6>
                       </span>

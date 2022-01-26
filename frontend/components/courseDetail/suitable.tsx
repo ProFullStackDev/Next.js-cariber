@@ -8,8 +8,8 @@ export default function Suitable({ suitable }: { suitable: Item[] }) {
         <div className="row align-items-center justify-content-center">
           <div className="block-type-text text-left col-6">
             <div className="block box-shadow-none">
-              <p style={{ fontSize: "26px", textAlign: "center" }}>
-                <span style={{ color: "#ed9081" }}>
+              <p className="f-s-26 text-center">
+                <span className="color-secondary">
                   <strong>
                     คอร์สนี้เหมาะสำหรับ
                   </strong>
@@ -20,16 +20,15 @@ export default function Suitable({ suitable }: { suitable: Item[] }) {
           <div className="block-type-text text-left col-10">
             <div className="block box-shadow-none row">
               {suitable.map((value) => {
-                if(value.label){
+                if (value.label) {
                   return (
                     <h6 key={`suitable-id-${value.id}`}
-                      className={`${value.label.length <= halfLine && "col-6"} ${value.label.length > halfLine && "col-12"}`}
-                      style={{ padding: "7px 0px 7px 30px" }}>
+                      className={`${value.label.length <= halfLine && "col-6"} ${value.label.length > halfLine && "col-12"} p-y-7 p-r-0 p-l-30`}>
                       <strong>
-                        <span style={{ color: "#ed9081" }}>
+                        <span className="color-secondary">
                           ✓ &nbsp;
                         </span>
-                        <span style={{ color: "#fbf5e4" }}>
+                        <span className="color-smooth">
                           {value.label}
                         </span>
                       </strong>

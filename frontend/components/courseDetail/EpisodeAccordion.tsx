@@ -10,14 +10,14 @@ export default function EpisodeAccordion({ totalHours, totalEpisodes, episodes }
             <div className="row block box-shadow-none justify-content-center">
               <h1 className="lg-mr-space row justify-content-center">
                 <strong>
-                  <span style={{ color: "#fbf5e4" }}>
+                  <span className="color-smooth">
                     ⌛ {totalHours} ชั่วโมง
                   </span>
                 </strong>
               </h1>
               <h1 className="row justify-content-center">
                 <strong>
-                  <span style={{ color: "#fbf5e4" }}>
+                  <span className="color-smooth">
                     📚 {totalEpisodes} บทเรียน
                   </span>
                 </strong>
