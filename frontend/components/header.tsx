@@ -30,14 +30,15 @@ export default function Header() {
     <header className="header">
       <div className="header-wrap">
         <div className="header-content header-content-desktop background-dark">
-          <div className="container header-container media" style={{ height: "43.5px" }}>
+          <div className="container header-container media h-44">
             <Link href="/" >
-              <a className="logo" style={{ width: 120, height: 41.8833 }}>
+              <a className="logo w-120 h-42">
                 <Img className="logo-image"
                   src="/header/header-logo.png"
-                  alt="Header Logo"
                   width={120}
-                  height={41.8833} />
+                  height={41.8833}
+                  alt="Header Logo"
+                   />
               </a>
             </Link>
             <div className="header-block header-switch-content header-block-menu media-body">
@@ -75,7 +76,7 @@ export default function Header() {
             </div>
           </div>
         </div>
-        <div className="header-content header-content-mobile background-dark" style={{ display: `${hamburgerOpened ? "block" : "none"}` }}>
+        <div className={`header-content header-content-mobile background-dark ${hamburgerOpened ? "d-block" : "d-none"}`}>
           <div className="header-block header-switch-content header-block-menu">
             <div className="link-list">
               {menu.map((value, index) => {

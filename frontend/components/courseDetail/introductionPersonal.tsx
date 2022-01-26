@@ -1,16 +1,16 @@
 import Img from "../image";
 import { CourseDetailIntroductionPersonal } from "../static/interface"
 
-export default function IntroductionPersonal({ fullName, personalHistoryImage }: CourseDetailIntroductionPersonal) {
+export default function IntroductionPersonal({ fullName, personalHistoryImage, highRatio }: CourseDetailIntroductionPersonal) {
   return (
     <div className="background-dark">
       <div className="row align-items-center justify-content-center">
         <div className="block-type-text text-left col-11">
           <div className="block box-shadow-none">
-            <h3 style={{ textAlign: "center", margin: "0px" }}>
-              <span style={{ color: "#ed9081" }}>
+            <h3 className="text-center m-0">
+              <span className="color-secondary">
                 <strong>
-                  รู้จักคุณ{fullName}
+                  รู้จัก{fullName}
                 </strong>
               </span>
             </h3>
@@ -21,8 +21,9 @@ export default function IntroductionPersonal({ fullName, personalHistoryImage }:
             <div className="image">
               <Img className="image-image"
                 src={personalHistoryImage}
-                width={995.6}
-                height={667.75}
+                width={900}
+                height={900*highRatio}
+                alt={fullName}
               />
             </div>
           </div>

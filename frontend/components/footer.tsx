@@ -10,12 +10,13 @@ export default function Footer() {
             <div className="container footer-container media">
               <div className="footer-block ">
                 <Link href="/">
-                <a className="logo" style={{ width: 40, height: 39.9667 }}>
+                <a className="logo w-40 h-40">
                   <Img className="logo-image"
                     src="/footer/footer-logo.jpg"
-                    alt="Footer Logo"
                     width={40}
-                    height={39.9667} />
+                    height={40} 
+                    alt="Footer Logo"
+                    />
                 </a>
                 </Link>
               </div>

@@ -10,31 +10,31 @@ export default function ShopeeReviews({ shopeeReviews }: { shopeeReviews: Shopee
           <div className="feature">
             <Img className="feature-image"
               src="/index/shopee.png"
-              alt="Shopee Review"
               width={200}
               height={65.9}
+              alt="Shopee Review"
             />
             <div className="feature-text">
-              <h5 style={{ textAlign: "center" }}>
-                <span style={{ color: "#fbf5e4" }}>
+              <h5 className="text-center">
+                <span className="color-smooth">
                   4.9 stars rating
                 </span>
               </h5>
-              <h5 style={{ textAlign: "center", marginBottom: "30px" }}>
+              <h5 className="text-center m-b-30">
                 <strong>
-                  <span style={{ color: "#0e1b20" }}>
+                  <span>
                     ⭐️⭐️⭐️⭐️⭐️
                   </span>
                 </strong>
               </h5>
               <h5>
-                <span style={{ color: "#e74e25" }}>
+                <span className="color-smooth">
                   จากทั้งหมด 207 รีวิวใน Shopee
                 </span>
               </h5>
             </div>
             <Link href="/reviews">
-              <a className="btn btn-solid btn-small btn-auto" style={{ margin: "0px" }}>
+              <a className="btn btn-solid btn-small btn-auto m-0">
                 คลิกเพื่อดูรีวิวทั้งหมด
               </a>
             </Link>
@@ -47,21 +47,21 @@ export default function ShopeeReviews({ shopeeReviews }: { shopeeReviews: Shopee
             <div className="block box-shadow-none">
               <div className="feature">
                 <div className="feature-text">
-                  <h5 style={{ textAlign: "center" }}>
+                  <h5 className="text-center">
                     <strong>
-                      <span style={{ color: "#0e1b20" }}>
+                      <span>
                         {value.rating}
                       </span>
                     </strong>
                   </h5>
-                  <p style={{ textAlign: "center" }}>
-                    <span style={{ color: "#fbf5e4" }}>
+                  <p className="text-center">
+                    <span className="color-smooth">
                       &quot;{value.review}&quot;
                     </span>
                   </p>
-                  <h6 style={{ textAlign: "center", fontSize: "16px" }}>
+                  <h6 className="f-s-16 text-center">
                     <em>
-                      <span style={{ color: "#e74e25" }}>
+                      <span className="color-smooth">
                         <strong>
                           {value.name}
                         </strong>
@@ -69,7 +69,7 @@ export default function ShopeeReviews({ shopeeReviews }: { shopeeReviews: Shopee
                     </em>
                     <br />
                     <em>
-                      <span style={{ color: "#e74e25" }}>
+                      <span className="color-smooth">
                         <strong>
                           {value.date}
                         </strong>

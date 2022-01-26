@@ -7,7 +7,7 @@ export default function ForgotPassword() {
       <Header />
       <div className="sizer sizer-full">
         <div className="container">
-          <div className="row align-items-center justify-content-center" style={{height: "670px"}}>
+          <div className="row align-items-center justify-content-center h-670">
             <div className="col-6 text-center">
               <div className="auth-content">
               <h1 className="auth-title">

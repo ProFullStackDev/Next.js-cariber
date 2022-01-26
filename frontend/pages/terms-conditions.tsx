@@ -11,7 +11,7 @@ export default function TermsConditions() {
             <div className="row align-items-center justify-content-center">
               <div className="block box-shadow-none">
                 <h1>
-                  <span style={{ color: "#303133" }}>
+                  <span className="color-grey">
                     <strong>
                       เงื่อนไขการใช้งาน (Terms and Conditions)
                     </strong>

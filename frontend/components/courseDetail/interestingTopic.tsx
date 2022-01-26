@@ -1,16 +1,17 @@
+import { strapiImage } from "../../models/content"
+import { Topics } from "../../models/courses"
 import Img from "../image"
-import { CourseDetailInterestingTopic } from "../static/interface"
 
-export default function InterestingTopic({ interestingTopics }: { interestingTopics: CourseDetailInterestingTopic[] }) {
+export default function InterestingTopic({ interestingTopics }: { interestingTopics: Topics[] }) {
   return (
     <div className="background-dark">
       <div className="container">
         <div className="row align-items-center justify-content-center">
           <div className="block-type-text text-center col-6">
             <div className="block box-shadow-none">
-              <p style={{ fontSize: "24px", textAlign: "center" }}>
+              <p className="f-s-24 text-center">
                 <strong>
-                  <span style={{ color: "#ed9081" }}>
+                  <span className="color-secondary">
                     หัวข้อที่น่าสนใจ
                   </span>
                 </strong>
@@ -24,15 +25,16 @@ export default function InterestingTopic({ interestingTopics }: { interestingTop
                 <div className="block box-shadow-none">
                   <div className="feature">
                     <Img className="feature-image"
-                      src={value.image}
+                      src={strapiImage(value.image.url)}
                       width={50}
                       height={50}
+                      alt={value.label}
                     />
                     <div className="feature-text">
-                      <p style={{ fontSize: "14px", textAlign: "center" }}>
+                      <p className="f-s-14 text-canter">
                         <strong>
-                          <span style={{ color: "#fbf5e4" }}>
-                            {value.name}
+                          <span className="color-smooth">
+                            {value.label}
                           </span>
                         </strong>
                       </p>

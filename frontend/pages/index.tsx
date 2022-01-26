@@ -30,7 +30,7 @@ const Index: NextPage = () => {
             <div className="block-type-form text-center col-3">
               <div className="block box-shadow-none">
                 <div className="form">
-                  <h2 style={{ fontSize: "28px" }}>
+                  <h2 className="f-s-28">
                     ลงทะเบียนทดลองเรียน 7 วัน ฟรี!
                   </h2>
                   <p>
@@ -73,7 +73,7 @@ const Index: NextPage = () => {
                 <div className="image">
                   <Img className="image-image"
                     src="/index/block-title.png"
-                    alt=""
+                    alt="ผู้นำตัวจริง"
                     width={855.733}
                     height={434.817}
                   />
@@ -89,9 +89,9 @@ const Index: NextPage = () => {
             <div className="row align-items-center justify-content-center">
               <div className="block-type-text text-left col-12">
                 <div className="block box-shadow-none">
-                  <h2 style={{ textAlign: "center" }}>
+                  <h2 className="text-center">
                     <strong>
-                      <span style={{ color: "#e74e25" }}>
+                      <span className="color-primary">
                         ปีใหม่นี้ยกระดับให้คุณเป็นคนใหม่ เรียนรู้กับ &lsquo;ผู้นำตัวจริง&rsquo; จากทุกวงการ<br />
                         แพ็กเกจรายปี ที่คุณจ่ายครั้งเดียว เข้าชมผู้สอนได้ทุกท่าน<br />
                       </span>
@@ -101,7 +101,7 @@ const Index: NextPage = () => {
               </div>
               <div className="block-type-feature text-center col-5">
                 <div className="block box-shadow-none">
-                  <div className="feature" style={{ display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center" }}>
+                  <div className="feature column-center">
                     <Img className="feature-image"
                       src="/index/yearly-subscription.jpg"
                       width={400}
@@ -132,20 +132,20 @@ const Index: NextPage = () => {
         <div className="sizer">
           <div className="row align-items-center justify-content-center">
             <div className="block-type-text text-center col-3">
-              <div className="block box-shadow-none" style={{ flexDirection: "column", alignItems: "center" }}>
-                <p style={{ fontSize: "30px" }}>
+              <div className="block box-shadow-none column-center">
+                <p className="f-s-30">
                   <strong>
-                    <span style={{ color: "#e74e25" }}>
+                    <span className="color-primary">
                       สูตรความสำเร็จกับ
                       <br />
                       &quot;ที่สุด&quot; ของประเทศ
                     </span>
                   </strong>
                 </p>
-                <p style={{ fontSize: "20px" }}>
+                <p className="f-s-20">
                   <em>
                     <strong>
-                      <span style={{ color: "#e74e25" }}>
+                      <span className="color-primary">
                         คอร์สออนไลน์กับผู้บริหาร ผู้นำทางความคิด แบบที่ไม่เคยมีมาก่อน
                       </span>
                     </strong>
@@ -155,6 +155,7 @@ const Index: NextPage = () => {
                   src="/index/yearly-subscription-1.jpg"
                   width={329.6}
                   height={211.55}
+                  alt="Yearly Subscription"
                 />
                 <a className="btn btn-solid btn-medium btn-auto" href="https://checkout.cariber.co/?add-to-cart=685&cfp=eWVhcmx5YmFubm5lcl9kZXNrdG9wXw==">
                   ซื้อแพ็กเกจรายปี
@@ -164,7 +165,7 @@ const Index: NextPage = () => {
             <div className="block-type-video col-7">
               <div className="block box-shadow-none">
                 <div className="video">
-                  <video width="100%" controls loop={true} muted={true} autoPlay={true} style={{ borderRadius: "4px" }}>
+                  <video className="b-r-4" width="100%" controls loop={true} muted={true} autoPlay={true}>
                     <source src="/index/cariber-video.mp4" type="video/mp4" />
                   </video>
                 </div>
@@ -178,7 +179,7 @@ const Index: NextPage = () => {
       </div>
       <div className="background-dark">
         <ReviewStudents />
-        <div className="sizer" style={{ paddingTop: "20px" }}>
+        <div className="sizer p-t-20">
           <div className="container">
             <ShopeeReviews shopeeReviews={shopeeReviews} />
           </div>
@@ -194,8 +195,8 @@ const Index: NextPage = () => {
           <div className="row align-items-start justify-content-center">
             <div className="block-type-text text-left col-8">
               <div className="block box-shadow-none">
-                <h2 style={{ textAlign: "center" }}>
-                  <span style={{ color: "#e74e25" }}>
+                <h2 className="text-center">
+                  <span className="color-primary">
                     คำถามที่พบบ่อย
                   </span>
                 </h2>

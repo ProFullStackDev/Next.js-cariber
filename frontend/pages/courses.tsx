@@ -2,19 +2,19 @@ import Img from "../components/image"
 import Footer from "../components/footer"
 import Header from "../components/header"
 import FooterBrand from "../components/footerBrand"
-import { strapi, strapiApi } from "../models/content"
+import { strapiApi, strapiImage } from "../models/content"
 import { Course } from "../models/courses"
-import { ResponseData } from "../models/data"
+import { ResponseDataList } from "../models/data"
 import Link from "next/link"
 
-export default function Courses({ courses }: { courses: ResponseData<Course> }) {
+export default function Courses({ courses }: { courses: ResponseDataList<Course> }) {
   return (
     <div className="background-image courses">
       <Header />
       <div className="sizer">
         <div className="container">
           <div className="row align-items-center">
-            <div className="block-type-image text-col-12" style={{ marginBottom: 0 }}>
+            <div className="block-type-image text-col-12 m-b-0">
               <div className="block box-shadow-none background-unrecognized">
                 <div className="image">
                   <a href="https://checkout.cariber.co/?add-to-cart=685&amp;cfp=bGFyZ2ViYW5uZXJfY291cnNlcw==">
@@ -29,7 +29,7 @@ export default function Courses({ courses }: { courses: ResponseData<Course> }) 
             </div>
             <div className="block-type-text text-left col-12">
               <div className="block box-shadow-none background-unrecognized">
-                <h2 style={{ textAlign: "center", color: "#e74e25" }}>
+                <h2 className="color-primary text-center">
                   คอร์สทั้งหมด
                 </h2>
               </div>
@@ -38,14 +38,13 @@ export default function Courses({ courses }: { courses: ResponseData<Course> }) 
             {courses ? courses.data.map((value) => {
               return (
                 <div key={value.id} className="block-type-feature text-center col-3">
-                  <div className="block box-shadow-large background-light"
-                    style={{ backgroundColor: "#ffffff", borderRadius: "4px" }}>
-                    <div style={{ padding: "15px" }}>
+                  <div className="block box-shadow-large background-white p-12 b-r-4">
+                    <div>
                       <div className="feature">
-                        <Link href="/thakorn-piyapan">
-                          <a>
+                        <Link href={`/course/${value.id}`}>
+                          <a className={`${!value.course_detail && "disabled"}`}>
                             <Img className="feature-image"
-                              src={strapi + value.thumbnail_image?.url}
+                              src={strapiImage(value.thumbnail_image?.url)}
                               alt={value?.thumbnail_image?.name}
                               width={262.5}
                               height={147.65} />
@@ -53,9 +52,9 @@ export default function Courses({ courses }: { courses: ResponseData<Course> }) 
                         </Link>
                         <div className="feature-text">
                           <h5>
-                            <Link href="/thakorn-piyapan">
-                              <a>
-                                <span style={{ color: "#223f99" }}>
+                            <Link href={`/course/${value.id}`}>
+                              <a className={`${!value.course_detail && "disabled"}`}>
+                                <span className="color-darkblue">
                                   <strong>
                                     {value.speaker_name}
                                   </strong>
@@ -63,10 +62,10 @@ export default function Courses({ courses }: { courses: ResponseData<Course> }) 
                               </a>
                             </Link>
                           </h5>
-                          <p style={{ fontSize: "12px" }}>
-                            <Link href="/thakorn-piyapan">
-                              <a>
-                              {value.course_name}
+                          <p className="f-s-12">
+                            <Link href={`/course/${value.id}`}>
+                              <a className={`${!value.course_detail && "disabled"}`}>
+                                {value.course_name}
                               </a>
                             </Link>
                           </p>
@@ -90,8 +89,8 @@ export default function Courses({ courses }: { courses: ResponseData<Course> }) 
 
 export async function getStaticProps() {
   try {
-    const response = await fetch(strapiApi + '/courses');
-    const data = await response.json() as ResponseData<Course>;
+    const response = await fetch(strapiApi + "/courses");
+    const data = await response.json() as ResponseDataList<Course>;
     return { props: { courses: data } }
   } catch (error) {
     console.error(error);

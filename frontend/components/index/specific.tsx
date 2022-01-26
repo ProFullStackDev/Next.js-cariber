@@ -8,9 +8,9 @@ export default function Specific() {
           <div className="image">
             <Img className="image-image"
               src="/index/book.webp"
-              alt="กว่า 168 บทเรียน จากผู้เชี่ยวชาญ"
               width={70.0333}
               height={70.0333}
+              alt="กว่า 168 บทเรียน จากผู้เชี่ยวชาญ"
             />
           </div>
         </div>
@@ -18,12 +18,12 @@ export default function Specific() {
       <div className="block-type-text text-left col-2">
         <div className="block box-shadow-none">
           <h5>
-            <span style={{ fontWeight: "400" }}>
+            <span>
               กว่า 168 บทเรียน
             </span>
           </h5>
           <h5>
-            <span style={{ fontWeight: "400" }}>
+            <span>
               จากผู้เชี่ยวชาญ
             </span>
           </h5>
@@ -34,9 +34,9 @@ export default function Specific() {
           <div className="image">
             <Img className="image-image"
               src="/index/hourglass.webp"
-              alt="เต็มอิ่มกับคอร์สเรียน กว่า 31 ชั่วโมง"
               width={70.0333}
               height={70.0333}
+              alt="เต็มอิ่มกับคอร์สเรียน กว่า 31 ชั่วโมง"
             />
           </div>
         </div>
@@ -44,12 +44,12 @@ export default function Specific() {
       <div className="block-type-text text-left col-2">
         <div className="block box-shadow-none">
           <h5>
-            <span style={{ fontWeight: "400" }}>
+            <span>
               เต็มอิ่มกับคอร์สเรียน
             </span>
           </h5>
           <h5>
-            <span style={{ fontWeight: "400" }}>
+            <span>
               กว่า 31 ชั่วโมง
             </span>
           </h5>
@@ -60,9 +60,9 @@ export default function Specific() {
           <div className="image">
             <Img className="image-image"
               src="/index/person.webp"
-              alt="เต็มอิ่มกับคอร์สเรียน กว่า 31 ชั่วโมง"
               width={70.0333}
               height={70.0333}
+              alt="อัพเดทคอร์สใหม่ ตลอดทั้งปี"
             />
           </div>
         </div>
@@ -70,12 +70,12 @@ export default function Specific() {
       <div className="block-type-text text-left col-2">
         <div className="block box-shadow-none">
           <h5>
-            <span style={{ fontWeight: "400" }}>
+            <span>
               อัพเดทคอร์สใหม่
             </span>
           </h5>
           <h5>
-            <span style={{ fontWeight: "400" }}>
+            <span>
               ตลอดทั้งปี
             </span>
           </h5>

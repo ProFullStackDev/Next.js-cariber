@@ -11,6 +11,7 @@ export default function NextInstructorForm() {
                 <Img src="/nextInstructorForm/title-image.jpg"
                   width={722.5}
                   height={274.883}
+                  alt="ผู้สอนคนต่อไป"
                 />
               </div>
             </div>

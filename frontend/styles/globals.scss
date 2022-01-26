@@ -12,7 +12,9 @@
 @import "./especial/accordion.module.scss";
 @import "./especial/episode.module.scss";
 @import "./especial/nextInstructorForm.module.scss";
+@import "./especial/account.module.scss";
 @import "./sizer.scss";
+@import "./pixel-helper.scss";
 
 $frequency: 0;
 $show-grid: false;
@@ -72,11 +74,11 @@ $modal-video-settings: false;
 $two-step-button-text: Get Started;
 $two-step-full-screen: false;
 $two-step-play-button: true;
-$font-size-body-mobile: 16px;
+$font-size-body-mobile: 14px;
 $background-dark-color: #0e1b20;
 $two-step-button-style: solid;
 $two-step-button-width: full;
-$font-size-body-desktop: 18px;
+$font-size-body-desktop: 16px;
 $modal-controls-on-load: false;
 $two-step-border-radius: 4;
 $modal-button-text-color: "";
@@ -4649,6 +4651,14 @@ a,
   display: none;
 }
 
+.d-none {
+  display: none;
+}
+
+.d-block {
+  display: block;
+}
+
 .pag {
   font-weight: 700;
   position: relative;
@@ -4783,4 +4793,69 @@ a .panel-sub-title {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.img-circle {
+  border-radius: 50%;
+}
+
+.media-left {
+  padding-right: 10px;
+}
+
+.lg-mr-space {
+  @media (min-width: $mobile-size) {
+    margin-right: 15px;
+  }
+}
+
+.color-smooth {
+  color: #fbf5e4;
+}
+
+.color-secondary {
+  color: #ed9081;
+}
+
+.color-primary {
+  color: #e74e25;
+}
+
+.color-black {
+  color: #0e1b20;
+}
+
+.column-center {
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  align-items: center !important;
+}
+
+.background-white {
+  background-color: white;
+
+  a {
+    color: $color-body;
+  }
+}
+
+.color-darkblue {
+  color: #223f99;
+
+  a {
+    color: #223f99 !important;
+  }
+}
+
+.color-grey {
+  color: #303133;
+}
+
+.h-max {
+  height: 100%;
+}
+
+.justify-end {
+  justify-self: end;
 }

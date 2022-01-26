@@ -19,25 +19,7 @@ interface EpisodeProps {
   episodes: ProductEpisode[]
 }
 
-export default function Episode() {
-  const episode: EpisodeProps =
-  {
-    episodeName: "Teaser",
-    episodeDescription: [
-      "‘ซิโก้’ เกียรติศักดิ์ เสนาเมือง อดีตนักฟุตบอลและหัวหน้าผู้ฝึกสอนทีมชาติไทยที่เคยพาทีมชาติไทยสร้างประวัติศาสตร์คว้าแชมป์อาเซียนคัพได้ถึง 2 สมัย",
-      "เข้าใจหน้าที่ของนักเตะและโค้ช เรียนรู้แผนการเล่นและแท็กติกในเกมฟุตบอล และเห็นความสำคัญของการเล่นอย่างเป็นระบบ",
-      "เล่าทุกรายละเอียด วิเคราะห์แท็กติกชัดๆ กับทุกเบื้องหลัง 90 นาทีในสนาม",
-      "“เพราะฟุตบอลเป็นมากกว่ากีฬา”"
-    ],
-    productName: "The Art of Football Tactics",
-    videoId: "ba36e29c18b8c21b53589a403cd5b09b",
-    episodes: staticDataProduct.episodes,
-    fileUrl: "https://www.cariber.co/resource_redirect/downloads/sites/163642/themes/2149288781/downloads/5kt5U0rKQeqyuJRSPSkL_Summary_Ep14.pdf",
-    instructorImage: "/products/instructor-image.jpg",
-    instructorName: "เกียรติศักดิ์ เสนาเมือง",
-    instructorRemark: "เพราะความสำเร็จของฟุตบอลเกิดจากทีมเวิร์ค และกว่าที่จะมาเป็นทีมได้ต้องมีกระบวนการสร้าง"
-  }
-
+export default function Episode({ episode }: { episode: EpisodeProps }) {
   return (
     <div className="episode">
       <Header />
@@ -59,7 +41,7 @@ export default function Episode() {
                         </a>
                       </div>
                       <div className="media-body media-middle">
-                        <p style={{marginBottom: "0px"}}>
+                        <p className="m-b-0">
                           บทเรียน 1 of 10
                         </p>
                       </div>
@@ -90,7 +72,7 @@ export default function Episode() {
                               <div className="media-left media-middle">
                                 {index === 0 ? (
                                   <p className="track-count active">
-                                    <i className="fa fa-play" style={{ color: "#e74e25" }}></i>
+                                    <i className="fa fa-play color-primary"></i>
                                   </p>
                                 ) : (
                                   <p className="track-count">{index + 1}</p>
@@ -101,6 +83,7 @@ export default function Episode() {
                                   src={value.image}
                                   width={70}
                                   height={39.3833}
+                                  alt={value.title}
                                 />
                               </div>
                               <div className="media-body media-middle">
@@ -118,7 +101,7 @@ export default function Episode() {
                               <div className="media-right media-middle">
                                 {value.progress === 100 && (
                                   <div>
-                                    <i className="fa fa-check" style={{ color: "#e74e25" }}></i>
+                                    <i className="fa fa-check color-primary"></i>
                                   </div>
                                 )}
                               </div>
@@ -150,13 +133,13 @@ export default function Episode() {
                       <span className="panel-text">
                         {episode.episodeDescription.map((value, index) => {
                           return (
-                            <h6 key={index} style={{ color: "black" }}>
+                            <h6 key={index} className="color-black">
                               {value}
                             </h6>
                           )
                         })}
                         <br />
-                        <h6 style={{ color: "black" }}>
+                        <h6 className="color-black">
                           *หากผู้ใดละเมิดนำงานไปเผยแพร่ คัดลอก หรือดัดแปลงไม่ว่าบางส่วนหรือทั้งหมดจะถูกดำเนินคดีตามกฎหมาย
                         </h6>
                       </span>
@@ -177,4 +160,37 @@ export default function Episode() {
       <Footer />
     </div>
   )
+}
+
+export async function getStaticPaths() {
+  return {
+    paths: [
+      { params: { episodeId: "1" } }
+    ],
+    fallback: false
+  };
+}
+
+
+export async function getStaticProps() {
+  return {
+    props: {
+      episode: {
+        episodeName: "Teaser",
+        episodeDescription: [
+          "‘ซิโก้’ เกียรติศักดิ์ เสนาเมือง อดีตนักฟุตบอลและหัวหน้าผู้ฝึกสอนทีมชาติไทยที่เคยพาทีมชาติไทยสร้างประวัติศาสตร์คว้าแชมป์อาเซียนคัพได้ถึง 2 สมัย",
+          "เข้าใจหน้าที่ของนักเตะและโค้ช เรียนรู้แผนการเล่นและแท็กติกในเกมฟุตบอล และเห็นความสำคัญของการเล่นอย่างเป็นระบบ",
+          "เล่าทุกรายละเอียด วิเคราะห์แท็กติกชัดๆ กับทุกเบื้องหลัง 90 นาทีในสนาม",
+          "“เพราะฟุตบอลเป็นมากกว่ากีฬา”"
+        ],
+        productName: "The Art of Football Tactics",
+        videoId: "ba36e29c18b8c21b53589a403cd5b09b",
+        episodes: staticDataProduct.episodes,
+        fileUrl: "https://www.cariber.co/resource_redirect/downloads/sites/163642/themes/2149288781/downloads/5kt5U0rKQeqyuJRSPSkL_Summary_Ep14.pdf",
+        instructorImage: "/products/instructor-image.jpg",
+        instructorName: "เกียรติศักดิ์ เสนาเมือง",
+        instructorRemark: "เพราะความสำเร็จของฟุตบอลเกิดจากทีมเวิร์ค และกว่าที่จะมาเป็นทีมได้ต้องมีกระบวนการสร้าง"
+      }
+    }
+  };
 }
