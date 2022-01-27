@@ -4,7 +4,7 @@ export default function FreeTrialReceived() {
   return (
     <div className="background-image h-full-center">
       <div className="block-type-text text-center col-6">
-        <div className="block box-shadow-large background-light" style={{ padding: "50px" }}>
+        <div className="block box-shadow-large background-light p-50">
           <h1>
             🎉
           </h1>
@@ -23,7 +23,7 @@ export default function FreeTrialReceived() {
             หรือ email : contact@cariber.co
           </p>
           <Link href="/login" passHref={true}>
-            <a className="btn btn-box btn-solid btn-medium" style={{ color: "white" }}>
+            <a className="btn btn-box btn-solid btn-medium color-smooth">
               เข้าสู่ระบบ
             </a>
           </Link>

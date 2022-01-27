@@ -1,10 +1,11 @@
 import Img from "../image";
 import { CourseDetailCourseHeader } from "../static/interface"
+import VideoPlayer from "../videoPlayer";
 
 export default function CourseHeader({ yearlySubscriptionImage,
                                        singleCourseImage,
                                        videoPoster,
-                                       video,
+                                       videoId,
                                        singleCheckoutUrl }: CourseDetailCourseHeader) {
   return (
     <div className="background-dark">
@@ -37,9 +38,7 @@ export default function CourseHeader({ yearlySubscriptionImage,
           <div className="block-type-video col-8">
             <div className="block box-shadow-none">
               <div className="video">
-                <video className="b-r-4" width="100%" controls poster={videoPoster} muted>
-                  <source src={video} type="video/mp4" />
-                </video>
+                <VideoPlayer videoId={videoId}/>
               </div>
             </div>
           </div>

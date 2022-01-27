@@ -13,6 +13,14 @@ $maximum-pixel-size : 1000;
   .h-#{$i} {
     height: #{$i}px !important;
   }
+
+  .m-w-#{$i} {
+    max-width: #{$i}px !important;
+  }
+
+  .m-h-#{$i} {
+    max-height: #{$i}px !important;
+  }
 }
 
 @for $i from 0 to $maximum-pixel-space {

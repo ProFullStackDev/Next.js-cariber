@@ -1,6 +1,6 @@
 import Link from "next/link";
-import { Router, useRouter } from "next/router";
-import { useState } from "react";
+import { useRouter } from "next/router";
+import { FormEvent, useState } from "react";
 import Popup from "reactjs-popup";
 import UserManager from "../auth/userManager";
 import Footer from "../components/footer";
@@ -16,32 +16,39 @@ export default function Login() {
     isError: false,
     message: "",
   });
+  const [form, setForm] = useState({
+    email: "",
+    password: ""
+  });
 
-  async function loginRequest() {
+  async function loginRequest(event: FormEvent) {
+    event.preventDefault();
     setError({
       isError: false,
       message: ""
     })
     const formData = new FormData();
-    formData.append('identifier', "test_user@codium.co");
-    formData.append('password', "Codium123!");
-    try {
-      const response = await fetch(strapiApiAuth, {
-        method: "POST",
-        body: formData,
-      })
-      const data = await response.json() as Auth
-      if (data.error === undefined) {
-        userManager.saveToken(data.jwt)
-        router.replace("/library")
-      } else {
-        setError({
-          isError: true,
-          message: data.error.message
+    formData.append("identifier", form.email);
+    formData.append("password", form.password);
+    if (form.email && form.password) {
+      try {
+        const response = await fetch(strapiApiAuth, {
+          method: "POST",
+          body: formData,
         })
+        const data = await response.json() as Auth
+        if (data.error === undefined) {
+          userManager.saveToken(data.jwt)
+          router.replace("/library")
+        } else {
+          setError({
+            isError: true,
+            message: data.error.message
+          })
+        }
+      } catch (error) {
+        console.log(error)
       }
-    } catch (error) {
-      console.log(error)
     }
   }
 
@@ -73,21 +80,32 @@ export default function Login() {
                   {error.isError && (
                     showError(error.message)
                   )}
-                  <div className="form-group">
-                    <label className="auth-label" form="member-email">
-                      ชื่ออีเมลหรือชื่อผู้ใช้งาน
-                    </label>
-                    <input id="member-email" className="form-control auth-field" type="text"></input>
-                  </div>
-                  <div className="form-group">
-                    <label className="auth-label" form="member-password">
-                      รหัสผ่าน
-                    </label>
-                    <input id="member-password" className="form-control auth-field" type="password"></input>
-                  </div>
-                  <button id="form-button" onClick={loginRequest} className="form-btn btn-solid btn-full" type="button">
-                    เข้าสู่ระบบ
-                  </button>
+                  <form onSubmit={loginRequest}>
+                    <div className="form-group">
+                      <label className="auth-label" form="member-email">
+                        ชื่ออีเมลหรือชื่อผู้ใช้งาน
+                      </label>
+                      <input id="member-email"
+                        onChange={e => { form.email = e.currentTarget.value; }}
+                        className="form-control auth-field"
+                        type="text"
+                        required></input>
+                    </div>
+                    <div className="form-group">
+                      <label className="auth-label" form="member-password">
+                        รหัสผ่าน
+                      </label>
+                      <input
+                        id="member-password"
+                        onChange={e => { form.password = e.currentTarget.value; }}
+                        className="form-control auth-field"
+                        type="password"
+                        required></input>
+                    </div>
+                    <button id="form-button" className="form-btn btn-solid btn-full" type="submit">
+                      เข้าสู่ระบบ
+                    </button>
+                  </form>
                   <div className="form-group p-t-15 p-x-0 p-n-5">
                     <label className="jus-between">
                       <span className="auth-label">
@@ -128,7 +146,7 @@ export default function Login() {
                   </a>
                   <a className="btn btn-box btn-solid btn-full">
                     <div className="flex-row">
-                      <div style={{ maxHeight: "25px", margin: "auto 0px" }}>
+                      <div className="facebook-icon">
                         <Img src="/login/facebook-icon.svg"
                           width={25}
                           height={25}

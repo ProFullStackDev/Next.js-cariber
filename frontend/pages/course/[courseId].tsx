@@ -33,7 +33,7 @@ export default function CourseDetail({ course }: { course: ResponseData<Course> 
         <CourseHeader yearlySubscriptionImage={"/courseDetail/yearly-sucscription-lg.png"}
           yearlySubscriptionImageMobile={"/courseDetail/yearly-sucscription-sm.png"}
           singleCourseImage={"/courseDetail/single-course.jpg"}
-          video={""}
+          videoId={course.data.course_detail.teaser_url}
           videoPoster={""}
           singleCheckoutUrl={course.data.course_detail.order_link} />
         {youtubeEPItems.length > 0 && (

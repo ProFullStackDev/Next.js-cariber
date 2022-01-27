@@ -4,6 +4,14 @@ import React from 'react'
 import Script from 'next/script'
 import Head from 'next/head'
 
+function SafeHydrate({ children }: { children: React.ReactNode }) {
+  return (
+    <div suppressHydrationWarning>
+      {typeof window === 'undefined' ? null : children}
+    </div>
+  )
+}
+
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <React.Fragment>
@@ -12,9 +20,9 @@ function MyApp({ Component, pageProps }: AppProps) {
         <title>Cariber</title>
         <link rel="icon" href="/title-icon.png" type="image/x-icon"></link>
       </Head>
-      <div>
+      <SafeHydrate>
         <Component {...pageProps} />
-      </div>
+      </SafeHydrate>
     </React.Fragment>
   )
 }

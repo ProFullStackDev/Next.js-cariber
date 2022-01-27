@@ -66,7 +66,7 @@ export interface CourseDetailCourseHeader {
   yearlySubscriptionImage: string,
   yearlySubscriptionImageMobile: string,
   singleCourseImage: string,
-  video: string,
+  videoId: string,
   videoPoster: string,
   singleCheckoutUrl: string
 }
