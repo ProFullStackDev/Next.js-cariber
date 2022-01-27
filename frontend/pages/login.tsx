@@ -1,5 +1,8 @@
 import Link from "next/link";
+import { Router, useRouter } from "next/router";
+import { useState } from "react";
 import Popup from "reactjs-popup";
+import UserManager from "../auth/userManager";
 import Footer from "../components/footer";
 import Header from "../components/header";
 import Img from "../components/image";
@@ -7,8 +10,18 @@ import { Auth } from "../models/auth";
 import { strapiApiAuth } from "../models/content";
 
 export default function Login() {
+  const router = useRouter()
+  const userManager = new UserManager()
+  const [error, setError] = useState({
+    isError: false,
+    message: "",
+  });
 
   async function loginRequest() {
+    setError({
+      isError: false,
+      message: ""
+    })
     const formData = new FormData();
     formData.append('identifier', "test_user@codium.co");
     formData.append('password', "Codium123!");
@@ -18,10 +31,26 @@ export default function Login() {
         body: formData,
       })
       const data = await response.json() as Auth
-      console.log(data)
+      if (data.error === undefined) {
+        userManager.saveToken(data.jwt)
+        router.replace("/library")
+      } else {
+        setError({
+          isError: true,
+          message: data.error.message
+        })
+      }
     } catch (error) {
       console.log(error)
     }
+  }
+
+  function showError(message: string) {
+    return (
+      <div className="auth-message alert alert-danger">
+        {message}
+      </div>
+    )
   }
 
   return (
@@ -41,6 +70,9 @@ export default function Login() {
                   />
                 </div>
                 <div>
+                  {error.isError && (
+                    showError(error.message)
+                  )}
                   <div className="form-group">
                     <label className="auth-label" form="member-email">
                       ชื่ออีเมลหรือชื่อผู้ใช้งาน
@@ -115,7 +147,8 @@ export default function Login() {
                     trigger={
                       <button className="link-colorless" >
                         สร้างบัญชีผู้ใช้งานใหม่
-                      </button>}
+                      </button>
+                    }
                     modal
                     closeOnDocumentClick={false}
                     position="right center">

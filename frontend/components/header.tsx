@@ -12,8 +12,15 @@ interface Menu {
 export default function Header() {
   const userManager = new UserManager()
   const [hamburgerOpened, setHamburgerOpened] = useState(false);
-  const menu: Menu[] = [
+
+  const menuLogedIn: Menu[] = [
     { url: "/library", name: "คอร์สของฉัน" },
+    { url: "/courses", name: "คอร์สทั้งหมด" },
+    { url: "https://blog.cariber.co/", name: "บทความ" },
+    { url: "/reviews", name: "รีวิว" },
+  ];
+
+  const menu: Menu[] = [
     { url: "/courses", name: "คอร์สทั้งหมด" },
     { url: "https://blog.cariber.co/", name: "บทความ" },
     { url: "/reviews", name: "รีวิว" },
@@ -22,12 +29,12 @@ export default function Header() {
   const menuUser: Menu[] = [
     { url: "/library", name: "คอร์สของฉัน" },
     { url: "/account", name: "การตั้งค่า" },
-    { url: "#", name: "ออกจากระบบ" },
+    { url: "/logout", name: "ออกจากระบบ" },
   ];
 
   const menuUserMobile: Menu[] = [
     { url: "/account", name: "การตั้งค่า" },
-    { url: "#", name: "ออกจากระบบ" },
+    { url: "/logout", name: "ออกจากระบบ" },
   ];
 
   useEffect(() => {
@@ -57,13 +64,27 @@ export default function Header() {
             </Link>
             <div className="header-block header-switch-content header-block-menu media-body">
               <div className="link-list justify-content-right">
-                {menu.map((value, index) => {
-                  return (
-                    <a key={index} className="link-list-link" href={value.url} rel="noopener">
-                      {value.name}
-                    </a>
-                  )
-                })}
+                {userManager.isLoggedIn() ? (
+                  <div>
+                    {menuLogedIn.map((value, index) => {
+                      return (
+                        <a key={index} className="link-list-link" href={value.url}>
+                          {value.name}
+                        </a>
+                      )
+                    })}
+                  </div>) : (
+                  <div>
+                    {menu.map((value, index) => {
+                      return (
+                        <a key={index} className="link-list-link" href={value.url}>
+                          {value.name}
+                        </a>
+                      )
+                    })}
+                  </div>
+                )}
+
               </div>
             </div>
             <div className="header-block header-switch-content header-block-cta">
@@ -77,7 +98,7 @@ export default function Header() {
                 <div className="user-avatar-block">
                   <Popup trigger={<div>
                     <Img className="user-avatar"
-                      src={"default_avatar.webp"}
+                      src={"/default_avatar.webp"}
                       width={40}
                       height={40}
                       alt="default_avatar.webp" />
@@ -99,7 +120,6 @@ export default function Header() {
                       })}
                     </div>
                   </Popup>
-
                 </div>
               </div>
             ) : (
@@ -113,7 +133,6 @@ export default function Header() {
                 </div>
               </div>
             )}
-
             <div className={`hamburger hidden-desktop ${hamburgerOpened && "hamburger-opened"}`} onClick={switchHamburger}>
               <div className="hamburger-slices">
                 <div className="hamburger-slice hamburger-slice-1"></div>
@@ -126,15 +145,27 @@ export default function Header() {
         </div>
         <div className={`header-content header-content-mobile background-dark ${hamburgerOpened ? "d-block" : "d-none"}`}>
           <div className="header-block header-switch-content header-block-menu">
-            <div className="link-list">
-              {menu.map((value, index) => {
-                return (
-                  <a key={index} className="link-list-link" href={value.url}>
-                    {value.name}
-                  </a>
-                )
-              })}
-            </div>
+            {userManager.isLoggedIn() ? (
+              <div className="link-list">
+                {menuLogedIn.map((value, index) => {
+                  return (
+                    <a key={index} className="link-list-link" href={value.url}>
+                      {value.name}
+                    </a>
+                  )
+                })}
+              </div>
+            ) : (
+              <div className="link-list">
+                {menu.map((value, index) => {
+                  return (
+                    <a key={index} className="link-list-link" href={value.url}>
+                      {value.name}
+                    </a>
+                  )
+                })}
+              </div>
+            )}
             <div className="header-block header-switch-content header-block-cta">
               <a className="btn btn-small btn-full"
                 href="https://checkout.cariber.co?add-to-cart=685&cfp=eWVhcmx5YmFubm5lcl9kZXNrdG9wX0M6L1VzZXJzL2luemVlL09uZURyaXZlJTIwLSUyMFVuaXZlcnNpdHklMjBvZiUyMFBoYXlhby9DYXJpYmVyJTIwZG91Y3VtZW50L3NhdmUlMjBwYWdlLyVFMCVCOCU4NCVFMCVCOCVBRCVFMCVCOCVBMyVFMCVCOSU4QyVFMCVCOCVBQSVFMCVCOCVBRCVFMCVCOCVBRCVFMCVCOCU5OSVFMCVCOSU4NCVFMCVCOCVBNSVFMCVCOCU5OSVFMCVCOSU4QyVFMCVCOCU4MSVFMCVCOCVCMSVFMCVCOCU5QSVFMCVCOCU4QiVFMCVCOCVCNCVFMCVCOSU4MiVFMCVCOCU4MSVFMCVCOSU4OSUyMCVFMCVCOSU4MCVFMCVCOCU4MSVFMCVCOCVCNSVFMCVCOCVBMiVFMCVCOCVBMyVFMCVCOCU5NSVFMCVCOCVCNCVFMCVCOCVBOCVFMCVCOCVCMSVFMCVCOCU4MSVFMCVCOCU5NCVFMCVCOCVCNCVFMCVCOSU4QyUyMCVFMCVCOSU4MCVFMCVCOCVBQSVFMCVCOCU5OSVFMCVCOCVCMiVFMCVCOSU4MCVFMCVCOCVBMSVFMCVCOCVCNyVFMCVCOCVBRCVFMCVCOCU4NyUyMEtpYXRpc3VrJTIwU2VuYW11YW5nLmh0bWw=">

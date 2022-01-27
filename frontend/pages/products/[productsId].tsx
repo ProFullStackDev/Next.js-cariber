@@ -1,5 +1,7 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { useEffect } from "react";
+import UserManager from "../../auth/userManager";
 import Footer from "../../components/footer";
 import Header from "../../components/header";
 import Img from "../../components/image";
@@ -21,6 +23,11 @@ interface ProductProp {
 
 export default function Products({ product }: { product: ProductProp }) {
   const router = useRouter()
+  const userManager = new UserManager()
+
+  useEffect(() => {
+    !userManager.isLoggedIn() && router.replace('/login')
+  })
 
   return (
     <div className="products">

@@ -4892,3 +4892,15 @@ a .panel-sub-title {
 .justify-end {
   justify-self: end;
 }
+
+.alert-danger {
+  border-color: red;
+  color: red;
+  background-color: rgba(255, 0, 0, 0.1);
+}
+
+.alert {
+  border-radius: 3px;
+  padding: 14px 20px;
+  margin: 20px 0;
+}

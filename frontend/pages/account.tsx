@@ -1,5 +1,7 @@
 import Link from "next/link";
-import { useRef } from "react";
+import { useRouter } from "next/router";
+import { useEffect, useRef } from "react";
+import UserManager from "../auth/userManager";
 import PurchasedCard from "../components/account/purchasedCard";
 import Img from "../components/image";
 import * as staticData from "../components/static/account"
@@ -7,6 +9,12 @@ import * as staticData from "../components/static/account"
 export default function Account() {
   const timeZone = staticData.timeZone
   const hiddenFileInput = useRef<HTMLInputElement>(null);
+  const router = useRouter()
+  const userManager = new UserManager()
+
+  useEffect(() => {
+    !userManager.isLoggedIn() && router.replace('/login')
+  })
 
   function handleClick() {
     hiddenFileInput.current && hiddenFileInput.current.click();

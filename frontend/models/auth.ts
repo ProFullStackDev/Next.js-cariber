@@ -1,6 +1,7 @@
 export interface Auth{
   jwt: string;
   user: User;
+  error: Error;
 }
 
 export interface User{
@@ -9,4 +10,10 @@ export interface User{
   username: string;
   blocked: boolean;
   confirmed: boolean;
+}
+
+export interface Error{
+  status: number;
+  name: string;
+  message: string;
 }

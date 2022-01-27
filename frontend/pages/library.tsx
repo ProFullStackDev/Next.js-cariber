@@ -1,5 +1,7 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { useEffect } from "react";
+import UserManager from "../auth/userManager";
 import Footer from "../components/footer";
 import FooterBrand from "../components/footerBrand";
 import Header from "../components/header";
@@ -17,7 +19,12 @@ export interface MyCourse {
 
 export default function Library() {
   const router = useRouter()
+  const userManager = new UserManager()
   const myCourse = staticData.myCourse
+
+  useEffect(() => {
+    !userManager.isLoggedIn() && router.replace('/login')
+  })
 
   return (
     <div className="background-image library">
