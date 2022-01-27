@@ -55,7 +55,7 @@
     }
   }
 
-  .jus-between{
+  .jus-between {
     display: flex;
     justify-content: space-between;
   }
@@ -80,9 +80,17 @@
     transition: all 0.1s;
     text-decoration: none;
     color: #000000;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
   }
 
-  .auth-image{
+  .auth-image {
     margin-bottom: 2rem;
+  }
+
+  .facebook-icon {
+    max-height: 25px;
+    margin: auto 0px;
   }
 }

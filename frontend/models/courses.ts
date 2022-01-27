@@ -22,6 +22,7 @@ export interface CourseDetail {
   order_link: string;
   header: string;
   teaser: string;
+  teaser_url: string;
   order_image: OrderImage;
   speaker_details: SpeakerDetails;
   contents: Contents[];

@@ -2,6 +2,7 @@ import Footer from "../components/footer";
 import Header from "../components/header";
 
 export default function ForgotPassword() {
+  
   return (
     <div className="background-image forgot-password">
       <Header />

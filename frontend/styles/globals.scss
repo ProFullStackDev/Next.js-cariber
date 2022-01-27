@@ -13,8 +13,10 @@
 @import "./especial/episode.module.scss";
 @import "./especial/nextInstructorForm.module.scss";
 @import "./especial/account.module.scss";
+@import "./especial/404.module.scss";
 @import "./sizer.scss";
 @import "./pixel-helper.scss";
+@import "reactjs-popup/dist/index.css";
 
 $frequency: 0;
 $show-grid: false;
@@ -4809,8 +4811,39 @@ a .panel-sub-title {
   }
 }
 
+.popup-register-content {
+  width: 30%;
+  width: 600px;
+  padding: 20px;
+  color: #ffffff;
+  background-color: #0e1b20;
+  border-color: #e74e25;
+
+  @media (max-width: $ipad-size) {
+    width: 70%;
+  }
+
+  @media (max-width: $mobile-size) {
+    width: 90%;
+  }
+}
+
+.pop-modal .close {
+  cursor: pointer;
+  position: absolute;
+  display: block;
+  padding: 3px 3px;
+  line-height: 15px;
+  right: -10px;
+  top: -10px;
+  font-size: 24px;
+  background: #ffffff;
+  border-radius: 18px;
+  border: 1px solid #cfcece;
+}
+
 .color-smooth {
-  color: #fbf5e4;
+  color: #fbf5e4 !important;
 }
 
 .color-secondary {
@@ -4858,4 +4891,16 @@ a .panel-sub-title {
 
 .justify-end {
   justify-self: end;
+}
+
+.alert-danger {
+  border-color: red;
+  color: red;
+  background-color: rgba(255, 0, 0, 0.1);
+}
+
+.alert {
+  border-radius: 3px;
+  padding: 14px 20px;
+  margin: 20px 0;
 }

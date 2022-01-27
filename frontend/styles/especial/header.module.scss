@@ -85,7 +85,8 @@ $btn-border-radius: 50px;
     .header-content-mobile {
       text-align: $mobile-text-alignment;
       background-color: $mobile-header-dropdown-color;
-      .btn{
+
+      .btn {
         margin: 0px;
       }
     }
@@ -100,6 +101,36 @@ $btn-border-radius: 50px;
 
   .header-block-cta {
     display: block;
-    padding: 8px 20px;
+    padding: 8px 5px;
   }
+
+  .user-avatar-block {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+  }
+}
+
+.menu {
+  width: 200px;
+  display: flex;
+  flex-direction: column;
+  padding: 10px 0px;
+  background: #fbf5e4;
+  border-radius: 4px;
+
+  a {
+    color: #e74e25;
+    font-size: 18px;
+  }
+
+  a:hover {
+    background: #d1cfc3;
+  }
+}
+
+.menu-item {
+  cursor: pointer;
+  text-align: end;
+  padding: 7px 20px;
 }

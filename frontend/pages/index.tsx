@@ -27,48 +27,7 @@ const Index: NextPage = () => {
       <div className="background-dark">
         <div className="sizer">
           <div className="row align-items-center justify-content-center">
-            <div className="block-type-form text-center col-3">
-              <div className="block box-shadow-none">
-                <div className="form">
-                  <h2 className="f-s-28">
-                    ลงทะเบียนทดลองเรียน 7 วัน ฟรี!
-                  </h2>
-                  <p>
-                    ทดลองเรียนได้ทันทีทุกคอร์ส คอร์สละ 1 บทเรียน
-                  </p>
-                  <form action="">
-                    <div className="text-field form-group">
-                      <input id="form_submission_name"
-                        className="form-control"
-                        type="text"
-                        required={true}
-                        placeholder="ชื่อ - นามสกุล" />
-                    </div>
-                    <div className="email-field form-group">
-                      <input id="form_submission_email"
-                        className="form-control"
-                        type="email"
-                        required={true}
-                        placeholder="อีเมลของคุณ" />
-                    </div>
-                    <div className="phone-field form-group">
-                      <input id="form_submission_phone"
-                        className="form-control"
-                        type="tel"
-                        required={true}
-                        placeholder="เบอร์โทรศัพท์" />
-                    </div>
-                    <button id="form-button" className="btn btn-solid btn-full btn-small" type="submit">
-                      ลงทะเบียน
-                    </button>
-                  </form>
-                  <p className="disclaimer-text">
-                    คอร์สทดลองเรียนจะหมดอายุภายใน 7 วัน นับจากวันที่ลงทะเบียนและได้รับคอร์ส
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div className="block-type-image text-center col-7">
+            <div className="block-type-image text-center col-12">
               <div className="block box-shadow-none">
                 <div className="image">
                   <Img className="image-image"

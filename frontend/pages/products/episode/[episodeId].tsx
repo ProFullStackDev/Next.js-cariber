@@ -6,6 +6,9 @@ import VideoPlayer from "../../../components/videoPlayer";
 import * as staticDataProduct from "../../../components/static/products";
 import Link from "next/link";
 import ProductBlogs from "../../../components/productBlogs";
+import { useRouter } from "next/router";
+import UserManager from "../../../auth/userManager";
+import { useEffect } from "react";
 
 interface EpisodeProps {
   episodeName: string
@@ -20,6 +23,12 @@ interface EpisodeProps {
 }
 
 export default function Episode({ episode }: { episode: EpisodeProps }) {
+  const router = useRouter()
+  const userManager = new UserManager()
+
+  useEffect(() => {
+    !userManager.isLoggedIn() && router.replace('/login')
+  })
   return (
     <div className="episode">
       <Header />
