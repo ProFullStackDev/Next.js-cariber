@@ -16,6 +16,6 @@ export default class UserManager {
     }
 
     isLoggedIn(): boolean {
-        return false;
+        return true;
     }
 }

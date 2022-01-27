@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import Img from "./image"
+import UserManager from "../auth/userManager"
+import Popup from "reactjs-popup";
 
 interface Menu {
   url: string,
@@ -8,16 +10,28 @@ interface Menu {
 }
 
 export default function Header() {
+  const userManager = new UserManager()
   const [hamburgerOpened, setHamburgerOpened] = useState(false);
   const menu: Menu[] = [
-    { url: '/library', name: 'คอร์สของฉัน' },
-    { url: '/courses', name: 'คอร์สทั้งหมด' },
-    { url: 'https://blog.cariber.co/', name: 'บทความ' },
-    { url: '/reviews', name: 'รีวิว' },
+    { url: "/library", name: "คอร์สของฉัน" },
+    { url: "/courses", name: "คอร์สทั้งหมด" },
+    { url: "https://blog.cariber.co/", name: "บทความ" },
+    { url: "/reviews", name: "รีวิว" },
+  ];
+
+  const menuUser: Menu[] = [
+    { url: "/library", name: "คอร์สของฉัน" },
+    { url: "/account", name: "การตั้งค่า" },
+    { url: "#", name: "ออกจากระบบ" },
+  ];
+
+  const menuUserMobile: Menu[] = [
+    { url: "/account", name: "การตั้งค่า" },
+    { url: "#", name: "ออกจากระบบ" },
   ];
 
   useEffect(() => {
-    window.addEventListener('resize', () => {
+    window.addEventListener("resize", () => {
       setHamburgerOpened(false)
     });
   }, [])
@@ -58,15 +72,48 @@ export default function Header() {
                 ซื้อแพ็กเกจรายปี
               </a>
             </div>
-            <div className="header-block header-switch-content header-block-user header-block-mr0">
-              <div className="user">
-                <span className="user-login">
-                  <Link href="/login">
-                    เข้าสู่ระบบ
-                  </Link>
-                </span>
+            {userManager.isLoggedIn() ? (
+              <div className="header-block header-switch-content header-block-user header-block-mr0">
+                <div className="user-avatar-block">
+                  <Popup trigger={<div>
+                    <Img className="user-avatar"
+                      src={"default_avatar.webp"}
+                      width={40}
+                      height={40}
+                      alt="default_avatar.webp" />
+                  </div>}
+                    position="bottom right"
+                    on="click"
+                    closeOnDocumentClick
+                    mouseLeaveDelay={300}
+                    mouseEnterDelay={0}
+                    contentStyle={{ padding: "0px", border: "none" }}
+                    arrow={false}>
+                    <div className="menu">
+                      {menuUser.map((value, index) => {
+                        return (
+                          <a key={index} href={value.url} className="menu-item">
+                            {value.name}
+                          </a>
+                        )
+                      })}
+                    </div>
+                  </Popup>
+
+                </div>
               </div>
-            </div>
+            ) : (
+              <div className="header-block header-switch-content header-block-user header-block-mr0">
+                <div className="user">
+                  <span className="user-login">
+                    <Link href="/login">
+                      เข้าสู่ระบบ
+                    </Link>
+                  </span>
+                </div>
+              </div>
+            )}
+
             <div className={`hamburger hidden-desktop ${hamburgerOpened && "hamburger-opened"}`} onClick={switchHamburger}>
               <div className="hamburger-slices">
                 <div className="hamburger-slice hamburger-slice-1"></div>
@@ -94,15 +141,29 @@ export default function Header() {
                 ซื้อแพ็กเกจรายปี
               </a>
             </div>
-            <div className="header-block header-switch-content header-block-user">
-              <span className="user-login">
-                <Link href="/login" passHref={true}>
-                  <a>
-                    เข้าสู่ระบบ
-                  </a>
-                </Link>
-              </span>
-            </div>
+            {userManager.isLoggedIn() ? (
+              <div className="header-block header-switch-content header-block-menu">
+                <span className="link-list">
+                  {menuUserMobile.map((value, index) => {
+                    return (
+                      <a key={index} className="link-list-link" href={value.url}>
+                        {value.name}
+                      </a>
+                    )
+                  })}
+                </span>
+              </div>
+            ) : (
+              <div className="header-block header-switch-content header-block-user">
+                <span className="user-login">
+                  <Link href="/login" passHref={true}>
+                    <a>
+                      เข้าสู่ระบบ
+                    </a>
+                  </Link>
+                </span>
+              </div>
+            )}
           </div>
         </div>
       </div>
