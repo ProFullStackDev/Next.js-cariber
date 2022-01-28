@@ -32,8 +32,8 @@ export default function Login() {
     confirmPassword: ""
   });
 
-  async function loginRequest(event: FormEvent) {
-    event.preventDefault();
+  async function loginRequest(event?: FormEvent) {
+    event && event.preventDefault();
     setErrorLogin({
       isError: false,
       message: ""
@@ -65,7 +65,9 @@ export default function Login() {
       formData.append("password", formRegister.password);
       const data = await registerApi(formData)
       if (data.error === undefined) {
-        router.replace("/free-trial-received")
+        formLogin.email = formRegister.email
+        formLogin.password = formRegister.password
+        loginRequest()
       } else {
         setErrorRegister({
           isError: true,
