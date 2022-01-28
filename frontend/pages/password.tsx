@@ -6,10 +6,12 @@ import Footer from "../components/footer";
 import FormInput from "../components/formInput";
 import Header from "../components/header";
 import ShowError from "../components/showError";
+import FlashMessages, { FlashMessagesType } from "../functions/flashMessages";
 
 export default function Password() {
   const router = useRouter()
   const userManager = new UserManager()
+  const flashMessages = new FlashMessages()
   const [error, setError] = useState({
     isError: false,
     message: "",
@@ -29,6 +31,8 @@ export default function Password() {
       const data = await passwordApi(formData)
       if (data.error === undefined) {
         userManager.saveToken(data.jwt)
+        flashMessages.setMessages(FlashMessagesType.forgotPasswordMessages,
+          "Your password has been changed successfully. You are now signed in.")
         router.replace("/library")
       } else {
         setError({
