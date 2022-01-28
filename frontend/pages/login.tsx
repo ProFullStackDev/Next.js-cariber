@@ -2,7 +2,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { FormEvent, useState } from "react";
 import Popup from "reactjs-popup";
-import { loginApi } from "../api/loginApi";
+import { authApi } from "../api/authApi";
 import { registerApi } from "../api/registerApi";
 import UserManager from "../auth/userManager";
 import Footer from "../components/footer";
@@ -41,7 +41,7 @@ export default function Login() {
     const formData = new FormData();
     formData.append("identifier", formLogin.email);
     formData.append("password", formLogin.password);
-    const data = await loginApi(formData)
+    const data = await authApi(formData)
     if (data.error === undefined) {
       userManager.saveToken(data.jwt)
       router.replace("/library")
