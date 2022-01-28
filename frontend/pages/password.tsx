@@ -23,27 +23,27 @@ export default function Password() {
 
   async function passwordRequest(event: FormEvent) {
     event.preventDefault();
-    if (formPassword.password === formPassword.confirmPassword) {
-      const formData = new FormData();
-      typeof router.query.code === "string" && formData.append("code", router.query.code);
-      formData.append("password", formPassword.password);
-      formData.append("passwordConfirmation", formPassword.password);
-      const data = await passwordApi(formData)
-      if (data.error === undefined) {
-        userManager.saveToken(data.jwt)
-        flashMessages.setMessages(FlashMessagesType.forgotPasswordMessages,
-          "Your password has been changed successfully. You are now signed in.")
-        router.replace("/library")
-      } else {
-        setError({
-          isError: true,
-          message: data.error.message
-        })
-      }
-    } else {
+    if (formPassword.password !== formPassword.confirmPassword) {
       setError({
         isError: true,
         message: "Passwords do not match"
+      })
+      return
+    }
+    const formData = new FormData();
+    typeof router.query.code === "string" && formData.append("code", router.query.code);
+    formData.append("password", formPassword.password);
+    formData.append("passwordConfirmation", formPassword.password);
+    const data = await passwordApi(formData)
+    if (data.error === undefined) {
+      userManager.saveToken(data.jwt)
+      flashMessages.setMessages(FlashMessagesType.forgotPasswordMessages,
+        "Your password has been changed successfully. You are now signed in.")
+      router.replace("/library")
+    } else {
+      setError({
+        isError: true,
+        message: data.error.message
       })
     }
   }

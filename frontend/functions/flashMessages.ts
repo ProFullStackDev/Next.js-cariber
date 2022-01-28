@@ -8,12 +8,8 @@ export default class FlashMessages {
   }
 
   getMessages(key: string): string {
-    const messages = sessionStorage.getItem(key);
+    const message = sessionStorage.getItem(key);
     setTimeout(() => { sessionStorage.removeItem(key) }, 3000);
-    if (messages) {
-      return messages;
-    } else {
-      return "";
-    }
+    return message || '';
   }
 }

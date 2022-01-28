@@ -6,6 +6,5 @@ export default async function registerApi(formData: FormData) {
     method: "POST",
     body: formData,
   })
-  const data = await response.json() as RegisterResponse
-  return data
+  return await response.json() as RegisterResponse
 }

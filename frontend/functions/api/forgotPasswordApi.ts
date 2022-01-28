@@ -5,6 +5,5 @@ export default async function forgotPasswordApi(formData: FormData) {
     method: "POST",
     body: formData,
   })
-  const data = await response.json()
-  return data
+  return await response.json()
 }
