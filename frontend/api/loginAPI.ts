@@ -1,7 +1,7 @@
 import { Auth } from "../models/auth"
 import { strapiAuthApi } from "../models/content"
 
-export async function loginAPI(formData: FormData) {
+export async function loginApi(formData: FormData) {
   const response = await fetch(strapiAuthApi, {
     method: "POST",
     body: formData,

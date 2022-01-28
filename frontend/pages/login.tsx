@@ -2,13 +2,14 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { FormEvent, useState } from "react";
 import Popup from "reactjs-popup";
-import { loginAPI } from "../api/loginAPI";
-import { registerAPI } from "../api/registerAPI";
+import { loginApi } from "../api/loginApi";
+import { registerApi } from "../api/registerApi";
 import UserManager from "../auth/userManager";
 import Footer from "../components/footer";
 import FormInput from "../components/formInput";
 import Header from "../components/header";
 import Img from "../components/image";
+import ShowError from "../components/showError";
 
 export default function Login() {
   const router = useRouter()
@@ -40,7 +41,7 @@ export default function Login() {
     const formData = new FormData();
     formData.append("identifier", formLogin.email);
     formData.append("password", formLogin.password);
-    const data = await loginAPI(formData)
+    const data = await loginApi(formData)
     if (data.error === undefined) {
       userManager.saveToken(data.jwt)
       router.replace("/library")
@@ -50,7 +51,6 @@ export default function Login() {
         message: data.error.message
       })
     }
-
   }
 
   async function registerRequest(event: FormEvent) {
@@ -59,12 +59,11 @@ export default function Login() {
       isError: false,
       message: ""
     })
-    const formData = new FormData();
     if (formRegister.password === formRegister.confirmPassword) {
+      const formData = new FormData();
       formData.append("email", formRegister.email);
       formData.append("password", formRegister.password);
-      const data = await registerAPI(formData)
-      console.log(data)
+      const data = await registerApi(formData)
       if (data.error === undefined) {
         router.replace("/free-trial-received")
       } else {
@@ -79,16 +78,6 @@ export default function Login() {
         message: "Passwords do not match"
       })
     }
-  }
-
-  function showError(error: boolean, message: string) {
-    return (
-      <div>
-        {error && (<div className="auth-message alert alert-danger">
-          {message}
-        </div>)}
-      </div>
-    )
   }
 
   return (
@@ -108,7 +97,7 @@ export default function Login() {
                   />
                 </div>
                 <div>
-                  {showError(errorLogin.isError, errorLogin.message)}
+                  {errorLogin.isError && (<ShowError message={errorLogin.message} />)}
                   <form onSubmit={loginRequest}>
                     <div className="form-group">
                       <label className="auth-label" form="member-email">
@@ -214,7 +203,7 @@ export default function Login() {
                               />
                               <div className="form p-t-30">
                                 <form onSubmit={registerRequest}>
-                                  {showError(errorRegister.isError, errorRegister.message)}
+                                  {errorRegister.isError && (<ShowError message={errorRegister.message} />)}
                                   <FormInput id={"email"}
                                     type={"email"}
                                     required={true}
@@ -225,7 +214,7 @@ export default function Login() {
                                     required={true}
                                     placeholder={"รหัสผ่าน"}
                                     onChange={(e) => { formRegister.password = e.currentTarget.value }} />
-                                  <FormInput id={"confirm_password"}
+                                  <FormInput id={"confirm-password"}
                                     type={"password"}
                                     required={true}
                                     placeholder={"ยืนยันรหัสผ่าน"}
