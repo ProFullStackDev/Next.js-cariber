@@ -127,6 +127,18 @@ $btn-border-radius: 50px;
   a:hover {
     background: #d1cfc3;
   }
+
+
+}
+
+.header-changed-password {
+  background-color: #ddf8f6;
+  color: #04696C;
+  display: flex;
+  justify-content: center;
+  .row{
+    align-items: center;
+  }
 }
 
 .menu-item {

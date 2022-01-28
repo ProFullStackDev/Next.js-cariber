@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import Img from "./image"
 import UserManager from "../auth/userManager"
 import Popup from "reactjs-popup";
+import FlashMessages, { FlashMessagesType } from "../functions/flashMessages";
 
 interface Menu {
   url: string,
@@ -11,7 +12,9 @@ interface Menu {
 
 export default function Header() {
   const userManager = new UserManager()
+  const flashMessages = new FlashMessages()
   const [hamburgerOpened, setHamburgerOpened] = useState(false);
+  const flashForgotPassword = flashMessages.getMessages(FlashMessagesType.forgotPasswordMessages)
 
   const menuLogedIn: Menu[] = [
     { url: "/library", name: "คอร์สของฉัน" },
@@ -41,7 +44,7 @@ export default function Header() {
     window.addEventListener("resize", () => {
       setHamburgerOpened(false)
     });
-  }, [])
+  })
 
   function switchHamburger() {
     setHamburgerOpened(!hamburgerOpened)
@@ -49,6 +52,17 @@ export default function Header() {
 
   return (
     <header className="header">
+      {flashForgotPassword && (
+        <div className="header-changed-password">
+          <div className="row">
+            <span className="fa fa-check-circle w-18 h-18"></span>
+            <p className="m-0">
+              &nbsp;
+              {flashForgotPassword}
+            </p>
+          </div >
+        </div >
+      )}
       <div className="header-wrap">
         <div className="header-content header-content-desktop background-dark">
           <div className="container header-container media h-44">

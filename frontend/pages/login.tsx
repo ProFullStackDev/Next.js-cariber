@@ -2,62 +2,84 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { FormEvent, useState } from "react";
 import Popup from "reactjs-popup";
+import authApi from "../functions/api/authApi";
+import registerApi from "../functions/api/registerApi";
 import UserManager from "../auth/userManager";
 import Footer from "../components/footer";
+import FormInput from "../components/formInput";
 import Header from "../components/header";
 import Img from "../components/image";
-import { Auth } from "../models/auth";
-import { strapiApiAuth } from "../models/content";
+import ShowError from "../components/showError";
 
 export default function Login() {
   const router = useRouter()
   const userManager = new UserManager()
-  const [error, setError] = useState({
+  const [errorLogin, setErrorLogin] = useState({
     isError: false,
     message: "",
   });
-  const [form, setForm] = useState({
+  const [errorRegister, setErrorRegister] = useState({
+    isError: false,
+    message: "",
+  });
+  const [formLogin, setFormLogin] = useState({
     email: "",
     password: ""
   });
+  const [formRegister, setFormRegister] = useState({
+    email: "",
+    password: "",
+    confirmPassword: ""
+  });
 
-  async function loginRequest(event: FormEvent) {
-    event.preventDefault();
-    setError({
+  async function loginRequest(event?: FormEvent) {
+    event && event.preventDefault();
+    setErrorLogin({
       isError: false,
       message: ""
     })
     const formData = new FormData();
-    formData.append("identifier", form.email);
-    formData.append("password", form.password);
-    if (form.email && form.password) {
-      try {
-        const response = await fetch(strapiApiAuth, {
-          method: "POST",
-          body: formData,
-        })
-        const data = await response.json() as Auth
-        if (data.error === undefined) {
-          userManager.saveToken(data.jwt)
-          router.replace("/library")
-        } else {
-          setError({
-            isError: true,
-            message: data.error.message
-          })
-        }
-      } catch (error) {
-        console.log(error)
-      }
+    formData.append("identifier", formLogin.email);
+    formData.append("password", formLogin.password);
+    const data = await authApi(formData)
+    if (data.error === undefined) {
+      userManager.saveToken(data.jwt)
+      router.replace("/library")
+    } else {
+      setErrorLogin({
+        isError: true,
+        message: data.error.message
+      })
     }
   }
 
-  function showError(message: string) {
-    return (
-      <div className="auth-message alert alert-danger">
-        {message}
-      </div>
-    )
+  async function registerRequest(event: FormEvent) {
+    event.preventDefault();
+    setErrorRegister({
+      isError: false,
+      message: ""
+    })
+    if (formRegister.password === formRegister.confirmPassword) {
+      const formData = new FormData();
+      formData.append("email", formRegister.email);
+      formData.append("password", formRegister.password);
+      const data = await registerApi(formData)
+      if (data.error === undefined) {
+        formLogin.email = formRegister.email
+        formLogin.password = formRegister.password
+        loginRequest()
+      } else {
+        setErrorRegister({
+          isError: true,
+          message: data.error.message
+        })
+      }
+    } else {
+      setErrorRegister({
+        isError: true,
+        message: "Passwords do not match"
+      })
+    }
   }
 
   return (
@@ -77,30 +99,27 @@ export default function Login() {
                   />
                 </div>
                 <div>
-                  {error.isError && (
-                    showError(error.message)
-                  )}
+                  {errorLogin.isError && (<ShowError message={errorLogin.message} />)}
                   <form onSubmit={loginRequest}>
                     <div className="form-group">
                       <label className="auth-label" form="member-email">
                         ชื่ออีเมลหรือชื่อผู้ใช้งาน
                       </label>
-                      <input id="member-email"
-                        onChange={e => { form.email = e.currentTarget.value; }}
-                        className="form-control auth-field"
-                        type="text"
-                        required></input>
+                      <FormInput id={"member-email"}
+                        type={"email"}
+                        required={true}
+                        placeholder={""}
+                        onChange={(e) => { formLogin.email = e.currentTarget.value }} />
                     </div>
                     <div className="form-group">
                       <label className="auth-label" form="member-password">
                         รหัสผ่าน
                       </label>
-                      <input
-                        id="member-password"
-                        onChange={e => { form.password = e.currentTarget.value; }}
-                        className="form-control auth-field"
-                        type="password"
-                        required></input>
+                      <FormInput id={"member-password"}
+                        type={"password"}
+                        required={true}
+                        placeholder={""}
+                        onChange={(e) => { formLogin.password = e.currentTarget.value }} />
                     </div>
                     <button id="form-button" className="form-btn btn-solid btn-full" type="submit">
                       เข้าสู่ระบบ
@@ -176,7 +195,7 @@ export default function Login() {
                           <button className="close" onClick={close}>
                             &times;
                           </button>
-                          <div className="block-type-form h-340 text-center">
+                          <div className="block-type-form text-center">
                             <div className="block box-shadow-none">
                               <Img className="logo-image m-t-2"
                                 src="/header/header-logo.png"
@@ -185,28 +204,23 @@ export default function Login() {
                                 alt="Header Logo"
                               />
                               <div className="form p-t-30">
-                                <form action="">
-                                  <div className="email-field form-group">
-                                    <input id="form_submission_email"
-                                      className="form-control"
-                                      type="email"
-                                      required={true}
-                                      placeholder="อีเมลของคุณ" />
-                                  </div>
-                                  <div className="text-field form-group">
-                                    <input id="form_submission_password"
-                                      className="form-control"
-                                      type="password"
-                                      required={true}
-                                      placeholder="รหัสผ่าน" />
-                                  </div>
-                                  <div className="phone-field form-group">
-                                    <input id="form_submission_confirm_password"
-                                      className="form-control"
-                                      type="tel"
-                                      required={true}
-                                      placeholder="ยืนยันรหัสผ่าน" />
-                                  </div>
+                                <form onSubmit={registerRequest}>
+                                  {errorRegister.isError && (<ShowError message={errorRegister.message} />)}
+                                  <FormInput id={"email"}
+                                    type={"email"}
+                                    required={true}
+                                    placeholder={"อีเมล"}
+                                    onChange={(e) => { formRegister.email = e.currentTarget.value }} />
+                                  <FormInput id={"password"}
+                                    type={"password"}
+                                    required={true}
+                                    placeholder={"รหัสผ่าน"}
+                                    onChange={(e) => { formRegister.password = e.currentTarget.value }} />
+                                  <FormInput id={"confirm-password"}
+                                    type={"password"}
+                                    required={true}
+                                    placeholder={"ยืนยันรหัสผ่าน"}
+                                    onChange={(e) => { formRegister.confirmPassword = e.currentTarget.value }} />
                                   <button id="form-button" className="btn btn-solid btn-full btn-small" type="submit">
                                     ลงทะเบียน
                                   </button>
