@@ -1,5 +1,5 @@
-import { strapiRegisterApi } from "../models/content";
-import { RegisterResponse } from "../models/register";
+import { strapiRegisterApi } from "../../models/content";
+import { RegisterResponse } from "../../models/register";
 
 export default async function registerApi(formData: FormData) {
   const response = await fetch(strapiRegisterApi, {

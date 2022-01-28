@@ -1,4 +1,4 @@
-import { strapiForgotPasswordApi } from "../models/content"
+import { strapiForgotPasswordApi } from "../../models/content"
 
 export default async function forgotPasswordApi(formData: FormData) {
   const response = await fetch(strapiForgotPasswordApi, {
