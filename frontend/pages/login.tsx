@@ -55,29 +55,25 @@ export default function Login() {
 
   async function registerRequest(event: FormEvent) {
     event.preventDefault();
-    setErrorRegister({
-      isError: false,
-      message: ""
-    })
-    if (formRegister.password === formRegister.confirmPassword) {
-      const formData = new FormData();
-      formData.append("email", formRegister.email);
-      formData.append("password", formRegister.password);
-      const data = await registerApi(formData)
-      if (data.error === undefined) {
-        formLogin.email = formRegister.email
-        formLogin.password = formRegister.password
-        loginRequest()
-      } else {
-        setErrorRegister({
-          isError: true,
-          message: data.error.message
-        })
-      }
-    } else {
+    if (formRegister.password !== formRegister.confirmPassword) {
       setErrorRegister({
         isError: true,
         message: "Passwords do not match"
+      })
+      return
+    }
+    const formData = new FormData();
+    formData.append("email", formRegister.email);
+    formData.append("password", formRegister.password);
+    const data = await registerApi(formData)
+    if (data.error === undefined) {
+      formLogin.email = formRegister.email
+      formLogin.password = formRegister.password
+      loginRequest()
+    } else {
+      setErrorRegister({
+        isError: true,
+        message: data.error.message
       })
     }
   }

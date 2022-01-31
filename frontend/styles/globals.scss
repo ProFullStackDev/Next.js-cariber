@@ -8,9 +8,8 @@
 @import "./especial/reviewStudents.module.scss";
 @import "./especial/library.module.scss";
 @import "./especial/courseDetail.module.scss";
-@import "./especial/products.module.scss";
+@import "./especial/product.module.scss";
 @import "./especial/accordion.module.scss";
-@import "./especial/episode.module.scss";
 @import "./especial/nextInstructorForm.module.scss";
 @import "./especial/account.module.scss";
 @import "./especial/404.module.scss";
@@ -4903,4 +4902,25 @@ a .panel-sub-title {
   border-radius: 3px;
   padding: 14px 20px;
   margin: 20px 0;
+}
+
+.btn-not-focus{
+  opacity: 0.7;
+}
+
+.hidden-xs-down {
+  @media(max-width: 575px) {
+    display: none;
+  }
+}
+
+.btn-link{
+  color: #e74e25;
+}
+
+.lg-flex-between{
+  @media(min-width: $mobile-size) {
+    display: flex;
+    justify-content: space-between;
+  }
 }

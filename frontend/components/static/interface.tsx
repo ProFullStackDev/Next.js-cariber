@@ -1,4 +1,5 @@
 import { Episode } from "../../models/courses";
+import { Icon } from "../accordion";
 
 export interface TimeZone {
   value: string,
@@ -33,7 +34,7 @@ export interface CourseSoon {
 
 export interface CardDescription {
   title: string,
-  description: string[],
+  description: string,
 }
 
 export interface CourseLatest {
@@ -94,5 +95,6 @@ export interface ProductEpisode {
   image: string,
   title: string,
   description: string,
-  progress: number
+  progress: number,
+  icon: Icon
 }

@@ -3,18 +3,15 @@ import Img from "./image";
 
 interface ProductBlogsProps {
   progressBlog: boolean,
-  productImage?: string,
+  productImage: string,
   productName: string,
-  fileUrl: string,
   instructorImage: string,
   instructorName: string,
   instructorRemark: string,
 }
 
 export default function ProductBlogs({ productImage,
-  productName,
   progressBlog,
-  fileUrl,
   instructorImage,
   instructorName,
   instructorRemark }: ProductBlogsProps) {
@@ -39,16 +36,6 @@ export default function ProductBlogs({ productImage,
           </div>
         </div>
       )}
-      <div className="panel">
-        <div className="panel-card-body text-center">
-          <h6 className="panel-heading">
-            {productName}
-          </h6>
-          <a className="btn btn-box f-s-12" href={fileUrl}>
-            คลิกเพื่อดาวน์โหลดไฟล์ประกอบ
-          </a>
-        </div>
-      </div>
       <div className="panel">
         <div className="panel-card-body">
           <div className="media">
