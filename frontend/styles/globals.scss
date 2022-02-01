@@ -4815,16 +4815,15 @@ a .panel-sub-title {
   }
 }
 
-.popup-register-content {
-  width: 30%;
-  width: 600px;
+.popup-auth-content {
+  width: 400px;
   padding: 20px;
   color: #ffffff;
   background-color: #0e1b20;
   border: none;
 
   @media (max-width: $ipad-size) {
-    width: 70%;
+    width: 60%;
   }
 
   @media (max-width: $mobile-size) {

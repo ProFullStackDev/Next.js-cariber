@@ -4,7 +4,7 @@ import Img from "./image"
 import UserManager from "../auth/userManager"
 import Popup from "reactjs-popup";
 import FlashMessages, { FlashMessagesType } from "../functions/flashMessages";
-import Login from "./login";
+import SwitchSignInSignUp from "./switchSignInSignUp";
 
 interface Menu {
   url: string,
@@ -141,7 +141,27 @@ export default function Header() {
               <div className="header-block header-switch-content header-block-user header-block-mr0">
                 <div className="user">
                   <span className="user-login">
-                    <Login />
+                    <Popup className="popup-auth"
+                      trigger={
+                        <button className="btn btn-link btn-small color-primary" >
+                          เข้าสู่ระบบ
+                        </button>
+                      }
+                      modal
+                      closeOnDocumentClick={false}>
+                      {(close: any) => {
+                        return (
+                          <div className="pop-modal">
+                            <button className="close" onClick={close}>
+                              <p>
+                                &times;
+                              </p>
+                            </button>
+                            <SwitchSignInSignUp />
+                          </div>
+                        )
+                      }}
+                    </Popup>
                   </span>
                 </div>
               </div>
@@ -200,7 +220,27 @@ export default function Header() {
             ) : (
               <div className="header-block header-switch-content header-block-user">
                 <span className="user-login">
-                  <Login />
+                  <Popup className="popup-auth"
+                    trigger={
+                      <button className="btn btn-link btn-small color-primary" >
+                        เข้าสู่ระบบ
+                      </button>
+                    }
+                    modal
+                    closeOnDocumentClick={false}>
+                    {(close: any) => {
+                      return (
+                        <div className="pop-modal">
+                          <button className="close" onClick={close}>
+                            <p>
+                              &times;
+                            </p>
+                          </button>
+                          <SwitchSignInSignUp />
+                        </div>
+                      )
+                    }}
+                  </Popup>
                 </span>
               </div>
             )}
