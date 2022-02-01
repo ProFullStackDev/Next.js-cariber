@@ -28,11 +28,14 @@ export default function Accordion({ title, description, col, icon, color, link }
   const [displayDescription, setDisplayDescription] = useState("d-none");
   const descriptionLocal = description.split(/\r\n|\n\r|\n|\r/)
   function switchDisplay() {
+    if(icon === Icon.lock){
+      return
+    } 
     displayDescription === "d-none" ? setDisplayDescription("d-block") : setDisplayDescription("d-none")
   }
 
   return (
-    <div className={`accordion block-type-accordion text-left col-${col}`} onClick={switchDisplay}>
+    <div className={`accordion block-type-accordion text-left col-${col} m-0`} onClick={switchDisplay}>
       <div className={`accordion-frame box-shadow-medium ${color}`}>
         <div className="accordion">
           <div className="accordion-title media align-items-center collapsed">

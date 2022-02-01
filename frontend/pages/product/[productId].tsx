@@ -96,7 +96,7 @@ export default function Products({ product }: { product: ProductProp }) {
                   </div>
                 </div>
               </div>
-              <div className="col-12">
+              <div className="col-12 p-b-20">
                 <div className="player">
                   <div className="player-video">
                     <VideoPlayer videoId={product.videoId} />
@@ -189,7 +189,7 @@ export default function Products({ product }: { product: ProductProp }) {
                   </a>
                 </div>
               </div>
-              <div className="col-8 p-0">
+              <div className="col-8">
                 {product.episodes.map((value, index) => {
                   return (<Accordion key={index}
                     title={value.title}
