@@ -36,29 +36,39 @@ export default function Products({ product }: { product: ProductProp }) {
   return (
     <div className="products">
       <Header />
+      <div className="col-12 m-0">
+        <div className="container sm-p-x-0">
+          <div className="nev-product">
+            <div className="left-nev-product">
+              <h6 className="color-primary">
+                คอร์สเรียน : {product.productName}
+              </h6>
+              <p className="f-s-14 m-b-0 color-black">
+                สอนโดย {product.instructorName}
+              </p>
+            </div>
+            <div className="right-nev-product">
+              <a className="btn btn-not-focus btn-small m-t-0" href="">
+                ซื้อคอร์สนี้
+              </a>
+              <a className="btn btn-small m-t-0 md-none" href="">
+                ซื้อแพ็คเกจรายปี
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
       <div className="background-image">
         <div className="sizer">
           <div className="container">
             <div className="row">
               <div className="col-12">
-                <div className="nev-product">
-                  <div className="left-nev-product">
-                    <h6 className="color-primary">
-                      คอร์สเรียน : Employee Survival Guide
-                    </h6>
-                    <p className="f-s-14 m-b-0 color-black">
-                      สอนโดย คุณฐากร ปิยะพันธ์
-                    </p>
-                  </div>
-                  <div className="right-nev-product">
-                    <a className="btn btn-not-focus btn-small m-t-0" href="">
-                      ซื้อคอร์สนี้
-                    </a>
-                    <a className="btn btn-small m-t-0 md-none" href="">
-                      ซื้อแพ็คเกจรายปี
-                    </a>
-                  </div>
-                </div>
+                <button className="btn-link f-s-16 row" onClick={router.back}>
+                  <i className="fal fa-chevron-left m-r-7"></i>
+                  <h5 className="color-black m-b-0">
+                    ย้อนกลับ
+                  </h5>
+                </button>
               </div>
               <div className="col-12 row lg-flex-between">
                 <div className="episode-title">
@@ -67,7 +77,7 @@ export default function Products({ product }: { product: ProductProp }) {
                   </h5>
                 </div>
                 <div>
-                  <a className="btn-link" href="#">
+                  <a className="color-primary" href="#">
                     ดูรายละเอียดคอร์สนี้เพิ่มเติม
                   </a>
                 </div>
@@ -145,7 +155,7 @@ export default function Products({ product }: { product: ProductProp }) {
                                 <div className="track-title">
                                   {value.title}
                                   {(value.progress > 0 && value.progress < 100) && (
-                                    <div className="progress">
+                                    <div className="player-progress">
                                       <div className="progress-outer">
                                         <div className="progress-inner" style={{ width: `${value.progress}%` }} />
                                       </div>

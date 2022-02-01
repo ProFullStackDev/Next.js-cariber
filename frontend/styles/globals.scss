@@ -4914,13 +4914,16 @@ a .panel-sub-title {
   }
 }
 
-.btn-link{
-  color: #e74e25;
-}
-
 .lg-flex-between{
   @media(min-width: $mobile-size) {
     display: flex;
     justify-content: space-between;
   }
+}
+
+.btn-link{
+  background: none;
+  border: none;
+  cursor: pointer;
+  align-items: center;
 }

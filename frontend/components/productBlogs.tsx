@@ -38,7 +38,7 @@ export default function ProductBlogs({ productImage,
       )}
       <div className="panel">
         <div className="panel-card-body">
-          <div className="media">
+          <div className="media row">
             <div className="media-left">
               <Img className="instructor-image"
                 src={instructorImage}
