@@ -1,5 +1,6 @@
 import { useRouter } from "next/router";
 import { useEffect } from "react";
+import Popup from "reactjs-popup";
 import UserManager from "../../auth/userManager";
 import Accordion, { Color } from "../../components/accordion";
 import Footer from "../../components/footer";
@@ -47,13 +48,78 @@ export default function Products({ product }: { product: ProductProp }) {
                 สอนโดย {product.instructorName}
               </p>
             </div>
-            <div className="right-nev-product">
+            <div className="right-nev-product sm-none">
               <a className="btn btn-not-focus btn-small m-t-0" href="">
                 ซื้อคอร์สนี้
               </a>
-              <a className="btn btn-small m-t-0 md-none" href="">
+              <a className="btn btn-small m-t-0" href="">
                 ซื้อแพ็คเกจรายปี
               </a>
+            </div>
+            <div className="right-nev-product lg-none">
+              <Popup className="popup-product-sale"
+                trigger={
+                  <button className="btn btn-not-focus btn-small m-t-0">
+                    ซื้อคอร์สนี้
+                  </button>
+                }
+                modal
+                closeOnDocumentClick={false}
+                position="right center">
+                {(close: any) => {
+                  return (
+                    <div className="pop-modal">
+                      <button className="close" onClick={close}>
+                        <p>
+                          &times;
+                        </p>
+                      </button>
+                      <div className="block-type-form text-center">
+                        <div className="block box-shadow-none">
+                          <h3>
+                            สนใจคอร์สเรียนของเราแล้วใช่ไหม?
+                          </h3>
+                          <h6>
+                            กรุณาเลือกแพ็คเกจที่คุณต้องการ
+                          </h6>
+                          <div id="singlebanner" className="feature column-center text-center m-b-40">
+                            <a href="https://checkout.cariber.co?add-to-cart=685&cfp=eWVhcmx5YmFubm5lcl9kZXNrdG9wX0M6L1VzZXJzL2luemVlL09uZURyaXZlJTIwLSUyMFVuaXZlcnNpdHklMjBvZiUyMFBoYXlhby9DYXJpYmVyJTIwZG91Y3VtZW50L3NhdmUlMjBwYWdlLyVFMCVCOCU4NCVFMCVCOCVBRCVFMCVCOCVBMyVFMCVCOSU4QyVFMCVCOCVBQSVFMCVCOCVBRCVFMCVCOCVBRCVFMCVCOCU5OSVFMCVCOSU4NCVFMCVCOCVBNSVFMCVCOCU5OSVFMCVCOSU4QyVFMCVCOCU4MSVFMCVCOCVCMSVFMCVCOCU5QSVFMCVCOCU4QiVFMCVCOCVCNCVFMCVCOSU4MiVFMCVCOCU4MSVFMCVCOSU4OSUyMCVFMCVCOSU4MCVFMCVCOCU4MSVFMCVCOCVCNSVFMCVCOCVBMiVFMCVCOCVBMyVFMCVCOCU5NSVFMCVCOCVCNCVFMCVCOCVBOCVFMCVCOCVCMSVFMCVCOCU4MSVFMCVCOCU5NCVFMCVCOCVCNCVFMCVCOSU4QyUyMCVFMCVCOSU4MCVFMCVCOCVBQSVFMCVCOCU5OSVFMCVCOCVCMiVFMCVCOSU4MCVFMCVCOCVBMSVFMCVCOCVCNyVFMCVCOCVBRCVFMCVCOCU4NyUyMEtpYXRpc3VrJTIwU2VuYW11YW5nLmh0bWw=">
+                              <Img id="block-single-img"
+                                className="feature-image"
+                                src={"/courseDetail/single-course.jpg"}
+                                width={623.183}
+                                height={400}
+                                alt="Cariber single Subscription"
+                              />
+                            </a>
+                            <a className="btn btn-not-focus btn-small m-t-10"
+                              href="https://checkout.cariber.co?add-to-cart=685&amp;cfp=eWVhcmx5YmFubm5lcl9kZXNrdG9wX0M6L1VzZXJzL2luemVlL09uZURyaXZlJTIwLSUyMFVuaXZlcnNpdHklMjBvZiUyMFBoYXlhby9DYXJpYmVyJTIwZG91Y3VtZW50L3NhdmUlMjBwYWdlLyVFMCVCOCU4NCVFMCVCOCVBRCVFMCVCOCVBMyVFMCVCOSU4QyVFMCVCOCVBQSVFMCVCOCVBRCVFMCVCOCVBRCVFMCVCOCU5OSVFMCVCOSU4NCVFMCVCOCVBNSVFMCVCOCU5OSVFMCVCOSU4QyVFMCVCOCU4MSVFMCVCOCVCMSVFMCVCOCU5QSVFMCVCOCU4QiVFMCVCOCVCNCVFMCVCOSU4MiVFMCVCOCU4MSVFMCVCOSU4OSUyMCVFMCVCOSU4MCVFMCVCOCU4MSVFMCVCOCVCNSVFMCVCOCVBMiVFMCVCOCVBMyVFMCVCOCU5NSVFMCVCOCVCNCVFMCVCOCVBOCVFMCVCOCVCMSVFMCVCOCU4MSVFMCVCOCU5NCVFMCVCOCVCNCVFMCVCOSU4QyUyMCVFMCVCOSU4MCVFMCVCOCVBQSVFMCVCOCU5OSVFMCVCOCVCMiVFMCVCOSU4MCVFMCVCOCVBMSVFMCVCOCVCNyVFMCVCOCVBRCVFMCVCOCU4NyUyMEtpYXRpc3VrJTIwU2VuYW11YW5nLmh0bWw="
+                              id="block-single-button">
+                              ซื้อเฉพาะคอร์สนี้
+                            </a>
+                          </div>
+                          <div id="yearlybanner" className="feature column-center text-center m-b-20">
+                            <a href="https://checkout.cariber.co?add-to-cart=685&cfp=eWVhcmx5YmFubm5lcl9kZXNrdG9wX0M6L1VzZXJzL2luemVlL09uZURyaXZlJTIwLSUyMFVuaXZlcnNpdHklMjBvZiUyMFBoYXlhby9DYXJpYmVyJTIwZG91Y3VtZW50L3NhdmUlMjBwYWdlLyVFMCVCOCU4NCVFMCVCOCVBRCVFMCVCOCVBMyVFMCVCOSU4QyVFMCVCOCVBQSVFMCVCOCVBRCVFMCVCOCVBRCVFMCVCOCU5OSVFMCVCOSU4NCVFMCVCOCVBNSVFMCVCOCU5OSVFMCVCOSU4QyVFMCVCOCU4MSVFMCVCOCVCMSVFMCVCOCU5QSVFMCVCOCU4QiVFMCVCOCVCNCVFMCVCOSU4MiVFMCVCOCU4MSVFMCVCOSU4OSUyMCVFMCVCOSU4MCVFMCVCOCU4MSVFMCVCOCVCNSVFMCVCOCVBMiVFMCVCOCVBMyVFMCVCOCU5NSVFMCVCOCVCNCVFMCVCOCVBOCVFMCVCOCVCMSVFMCVCOCU4MSVFMCVCOCU5NCVFMCVCOCVCNCVFMCVCOSU4QyUyMCVFMCVCOSU4MCVFMCVCOCVBQSVFMCVCOCU5OSVFMCVCOCVCMiVFMCVCOSU4MCVFMCVCOCVBMSVFMCVCOCVCNyVFMCVCOCVBRCVFMCVCOCU4NyUyMEtpYXRpc3VrJTIwU2VuYW11YW5nLmh0bWw=">
+                              <Img id="block-yearly-img"
+                                className="feature-image"
+                                src={"/courseDetail/yearly-sucscription-lg.png"}
+                                width={623.183}
+                                height={400}
+                                alt="Cariber Yearly Subscription"
+                              />
+                            </a>
+                            <a className="btn btn-small m-t-10"
+                              href="https://checkout.cariber.co?add-to-cart=685&amp;cfp=eWVhcmx5YmFubm5lcl9kZXNrdG9wX0M6L1VzZXJzL2luemVlL09uZURyaXZlJTIwLSUyMFVuaXZlcnNpdHklMjBvZiUyMFBoYXlhby9DYXJpYmVyJTIwZG91Y3VtZW50L3NhdmUlMjBwYWdlLyVFMCVCOCU4NCVFMCVCOCVBRCVFMCVCOCVBMyVFMCVCOSU4QyVFMCVCOCVBQSVFMCVCOCVBRCVFMCVCOCVBRCVFMCVCOCU5OSVFMCVCOSU4NCVFMCVCOCVBNSVFMCVCOCU5OSVFMCVCOSU4QyVFMCVCOCU4MSVFMCVCOCVCMSVFMCVCOCU5QSVFMCVCOCU4QiVFMCVCOCVCNCVFMCVCOSU4MiVFMCVCOCU4MSVFMCVCOSU4OSUyMCVFMCVCOSU4MCVFMCVCOCU4MSVFMCVCOCVCNSVFMCVCOCVBMiVFMCVCOCVBMyVFMCVCOCU5NSVFMCVCOCVCNCVFMCVCOCVBOCVFMCVCOCVCMSVFMCVCOCU4MSVFMCVCOCU5NCVFMCVCOCVCNCVFMCVCOSU4QyUyMCVFMCVCOSU4MCVFMCVCOCVBQSVFMCVCOCU5OSVFMCVCOCVCMiVFMCVCOSU4MCVFMCVCOCVBMSVFMCVCOCVCNyVFMCVCOCVBRCVFMCVCOCU4NyUyMEtpYXRpc3VrJTIwU2VuYW11YW5nLmh0bWw="
+                              id="block-yearly-button">
+                              ซื้อแพ็กเกจรายปี
+                            </a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  )
+                }}
+              </Popup>
             </div>
           </div>
         </div>
@@ -100,7 +166,7 @@ export default function Products({ product }: { product: ProductProp }) {
                   <div className="player-nav">
                     <div className="media">
                       <div className="media-left-under-player">
-                        <a className="btn btn-box disabled" href="#">
+                        <a className="btn btn-box btn-small disabled" href="#">
                           <i className="fa fa-chevron-left" aria-hidden="true"></i>
                           บทเรียนก่อนหน้า
                         </a>
@@ -111,7 +177,7 @@ export default function Products({ product }: { product: ProductProp }) {
                         </p>
                       </div>
                       <div className="media-right">
-                        <a className="btn btn-box" href="#">
+                        <a className="btn btn-box btn-small" href="#">
                           บทเรียนถัดไป
                           <i className="fa fa-chevron-right" aria-hidden="true"></i>
                         </a>
@@ -235,7 +301,7 @@ export async function getStaticProps() {
         instructorImage: "/product/instructor-image.jpg",
         instructorName: "เกียรติศักดิ์ เสนาเมือง",
         instructorRemark: "เพราะความสำเร็จของฟุตบอลเกิดจากทีมเวิร์ค และกว่าที่จะมาเป็นทีมได้ต้องมีกระบวนการสร้าง",
-        episodes: staticData.episodes
+        episodes: staticData.episodes,
       }
     }
   };

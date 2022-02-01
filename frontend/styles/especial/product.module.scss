@@ -249,7 +249,8 @@
 
   .left-nev-product {
     @media(max-width: $mobile-size) {
-      p{
+      width: 70%;
+      p {
         font-size: 12px;
       }
     }
@@ -260,17 +261,51 @@
     align-items: center;
   }
 
-  .product-announcement{
+  .product-announcement {
     display: flex;
     flex-direction: row;
     background-color: #e74e25;
     color: white;
     border-radius: 5px;
     padding: 10px;
-    span{
+
+    span {
       white-space: pre-line;
+
       @media(max-width: $mobile-size) {
         font-size: 12px;
+      }
+    }
+  }
+
+}
+
+.popup-product-sale-content {
+  padding: 5rem 1rem;
+  height: 100%;
+  width: 100%;
+  background-color: #fbf5e4;
+
+  h3 {
+    color: #e74e25;
+    font-weight: 600;
+  }
+
+  h6 {
+    color: #e74e25;
+  }
+
+  .pop-modal{
+    .close{
+      width: 25px;
+      height: 25px;
+      align-items: center;
+      top: 3rem;
+      right: 1rem;
+
+      p{
+        margin: 0px;
+        opacity: 0.7;
       }
     }
   }

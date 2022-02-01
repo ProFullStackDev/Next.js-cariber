@@ -4631,13 +4631,13 @@ a,
 
 @media (min-width: $mobile-size) {
   .lg-none {
-    display: none;
+    display: none !important;
   }
 }
 
 @media (max-width: $mobile-size) {
-  .md-none {
-    display: none;
+  .sm-none {
+    display: none !important;
   }
 }
 
