@@ -21,5 +21,9 @@ module.exports = ({ env }) => ({
         defaultReplyTo: 'supitcha.b@codium.co'
       }
     }
-  }
+  },
+  'upload-cloudflare': {
+    enabled: true,
+    resolve: './src/plugins/upload-cloudflare'
+  },
 });
