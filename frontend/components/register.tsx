@@ -36,7 +36,7 @@ export default function Register({ callbackButton }: RegisterProps) {
     formData.append("email", formRegister.email);
     formData.append("password", formRegister.password);
     const data = await registerApi(formData)
-    if (data.error === undefined) {
+    if (!data.error) {
       const formLogin = new FormData();
       formLogin.append("identifier", formRegister.email);
       formLogin.append("password", formRegister.password);

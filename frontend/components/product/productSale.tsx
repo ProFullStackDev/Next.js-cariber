@@ -1,3 +1,4 @@
+import { MouseEventHandler } from "react"
 import Popup from "reactjs-popup"
 import Img from "../image"
 
@@ -11,7 +12,7 @@ export default function ProductSale() {
       }
       modal
       closeOnDocumentClick={false}>
-      {(close: any) => {
+      {(close: MouseEventHandler<HTMLButtonElement>) => {
         return (
           <div className="pop-modal">
             <button className="close" onClick={close}>

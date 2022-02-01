@@ -32,7 +32,7 @@ export default function Login({ callbackButton }: LoginProps) {
     formData.append("identifier", formLogin.email);
     formData.append("password", formLogin.password);
     const data = await authApi(formData)
-    if (data.error === undefined) {
+    if (!data.error) {
       userManager.saveToken(data.jwt)
       router.replace("/library")
     } else {

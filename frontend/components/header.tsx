@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { MouseEventHandler, useEffect, useState } from "react";
 import Img from "./image"
 import UserManager from "../auth/userManager"
 import Popup from "reactjs-popup";
@@ -149,7 +149,7 @@ export default function Header() {
                       }
                       modal
                       closeOnDocumentClick={false}>
-                      {(close: any) => {
+                      {(close: MouseEventHandler<HTMLButtonElement>) => {
                         return (
                           <div className="pop-modal">
                             <button className="close" onClick={close}>
@@ -228,7 +228,7 @@ export default function Header() {
                     }
                     modal
                     closeOnDocumentClick={false}>
-                    {(close: any) => {
+                    {(close: MouseEventHandler<HTMLButtonElement>) => {
                       return (
                         <div className="pop-modal">
                           <button className="close" onClick={close}>
