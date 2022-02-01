@@ -24,7 +24,7 @@ interface ProductProp {
   videoId: string,
 }
 
-export default function Products({ product }: { product: ProductProp }) {
+export default function Product({ product }: { product: ProductProp }) {
   const router = useRouter()
   const userManager = new UserManager()
   const announcement = "ตอนนี้คุณกำลังอยู่ในโหมดทดลองเรียนฟรี เนื้อหาบางส่วนมีการถูกล็อกไว้\nคุณสามารถซื้อคอร์สนี้เพื่อดุเนื้อหาทั้งหมดในคอร์สเรียน"
@@ -35,7 +35,7 @@ export default function Products({ product }: { product: ProductProp }) {
   })
 
   return (
-    <div className="products">
+    <div className="product">
       <Header />
       <div className="col-12 m-0">
         <div className="container sm-p-x-0">

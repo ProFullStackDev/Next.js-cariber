@@ -4,7 +4,6 @@ import VideoPlayer from "../videoPlayer";
 
 export default function CourseHeader({ yearlySubscriptionImage,
                                        singleCourseImage,
-                                       videoPoster,
                                        videoId,
                                        singleCheckoutUrl }: CourseDetailCourseHeader) {
   return (

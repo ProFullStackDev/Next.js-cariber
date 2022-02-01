@@ -10,8 +10,7 @@ export default function ProductSale() {
         </button>
       }
       modal
-      closeOnDocumentClick={false}
-      position="right center">
+      closeOnDocumentClick={false}>
       {(close: any) => {
         return (
           <div className="pop-modal">
