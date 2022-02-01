@@ -1,9 +1,10 @@
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { MouseEventHandler, useEffect, useState } from "react";
 import Img from "./image"
 import UserManager from "../auth/userManager"
 import Popup from "reactjs-popup";
 import FlashMessages, { FlashMessagesType } from "../functions/flashMessages";
+import SwitchSignInSignUp from "./switchSignInSignUp";
 
 interface Menu {
   url: string,
@@ -140,9 +141,27 @@ export default function Header() {
               <div className="header-block header-switch-content header-block-user header-block-mr0">
                 <div className="user">
                   <span className="user-login">
-                    <Link href="/login">
-                      เข้าสู่ระบบ
-                    </Link>
+                    <Popup className="popup-auth"
+                      trigger={
+                        <button className="btn btn-link btn-small color-primary" >
+                          เข้าสู่ระบบ
+                        </button>
+                      }
+                      modal
+                      closeOnDocumentClick={false}>
+                      {(close: MouseEventHandler<HTMLButtonElement>) => {
+                        return (
+                          <div className="pop-modal">
+                            <button className="close" onClick={close}>
+                              <p>
+                                &times;
+                              </p>
+                            </button>
+                            <SwitchSignInSignUp />
+                          </div>
+                        )
+                      }}
+                    </Popup>
                   </span>
                 </div>
               </div>
@@ -201,11 +220,27 @@ export default function Header() {
             ) : (
               <div className="header-block header-switch-content header-block-user">
                 <span className="user-login">
-                  <Link href="/login" passHref={true}>
-                    <a>
-                      เข้าสู่ระบบ
-                    </a>
-                  </Link>
+                  <Popup className="popup-auth"
+                    trigger={
+                      <button className="btn btn-link btn-small color-primary" >
+                        เข้าสู่ระบบ
+                      </button>
+                    }
+                    modal
+                    closeOnDocumentClick={false}>
+                    {(close: MouseEventHandler<HTMLButtonElement>) => {
+                      return (
+                        <div className="pop-modal">
+                          <button className="close" onClick={close}>
+                            <p>
+                              &times;
+                            </p>
+                          </button>
+                          <SwitchSignInSignUp />
+                        </div>
+                      )
+                    }}
+                  </Popup>
                 </span>
               </div>
             )}

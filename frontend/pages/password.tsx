@@ -35,7 +35,7 @@ export default function Password() {
     formData.append("password", formPassword.password);
     formData.append("passwordConfirmation", formPassword.password);
     const data = await passwordApi(formData)
-    if (data.error === undefined) {
+    if (!data.error) {
       userManager.saveToken(data.jwt)
       flashMessages.setMessages(FlashMessagesType.forgotPasswordMessages,
         "Your password has been changed successfully. You are now signed in.")

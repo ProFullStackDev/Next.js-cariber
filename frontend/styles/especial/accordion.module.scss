@@ -1,6 +1,7 @@
 .accordion{
   .accordion-title {
     height: fit-content;
+    align-items: center;
   }
   
   .accordion-body {
@@ -31,5 +32,11 @@
 
   .light{
     background-color: #fff;
+  }
+
+  .accordion-button{
+    display: flex;
+    justify-content: flex-end;
+    padding-bottom: 10px;
   }
 }

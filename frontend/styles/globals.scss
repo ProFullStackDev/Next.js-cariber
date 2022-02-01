@@ -8,9 +8,8 @@
 @import "./especial/reviewStudents.module.scss";
 @import "./especial/library.module.scss";
 @import "./especial/courseDetail.module.scss";
-@import "./especial/products.module.scss";
+@import "./especial/product.module.scss";
 @import "./especial/accordion.module.scss";
-@import "./especial/episode.module.scss";
 @import "./especial/nextInstructorForm.module.scss";
 @import "./especial/account.module.scss";
 @import "./especial/404.module.scss";
@@ -96,6 +95,7 @@ $modal-button-background-color: "";
 $two-step-button-border-radius: 4;
 $two-step-button-background-color: "";
 $border-radius: 4px;
+$btn-text-color: #ffffff;
 
 
 [data-aos][data-aos][data-aos-duration="50"],
@@ -3270,6 +3270,10 @@ strong {
   flex: 0 0 100%;
 }
 
+button{
+  font-family: $font-family-body;
+}
+
 .btn {
   font-family: $font-family-body;
   font-size: 18px;
@@ -4632,13 +4636,13 @@ a,
 
 @media (min-width: $mobile-size) {
   .lg-none {
-    display: none;
+    display: none !important;
   }
 }
 
 @media (max-width: $mobile-size) {
-  .md-none {
-    display: none;
+  .sm-none {
+    display: none !important;
   }
 }
 
@@ -4811,35 +4815,20 @@ a .panel-sub-title {
   }
 }
 
-.popup-register-content {
-  width: 30%;
-  width: 600px;
+.popup-auth-content {
+  width: 400px;
   padding: 20px;
   color: #ffffff;
   background-color: #0e1b20;
-  border-color: #e74e25;
+  border: none;
 
   @media (max-width: $ipad-size) {
-    width: 70%;
+    width: 60%;
   }
 
   @media (max-width: $mobile-size) {
     width: 90%;
   }
-}
-
-.pop-modal .close {
-  cursor: pointer;
-  position: absolute;
-  display: block;
-  padding: 3px 3px;
-  line-height: 15px;
-  right: -10px;
-  top: -10px;
-  font-size: 24px;
-  background: #ffffff;
-  border-radius: 18px;
-  border: 1px solid #cfcece;
 }
 
 .color-smooth {
@@ -4903,4 +4892,89 @@ a .panel-sub-title {
   border-radius: 3px;
   padding: 14px 20px;
   margin: 20px 0;
+}
+
+.btn-not-focus{
+  opacity: 0.7;
+}
+
+.hidden-xs-down {
+  @media(max-width: 575px) {
+    display: none;
+  }
+}
+
+.lg-flex-between{
+  @media(min-width: $mobile-size) {
+    display: flex;
+    justify-content: space-between;
+  }
+}
+
+.btn-link{
+  background: none;
+  border: none;
+  cursor: pointer;
+  align-items: center;
+}
+
+.pop-modal{
+  .close{
+    width: 25px;
+    height: 25px;
+    align-items: center;
+    top: 3rem;
+    right: 1rem;
+
+    p{
+      margin: 0px;
+      opacity: 0.7;
+    }
+  }
+}
+
+.pop-modal .close {
+  cursor: pointer;
+  position: absolute;
+  display: block;
+  padding: 3px 3px;
+  line-height: 15px;
+  right: -10px;
+  top: -10px;
+  font-size: 24px;
+  background: #ffffff;
+  border-radius: 18px;
+  border: 1px solid #cfcece;
+}
+
+
+.color-white{
+  color: white !important;
+}
+
+.link-colorless {
+  font-weight: 400;
+  text-decoration: underline !important;
+  -webkit-transition: all 0.1s;
+  -o-transition: all 0.1s;
+  transition: all 0.1s;
+  text-decoration: none;
+  color: #000000;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.login-bottom{
+  margin-top: 28px;
+}
+
+.background-color-facebook{
+  background-color: #4267B2;
+  border: none;
+}
+
+.background-color-google{
+  background-color: #4285F4;
+  border: none;
 }

@@ -42,7 +42,7 @@ export default function Library() {
                 <div className="resume-course box-shadow-none">
                   <div className="resume-course-positioner">
                     <a className="resume-course-content" href="#">
-                      <div className="resume-course-text md-none">
+                      <div className="resume-course-text sm-none">
                         <h6 className="resume-course-status m-0">
                           <strong>
                             เรียนคอร์สต่อ
