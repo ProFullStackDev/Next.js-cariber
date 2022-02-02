@@ -22,10 +22,10 @@ interface AccordionProps {
   icon?: Icon,
   color: Color,
   link?: AccordionLink,
-  percentage?: number
+  progress?: number
 }
 
-export default function Accordion({ title, description, col, icon, color, link, percentage }: AccordionProps) {
+export default function Accordion({ title, description, col, icon, color, link, progress }: AccordionProps) {
   const [displayDescription, setDisplayDescription] = useState("d-none");
   const descriptionLocal = description.split(/\r\n|\n\r|\n|\r/)
   function switchDisplay() {
@@ -74,13 +74,13 @@ export default function Accordion({ title, description, col, icon, color, link, 
           {link && (
             <div className="accordion-right col-3">
               <div>
-                {percentage && (<div>
+                {(progress || progress === 0) && (<div>
                   <p className="f-s-12">
-                    รับชมแล้ว 3 นาทีจาก 7นาที
+                    รับชมแล้ว {progress / 10} นาทีจาก 10นาที
                   </p>
                   <div className="player-progress full">
                     <div className="progress-outer">
-                      <div className={`progress-inner p-w-${Math.round(20)}`} />
+                      <div className={`progress-inner p-w-${Math.round(progress)}`} />
                     </div>
                   </div>
                 </div>)}

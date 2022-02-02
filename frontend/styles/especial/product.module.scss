@@ -1,6 +1,26 @@
 @import "../sizer.scss";
 
 .product {
+  .playlist-button {
+    padding-top: 1rem;
+    display: flex;
+    justify-content: center;
+
+    button {
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      background-color: #343434;
+      color: white;
+      cursor: pointer;
+    }
+
+    button:hover {
+      -webkit-filter: brightness(115%);
+      filter: brightness(115%);
+    }
+  }
+
   .progress {
     height: 4px;
   }

@@ -135,48 +135,31 @@ export default function Product({ product }: { product: ProductProp }) {
                         </div>
                       </div>
                       <div className="playlist-body">
-                        {product.episodes.map((value, index) => {
-                          return (
-                            <a key={index} className="media track" href="#">
-                              <div className="media-left media-middle">
-                                {index === 0 ? (
-                                  <p className="track-count active">
-                                    <i className="fa fa-play color-primary"></i>
-                                  </p>
-                                ) : (
-                                  <p className="track-count">{index + 1}</p>
-                                )}
-                              </div>
-                              <div className="media-left media-middle">
-                                <Img className="track-thumb"
-                                  src={value.image}
-                                  width={70}
-                                  height={39.3833}
-                                  alt={value.title}
-                                />
-                              </div>
-                              <div className="media-body media-middle">
-                                <div className="track-title">
-                                  {value.title}
-                                  {(value.progress > 0 && value.progress < 100) && (
-                                    <div className="player-progress">
-                                      <div className="progress-outer">
-                                        <div className={`progress-inner p-w-${Math.round(value.progress)}`} />
-                                      </div>
-                                    </div>
-                                  )}
-                                </div>
-                              </div>
-                              <div className="media-right media-middle">
-                                {value.progress === 100 && (
-                                  <div>
-                                    <i className="fa fa-check color-primary"></i>
-                                  </div>
-                                )}
-                              </div>
-                            </a>
-                          )
-                        })}
+                        <a className="media track" href="#">
+                          <div className="media-left media-middle">
+                            <p className="track-count active">
+                              <i className="fa fa-play color-primary"></i>
+                            </p>
+                          </div>
+                          <div className="media-left media-middle">
+                            <Img className="track-thumb"
+                              src={"/product/product-2.jpg"}
+                              width={70}
+                              height={39.3833}
+                              alt={"EP02: ศาสตร์ของการเป็นโค้ช"}
+                            />
+                          </div>
+                          <div className="media-body media-middle">
+                            <div className="track-title">
+                              {"EP02: ศาสตร์ของการเป็นโค้ช"}
+                            </div>
+                          </div>
+                        </a>
+                        <div className="playlist-button">
+                          <button>
+                            บทเรียนถัดไป
+                          </button>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -197,8 +180,8 @@ export default function Product({ product }: { product: ProductProp }) {
                     col={12}
                     icon={value.icon}
                     color={Color.light}
-                    link={{ linkUrl: "#", linkText: "รับชมเนื้อหา" }}
-                    percentage={10}
+                    link={{ linkUrl: "#", linkText: `${value.progress ? (`${value.progress < 100 ? ("ดูต่อ") : ("ดูอีกครั้ง")}`) : ("รับชมเนื้อหา")}` }}
+                    progress={value.progress}
                   />)
                 })
                 }
