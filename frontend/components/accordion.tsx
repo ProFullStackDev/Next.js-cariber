@@ -22,9 +22,10 @@ interface AccordionProps {
   icon?: Icon,
   color: Color,
   link?: AccordionLink,
+  percentage?: number
 }
 
-export default function Accordion({ title, description, col, icon, color, link }: AccordionProps) {
+export default function Accordion({ title, description, col, icon, color, link, percentage }: AccordionProps) {
   const [displayDescription, setDisplayDescription] = useState("d-none");
   const descriptionLocal = description.split(/\r\n|\n\r|\n|\r/)
   function switchDisplay() {
@@ -58,30 +59,31 @@ export default function Accordion({ title, description, col, icon, color, link }
       </div>
       <div className={`accordion-collapse ${color} ${displayDescription}`}>
         <div className={`accordion accordion-body row`}>
-          <div className="col-9">
-          {descriptionLocal.map((value, index) => {
-            return (
-              <h6 key={index} className="f-s-14">
-                <span>
-                  {value}
-                </span>
-                <br />
-              </h6>
-            )
-          })}
-        </div>
+          <div className={`${link ? ("col-9") : ("col-12")} `}>
+            {descriptionLocal.map((value, index) => {
+              return (
+                <h6 key={index} className="f-s-14">
+                  <span>
+                    {value}
+                  </span>
+                  <br />
+                </h6>
+              )
+            })}
+          </div>
           {link && (
             <div className="accordion-right col-3">
               <div>
-                <p className="f-s-12">
-                  รับชมแล้ว 3 นาทีจาก 7นาที
-                </p>
-                <div className="player-progress full">
-                  <div className="progress-outer">
-                    <div className="progress-inner">
+                {percentage && (<div>
+                  <p className="f-s-12">
+                    รับชมแล้ว 3 นาทีจาก 7นาที
+                  </p>
+                  <div className="player-progress full">
+                    <div className="progress-outer">
+                      <div className={`progress-inner p-w-${Math.round(20)}`} />
                     </div>
                   </div>
-                </div>
+                </div>)}
                 <a href={link.linkUrl} className="btn btn-small btn-full">{link.linkText}</a>
               </div>
             </div>

@@ -57,7 +57,7 @@ export default function Product({ product }: { product: ProductProp }) {
               </a>
             </div>
             <div className="right-nev-product lg-none">
-              <ProductSale/>
+              <ProductSale />
             </div>
           </div>
         </div>
@@ -161,7 +161,7 @@ export default function Product({ product }: { product: ProductProp }) {
                                   {(value.progress > 0 && value.progress < 100) && (
                                     <div className="player-progress">
                                       <div className="progress-outer">
-                                        <div className="progress-inner" style={{ width: `${value.progress}%` }} />
+                                        <div className={`progress-inner p-w-${Math.round(value.progress)}`} />
                                       </div>
                                     </div>
                                   )}
@@ -198,6 +198,7 @@ export default function Product({ product }: { product: ProductProp }) {
                     icon={value.icon}
                     color={Color.light}
                     link={{ linkUrl: "#", linkText: "รับชมเนื้อหา" }}
+                    percentage={10}
                   />)
                 })
                 }
