@@ -4649,7 +4649,7 @@ a,
 .background-image {
   background-image: url("/background-image.jpg");
   background-position: top;
-  background-size: cover;
+  background-size: contain;
   background-attachment: fixed;
 }
 
