@@ -35,9 +35,9 @@ export default function Accordion({ title, description, col, icon, color, link }
   }
 
   return (
-    <div className={`accordion-outside col-${col}`}>
-      <div className={`accordion-frame box-shadow-medium block-type-accordion text-left ${color}`} 
-      onClick={switchDisplay}>
+    <div className={`accordion-outside m-0 col-${col}`}>
+      <div className={`accordion-frame box-shadow-medium block-type-accordion text-left ${color}`}
+        onClick={switchDisplay}>
         <div className={`${icon === Icon.lock && ("accordion-non-focus")} ${displayDescription === "d-block" && ("accordion-active")}`}>
           <div className="accordion">
             <div className="accordion-title media align-items-center collapsed">
@@ -51,13 +51,14 @@ export default function Accordion({ title, description, col, icon, color, link }
               </h5>
               {displayDescription === "d-none" ?
                 (<i className="fas fa-chevron-right"></i>) :
-                (<i className="fas fa-chevron-down"></i>)}
+                (<i className="fas fa-chevron-up"></i>)}
             </div>
           </div>
         </div>
       </div>
       <div className={`accordion-collapse ${color} ${displayDescription}`}>
-        <div className={`accordion accordion-body`}>
+        <div className={`accordion accordion-body row`}>
+          <div className="col-9">
           {descriptionLocal.map((value, index) => {
             return (
               <h6 key={index} className="f-s-14">
@@ -67,11 +68,22 @@ export default function Accordion({ title, description, col, icon, color, link }
                 <br />
               </h6>
             )
-          })
-          }
+          })}
+        </div>
           {link && (
-            <div className="accordion-button">
-              <a href={link.linkUrl} className="btn btn-small">{link.linkText}</a>
+            <div className="accordion-right col-3">
+              <div>
+                <p className="f-s-12">
+                  รับชมแล้ว 3 นาทีจาก 7นาที
+                </p>
+                <div className="player-progress full">
+                  <div className="progress-outer">
+                    <div className="progress-inner">
+                    </div>
+                  </div>
+                </div>
+                <a href={link.linkUrl} className="btn btn-small btn-full">{link.linkText}</a>
+              </div>
             </div>
           )}
         </div>

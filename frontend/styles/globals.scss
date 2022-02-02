@@ -3270,7 +3270,7 @@ strong {
   flex: 0 0 100%;
 }
 
-button{
+button {
   font-family: $font-family-body;
 }
 
@@ -4894,7 +4894,7 @@ a .panel-sub-title {
   margin: 20px 0;
 }
 
-.btn-not-focus{
+.btn-not-focus {
   opacity: 0.7;
 }
 
@@ -4904,29 +4904,29 @@ a .panel-sub-title {
   }
 }
 
-.lg-flex-between{
+.lg-flex-between {
   @media(min-width: $mobile-size) {
     display: flex;
     justify-content: space-between;
   }
 }
 
-.btn-link{
+.btn-link {
   background: none;
   border: none;
   cursor: pointer;
   align-items: center;
 }
 
-.pop-modal{
-  .close{
+.pop-modal {
+  .close {
     width: 25px;
     height: 25px;
     align-items: center;
     top: 3rem;
     right: 1rem;
 
-    p{
+    p {
       margin: 0px;
       opacity: 0.7;
     }
@@ -4948,7 +4948,7 @@ a .panel-sub-title {
 }
 
 
-.color-white{
+.color-white {
   color: white !important;
 }
 
@@ -4965,26 +4965,36 @@ a .panel-sub-title {
   cursor: pointer;
 }
 
-.login-bottom{
+.login-bottom {
   margin-top: 28px;
 }
 
-.background-color-facebook{
+.background-color-facebook {
   background-color: #4267B2;
   border: none;
 }
 
-.background-color-google{
+.background-color-google {
   background-color: #4285F4;
   border: none;
 }
 
-.sm-full{
-  @media(max-width: $mobile-size) {
-  width: 100%;
+.full{
+  width: 100% !important;
+}
+
+.lg-full {
+  @media(min-width: $mobile-size) {
+    width: 100% !important;
   }
 }
 
-.d-flex{
+.sm-full {
+  @media(max-width: $mobile-size) {
+    width: 100% !important;
+  }
+}
+
+.d-flex {
   display: flex;
 }

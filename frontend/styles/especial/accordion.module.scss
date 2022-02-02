@@ -1,5 +1,10 @@
 .accordion-outside {
 
+  .accordion-progress {
+    display: flex;
+    justify-content: flex-end;
+  }
+
   .accordion-title {
     height: fit-content;
     align-items: center;
@@ -31,9 +36,16 @@
     background-color: #fff;
   }
 
-  .accordion-button {
+  .accordion-right {
     display: flex;
     justify-content: flex-end;
+    align-items: flex-end;
     padding-bottom: 10px;
+  }
+
+  [class*="col-"]{
+    @media (max-width: $ipad-size) {
+      width: 100% !important;
+    }    
   }
 }
