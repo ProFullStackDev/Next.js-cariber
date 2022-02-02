@@ -10,7 +10,7 @@ export enum Color {
   dark = "dark"
 }
 
-interface AccordionLink{
+interface AccordionLink {
   linkUrl: string,
   linkText: string
 }
@@ -28,49 +28,52 @@ export default function Accordion({ title, description, col, icon, color, link }
   const [displayDescription, setDisplayDescription] = useState("d-none");
   const descriptionLocal = description.split(/\r\n|\n\r|\n|\r/)
   function switchDisplay() {
-    if(icon === Icon.lock){
+    if (icon === Icon.lock) {
       return
-    } 
+    }
     displayDescription === "d-none" ? setDisplayDescription("d-block") : setDisplayDescription("d-none")
   }
 
   return (
-    <div className={`accordion block-type-accordion text-left col-${col} m-0`} onClick={switchDisplay}>
-      <div className={`accordion-frame box-shadow-medium ${color}`}>
-        <div className="accordion">
-          <div className="accordion-title media align-items-center collapsed">
-            {icon && (
-              <div className="m-r-10">
-                <i className={icon}></i>
-              </div>
-            )}
-            <h5 className="media-body f-s-16">
-              {title}
-            </h5>
-            {displayDescription === "d-none" ?
-              (<i className="fas fa-chevron-right"></i>) :
-              (<i className="fas fa-chevron-down"></i>)}
-          </div>
-          <div className={`accordion-collapse ${displayDescription}`}>
-            <div className="accordion-body">
-              {descriptionLocal.map((value, index) => {
-                return (
-                  <h5 key={index} className="f-s-14">
-                    <span>
-                      {value}
-                    </span>
-                    <br />
-                  </h5>
-                )
-              })
-              }
+    <div className={`accordion-outside col-${col}`}>
+      <div className={`accordion-frame box-shadow-medium block-type-accordion text-left ${color}`} 
+      onClick={switchDisplay}>
+        <div className={`${icon === Icon.lock && ("accordion-non-focus")} ${displayDescription === "d-block" && ("accordion-active")}`}>
+          <div className="accordion">
+            <div className="accordion-title media align-items-center collapsed">
+              {icon && (
+                <div className="m-r-10">
+                  <i className={icon}></i>
+                </div>
+              )}
+              <h5 className="media-body f-s-16">
+                {title}
+              </h5>
+              {displayDescription === "d-none" ?
+                (<i className="fas fa-chevron-right"></i>) :
+                (<i className="fas fa-chevron-down"></i>)}
             </div>
-            {link && (
-              <div className="accordion-button">
-                <a href={link.linkUrl} className="btn btn-small">{link.linkText}</a>
-              </div>
-            )}
           </div>
+        </div>
+      </div>
+      <div className={`accordion-collapse ${color} ${displayDescription}`}>
+        <div className={`accordion accordion-body`}>
+          {descriptionLocal.map((value, index) => {
+            return (
+              <h6 key={index} className="f-s-14">
+                <span>
+                  {value}
+                </span>
+                <br />
+              </h6>
+            )
+          })
+          }
+          {link && (
+            <div className="accordion-button">
+              <a href={link.linkUrl} className="btn btn-small">{link.linkText}</a>
+            </div>
+          )}
         </div>
       </div>
     </div>
