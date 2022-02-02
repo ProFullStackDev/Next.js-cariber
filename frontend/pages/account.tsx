@@ -209,6 +209,12 @@ export default function Account() {
             </div>
           </div>
         </div>
+        <hr />
+        <div className="justify-content-right d-flex">
+          <button type="submit" className="btn btn-primary btn-footer sm-full">
+            Save
+          </button>
+        </div>
       </div>
     </div>
   )

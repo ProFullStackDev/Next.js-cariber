@@ -4978,3 +4978,13 @@ a .panel-sub-title {
   background-color: #4285F4;
   border: none;
 }
+
+.sm-full{
+  @media(max-width: $mobile-size) {
+  width: 100%;
+  }
+}
+
+.d-flex{
+  display: flex;
+}
