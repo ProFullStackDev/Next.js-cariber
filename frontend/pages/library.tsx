@@ -104,7 +104,7 @@ export default function Library() {
                             </Link>
                             <div className="progress">
                               <div className="progress-outer">
-                                <div className="progress-inner" style={{ width: `${value.progress}%` }} />
+                                <div className={`progress-inner p-w-${Math.round(value.progress)}`} />
                               </div>
                             </div>
                             <p className="product-body">

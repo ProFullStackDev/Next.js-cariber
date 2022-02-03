@@ -1,6 +1,26 @@
 @import "../sizer.scss";
 
 .product {
+  .playlist-button {
+    padding-top: 1rem;
+    display: flex;
+    justify-content: center;
+
+    button {
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      background-color: #343434;
+      color: white;
+      cursor: pointer;
+    }
+
+    button:hover {
+      -webkit-filter: brightness(115%);
+      filter: brightness(115%);
+    }
+  }
+
   .progress {
     height: 4px;
   }
@@ -250,6 +270,7 @@
   .left-nev-product {
     @media(max-width: $mobile-size) {
       width: 70%;
+
       p {
         font-size: 12px;
       }
@@ -278,12 +299,38 @@
     }
   }
 
-  .accordion{
-    padding: 20px 30px !important;
+  .accordion-non-focus {
+    background-color: rgb(245, 245, 245) !important;
   }
 
-  .block-type-accordion{
-    padding: 5px 0px !important;
+  .accordion-frame {
+    border-radius: 0px !important;
+  }
+
+  .accordion-outside {
+    padding: 0px !important;
+    border-top-width: 1px;
+    border-top-style: solid;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    border-color: rgb(191, 191, 191);
+  }
+
+  .accordion {
+    padding: 25px 30px !important;
+  }
+
+  .accordion-active {
+    color: white;
+    background-color: rgb(14, 27, 32) !important;
+
+    h5 {
+      color: white;
+    }
+  }
+
+  .block-type-accordion {
+    padding: 0px 0px !important;
   }
 }
 
@@ -302,15 +349,15 @@
     color: #e74e25;
   }
 
-  .pop-modal{
-    .close{
+  .pop-modal {
+    .close {
       width: 25px;
       height: 25px;
       align-items: center;
       top: 3rem;
       right: 1rem;
 
-      p{
+      p {
         margin: 0px;
         opacity: 0.7;
       }

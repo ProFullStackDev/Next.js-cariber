@@ -1,10 +1,10 @@
-export interface Auth{
+export interface Auth {
   jwt: string;
   user: User;
   error: Error;
 }
 
-export interface User{
+export interface User {
   id: number;
   email: string;
   username: string;
@@ -12,7 +12,18 @@ export interface User{
   confirmed: boolean;
 }
 
-export interface Error{
+export interface UserProfile {
+  fullName: string,
+  timeZone: string,
+  notifyUpdatesProducts: boolean,
+  notifyReplyMyPosts: boolean,
+  emailPromotions: boolean,
+  avatarUserBase64: string,
+  bio: string,
+  location: string
+}
+
+export interface Error {
   status: number;
   name: string;
   message: string;
