@@ -1,5 +1,5 @@
 import { FormEvent, useState } from "react";
-import forgotPasswordApi from "../functions/api/forgotPasswordApi";
+import forgotPasswordApi, { ForgotPasswordApiProps } from "../functions/api/forgotPasswordApi";
 import Footer from "../components/footer";
 import FormInput from "../components/formInput";
 import Header from "../components/header";
@@ -15,13 +15,14 @@ export default function ForgotPassword() {
   });
 
   async function forgotPasswordRequest(event: FormEvent) {
+    event.preventDefault();
     setError({
       isError: false,
       message: "",
     })
-    event.preventDefault();
-    const formData = new FormData();
-    formData.append("email", formForgotPassword.email);
+    const formData: ForgotPasswordApiProps = {
+      email: formForgotPassword.email
+    }
     await forgotPasswordApi(formData)
     setError({
       isError: true,

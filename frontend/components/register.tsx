@@ -1,8 +1,8 @@
 import { useRouter } from "next/router";
 import { useState, FormEvent, MouseEventHandler } from "react";
 import UserManager from "../auth/userManager";
-import authApi from "../functions/api/authApi";
-import registerApi from "../functions/api/registerApi";
+import authApi, { AuthApiProps } from "../functions/api/authApi";
+import registerApi, { RegisterApiProps } from "../functions/api/registerApi";
 import FormInput from "./formInput"
 import ShowError from "./showError";
 
@@ -32,14 +32,16 @@ export default function Register({ callbackButton }: RegisterProps) {
       })
       return
     }
-    const formData = new FormData();
-    formData.append("email", formRegister.email);
-    formData.append("password", formRegister.password);
+    const formData: RegisterApiProps ={
+      email: formRegister.email,
+      password: formRegister.password
+    }
     const data = await registerApi(formData)
     if (!data.error) {
-      const formLogin = new FormData();
-      formLogin.append("identifier", formRegister.email);
-      formLogin.append("password", formRegister.password);
+      const formLogin: AuthApiProps ={
+        email: formRegister.email,
+        password: formRegister.password
+      }
       const dataLogin = await authApi(formLogin)
       userManager.saveToken(dataLogin.jwt)
       router.replace("/library")

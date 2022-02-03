@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import { FormEvent, MouseEventHandler, useState } from "react";
-import authApi from "../functions/api/authApi";
+import authApi, { AuthApiProps } from "../functions/api/authApi";
 import UserManager from "../auth/userManager";
 import FormInput from "./formInput";
 import ShowError from "./showError";
@@ -28,9 +28,10 @@ export default function Login({ callbackButton }: LoginProps) {
       isError: false,
       message: ""
     })
-    const formData = new FormData();
-    formData.append("identifier", formLogin.email);
-    formData.append("password", formLogin.password);
+    const formData: AuthApiProps = {
+      email: formLogin.email,
+      password: formLogin.password
+    }
     const data = await authApi(formData)
     if (!data.error) {
       userManager.saveToken(data.jwt)

@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import { FormEvent, useState } from "react";
-import passwordApi from "../functions/api/passwordApi";
+import passwordApi, { PasswordApiProps } from "../functions/api/passwordApi";
 import UserManager from "../auth/userManager";
 import Footer from "../components/footer";
 import FormInput from "../components/formInput";
@@ -30,10 +30,11 @@ export default function Password() {
       })
       return
     }
-    const formData = new FormData();
-    typeof router.query.code === "string" && formData.append("code", router.query.code);
-    formData.append("password", formPassword.password);
-    formData.append("passwordConfirmation", formPassword.password);
+    const formData: PasswordApiProps = {
+      code: router.query.code?.toString(),
+      password: formPassword.password,
+      passwordConfirmation: formPassword.confirmPassword
+    }
     const data = await passwordApi(formData)
     if (!data.error) {
       userManager.saveToken(data.jwt)
