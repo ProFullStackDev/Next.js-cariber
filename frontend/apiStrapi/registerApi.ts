@@ -1,5 +1,6 @@
+import { User } from "../models/auth";
 import { strapiRegisterApi } from "../models/content";
-import { RegisterResponse } from "../models/register";
+import { ResponseData } from "../models/data";
 
 export interface RegisterApiProps {
   email: string,
@@ -14,5 +15,5 @@ export default async function registerApi(body: RegisterApiProps) {
     method: "POST",
     body: formData,
   })
-  return await response.json() as RegisterResponse
+  return await response.json() as ResponseData<User>
 }

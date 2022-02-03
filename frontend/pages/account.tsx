@@ -1,32 +1,34 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { ChangeEvent, FormEvent, useEffect, useRef, useState } from "react";
-import getUser from "../apiStrapi/getUser";
-import updateUserApi from "../apiStrapi/updateUser";
+import getUserProfileApi from "../apiStrapi/getUserProfileApi";
+import updateUserProfileApi from "../apiStrapi/updateUserProfileApi";
 import UserManager from "../auth/userManager";
 import PurchasedCard from "../components/account/purchasedCard";
 import Img from "../components/image";
 import * as staticData from "../components/static/account"
+import encodeBase64 from "../functions/encodeBase64";
 
 export default function Account() {
   const timeZone = staticData.timeZone
   const hiddenFileInput = useRef<HTMLInputElement>(null);
   const router = useRouter()
-  const userManager = new UserManager()
   const [formData, setFormData] = useState({
     fullName: "",
     timeZone: "",
     notifyUpdatesProducts: false,
     notifyReplyMyPosts: false,
     emailPromotions: false,
+    avatarUserBase64: "/default_avatar.webp",
     bio: "",
     location: ""
   })
 
   useEffect(() => {
+    const userManager = new UserManager()
     !userManager.isLoggedIn() && router.replace('/login')
     fetchData()
-  }, [])
+  }, [router])
 
   const handleChange = (event: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLSelectElement> | ChangeEvent<HTMLTextAreaElement>) => {
     const name = event.target.name;
@@ -41,12 +43,15 @@ export default function Account() {
   }
 
   async function fetchData() {
-    setFormData(await getUser())
+    const data = await getUserProfileApi()
+    if (data.data) {
+      setFormData(data.data)
+    }
   }
 
   async function saveAccount(event: FormEvent) {
     event.preventDefault();
-    const data = await updateUserApi(formData)
+    const data = await updateUserProfileApi(formData)
     if (!data.error) {
       alert("แก้ไขสำเร็จ")
     }
@@ -55,6 +60,23 @@ export default function Account() {
   function handleClick() {
     hiddenFileInput.current && hiddenFileInput.current.click();
   };
+
+  async function handleChangeAvatar(event: ChangeEvent<HTMLInputElement>) {
+    if (event.currentTarget!.files![0]) {
+      await encodeBase64(event.currentTarget!.files![0]).then((result) => {
+        setFormData({
+          avatarUserBase64: String(result),
+          bio: formData.bio,
+          emailPromotions: formData.emailPromotions,
+          fullName: formData.fullName,
+          location: formData.location,
+          notifyReplyMyPosts: formData.notifyReplyMyPosts,
+          notifyUpdatesProducts: formData.notifyUpdatesProducts,
+          timeZone: formData.timeZone
+        })
+      })
+    }
+  }
 
   return (
     <div className="account">
@@ -173,7 +195,7 @@ export default function Account() {
                         <Img id="member-avatar-preview"
                           className="avatar img-circle media-object"
                           alt="Avatar"
-                          src="https://www.gravatar.com/avatar/d42fb2edb07445e1e602fc89e8e65160?s=64&amp;d=https://s3.amazonaws.com/kajabi-storefronts-production/static_assets/default_avatar.jpg"
+                          src={formData.avatarUserBase64}
                           width={64}
                           height={64} />
                       </div>
@@ -184,7 +206,12 @@ export default function Account() {
                             &nbsp;100x100
                           </strong>
                         </p>
-                        <input className="d-none" type="file" accept="image/*" ref={hiddenFileInput} />
+                        <input className="d-none"
+                          type="file"
+                          accept="image/*"
+                          ref={hiddenFileInput}
+                          onChange={handleChangeAvatar}
+                        />
                         <button type="button" onClick={handleClick} className="btn btn-primary btn-outline filepicker-btn fp-input">
                           Change Avatar
                         </button>

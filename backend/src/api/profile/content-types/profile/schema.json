@@ -27,16 +27,6 @@
     "emailPromotions": {
       "type": "boolean"
     },
-    "avatarUser": {
-      "type": "media",
-      "multiple": false,
-      "required": false,
-      "allowedTypes": [
-        "images",
-        "files",
-        "videos"
-      ]
-    },
     "bio": {
       "type": "text"
     },
@@ -47,6 +37,9 @@
       "type": "relation",
       "relation": "oneToOne",
       "target": "plugin::users-permissions.user"
+    },
+    "avatarUserBase64": {
+      "type": "text"
     }
   }
 }

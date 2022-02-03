@@ -6,7 +6,7 @@ module.exports = {
     async getMe(ctx) {
         const user = ctx.state.user;
         const profile = await  strapi.query(profileUid).findOne({where: {users_permissions_user: user}});
-        return profile;
+        return { data: profile};
     },
     async updateMe(ctx) {
         let data = ctx.request.body;
@@ -18,6 +18,6 @@ module.exports = {
         }else {
             await strapi.entityService.create(profileUid, {data: data})
         }
-        return ctx.request.body;
+        return  { data: ctx.request.body };
     }
 };
