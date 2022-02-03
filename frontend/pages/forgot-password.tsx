@@ -1,5 +1,5 @@
 import { FormEvent, useState } from "react";
-import forgotPasswordApi, { ForgotPasswordApiProps } from "../functions/api/forgotPasswordApi";
+import forgotPasswordApi, { ForgotPasswordApiProps } from "../apiStrapi/forgotPasswordApi";
 import Footer from "../components/footer";
 import FormInput from "../components/formInput";
 import Header from "../components/header";

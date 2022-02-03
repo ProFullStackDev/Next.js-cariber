@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import { FormEvent, MouseEventHandler, useState } from "react";
-import authApi, { AuthApiProps } from "../functions/api/authApi";
+import authApi, { AuthApiProps } from "../apiStrapi/authApi";
 import UserManager from "../auth/userManager";
 import FormInput from "./formInput";
 import ShowError from "./showError";

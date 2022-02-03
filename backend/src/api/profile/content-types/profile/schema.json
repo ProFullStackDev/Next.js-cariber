@@ -1,0 +1,52 @@
+{
+  "kind": "collectionType",
+  "collectionName": "profiles",
+  "info": {
+    "singularName": "profile",
+    "pluralName": "profiles",
+    "displayName": "Profile",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "fullName": {
+      "type": "string"
+    },
+    "timeZone": {
+      "type": "string"
+    },
+    "notifyUpdatesProducts": {
+      "type": "boolean"
+    },
+    "notifyReplyMyPosts": {
+      "type": "boolean"
+    },
+    "emailPromotions": {
+      "type": "boolean"
+    },
+    "avatarUser": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos"
+      ]
+    },
+    "bio": {
+      "type": "text"
+    },
+    "location": {
+      "type": "text"
+    },
+    "users_permissions_user": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "plugin::users-permissions.user"
+    }
+  }
+}

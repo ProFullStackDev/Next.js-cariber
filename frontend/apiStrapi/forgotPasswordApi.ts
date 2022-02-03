@@ -1,4 +1,4 @@
-import { strapiForgotPasswordApi } from "../../models/content"
+import { strapiForgotPasswordApi } from "../models/content"
 
 export interface ForgotPasswordApiProps {
   email: string

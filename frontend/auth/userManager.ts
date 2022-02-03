@@ -15,6 +15,10 @@ export default class UserManager {
         return getCookie(this.tokenKey, {sameSite: "none", secure: true});
     }
 
+    getJwtToken(): string {
+        return "Bearer "+getCookie(this.tokenKey, {sameSite: "none", secure: true});
+    }
+
     destroyToken(): void {
         removeCookies(this.tokenKey, {sameSite: "none", secure: true})
     }

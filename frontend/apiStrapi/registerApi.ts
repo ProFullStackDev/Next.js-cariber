@@ -1,5 +1,5 @@
-import { strapiRegisterApi } from "../../models/content";
-import { RegisterResponse } from "../../models/register";
+import { strapiRegisterApi } from "../models/content";
+import { RegisterResponse } from "../models/register";
 
 export interface RegisterApiProps {
   email: string,

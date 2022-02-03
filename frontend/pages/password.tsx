@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import { FormEvent, useState } from "react";
-import passwordApi, { PasswordApiProps } from "../functions/api/passwordApi";
+import passwordApi, { PasswordApiProps } from "../apiStrapi/passwordApi";
 import UserManager from "../auth/userManager";
 import Footer from "../components/footer";
 import FormInput from "../components/formInput";
