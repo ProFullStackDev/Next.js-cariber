@@ -16,12 +16,12 @@ export default function Login({ callbackButton }: LoginProps) {
   const userManager = new UserManager()
   const [formLogin, setFormLogin] = useState({
     email: "",
-    password: ""
-  });
+    password: "",
+  })
   const [errorLogin, setErrorLogin] = useState({
     isError: false,
     message: "",
-  });
+  })
 
   async function loginRequest(event?: FormEvent) {
     event && event.preventDefault();
