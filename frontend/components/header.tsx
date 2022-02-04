@@ -53,9 +53,11 @@ export default function Header() {
   }, [])
 
   async function fetchData() {
-    const data = await getUserProfileApi()
-    if (data.data.avatarUserBase64) {
-      setFormData(data.data)
+    if(userManager.isLoggedIn()){
+      const data = await getUserProfileApi()
+      if (data.data?.avatarUserBase64) {
+        setFormData(data.data)
+      }
     }
   }
 

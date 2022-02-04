@@ -5,6 +5,7 @@ import UserManager from "../auth/userManager";
 import FormInput from "./formInput";
 import ShowError from "./showError";
 import Link from "next/link";
+import Img from "./image";
 
 interface LoginProps {
   callbackButton: MouseEventHandler<HTMLButtonElement>
@@ -50,10 +51,24 @@ export default function Login({ callbackButton }: LoginProps) {
         เข้าสู่ระบบ
       </h2>
       <div className="column-center">
-        <button className="btn btn-full m-b-5 m-x-0 background-color-facebook">
+        <button className="btn btn-icon btn-full m-b-5 m-x-0 background-color-facebook">
+          <div className="icon-frame p-0">
+            <Img src="/login/facebook-icon.png"
+              width={25}
+              height={25}
+              alt="Facebook"
+            />
+          </div>
           เข้าสู่ระบบด้วย Facebook
         </button>
-        <button className="btn btn-full m-b-10 m-x-0 background-color-google">
+        <button className="btn btn-icon btn-full m-b-10 m-x-0 background-color-google">
+          <div className="icon-frame">
+            <Img src="/login/google-icon.svg"
+              width={25}
+              height={25}
+              alt="Google"
+            />
+          </div>
           เข้าสู่ระบบด้วย Google
         </button>
       </div>
