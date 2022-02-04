@@ -5,6 +5,7 @@ import UserManager from "../auth/userManager"
 import Popup from "reactjs-popup";
 import FlashMessages, { FlashMessagesType } from "../functions/flashMessages";
 import SwitchSignInSignUp from "./switchSignInSignUp";
+import getUserProfileApi from "../apiStrapi/getUserProfileApi";
 
 interface Menu {
   url: string,
@@ -16,6 +17,9 @@ export default function Header() {
   const flashMessages = new FlashMessages()
   const [hamburgerOpened, setHamburgerOpened] = useState(false);
   const flashForgotPassword = flashMessages.getMessages(FlashMessagesType.forgotPasswordMessages)
+  const [formData, setFormData] = useState({
+    avatarUserBase64: "/default_avatar.webp",
+  })
 
   const menuLogedIn: Menu[] = [
     { url: "/library", name: "คอร์สของฉัน" },
@@ -45,7 +49,15 @@ export default function Header() {
     window.addEventListener("resize", () => {
       setHamburgerOpened(false)
     });
-  })
+    fetchData()
+  }, [])
+
+  async function fetchData() {
+    const data = await getUserProfileApi()
+    if (data.data.avatarUserBase64) {
+      setFormData(data.data)
+    }
+  }
 
   function switchHamburger() {
     setHamburgerOpened(!hamburgerOpened)
@@ -113,7 +125,7 @@ export default function Header() {
                 <div className="user-avatar-block">
                   <Popup trigger={<div>
                     <Img className="user-avatar"
-                      src={"/default_avatar.webp"}
+                      src={formData.avatarUserBase64}
                       width={40}
                       height={40}
                       alt="default_avatar.webp" />
