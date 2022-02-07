@@ -6,6 +6,7 @@ import updateUserProfileApi from "../apiStrapi/updateUserProfileApi";
 import UserManager from "../auth/userManager";
 import PurchasedCard from "../components/account/purchasedCard";
 import Img from "../components/image";
+import ShowError from "../components/showError";
 import * as staticData from "../components/static/account"
 import encodeBase64 from "../functions/encodeBase64";
 
@@ -15,6 +16,10 @@ export default function Account() {
   const router = useRouter()
   const [formData, setFormData] = useState({
     fullName: "",
+    email: "",
+    currentPassword: "",
+    newPassword: "",
+    confirmPassword: "",
     timeZone: "",
     notifyUpdatesProducts: false,
     notifyReplyMyPosts: false,
@@ -22,6 +27,10 @@ export default function Account() {
     avatarUserBase64: "/default_avatar.webp",
     bio: "",
     location: ""
+  })
+  const [errorPassword, setErrorPassword] = useState({
+    isError: false,
+    message: "",
   })
 
   useEffect(() => {
@@ -45,15 +54,31 @@ export default function Account() {
   async function fetchData() {
     const data = await getUserProfileApi()
     if (data.data) {
+      data.data.currentPassword = ""
+      data.data.newPassword = ""
+      data.data.confirmPassword = ""
       setFormData(data.data)
     }
   }
 
   async function saveAccount(event: FormEvent) {
     event.preventDefault();
+    setErrorPassword({
+      isError: false,
+      message: ""
+    })
+    if (formData.newPassword !== formData.confirmPassword) {
+      setErrorPassword({
+        isError: true,
+        message: "New passwords do not match"
+      })
+      return
+    }
     const data = await updateUserProfileApi(formData)
     if (!data.error) {
       alert("แก้ไขสำเร็จ")
+    }else{
+      alert(data.error.message)
     }
   }
 
@@ -66,6 +91,10 @@ export default function Account() {
       await encodeBase64(event.currentTarget!.files![0]).then((result) => {
         setFormData({
           avatarUserBase64: String(result),
+          email: formData.email,
+          currentPassword: formData.currentPassword,
+          newPassword: formData.newPassword,
+          confirmPassword: formData.confirmPassword,
           bio: formData.bio,
           emailPromotions: formData.emailPromotions,
           fullName: formData.fullName,
@@ -127,8 +156,12 @@ export default function Account() {
                       E-mail
                     </label>
                     <input id="member_email"
+                      name="email"
                       className="form-control string"
-                      type="text" />
+                      type="email"
+                      value={formData.email}
+                      required
+                      onChange={handleChange} />
                   </div>
                   <div className="form-group">
                     <label className="control-label string" htmlFor="member_time_zone">
@@ -266,11 +299,16 @@ export default function Account() {
             <div className="col-8 card-form">
               <div className="panel panel-default panel-form">
                 <div className="panel-body">
+                  {errorPassword.isError && (<ShowError message={errorPassword.message} />)}
                   <div className="form-group">
                     <label className="control-label string" htmlFor="member_current_password">
                       Current Password
                     </label>
-                    <input id="member_current_password" className="form-control string" type="text" />
+                    <input id="member_current_password"
+                      className="form-control string"
+                      name="currentPassword"
+                      type="password"
+                      onChange={handleChange} />
                     <p className="help-block">
                       <Link href="/forgot-password" passHref={true}>
                         <a>
@@ -283,13 +321,21 @@ export default function Account() {
                     <label className="control-label string" htmlFor="member_new_password">
                       New Password
                     </label>
-                    <input id="member_new_password" className="form-control string" type="text" />
+                    <input id="member_new_password"
+                      className="form-control string"
+                      name="newPassword"
+                      type="password"
+                      onChange={handleChange} />
                   </div>
                   <div className="form-group">
                     <label className="control-label string" htmlFor="member_verify_password">
                       Verify Password
                     </label>
-                    <input id="member_verify_password" className="form-control string" type="text" />
+                    <input id="member_verify_password"
+                      className="form-control string"
+                      name="confirmPassword"
+                      type="password"
+                      onChange={handleChange} />
                   </div>
                 </div>
               </div>

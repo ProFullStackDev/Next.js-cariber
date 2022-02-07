@@ -1,4 +1,4 @@
-import { Auth } from '../models/auth';
+import { Auth } from '../models/contentType/auth';
 import { strapiAuthApi } from '../models/content';
 
 export interface AuthApiProps {

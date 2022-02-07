@@ -45,7 +45,7 @@ export default function Sale({ yearlySubscriptionImage,
                     <Img id="block-yearly-img"
                       className="feature-image"
                       src={yearlySubscriptionImageMobile}
-                      width={400}
+                      width={623.183}
                       height={400}
                       alt="Cariber Yearly Subscription"
                     />

@@ -1,5 +1,5 @@
 import UserManager from "../auth/userManager"
-import { UserProfile } from "../models/auth"
+import { UserProfile } from "../models/contentType/auth"
 import { strapiGetUserProfileApi } from "../models/content"
 import { ResponseData } from "../models/data"
 

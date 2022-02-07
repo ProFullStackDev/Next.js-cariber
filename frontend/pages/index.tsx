@@ -89,51 +89,55 @@ const Index: NextPage = () => {
       </div>
       <div className="background-light">
         <div className="sizer">
-          <div className="row align-items-center justify-content-center">
-            <div className="block-type-text text-center col-3">
-              <div className="block box-shadow-none column-center">
-                <p className="f-s-30">
-                  <strong>
-                    <span className="color-primary">
-                      สูตรความสำเร็จกับ
-                      <br />
-                      &quot;ที่สุด&quot; ของประเทศ
-                    </span>
-                  </strong>
-                </p>
-                <p className="f-s-20">
-                  <em>
+          <div className="container">
+            <div className="row align-items-center justify-content-center">
+              <div className="block-type-text text-center col-3">
+                <div className="block box-shadow-none column-center">
+                  <p className="f-s-30">
                     <strong>
                       <span className="color-primary">
-                        คอร์สออนไลน์กับผู้บริหาร ผู้นำทางความคิด แบบที่ไม่เคยมีมาก่อน
+                        สูตรความสำเร็จกับ
+                        <br />
+                        &quot;ที่สุด&quot; ของประเทศ
                       </span>
                     </strong>
-                  </em>
-                </p>
-                <Img className="feature-image"
-                  src="/index/yearly-subscription-1.jpg"
-                  width={329.6}
-                  height={211.55}
-                  alt="Yearly Subscription"
-                />
-                <a className="btn btn-solid btn-medium btn-auto" href="https://checkout.cariber.co/?add-to-cart=685&cfp=eWVhcmx5YmFubm5lcl9kZXNrdG9wXw==">
-                  ซื้อแพ็กเกจรายปี
-                </a>
+                  </p>
+                  <p className="f-s-20">
+                    <em>
+                      <strong>
+                        <span className="color-primary">
+                          คอร์สออนไลน์กับผู้บริหาร ผู้นำทางความคิด แบบที่ไม่เคยมีมาก่อน
+                        </span>
+                      </strong>
+                    </em>
+                  </p>
+                  <Img className="feature-image"
+                    src="/index/yearly-subscription-1.jpg"
+                    width={329.6}
+                    height={211.55}
+                    alt="Yearly Subscription"
+                  />
+                  <a className="btn btn-solid btn-medium btn-auto" href="https://checkout.cariber.co/?add-to-cart=685&cfp=eWVhcmx5YmFubm5lcl9kZXNrdG9wXw==">
+                    ซื้อแพ็กเกจรายปี
+                  </a>
+                </div>
               </div>
-            </div>
-            <div className="block-type-video col-7">
-              <div className="block box-shadow-none">
-                <div className="video">
-                  <video className="b-r-4" width="100%" controls loop={true} muted={true} autoPlay={true}>
-                    <source src="/index/cariber-video.mp4" type="video/mp4" />
-                  </video>
+              <div className="block-type-video col-7">
+                <div className="block box-shadow-none">
+                  <div className="video">
+                    <video className="b-r-4" width="100%" controls loop={true} muted={true} autoPlay={true}>
+                      <source src="/index/cariber-video.mp4" type="video/mp4" />
+                    </video>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
         <div className="sizer">
-          <CoursesUpdate coursesSoon={coursesSoon} coursesLatest={coursesLatest} />
+          <div className="container">
+            <CoursesUpdate coursesSoon={coursesSoon} coursesLatest={coursesLatest} />
+          </div>
         </div>
       </div>
       <div className="background-dark">

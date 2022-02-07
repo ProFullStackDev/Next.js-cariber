@@ -45,11 +45,11 @@ $social-icons-background-color: #ffffff;
     }
 
     a.link-list-link {
-        color: $text-color;
+        color: $text-color !important;
     }
 
     .link-list-link:hover {
-        color: $text-color;
+        color: $text-color !important;
     }
 
     .footer-block {

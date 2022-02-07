@@ -1,4 +1,4 @@
-import { Item } from "../../models/courses"
+import { Item } from "../../models/contentType/courses"
 
 export default function Suitable({ suitable }: { suitable: Item[] }) {
   const halfLine = 60

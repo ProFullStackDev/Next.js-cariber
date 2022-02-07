@@ -14,6 +14,10 @@ export interface User {
 
 export interface UserProfile {
   fullName: string,
+  email: string,
+  currentPassword: string,
+  newPassword: string,
+  confirmPassword: string,
   timeZone: string,
   notifyUpdatesProducts: boolean,
   notifyReplyMyPosts: boolean,

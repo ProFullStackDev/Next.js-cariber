@@ -1,4 +1,4 @@
-import { User } from "../models/auth";
+import { User } from "../models/contentType/auth";
 import { strapiRegisterApi } from "../models/content";
 import { ResponseData } from "../models/data";
 

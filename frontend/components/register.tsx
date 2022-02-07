@@ -5,6 +5,7 @@ import authApi, { AuthApiProps } from "../apiStrapi/authApi";
 import registerApi, { RegisterApiProps } from "../apiStrapi/registerApi";
 import FormInput from "./formInput"
 import ShowError from "./showError";
+import Img from "./image";
 
 interface RegisterProps {
   callbackButton: MouseEventHandler<HTMLButtonElement>
@@ -59,10 +60,24 @@ export default function Register({ callbackButton }: RegisterProps) {
         สร้างบัญชีผู้ใช้งาน
       </h2>
       <div className="column-center">
-        <button className="btn btn-full m-b-5 m-x-0 background-color-facebook">
+      <button className="btn btn-icon btn-full m-b-5 m-x-0 background-color-facebook">
+          <div className="icon-frame p-0">
+            <Img src="/login/facebook-icon.png"
+              width={25}
+              height={25}
+              alt="Facebook"
+            />
+          </div>
           ลงทะเบียนด้วย Facebook
         </button>
-        <button className="btn btn-full m-b-10 m-x-0 background-color-google">
+        <button className="btn btn-icon btn-full m-b-10 m-x-0 background-color-google">
+          <div className="icon-frame">
+            <Img src="/login/google-icon.svg"
+              width={25}
+              height={25}
+              alt="Google"
+            />
+          </div>
           ลงทะเบียนด้วย Google
         </button>
       </div>
