@@ -37,6 +37,7 @@ export interface Contents{
   description: string;
   video_url: string;
 }
+
 export interface Topics{
   id: number;
   label: string;

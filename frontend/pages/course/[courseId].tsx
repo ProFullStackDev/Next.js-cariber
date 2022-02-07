@@ -11,18 +11,28 @@ import Suitable from "../../components/courseDetail/suitable"
 import Sale from "../../components/courseDetail/sale"
 import UpperHeader from "../../components/courseDetail/upperHeader"
 import { ResponseData, ResponseDataList } from "../../models/data"
-import { Course } from "../../models/courses"
+import { Course } from "../../models/contentType/courses"
 import { strapiApi, strapiImage } from "../../models/content"
 import YoutubeEP from "../../components/courseDetail/youtubeEP"
 import CourseHeader from "../../components/courseDetail/courseHeader"
+import singleCourseApi from "../../apiStrapi/singleCoures"
+import { SingleCourse } from "../../models/contentType/singleCourse"
+import annualPromotionApi from "../../apiStrapi/annualPromotion"
+import { AnnualPromotion } from "../../models/contentType/annualPromotion"
 
 interface CourseDetailParams {
-  courseId: string
+  courseId: string;
 }
 
-export default function CourseDetail({ course }: { course: ResponseData<Course> }) {
-  const slideCourses = staticDataReview.slideCourses
-  const youtubeEPItems = course.data.course_detail.contents.filter((value) => { return value.__component === "components.special-ep-component" })
+interface CourseDetailProps {
+  course: ResponseData<Course>;
+  singleCourse: ResponseData<SingleCourse>;
+  annualPromotion: ResponseData<AnnualPromotion>;
+}
+
+export default function CourseDetail({ course, singleCourse, annualPromotion }: CourseDetailProps) {
+  const slideCourses = staticDataReview.slideCourses;
+  const youtubeEPItems = course.data.course_detail.contents.filter((value) => { return value.__component === "components.special-ep-component" });
   return (
     <div className="course-detail">
       <Header />
@@ -30,9 +40,9 @@ export default function CourseDetail({ course }: { course: ResponseData<Course> 
         {course.data.course_detail.header && (
           <UpperHeader header={course.data.course_detail.header} />
         )}
-        <CourseHeader yearlySubscriptionImage={"/courseDetail/yearly-sucscription-lg.png"}
-          yearlySubscriptionImageMobile={"/courseDetail/yearly-sucscription-sm.png"}
-          singleCourseImage={"/courseDetail/single-course.jpg"}
+        <CourseHeader yearlySubscriptionImage={strapiImage(annualPromotion.data.attributes.image.data.attributes.url)}
+          yearlySubscriptionImageMobile={strapiImage(annualPromotion.data.attributes.image.data.attributes.url)}
+          singleCourseImage={strapiImage(singleCourse.data.attributes.image.data.attributes.url)}
           videoId={course.data.course_detail.teaser_url}
           videoPoster={""}
           singleCheckoutUrl={course.data.course_detail.order_link} />
@@ -41,8 +51,8 @@ export default function CourseDetail({ course }: { course: ResponseData<Course> 
         )}
         {course.data.course_detail.speaker_details?.url && (
           <IntroductionPersonal fullName={course.data.course_detail.name}
-            personalHistoryImage={strapiImage(course.data.course_detail.speaker_details?.url)} 
-            highRatio={course.data.course_detail.speaker_details.height/course.data.course_detail.speaker_details.width}/>
+            personalHistoryImage={strapiImage(course.data.course_detail.speaker_details?.url)}
+            highRatio={course.data.course_detail.speaker_details.height / course.data.course_detail.speaker_details.width} />
         )}
         {course.data.course_detail.contents.map((value, index) => {
           if (value.__component === "components.topic-component") {
@@ -61,8 +71,8 @@ export default function CourseDetail({ course }: { course: ResponseData<Course> 
           episodes={course.data.episodes} />
       </div>
       <Sale singleCoursePersonalImage={strapiImage(course.data.course_detail.order_image.url)}
-        yearlySubscriptionImage={"/courseDetail/yearly-sucscription-lg.png"}
-        yearlySubscriptionImageMobile={"/courseDetail/yearly-sucscription-sm.png"}
+        yearlySubscriptionImage={strapiImage(annualPromotion.data.attributes.image.data.attributes.url)}
+        yearlySubscriptionImageMobile={strapiImage(annualPromotion.data.attributes.image.data.attributes.url)}
         singleCheckoutUrl={course.data.course_detail.order_link} />
       <div className="background-light">
         <div className="sizer">
@@ -98,18 +108,28 @@ export async function getStaticPaths() {
   const data = await response.json() as ResponseDataList<Course>;
   const dataFilter = (data.data.filter((value) => {
     return value.course_detail
-  }))
+  }));
   const paths = dataFilter.map((value) => {
-    return { params: { courseId: value.id.toString() } }
-  })
+    return {
+      params: {
+        courseId: value.id.toString(),
+      }
+    }
+  });
   return {
     paths: paths,
-    fallback: false
+    fallback: false,
   };
-};
+}
 
 export async function getStaticProps({ params }: { params: CourseDetailParams }) {
   const response = await fetch(strapiApi + `/courses/${params.courseId}`);
   const data = await response.json() as ResponseData<Course>;
-  return { props: { course: data } };
+  return {
+    props: {
+      course: data,
+      singleCourse: await singleCourseApi(),
+      annualPromotion: await annualPromotionApi(),
+    }
+  };
 }

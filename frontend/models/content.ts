@@ -6,7 +6,9 @@ export const strapiForgotPasswordApi = strapiApi+"/auth/forgot-password";
 export const strapiPasswordApi = strapiApi+"/auth/reset-password";
 export const strapiGetUserProfileApi = strapiApi+"/user/get-me";
 export const strapiUpdateUseProfilerApi = strapiApi+"/user/update-me";
+export const strapiSingleCourse = strapiApi+"/single-course?populate=*";
+export const strapiAnnualPromotion = strapiApi+"/annual-promotion?populate=*";
 
 export function strapiImage(url: string){
-  return strapi+url
+  return strapi+url;
 }

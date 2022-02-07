@@ -3,7 +3,7 @@ import Footer from "../components/footer"
 import Header from "../components/header"
 import FooterBrand from "../components/footerBrand"
 import { strapiApi, strapiImage } from "../models/content"
-import { Course } from "../models/courses"
+import { Course } from "../models/contentType/courses"
 import { ResponseDataList } from "../models/data"
 import Link from "next/link"
 

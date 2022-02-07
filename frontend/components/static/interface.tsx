@@ -1,4 +1,4 @@
-import { Episode } from "../../models/courses";
+import { Episode } from "../../models/contentType/courses";
 import { Icon } from "../accordion";
 
 export interface TimeZone {
