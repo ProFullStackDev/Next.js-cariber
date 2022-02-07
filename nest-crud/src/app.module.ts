@@ -10,17 +10,20 @@ import {
   UserModule,
   AcessgroupModule,
   SubscriptionRecordModule,
+  EpisodeModule,
+  InstructorModule
 } from './repositories'
 import {
   AuthController,
   UserController,
   AcessgroupController,
   CourseController,
+  EpisodeController,
+  InstructorController
 } from './controllers'
 import * as config from 'src/database/ormconfig'
 import { SubscriptionRecordController } from './controllers/subscriptionrecord.controller';
 import { CourseModule } from './repositories/course';
-import { User } from './models/user';
 @Module({
   imports: [
     TypeOrmModule.forRoot(config),
@@ -30,7 +33,8 @@ import { User } from './models/user';
     AcessgroupModule,
     SubscriptionRecordModule,
     CourseModule,
-    DefaultAdminModule
+    EpisodeModule,
+    InstructorModule
   ],
   controllers: [
     AppController,
@@ -39,8 +43,9 @@ import { User } from './models/user';
     AcessgroupController,
     SubscriptionRecordController,
     CourseController,
+    EpisodeController,
+    InstructorController
   ],
   providers: [Logger, AppService],
 })
-export class AppModule {
-}
+export class AppModule {}

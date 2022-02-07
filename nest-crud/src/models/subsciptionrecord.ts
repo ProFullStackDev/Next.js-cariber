@@ -5,6 +5,7 @@ import { ApiProperty } from '@nestjs/swagger'
 import { User } from './user'
 import { AccessGroup } from './accessgroup';
 
+
 @Entity({ schema: 'public' })
 export class SubscriptionRecord {
 

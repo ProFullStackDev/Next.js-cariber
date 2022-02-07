@@ -18,7 +18,33 @@ export class AuthService {
 
   async validateUserByID(id: string): Promise<any> {
     
-    const user = await this.userService.findOne(id, { relations: ['subscription', 'subscription.access_group'] })
+    const user = await this.userService.findOne(id, {
+      join: { 
+        alias: "user",
+        innerJoinAndSelect: {
+          "subscription": "user.subscription",
+          "access_groups": "subscription.access_group",
+          "course": "access_groups.course"
+        },
+    }}) as any
+    let course_list = []
+    user.subscription.forEach((record)=> { 
+      record.access_group.course.forEach((course)=>{
+            let course_mapping = {...course,duration:record.access_group.duration, subscript_date:record.subscription_date};
+            course_list.push(course_mapping)
+          })
+    })
+    const holder = {}
+    course_list.forEach(function(d) {
+      if (holder.hasOwnProperty(d.id)) {
+        holder[d.id] = holder[d.id] + d.duration;
+      } else {
+        holder[d.id] = d.duration;
+      }
+    });
+    console.log(holder);
+    
+    user.extra_field = course_list
     if (!user) return null
     else {
       
@@ -28,15 +54,11 @@ export class AuthService {
   }
 
   async validateUser(email: string, password: string): Promise<any> {
-    console.log(email);
-    
     const user = await this.userService.findOne({where: {email: email}})
-    console.log(user);
     
     if (!user) return null
     else if (!isEmpty(user.password)) {
       const matchPassword = await comparePassword(password, user.password)
-      console.log(password, user.password);
       
       if (matchPassword) {
         delete user.password

@@ -17,11 +17,33 @@ import {
   ApiUnauthorizedResponse,
   ApiBearerAuth
 } from '@nestjs/swagger'
+import { Subscription } from 'rxjs'
+import { AccessGroup } from 'src/models/accessgroup'
+import { Course } from 'src/models/course'
 
 import { AuthService } from '../auth'
 import { AuthToken, AuthLogin } from '../models/auth'
 import { User } from '../models/user'
 
+class AccessGroupDetail {
+  id: number;
+  name: string;
+  duration: number;
+  course: Array<Course>;
+}
+class SubscriptionDetail {
+  id: string;
+  access_group: Array<AccessGroupDetail>;
+  subscription_date: Date;
+}
+class UserDetail {
+  id: string;
+  email: string;
+  status: string;
+  createDate: Date;
+  UpdateDate: Date;
+  subscription: Array<SubscriptionDetail>
+}
 @ApiTags('Authentication')
 @Controller('/api/auth')
 export class AuthController {
@@ -52,6 +74,7 @@ export class AuthController {
     return this.authService.getAccessToken(request.user)
   }
 
+
   @ApiOperation({ summary: 'Get Detail User' })
   @ApiOkResponse({ description: 'Authentication token is valid' })
   @ApiUnauthorizedResponse({ description: 'The authentication token is invalid' })
@@ -60,7 +83,7 @@ export class AuthController {
   @Get('detail')
   @HttpCode(HttpStatus.OK)
   // eslint-disable-next-line @typescript-eslint/no-empty-function
-  UserDetail(@Body() req): Promise<User> { return this.authService.userDetail(req) }
+  UserDetail(@Body() req): Promise<UserDetail> { return this.authService.userDetail(req) }
 
 
 

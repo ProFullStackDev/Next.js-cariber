@@ -5,6 +5,8 @@ import { ApiProperty } from '@nestjs/swagger'
 import { User } from './user'
 import { SubscriptionRecord } from './subsciptionRecord';
 import { AccessGroup } from './accessgroup';
+import { Episode } from './episode';
+import { Instructor } from './instructor';
 
 @Entity({ name: 'course', schema: 'public' })
 export class Course {
@@ -44,9 +46,12 @@ export class Course {
   @UpdateDateColumn({ type: 'timestamp without time zone' })
   updateDate: Date
 
-//   @OneToMany(()=> Episode, episode => episode.course)
-//   episode: Episode[]
+  @OneToMany(()=> Episode, episode => episode.course)
+  episode: Episode[]
 
   @ManyToOne(()=> AccessGroup, access_group => access_group.course, { onDelete: 'CASCADE', onUpdate: 'CASCADE' })
   access_group: AccessGroup
+
+  @ManyToOne(()=> Instructor, instructor => instructor.course, { onDelete: 'CASCADE', onUpdate: 'CASCADE' })
+  instructor: Instructor
 }

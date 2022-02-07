@@ -35,7 +35,6 @@ export class LocalStrategy extends PassportStrategy(Strategy, 'local') {
     if (!user) {
       throw new UnauthorizedException()
     }
-    console.log(user);
     if(user.status == UserStatus.Inactive){
       throw new UnauthorizedException(ERRORS.USER_INACTIVE)
     }

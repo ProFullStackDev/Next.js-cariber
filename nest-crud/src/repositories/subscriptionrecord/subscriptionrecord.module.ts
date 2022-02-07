@@ -9,5 +9,4 @@ import { SubscriptionRecord } from 'src/models/subsciptionRecord';
   providers: [SubscriptionRecordService],
   exports: [SubscriptionRecordService]
 })
-export class SubscriptionRecordModule {
-}
+export class SubscriptionRecordModule {}

@@ -2,11 +2,18 @@ import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards, HttpCode,
 import { AccessGroup } from 'src/models/accessgroup';
 import { AcessgroupService } from '../repositories/acessgroup/acessgroup.service';
 import { Crud, CrudController } from "@nestjsx/crud";
-import { ApiBearerAuth, ApiBody, ApiOperation } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiBody, ApiOperation, ApiProperty, ApiTags } from '@nestjs/swagger';
 import { AuthGuard } from '@nestjs/passport';
+import { Course } from 'src/models/course';
+import { IsArray, IsNumber } from 'class-validator';
 
 class setCourseDTO {
+  @ApiProperty({type: Number})
+  @IsNumber()
   id: number;
+
+  @ApiProperty({type: [Number]})
+  @IsArray()
   course_list: Array<number>;
 }
 @Crud({
@@ -14,6 +21,7 @@ class setCourseDTO {
     type: AccessGroup,
   },
 })
+@ApiTags('Acessgroup')
 @Controller('api/acessgroup')
 export class AcessgroupController implements CrudController<AccessGroup> {
   constructor(public service: AcessgroupService) { }
@@ -25,7 +33,7 @@ export class AcessgroupController implements CrudController<AccessGroup> {
   @Post('set-course')
   @HttpCode(HttpStatus.OK)
   subscription(
-      @Body() request: any
+      @Body() request: setCourseDTO
   ): Promise<any> {
       return this.service.setCourseOfAccessGroup(request)
   }
