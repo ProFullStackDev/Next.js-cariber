@@ -15,6 +15,15 @@ payload
   "password": "string"
 }
 
+4. for login and get bearer token 
+Authentication 
+POST /api/auth
+payload
+{
+  "username": "string",
+  "password": "string"
+}
+
 Noted : for command makemigration or migrate has some prob so i set 
 synchronize: true, # auto sync table with model when run
 dropSchema: false, # drop table all and recreate when run or chnage file
