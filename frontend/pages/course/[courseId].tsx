@@ -19,6 +19,8 @@ import { SingleCourse } from "../../apiStrapi/models/contentType/singleCourse"
 import annualPromotionApi from "../../apiStrapi/annualPromotionApi"
 import { AnnualPromotionContent } from "../../apiStrapi/models/contentType/annualPromotion"
 import EpisodeAccordion from "../../components/courseDetail/episodeAccordion"
+import reviewStudentsApi from "../../apiStrapi/reviewStudentsApi"
+import { ReviewStudentContent } from "../../apiStrapi/models/contentType/reviewStudent"
 
 interface CourseDetailParams {
   courseId: string;
@@ -28,9 +30,13 @@ interface CourseDetailProps {
   course: ResponseData<CourseContent>;
   singleCourse: ResponseData<SingleCourse>;
   annualPromotion: ResponseData<AnnualPromotionContent>;
+  reviewStudents: ResponseDataList<ReviewStudentContent>;
 }
 
-export default function CourseDetail({ course, singleCourse, annualPromotion }: CourseDetailProps) {
+export default function CourseDetail({ course,
+  singleCourse,
+  annualPromotion,
+  reviewStudents }: CourseDetailProps) {
   const slideCourses = staticDataReview.slideCourses;
   const youtubeEPItems = course.data.course_detail.contents.filter((value) => { return value.__component === "components.special-ep-component" });
   return (
@@ -41,12 +47,12 @@ export default function CourseDetail({ course, singleCourse, annualPromotion }: 
           <UpperHeader header={course.data.course_detail.header} />
         )}
         <CourseHeader yearlySubscriptionImage={strapiImage(annualPromotion.data.attributes.image.data.attributes.url)}
-        singleCourseImage={strapiImage(singleCourse.data.attributes.image.data.attributes.url)}
-        videoId={course.data.course_detail.teaser_url}
-        videoPoster={""}
-        singleCheckoutUrl={course.data.course_detail.order_link} 
-        yearlySubscriptionCheckoutUrl={annualPromotion.data.attributes.url} 
-        yearlySubscriptionImageMobile={strapiImage(annualPromotion.data.attributes.image_mobile?.data.attributes.url)}/>
+          singleCourseImage={strapiImage(singleCourse.data.attributes.image.data.attributes.url)}
+          videoId={course.data.course_detail.teaser_url}
+          videoPoster={""}
+          singleCheckoutUrl={course.data.course_detail.order_link}
+          yearlySubscriptionCheckoutUrl={annualPromotion.data.attributes.url}
+          yearlySubscriptionImageMobile={strapiImage(annualPromotion.data.attributes.image_mobile?.data.attributes.url)} />
         {youtubeEPItems.length > 0 && (
           <YoutubeEP YoutubeEPItems={youtubeEPItems} />
         )}
@@ -72,10 +78,10 @@ export default function CourseDetail({ course, singleCourse, annualPromotion }: 
           episodes={course.data.episodes} />
       </div>
       <Sale singleCoursePersonalImage={strapiImage(course.data.course_detail.order_image.url)}
-      yearlySubscriptionImage={strapiImage(annualPromotion.data.attributes.image.data.attributes.url)}
-      yearlySubscriptionImageMobile={strapiImage(annualPromotion.data.attributes.image_mobile?.data.attributes.url)}
-      singleCheckoutUrl={course.data.course_detail.order_link}
-      yearlySubscriptionCheckoutUrl={annualPromotion.data.attributes.url} />
+        yearlySubscriptionImage={strapiImage(annualPromotion.data.attributes.image.data.attributes.url)}
+        yearlySubscriptionImageMobile={strapiImage(annualPromotion.data.attributes.image_mobile?.data.attributes.url)}
+        singleCheckoutUrl={course.data.course_detail.order_link}
+        yearlySubscriptionCheckoutUrl={annualPromotion.data.attributes.url} />
       <div className="background-light">
         <div className="sizer">
           <div className="container">
@@ -97,7 +103,7 @@ export default function CourseDetail({ course, singleCourse, annualPromotion }: 
         </div>
       </div>
       <div className="background-dark">
-        <ReviewStudents />
+        <ReviewStudents reviewStudents={reviewStudents} />
       </div>
       <FooterBrand />
       <Footer />
@@ -132,6 +138,7 @@ export async function getStaticProps({ params }: { params: CourseDetailParams })
       course: data,
       singleCourse: await singleCourseApi(),
       annualPromotion: await annualPromotionApi(),
+      reviewStudents: await reviewStudentsApi(),
     }
   };
 }

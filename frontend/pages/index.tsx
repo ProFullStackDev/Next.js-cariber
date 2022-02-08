@@ -1,4 +1,3 @@
-import type { NextPage } from 'next'
 import Header from '../components/header'
 import Footer from '../components/footer'
 import Accordion, { Color } from '../components/accordion'
@@ -12,8 +11,15 @@ import Specific from '../components/index/specific'
 import Mystudent from '../components/index/myStudent'
 import CoursesUpdate from '../components/index/coursesUpdate'
 import ReviewStudents from '../components/reviewStudents'
+import reviewStudentsApi from '../apiStrapi/reviewStudentsApi'
+import { ResponseDataList } from '../apiStrapi/models/data'
+import { ReviewStudentContent } from '../apiStrapi/models/contentType/reviewStudent'
 
-const Index: NextPage = () => {
+interface IndexProps {
+  reviewStudents: ResponseDataList<ReviewStudentContent>
+}
+
+export default function Index({ reviewStudents }: IndexProps) {
   const shopeeReviews = staticData.shopeeReviews
   const myStudents = staticData.myStudents
   const frequentlyAskedQuestions = staticData.frequentlyAskedQuestions
@@ -141,7 +147,7 @@ const Index: NextPage = () => {
         </div>
       </div>
       <div className="background-dark">
-        <ReviewStudents />
+        <ReviewStudents reviewStudents={reviewStudents} />
         <div className="sizer p-t-20">
           <div className="container">
             <ShopeeReviews shopeeReviews={shopeeReviews} />
@@ -179,4 +185,10 @@ const Index: NextPage = () => {
   )
 }
 
-export default Index
+export async function getStaticProps() {
+  return {
+    props: {
+      reviewStudents: await reviewStudentsApi(),
+    }
+  };
+}

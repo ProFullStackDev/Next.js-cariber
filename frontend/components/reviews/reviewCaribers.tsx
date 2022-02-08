@@ -1,5 +1,5 @@
 import { strapiImage } from "../../apiStrapi/models/content";
-import { ReviewCariberContent } from "../../apiStrapi/models/contentType/reviewCaribers";
+import { ReviewCariberContent } from "../../apiStrapi/models/contentType/reviewCariber";
 import Img from "../image";
 
 export default function ReviewCaribers({ reviewCariber }: { reviewCariber: ReviewCariberContent }) {

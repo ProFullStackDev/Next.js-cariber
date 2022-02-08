@@ -15,7 +15,7 @@ import { ReviewStudentContent } from "../apiStrapi/models/contentType/reviewStud
 import ReviewHeader from "../components/reviews/reviewHeader";
 import ReviewStudents from "../components/reviews/reviewStudents";
 import ReviewCaribers from "../components/reviews/reviewCaribers";
-import { ReviewCariberContent } from "../apiStrapi/models/contentType/reviewCaribers";
+import { ReviewCariberContent } from "../apiStrapi/models/contentType/reviewCariber";
 import reviewCaribersApi from "../apiStrapi/reviewCaribersApi";
 import reviewShopeesApi from "../apiStrapi/reviewShopeesApi";
 import { ReviewShopeeContent } from "../apiStrapi/models/contentType/reviewShopee";
@@ -79,17 +79,17 @@ export default function Review({ annualPromotion,
       <div className="section-feature-1">
         <div className="container">
           <div className="justify-content-center grid-container">
-            {reviewStudents.data.map((value, index) => {
+            {reviewStudents.data?.map((value, index) => {
               return (
                 <ReviewStudents key={index} reviewStudent={value} />
               )
             })}
-            {reviewCaribers.data.map((value, index) => {
+            {reviewCaribers.data?.map((value, index) => {
               return (
                 <ReviewCaribers key={index} reviewCariber={value} />
               )
             })}
-            {reviewShopees.data.map((value, index) => {
+            {reviewShopees.data?.map((value, index) => {
               return (
                 <ReviewShopee key={index} reviewShopee={value}/>
               )

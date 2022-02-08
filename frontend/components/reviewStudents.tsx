@@ -1,9 +1,9 @@
+import { strapiImage } from "../apiStrapi/models/content"
+import { ReviewStudentContent } from "../apiStrapi/models/contentType/reviewStudent"
+import { ResponseDataList } from "../apiStrapi/models/data"
 import Img from "./image"
-import * as staticDataReview from "./static/review"
 
-export default function ReviewStudents() {
-  const reviews = staticDataReview.reviewsCariberFirst
-
+export default function ReviewStudents({ reviewStudents }: { reviewStudents: ResponseDataList<ReviewStudentContent> }) {
   return (
     <div className="sizer reviewStudents p-t-20">
       <div className="container">
@@ -19,31 +19,31 @@ export default function ReviewStudents() {
               </h2>
             </div>
           </div>
-          {reviews.map((value, index) => {
+          {reviewStudents.data?.map((value, index) => {
             return (
               <div key={index} className="block-type-feature text-center col-2">
                 <div className="block box-shadow-none">
                   <div className="feature">
                     <Img className="feature-image"
-                      src={value.image}
+                      src={strapiImage(value.attributes.image.data.attributes.url)}
                       width={175}
                       height={185.917}
-                      alt={value.name}
+                      alt={value.attributes.name}
                     />
                     <div className="feature-text">
                       <p className="text-center">
                         <span className="color-smooth">
-                          &quot;{value.review}&quot;
+                          &quot;{value.attributes.description}&quot;
                         </span>
                       </p>
                       <h4>
                         <span className="color-secondary">
-                          {value.name}
+                          {value.attributes.name}
                         </span>
                       </h4>
                       <span className="color-primary">
                         <em>
-                          {value.career}
+                          {value.attributes.career}
                         </em>
                       </span>
                     </div>

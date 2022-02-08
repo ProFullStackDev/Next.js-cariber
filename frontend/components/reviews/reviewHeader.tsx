@@ -11,15 +11,15 @@ export default function ReviewHeader({ reviewHeader }: { reviewHeader: ReviewHea
             <div className="block-type-image text-col-11">
               <div className="row block box-shadow-large background-light">
                 <Img className="image-image"
-                  src={strapiImage(reviewHeader.attributes.image.data.attributes.url)}
-                  alt={reviewHeader.attributes.facebook_name}
+                  src={strapiImage(reviewHeader?.attributes.image.data.attributes.url)}
+                  alt={reviewHeader?.attributes.facebook_name}
                   width={200}
                   height={200} />
                 <div className="block-text">
                   <p className="m-b-14">
                     <strong>
                       <span className="color-grey white-space-pre">
-                        {reviewHeader.attributes.description}
+                        {reviewHeader?.attributes.description}
                       </span>
                     </strong>
                   </p>
@@ -27,8 +27,8 @@ export default function ReviewHeader({ reviewHeader }: { reviewHeader: ReviewHea
                     <strong className="mt-auto">
                       <span className="color-darkblue f-s-16">
                         <a
-                          href={reviewHeader.attributes.facebook_url}>
-                          Facebook page : {reviewHeader.attributes.facebook_name}
+                          href={reviewHeader?.attributes.facebook_url}>
+                          Facebook page : {reviewHeader?.attributes.facebook_name}
                         </a>
                       </span>
                     </strong>
