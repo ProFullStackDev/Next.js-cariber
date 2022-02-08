@@ -46,7 +46,7 @@ export default function CourseDetail({ course, singleCourse, annualPromotion }: 
         videoPoster={""}
         singleCheckoutUrl={course.data.course_detail.order_link} 
         yearlySubscriptionCheckoutUrl={annualPromotion.data.attributes.url} 
-        yearlySubscriptionImageMobile={strapiImage(annualPromotion.data.attributes.image_mobile.data.attributes.url)}/>
+        yearlySubscriptionImageMobile={strapiImage(annualPromotion.data.attributes.image_mobile?.data.attributes.url)}/>
         {youtubeEPItems.length > 0 && (
           <YoutubeEP YoutubeEPItems={youtubeEPItems} />
         )}
@@ -73,7 +73,7 @@ export default function CourseDetail({ course, singleCourse, annualPromotion }: 
       </div>
       <Sale singleCoursePersonalImage={strapiImage(course.data.course_detail.order_image.url)}
       yearlySubscriptionImage={strapiImage(annualPromotion.data.attributes.image.data.attributes.url)}
-      yearlySubscriptionImageMobile={strapiImage(annualPromotion.data.attributes.image_mobile.data.attributes.url)}
+      yearlySubscriptionImageMobile={strapiImage(annualPromotion.data.attributes.image_mobile?.data.attributes.url)}
       singleCheckoutUrl={course.data.course_detail.order_link}
       yearlySubscriptionCheckoutUrl={annualPromotion.data.attributes.url} />
       <div className="background-light">

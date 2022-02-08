@@ -26,7 +26,7 @@ export default function Courses({ courses, annualPromotion }: CoursesProps) {
                 <div className="image">
                   <a href={annualPromotion.data.attributes.url}>
                     <Img className="image-image"
-                      src={strapiImage(annualPromotion.data.attributes.image_header.data.attributes.url)}
+                      src={strapiImage(annualPromotion.data.attributes.image_header?.data.attributes.url)}
                       alt="Promotion"
                       width={1260}
                       height={282.017} />
