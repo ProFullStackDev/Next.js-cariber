@@ -1,5 +1,5 @@
-import { Auth } from "../models/contentType/auth"
-import { strapiPasswordApi } from "../models/content"
+import { Auth } from "./models/contentType/auth"
+import { strapiPasswordApi } from "./models/content"
 
 export interface PasswordApiProps {
   code?: string,

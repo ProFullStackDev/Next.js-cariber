@@ -6,6 +6,8 @@ export interface AnnualPromotion {
 interface Attributes {
   url: string;
   image: Image;
+  image_mobile: Image;
+  image_header: Image;
 }
 
 interface Image {

@@ -10,15 +10,15 @@ import InterestingTopic from "../../components/courseDetail/interestingTopic"
 import Suitable from "../../components/courseDetail/suitable"
 import Sale from "../../components/courseDetail/sale"
 import UpperHeader from "../../components/courseDetail/upperHeader"
-import { ResponseData, ResponseDataList } from "../../models/data"
-import { Course } from "../../models/contentType/courses"
-import { strapiApi, strapiImage } from "../../models/content"
+import { ResponseData, ResponseDataList } from "../../apiStrapi/models/data"
+import { Course } from "../../apiStrapi/models/contentType/courses"
+import { strapiApi, strapiImage } from "../../apiStrapi/models/content"
 import YoutubeEP from "../../components/courseDetail/youtubeEP"
 import CourseHeader from "../../components/courseDetail/courseHeader"
 import singleCourseApi from "../../apiStrapi/singleCoures"
-import { SingleCourse } from "../../models/contentType/singleCourse"
+import { SingleCourse } from "../../apiStrapi/models/contentType/singleCourse"
 import annualPromotionApi from "../../apiStrapi/annualPromotion"
-import { AnnualPromotion } from "../../models/contentType/annualPromotion"
+import { AnnualPromotion } from "../../apiStrapi/models/contentType/annualPromotion"
 
 interface CourseDetailParams {
   courseId: string;
@@ -41,11 +41,12 @@ export default function CourseDetail({ course, singleCourse, annualPromotion }: 
           <UpperHeader header={course.data.course_detail.header} />
         )}
         <CourseHeader yearlySubscriptionImage={strapiImage(annualPromotion.data.attributes.image.data.attributes.url)}
-          yearlySubscriptionImageMobile={strapiImage(annualPromotion.data.attributes.image.data.attributes.url)}
-          singleCourseImage={strapiImage(singleCourse.data.attributes.image.data.attributes.url)}
-          videoId={course.data.course_detail.teaser_url}
-          videoPoster={""}
-          singleCheckoutUrl={course.data.course_detail.order_link} />
+        singleCourseImage={strapiImage(singleCourse.data.attributes.image.data.attributes.url)}
+        videoId={course.data.course_detail.teaser_url}
+        videoPoster={""}
+        singleCheckoutUrl={course.data.course_detail.order_link} 
+        yearlySubscriptionCheckoutUrl={annualPromotion.data.attributes.url} 
+        yearlySubscriptionImageMobile={strapiImage(annualPromotion.data.attributes.image_mobile.data.attributes.url)}/>
         {youtubeEPItems.length > 0 && (
           <YoutubeEP YoutubeEPItems={youtubeEPItems} />
         )}
@@ -71,9 +72,10 @@ export default function CourseDetail({ course, singleCourse, annualPromotion }: 
           episodes={course.data.episodes} />
       </div>
       <Sale singleCoursePersonalImage={strapiImage(course.data.course_detail.order_image.url)}
-        yearlySubscriptionImage={strapiImage(annualPromotion.data.attributes.image.data.attributes.url)}
-        yearlySubscriptionImageMobile={strapiImage(annualPromotion.data.attributes.image.data.attributes.url)}
-        singleCheckoutUrl={course.data.course_detail.order_link} />
+      yearlySubscriptionImage={strapiImage(annualPromotion.data.attributes.image.data.attributes.url)}
+      yearlySubscriptionImageMobile={strapiImage(annualPromotion.data.attributes.image_mobile.data.attributes.url)}
+      singleCheckoutUrl={course.data.course_detail.order_link}
+      yearlySubscriptionCheckoutUrl={annualPromotion.data.attributes.url} />
       <div className="background-light">
         <div className="sizer">
           <div className="container">
