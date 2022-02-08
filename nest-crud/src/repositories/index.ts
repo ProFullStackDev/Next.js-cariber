@@ -1,6 +1,0 @@
-export * from './user'
-export * from './acessgroup'
-export * from './subscriptionrecord'
-export * from './course'
-export * from './episode'
-export * from './instructor'
