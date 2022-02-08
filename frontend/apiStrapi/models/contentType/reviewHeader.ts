@@ -1,13 +1,14 @@
-export interface AnnualPromotionContent {
+export interface ReviewHeaderContent {
   id: number;
   attributes: Attributes;
 }
 
 interface Attributes {
   url: string;
+  facebook_name: string;
+  facebook_url: string;
+  description: string;
   image: Image;
-  image_mobile: Image;
-  image_header: Image;
 }
 
 interface Image {

@@ -3,15 +3,15 @@ import Footer from "../components/footer"
 import Header from "../components/header"
 import FooterBrand from "../components/footerBrand"
 import { strapiApi, strapiImage } from "../apiStrapi/models/content"
-import { Course } from "../apiStrapi/models/contentType/courses"
+import { CourseContent } from "../apiStrapi/models/contentType/courses"
 import { ResponseData, ResponseDataList } from "../apiStrapi/models/data"
 import Link from "next/link"
-import annualPromotionApi from "../apiStrapi/annualPromotion"
-import { AnnualPromotion } from "../apiStrapi/models/contentType/annualPromotion"
+import annualPromotionApi from "../apiStrapi/annualPromotionApi"
+import { AnnualPromotionContent } from "../apiStrapi/models/contentType/annualPromotion"
 
 interface CoursesProps {
-  courses: ResponseDataList<Course>;
-  annualPromotion: ResponseData<AnnualPromotion>;
+  courses: ResponseDataList<CourseContent>;
+  annualPromotion: ResponseData<AnnualPromotionContent>;
 }
 
 export default function Courses({ courses, annualPromotion }: CoursesProps) {
@@ -97,7 +97,7 @@ export default function Courses({ courses, annualPromotion }: CoursesProps) {
 export async function getStaticProps() {
   try {
     const response = await fetch(strapiApi + "/courses");
-    const data = await response.json() as ResponseDataList<Course>;
+    const data = await response.json() as ResponseDataList<CourseContent>;
     return {
       props: {
         courses: data,

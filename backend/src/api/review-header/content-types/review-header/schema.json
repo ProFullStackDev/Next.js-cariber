@@ -1,0 +1,33 @@
+{
+  "kind": "singleType",
+  "collectionName": "review_headers",
+  "info": {
+    "singularName": "review-header",
+    "pluralName": "review-headers",
+    "displayName": "Review Header"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "image": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos"
+      ],
+      "type": "media",
+      "multiple": false
+    },
+    "facebook_name": {
+      "type": "string"
+    },
+    "facebook_url": {
+      "type": "string"
+    },
+    "description": {
+      "type": "text"
+    }
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "kind": "collectionType",
+  "collectionName": "review_caribers",
+  "info": {
+    "singularName": "review-cariber",
+    "pluralName": "review-caribers",
+    "displayName": "Review Cariber"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "career": {
+      "type": "string"
+    },
+    "description": {
+      "type": "text"
+    },
+    "image": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos"
+      ],
+      "type": "media",
+      "multiple": false
+    }
+  }
+}

@@ -10,14 +10,14 @@ import Suitable from "../../components/courseDetail/suitable"
 import Sale from "../../components/courseDetail/sale"
 import UpperHeader from "../../components/courseDetail/upperHeader"
 import { ResponseData, ResponseDataList } from "../../apiStrapi/models/data"
-import { Course } from "../../apiStrapi/models/contentType/courses"
+import { CourseContent } from "../../apiStrapi/models/contentType/courses"
 import { strapiApi, strapiImage } from "../../apiStrapi/models/content"
 import YoutubeEP from "../../components/courseDetail/youtubeEP"
 import CourseHeader from "../../components/courseDetail/courseHeader"
-import singleCourseApi from "../../apiStrapi/singleCoures"
+import singleCourseApi from "../../apiStrapi/singleCouresApi"
 import { SingleCourse } from "../../apiStrapi/models/contentType/singleCourse"
-import annualPromotionApi from "../../apiStrapi/annualPromotion"
-import { AnnualPromotion } from "../../apiStrapi/models/contentType/annualPromotion"
+import annualPromotionApi from "../../apiStrapi/annualPromotionApi"
+import { AnnualPromotionContent } from "../../apiStrapi/models/contentType/annualPromotion"
 import EpisodeAccordion from "../../components/courseDetail/episodeAccordion"
 
 interface CourseDetailParams {
@@ -25,9 +25,9 @@ interface CourseDetailParams {
 }
 
 interface CourseDetailProps {
-  course: ResponseData<Course>;
+  course: ResponseData<CourseContent>;
   singleCourse: ResponseData<SingleCourse>;
-  annualPromotion: ResponseData<AnnualPromotion>;
+  annualPromotion: ResponseData<AnnualPromotionContent>;
 }
 
 export default function CourseDetail({ course, singleCourse, annualPromotion }: CourseDetailProps) {
@@ -107,7 +107,7 @@ export default function CourseDetail({ course, singleCourse, annualPromotion }: 
 
 export async function getStaticPaths() {
   const response = await fetch(strapiApi + '/courses');
-  const data = await response.json() as ResponseDataList<Course>;
+  const data = await response.json() as ResponseDataList<CourseContent>;
   const dataFilter = (data.data.filter((value) => {
     return value.course_detail
   }));
@@ -126,7 +126,7 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({ params }: { params: CourseDetailParams }) {
   const response = await fetch(strapiApi + `/courses/${params.courseId}`);
-  const data = await response.json() as ResponseData<Course>;
+  const data = await response.json() as ResponseData<CourseContent>;
   return {
     props: {
       course: data,

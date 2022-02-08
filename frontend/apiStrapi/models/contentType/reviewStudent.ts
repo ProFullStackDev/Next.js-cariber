@@ -1,13 +1,13 @@
-export interface AnnualPromotionContent {
+export interface ReviewStudentContent {
   id: number;
   attributes: Attributes;
 }
 
 interface Attributes {
-  url: string;
+  name: string;
+  career: string;
+  description: string;
   image: Image;
-  image_mobile: Image;
-  image_header: Image;
 }
 
 interface Image {
@@ -19,7 +19,7 @@ interface Data {
   attributes: AttributesImage;
 }
 
-interface AttributesImage{
+interface AttributesImage {
   name: string;
   size: number;
   url: string;

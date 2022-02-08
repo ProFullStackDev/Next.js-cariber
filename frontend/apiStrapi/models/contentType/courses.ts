@@ -1,4 +1,4 @@
-export interface Course {
+export interface CourseContent {
   id: number;
   speaker_name: string;
   course_name: string;
