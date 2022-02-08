@@ -9,12 +9,12 @@ import Link from "next/link"
 import annualPromotionApi from "../apiStrapi/annualPromotion"
 import { AnnualPromotion } from "../apiStrapi/models/contentType/annualPromotion"
 
-interface CoursesProps{
+interface CoursesProps {
   courses: ResponseDataList<Course>;
   annualPromotion: ResponseData<AnnualPromotion>;
 }
 
-export default function Courses({ courses, annualPromotion}: CoursesProps) {
+export default function Courses({ courses, annualPromotion }: CoursesProps) {
   return (
     <div className="background-image courses">
       <Header />
@@ -24,7 +24,7 @@ export default function Courses({ courses, annualPromotion}: CoursesProps) {
             <div className="block-type-image text-col-12 m-b-0">
               <div className="block box-shadow-none background-unrecognized">
                 <div className="image">
-                  <a href="https://checkout.cariber.co/?add-to-cart=685&amp;cfp=bGFyZ2ViYW5uZXJfY291cnNlcw==">
+                  <a href={annualPromotion.data.attributes.url}>
                     <Img className="image-image"
                       src={strapiImage(annualPromotion.data.attributes.image_header.data.attributes.url)}
                       alt="Promotion"

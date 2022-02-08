@@ -5,7 +5,6 @@ import ReviewStudents from "../../components/reviewStudents"
 import SlideCourse from "../../components/slideCourse"
 import * as staticDataReview from "../../components/static/review"
 import IntroductionPersonal from "../../components/courseDetail/introductionPersonal"
-import EpisodeAccordion from "../../components/courseDetail/EpisodeAccordion"
 import InterestingTopic from "../../components/courseDetail/interestingTopic"
 import Suitable from "../../components/courseDetail/suitable"
 import Sale from "../../components/courseDetail/sale"
@@ -19,6 +18,7 @@ import singleCourseApi from "../../apiStrapi/singleCoures"
 import { SingleCourse } from "../../apiStrapi/models/contentType/singleCourse"
 import annualPromotionApi from "../../apiStrapi/annualPromotion"
 import { AnnualPromotion } from "../../apiStrapi/models/contentType/annualPromotion"
+import EpisodeAccordion from "../../components/courseDetail/episodeAccordion"
 
 interface CourseDetailParams {
   courseId: string;
