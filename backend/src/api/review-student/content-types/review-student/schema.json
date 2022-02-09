@@ -1,0 +1,33 @@
+{
+  "kind": "collectionType",
+  "collectionName": "review_students",
+  "info": {
+    "singularName": "review-student",
+    "pluralName": "review-students",
+    "displayName": "Review Student"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "career": {
+      "type": "string"
+    },
+    "description": {
+      "type": "text"
+    },
+    "image": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos"
+      ],
+      "type": "media",
+      "multiple": false
+    }
+  }
+}

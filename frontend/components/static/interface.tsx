@@ -1,4 +1,4 @@
-import { Episode } from "../../models/contentType/courses";
+import { Episode } from "../../apiStrapi/models/contentType/courses";
 import { Icon } from "../accordion";
 
 export interface TimeZone {
@@ -63,15 +63,6 @@ export interface CourseDetailInterestingTopic {
   name: string,
 }
 
-export interface CourseDetailCourseHeader {
-  yearlySubscriptionImage: string,
-  yearlySubscriptionImageMobile: string,
-  singleCourseImage: string,
-  videoId: string,
-  videoPoster: string,
-  singleCheckoutUrl: string
-}
-
 export interface CourseDetailIntroductionPersonal {
   fullName: string,
   personalHistoryImage: string,
@@ -82,13 +73,6 @@ export interface CourseDetailEpisode {
   totalHours: string,
   totalEpisodes: string,
   episodes: Episode[],
-}
-
-export interface CourseDetailSale {
-  yearlySubscriptionImage: string,
-  yearlySubscriptionImageMobile: string,
-  singleCoursePersonalImage: string,
-  singleCheckoutUrl: string,
 }
 
 export interface ProductEpisode {

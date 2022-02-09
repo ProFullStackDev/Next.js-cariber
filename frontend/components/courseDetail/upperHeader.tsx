@@ -1,5 +1,7 @@
+import stringSplitLine from "../../functions/stringSplitLine"
+
 export default function UpperHeader({ header }: { header: string }) {
-  const headerLocal = header.split(/\r\n|\n\r|\n|\r/)
+  const headerLocal = stringSplitLine(header)
   return (
     <div className="background-dark">
       <div className="row align-items-center justify-content-center">

@@ -1,4 +1,4 @@
-import { Item } from "../../models/contentType/courses"
+import { Item } from "../../apiStrapi/models/contentType/courses"
 
 export default function Suitable({ suitable }: { suitable: Item[] }) {
   const halfLine = 60

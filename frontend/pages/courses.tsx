@@ -2,12 +2,19 @@ import Img from "../components/image"
 import Footer from "../components/footer"
 import Header from "../components/header"
 import FooterBrand from "../components/footerBrand"
-import { strapiApi, strapiImage } from "../models/content"
-import { Course } from "../models/contentType/courses"
-import { ResponseDataList } from "../models/data"
+import { strapiApi, strapiImage } from "../apiStrapi/models/content"
+import { CourseContent } from "../apiStrapi/models/contentType/courses"
+import { ResponseData, ResponseDataList } from "../apiStrapi/models/data"
 import Link from "next/link"
+import annualPromotionApi from "../apiStrapi/annualPromotionApi"
+import { AnnualPromotionContent } from "../apiStrapi/models/contentType/annualPromotion"
 
-export default function Courses({ courses }: { courses: ResponseDataList<Course> }) {
+interface CoursesProps {
+  courses: ResponseDataList<CourseContent>;
+  annualPromotion: ResponseData<AnnualPromotionContent>;
+}
+
+export default function Courses({ courses, annualPromotion }: CoursesProps) {
   return (
     <div className="background-image courses">
       <Header />
@@ -17,9 +24,9 @@ export default function Courses({ courses }: { courses: ResponseDataList<Course>
             <div className="block-type-image text-col-12 m-b-0">
               <div className="block box-shadow-none background-unrecognized">
                 <div className="image">
-                  <a href="https://checkout.cariber.co/?add-to-cart=685&amp;cfp=bGFyZ2ViYW5uZXJfY291cnNlcw==">
+                  <a href={annualPromotion.data.attributes.url}>
                     <Img className="image-image"
-                      src="/courses/promotion.webp"
+                      src={strapiImage(annualPromotion.data.attributes.image_header?.data.attributes.url)}
                       alt="Promotion"
                       width={1260}
                       height={282.017} />
@@ -90,8 +97,13 @@ export default function Courses({ courses }: { courses: ResponseDataList<Course>
 export async function getStaticProps() {
   try {
     const response = await fetch(strapiApi + "/courses");
-    const data = await response.json() as ResponseDataList<Course>;
-    return { props: { courses: data } }
+    const data = await response.json() as ResponseDataList<CourseContent>;
+    return {
+      props: {
+        courses: data,
+        annualPromotion: await annualPromotionApi(),
+      }
+    }
   } catch (error) {
     console.error(error);
     return {

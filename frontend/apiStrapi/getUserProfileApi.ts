@@ -1,7 +1,7 @@
 import UserManager from "../auth/userManager"
-import { UserProfile } from "../models/contentType/auth"
-import { strapiGetUserProfileApi } from "../models/content"
-import { ResponseData } from "../models/data"
+import { UserProfile } from "./models/contentType/auth"
+import { strapiGetUserProfileApi } from "./models/content"
+import { ResponseData } from "./models/data"
 
 export default async function getUserProfileApi() {
   const userManager = new UserManager()
