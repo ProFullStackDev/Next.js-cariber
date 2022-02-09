@@ -147,7 +147,7 @@ export default function Index({ review }: IndexProps) {
         </div>
       </div>
       <div className="background-dark">
-        <StudentReviews reviewStudents={review.data.student} />
+        <StudentReviews reviewStudents={review?.data?.student} />
         <div className="sizer p-t-20">
           <div className="container">
             <ShopeeReviews shopeeReviews={shopeeReviews} />

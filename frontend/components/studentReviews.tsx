@@ -18,7 +18,7 @@ export default function StudentReviews({ reviewStudents }: { reviewStudents: Rev
               </h2>
             </div>
           </div>
-          {reviewStudents.map((value, index) => {
+          {reviewStudents?.map((value, index) => {
             return (
               <div key={index} className="block-type-feature text-center col-2">
                 <div className="block box-shadow-none">
