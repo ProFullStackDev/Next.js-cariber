@@ -4,7 +4,6 @@ import Accordion, { Color } from '../components/accordion'
 import Img from '../components/image'
 import SlideCourse from '../components/slideCourse'
 import * as staticDataReview from "../components/static/review"
-import * as staticData from "../components/static/index"
 import FooterBrand from '../components/footerBrand'
 import ShopeeReviews from '../components/index/shopeeReviews'
 import Specific from '../components/index/specific'
@@ -37,7 +36,7 @@ export default function Index({ home, review }: IndexProps) {
               <div className="block box-shadow-none">
                 <div className="image">
                   <Img className="image-image"
-                    src={strapiImage(home.data.header_image.url)}
+                    src={strapiImage(home.data?.header_image.url)}
                     alt="ผู้นำตัวจริง"
                     width={855.733}
                     height={434.817}
@@ -67,15 +66,15 @@ export default function Index({ home, review }: IndexProps) {
               <div className="block-type-feature text-center col-5">
                 <div className="block box-shadow-none">
                   <div className="feature column-center">
-                    <a href={home.data.promotions.url}>
+                    <a href={home.data?.promotions?.url}>
                       <Img className="feature-image"
-                        src={strapiImage(home.data.promotions.high_yearly_sub.url)}
+                        src={strapiImage(home.data?.promotions?.high_yearly_sub.url)}
                         width={400}
                         height={400}
                         alt="Yearly Subscription"
                       />
                     </a>
-                    <a className="btn btn-solid btn-medium btn-auto" href={home.data.promotions.url}>
+                    <a className="btn btn-solid btn-medium btn-auto" href={home.data?.promotions?.url}>
                       สมัครเลย
                     </a>
                   </div>
@@ -91,7 +90,7 @@ export default function Index({ home, review }: IndexProps) {
       <div className="background-dark">
         <div className="sizer">
           <div className="container">
-            <Specific specifics={home.data.information} />
+            <Specific specifics={home.data?.information} />
           </div>
         </div>
       </div>
@@ -120,7 +119,7 @@ export default function Index({ home, review }: IndexProps) {
                     </em>
                   </p>
                   <Img className="feature-image"
-                    src={strapiImage(home.data.promotions.large_yearly_sub.url)}
+                    src={strapiImage(home.data?.promotions?.large_yearly_sub.url)}
                     width={329.6}
                     height={211.55}
                     alt="Yearly Subscription"
@@ -132,7 +131,7 @@ export default function Index({ home, review }: IndexProps) {
               </div>
               <div className="block-type-video col-7">
                 <div className="block box-shadow-none">
-                  <VideoPlayer videoId={home.data.video_id}/>
+                  <VideoPlayer videoId={home.data?.video_id}/>
                 </div>
               </div>
             </div>
@@ -140,21 +139,21 @@ export default function Index({ home, review }: IndexProps) {
         </div>
         <div className="sizer">
           <div className="container">
-            <CoursesUpdate coursesSoon={home.data.courses_soon} coursesLatest={home.data.courses_latest} />
+            <CoursesUpdate coursesSoon={home.data?.courses_soon} coursesLatest={home.data?.courses_latest} />
           </div>
         </div>
       </div>
       <div className="background-dark">
-        <StudentReviews reviewStudents={review.data.student} />
+        <StudentReviews reviewStudents={review.data?.student} />
         <div className="sizer p-t-20">
           <div className="container">
-            <ShopeeReviews reviewShopee={review.data.shopee} />
+            <ShopeeReviews reviewShopee={review.data?.shopee} />
           </div>
         </div>
       </div>
       <div className="sizer background-light">
         <div className="container">
-          <MyStudent myStudents={home.data.my_student} />
+          <MyStudent myStudents={home.data?.my_student} />
         </div>
       </div>
       <div className="sizer background-light">
@@ -169,7 +168,7 @@ export default function Index({ home, review }: IndexProps) {
                 </h2>
               </div>
             </div>
-            {home.data.q_and_a.map((value, index) => {
+            {home.data?.q_and_a.map((value, index) => {
               return (
                 <Accordion key={index} title={value.title} description={value.description} col={8} color={Color.light} />
               )

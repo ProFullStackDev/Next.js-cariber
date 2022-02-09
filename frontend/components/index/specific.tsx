@@ -2,11 +2,10 @@ import { strapiImage } from "../../apiStrapi/models/content";
 import { Information } from "../../apiStrapi/models/contentType/home";
 import Img from "../image";
 
-export default function Specific({ specifics }: { specifics: Information[] }) {
-  console.log(specifics)
+export default function Specific({ specifics }: { specifics?: Information[] }) {
   return (
     <div className="row align-items-center justify-content-center text-center">
-      {specifics.map((value, index) => {
+      {specifics?.map((value, index) => {
         return (
           <div className="col-4 row" key={index}>
             <div className="block-type-image col-4 p-0">

@@ -13,5 +13,8 @@ export const strapiReview = strapiApi+"/review";
 export const strapiHome = strapiApi+"/home";
 
 export function strapiImage(url: string){
-  return strapi+url;
+  if(url){
+    return strapi+url;
+  }
+  return "";
 }

@@ -17,7 +17,7 @@ export default function MyStudent({ myStudents }: { myStudents: MyStudentContent
         </div>
       </div>
       <div className="block-break"></div>
-      {myStudents.map((value, index) => {
+      {myStudents?.map((value, index) => {
         return (
           <div key={index} className="block-type-image col-2 m-r-5">
             <div className="block box-shadow-none">

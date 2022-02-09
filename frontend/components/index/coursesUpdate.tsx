@@ -15,7 +15,7 @@ export default function CoursesUpdate({ coursesSoon, coursesLatest }: { coursesS
           </h1>
         </div>
       </div>
-      {coursesLatest.map((value, index) => {
+      {coursesLatest?.map((value, index) => {
         return (
           <div key={index} className="block-type-feature text-center col-6">
             <div className="block box-shadow-none">
@@ -44,7 +44,7 @@ export default function CoursesUpdate({ coursesSoon, coursesLatest }: { coursesS
           </h1>
         </div>
       </div>
-      {coursesSoon.map((value, index) => {
+      {coursesSoon?.map((value, index) => {
         return (
           <div key={index} className="block-type-image col-3">
             <div className="block box-shadow-none">
