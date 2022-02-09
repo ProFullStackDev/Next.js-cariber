@@ -1,4 +1,4 @@
-import { ReviewShopeeContent } from "../../apiStrapi/models/contentType/reviewShopee";
+import { ReviewShopeeContent } from "../../apiStrapi/models/contentType/review";
 
 export default function ReviewShopee({ reviewShopee }: { reviewShopee: ReviewShopeeContent }) {
   return (
@@ -8,13 +8,13 @@ export default function ReviewShopee({ reviewShopee }: { reviewShopee: ReviewSho
           <div className="feature-text">
             <h4>
               <span className="color-secondary">
-                {reviewShopee.attributes.name}
+                {reviewShopee.name}
               </span>
             </h4>
             <p className="m-0">
               <strong>
                 <span className="color-black">
-                  Ratings : {"⭐️".repeat(reviewShopee.attributes.ratings)}
+                  Ratings : {"⭐️".repeat(reviewShopee.ratings)}
                 </span>
               </strong>
             </p>
@@ -22,7 +22,7 @@ export default function ReviewShopee({ reviewShopee }: { reviewShopee: ReviewSho
               <br />
               <span className="color-black">
                 &quot;
-                {reviewShopee.attributes.description}
+                {reviewShopee.description}
                 &quot;
               </span>
             </p>

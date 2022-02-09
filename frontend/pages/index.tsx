@@ -10,16 +10,16 @@ import ShopeeReviews from '../components/index/shopeeReviews'
 import Specific from '../components/index/specific'
 import Mystudent from '../components/index/myStudent'
 import CoursesUpdate from '../components/index/coursesUpdate'
-import ReviewStudents from '../components/reviewStudents'
-import reviewStudentsApi from '../apiStrapi/reviewStudentsApi'
-import { ResponseDataList } from '../apiStrapi/models/data'
-import { ReviewStudentContent } from '../apiStrapi/models/contentType/reviewStudent'
+import StudentReviews from '../components/studentReviews'
+import { ResponseData } from '../apiStrapi/models/data'
+import { ReviewContent } from '../apiStrapi/models/contentType/review'
+import reviewApi from '../apiStrapi/reviewApi'
 
 interface IndexProps {
-  reviewStudents: ResponseDataList<ReviewStudentContent>
+  review: ResponseData<ReviewContent>
 }
 
-export default function Index({ reviewStudents }: IndexProps) {
+export default function Index({ review }: IndexProps) {
   const shopeeReviews = staticData.shopeeReviews
   const myStudents = staticData.myStudents
   const frequentlyAskedQuestions = staticData.frequentlyAskedQuestions
@@ -147,7 +147,7 @@ export default function Index({ reviewStudents }: IndexProps) {
         </div>
       </div>
       <div className="background-dark">
-        <ReviewStudents reviewStudents={reviewStudents} />
+        <StudentReviews reviewStudents={review.data.student} />
         <div className="sizer p-t-20">
           <div className="container">
             <ShopeeReviews shopeeReviews={shopeeReviews} />
@@ -188,7 +188,7 @@ export default function Index({ reviewStudents }: IndexProps) {
 export async function getStaticProps() {
   return {
     props: {
-      reviewStudents: await reviewStudentsApi(),
+      review: await reviewApi(),
     }
   };
 }

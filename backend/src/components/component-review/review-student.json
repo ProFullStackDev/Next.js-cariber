@@ -1,15 +1,10 @@
 {
-  "kind": "collectionType",
-  "collectionName": "review_students",
+  "collectionName": "components_component_review_review_students",
   "info": {
-    "singularName": "review-student",
-    "pluralName": "review-students",
-    "displayName": "Review Student"
+    "displayName": "Review Student",
+    "icon": "address-book"
   },
-  "options": {
-    "draftAndPublish": true
-  },
-  "pluginOptions": {},
+  "options": {},
   "attributes": {
     "name": {
       "type": "string"

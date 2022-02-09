@@ -1,7 +1,7 @@
 import Footer from "../../components/footer"
 import FooterBrand from "../../components/footerBrand"
 import Header from "../../components/header"
-import ReviewStudents from "../../components/reviewStudents"
+import StudentReviews from "../../components/studentReviews"
 import SlideCourse from "../../components/slideCourse"
 import * as staticDataReview from "../../components/static/review"
 import IntroductionPersonal from "../../components/courseDetail/introductionPersonal"
@@ -19,8 +19,8 @@ import { SingleCourse } from "../../apiStrapi/models/contentType/singleCourse"
 import annualPromotionApi from "../../apiStrapi/annualPromotionApi"
 import { AnnualPromotionContent } from "../../apiStrapi/models/contentType/annualPromotion"
 import EpisodeAccordion from "../../components/courseDetail/episodeAccordion"
-import reviewStudentsApi from "../../apiStrapi/reviewStudentsApi"
-import { ReviewStudentContent } from "../../apiStrapi/models/contentType/reviewStudent"
+import { ReviewContent } from "../../apiStrapi/models/contentType/review"
+import reviewApi from "../../apiStrapi/reviewApi"
 
 interface CourseDetailParams {
   courseId: string;
@@ -30,13 +30,13 @@ interface CourseDetailProps {
   course: ResponseData<CourseContent>;
   singleCourse: ResponseData<SingleCourse>;
   annualPromotion: ResponseData<AnnualPromotionContent>;
-  reviewStudents: ResponseDataList<ReviewStudentContent>;
+  review: ResponseData<ReviewContent>;
 }
 
 export default function CourseDetail({ course,
   singleCourse,
   annualPromotion,
-  reviewStudents }: CourseDetailProps) {
+  review }: CourseDetailProps) {
   const slideCourses = staticDataReview.slideCourses;
   const youtubeEPItems = course.data.course_detail.contents.filter((value) => { return value.__component === "components.special-ep-component" });
   return (
@@ -103,7 +103,7 @@ export default function CourseDetail({ course,
         </div>
       </div>
       <div className="background-dark">
-        <ReviewStudents reviewStudents={reviewStudents} />
+        <StudentReviews reviewStudents={review.data.student} />
       </div>
       <FooterBrand />
       <Footer />
@@ -138,7 +138,7 @@ export async function getStaticProps({ params }: { params: CourseDetailParams })
       course: data,
       singleCourse: await singleCourseApi(),
       annualPromotion: await annualPromotionApi(),
-      reviewStudents: await reviewStudentsApi(),
+      review: await reviewApi(),
     }
   };
 }

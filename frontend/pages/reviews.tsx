@@ -4,39 +4,25 @@ import Img from "../components/image";
 import FooterBrand from "../components/footerBrand";
 import * as staticData from "../components/static/review"
 import SlideCourse from "../components/slideCourse";
-import { AnnualPromotionContent } from "../apiStrapi/models/contentType/annualPromotion";
-import { ResponseData, ResponseDataList } from "../apiStrapi/models/data";
-import annualPromotionApi from "../apiStrapi/annualPromotionApi";
+import { ResponseData } from "../apiStrapi/models/data";
 import { strapiImage } from "../apiStrapi/models/content";
-import reviewStudentsApi from "../apiStrapi/reviewStudentsApi";
-import reviewHeaderApi from "../apiStrapi/reviewHeaderApi";
-import { ReviewHeaderContent } from "../apiStrapi/models/contentType/reviewHeader";
-import { ReviewStudentContent } from "../apiStrapi/models/contentType/reviewStudent";
+import { ReviewContent } from "../apiStrapi/models/contentType/review";
+import { AnnualPromotionContent } from "../apiStrapi/models/contentType/annualPromotion";
+import reviewApi from "../apiStrapi/reviewApi";
+import annualPromotionApi from "../apiStrapi/annualPromotionApi";
 import ReviewHeader from "../components/reviews/reviewHeader";
 import ReviewStudents from "../components/reviews/reviewStudents";
 import ReviewCaribers from "../components/reviews/reviewCaribers";
-import { ReviewCariberContent } from "../apiStrapi/models/contentType/reviewCariber";
-import reviewCaribersApi from "../apiStrapi/reviewCaribersApi";
-import reviewShopeesApi from "../apiStrapi/reviewShopeesApi";
-import { ReviewShopeeContent } from "../apiStrapi/models/contentType/reviewShopee";
 import ReviewShopee from "../components/reviews/reviewShopee";
 
 interface ReviewProps {
-  annualPromotion: ResponseData<AnnualPromotionContent>;
-  reviewHeader: ResponseData<ReviewHeaderContent>;
-  reviewStudents: ResponseDataList<ReviewStudentContent>;
-  reviewCaribers: ResponseDataList<ReviewCariberContent>;
-  reviewShopees: ResponseDataList<ReviewShopeeContent>;
+  review: ResponseData<ReviewContent>;
+  annualPromotion: ResponseData<AnnualPromotionContent>
 }
 
 
-export default function Review({ annualPromotion,
-  reviewHeader,
-  reviewStudents,
-  reviewCaribers,
-  reviewShopees, }: ReviewProps) {
+export default function Review({ review, annualPromotion }: ReviewProps) {
   const slideCourses = staticData.slideCourses
-
   return (
     <div className="background-primary-color review">
       <Header />
@@ -75,21 +61,21 @@ export default function Review({ annualPromotion,
           </div>
         </div>
       </div>
-      <ReviewHeader reviewHeader={reviewHeader.data} />
+      <ReviewHeader reviewHeader={review.data.header} />
       <div className="section-feature-1">
         <div className="container">
           <div className="justify-content-center grid-container">
-            {reviewStudents.data?.map((value, index) => {
+            {review.data.student.map((value, index) => {
               return (
                 <ReviewStudents key={index} reviewStudent={value} />
               )
             })}
-            {reviewCaribers.data?.map((value, index) => {
+            {review.data.cariber.map((value, index) => {
               return (
                 <ReviewCaribers key={index} reviewCariber={value} />
               )
             })}
-            {reviewShopees.data?.map((value, index) => {
+            {review.data.shopee.map((value, index) => {
               return (
                 <ReviewShopee key={index} reviewShopee={value}/>
               )
@@ -137,11 +123,8 @@ export default function Review({ annualPromotion,
 export async function getStaticProps() {
   return {
     props: {
+      review: await reviewApi(),
       annualPromotion: await annualPromotionApi(),
-      reviewHeader: await reviewHeaderApi(),
-      reviewStudents: await reviewStudentsApi(),
-      reviewCaribers: await reviewCaribersApi(),
-      reviewShopees: await reviewShopeesApi(),
     }
   }
 };

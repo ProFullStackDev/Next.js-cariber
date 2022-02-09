@@ -1,5 +1,5 @@
 import { strapiImage } from "../../apiStrapi/models/content";
-import { ReviewCariberContent } from "../../apiStrapi/models/contentType/reviewCariber";
+import { ReviewCariberContent } from "../../apiStrapi/models/contentType/review";
 import Img from "../image";
 
 export default function ReviewCaribers({ reviewCariber }: { reviewCariber: ReviewCariberContent }) {
@@ -8,21 +8,21 @@ export default function ReviewCaribers({ reviewCariber }: { reviewCariber: Revie
       <div className="block box-shadow-large background-light">
         <div className="feature">
           <Img className="feature-image"
-            src={strapiImage(reviewCariber.attributes.image.data.attributes.url)}
-            alt={reviewCariber.attributes.name}
+            src={strapiImage(reviewCariber.image.url)}
+            alt={reviewCariber.name}
             width={70}
             height={70}
           />
           <div className="feature-text">
             <h4>
               <span className="color-secondary">
-                {reviewCariber.attributes.name}
+                {reviewCariber.name}
               </span>
             </h4>
             <p>
               <span className="color-primary">
                 <em>
-                  {reviewCariber.attributes.career}
+                  {reviewCariber.career}
                 </em>
               </span>
             </p>
@@ -30,7 +30,7 @@ export default function ReviewCaribers({ reviewCariber }: { reviewCariber: Revie
               <br />
               <span className="color-black">
                 &quot;
-                {reviewCariber.attributes.description}
+                {reviewCariber.description}
                 &quot;
               </span>
             </p>

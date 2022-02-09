@@ -1,15 +1,10 @@
 {
-  "kind": "singleType",
-  "collectionName": "review_headers",
+  "collectionName": "components_component_review_review_headers",
   "info": {
-    "singularName": "review-header",
-    "pluralName": "review-headers",
-    "displayName": "Review Header"
+    "displayName": "Review Header",
+    "icon": "address-card"
   },
-  "options": {
-    "draftAndPublish": true
-  },
-  "pluginOptions": {},
+  "options": {},
   "attributes": {
     "image": {
       "allowedTypes": [

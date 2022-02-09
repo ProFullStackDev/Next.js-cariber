@@ -1,9 +1,8 @@
 import { strapiImage } from "../apiStrapi/models/content"
-import { ReviewStudentContent } from "../apiStrapi/models/contentType/reviewStudent"
-import { ResponseDataList } from "../apiStrapi/models/data"
+import { ReviewStudentContent } from "../apiStrapi/models/contentType/review"
 import Img from "./image"
 
-export default function ReviewStudents({ reviewStudents }: { reviewStudents: ResponseDataList<ReviewStudentContent> }) {
+export default function StudentReviews({ reviewStudents }: { reviewStudents: ReviewStudentContent[] }) {
   return (
     <div className="sizer reviewStudents p-t-20">
       <div className="container">
@@ -19,31 +18,31 @@ export default function ReviewStudents({ reviewStudents }: { reviewStudents: Res
               </h2>
             </div>
           </div>
-          {reviewStudents.data?.map((value, index) => {
+          {reviewStudents.map((value, index) => {
             return (
               <div key={index} className="block-type-feature text-center col-2">
                 <div className="block box-shadow-none">
                   <div className="feature">
                     <Img className="feature-image"
-                      src={strapiImage(value.attributes.image.data.attributes.url)}
+                      src={strapiImage(value.image.url)}
                       width={175}
                       height={185.917}
-                      alt={value.attributes.name}
+                      alt={value.name}
                     />
                     <div className="feature-text">
                       <p className="text-center">
                         <span className="color-smooth">
-                          &quot;{value.attributes.description}&quot;
+                          &quot;{value.description}&quot;
                         </span>
                       </p>
                       <h4>
                         <span className="color-secondary">
-                          {value.attributes.name}
+                          {value.name}
                         </span>
                       </h4>
                       <span className="color-primary">
                         <em>
-                          {value.attributes.career}
+                          {value.career}
                         </em>
                       </span>
                     </div>
