@@ -36,7 +36,7 @@ export default function Index({ home, review }: IndexProps) {
               <div className="block box-shadow-none">
                 <div className="image">
                   <Img className="image-image"
-                    src={strapiImage(home.data?.header_image.url)}
+                    src={strapiImage(home.data?.header_image?.url)}
                     alt="ผู้นำตัวจริง"
                     width={855.733}
                     height={434.817}
@@ -68,7 +68,7 @@ export default function Index({ home, review }: IndexProps) {
                   <div className="feature column-center">
                     <a href={home.data?.promotions?.url}>
                       <Img className="feature-image"
-                        src={strapiImage(home.data?.promotions?.high_yearly_sub.url)}
+                        src={strapiImage(home.data?.promotions?.high_yearly_sub?.url)}
                         width={400}
                         height={400}
                         alt="Yearly Subscription"
@@ -119,7 +119,7 @@ export default function Index({ home, review }: IndexProps) {
                     </em>
                   </p>
                   <Img className="feature-image"
-                    src={strapiImage(home.data?.promotions?.large_yearly_sub.url)}
+                    src={strapiImage(home.data?.promotions?.large_yearly_sub?.url)}
                     width={329.6}
                     height={211.55}
                     alt="Yearly Subscription"
@@ -168,7 +168,7 @@ export default function Index({ home, review }: IndexProps) {
                 </h2>
               </div>
             </div>
-            {home.data?.q_and_a.map((value, index) => {
+            {home.data?.q_and_a?.map((value, index) => {
               return (
                 <Accordion key={index} title={value.title} description={value.description} col={8} color={Color.light} />
               )
