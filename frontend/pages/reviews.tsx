@@ -61,21 +61,21 @@ export default function Review({ review, annualPromotion }: ReviewProps) {
           </div>
         </div>
       </div>
-      <ReviewHeader reviewHeader={review.data.header} />
+      <ReviewHeader reviewHeader={review.data?.header} />
       <div className="section-feature-1">
         <div className="container">
           <div className="justify-content-center grid-container">
-            {review.data.student.map((value, index) => {
+            {review.data?.student.map((value, index) => {
               return (
                 <ReviewStudents key={index} reviewStudent={value} />
               )
             })}
-            {review.data.cariber.map((value, index) => {
+            {review.data?.cariber.map((value, index) => {
               return (
                 <ReviewCaribers key={index} reviewCariber={value} />
               )
             })}
-            {review.data.shopee.map((value, index) => {
+            {review.data?.shopee.map((value, index) => {
               return (
                 <ReviewShopee key={index} reviewShopee={value}/>
               )
