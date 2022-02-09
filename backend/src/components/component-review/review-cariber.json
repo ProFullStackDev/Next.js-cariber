@@ -1,15 +1,10 @@
 {
-  "kind": "collectionType",
-  "collectionName": "review_caribers",
+  "collectionName": "components_component_review_review_caribers",
   "info": {
-    "singularName": "review-cariber",
-    "pluralName": "review-caribers",
-    "displayName": "Review Cariber"
+    "displayName": "Review Cariber",
+    "icon": "laugh-squint"
   },
-  "options": {
-    "draftAndPublish": true
-  },
-  "pluginOptions": {},
+  "options": {},
   "attributes": {
     "name": {
       "type": "string"
