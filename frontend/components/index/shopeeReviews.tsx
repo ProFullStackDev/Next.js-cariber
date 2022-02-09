@@ -1,8 +1,8 @@
 import Link from "next/link"
+import { ReviewShopeeContent } from "../../apiStrapi/models/contentType/review"
 import Img from "../image"
-import { ShopeeReview } from "../static/interface"
 
-export default function ShopeeReviews({ shopeeReviews }: { shopeeReviews: ShopeeReview[] }) {
+export default function ShopeeReviews({ reviewShopee }: { reviewShopee: ReviewShopeeContent[] }) {
   return (
     <div className="row align-items-start justify-content-between">
       <div className="block-type-feature text-center col-3">
@@ -41,7 +41,7 @@ export default function ShopeeReviews({ shopeeReviews }: { shopeeReviews: Shopee
           </div>
         </div>
       </div>
-      {shopeeReviews.map((value, index) => {
+      {reviewShopee.map((value, index) => {
         return (
           <div key={index} className="block-type-feature text-center col-2">
             <div className="block box-shadow-none">
@@ -50,13 +50,13 @@ export default function ShopeeReviews({ shopeeReviews }: { shopeeReviews: Shopee
                   <h5 className="text-center">
                     <strong>
                       <span>
-                        {value.rating}
+                      {"⭐️".repeat(value.ratings)}
                       </span>
                     </strong>
                   </h5>
                   <p className="text-center">
                     <span className="color-smooth">
-                      &quot;{value.review}&quot;
+                      &quot;{value.description}&quot;
                     </span>
                   </p>
                   <h6 className="f-s-16 text-center">
@@ -64,14 +64,6 @@ export default function ShopeeReviews({ shopeeReviews }: { shopeeReviews: Shopee
                       <span className="color-smooth">
                         <strong>
                           {value.name}
-                        </strong>
-                      </span>
-                    </em>
-                    <br />
-                    <em>
-                      <span className="color-smooth">
-                        <strong>
-                          {value.date}
                         </strong>
                       </span>
                     </em>

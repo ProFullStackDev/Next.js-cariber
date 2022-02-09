@@ -8,24 +8,24 @@ import * as staticData from "../components/static/index"
 import FooterBrand from '../components/footerBrand'
 import ShopeeReviews from '../components/index/shopeeReviews'
 import Specific from '../components/index/specific'
-import Mystudent from '../components/index/myStudent'
+import MyStudent from '../components/index/myStudent'
 import CoursesUpdate from '../components/index/coursesUpdate'
 import StudentReviews from '../components/studentReviews'
 import { ResponseData } from '../apiStrapi/models/data'
 import { ReviewContent } from '../apiStrapi/models/contentType/review'
 import reviewApi from '../apiStrapi/reviewApi'
+import homeApi from '../apiStrapi/homeApi'
+import { HomeContent } from '../apiStrapi/models/contentType/home'
+import { strapiImage } from '../apiStrapi/models/content'
+import VideoPlayer from '../components/videoPlayer'
 
 interface IndexProps {
-  review: ResponseData<ReviewContent>
+  home: ResponseData<HomeContent>;
+  review: ResponseData<ReviewContent>;
 }
 
-export default function Index({ review }: IndexProps) {
-  const shopeeReviews = staticData.shopeeReviews
-  const myStudents = staticData.myStudents
-  const frequentlyAskedQuestions = staticData.frequentlyAskedQuestions
+export default function Index({ home, review }: IndexProps) {
   const slideCourses = staticDataReview.slideCourses
-  const coursesSoon = staticData.coursesSoon
-  const coursesLatest = staticData.coursesLatest
 
   return (
     <div className="index">
@@ -37,7 +37,7 @@ export default function Index({ review }: IndexProps) {
               <div className="block box-shadow-none">
                 <div className="image">
                   <Img className="image-image"
-                    src="/index/block-title.png"
+                    src={strapiImage(home.data.header_image.url)}
                     alt="ผู้นำตัวจริง"
                     width={855.733}
                     height={434.817}
@@ -67,13 +67,15 @@ export default function Index({ review }: IndexProps) {
               <div className="block-type-feature text-center col-5">
                 <div className="block box-shadow-none">
                   <div className="feature column-center">
-                    <Img className="feature-image"
-                      src="/index/yearly-subscription.jpg"
-                      width={400}
-                      height={400}
-                      alt="Yearly Subscription"
-                    />
-                    <a className="btn btn-solid btn-medium btn-auto" href="https://checkout.cariber.co/?add-to-cart=685&cfp=YmFubmVyK3NsaWRlc2hvd19ob21l">
+                    <a href={home.data.promotions.url}>
+                      <Img className="feature-image"
+                        src={strapiImage(home.data.promotions.high_yearly_sub.url)}
+                        width={400}
+                        height={400}
+                        alt="Yearly Subscription"
+                      />
+                    </a>
+                    <a className="btn btn-solid btn-medium btn-auto" href={home.data.promotions.url}>
                       สมัครเลย
                     </a>
                   </div>
@@ -89,7 +91,7 @@ export default function Index({ review }: IndexProps) {
       <div className="background-dark">
         <div className="sizer">
           <div className="container">
-            <Specific />
+            <Specific specifics={home.data.information} />
           </div>
         </div>
       </div>
@@ -118,7 +120,7 @@ export default function Index({ review }: IndexProps) {
                     </em>
                   </p>
                   <Img className="feature-image"
-                    src="/index/yearly-subscription-1.jpg"
+                    src={strapiImage(home.data.promotions.large_yearly_sub.url)}
                     width={329.6}
                     height={211.55}
                     alt="Yearly Subscription"
@@ -130,11 +132,7 @@ export default function Index({ review }: IndexProps) {
               </div>
               <div className="block-type-video col-7">
                 <div className="block box-shadow-none">
-                  <div className="video">
-                    <video className="b-r-4" width="100%" controls loop={true} muted={true} autoPlay={true}>
-                      <source src="/index/cariber-video.mp4" type="video/mp4" />
-                    </video>
-                  </div>
+                  <VideoPlayer videoId={home.data.video_id}/>
                 </div>
               </div>
             </div>
@@ -142,7 +140,7 @@ export default function Index({ review }: IndexProps) {
         </div>
         <div className="sizer">
           <div className="container">
-            <CoursesUpdate coursesSoon={coursesSoon} coursesLatest={coursesLatest} />
+            <CoursesUpdate coursesSoon={home.data.courses_soon} coursesLatest={home.data.courses_latest} />
           </div>
         </div>
       </div>
@@ -150,13 +148,13 @@ export default function Index({ review }: IndexProps) {
         <StudentReviews reviewStudents={review.data.student} />
         <div className="sizer p-t-20">
           <div className="container">
-            <ShopeeReviews shopeeReviews={shopeeReviews} />
+            <ShopeeReviews reviewShopee={review.data.shopee} />
           </div>
         </div>
       </div>
       <div className="sizer background-light">
         <div className="container">
-          <Mystudent myStudents={myStudents} />
+          <MyStudent myStudents={home.data.my_student} />
         </div>
       </div>
       <div className="sizer background-light">
@@ -171,7 +169,7 @@ export default function Index({ review }: IndexProps) {
                 </h2>
               </div>
             </div>
-            {frequentlyAskedQuestions.map((value, index) => {
+            {home.data.q_and_a.map((value, index) => {
               return (
                 <Accordion key={index} title={value.title} description={value.description} col={8} color={Color.light} />
               )
@@ -188,6 +186,7 @@ export default function Index({ review }: IndexProps) {
 export async function getStaticProps() {
   return {
     props: {
+      home: await homeApi(),
       review: await reviewApi(),
     }
   };
