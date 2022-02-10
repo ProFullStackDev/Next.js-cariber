@@ -21,15 +21,10 @@ export default function Specific({ specifics }: { specifics?: Information[] }) {
               </div>
             </div>
             <div className="block-type-text text-left col-8 p-0">
-              <div className="block box-shadow-none">
+              <div className="block box-shadow-none white-space-pre">
                 <h5>
                   <span>
-                    กว่า 168 บทเรียน
-                  </span>
-                </h5>
-                <h5>
-                  <span>
-                    จากผู้เชี่ยวชาญ
+                    {value.description}
                   </span>
                 </h5>
               </div>
