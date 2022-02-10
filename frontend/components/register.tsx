@@ -44,6 +44,7 @@ export default function Register({ callbackButton }: RegisterProps) {
         password: formRegister.password
       }
       const dataLogin = await loginApi(formLogin)
+      if(!dataLogin) return;
       userManager.saveToken(dataLogin.access_token)
       router.replace("/library")
     } else {

@@ -34,6 +34,7 @@ export default function Login({ callbackButton }: LoginProps) {
       password: formLogin.password
     }
     const data = await loginApi(formData);
+    if (!data) return;
     if (!data.message) {
       userManager.saveToken(data.access_token)
       router.replace("/library")
