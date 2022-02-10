@@ -4,7 +4,7 @@ import { strapiUpdateUseProfilerApi } from "./models/content";
 import { ResponseData } from "./models/data";
 
 export default async function updateUserProfileApi(body: UserProfile) {
-  const userManager = new UserManager()
+  const userManager = new UserManager();
   const formData = new FormData();
   formData.append("fullName", body.fullName)
   formData.append("email", body.email)

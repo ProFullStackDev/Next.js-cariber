@@ -1,30 +1,48 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { myCourseApi } from "../apiNest/myCourseApi";
 import UserManager from "../auth/userManager";
 import Footer from "../components/footer";
 import FooterBrand from "../components/footerBrand";
 import Header from "../components/header";
 import Img from "../components/image";
+import Loading from "../components/loading";
 import Pagination from "../components/pagination";
-import * as staticData from "../components/static/library"
-
-export interface MyCourse {
-  image: string,
-  title: string,
-  progress: number,
-  description: string,
-  path: string
-}
 
 export default function Library() {
-  const router = useRouter()
-  const userManager = new UserManager()
-  const myCourse = staticData.myCourse
+  const router = useRouter();
+  const userManager = new UserManager();
+  const [loading, setLoading] = useState(true)
+  const [myCourse, setMyCourse] = useState({
+    id: "",
+    email: "",
+    status: "",
+    course_list: [{
+      id: 0,
+      speaker_name: "",
+      description: "",
+      expires_date: "",
+      course_name: "",
+    }]
+  });
 
   useEffect(() => {
-    !userManager.isLoggedIn() && router.replace('/login')
-  })
+    fetchData();
+  }, [])
+
+  async function fetchData() {
+    const data = await myCourseApi();
+    data && setMyCourse(data);
+    setLoading(false)
+  }
+
+  if (!userManager.isLoggedIn()) {
+    router.replace('/');
+    return <div></div>;
+  }
+
+  if(loading) return <Loading/>;
 
   return (
     <div className="background-image library">
@@ -75,36 +93,36 @@ export default function Library() {
               </div>
             </div>
             <div className="grid-container">
-              {myCourse.map((value, index) => {
+              {myCourse?.course_list?.map((value, index) => {
                 return (
                   <div key={`mycourse ${index}`} className="col-12 products-col">
                     <div className="product product-4 box-shadow-medium  background-light h-max">
                       <div className="product-content h-max">
-                        <Link href={value.path} passHref={true}>
+                        <Link href={""}>
                           <a>
                             <div className="product-image">
-                              <Img src={value.image}
+                              <Img src={""}
                                 width={700}
                                 height={400}
-                                alt={value.title}
+                                alt={value.speaker_name}
                               />
                             </div>
                           </a>
                         </Link>
                         <div className="p-30">
                           <div className="product-info" >
-                            <Link href={value.path} passHref={true}>
+                            <Link href={""}>
                               <a>
                                 <h4 className="product-title">
                                   <strong>
-                                    {value.title}
+                                    {value.course_name}
                                   </strong>
                                 </h4>
                               </a>
                             </Link>
                             <div className="progress">
                               <div className="progress-outer">
-                                <div className={`progress-inner p-w-${Math.round(value.progress)}`} />
+                                <div className={`progress-inner p-w-${Math.round(0)}`} />
                               </div>
                             </div>
                             <p className="product-body">
@@ -112,7 +130,7 @@ export default function Library() {
                             </p>
                           </div>
                           <div className="product-button">
-                            <Link href={value.path} passHref={true}>
+                            <Link href={""}>
                               <a className="btn btn-box btn-solid btn-small btn-full">
                                 รับชมเลย
                               </a>

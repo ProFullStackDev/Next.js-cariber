@@ -11,18 +11,26 @@ export async function loginApi(body: AuthApiProps) {
   const formData = new FormData();
   formData.append("username", body.email);
   formData.append("password", body.password);
-  const response = await fetch(nestAuthApi, {
-    method: "POST",
-    headers: headersNest,
-    body: await formDataToJson(formData),
-  })
-  return await response.json() as Auth;
+  try {
+    const response = await fetch(nestAuthApi, {
+      method: "POST",
+      headers: headersNest,
+      body: await formDataToJson(formData),
+    })
+    return await response.json() as Auth;
+  } catch (error) {
+    console.log(error)
+  }
 }
 
 export async function validateTokenApi() {
-  const response = await fetch(nestAuthApi, {
-    method: "GET",
-    headers: headersNest,
-  })
-  return await response.json() as ValidateAuth;
+  try {
+    const response = await fetch(nestAuthApi, {
+      method: "GET",
+      headers: headersNest,
+    })
+    return await response.json() as ValidateAuth;
+  } catch (error) {
+    console.log(error)
+  }
 }
