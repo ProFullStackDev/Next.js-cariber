@@ -48,10 +48,11 @@ export default function ForgotPassword() {
                       อีเมล
                     </label>
                     <FormInput id={"email"}
-                      type={"email"}
-                      required={true}
-                      placeholder={""}
-                      onChange={(e) => { formForgotPassword.email = e.currentTarget.value }} />
+                    type={"email"}
+                    required={true}
+                    placeholder={""}
+                    onChange={(e) => { formForgotPassword.email = e.currentTarget.value; } } 
+                    minLength={0} />
                   </div>
                   <button id="form-button" className="form-btn btn-solid btn-full btn-small" type="submit">
                     ยืนยัน

@@ -37,14 +37,14 @@ export default function Password() {
     }
     const data = await passwordApi(formData)
     if (!data.error) {
-      userManager.saveToken(data.jwt)
+      userManager.saveToken(data.access_token)
       flashMessages.setMessages(FlashMessagesType.forgotPasswordMessages,
         "Your password has been changed successfully. You are now signed in.")
       router.replace("/library")
     } else {
       setError({
         isError: true,
-        message: data.error.message
+        message: data.message
       })
     }
   }
@@ -67,20 +67,22 @@ export default function Password() {
                       รหัสผ่าน
                     </label>
                     <FormInput id={"password"}
-                      type={"password"}
-                      required={true}
-                      placeholder={""}
-                      onChange={(e) => { formPassword.password = e.currentTarget.value }} />
+                    type={"password"}
+                    required={true}
+                    placeholder={""}
+                    onChange={(e) => { formPassword.password = e.currentTarget.value; } } 
+                    minLength={8} />
                   </div>
                   <div className="form-group">
                     <label className="auth-label" form="confirm-password">
                       รหัสผ่าน
                     </label>
                     <FormInput id={"confirm-password"}
-                      type={"password"}
-                      required={true}
-                      placeholder={""}
-                      onChange={(e) => { formPassword.confirmPassword = e.currentTarget.value }} />
+                    type={"password"}
+                    required={true}
+                    placeholder={""}
+                    onChange={(e) => { formPassword.confirmPassword = e.currentTarget.value; } } 
+                    minLength={8} />
                   </div>
                   <button id="form-button" className="form-btn btn-solid btn-full btn-small" type="submit">
                     ส่ง

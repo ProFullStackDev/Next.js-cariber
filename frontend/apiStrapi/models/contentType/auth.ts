@@ -1,9 +1,3 @@
-export interface Auth {
-  jwt: string;
-  user: User;
-  error: Error;
-}
-
 export interface User {
   id: number;
   email: string;

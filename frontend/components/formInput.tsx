@@ -6,13 +6,15 @@ interface FormInputProps {
   required: boolean;
   placeholder: string;
   onChange: ChangeEventHandler<HTMLInputElement>;
+  minLength: number;
 }
 
 export default function FormInput({ id,
   type,
   required,
   placeholder,
-  onChange }: FormInputProps) {
+  onChange,
+  minLength }: FormInputProps) {
 
   return (
     <div className={`${id}-field form-group`}>
@@ -21,7 +23,8 @@ export default function FormInput({ id,
         type={type}
         onChange={onChange}
         required={required}
-        placeholder={placeholder} />
+        placeholder={placeholder}
+        minLength={minLength} />
     </div>
   )
 }
