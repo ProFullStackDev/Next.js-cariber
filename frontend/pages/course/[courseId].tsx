@@ -103,7 +103,7 @@ export default function CourseDetail({ course,
         </div>
       </div>
       <div className="background-dark">
-        <StudentReviews reviewStudents={review.data.student} />
+        <StudentReviews reviewStudents={review?.data?.student} />
       </div>
       <FooterBrand />
       <Footer />
