@@ -20,13 +20,17 @@ export default function CoursesUpdate({ coursesSoon, coursesLatest }: { coursesS
           <div key={index} className="block-type-feature text-center col-6">
             <div className="block box-shadow-none">
               <div className="feature column-center">
-                <Img className="feature-image"
-                  src={strapiImage(value.image.url)}
-                  width={600}
-                  height={337.5}
-                  alt={value.name}
-                />
-                <Link href={`/course${value.speaker_id}`}>
+                <Link href={`/course/${value.speaker_id}`}>
+                  <a>
+                    <Img className="feature-image"
+                      src={strapiImage(value.image.url)}
+                      width={600}
+                      height={337.5}
+                      alt={value.name}
+                    />
+                  </a>
+                </Link>
+                <Link href={`/course/${value.speaker_id}`}>
                   <a className="btn btn-solid btn-small btn-auto" >ดูรายละเอียดคอร์ส</a>
                 </Link>
               </div>

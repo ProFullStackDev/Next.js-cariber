@@ -1,4 +1,4 @@
-export interface HomeContent{
+export interface HomeContent {
   id: number;
   video_id: string;
   header_image: Image;
@@ -8,9 +8,26 @@ export interface HomeContent{
   courses_soon: CoursesSoon[];
   my_student: MyStudentContent[];
   q_and_a: QAndA[];
+  shopee_info: ShopeeInfo;
+  shopee: Shopee[];
 }
 
-interface Promotions{
+export interface Shopee {
+  id: number;
+  name: string;
+  ratings: number;
+  description: string;
+  date: string;
+}
+
+export interface ShopeeInfo {
+  id: number;
+  quantity_review: number;
+  ratings: number;
+  image: Image;
+}
+
+interface Promotions {
   id: number;
   url: string;
   high_yearly_sub: Image;
@@ -18,26 +35,26 @@ interface Promotions{
 }
 
 
-export interface Information{
+export interface Information {
   id: number;
   description: string;
   image: Image;
 }
 
-export interface CoursesLatest{
+export interface CoursesLatest {
   id: number;
   name: string;
   image: Image;
   speaker_id: string;
 }
 
-export interface CoursesSoon{
+export interface CoursesSoon {
   id: number;
   name: string;
   image: Image;
 }
 
-export interface MyStudentContent{
+export interface MyStudentContent {
   id: number;
   name: string;
   image: Image;
@@ -52,7 +69,7 @@ interface Image {
   url: string;
 }
 
-interface QAndA{
+interface QAndA {
   id: number;
   title: string;
   description: string;

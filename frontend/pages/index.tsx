@@ -118,20 +118,22 @@ export default function Index({ home, review }: IndexProps) {
                       </strong>
                     </em>
                   </p>
-                  <Img className="feature-image"
-                    src={strapiImage(home.data?.promotions?.large_yearly_sub?.url)}
-                    width={329.6}
-                    height={211.55}
-                    alt="Yearly Subscription"
-                  />
-                  <a className="btn btn-solid btn-medium btn-auto" href="https://checkout.cariber.co/?add-to-cart=685&cfp=eWVhcmx5YmFubm5lcl9kZXNrdG9wXw==">
+                  <a href={home.data?.promotions?.url}>
+                    <Img className="feature-image"
+                      src={strapiImage(home.data?.promotions?.large_yearly_sub?.url)}
+                      width={329.6}
+                      height={211.55}
+                      alt="Yearly Subscription"
+                    />
+                  </a>
+                  <a className="btn btn-solid btn-medium btn-auto" href={home.data?.promotions?.url}>
                     ซื้อแพ็กเกจรายปี
                   </a>
                 </div>
               </div>
               <div className="block-type-video col-7">
                 <div className="block box-shadow-none">
-                  <VideoPlayer videoId={home.data?.video_id}/>
+                  <VideoPlayer videoId={home.data?.video_id} />
                 </div>
               </div>
             </div>
@@ -147,7 +149,7 @@ export default function Index({ home, review }: IndexProps) {
         <StudentReviews reviewStudents={review.data?.student} />
         <div className="sizer p-t-20">
           <div className="container">
-            <ShopeeReviews reviewShopee={review.data?.shopee} />
+            <ShopeeReviews shopeeInfo={home.data?.shopee_info} shopee={home.data?.shopee} />
           </div>
         </div>
       </div>
