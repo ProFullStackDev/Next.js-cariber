@@ -1,0 +1,27 @@
+{
+  "collectionName": "components_component_home_courses_latests",
+  "info": {
+    "displayName": "Courses Latest",
+    "icon": "user-clock",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos"
+      ]
+    },
+    "speaker_id": {
+      "type": "string"
+    }
+  }
+}

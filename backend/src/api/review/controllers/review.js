@@ -7,7 +7,7 @@
 const { createCoreController } = require('@strapi/strapi').factories;
 const { getFullPopulateObject } = require('./../../../helper/populate');
 
-const modelUid = "api::review.review"
+const modelUid = 'api::review.review'
 
 module.exports = createCoreController(modelUid, ({ strapi }) => ({
     async find(ctx) {
@@ -20,6 +20,7 @@ module.exports = createCoreController(modelUid, ({ strapi }) => ({
         const sanitizedEntities = await this.sanitizeOutput(data, ctx);
             return {
             data: sanitizedEntities,
+            error: data.error,
         };
     },
 }));

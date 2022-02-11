@@ -9,7 +9,8 @@ export const strapiUpdateUseProfilerApi = strapiApi+"/user/update-me";
 export const strapiSingleCourse = strapiApi+"/single-course?populate=*";
 export const strapiAnnualPromotion = strapiApi+"/annual-promotion?populate=*";
 export const strapiReview = strapiApi+"/review";
+export const strapiHome = strapiApi+"/home";
 
 export function strapiImage(url: string){
-  return strapi+url;
+  return url ? strapi + url : "";
 }
