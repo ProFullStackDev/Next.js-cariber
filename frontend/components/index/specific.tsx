@@ -1,4 +1,4 @@
-import { strapiImage } from "../../apiStrapi/models/content";
+import { strapiImage } from "../../apiStrapi/models/contact";
 import { Information } from "../../apiStrapi/models/contentType/home";
 import Img from "../image";
 
@@ -12,7 +12,7 @@ export default function Specific({ specifics }: { specifics?: Information[] }) {
               <div className="block box-shadow-none">
                 <div className="image">
                   <Img className="image-image"
-                    src={strapiImage(value.image.url)}
+                    src={strapiImage(value.image?.url)}
                     width={70.0333}
                     height={70.0333}
                     alt={value.description}

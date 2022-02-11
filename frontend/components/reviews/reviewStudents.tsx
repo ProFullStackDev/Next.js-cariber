@@ -1,4 +1,4 @@
-import { strapiImage } from "../../apiStrapi/models/content";
+import { strapiImage } from "../../apiStrapi/models/contact";
 import { ReviewStudentContent } from "../../apiStrapi/models/contentType/review";
 import Img from "../image";
 
@@ -8,7 +8,7 @@ export default function ReviewStudents({ reviewStudent }: { reviewStudent: Revie
       <div className="block box-shadow-large background-light">
         <div className="feature">
           <Img className="feature-image"
-            src={strapiImage(reviewStudent.image.url)}
+            src={strapiImage(reviewStudent.image?.url)}
             alt={reviewStudent.name}
             width={100}
             height={100}

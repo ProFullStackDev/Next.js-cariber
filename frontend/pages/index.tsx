@@ -15,7 +15,7 @@ import { ReviewContent } from '../apiStrapi/models/contentType/review'
 import reviewApi from '../apiStrapi/reviewApi'
 import homeApi from '../apiStrapi/homeApi'
 import { HomeContent } from '../apiStrapi/models/contentType/home'
-import { strapiImage } from '../apiStrapi/models/content'
+import { strapiImage } from '../apiStrapi/models/contact'
 import VideoPlayer from '../components/videoPlayer'
 
 interface IndexProps {

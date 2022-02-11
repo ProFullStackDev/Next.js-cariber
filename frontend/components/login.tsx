@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import { FormEvent, MouseEventHandler, useState } from "react";
-import authApi, { AuthApiProps } from "../apiStrapi/authApi";
+import { AuthApiProps, loginApi } from "../apiNest/authApi";
 import UserManager from "../auth/userManager";
 import FormInput from "./formInput";
 import ShowError from "./showError";
@@ -33,14 +33,15 @@ export default function Login({ callbackButton }: LoginProps) {
       email: formLogin.email,
       password: formLogin.password
     }
-    const data = await authApi(formData)
-    if (!data.error) {
-      userManager.saveToken(data.jwt)
+    const data = await loginApi(formData);
+    if (!data) return;
+    if (!data.message) {
+      userManager.saveToken(data.access_token)
       router.replace("/library")
     } else {
       setErrorLogin({
         isError: true,
-        message: data.error.message
+        message: data.message,
       })
     }
   }
@@ -87,7 +88,8 @@ export default function Login({ callbackButton }: LoginProps) {
                     type={"email"}
                     required={true}
                     placeholder={""}
-                    onChange={(e) => { formLogin.email = e.currentTarget.value }} />
+                    onChange={(e) => { formLogin.email = e.currentTarget.value; }}
+                    minLength={0} />
                 </div>
                 <div className="form-group">
                   <label className="label" form="member-email">
@@ -97,7 +99,8 @@ export default function Login({ callbackButton }: LoginProps) {
                     type={"password"}
                     required={true}
                     placeholder={""}
-                    onChange={(e) => { formLogin.password = e.currentTarget.value }} />
+                    onChange={(e) => { formLogin.password = e.currentTarget.value; }}
+                    minLength={8} />
                 </div>
                 <button id="form-button" className="btn btn-solid btn-full btn-small" type="submit">
                   เข้าสู่ระบบ

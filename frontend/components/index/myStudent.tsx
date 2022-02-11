@@ -1,4 +1,4 @@
-import { strapiImage } from "../../apiStrapi/models/content"
+import { strapiImage } from "../../apiStrapi/models/contact"
 import { MyStudentContent } from "../../apiStrapi/models/contentType/home"
 import Img from "../image"
 
@@ -23,9 +23,9 @@ export default function MyStudent({ myStudents }: { myStudents: MyStudentContent
             <div className="block box-shadow-none">
               <div className="image">
                 <Img className="image-image"
-                  src={strapiImage(value.image.url)}
-                  width={value.image.width}
-                  height={value.image.height}
+                  src={strapiImage(value.image?.url)}
+                  width={value.image?.width}
+                  height={value.image?.height}
                   alt={value.name}
                 />
               </div>

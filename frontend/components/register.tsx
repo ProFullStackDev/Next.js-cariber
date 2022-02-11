@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import { useState, FormEvent, MouseEventHandler } from "react";
 import UserManager from "../auth/userManager";
-import authApi, { AuthApiProps } from "../apiStrapi/authApi";
+import { AuthApiProps, loginApi } from "../apiNest/authApi";
 import registerApi, { RegisterApiProps } from "../apiStrapi/registerApi";
 import FormInput from "./formInput"
 import ShowError from "./showError";
@@ -43,8 +43,9 @@ export default function Register({ callbackButton }: RegisterProps) {
         email: formRegister.email,
         password: formRegister.password
       }
-      const dataLogin = await authApi(formLogin)
-      userManager.saveToken(dataLogin.jwt)
+      const dataLogin = await loginApi(formLogin)
+      if(!dataLogin) return;
+      userManager.saveToken(dataLogin.access_token)
       router.replace("/library")
     } else {
       setErrorRegister({
@@ -93,30 +94,33 @@ export default function Register({ callbackButton }: RegisterProps) {
                     อีเมล
                   </label>
                   <FormInput id={"email"}
-                    type={"email"}
-                    required={true}
-                    placeholder={""}
-                    onChange={(e) => { formRegister.email = e.currentTarget.value }} />
+                  type={"email"}
+                  required={true}
+                  placeholder={""}
+                  onChange={(e) => { formRegister.email = e.currentTarget.value; } } 
+                  minLength={0} />
                 </div>
                 <div className="form-group">
                   <label className="label" form="member-email">
                     รหัสผ่าน
                   </label>
                   <FormInput id={"password"}
-                    type={"password"}
-                    required={true}
-                    placeholder={""}
-                    onChange={(e) => { formRegister.password = e.currentTarget.value }} />
+                  type={"password"}
+                  required={true}
+                  placeholder={""}
+                  onChange={(e) => { formRegister.password = e.currentTarget.value; } } 
+                  minLength={8} />
                 </div>
                 <div className="form-group">
                   <label className="label" form="member-email">
                     ยืนยันรหัสผ่าน
                   </label>
                   <FormInput id={"confirm-password"}
-                    type={"password"}
-                    required={true}
-                    placeholder={""}
-                    onChange={(e) => { formRegister.confirmPassword = e.currentTarget.value }} />
+                  type={"password"}
+                  required={true}
+                  placeholder={""}
+                  onChange={(e) => { formRegister.confirmPassword = e.currentTarget.value; } } 
+                  minLength={8} />
                 </div>
                 <button id="form-button" className="btn btn-solid btn-full btn-small" type="submit">
                   ลงทะเบียน

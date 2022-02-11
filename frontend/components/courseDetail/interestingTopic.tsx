@@ -1,4 +1,4 @@
-import { strapiImage } from "../../apiStrapi/models/content"
+import { strapiImage } from "../../apiStrapi/models/contact"
 import { Topics } from "../../apiStrapi/models/contentType/courses"
 import Img from "../image"
 

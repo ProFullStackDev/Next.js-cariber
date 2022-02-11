@@ -1,0 +1,20 @@
+const BASE_URL = process?.env?.NEXT_PUBLIC_STRAPI_API || "https://strapi-dev.cariber.co";
+const BASE_API = BASE_URL + "/api";
+
+export const STRAPI_API_URLS = {
+  auth: BASE_API+"/auth/local",
+  register: BASE_API+"/auth/local/register",
+  forgotPassword: BASE_API+"/auth/forgot-password",
+  password: BASE_API+"/auth/reset-password",
+  getUserProfile: BASE_API+"/user/get-me",
+  updateUseProfiler: BASE_API+"/user/update-me",
+  singleCourse: BASE_API+"/single-course?populate=*",
+  annualPromotion: BASE_API+"/annual-promotion?populate=*",
+  review: BASE_API+"/review",
+  home: BASE_API+"/home",
+  courses: BASE_API+"/courses"
+}
+
+export function strapiImage(url: string){
+  return url ? BASE_URL + url : "";
+}
