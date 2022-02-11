@@ -2,6 +2,7 @@ import React, { useRef, useState } from 'react';
 import { findDOMNode } from 'react-dom';
 import ReactPlayer from 'react-player/lazy';
 import screenfull from 'screenfull';
+import Img from './image';
 
 type VideoPlayerProps = {
   videoId: string;
@@ -162,7 +163,7 @@ function VideoPlayer(props: VideoPlayerProps) {
   }
 
   return (
-    <div className="player-wrapper" style={{ ...props.style }}>
+    <div className="player-wrapper video-player" style={{ ...props.style }}>
       <ReactPlayer
         width='100%'
         height='100%'
@@ -170,7 +171,7 @@ function VideoPlayer(props: VideoPlayerProps) {
         url={videoState.url}
         pip={videoState.pip}
         playing={videoState.playing}
-        controls={true}
+        controls={false}
         light={videoState.light}
         loop={videoState.loop}
         playbackRate={videoState.playbackRate}
@@ -190,76 +191,100 @@ function VideoPlayer(props: VideoPlayerProps) {
         onProgress={handleProgress}
         onDuration={handleDuration}
       />
-      <table>
-        <tbody>
-          <tr>
-            <th>Controls</th>
-            <td>
-              <button onClick={handlePlayPause}>{videoState.playing ? 'Pause' : 'Play'}</button>
-              <button onClick={handleClickFullscreen}>Toggle Fullscreen</button>
-              <button onClick={handleTogglePIP}>{videoState.pip ? 'Disable PiP' : 'Enable PiP'}</button>
-            </td>
-          </tr>
-          <tr>
-            <th>Speed</th>
-            <td>
-              <button onClick={handleSetPlaybackRate} value={1}>1x</button>
-              <button onClick={handleSetPlaybackRate} value={1.5}>1.5x</button>
-              <button onClick={handleSetPlaybackRate} value={2}>2x</button>
-            </td>
-          </tr>
-          <tr>
-            <th>Seek</th>
-            <td>
-              <input
-                type='range' min={0} max={0.999999} step='any'
-                value={videoState.played}
-                onMouseDown={handleSeekMouseDown}
-                onChange={handleSeekChange}
-                onMouseUp={handleSeekMouseUp}
-              />
-            </td>
-          </tr>
-          <tr>
-            <th>Volume</th>
-            <td>
-              <input type='range' min={0} max={1} step='any' value={videoState.volume} onChange={handleVolumeChange} />
-            </td>
-          </tr>
-          <tr>
-            <th>
-              <label htmlFor='muted'>Muted</label>
-            </th>
-            <td>
-              <input id='muted' type='checkbox' checked={videoState.muted} onChange={handleToggleMuted} />
-            </td>
-          </tr>
-          <tr>
-            <th>
-              <label htmlFor='loop'>Loop</label>
-            </th>
-            <td>
-              <input id='loop' type='checkbox' checked={videoState.loop} onChange={handleToggleLoop} />
-            </td>
-          </tr>
-          <tr>
-            <th>Played</th>
-            <td><progress max={1} value={videoState.played} /></td>
-          </tr>
-          <tr>
-            <th>Loaded</th>
-            <td><progress max={1} value={videoState.loaded} /></td>
-          </tr>
-          <tr>
-            <th>Resolution</th>
-            <td>
-              {videoState.resolutions.map((item: any, index: number) => {
-                return <button key={index} onClick={() => setVideoResolution(index)}>{item.height}</button>
-              })}
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <div className="video-controller">
+        <button className="player-button" onClick={handlePlayPause}>
+          {videoState.playing ? (<Img src="/videoPlayer/pause-solid.svg"
+          width={15}
+          height={15}/>) : (<Img src="/videoPlayer/play-solid.svg"
+          width={15}
+          height={15}/>)}
+        </button>
+        <div className="video-progress">
+          <input
+            className="input-progress"
+            type='range' min={0} max={0.999999} step='any'
+            value={videoState.played}
+            onMouseDown={handleSeekMouseDown}
+            onChange={handleSeekChange}
+            onMouseUp={handleSeekMouseUp}
+          />
+        </div>
+        <div className="video-volume">
+          <input type='range' min={0} max={1} step='any' value={videoState.volume} onChange={handleVolumeChange} />
+        </div>
+      </div>
+      {/* <div>
+        <table>
+          <tbody>
+            <tr>
+              <th>Controls</th>
+              <td>
+                <button onClick={handlePlayPause}>{videoState.playing ? 'Pause' : 'Play'}</button>
+                <button onClick={handleClickFullscreen}>Toggle Fullscreen</button>
+                <button onClick={handleTogglePIP}>{videoState.pip ? 'Disable PiP' : 'Enable PiP'}</button>
+              </td>
+            </tr>
+            <tr>
+              <th>Speed</th>
+              <td>
+                <button onClick={handleSetPlaybackRate} value={1}>1x</button>
+                <button onClick={handleSetPlaybackRate} value={1.5}>1.5x</button>
+                <button onClick={handleSetPlaybackRate} value={2}>2x</button>
+              </td>
+            </tr>
+            <tr>
+              <th>Seek</th>
+              <td>
+                <input
+                  type='range' min={0} max={0.999999} step='any'
+                  value={videoState.played}
+                  onMouseDown={handleSeekMouseDown}
+                  onChange={handleSeekChange}
+                  onMouseUp={handleSeekMouseUp}
+                />
+              </td>
+            </tr>
+            <tr>
+              <th>Volume</th>
+              <td>
+                <input type='range' min={0} max={1} step='any' value={videoState.volume} onChange={handleVolumeChange} />
+              </td>
+            </tr>
+            <tr>
+              <th>
+                <label htmlFor='muted'>Muted</label>
+              </th>
+              <td>
+                <input id='muted' type='checkbox' checked={videoState.muted} onChange={handleToggleMuted} />
+              </td>
+            </tr>
+            <tr>
+              <th>
+                <label htmlFor='loop'>Loop</label>
+              </th>
+              <td>
+                <input id='loop' type='checkbox' checked={videoState.loop} onChange={handleToggleLoop} />
+              </td>
+            </tr>
+            <tr>
+              <th>Played</th>
+              <td><progress max={1} value={videoState.played} /></td>
+            </tr>
+            <tr>
+              <th>Loaded</th>
+              <td><progress max={1} value={videoState.loaded} /></td>
+            </tr>
+            <tr>
+              <th>Resolution</th>
+              <td>
+                {videoState.resolutions.map((item: any, index: number) => {
+                  return <button key={index} onClick={() => setVideoResolution(index)}>{item.height}</button>
+                })}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div> */}
     </div>
   )
 }
