@@ -47,8 +47,8 @@ export default function Library() {
   return (
     <div className="background-image library">
       <Header />
-      <div className="sizer p-b-80">
-        <div className="container">
+      <div className="sizer-full align-items-start p-b-80">
+        <div className="container m-t-30">
           <div className="row products-list">
             <div className="col-12 products-col">
               <div className="products-header">

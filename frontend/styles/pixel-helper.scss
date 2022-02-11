@@ -21,12 +21,20 @@ $maximum-pixel-percentage : 100;
     height: #{$i}px !important;
   }
 
-  .m-w-#{$i} {
+  .max-w-#{$i} {
     max-width: #{$i}px !important;
   }
 
-  .m-h-#{$i} {
+  .max-h-#{$i} {
     max-height: #{$i}px !important;
+  }
+
+  .min-w-#{$i} {
+    min-width: #{$i}px !important;
+  }
+
+  .min-h-#{$i} {
+    min-height: #{$i}px !important;
   }
 }
 

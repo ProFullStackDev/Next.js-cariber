@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { strapiImage } from "../../apiStrapi/models/content"
+import { strapiImage } from "../../apiStrapi/models/contact"
 import { CoursesLatest, CoursesSoon } from "../../apiStrapi/models/contentType/home"
 import Img from "../image"
 
@@ -23,7 +23,7 @@ export default function CoursesUpdate({ coursesSoon, coursesLatest }: { coursesS
                 <Link href={`/course/${value.speaker_id}`}>
                   <a>
                     <Img className="feature-image"
-                      src={strapiImage(value.image.url)}
+                      src={strapiImage(value.image?.url)}
                       width={600}
                       height={337.5}
                       alt={value.name}
@@ -54,7 +54,7 @@ export default function CoursesUpdate({ coursesSoon, coursesLatest }: { coursesS
             <div className="block box-shadow-none">
               <div className="image">
                 <Img className="image-image"
-                  src={strapiImage(value.image.url)}
+                  src={strapiImage(value.image?.url)}
                   alt={value.name}
                   width={349.6}
                   height={196.733}

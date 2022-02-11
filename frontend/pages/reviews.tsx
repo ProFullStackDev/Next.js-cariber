@@ -5,7 +5,7 @@ import FooterBrand from "../components/footerBrand";
 import * as staticData from "../components/static/review"
 import SlideCourse from "../components/slideCourse";
 import { ResponseData } from "../apiStrapi/models/data";
-import { strapiImage } from "../apiStrapi/models/content";
+import { strapiImage } from "../apiStrapi/models/contact";
 import { ReviewContent } from "../apiStrapi/models/contentType/review";
 import { AnnualPromotionContent } from "../apiStrapi/models/contentType/annualPromotion";
 import reviewApi from "../apiStrapi/reviewApi";

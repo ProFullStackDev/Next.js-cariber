@@ -1,5 +1,5 @@
+import { STRAPI_API_URLS } from './models/contact';
 import { User } from "./models/contentType/auth";
-import { strapiRegisterApi } from "./models/content";
 import { ResponseData } from "./models/data";
 
 export interface RegisterApiProps {
@@ -11,7 +11,7 @@ export default async function registerApi(body: RegisterApiProps) {
   const formData = new FormData();
   formData.append("email", body.email);
   formData.append("password", body.password);
-  const response = await fetch(strapiRegisterApi, {
+  const response = await fetch(STRAPI_API_URLS.register, {
     method: "POST",
     body: formData,
   })

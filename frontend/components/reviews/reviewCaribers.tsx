@@ -1,4 +1,4 @@
-import { strapiImage } from "../../apiStrapi/models/content";
+import { strapiImage } from "../../apiStrapi/models/contact";
 import { ReviewCariberContent } from "../../apiStrapi/models/contentType/review";
 import Img from "../image";
 
@@ -8,7 +8,7 @@ export default function ReviewCaribers({ reviewCariber }: { reviewCariber: Revie
       <div className="block box-shadow-large background-light">
         <div className="feature">
           <Img className="feature-image"
-            src={strapiImage(reviewCariber.image.url)}
+            src={strapiImage(reviewCariber.image?.url)}
             alt={reviewCariber.name}
             width={70}
             height={70}

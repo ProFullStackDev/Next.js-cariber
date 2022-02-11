@@ -9,9 +9,9 @@ import InterestingTopic from "../../components/courseDetail/interestingTopic"
 import Suitable from "../../components/courseDetail/suitable"
 import Sale from "../../components/courseDetail/sale"
 import UpperHeader from "../../components/courseDetail/upperHeader"
-import { ResponseData, ResponseDataList } from "../../apiStrapi/models/data"
+import { ResponseData } from "../../apiStrapi/models/data"
 import { CourseContent } from "../../apiStrapi/models/contentType/courses"
-import { strapiApi, strapiImage } from "../../apiStrapi/models/content"
+import { strapiImage } from "../../apiStrapi/models/contact"
 import YoutubeEP from "../../components/courseDetail/youtubeEP"
 import CourseHeader from "../../components/courseDetail/courseHeader"
 import singleCourseApi from "../../apiStrapi/singleCouresApi"
@@ -21,6 +21,7 @@ import { AnnualPromotionContent } from "../../apiStrapi/models/contentType/annua
 import EpisodeAccordion from "../../components/courseDetail/episodeAccordion"
 import { ReviewContent } from "../../apiStrapi/models/contentType/review"
 import reviewApi from "../../apiStrapi/reviewApi"
+import { coursesAllApi, coursesApi } from "../../apiStrapi/coursesApi"
 
 interface CourseDetailParams {
   courseId: string;
@@ -112,8 +113,7 @@ export default function CourseDetail({ course,
 }
 
 export async function getStaticPaths() {
-  const response = await fetch(strapiApi + '/courses');
-  const data = await response.json() as ResponseDataList<CourseContent>;
+  const data = await coursesAllApi(); 
   const dataFilter = (data.data.filter((value) => {
     return value.course_detail
   }));
@@ -131,11 +131,9 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }: { params: CourseDetailParams }) {
-  const response = await fetch(strapiApi + `/courses/${params.courseId}`);
-  const data = await response.json() as ResponseData<CourseContent>;
   return {
     props: {
-      course: data,
+      course: await coursesApi(params.courseId),
       singleCourse: await singleCourseApi(),
       annualPromotion: await annualPromotionApi(),
       review: await reviewApi(),

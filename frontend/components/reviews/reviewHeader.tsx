@@ -1,4 +1,4 @@
-import { strapiImage } from "../../apiStrapi/models/content";
+import { strapiImage } from "../../apiStrapi/models/contact";
 import { ReviewHeaderContent } from "../../apiStrapi/models/contentType/review";
 import Img from "../image";
 
@@ -11,7 +11,7 @@ export default function ReviewHeader({ reviewHeader }: { reviewHeader: ReviewHea
             <div className="block-type-image text-col-11">
               <div className="row block box-shadow-large background-light">
                 <Img className="image-image"
-                  src={strapiImage(reviewHeader?.image.url)}
+                  src={strapiImage(reviewHeader?.image?.url)}
                   alt={reviewHeader?.facebook_name}
                   width={200}
                   height={200} />

@@ -1,6 +1,6 @@
+import { STRAPI_API_URLS } from './models/contact';
 import UserManager from "../auth/userManager";
 import { UserProfile } from "./models/contentType/auth";
-import { strapiUpdateUseProfilerApi } from "./models/content";
 import { ResponseData } from "./models/data";
 
 export default async function updateUserProfileApi(body: UserProfile) {
@@ -17,7 +17,7 @@ export default async function updateUserProfileApi(body: UserProfile) {
   formData.append("avatarUserBase64", body.avatarUserBase64)
   formData.append("bio", body.bio)
   formData.append("location", body.location)
-  const response = await fetch(strapiUpdateUseProfilerApi, {
+  const response = await fetch(STRAPI_API_URLS.updateUseProfiler, {
     method: "PUT",
     headers: new Headers({
       'Authorization': userManager.getJwtToken(),

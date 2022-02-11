@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { strapiImage } from "../../apiStrapi/models/content"
+import { strapiImage } from "../../apiStrapi/models/contact"
 import { Shopee, ShopeeInfo } from "../../apiStrapi/models/contentType/home"
 import Img from "../image"
 
@@ -15,7 +15,7 @@ export default function ShopeeReviews({ shopeeInfo, shopee }: ShopeeReviewsProps
         <div className="block box-shadow-none">
           <div className="feature">
             <Img className="feature-image"
-              src={strapiImage(shopeeInfo?.image.url)}
+              src={strapiImage(shopeeInfo?.image?.url)}
               width={200}
               height={65.9}
               alt="Shopee Review"
