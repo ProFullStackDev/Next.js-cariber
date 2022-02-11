@@ -1,6 +1,6 @@
-import React, { useRef, useState } from 'react';
-import { findDOMNode } from 'react-dom';
+import React, { ChangeEvent, useRef, useState } from 'react';
 import ReactPlayer from 'react-player/lazy';
+import Popup from 'reactjs-popup';
 import screenfull from 'screenfull';
 import Img from './image';
 
@@ -25,16 +25,18 @@ type ReactVideoPlayerState = {
   seeking: boolean;
   resolutions: any;
   fullscreen: boolean;
+  controllerVisibility: string;
 }
 
 function VideoPlayer(props: VideoPlayerProps) {
   const player = useRef<ReactPlayer>(null);
+  const playerContainerRef = useRef(null);
   const [videoState, setVideoState] = useState<ReactVideoPlayerState>({
     url: `https://videodelivery.net/${props.videoId}/manifest/video.m3u8`,
     pip: false,
-    playing: true,
+    playing: false,
     controls: false,
-    light: `https://videodelivery.net/${props.videoId}/thumbnails/thumbnail.jpg?time=3s`, // can set the default time in cloudflare
+    light: `https://s.isanook.com/ca/0/ui/279/1396205/download20190701165129_1562561119.jpg`,
     volume: 1,
     muted: false,
     played: 0,
@@ -44,13 +46,13 @@ function VideoPlayer(props: VideoPlayerProps) {
     loop: false,
     seeking: false,
     resolutions: [],
-    fullscreen: false
+    fullscreen: false,
+    controllerVisibility: "hidden",
   });
 
   const handleReady = () => {
     const hlsPlayer = player.current?.getInternalPlayer('hls');
     if (!hlsPlayer) return;
-    // https://github.com/video-dev/hls.js/blob/master/docs/API.md
     setVideoState({ ...videoState, resolutions: hlsPlayer.levels });
   }
 
@@ -81,8 +83,9 @@ function VideoPlayer(props: VideoPlayerProps) {
     setVideoState({ ...videoState, loop: !videoState.loop })
   }
 
-  const handleVolumeChange = (e: any) => {
-    setVideoState({ ...videoState, volume: parseFloat(e.target.value) })
+  const handleVolumeChange = (e: number | ChangeEvent<HTMLInputElement>) => {
+    typeof e === "number" && setVideoState({ ...videoState, volume: e })
+    typeof e === "object" && setVideoState({ ...videoState, volume: parseFloat(e.target.value) })
   }
 
   const handleToggleMuted = () => {
@@ -146,145 +149,112 @@ function VideoPlayer(props: VideoPlayerProps) {
     setVideoState({ ...videoState, duration })
   }
 
-  const handleClickFullscreen = () => {
-    if (!screenfull.isEnabled) return;
-    if (!videoState.fullscreen) {
+  const handleMouseMove = () => {
+    setVideoState({ ...videoState, controllerVisibility: "visible" })
+  };
 
-      const video = findDOMNode(player.current) as Element & {
-        mozRequestFullScreen(): Promise<void>;
-        webkitRequestFullscreen(): Promise<void>;
-        msRequestFullscreen(): Promise<void>;
-      };
-      screenfull.request(video);
-    } else {
-      screenfull.exit();
-    }
-    setVideoState({ ...videoState, fullscreen: !videoState.fullscreen });
+  const handleMouseLeave = () => {
+    setVideoState({ ...videoState, controllerVisibility: "hidden" })
+  };
+
+  const handleClickFullscreen = () => {
+    playerContainerRef.current && screenfull.toggle(playerContainerRef.current);
   }
 
   return (
-    <div className="player-wrapper video-player" style={{ ...props.style }}>
+    <div className="player-wrapper video-player"
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      ref={playerContainerRef}
+      style={{ ...props.style }}>
       <ReactPlayer
-        width='100%'
-        height='100%'
+        width="100%"
+        height="100%"
         ref={player}
         url={videoState.url}
         pip={videoState.pip}
         playing={videoState.playing}
         controls={false}
-        light={videoState.light}
         loop={videoState.loop}
         playbackRate={videoState.playbackRate}
         volume={videoState.volume}
         muted={videoState.muted}
         onReady={handleReady}
-        // onStart={() => console.log('onStart')}
         onPlay={handlePlay}
         onEnablePIP={handleEnablePIP}
         onDisablePIP={handleDisablePIP}
         onPause={handlePause}
-        // onBuffer={() => console.log('onBuffer')}
-        // onPlaybackRateChange={handleOnPlaybackRateChange}
-        // onSeek={e => console.log('onSeek', e)}
         onEnded={handleEnded}
-        // onError={e => console.log('onError', e)}
         onProgress={handleProgress}
         onDuration={handleDuration}
       />
-      <div className="video-controller">
-        <button className="player-button" onClick={handlePlayPause}>
-          {videoState.playing ? (<Img src="/videoPlayer/pause-solid.svg"
-          width={15}
-          height={15}/>) : (<Img src="/videoPlayer/play-solid.svg"
-          width={15}
-          height={15}/>)}
-        </button>
-        <div className="video-progress">
-          <input
-            className="input-progress"
-            type='range' min={0} max={0.999999} step='any'
-            value={videoState.played}
-            onMouseDown={handleSeekMouseDown}
-            onChange={handleSeekChange}
-            onMouseUp={handleSeekMouseUp}
-          />
-        </div>
-        <div className="video-volume">
-          <input type='range' min={0} max={1} step='any' value={videoState.volume} onChange={handleVolumeChange} />
+      <div className="controls-wrapper">
+        <div className={`video-controller`}>
+          <button className="player-button" onClick={handlePlayPause}>
+            {videoState.playing ? (<Img src="/videoPlayer/pause-solid.svg"
+              width={20}
+              height={20} />) : (<Img src="/videoPlayer/play-solid.svg"
+                width={20}
+                height={20} />)}
+          </button>
+          <div className="video-progress">
+            <input
+              className="input-progress"
+              type='range' min={0} max={0.999999} step='any'
+              value={videoState.played}
+              onMouseDown={handleSeekMouseDown}
+              onChange={handleSeekChange}
+              onMouseUp={handleSeekMouseUp}
+            />
+          </div>
+          <Popup className="popup-player-volume"
+            trigger={
+              <div className="video-volume">
+                {videoState.volume ? (
+                  <Img onClick={() => { handleVolumeChange(0) }} src="/videoPlayer/volume-solid.svg"
+                    width={20}
+                    height={20} />
+                ) : (
+                  <Img onClick={() => { handleVolumeChange(1) }} src="/videoPlayer/volume-xmark-solid.svg"
+                    width={20}
+                    height={20} />
+                )}
+              </div>
+            }
+            position="top center"
+            contentStyle={{ padding: "0px", border: "none" }}
+            mouseLeaveDelay={300}
+            arrow={false}
+            on="hover"
+          >
+            <div className="volume-progress">
+              <input className="h-100 input-progress" type='range' min={0} max={1} step='any' value={videoState.volume} orient="vertical" onChange={handleVolumeChange} />
+            </div>
+          </Popup>
+          <Popup className="popup-player-options"
+            trigger={
+              <div className="video-options">
+                <Img src="/videoPlayer/gear-solid.svg"
+                  width={20}
+                  height={20} />
+              </div>
+            }
+            position="top center"
+            contentStyle={{ padding: "0px", border: "none" }}
+            mouseLeaveDelay={300}
+            arrow={false}
+            on="hover"
+          >
+            <div className="options-item">
+            </div>
+          </Popup>
+          <div className="video-full-screen" onClick={handleClickFullscreen}>
+            <Img src="/videoPlayer/expand-wide-solid.svg"
+              width={20}
+              height={20} />
+          </div>
         </div>
       </div>
-      {/* <div>
-        <table>
-          <tbody>
-            <tr>
-              <th>Controls</th>
-              <td>
-                <button onClick={handlePlayPause}>{videoState.playing ? 'Pause' : 'Play'}</button>
-                <button onClick={handleClickFullscreen}>Toggle Fullscreen</button>
-                <button onClick={handleTogglePIP}>{videoState.pip ? 'Disable PiP' : 'Enable PiP'}</button>
-              </td>
-            </tr>
-            <tr>
-              <th>Speed</th>
-              <td>
-                <button onClick={handleSetPlaybackRate} value={1}>1x</button>
-                <button onClick={handleSetPlaybackRate} value={1.5}>1.5x</button>
-                <button onClick={handleSetPlaybackRate} value={2}>2x</button>
-              </td>
-            </tr>
-            <tr>
-              <th>Seek</th>
-              <td>
-                <input
-                  type='range' min={0} max={0.999999} step='any'
-                  value={videoState.played}
-                  onMouseDown={handleSeekMouseDown}
-                  onChange={handleSeekChange}
-                  onMouseUp={handleSeekMouseUp}
-                />
-              </td>
-            </tr>
-            <tr>
-              <th>Volume</th>
-              <td>
-                <input type='range' min={0} max={1} step='any' value={videoState.volume} onChange={handleVolumeChange} />
-              </td>
-            </tr>
-            <tr>
-              <th>
-                <label htmlFor='muted'>Muted</label>
-              </th>
-              <td>
-                <input id='muted' type='checkbox' checked={videoState.muted} onChange={handleToggleMuted} />
-              </td>
-            </tr>
-            <tr>
-              <th>
-                <label htmlFor='loop'>Loop</label>
-              </th>
-              <td>
-                <input id='loop' type='checkbox' checked={videoState.loop} onChange={handleToggleLoop} />
-              </td>
-            </tr>
-            <tr>
-              <th>Played</th>
-              <td><progress max={1} value={videoState.played} /></td>
-            </tr>
-            <tr>
-              <th>Loaded</th>
-              <td><progress max={1} value={videoState.loaded} /></td>
-            </tr>
-            <tr>
-              <th>Resolution</th>
-              <td>
-                {videoState.resolutions.map((item: any, index: number) => {
-                  return <button key={index} onClick={() => setVideoResolution(index)}>{item.height}</button>
-                })}
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div> */}
     </div>
   )
 }
