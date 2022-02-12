@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useRef, useState } from 'react';
+import React, { ChangeEvent, Dispatch, SetStateAction, useRef, useState } from 'react';
 import ReactPlayer from 'react-player/lazy';
 import Popup from 'reactjs-popup';
 import screenfull from 'screenfull';
@@ -31,6 +31,7 @@ type ReactVideoPlayerState = {
 function VideoPlayer(props: VideoPlayerProps) {
   const player = useRef<ReactPlayer>(null);
   const playerContainerRef = useRef(null);
+  const [optionsVisible, setOptionsVisible] = useState(false);
   const [videoState, setVideoState] = useState<ReactVideoPlayerState>({
     url: `https://videodelivery.net/${props.videoId}/manifest/video.m3u8`,
     pip: false,
@@ -59,7 +60,14 @@ function VideoPlayer(props: VideoPlayerProps) {
   const setVideoResolution = (value: number) => {
     const hlsPlayer = player.current?.getInternalPlayer('hls');
     if (!hlsPlayer) return;
+    getVideoResolution();
     hlsPlayer.nextLevel = value;
+  }
+
+  const getVideoResolution = () => {
+    const hlsPlayer = player.current?.getInternalPlayer('hls');
+    if (!hlsPlayer) return;
+    return hlsPlayer.nextLevel;
   }
 
   const load = (url: string) => {
@@ -161,6 +169,14 @@ function VideoPlayer(props: VideoPlayerProps) {
     playerContainerRef.current && screenfull.toggle(playerContainerRef.current);
   }
 
+  const handleVisible = (setState: Dispatch<SetStateAction<boolean>>) => {
+    setState(true);
+  }
+
+  const handleHidden = (setState: Dispatch<SetStateAction<boolean>>) => {
+    setTimeout(() => { setState(false) }, 500)
+  }
+
   return (
     <div className="player-wrapper video-player"
       onMouseMove={handleMouseMove}
@@ -231,23 +247,24 @@ function VideoPlayer(props: VideoPlayerProps) {
               <input className="h-100 input-progress" type='range' min={0} max={1} step='any' value={videoState.volume} orient="vertical" onChange={handleVolumeChange} />
             </div>
           </Popup>
-          <Popup className="popup-player-options"
-            trigger={
-              <div className="video-options">
-                <Img src="/videoPlayer/gear-solid.svg"
-                  width={20}
-                  height={20} />
+          <div className="video-options"
+            onMouseEnter={() => { handleVisible(setOptionsVisible) }}
+            onMouseLeave={() => { handleHidden(setOptionsVisible) }}>
+            <div className={`options-item ${optionsVisible ? "visible" : "hidden"}`}>
+              <div className="option-resolutions">
+                {videoState.resolutions.map((item: any, index: number) => {
+                  return <button className={`option-resolutions ${index === getVideoResolution() && "resolutions-active"}`}
+                    key={index}
+                    onClick={() => setVideoResolution(index)}>{item.height}</button>
+                })}
               </div>
-            }
-            position="top center"
-            contentStyle={{ padding: "0px", border: "none" }}
-            mouseLeaveDelay={300}
-            arrow={false}
-            on="hover"
-          >
-            <div className="options-item">
             </div>
-          </Popup>
+            <div className="h-35 video-options">
+              <Img src="/videoPlayer/gear-solid.svg"
+                width={20}
+                height={20} />
+            </div>
+          </div>
           <div className="video-full-screen" onClick={handleClickFullscreen}>
             <Img src="/videoPlayer/expand-wide-solid.svg"
               width={20}

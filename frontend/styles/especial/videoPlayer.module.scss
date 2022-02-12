@@ -1,7 +1,7 @@
 .video-player {
   position: relative;
 
-  .controls-wrapper{
+  .controls-wrapper {
     height: 100%;
     width: 100%;
     position: absolute;
@@ -91,14 +91,34 @@
     opacity: 0.7;
   }
 
-  video{
+  video {
     margin-bottom: -8px;
   }
 
-  .video-options{
+  .video-options {
     display: flex;
     align-items: center;
+    flex-direction: column;
+    justify-content: center;
   }
+
+  .options-item{
+    position: absolute;
+    bottom: 35px;
+  }
+
+  .option-resolutions {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .resolutions-active {
+    background-color: #007bff;
+  }
+}
+
+.popup-player-options-content {
+  width: 40px !important;
 }
 
 .popup-player-volume-content {
