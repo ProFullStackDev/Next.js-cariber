@@ -95,13 +95,6 @@
     margin-bottom: -8px;
   }
 
-  .video-options {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    justify-content: center;
-  }
-
   .options-item{
     position: absolute;
     bottom: 35px;
@@ -109,11 +102,19 @@
 
   .option-resolutions {
     display: flex;
-    flex-direction: column;
+    flex-direction: column-reverse;
+    background-color: white;
   }
 
   .resolutions-active {
     background-color: #007bff;
+  }
+
+  .volume-progress{
+    position: absolute;
+    transform: rotate(-90deg);
+    background-color: white;
+    bottom: 105px;
   }
 }
 

@@ -24,6 +24,7 @@ type ReactVideoPlayerState = {
   loop: boolean;
   seeking: boolean;
   resolutions: any;
+  currentResolution: number;
   fullscreen: boolean;
   controllerVisibility: string;
 }
@@ -32,6 +33,7 @@ function VideoPlayer(props: VideoPlayerProps) {
   const player = useRef<ReactPlayer>(null);
   const playerContainerRef = useRef(null);
   const [optionsVisible, setOptionsVisible] = useState(false);
+  const [volumeVisible, setVolumeVisible] = useState(false);
   const [videoState, setVideoState] = useState<ReactVideoPlayerState>({
     url: `https://videodelivery.net/${props.videoId}/manifest/video.m3u8`,
     pip: false,
@@ -47,6 +49,7 @@ function VideoPlayer(props: VideoPlayerProps) {
     loop: false,
     seeking: false,
     resolutions: [],
+    currentResolution: -1,
     fullscreen: false,
     controllerVisibility: "hidden",
   });
@@ -60,7 +63,7 @@ function VideoPlayer(props: VideoPlayerProps) {
   const setVideoResolution = (value: number) => {
     const hlsPlayer = player.current?.getInternalPlayer('hls');
     if (!hlsPlayer) return;
-    getVideoResolution();
+    setVideoState({ ...videoState, currentResolution: value });
     hlsPlayer.nextLevel = value;
   }
 
@@ -80,15 +83,15 @@ function VideoPlayer(props: VideoPlayerProps) {
   }
 
   const handlePlayPause = () => {
-    setVideoState({ ...videoState, playing: !videoState?.playing })
+    setVideoState({ ...videoState, playing: !videoState?.playing });
   }
 
   const handleToggleLight = () => {
-    setVideoState({ ...videoState, light: !videoState.light })
+    setVideoState({ ...videoState, light: !videoState.light });
   }
 
   const handleToggleLoop = () => {
-    setVideoState({ ...videoState, loop: !videoState.loop })
+    setVideoState({ ...videoState, loop: !videoState.loop });
   }
 
   const handleVolumeChange = (e: number | ChangeEvent<HTMLInputElement>) => {
@@ -174,7 +177,7 @@ function VideoPlayer(props: VideoPlayerProps) {
   }
 
   const handleHidden = (setState: Dispatch<SetStateAction<boolean>>) => {
-    setTimeout(() => { setState(false) }, 500)
+    setTimeout(() => { setState(false) }, 300)
   }
 
   return (
@@ -223,43 +226,39 @@ function VideoPlayer(props: VideoPlayerProps) {
               onMouseUp={handleSeekMouseUp}
             />
           </div>
-          <Popup className="popup-player-volume"
-            trigger={
-              <div className="video-volume">
-                {videoState.volume ? (
-                  <Img onClick={() => { handleVolumeChange(0) }} src="/videoPlayer/volume-solid.svg"
-                    width={20}
-                    height={20} />
-                ) : (
-                  <Img onClick={() => { handleVolumeChange(1) }} src="/videoPlayer/volume-xmark-solid.svg"
-                    width={20}
-                    height={20} />
-                )}
-              </div>
-            }
-            position="top center"
-            contentStyle={{ padding: "0px", border: "none" }}
-            mouseLeaveDelay={300}
-            arrow={false}
-            on="hover"
-          >
-            <div className="volume-progress">
-              <input className="h-100 input-progress" type='range' min={0} max={1} step='any' value={videoState.volume} orient="vertical" onChange={handleVolumeChange} />
+          <div className="flex-column-center"
+            onMouseEnter={() => { handleVisible(setVolumeVisible) }}
+            onMouseLeave={() => { handleHidden(setVolumeVisible) }}>
+            <div className={`volume-progress flex-column-center ${volumeVisible ? "visible" : "hidden"}`}>
+              <input className="input-progress" type='range' min={0} max={1} step='any' value={videoState.volume} onChange={handleVolumeChange} />
             </div>
-          </Popup>
-          <div className="video-options"
+            <div className="flex-column-center">
+              {videoState.volume ? (
+                <Img onClick={() => { handleVolumeChange(0) }} src="/videoPlayer/volume-solid.svg"
+                  width={20}
+                  height={20} />
+              ) : (
+                <Img onClick={() => { handleVolumeChange(1) }} src="/videoPlayer/volume-xmark-solid.svg"
+                  width={20}
+                  height={20} />
+              )}
+            </div>
+          </div>
+          <div className="flex-column-center"
             onMouseEnter={() => { handleVisible(setOptionsVisible) }}
             onMouseLeave={() => { handleHidden(setOptionsVisible) }}>
             <div className={`options-item ${optionsVisible ? "visible" : "hidden"}`}>
               <div className="option-resolutions">
+                <button className={`option-resolutions ${-1 === videoState.currentResolution && "resolutions-active"}`}
+                  onClick={() => setVideoResolution(-1)}>Auto</button>
                 {videoState.resolutions.map((item: any, index: number) => {
-                  return <button className={`option-resolutions ${index === getVideoResolution() && "resolutions-active"}`}
+                  return <button className={`option-resolutions ${index === videoState.currentResolution && "resolutions-active"}`}
                     key={index}
                     onClick={() => setVideoResolution(index)}>{item.height}</button>
                 })}
               </div>
             </div>
-            <div className="h-35 video-options">
+            <div className="h-35 flex-column-center">
               <Img src="/videoPlayer/gear-solid.svg"
                 width={20}
                 height={20} />

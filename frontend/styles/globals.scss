@@ -4980,7 +4980,7 @@ a .panel-sub-title {
   border: none;
 }
 
-.full{
+.full {
   width: 100% !important;
 }
 
@@ -5000,13 +5000,13 @@ a .panel-sub-title {
   display: flex;
 }
 
-.btn-icon{
+.btn-icon {
   display: inline-flex !important;
   align-items: center !important;
   justify-content: center !important;
 }
 
-.icon-frame{
+.icon-frame {
   margin-right: 7px;
   width: 25px;
   height: 25px;
@@ -5015,10 +5015,17 @@ a .panel-sub-title {
   background-color: white;
 }
 
-.visible{
+.visible {
   visibility: visible;
 }
 
-.hidden{
+.hidden {
   visibility: hidden;
+}
+
+.flex-column-center {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
 }
