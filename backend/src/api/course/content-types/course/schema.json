@@ -12,17 +12,33 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "speaker_name": {
-      "type": "string",
-      "required": true,
-      "unique": true
+    "name": {
+      "type": "string"
     },
-    "course_name": {
-      "type": "string",
-      "unique": true,
-      "required": true
+    "teaser": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "videos"
+      ]
     },
-    "thumbnail_image": {
+    "contents": {
+      "type": "dynamiczone",
+      "components": [
+        "components.topic-component",
+        "components.suitable-component",
+        "components.episode-component",
+        "components.special-ep-component"
+      ]
+    },
+    "total_hours": {
+      "type": "string"
+    },
+    "total_lessons": {
+      "type": "string"
+    },
+    "order_image": {
       "type": "media",
       "multiple": false,
       "required": false,
@@ -30,16 +46,41 @@
         "images"
       ]
     },
-    "thumbnail_video": {
+    "order_link": {
+      "type": "string"
+    },
+    "header": {
+      "type": "text"
+    },
+    "speaker_details": {
       "type": "media",
-      "multiple": true,
+      "multiple": false,
       "required": false,
       "allowedTypes": [
+        "images"
+      ]
+    },
+    "teaser_url": {
+      "type": "string"
+    },
+    "course_name": {
+      "type": "string"
+    },
+    "asset_download": {
+      "type": "string"
+    },
+    "thumbnail_image": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "files",
         "videos"
       ]
     },
-    "description": {
-      "type": "richtext"
+    "publish_date": {
+      "type": "datetime"
     },
     "episodes": {
       "type": "relation",
@@ -47,17 +88,14 @@
       "target": "api::episode.episode",
       "mappedBy": "course"
     },
-    "publish_date": {
-      "type": "datetime"
-    },
-    "asset_download": {
-      "type": "string"
-    },
-    "course_detail": {
+    "instructor": {
       "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::course-detail.course-detail",
-      "inversedBy": "course"
+      "relation": "manyToOne",
+      "target": "api::instructor.instructor",
+      "inversedBy": "courses"
+    },
+    "description": {
+      "type": "richtext"
     }
   }
 }
