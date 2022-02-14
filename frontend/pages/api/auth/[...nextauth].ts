@@ -34,9 +34,11 @@ export default NextAuth({
       }
       return true;
     },
-    // redirect: async (url: string, _baseUrl: string) => {
-    //   return Promise.resolve('/');
-    // },
+    redirect({url, baseUrl}) {
+      if (url.startsWith(baseUrl)) return url
+      else if (url.startsWith("/")) return new URL(url, baseUrl).toString()
+      return baseUrl
+    },
     async jwt({token, account}) {
       if (account) {
         token.accessToken = account.access_token
