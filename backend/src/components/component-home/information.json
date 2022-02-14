@@ -1,0 +1,22 @@
+{
+  "collectionName": "components_component_home_information",
+  "info": {
+    "displayName": "Information",
+    "icon": "square"
+  },
+  "options": {},
+  "attributes": {
+    "description": {
+      "type": "text"
+    },
+    "image": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos"
+      ],
+      "type": "media",
+      "multiple": false
+    }
+  }
+}

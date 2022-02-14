@@ -1,5 +1,5 @@
-import { strapiImage } from "../../models/content"
-import { Topics } from "../../models/contentType/courses"
+import { strapiImage } from "../../apiStrapi/models/contact"
+import { Topics } from "../../apiStrapi/models/contentType/courses"
 import Img from "../image"
 
 export default function InterestingTopic({ interestingTopics }: { interestingTopics: Topics[] }) {

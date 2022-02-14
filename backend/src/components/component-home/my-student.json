@@ -1,0 +1,22 @@
+{
+  "collectionName": "components_component_home_my_students",
+  "info": {
+    "displayName": "My Student",
+    "icon": "graduation-cap"
+  },
+  "options": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "image": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos"
+      ],
+      "type": "media",
+      "multiple": false
+    }
+  }
+}

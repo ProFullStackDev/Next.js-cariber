@@ -1,0 +1,16 @@
+{
+  "collectionName": "components_component_home_qnas",
+  "info": {
+    "displayName": "qna",
+    "icon": "align-justify"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "description": {
+      "type": "text"
+    }
+  }
+}

@@ -1,15 +1,21 @@
 import Link from "next/link"
+import { strapiImage } from "../../apiStrapi/models/contact"
+import { Shopee, ShopeeInfo } from "../../apiStrapi/models/contentType/home"
 import Img from "../image"
-import { ShopeeReview } from "../static/interface"
 
-export default function ShopeeReviews({ shopeeReviews }: { shopeeReviews: ShopeeReview[] }) {
+interface ShopeeReviewsProps{
+  shopeeInfo: ShopeeInfo, 
+  shopee: Shopee[]
+}
+
+export default function ShopeeReviews({ shopeeInfo, shopee }: ShopeeReviewsProps) {
   return (
     <div className="row align-items-start justify-content-between">
       <div className="block-type-feature text-center col-3">
         <div className="block box-shadow-none">
           <div className="feature">
             <Img className="feature-image"
-              src="/index/shopee.png"
+              src={strapiImage(shopeeInfo?.image?.url)}
               width={200}
               height={65.9}
               alt="Shopee Review"
@@ -17,19 +23,19 @@ export default function ShopeeReviews({ shopeeReviews }: { shopeeReviews: Shopee
             <div className="feature-text">
               <h5 className="text-center">
                 <span className="color-smooth">
-                  4.9 stars rating
+                  {shopeeInfo?.ratings} stars rating
                 </span>
               </h5>
               <h5 className="text-center m-b-30">
                 <strong>
                   <span>
-                    ⭐️⭐️⭐️⭐️⭐️
+                    {"⭐️".repeat(Math.round(shopeeInfo?.ratings))}
                   </span>
                 </strong>
               </h5>
               <h5>
                 <span className="color-smooth">
-                  จากทั้งหมด 207 รีวิวใน Shopee
+                  จากทั้งหมด {shopeeInfo?.quantity_review} รีวิวใน Shopee
                 </span>
               </h5>
             </div>
@@ -41,7 +47,7 @@ export default function ShopeeReviews({ shopeeReviews }: { shopeeReviews: Shopee
           </div>
         </div>
       </div>
-      {shopeeReviews.map((value, index) => {
+      {shopee?.map((value, index) => {
         return (
           <div key={index} className="block-type-feature text-center col-2">
             <div className="block box-shadow-none">
@@ -50,13 +56,13 @@ export default function ShopeeReviews({ shopeeReviews }: { shopeeReviews: Shopee
                   <h5 className="text-center">
                     <strong>
                       <span>
-                        {value.rating}
+                      {"⭐️".repeat(value.ratings)}
                       </span>
                     </strong>
                   </h5>
                   <p className="text-center">
                     <span className="color-smooth">
-                      &quot;{value.review}&quot;
+                      &quot;{value.description}&quot;
                     </span>
                   </p>
                   <h6 className="f-s-16 text-center">

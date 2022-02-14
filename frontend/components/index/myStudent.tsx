@@ -1,7 +1,8 @@
+import { strapiImage } from "../../apiStrapi/models/contact"
+import { MyStudentContent } from "../../apiStrapi/models/contentType/home"
 import Img from "../image"
-import { MyStudent } from "../static/interface"
 
-export default function Mystudent({ myStudents }: { myStudents: MyStudent[] }) {
+export default function MyStudent({ myStudents }: { myStudents: MyStudentContent[] }) {
   return (
     <div className="row align-items-center justify-content-center">
       <div className="block-type-text text-left col-6">
@@ -16,16 +17,16 @@ export default function Mystudent({ myStudents }: { myStudents: MyStudent[] }) {
         </div>
       </div>
       <div className="block-break"></div>
-      {myStudents.map((value, index) => {
+      {myStudents?.map((value, index) => {
         return (
           <div key={index} className="block-type-image col-2 m-r-5">
             <div className="block box-shadow-none">
               <div className="image">
                 <Img className="image-image"
-                  src={value.image}
-                  width={value.width}
-                  height={value.height}
-                  alt={value.alt}
+                  src={strapiImage(value.image?.url)}
+                  width={value.image?.width}
+                  height={value.image?.height}
+                  alt={value.name}
                 />
               </div>
             </div>

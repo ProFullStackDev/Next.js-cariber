@@ -1,0 +1,28 @@
+{
+  "collectionName": "components_component_review_review_caribers",
+  "info": {
+    "displayName": "Review Cariber",
+    "icon": "laugh-squint"
+  },
+  "options": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "career": {
+      "type": "string"
+    },
+    "description": {
+      "type": "text"
+    },
+    "image": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos"
+      ],
+      "type": "media",
+      "multiple": false
+    }
+  }
+}

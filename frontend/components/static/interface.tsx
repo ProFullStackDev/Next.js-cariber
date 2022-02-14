@@ -1,4 +1,4 @@
-import { Episode } from "../../models/contentType/courses";
+import { Episode } from "../../apiStrapi/models/contentType/courses";
 import { Icon } from "../accordion";
 
 export interface TimeZone {
@@ -20,27 +20,9 @@ export interface ShopeeReview {
   date: string,
 }
 
-export interface MyStudent {
-  image: string,
-  alt: string,
-  width: number,
-  height: number,
-}
-
-export interface CourseSoon {
-  image: string,
-  alt: string,
-}
-
 export interface CardDescription {
   title: string,
   description: string,
-}
-
-export interface CourseLatest {
-  image: string,
-  alt: string,
-  link: string
 }
 
 export interface FeatureCariber {
@@ -63,15 +45,6 @@ export interface CourseDetailInterestingTopic {
   name: string,
 }
 
-export interface CourseDetailCourseHeader {
-  yearlySubscriptionImage: string,
-  yearlySubscriptionImageMobile: string,
-  singleCourseImage: string,
-  videoId: string,
-  videoPoster: string,
-  singleCheckoutUrl: string
-}
-
 export interface CourseDetailIntroductionPersonal {
   fullName: string,
   personalHistoryImage: string,
@@ -82,13 +55,6 @@ export interface CourseDetailEpisode {
   totalHours: string,
   totalEpisodes: string,
   episodes: Episode[],
-}
-
-export interface CourseDetailSale {
-  yearlySubscriptionImage: string,
-  yearlySubscriptionImageMobile: string,
-  singleCoursePersonalImage: string,
-  singleCheckoutUrl: string,
 }
 
 export interface ProductEpisode {

@@ -1,86 +1,37 @@
+import { strapiImage } from "../../apiStrapi/models/contact";
+import { Information } from "../../apiStrapi/models/contentType/home";
 import Img from "../image";
 
-export default function Specific() {
+export default function Specific({ specifics }: { specifics?: Information[] }) {
   return (
     <div className="row align-items-center justify-content-center text-center">
-      <div className="block-type-image col-1">
-        <div className="block box-shadow-none">
-          <div className="image">
-            <Img className="image-image"
-              src="/index/book.webp"
-              width={70.0333}
-              height={70.0333}
-              alt="กว่า 168 บทเรียน จากผู้เชี่ยวชาญ"
-            />
+      {specifics?.map((value, index) => {
+        return (
+          <div className="col-4 row" key={index}>
+            <div className="block-type-image col-4 p-0">
+              <div className="block box-shadow-none">
+                <div className="image">
+                  <Img className="image-image"
+                    src={strapiImage(value.image?.url)}
+                    width={70.0333}
+                    height={70.0333}
+                    alt={value.description}
+                  />
+                </div>
+              </div>
+            </div>
+            <div className="block-type-text text-left col-8 p-0">
+              <div className="block box-shadow-none white-space-pre">
+                <h5>
+                  <span>
+                    {value.description}
+                  </span>
+                </h5>
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
-      <div className="block-type-text text-left col-2">
-        <div className="block box-shadow-none">
-          <h5>
-            <span>
-              กว่า 168 บทเรียน
-            </span>
-          </h5>
-          <h5>
-            <span>
-              จากผู้เชี่ยวชาญ
-            </span>
-          </h5>
-        </div>
-      </div>
-      <div className="block-type-image col-1">
-        <div className="block box-shadow-none">
-          <div className="image">
-            <Img className="image-image"
-              src="/index/hourglass.webp"
-              width={70.0333}
-              height={70.0333}
-              alt="เต็มอิ่มกับคอร์สเรียน กว่า 31 ชั่วโมง"
-            />
-          </div>
-        </div>
-      </div>
-      <div className="block-type-text text-left col-2">
-        <div className="block box-shadow-none">
-          <h5>
-            <span>
-              เต็มอิ่มกับคอร์สเรียน
-            </span>
-          </h5>
-          <h5>
-            <span>
-              กว่า 31 ชั่วโมง
-            </span>
-          </h5>
-        </div>
-      </div>
-      <div className="block-type-image col-1">
-        <div className="block box-shadow-none">
-          <div className="image">
-            <Img className="image-image"
-              src="/index/person.webp"
-              width={70.0333}
-              height={70.0333}
-              alt="อัพเดทคอร์สใหม่ ตลอดทั้งปี"
-            />
-          </div>
-        </div>
-      </div>
-      <div className="block-type-text text-left col-2">
-        <div className="block box-shadow-none">
-          <h5>
-            <span>
-              อัพเดทคอร์สใหม่
-            </span>
-          </h5>
-          <h5>
-            <span>
-              ตลอดทั้งปี
-            </span>
-          </h5>
-        </div>
-      </div>
+        )
+      })}
     </div>
   )
 }

@@ -1,36 +1,43 @@
 import Footer from "../../components/footer"
 import FooterBrand from "../../components/footerBrand"
 import Header from "../../components/header"
-import ReviewStudents from "../../components/reviewStudents"
+import StudentReviews from "../../components/studentReviews"
 import SlideCourse from "../../components/slideCourse"
 import * as staticDataReview from "../../components/static/review"
 import IntroductionPersonal from "../../components/courseDetail/introductionPersonal"
-import EpisodeAccordion from "../../components/courseDetail/EpisodeAccordion"
 import InterestingTopic from "../../components/courseDetail/interestingTopic"
 import Suitable from "../../components/courseDetail/suitable"
 import Sale from "../../components/courseDetail/sale"
 import UpperHeader from "../../components/courseDetail/upperHeader"
-import { ResponseData, ResponseDataList } from "../../models/data"
-import { Course } from "../../models/contentType/courses"
-import { strapiApi, strapiImage } from "../../models/content"
+import { ResponseData } from "../../apiStrapi/models/data"
+import { CourseContent } from "../../apiStrapi/models/contentType/courses"
+import { strapiImage } from "../../apiStrapi/models/contact"
 import YoutubeEP from "../../components/courseDetail/youtubeEP"
 import CourseHeader from "../../components/courseDetail/courseHeader"
-import singleCourseApi from "../../apiStrapi/singleCoures"
-import { SingleCourse } from "../../models/contentType/singleCourse"
-import annualPromotionApi from "../../apiStrapi/annualPromotion"
-import { AnnualPromotion } from "../../models/contentType/annualPromotion"
+import singleCourseApi from "../../apiStrapi/singleCouresApi"
+import { SingleCourse } from "../../apiStrapi/models/contentType/singleCourse"
+import annualPromotionApi from "../../apiStrapi/annualPromotionApi"
+import { AnnualPromotionContent } from "../../apiStrapi/models/contentType/annualPromotion"
+import EpisodeAccordion from "../../components/courseDetail/episodeAccordion"
+import { ReviewContent } from "../../apiStrapi/models/contentType/review"
+import reviewApi from "../../apiStrapi/reviewApi"
+import { coursesAllApi, coursesApi } from "../../apiStrapi/coursesApi"
 
 interface CourseDetailParams {
   courseId: string;
 }
 
 interface CourseDetailProps {
-  course: ResponseData<Course>;
+  course: ResponseData<CourseContent>;
   singleCourse: ResponseData<SingleCourse>;
-  annualPromotion: ResponseData<AnnualPromotion>;
+  annualPromotion: ResponseData<AnnualPromotionContent>;
+  review: ResponseData<ReviewContent>;
 }
 
-export default function CourseDetail({ course, singleCourse, annualPromotion }: CourseDetailProps) {
+export default function CourseDetail({ course,
+  singleCourse,
+  annualPromotion,
+  review }: CourseDetailProps) {
   const slideCourses = staticDataReview.slideCourses;
   const youtubeEPItems = course.data.course_detail.contents.filter((value) => { return value.__component === "components.special-ep-component" });
   return (
@@ -41,11 +48,12 @@ export default function CourseDetail({ course, singleCourse, annualPromotion }: 
           <UpperHeader header={course.data.course_detail.header} />
         )}
         <CourseHeader yearlySubscriptionImage={strapiImage(annualPromotion.data.attributes.image.data.attributes.url)}
-          yearlySubscriptionImageMobile={strapiImage(annualPromotion.data.attributes.image.data.attributes.url)}
           singleCourseImage={strapiImage(singleCourse.data.attributes.image.data.attributes.url)}
           videoId={course.data.course_detail.teaser_url}
           videoPoster={""}
-          singleCheckoutUrl={course.data.course_detail.order_link} />
+          singleCheckoutUrl={course.data.course_detail.order_link}
+          yearlySubscriptionCheckoutUrl={annualPromotion.data.attributes.url}
+          yearlySubscriptionImageMobile={strapiImage(annualPromotion.data.attributes.image_mobile?.data.attributes.url)} />
         {youtubeEPItems.length > 0 && (
           <YoutubeEP YoutubeEPItems={youtubeEPItems} />
         )}
@@ -72,8 +80,9 @@ export default function CourseDetail({ course, singleCourse, annualPromotion }: 
       </div>
       <Sale singleCoursePersonalImage={strapiImage(course.data.course_detail.order_image.url)}
         yearlySubscriptionImage={strapiImage(annualPromotion.data.attributes.image.data.attributes.url)}
-        yearlySubscriptionImageMobile={strapiImage(annualPromotion.data.attributes.image.data.attributes.url)}
-        singleCheckoutUrl={course.data.course_detail.order_link} />
+        yearlySubscriptionImageMobile={strapiImage(annualPromotion.data.attributes.image_mobile?.data.attributes.url)}
+        singleCheckoutUrl={course.data.course_detail.order_link}
+        yearlySubscriptionCheckoutUrl={annualPromotion.data.attributes.url} />
       <div className="background-light">
         <div className="sizer">
           <div className="container">
@@ -95,7 +104,7 @@ export default function CourseDetail({ course, singleCourse, annualPromotion }: 
         </div>
       </div>
       <div className="background-dark">
-        <ReviewStudents />
+        <StudentReviews reviewStudents={review?.data?.student} />
       </div>
       <FooterBrand />
       <Footer />
@@ -104,8 +113,7 @@ export default function CourseDetail({ course, singleCourse, annualPromotion }: 
 }
 
 export async function getStaticPaths() {
-  const response = await fetch(strapiApi + '/courses');
-  const data = await response.json() as ResponseDataList<Course>;
+  const data = await coursesAllApi(); 
   const dataFilter = (data.data.filter((value) => {
     return value.course_detail
   }));
@@ -123,13 +131,12 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }: { params: CourseDetailParams }) {
-  const response = await fetch(strapiApi + `/courses/${params.courseId}`);
-  const data = await response.json() as ResponseData<Course>;
   return {
     props: {
-      course: data,
+      course: await coursesApi(params.courseId),
       singleCourse: await singleCourseApi(),
       annualPromotion: await annualPromotionApi(),
+      review: await reviewApi(),
     }
   };
 }

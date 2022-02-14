@@ -68,6 +68,7 @@
 
   .grid-container {
     @media (min-width: $mobile-size) {
+      width: 100%;
       display: grid !important;
       grid-template-columns: 33.33% 33.33% 33.33% !important;
     }

@@ -1,0 +1,28 @@
+{
+  "collectionName": "components_component_review_review_headers",
+  "info": {
+    "displayName": "Review Header",
+    "icon": "address-card"
+  },
+  "options": {},
+  "attributes": {
+    "image": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos"
+      ],
+      "type": "media",
+      "multiple": false
+    },
+    "facebook_name": {
+      "type": "string"
+    },
+    "facebook_url": {
+      "type": "string"
+    },
+    "description": {
+      "type": "text"
+    }
+  }
+}
