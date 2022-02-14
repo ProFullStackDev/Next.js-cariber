@@ -26,12 +26,12 @@ type ReactVideoPlayerState = {
   resolutions: any;
   currentResolution: number;
   fullscreen: boolean;
-  controllerVisibility: string;
 }
 
 function VideoPlayer(props: VideoPlayerProps) {
   const player = useRef<ReactPlayer>(null);
   const playerContainerRef = useRef(null);
+  const [controllerVisible, setControllerVisible] = useState(false);
   const [optionsVisible, setOptionsVisible] = useState(false);
   const [volumeVisible, setVolumeVisible] = useState(false);
   const [videoState, setVideoState] = useState<ReactVideoPlayerState>({
@@ -51,7 +51,6 @@ function VideoPlayer(props: VideoPlayerProps) {
     resolutions: [],
     currentResolution: -1,
     fullscreen: false,
-    controllerVisibility: "hidden",
   });
 
   const handleReady = () => {
@@ -160,14 +159,6 @@ function VideoPlayer(props: VideoPlayerProps) {
     setVideoState({ ...videoState, duration })
   }
 
-  const handleMouseMove = () => {
-    setVideoState({ ...videoState, controllerVisibility: "visible" })
-  };
-
-  const handleMouseLeave = () => {
-    setVideoState({ ...videoState, controllerVisibility: "hidden" })
-  };
-
   const handleClickFullscreen = () => {
     playerContainerRef.current && screenfull.toggle(playerContainerRef.current);
   }
@@ -177,13 +168,17 @@ function VideoPlayer(props: VideoPlayerProps) {
   }
 
   const handleHidden = (setState: Dispatch<SetStateAction<boolean>>) => {
-    setTimeout(() => { setState(false) }, 300)
+    setState(false)
+  }
+
+  const handleSwitchVisible = (visible: boolean, setState: Dispatch<SetStateAction<boolean>>) => {
+    setState(!visible)
   }
 
   return (
     <div className="player-wrapper video-player"
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
+      onMouseEnter={() => { handleVisible(setControllerVisible) }}
+      onMouseLeave={() => { handleHidden(setControllerVisible) }}
       ref={playerContainerRef}
       style={{ ...props.style }}>
       <ReactPlayer
@@ -207,14 +202,16 @@ function VideoPlayer(props: VideoPlayerProps) {
         onProgress={handleProgress}
         onDuration={handleDuration}
       />
-      <div className="controls-wrapper">
-        <div className={`video-controller`}>
-          <button className="player-button" onClick={handlePlayPause}>
+      <div className={`controls-wrapper ${controllerVisible ? "visible" : "hidden"}`}>
+        <div className="video-controller">
+          <button className="control-button" onClick={handlePlayPause}>
             {videoState.playing ? (<Img src="/videoPlayer/pause-solid.svg"
               width={20}
-              height={20} />) : (<Img src="/videoPlayer/play-solid.svg"
+              height={20}
+              className="filter-white" />) : (<Img src="/videoPlayer/play-solid.svg"
                 width={20}
-                height={20} />)}
+                height={20}
+                className="filter-white" />)}
           </button>
           <div className="video-progress">
             <input
@@ -232,42 +229,45 @@ function VideoPlayer(props: VideoPlayerProps) {
             <div className={`volume-progress flex-column-center ${volumeVisible ? "visible" : "hidden"}`}>
               <input className="input-progress" type='range' min={0} max={1} step='any' value={videoState.volume} onChange={handleVolumeChange} />
             </div>
-            <div className="flex-column-center">
+            <div className="flex-column-center control-button">
               {videoState.volume ? (
                 <Img onClick={() => { handleVolumeChange(0) }} src="/videoPlayer/volume-solid.svg"
                   width={20}
-                  height={20} />
+                  height={20}
+                  className="filter-white" />
               ) : (
                 <Img onClick={() => { handleVolumeChange(1) }} src="/videoPlayer/volume-xmark-solid.svg"
                   width={20}
-                  height={20} />
+                  height={20}
+                  className="filter-white" />
               )}
             </div>
           </div>
           <div className="flex-column-center"
-            onMouseEnter={() => { handleVisible(setOptionsVisible) }}
-            onMouseLeave={() => { handleHidden(setOptionsVisible) }}>
+            onClick={() => { handleSwitchVisible(optionsVisible, setOptionsVisible) }}>
             <div className={`options-item ${optionsVisible ? "visible" : "hidden"}`}>
               <div className="option-resolutions">
                 <button className={`option-resolutions ${-1 === videoState.currentResolution && "resolutions-active"}`}
                   onClick={() => setVideoResolution(-1)}>Auto</button>
                 {videoState.resolutions.map((item: any, index: number) => {
-                  return <button className={`option-resolutions ${index === videoState.currentResolution && "resolutions-active"}`}
+                  return <button className={`option-resolutions f-s-14 ${index === videoState.currentResolution && "resolutions-active"}`}
                     key={index}
                     onClick={() => setVideoResolution(index)}>{item.height}</button>
                 })}
               </div>
             </div>
-            <div className="h-35 flex-column-center">
+            <div className="control-button flex-column-center">
               <Img src="/videoPlayer/gear-solid.svg"
                 width={20}
-                height={20} />
+                height={20}
+                className="filter-white" />
             </div>
           </div>
-          <div className="video-full-screen" onClick={handleClickFullscreen}>
+          <div className="video-full-screen control-button" onClick={handleClickFullscreen}>
             <Img src="/videoPlayer/expand-wide-solid.svg"
               width={20}
-              height={20} />
+              height={20}
+              className="filter-white" />
           </div>
         </div>
       </div>

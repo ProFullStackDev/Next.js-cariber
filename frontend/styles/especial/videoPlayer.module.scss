@@ -16,15 +16,14 @@
     justify-content: space-between;
     position: absolute;
     box-sizing: border-box;
-    background-color: rgba(189, 189, 189, 0.5);
+    background-color: rgb(231, 78, 37, 0.7);
     display: flex;
     left: 0px;
     right: 0px;
-    bottom: 0px;
+    bottom: -1px;
     width: 100%;
     padding: 0px 15px;
     height: 35px;
-    z-index: 3;
     -o-transition: opacity .2s ease-in-out;
     -ms-transition: opacity .2s ease-in-out;
     -moz-transition: opacity .2s ease-in-out;
@@ -32,15 +31,16 @@
     transition: opacity .2s ease-in-out;
   }
 
-  .player-button {
+  .control-button {
     padding: 5px 10px;
+    height: 35px;
     display: flex;
     align-items: center;
     background: none;
     border: none;
   }
 
-  .player-button:hover {
+  .control-button:hover {
     background-color: rgb(33, 33, 34);
     opacity: 0.7;
   }
@@ -51,51 +51,17 @@
     width: 80%;
     padding: 0px 10px;
 
-    .input-progress {
+    input[type="range"] {
       width: 100%;
       height: 5px;
     }
-
-    .input-progress::-moz-range-thumb {
-      border: none;
-      width: 10px;
-      height: 10px;
-      background: #007bff;
-      cursor: pointer;
-    }
-  }
-
-  .video-volume {
-    height: 100%;
-    width: 25px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .video-volume:hover {
-    background-color: rgb(33, 33, 34);
-    opacity: 0.7;
-  }
-
-  .video-full-screen {
-    height: 100%;
-    width: 25px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .video-full-screen:hover {
-    background-color: rgb(33, 33, 34);
-    opacity: 0.7;
   }
 
   video {
     margin-bottom: -8px;
   }
 
-  .options-item{
+  .options-item {
     position: absolute;
     bottom: 35px;
   }
@@ -103,18 +69,34 @@
   .option-resolutions {
     display: flex;
     flex-direction: column-reverse;
-    background-color: white;
+    background-color: rgba(33, 33, 34, 0.7);
+
+    button {
+      border: none;
+      background: none;
+      color: white;
+    }
+
+    button:hover {
+      background-color: rgb(33, 33, 34);
+    }
   }
 
   .resolutions-active {
-    background-color: #007bff;
+    background-color: rgba(33, 33, 34) !important;
   }
 
-  .volume-progress{
+  .volume-progress {
+    height: 100%;
     position: absolute;
+    background-color: rgba(33, 33, 34, 0.7) !important;
     transform: rotate(-90deg);
     background-color: white;
-    bottom: 105px;
+    bottom: 94px;
+
+    input[type="range"] {
+      width: 150px;
+    }
   }
 }
 

@@ -5029,3 +5029,7 @@ a .panel-sub-title {
   flex-direction: column;
   justify-content: center;
 }
+
+.filter-white{
+  filter: invert(100%) sepia(2%) saturate(633%) hue-rotate(195deg) brightness(116%) contrast(100%);
+}
