@@ -29,7 +29,6 @@ export default function Index({ home, review }: IndexProps) {
   return (
     <div className="index">
       <Header />
-      <VideoPlayer videoId={'ba36e29c18b8c21b53589a403cd5b09b'}></VideoPlayer>
       <div className="background-dark">
         <div className="sizer">
           <div className="row align-items-center justify-content-center">
