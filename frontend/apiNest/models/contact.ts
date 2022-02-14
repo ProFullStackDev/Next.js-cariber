@@ -5,6 +5,8 @@ const userManager = new UserManager();
 
 export const NEST_API_URLS = {
   auth: BASE_API + "/auth",
+  facebookAuth: BASE_API + "/facebook-auth",
+  googleAuth: BASE_API + "/google-auth",
   myCourse: BASE_API + "/users/my-course",
 }
 
