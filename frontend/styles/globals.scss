@@ -16,6 +16,7 @@
 @import "./sizer.scss";
 @import "./pixel-helper.scss";
 @import "reactjs-popup/dist/index.css";
+@import "./especial//videoPlayer.module.scss";
 
 $frequency: 0;
 $show-grid: false;
@@ -4979,7 +4980,7 @@ a .panel-sub-title {
   border: none;
 }
 
-.full{
+.full {
   width: 100% !important;
 }
 
@@ -4999,13 +5000,13 @@ a .panel-sub-title {
   display: flex;
 }
 
-.btn-icon{
+.btn-icon {
   display: inline-flex !important;
   align-items: center !important;
   justify-content: center !important;
 }
 
-.icon-frame{
+.icon-frame {
   margin-right: 7px;
   width: 25px;
   height: 25px;
@@ -5014,6 +5015,17 @@ a .panel-sub-title {
   background-color: white;
 }
 
-.white-space-pre{
+.flex-column-center {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.filter-white {
+  filter: invert(100%) sepia(2%) saturate(633%) hue-rotate(195deg) brightness(116%) contrast(100%);
+}
+
+.white-space-pre {
   white-space: pre;
 }
