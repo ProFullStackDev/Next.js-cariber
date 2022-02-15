@@ -1,6 +1,5 @@
 export interface CourseContent {
   id: number;
-  speaker_name: string;
   course_name: string;
   description: string;
   asset_download: string;
@@ -10,12 +9,6 @@ export interface CourseContent {
   publish_date: string;
   thumbnail_image: Thumbnail;
   thumbnail_video: Thumbnail;
-  course_detail: CourseDetail;
-  episodes: Episode[];
-}
-
-export interface CourseDetail {
-  id: number;
   name: string;
   total_hours: string;
   total_lessons: string;
@@ -26,6 +19,7 @@ export interface CourseDetail {
   order_image: OrderImage;
   speaker_details: SpeakerDetails;
   contents: Contents[];
+  episodes: Episode[];
 }
 
 export interface Contents{
@@ -33,9 +27,14 @@ export interface Contents{
   id: number;
   items: Item[];
   topics: Topics[];
+  special_ep: specialEP[];
+}
+
+export interface specialEP{
+  id: number;
   title: string;
   description: string;
-  video_url: string;
+  youtube_url: string;
 }
 
 export interface Topics{

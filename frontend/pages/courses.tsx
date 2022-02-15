@@ -50,7 +50,7 @@ export default function Courses({ courses, annualPromotion }: CoursesProps) {
                     <div>
                       <div className="feature">
                         <Link href={`/course/${value.id}`}>
-                          <a className={`${!value.course_detail && "disabled"}`}>
+                          <a className={`${!value.publishedAt && "disabled"}`}>
                             <Img className="feature-image"
                               src={strapiImage(value.thumbnail_image?.url)}
                               alt={value?.thumbnail_image?.name}
@@ -61,10 +61,10 @@ export default function Courses({ courses, annualPromotion }: CoursesProps) {
                         <div className="feature-text">
                           <h5>
                             <Link href={`/course/${value.id}`}>
-                              <a className={`${!value.course_detail && "disabled"}`}>
+                              <a className={`${!value.publishedAt && "disabled"}`}>
                                 <span className="color-darkblue">
                                   <strong>
-                                    {value.speaker_name}
+                                    {value.name}
                                   </strong>
                                 </span>
                               </a>
@@ -72,7 +72,7 @@ export default function Courses({ courses, annualPromotion }: CoursesProps) {
                           </h5>
                           <p className="f-s-12">
                             <Link href={`/course/${value.id}`}>
-                              <a className={`${!value.course_detail && "disabled"}`}>
+                              <a className={`${!value.publishedAt && "disabled"}`}>
                                 {value.course_name}
                               </a>
                             </Link>
