@@ -3,13 +3,12 @@ import FooterBrand from "../../components/footerBrand"
 import Header from "../../components/header"
 import StudentReviews from "../../components/studentReviews"
 import SlideCourse from "../../components/slideCourse"
-import * as staticDataReview from "../../components/static/review"
 import IntroductionPersonal from "../../components/courseDetail/introductionPersonal"
 import InterestingTopic from "../../components/courseDetail/interestingTopic"
 import Suitable from "../../components/courseDetail/suitable"
 import Sale from "../../components/courseDetail/sale"
 import UpperHeader from "../../components/courseDetail/upperHeader"
-import { ResponseData } from "../../apiStrapi/models/data"
+import { ResponseData, ResponseDataList } from "../../apiStrapi/models/data"
 import { CourseContent, Contents } from "../../apiStrapi/models/contentType/courses"
 import { strapiImage } from "../../apiStrapi/models/contact"
 import YoutubeEP from "../../components/courseDetail/youtubeEP"
@@ -29,16 +28,17 @@ interface CourseDetailParams {
 
 interface CourseDetailProps {
   course: ResponseData<CourseContent>;
+  courses: ResponseDataList<CourseContent>;
   singleCourse: ResponseData<SingleCourse>;
   annualPromotion: ResponseData<AnnualPromotionContent>;
   review: ResponseData<ReviewContent>;
 }
 
 export default function CourseDetail({ course,
+  courses,
   singleCourse,
   annualPromotion,
   review }: CourseDetailProps) {
-  const slideCourses = staticDataReview.slideCourses;
   const youtubeEPItems = course.data?.contents?.find((value) => { return value.__component === "components.special-ep-component" }) as Contents;
   return (
     <div className="course-detail">
@@ -97,7 +97,7 @@ export default function CourseDetail({ course,
                 </div>
               </div>
               <div className="block-type-code text-left col-12">
-                <SlideCourse slideCourses={slideCourses} slideView={4} imageWidth={235} imageHeight={470.533} />
+                <SlideCourse slideCourses={courses.data} slideView={4} imageWidth={235} imageHeight={470.533} />
               </div>
             </div>
           </div>
@@ -134,6 +134,7 @@ export async function getStaticProps({ params }: { params: CourseDetailParams })
   return {
     props: {
       course: await coursesApi(params.courseId),
+      courses: await coursesAllApi(),
       singleCourse: await singleCourseApi(),
       annualPromotion: await annualPromotionApi(),
       review: await reviewApi(),

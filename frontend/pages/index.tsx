@@ -1,31 +1,31 @@
-import Header from '../components/header'
-import Footer from '../components/footer'
-import Accordion, { Color } from '../components/accordion'
-import Img from '../components/image'
-import SlideCourse from '../components/slideCourse'
-import * as staticDataReview from "../components/static/review"
-import FooterBrand from '../components/footerBrand'
-import ShopeeReviews from '../components/index/shopeeReviews'
-import Specific from '../components/index/specific'
-import MyStudent from '../components/index/myStudent'
-import CoursesUpdate from '../components/index/coursesUpdate'
-import StudentReviews from '../components/studentReviews'
-import { ResponseData } from '../apiStrapi/models/data'
-import { ReviewContent } from '../apiStrapi/models/contentType/review'
-import reviewApi from '../apiStrapi/reviewApi'
-import homeApi from '../apiStrapi/homeApi'
-import { HomeContent } from '../apiStrapi/models/contentType/home'
-import { strapiImage } from '../apiStrapi/models/contact'
-import VideoPlayer from '../components/videoPlayer'
+import Header from '../components/header';
+import Footer from '../components/footer';
+import Accordion, { Color } from '../components/accordion';
+import Img from '../components/image';
+import SlideCourse from '../components/slideCourse';
+import FooterBrand from '../components/footerBrand';
+import ShopeeReviews from '../components/index/shopeeReviews';
+import Specific from '../components/index/specific';
+import MyStudent from '../components/index/myStudent';
+import CoursesUpdate from '../components/index/coursesUpdate';
+import StudentReviews from '../components/studentReviews';
+import { ResponseData, ResponseDataList } from '../apiStrapi/models/data';
+import { ReviewContent } from '../apiStrapi/models/contentType/review';
+import reviewApi from '../apiStrapi/reviewApi';
+import homeApi from '../apiStrapi/homeApi';
+import { HomeContent } from '../apiStrapi/models/contentType/home';
+import { strapiImage } from '../apiStrapi/models/contact';
+import VideoPlayer from '../components/videoPlayer';
+import { CourseContent } from '../apiStrapi/models/contentType/courses';
+import { coursesAllApi } from '../apiStrapi/coursesApi';
 
 interface IndexProps {
+  courses: ResponseDataList<CourseContent>;
   home: ResponseData<HomeContent>;
   review: ResponseData<ReviewContent>;
 }
 
-export default function Index({ home, review }: IndexProps) {
-  const slideCourses = staticDataReview.slideCourses
-
+export default function Index({ courses, home, review }: IndexProps) {
   return (
     <div className="index">
       <Header />
@@ -81,7 +81,7 @@ export default function Index({ home, review }: IndexProps) {
                 </div>
               </div>
               <div className="block-type-code text-left col-6">
-                <SlideCourse slideCourses={slideCourses} slideView={2} imageWidth={232.85} imageHeight={425.05} />
+                <SlideCourse slideCourses={courses.data} slideView={2} imageWidth={232.85} imageHeight={425.05} />
               </div>
             </div>
           </div>
@@ -187,6 +187,7 @@ export default function Index({ home, review }: IndexProps) {
 export async function getStaticProps() {
   return {
     props: {
+      courses: await coursesAllApi(),
       home: await homeApi(),
       review: await reviewApi(),
     }

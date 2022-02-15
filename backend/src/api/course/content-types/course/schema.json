@@ -96,6 +96,15 @@
     },
     "description": {
       "type": "richtext"
+    },
+    "carousel_image": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos"
+      ],
+      "type": "media",
+      "multiple": false
     }
   }
 }

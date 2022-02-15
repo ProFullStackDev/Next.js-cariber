@@ -20,6 +20,7 @@ export interface CourseContent {
   speaker_details: SpeakerDetails;
   contents: Contents[];
   episodes: Episode[];
+  carousel_image: Image;
 }
 
 export interface Contents{
