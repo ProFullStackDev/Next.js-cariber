@@ -1,7 +1,14 @@
+import { strapiImage } from "../../apiStrapi/models/contact";
+import { SpeakerDetails } from "../../apiStrapi/models/contentType/courses";
 import Img from "../image";
-import { CourseDetailIntroductionPersonal } from "../static/interface"
 
-export default function IntroductionPersonal({ fullName, personalHistoryImage, highRatio }: CourseDetailIntroductionPersonal) {
+export interface IntroductionPersonal {
+  fullName: string,
+  personalHistoryImage: string,
+  highRatio: number,
+}
+
+export default function IntroductionPersonal({ speakerDetails, fullName }: { speakerDetails: SpeakerDetails[], fullName: string }) {
   return (
     <div className="background-dark">
       <div className="row align-items-center justify-content-center">
@@ -16,16 +23,24 @@ export default function IntroductionPersonal({ fullName, personalHistoryImage, h
             </h3>
           </div>
         </div>
-        <div className="block-type-image text-center col-11">
-          <div className="block box-shadow-none">
-            <div className="image">
-              <Img className="image-image"
-                src={personalHistoryImage}
-                width={900}
-                height={900*highRatio}
-                alt={fullName}
-              />
-            </div>
+        <div className="block-type-image text-center col-7 m-y-50">
+          <div className="block box-shadow-none speaker-detail-block">
+            {speakerDetails.map((value, index) => {
+              return (
+                <div key={index} className="item-speaker-detail">
+                  <div className="p-x-10 min-w-120">
+                    <Img src={strapiImage(value.image?.url)}
+                      width={100}
+                      height={100} />
+                  </div>
+                  <div className="white-space-pre speaker-description">
+                    <p>
+                      {value.description}
+                    </p>
+                  </div>
+                </div>
+              )
+            })}
           </div>
         </div>
       </div>

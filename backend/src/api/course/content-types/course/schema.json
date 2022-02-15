@@ -29,7 +29,8 @@
         "components.topic-component",
         "components.suitable-component",
         "components.episode-component",
-        "components.special-ep-component"
+        "components.special-ep-component",
+        "components.speaker-detail-component"
       ]
     },
     "total_hours": {
@@ -51,14 +52,6 @@
     },
     "header": {
       "type": "text"
-    },
-    "speaker_details": {
-      "type": "media",
-      "multiple": false,
-      "required": false,
-      "allowedTypes": [
-        "images"
-      ]
     },
     "teaser_url": {
       "type": "string"
@@ -98,13 +91,14 @@
       "type": "richtext"
     },
     "carousel_image": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
       "allowedTypes": [
         "images",
         "files",
         "videos"
-      ],
-      "type": "media",
-      "multiple": false
+      ]
     }
   }
 }

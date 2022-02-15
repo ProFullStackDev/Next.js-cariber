@@ -57,12 +57,12 @@ export default function CourseDetail({ course,
         {youtubeEPItems?.special_ep?.length > 0 && (
           <YoutubeEP YoutubeEPItems={youtubeEPItems.special_ep} />
         )}
-        {course.data?.speaker_details?.url && (
-          <IntroductionPersonal fullName={course.data?.name}
-            personalHistoryImage={strapiImage(course.data.speaker_details?.url)}
-            highRatio={course.data?.speaker_details?.height / course.data?.speaker_details?.width} />
-        )}
         {course.data?.contents?.map((value, index) => {
+          if (value.__component === "components.speaker-detail-component") {
+            return (
+              <IntroductionPersonal key={index} fullName={course.data?.name} speakerDetails={value?.speaker_detail} />
+            )
+          }
           if (value.__component === "components.topic-component") {
             return (
               <InterestingTopic key={index} interestingTopics={value?.topics} />

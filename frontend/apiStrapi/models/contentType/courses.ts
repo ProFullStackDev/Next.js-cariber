@@ -17,7 +17,6 @@ export interface CourseContent {
   teaser: string;
   teaser_url: string;
   order_image: OrderImage;
-  speaker_details: SpeakerDetails;
   contents: Contents[];
   episodes: Episode[];
   carousel_image: Image;
@@ -29,6 +28,13 @@ export interface Contents{
   items: Item[];
   topics: Topics[];
   special_ep: specialEP[];
+  speaker_detail: SpeakerDetails[];
+}
+
+export interface SpeakerDetails{
+  id: number;
+  description: string;
+  image: Image;
 }
 
 export interface specialEP{
@@ -57,13 +63,6 @@ export interface Item{
 export interface OrderImage {
   id: number;
   url: string;
-}
-
-export interface SpeakerDetails{
-  id: number;
-  url: string;
-  width: number;
-  height: number;
 }
 
 export interface Thumbnail {
