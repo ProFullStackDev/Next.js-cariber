@@ -1,11 +1,10 @@
 import Link from "next/link";
 import { MouseEventHandler, useEffect, useState } from "react";
 import Img from "./image"
-import UserManager from "../auth/userManager"
 import Popup from "reactjs-popup";
 import FlashMessages, { FlashMessagesType } from "../functions/flashMessages";
 import SwitchSignInSignUp from "./switchSignInSignUp";
-import getUserProfileApi from "../apiStrapi/getUserProfileApi";
+import { useSession } from "next-auth/react";
 
 interface Menu {
   url: string,
@@ -13,7 +12,7 @@ interface Menu {
 }
 
 export default function Header() {
-  const userManager = new UserManager()
+  const { data: session } = useSession();
   const flashMessages = new FlashMessages()
   const [hamburgerOpened, setHamburgerOpened] = useState(false);
   const flashForgotPassword = flashMessages.getMessages(FlashMessagesType.forgotPasswordMessages)
@@ -49,17 +48,7 @@ export default function Header() {
     window.addEventListener("resize", () => {
       setHamburgerOpened(false)
     });
-    fetchData()
   }, [])
-
-  async function fetchData() {
-    if(userManager.isLoggedIn()){
-      const data = await getUserProfileApi()
-      if (data.data?.avatarUserBase64) {
-        setFormData(data.data)
-      }
-    }
-  }
 
   function switchHamburger() {
     setHamburgerOpened(!hamburgerOpened)
@@ -93,7 +82,7 @@ export default function Header() {
             </Link>
             <div className="header-block header-switch-content header-block-menu media-body">
               <div className="link-list justify-content-right">
-                {userManager.isLoggedIn() ? (
+                {session ? (
                   <div>
                     {menuLogedIn.map((value, index) => {
                       return (
@@ -122,7 +111,7 @@ export default function Header() {
                 ซื้อแพ็กเกจรายปี
               </a>
             </div>
-            {userManager.isLoggedIn() ? (
+            {session ? (
               <div className="header-block header-switch-content header-block-user header-block-mr0">
                 <div className="user-avatar-block">
                   <Popup trigger={<div>
@@ -190,7 +179,7 @@ export default function Header() {
         </div>
         <div className={`header-content header-content-mobile background-dark ${hamburgerOpened ? "d-block" : "d-none"}`}>
           <div className="header-block header-switch-content header-block-menu">
-            {userManager.isLoggedIn() ? (
+            {session ? (
               <div className="link-list">
                 {menuLogedIn.map((value, index) => {
                   return (
@@ -217,7 +206,7 @@ export default function Header() {
                 ซื้อแพ็กเกจรายปี
               </a>
             </div>
-            {userManager.isLoggedIn() ? (
+            {session ? (
               <div className="header-block header-switch-content header-block-menu">
                 <span className="link-list">
                   {menuUserMobile.map((value, index) => {

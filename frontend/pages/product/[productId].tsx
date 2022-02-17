@@ -1,6 +1,4 @@
 import { useRouter } from "next/router";
-import { useEffect } from "react";
-import UserManager from "../../auth/userManager";
 import Accordion, { Color } from "../../components/accordion";
 import Footer from "../../components/footer";
 import Header from "../../components/header";
@@ -26,13 +24,8 @@ interface ProductProp {
 
 export default function Product({ product }: { product: ProductProp }) {
   const router = useRouter()
-  const userManager = new UserManager()
   const announcement = "ตอนนี้คุณกำลังอยู่ในโหมดทดลองเรียนฟรี เนื้อหาบางส่วนมีการถูกล็อกไว้\nคุณสามารถซื้อคอร์สนี้เพื่อดูเนื้อหาทั้งหมดในคอร์สเรียน"
   const episodeTitle = "EP01: รู้จักกับ “คุณเกียรติศักดิ์ เสนาเมือง”"
-
-  useEffect(() => {
-    !userManager.isLoggedIn() && router.replace('/login')
-  })
 
   return (
     <div className="product">

@@ -49,7 +49,7 @@ export default function SlideCourse({ slideCourses, slideView, imageWidth, image
   }
 
   useEffect(() => {
-    if(countIndex === 0){
+    if (countIndex === 0) {
       slideCoursesLocal.reverse();
     }
     resetTimeout();
@@ -106,7 +106,6 @@ export default function SlideCourse({ slideCourses, slideView, imageWidth, image
                                 />
                               </a>
                             </Link>)}
-
                           </div>
                           <div className="news-grid-txt">
                             {!value.publishedAt ? (
@@ -164,6 +163,6 @@ export default function SlideCourse({ slideCourses, slideView, imageWidth, image
           </div>
         </div>
       </div>
-    </div >
+    </div>
   )
 }
