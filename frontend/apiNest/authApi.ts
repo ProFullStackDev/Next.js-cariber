@@ -23,6 +23,24 @@ export async function loginApi(body: AuthApiProps) {
   }
 }
 
+export async function getGoogleAuthToken(body: any): Promise<Auth> {
+  const response = await fetch(NEST_API_URLS.googleAuth, {
+    method: 'POST',
+    headers: NEST_HEADERs.default,
+    body: JSON.stringify(body),
+  })
+  return await response.json() as Auth;
+}
+
+export async function getFacebookAuthToken(body: any): Promise<Auth> {
+  const response = await fetch(NEST_API_URLS.facebookAuth, {
+    method: 'POST',
+    headers: NEST_HEADERs.default,
+    body: JSON.stringify(body),
+  })
+  return await response.json() as Auth;
+}
+
 export async function validateTokenApi() {
   try {
     const response = await fetch(NEST_API_URLS.auth, {
