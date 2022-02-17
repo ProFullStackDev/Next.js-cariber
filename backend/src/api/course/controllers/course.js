@@ -43,7 +43,6 @@ module.exports = createCoreController(modelUid, ({ strapi }) => ({
       ...getFullPopulateObject(modelUid, 5),
       ...query,
     });
-    delete entity.course_detail.course;
     const sanitizedEntity = await this.sanitizeOutput(entity, ctx);
     return {
       data: { ...sanitizedEntity, episodes: episodes_entity }

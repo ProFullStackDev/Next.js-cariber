@@ -2,9 +2,8 @@ import Footer from "../components/footer";
 import Header from "../components/header";
 import Img from "../components/image";
 import FooterBrand from "../components/footerBrand";
-import * as staticData from "../components/static/review"
 import SlideCourse from "../components/slideCourse";
-import { ResponseData } from "../apiStrapi/models/data";
+import { ResponseData, ResponseDataList } from "../apiStrapi/models/data";
 import { strapiImage } from "../apiStrapi/models/contact";
 import { ReviewContent } from "../apiStrapi/models/contentType/review";
 import { AnnualPromotionContent } from "../apiStrapi/models/contentType/annualPromotion";
@@ -14,15 +13,17 @@ import ReviewHeader from "../components/reviews/reviewHeader";
 import ReviewStudents from "../components/reviews/reviewStudents";
 import ReviewCaribers from "../components/reviews/reviewCaribers";
 import ReviewShopee from "../components/reviews/reviewShopee";
+import { CourseContent } from "../apiStrapi/models/contentType/courses";
+import { coursesAllApi } from "../apiStrapi/coursesApi";
 
 interface ReviewProps {
   review: ResponseData<ReviewContent>;
-  annualPromotion: ResponseData<AnnualPromotionContent>
+  annualPromotion: ResponseData<AnnualPromotionContent>;
+  courses: ResponseDataList<CourseContent>;
 }
 
 
-export default function Review({ review, annualPromotion }: ReviewProps) {
-  const slideCourses = staticData.slideCourses
+export default function Review({ review, annualPromotion, courses }: ReviewProps) {
   return (
     <div className="background-primary-color review">
       <Header />
@@ -108,7 +109,7 @@ export default function Review({ review, annualPromotion }: ReviewProps) {
                 </div>
               </div>
               <div className="block-type-code text-left col-12">
-                <SlideCourse slideCourses={slideCourses} slideView={4} imageWidth={258} imageHeight={470} />
+                <SlideCourse slideCourses={courses.data} slideView={4} imageWidth={258} imageHeight={470} />
               </div>
             </div>
           </div>
@@ -125,6 +126,7 @@ export async function getStaticProps() {
     props: {
       review: await reviewApi(),
       annualPromotion: await annualPromotionApi(),
+      courses: await coursesAllApi(),
     }
   }
 };

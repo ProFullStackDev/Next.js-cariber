@@ -2,19 +2,15 @@
   "collectionName": "components_components_special_ep_components",
   "info": {
     "displayName": "Special EP Component",
-    "icon": "eye",
+    "icon": "anchor",
     "description": ""
   },
   "options": {},
   "attributes": {
-    "title": {
-      "type": "string"
-    },
-    "description": {
-      "type": "text"
-    },
-    "video_url": {
-      "type": "string"
+    "special_ep": {
+      "type": "component",
+      "repeatable": true,
+      "component": "course-detail-component.special-ep"
     }
   }
 }

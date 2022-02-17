@@ -1,47 +1,57 @@
-import Header from '../components/header'
-import Footer from '../components/footer'
-import Accordion, { Color } from '../components/accordion'
-import Img from '../components/image'
-import SlideCourse from '../components/slideCourse'
-import * as staticDataReview from "../components/static/review"
-import FooterBrand from '../components/footerBrand'
-import ShopeeReviews from '../components/index/shopeeReviews'
-import Specific from '../components/index/specific'
-import MyStudent from '../components/index/myStudent'
-import CoursesUpdate from '../components/index/coursesUpdate'
-import StudentReviews from '../components/studentReviews'
-import { ResponseData } from '../apiStrapi/models/data'
-import { ReviewContent } from '../apiStrapi/models/contentType/review'
-import reviewApi from '../apiStrapi/reviewApi'
-import homeApi from '../apiStrapi/homeApi'
-import { HomeContent } from '../apiStrapi/models/contentType/home'
-import { strapiImage } from '../apiStrapi/models/contact'
-import VideoPlayer from '../components/videoPlayer'
+import Header from '../components/header';
+import Footer from '../components/footer';
+import Accordion, { Color } from '../components/accordion';
+import Img from '../components/image';
+import SlideCourse from '../components/slideCourse';
+import FooterBrand from '../components/footerBrand';
+import ShopeeReviews from '../components/index/shopeeReviews';
+import Specific from '../components/index/specific';
+import MyStudent from '../components/index/myStudent';
+import CoursesUpdate from '../components/index/coursesUpdate';
+import StudentReviews from '../components/studentReviews';
+import { ResponseData, ResponseDataList } from '../apiStrapi/models/data';
+import { ReviewContent } from '../apiStrapi/models/contentType/review';
+import reviewApi from '../apiStrapi/reviewApi';
+import homeApi from '../apiStrapi/homeApi';
+import { HomeContent } from '../apiStrapi/models/contentType/home';
+import { strapiImage } from '../apiStrapi/models/contact';
+import VideoPlayer from '../components/videoPlayer';
+import { CourseContent } from '../apiStrapi/models/contentType/courses';
+import { coursesAllApi } from '../apiStrapi/coursesApi';
 
 interface IndexProps {
+  courses: ResponseDataList<CourseContent>;
   home: ResponseData<HomeContent>;
   review: ResponseData<ReviewContent>;
 }
 
-export default function Index({ home, review }: IndexProps) {
-  const slideCourses = staticDataReview.slideCourses
-
+export default function Index({ courses, home, review }: IndexProps) {
   return (
     <div className="index">
       <Header />
       <div className="background-dark">
         <div className="sizer">
           <div className="row align-items-center justify-content-center">
-            <div className="block-type-image text-center col-12">
+            <div className="block-type-image text-center col-8">
               <div className="block box-shadow-none">
-                <div className="image">
-                  <Img className="image-image"
-                    src={strapiImage(home.data?.header_image?.url)}
-                    alt="ผู้นำตัวจริง"
-                    width={855.733}
-                    height={434.817}
-                  />
-                </div>
+                <h1>
+                  <strong>
+                    <span className="color-primary">
+                      สูตรความสำเร็จกับ &quot;ที่สุด&quot; ของประเทศ
+                    </span>
+                  </strong>
+                </h1>
+                <h4>
+                  <em>
+                    <strong>
+                      <span className="color-primary">
+                        คอร์สออนไลน์กับผู้บริหาร ผู้นำทางความคิด แบบที่ไม่เคยมีมาก่อน
+                      </span>
+                    </strong>
+                  </em>
+                </h4>
+                <br />
+                <VideoPlayer videoId={home.data?.video_id} />
               </div>
             </div>
           </div>
@@ -56,8 +66,10 @@ export default function Index({ home, review }: IndexProps) {
                   <h2 className="text-center">
                     <strong>
                       <span className="color-primary">
-                        ปีใหม่นี้ยกระดับให้คุณเป็นคนใหม่ เรียนรู้กับ &lsquo;ผู้นำตัวจริง&rsquo; จากทุกวงการ<br />
-                        แพ็กเกจรายปี ที่คุณจ่ายครั้งเดียว เข้าชมผู้สอนได้ทุกท่าน<br />
+                        ปีใหม่นี้ยกระดับให้คุณเป็นคนใหม่ เรียนรู้กับ &lsquo;ผู้นำตัวจริง&rsquo; จากทุกวงการ
+                        <br />
+                        จ่ายครั้งเดียวเข้าชมผู้สอนได้กว่า 50 ท่านตลอดปี 2022
+                        <br />
                       </span>
                     </strong>
                   </h2>
@@ -81,7 +93,7 @@ export default function Index({ home, review }: IndexProps) {
                 </div>
               </div>
               <div className="block-type-code text-left col-6">
-                <SlideCourse slideCourses={slideCourses} slideView={2} imageWidth={232.85} imageHeight={425.05} />
+                <SlideCourse slideCourses={courses.data} slideView={2} imageWidth={232.85} imageHeight={425.05} />
               </div>
             </div>
           </div>
@@ -95,50 +107,6 @@ export default function Index({ home, review }: IndexProps) {
         </div>
       </div>
       <div className="background-light">
-        <div className="sizer">
-          <div className="container">
-            <div className="row align-items-center justify-content-center">
-              <div className="block-type-text text-center col-3">
-                <div className="block box-shadow-none column-center">
-                  <p className="f-s-30">
-                    <strong>
-                      <span className="color-primary">
-                        สูตรความสำเร็จกับ
-                        <br />
-                        &quot;ที่สุด&quot; ของประเทศ
-                      </span>
-                    </strong>
-                  </p>
-                  <p className="f-s-20">
-                    <em>
-                      <strong>
-                        <span className="color-primary">
-                          คอร์สออนไลน์กับผู้บริหาร ผู้นำทางความคิด แบบที่ไม่เคยมีมาก่อน
-                        </span>
-                      </strong>
-                    </em>
-                  </p>
-                  <a href={home.data?.promotions?.url}>
-                    <Img className="feature-image"
-                      src={strapiImage(home.data?.promotions?.large_yearly_sub?.url)}
-                      width={329.6}
-                      height={211.55}
-                      alt="Yearly Subscription"
-                    />
-                  </a>
-                  <a className="btn btn-solid btn-medium btn-auto" href={home.data?.promotions?.url}>
-                    ซื้อแพ็กเกจรายปี
-                  </a>
-                </div>
-              </div>
-              <div className="block-type-video col-7">
-                <div className="block box-shadow-none">
-                  <VideoPlayer videoId={home.data?.video_id} />
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
         <div className="sizer">
           <div className="container">
             <CoursesUpdate coursesSoon={home.data?.courses_soon} coursesLatest={home.data?.courses_latest} />
@@ -187,6 +155,7 @@ export default function Index({ home, review }: IndexProps) {
 export async function getStaticProps() {
   return {
     props: {
+      courses: await coursesAllApi(),
       home: await homeApi(),
       review: await reviewApi(),
     }

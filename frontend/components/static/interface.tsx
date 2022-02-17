@@ -45,12 +45,6 @@ export interface CourseDetailInterestingTopic {
   name: string,
 }
 
-export interface CourseDetailIntroductionPersonal {
-  fullName: string,
-  personalHistoryImage: string,
-  highRatio: number,
-}
-
 export interface CourseDetailEpisode {
   totalHours: string,
   totalEpisodes: string,

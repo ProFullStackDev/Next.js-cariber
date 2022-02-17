@@ -1,4 +1,4 @@
-const BASE_URL = process?.env?.NEXT_PUBLIC_STRAPI_API || "https://strapi-dev.cariber.co";
+const BASE_URL = process?.env?.NEXT_PUBLIC_STRAPI_API || (process.env.NODE_ENV === "production") ? "https://strapi-dev.cariber.co" : "http://localhost:1337";
 const BASE_API = BASE_URL + "/api";
 
 export const STRAPI_API_URLS = {
