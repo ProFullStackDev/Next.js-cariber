@@ -4,19 +4,19 @@ interface YoutubeEPProps {
   id: number;
   title: string;
   description: string;
-  video_url: string;
+  youtube_url: string;
 }
 
 export default function YoutubeEP({ YoutubeEPItems }: { YoutubeEPItems: YoutubeEPProps[] }) {
   const refFrame = useRef<HTMLDivElement>(null);
   const [youtubeFrameWidth, setYoutubeFrameWidth] = useState(0);
-
-  function youtubeIframeLink(url: string){
-    if(url.includes("embed")){
+  
+  function youtubeIframeLink(url: string) {
+    if (url.includes("embed")) {
       return url;
-    }else{
+    } else {
       const urlList = url.split("/")
-      return "https://www.youtube.com/embed/"+urlList[urlList.length-1];
+      return "https://www.youtube.com/embed/" + urlList[urlList.length - 1];
     }
   }
 
@@ -57,7 +57,7 @@ export default function YoutubeEP({ YoutubeEPItems }: { YoutubeEPItems: YoutubeE
                     <div className="block-type-video-embed text-left col-8">
                       <div className="block box-shadow-none" ref={refFrame}>
                         <div className="responsive-video">
-                          <iframe src={youtubeIframeLink(value.video_url)}
+                          <iframe src={youtubeIframeLink(value.youtube_url)}
                             sandbox="allow-forms allow-scripts allow-pointer-lock allow-same-origin allow-top-navigation" width="100%" height={youtubeFrameWidth * 0.56249036144} />
                         </div>
                       </div>

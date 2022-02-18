@@ -3,7 +3,6 @@ import { useRouter } from "next/router";
 import { ChangeEvent, FormEvent, useEffect, useRef, useState } from "react";
 import getUserProfileApi from "../apiStrapi/getUserProfileApi";
 import updateUserProfileApi from "../apiStrapi/updateUserProfileApi";
-import UserManager from "../auth/userManager";
 import PurchasedCard from "../components/account/purchasedCard";
 import Img from "../components/image";
 import ShowError from "../components/showError";
@@ -34,10 +33,8 @@ export default function Account() {
   })
 
   useEffect(() => {
-    const userManager = new UserManager()
-    !userManager.isLoggedIn() && router.replace('/login')
-    fetchData()
-  }, [router])
+    fetchData();
+  }, [])
 
   const handleChange = (event: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLSelectElement> | ChangeEvent<HTMLTextAreaElement>) => {
     const name = event.target.name;

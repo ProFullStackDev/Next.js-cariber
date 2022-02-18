@@ -3,14 +3,13 @@ import FooterBrand from "../../components/footerBrand"
 import Header from "../../components/header"
 import StudentReviews from "../../components/studentReviews"
 import SlideCourse from "../../components/slideCourse"
-import * as staticDataReview from "../../components/static/review"
 import IntroductionPersonal from "../../components/courseDetail/introductionPersonal"
 import InterestingTopic from "../../components/courseDetail/interestingTopic"
 import Suitable from "../../components/courseDetail/suitable"
 import Sale from "../../components/courseDetail/sale"
 import UpperHeader from "../../components/courseDetail/upperHeader"
-import { ResponseData } from "../../apiStrapi/models/data"
-import { CourseContent } from "../../apiStrapi/models/contentType/courses"
+import { ResponseData, ResponseDataList } from "../../apiStrapi/models/data"
+import { CourseContent, Contents } from "../../apiStrapi/models/contentType/courses"
 import { strapiImage } from "../../apiStrapi/models/contact"
 import YoutubeEP from "../../components/courseDetail/youtubeEP"
 import CourseHeader from "../../components/courseDetail/courseHeader"
@@ -22,67 +21,71 @@ import EpisodeAccordion from "../../components/courseDetail/episodeAccordion"
 import { ReviewContent } from "../../apiStrapi/models/contentType/review"
 import reviewApi from "../../apiStrapi/reviewApi"
 import { coursesAllApi, coursesApi } from "../../apiStrapi/coursesApi"
+import carouselApi from "../../apiStrapi/carouselApi"
+import { CarouselContent } from "../../apiStrapi/models/contentType/carousel"
 
 interface CourseDetailParams {
   courseId: string;
 }
 
 interface CourseDetailProps {
+  carousel: ResponseDataList<CarouselContent>;
   course: ResponseData<CourseContent>;
   singleCourse: ResponseData<SingleCourse>;
   annualPromotion: ResponseData<AnnualPromotionContent>;
   review: ResponseData<ReviewContent>;
 }
 
-export default function CourseDetail({ course,
+export default function CourseDetail({ 
+  carousel,
+  course,
   singleCourse,
   annualPromotion,
   review }: CourseDetailProps) {
-  const slideCourses = staticDataReview.slideCourses;
-  const youtubeEPItems = course.data.course_detail.contents.filter((value) => { return value.__component === "components.special-ep-component" });
+  const youtubeEPItems = course.data?.contents?.find((value) => { return value.__component === "components.special-ep-component" }) as Contents;
   return (
     <div className="course-detail">
       <Header />
       <div className="tb-sizer">
-        {course.data.course_detail.header && (
-          <UpperHeader header={course.data.course_detail.header} />
+        {course.data?.header && (
+          <UpperHeader header={course.data?.header} />
         )}
-        <CourseHeader yearlySubscriptionImage={strapiImage(annualPromotion.data.attributes.image.data.attributes.url)}
-          singleCourseImage={strapiImage(singleCourse.data.attributes.image.data.attributes.url)}
-          videoId={course.data.course_detail.teaser_url}
+        <CourseHeader yearlySubscriptionImage={strapiImage(annualPromotion.data?.attributes?.image?.data?.attributes?.url)}
+          singleCourseImage={strapiImage(singleCourse.data?.attributes?.image?.data?.attributes?.url)}
+          videoId={course.data?.teaser_url}
           videoPoster={""}
-          singleCheckoutUrl={course.data.course_detail.order_link}
-          yearlySubscriptionCheckoutUrl={annualPromotion.data.attributes.url}
-          yearlySubscriptionImageMobile={strapiImage(annualPromotion.data.attributes.image_mobile?.data.attributes.url)} />
-        {youtubeEPItems.length > 0 && (
-          <YoutubeEP YoutubeEPItems={youtubeEPItems} />
+          singleCheckoutUrl={course.data?.order_link}
+          yearlySubscriptionCheckoutUrl={annualPromotion.data?.attributes?.url}
+          yearlySubscriptionImageMobile={strapiImage(annualPromotion.data?.attributes?.image_mobile?.data?.attributes?.url)} />
+        {youtubeEPItems?.special_ep?.length > 0 && (
+          <YoutubeEP YoutubeEPItems={youtubeEPItems.special_ep} />
         )}
-        {course.data.course_detail.speaker_details?.url && (
-          <IntroductionPersonal fullName={course.data.course_detail.name}
-            personalHistoryImage={strapiImage(course.data.course_detail.speaker_details?.url)}
-            highRatio={course.data.course_detail.speaker_details.height / course.data.course_detail.speaker_details.width} />
-        )}
-        {course.data.course_detail.contents.map((value, index) => {
+        {course.data?.contents?.map((value, index) => {
+          if (value.__component === "components.speaker-detail-component") {
+            return (
+              <IntroductionPersonal key={index} fullName={course.data?.name} speakerDetails={value?.speaker_detail} />
+            )
+          }
           if (value.__component === "components.topic-component") {
             return (
-              <InterestingTopic key={index} interestingTopics={value.topics} />
+              <InterestingTopic key={index} interestingTopics={value?.topics} />
             )
           }
           if (value.__component === "components.suitable-component") {
             return (
-              <Suitable key={index} suitable={value.items} />
+              <Suitable key={index} suitable={value?.items} />
             )
           }
         })}
-        <EpisodeAccordion totalHours={course.data.course_detail.total_hours}
-          totalEpisodes={course.data.course_detail.total_lessons}
-          episodes={course.data.episodes} />
+        <EpisodeAccordion totalHours={course.data?.total_hours}
+          totalEpisodes={course.data?.total_lessons}
+          episodes={course.data?.episodes} />
       </div>
-      <Sale singleCoursePersonalImage={strapiImage(course.data.course_detail.order_image.url)}
-        yearlySubscriptionImage={strapiImage(annualPromotion.data.attributes.image.data.attributes.url)}
-        yearlySubscriptionImageMobile={strapiImage(annualPromotion.data.attributes.image_mobile?.data.attributes.url)}
-        singleCheckoutUrl={course.data.course_detail.order_link}
-        yearlySubscriptionCheckoutUrl={annualPromotion.data.attributes.url} />
+      <Sale singleCoursePersonalImage={strapiImage(course.data?.order_image?.url)}
+        yearlySubscriptionImage={strapiImage(annualPromotion.data?.attributes?.image?.data?.attributes?.url)}
+        yearlySubscriptionImageMobile={strapiImage(annualPromotion.data?.attributes?.image_mobile?.data?.attributes?.url)}
+        singleCheckoutUrl={course.data?.order_link}
+        yearlySubscriptionCheckoutUrl={annualPromotion.data?.attributes?.url} />
       <div className="background-light">
         <div className="sizer">
           <div className="container">
@@ -97,14 +100,14 @@ export default function CourseDetail({ course,
                 </div>
               </div>
               <div className="block-type-code text-left col-12">
-                <SlideCourse slideCourses={slideCourses} slideView={4} imageWidth={235} imageHeight={470.533} />
+                <SlideCourse slideCourses={carousel.data} slideView={4} imageWidth={235} imageHeight={470.533} />
               </div>
             </div>
           </div>
         </div>
       </div>
       <div className="background-dark">
-        <StudentReviews reviewStudents={review?.data?.student} />
+        <StudentReviews reviewStudents={review.data?.student} />
       </div>
       <FooterBrand />
       <Footer />
@@ -115,7 +118,7 @@ export default function CourseDetail({ course,
 export async function getStaticPaths() {
   const data = await coursesAllApi(); 
   const dataFilter = (data.data.filter((value) => {
-    return value.course_detail
+    return value
   }));
   const paths = dataFilter.map((value) => {
     return {
@@ -133,6 +136,7 @@ export async function getStaticPaths() {
 export async function getStaticProps({ params }: { params: CourseDetailParams }) {
   return {
     props: {
+      carousel: await carouselApi(),
       course: await coursesApi(params.courseId),
       singleCourse: await singleCourseApi(),
       annualPromotion: await annualPromotionApi(),

@@ -1,0 +1,15 @@
+{
+  "collectionName": "components_components_speaker_detail_components",
+  "info": {
+    "displayName": "Speaker Detail Component",
+    "icon": "align-right"
+  },
+  "options": {},
+  "attributes": {
+    "speaker_detail": {
+      "type": "component",
+      "repeatable": true,
+      "component": "course-detail-component.speaker-details"
+    }
+  }
+}

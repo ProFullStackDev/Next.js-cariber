@@ -18,6 +18,7 @@
 @import "reactjs-popup/dist/index.css";
 @import "./especial/videoPlayer.module.scss";
 @import "./especial/guardContact.scss";
+@import "./especial/forgotPassword.module.scss";
 
 $frequency: 0;
 $show-grid: false;
@@ -5032,7 +5033,7 @@ a .panel-sub-title {
 }
 
 .white-space-pre {
-  white-space: pre;
+  white-space: pre-line;
 }
 
 .card-form {

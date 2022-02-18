@@ -36,25 +36,29 @@ export default function ForgotPassword() {
       <div className="sizer sizer-full">
         <div className="container">
           <div className="row align-items-center justify-content-center h-670">
-            <div className="col-6 text-center">
+            <div className="col-6 text-center text-card">
               <div className="auth-content">
-                <h1 className="auth-title">
-                  กู้คืนรหัสผ่าน
-                </h1>
+                <h3>
+                  <span>หากลืมรหัสผ่านในการลงชื่อเข้าใช้</span>
+                </h3>
+                <h4>
+                  <span>
+                    กรุณากรอกอีเมลที่ใช้สมัครเรียน เพื่อเปลี่ยนรหัสผ่าน
+                  </span>
+                </h4>
+                <br />
+                <br />
                 <form onSubmit={forgotPasswordRequest}>
                   {error.isError && (<ShowError message={error.message} />)}
                   <div className="form-group">
-                    <label className="auth-label" form="member-email">
-                      อีเมล
-                    </label>
                     <FormInput id={"email"}
-                    type={"email"}
-                    required={true}
-                    placeholder={""}
-                    onChange={(e) => { formForgotPassword.email = e.currentTarget.value; } } 
-                    minLength={0} />
+                      type={"email"}
+                      required={true}
+                      placeholder={"อีเมล"}
+                      onChange={(e) => { formForgotPassword.email = e.currentTarget.value; }}
+                      minLength={0} />
                   </div>
-                  <button id="form-button" className="form-btn btn-solid btn-full btn-small" type="submit">
+                  <button id="form-button" className="btn btn-solid btn-full" type="submit">
                     ยืนยัน
                   </button>
                 </form>

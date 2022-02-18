@@ -1,19 +1,17 @@
+import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { myCourseApi } from "../apiNest/myCourseApi";
-import UserManager from "../auth/userManager";
 import Footer from "../components/footer";
 import FooterBrand from "../components/footerBrand";
 import Header from "../components/header";
 import Img from "../components/image";
-import Loading from "../components/loading";
 import Pagination from "../components/pagination";
 
 export default function Library() {
+  const { data: session } = useSession();
   const router = useRouter();
-  const userManager = new UserManager();
-  const [loading, setLoading] = useState(true)
   const [myCourse, setMyCourse] = useState({
     id: "",
     email: "",
@@ -32,17 +30,9 @@ export default function Library() {
   }, [])
 
   async function fetchData() {
-    const data = await myCourseApi();
+    const data = await myCourseApi(session!.accessToken as string);
     data && setMyCourse(data);
-    setLoading(false)
   }
-
-  if (!userManager.isLoggedIn()) {
-    router.replace('/');
-    return <div></div>;
-  }
-
-  if(loading) return <Loading/>;
 
   return (
     <div className="background-image library">

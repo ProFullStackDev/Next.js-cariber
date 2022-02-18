@@ -13,6 +13,12 @@ $maximum-pixel-percentage : 100;
     font-size: #{$i}px !important;
   }
 
+  @media(max-width: $mobile-size) {
+    .sm-f-s-#{$i} {
+      font-size: #{$i}px !important;
+    }
+  }
+
   .w-#{$i} {
     width: #{$i}px !important;
   }

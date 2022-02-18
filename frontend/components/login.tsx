@@ -1,19 +1,16 @@
-import { useRouter } from "next/router";
 import { FormEvent, MouseEventHandler, useState } from "react";
-import { AuthApiProps, loginApi } from "../apiNest/authApi";
-import UserManager from "../auth/userManager";
+import { NextAuthResponse } from "../apiNest/authApi";
 import FormInput from "./formInput";
 import ShowError from "./showError";
 import Link from "next/link";
 import Img from "./image";
+import { signIn } from 'next-auth/react';
 
 interface LoginProps {
   callbackButton: MouseEventHandler<HTMLButtonElement>
 }
 
 export default function Login({ callbackButton }: LoginProps) {
-  const router = useRouter()
-  const userManager = new UserManager()
   const [formLogin, setFormLogin] = useState({
     email: "",
     password: "",
@@ -29,19 +26,15 @@ export default function Login({ callbackButton }: LoginProps) {
       isError: false,
       message: ""
     })
-    const formData: AuthApiProps = {
+    const data = await signIn("credentials", {
+      redirect: false,
       email: formLogin.email,
-      password: formLogin.password
-    }
-    const data = await loginApi(formData);
-    if (!data) return;
-    if (!data.message) {
-      userManager.saveToken(data.access_token)
-      router.replace("/library")
-    } else {
+      password: formLogin.password,
+    }) as unknown as NextAuthResponse;
+    if (data.error) {
       setErrorLogin({
         isError: true,
-        message: data.message,
+        message: data.error,
       })
     }
   }
@@ -52,7 +45,9 @@ export default function Login({ callbackButton }: LoginProps) {
         เข้าสู่ระบบ
       </h2>
       <div className="column-center">
-        <button className="btn btn-icon btn-full m-b-5 m-x-0 background-color-facebook">
+        <button
+          className="btn btn-icon btn-full m-b-5 m-x-0 background-color-facebook"
+          onClick={() => signIn('facebook')}>
           <div className="icon-frame p-0">
             <Img src="/login/facebook-icon.png"
               width={25}
@@ -62,7 +57,9 @@ export default function Login({ callbackButton }: LoginProps) {
           </div>
           เข้าสู่ระบบด้วย Facebook
         </button>
-        <button className="btn btn-icon btn-full m-b-10 m-x-0 background-color-google">
+        <button
+          className="btn btn-icon btn-full m-b-10 m-x-0 background-color-google"
+          onClick={() => signIn('google')}>
           <div className="icon-frame">
             <Img src="/login/google-icon.svg"
               width={25}
