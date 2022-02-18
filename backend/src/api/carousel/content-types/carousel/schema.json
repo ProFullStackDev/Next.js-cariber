@@ -1,0 +1,31 @@
+{
+  "kind": "collectionType",
+  "collectionName": "carousels",
+  "info": {
+    "singularName": "carousel",
+    "pluralName": "carousels",
+    "displayName": "Carousel",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "carousel_image": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos"
+      ]
+    },
+    "course": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::course.course"
+    }
+  }
+}

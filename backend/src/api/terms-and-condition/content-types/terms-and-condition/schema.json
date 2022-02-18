@@ -1,0 +1,27 @@
+{
+  "kind": "singleType",
+  "collectionName": "terms_and_conditions",
+  "info": {
+    "singularName": "terms-and-condition",
+    "pluralName": "terms-and-conditions",
+    "displayName": "Terms & Condition",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "paragraph": {
+      "type": "component",
+      "repeatable": true,
+      "component": "components.paragraph"
+    },
+    "footer": {
+      "type": "string"
+    }
+  }
+}
