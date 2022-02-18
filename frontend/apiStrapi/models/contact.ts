@@ -14,6 +14,7 @@ export const STRAPI_API_URLS = {
   home: BASE_API+"/home",
   courses: BASE_API+"/courses",
   termsConditions: BASE_API+"/terms-and-condition?populate=*",
+  privacyPolicy: BASE_API+"/privacy-policy",
 }
 
 export function strapiImage(url: string){
