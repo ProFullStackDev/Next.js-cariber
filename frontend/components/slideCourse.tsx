@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { useState, useRef, useEffect } from "react";
 import { strapiImage } from "../apiStrapi/models/contact";
-import { CourseContent } from "../apiStrapi/models/contentType/courses";
+import { CarouselContent } from "../apiStrapi/models/contentType/carousel";
 import Img from "./image";
 
 export interface SlideCourse {
@@ -10,14 +10,13 @@ export interface SlideCourse {
 }
 
 interface SlideCourseProps {
-  slideCourses: CourseContent[],
+  slideCourses: CarouselContent[],
   slideView: number,
   imageWidth: number,
   imageHeight: number
 }
 
 export default function SlideCourse({ slideCourses, slideView, imageWidth, imageHeight }: SlideCourseProps) {
-  const [slideCoursesLocal, setSlideCoursesLocal] = useState(slideCourses.slice(slideCourses.length - 10, slideCourses.length));
   const [slideViewLocal, setSlideViewLocal] = useState(slideView);
   const [imageWidthLocal, setImageWidthLocal] = useState(imageWidth);
   const [imageHeightLocal, setImageHeightLocal] = useState(imageHeight);
@@ -38,25 +37,22 @@ export default function SlideCourse({ slideCourses, slideView, imageWidth, image
 
   function nextSlide() {
     setSlideShowIndex((index) =>
-      index >= slideCoursesLocal.length + 1 - slideViewLocal ? 0 : index + 1
+      index >= slideCourses.length + 1 - slideViewLocal ? 0 : index + 1
     )
   }
 
   function previousSlide() {
     setSlideShowIndex((index) =>
-      index <= 0 ? slideCoursesLocal.length + 1 - slideViewLocal : index - 1
+      index <= 0 ? slideCourses.length + 1 - slideViewLocal : index - 1
     )
   }
 
   useEffect(() => {
-    if (countIndex === 0) {
-      slideCoursesLocal.reverse();
-    }
     resetTimeout();
     timeoutRef.current = window.setTimeout(
       () =>
         setSlideShowIndex((index) =>
-          index >= slideCoursesLocal.length + 1 - slideViewLocal ? 0 : index + 1
+          index >= slideCourses.length + 1 - slideViewLocal ? 0 : index + 1
         ),
       delay
     );
@@ -76,7 +72,7 @@ export default function SlideCourse({ slideCourses, slideView, imageWidth, image
     return () => {
       resetTimeout();
     }
-  }, [frameWidth, slideCoursesLocal.length, slideViewLocal, slideShowIndex])
+  }, [frameWidth, slideViewLocal, slideShowIndex])
 
   return (
     <div className="block box-shadow-none background-unrecognized">
@@ -86,20 +82,20 @@ export default function SlideCourse({ slideCourses, slideView, imageWidth, image
             <div id="news-slider" className="owl-carousel owl-theme">
               <div className="owl-wrapper-outer">
                 <div className="owl-wrapper" style={{ transform: `translate3d(${-slideShowIndex * (itemFrameWidth) - 10}px, 0px, 0px)` }}>
-                  {slideCoursesLocal.map((value, index) => {
+                  {slideCourses?.map((value, index) => {
                     return (
                       <div key={index} className="owl-item" ref={refItemFrame}>
                         <div className="news-grid">
                           <div className="news-grid-image">
-                            {!value.publishedAt ? (<Img
-                              src={strapiImage(value.carousel_image?.url)}
+                            {!value.attributes?.course?.data?.attributes?.publishedAt ? (<Img
+                              src={strapiImage(value.attributes?.carousel_image?.data?.attributes?.url)}
                               width={imageWidthLocal}
                               height={imageHeightLocal}
                               alt="Slide Course"
-                            />) : (<Link href={`/course/${value.id}`}>
+                            />) : (<Link href={`/course/${value.attributes?.course?.data?.id}`}>
                               <a>
                                 <Img
-                                  src={strapiImage(value.carousel_image?.url)}
+                                  src={strapiImage(value.attributes?.carousel_image?.data?.attributes?.url)}
                                   width={imageWidthLocal}
                                   height={imageHeightLocal}
                                   alt="Slide Course"
@@ -108,10 +104,10 @@ export default function SlideCourse({ slideCourses, slideView, imageWidth, image
                             </Link>)}
                           </div>
                           <div className="news-grid-txt">
-                            {!value.publishedAt ? (
+                            {!value.attributes?.course?.data?.attributes?.publishedAt ? (
                               <b>Coming Soon</b>
                             ) : (
-                              <Link href={`/course/${value.id}`}>
+                              <Link href={`/course/${value.attributes?.course?.data?.id}`}>
                                 <a>
                                   ซื้อคอร์สนี้
                                 </a>

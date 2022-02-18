@@ -13,17 +13,17 @@ import ReviewHeader from "../components/reviews/reviewHeader";
 import ReviewStudents from "../components/reviews/reviewStudents";
 import ReviewCaribers from "../components/reviews/reviewCaribers";
 import ReviewShopee from "../components/reviews/reviewShopee";
-import { CourseContent } from "../apiStrapi/models/contentType/courses";
-import { coursesAllApi } from "../apiStrapi/coursesApi";
+import { CarouselContent } from "../apiStrapi/models/contentType/carousel";
+import carouselApi from "../apiStrapi/carouselApi";
 
 interface ReviewProps {
+  carousel: ResponseDataList<CarouselContent>;
   review: ResponseData<ReviewContent>;
   annualPromotion: ResponseData<AnnualPromotionContent>;
-  courses: ResponseDataList<CourseContent>;
 }
 
 
-export default function Review({ review, annualPromotion, courses }: ReviewProps) {
+export default function Review({ carousel, review, annualPromotion }: ReviewProps) {
   return (
     <div className="background-primary-color review">
       <Header />
@@ -109,7 +109,7 @@ export default function Review({ review, annualPromotion, courses }: ReviewProps
                 </div>
               </div>
               <div className="block-type-code text-left col-12">
-                <SlideCourse slideCourses={courses.data} slideView={4} imageWidth={258} imageHeight={470} />
+                <SlideCourse slideCourses={carousel.data} slideView={4} imageWidth={258} imageHeight={470} />
               </div>
             </div>
           </div>
@@ -124,9 +124,9 @@ export default function Review({ review, annualPromotion, courses }: ReviewProps
 export async function getStaticProps() {
   return {
     props: {
+      carousel: await carouselApi(),
       review: await reviewApi(),
       annualPromotion: await annualPromotionApi(),
-      courses: await coursesAllApi(),
     }
   }
 };
