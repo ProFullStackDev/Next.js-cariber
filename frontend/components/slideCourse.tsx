@@ -37,13 +37,13 @@ export default function SlideCourse({ slideCourses, slideView, imageWidth, image
 
   function nextSlide() {
     setSlideShowIndex((index) =>
-      index >= slideCourses.length + 1 - slideViewLocal ? 0 : index + 1
+      index >= slideCourses?.length + 1 - slideViewLocal ? 0 : index + 1
     )
   }
 
   function previousSlide() {
     setSlideShowIndex((index) =>
-      index <= 0 ? slideCourses.length + 1 - slideViewLocal : index - 1
+      index <= 0 ? slideCourses?.length + 1 - slideViewLocal : index - 1
     )
   }
 
@@ -52,7 +52,7 @@ export default function SlideCourse({ slideCourses, slideView, imageWidth, image
     timeoutRef.current = window.setTimeout(
       () =>
         setSlideShowIndex((index) =>
-          index >= slideCourses.length + 1 - slideViewLocal ? 0 : index + 1
+          index >= slideCourses?.length + 1 - slideViewLocal ? 0 : index + 1
         ),
       delay
     );
