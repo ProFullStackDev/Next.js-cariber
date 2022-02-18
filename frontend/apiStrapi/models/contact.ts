@@ -12,7 +12,10 @@ export const STRAPI_API_URLS = {
   annualPromotion: BASE_API+"/annual-promotion?populate=*",
   review: BASE_API+"/review",
   home: BASE_API+"/home",
-  courses: BASE_API+"/courses"
+  courses: BASE_API+"/courses",
+  termsConditions: BASE_API+"/terms-and-condition?populate=*",
+  privacyPolicy: BASE_API+"/privacy-policy",
+  carousels: BASE_API+"/carousels?populate=*",
 }
 
 export function strapiImage(url: string){

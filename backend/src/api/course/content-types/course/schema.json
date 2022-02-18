@@ -91,14 +91,13 @@
       "type": "richtext"
     },
     "carousel_image": {
-      "type": "media",
-      "multiple": false,
-      "required": false,
       "allowedTypes": [
         "images",
         "files",
         "videos"
-      ]
+      ],
+      "type": "media",
+      "multiple": false
     }
   }
 }

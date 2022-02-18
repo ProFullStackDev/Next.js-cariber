@@ -40,7 +40,7 @@ export default function Register({ callbackButton }: RegisterProps) {
     const data = await registerApi(formData)
     if (!data.error) {
       const formLogin: AuthApiProps ={
-        email: formRegister.email,
+        username: formRegister.email,
         password: formRegister.password
       }
       const dataLogin = await loginApi(formLogin)

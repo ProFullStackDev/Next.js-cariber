@@ -16,16 +16,16 @@ import homeApi from '../apiStrapi/homeApi';
 import { HomeContent } from '../apiStrapi/models/contentType/home';
 import { strapiImage } from '../apiStrapi/models/contact';
 import VideoPlayer from '../components/videoPlayer';
-import { CourseContent } from '../apiStrapi/models/contentType/courses';
-import { coursesAllApi } from '../apiStrapi/coursesApi';
+import { CarouselContent } from '../apiStrapi/models/contentType/carousel';
+import carouselApi from '../apiStrapi/carouselApi';
 
 interface IndexProps {
-  courses: ResponseDataList<CourseContent>;
+  carousel: ResponseDataList<CarouselContent>;
   home: ResponseData<HomeContent>;
   review: ResponseData<ReviewContent>;
 }
-
-export default function Index({ courses, home, review }: IndexProps) {
+  
+export default function Index({ carousel, home, review }: IndexProps) {
   return (
     <div className="index">
       <Header />
@@ -93,7 +93,7 @@ export default function Index({ courses, home, review }: IndexProps) {
                 </div>
               </div>
               <div className="block-type-code text-left col-6">
-                <SlideCourse slideCourses={courses.data} slideView={2} imageWidth={232.85} imageHeight={425.05} />
+                <SlideCourse slideCourses={carousel.data} slideView={2} imageWidth={232.85} imageHeight={425.05} />
               </div>
             </div>
           </div>
@@ -155,7 +155,7 @@ export default function Index({ courses, home, review }: IndexProps) {
 export async function getStaticProps() {
   return {
     props: {
-      courses: await coursesAllApi(),
+      carousel: await carouselApi(),
       home: await homeApi(),
       review: await reviewApi(),
     }

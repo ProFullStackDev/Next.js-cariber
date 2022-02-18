@@ -21,21 +21,24 @@ import EpisodeAccordion from "../../components/courseDetail/episodeAccordion"
 import { ReviewContent } from "../../apiStrapi/models/contentType/review"
 import reviewApi from "../../apiStrapi/reviewApi"
 import { coursesAllApi, coursesApi } from "../../apiStrapi/coursesApi"
+import carouselApi from "../../apiStrapi/carouselApi"
+import { CarouselContent } from "../../apiStrapi/models/contentType/carousel"
 
 interface CourseDetailParams {
   courseId: string;
 }
 
 interface CourseDetailProps {
+  carousel: ResponseDataList<CarouselContent>;
   course: ResponseData<CourseContent>;
-  courses: ResponseDataList<CourseContent>;
   singleCourse: ResponseData<SingleCourse>;
   annualPromotion: ResponseData<AnnualPromotionContent>;
   review: ResponseData<ReviewContent>;
 }
 
-export default function CourseDetail({ course,
-  courses,
+export default function CourseDetail({ 
+  carousel,
+  course,
   singleCourse,
   annualPromotion,
   review }: CourseDetailProps) {
@@ -97,7 +100,7 @@ export default function CourseDetail({ course,
                 </div>
               </div>
               <div className="block-type-code text-left col-12">
-                <SlideCourse slideCourses={courses.data} slideView={4} imageWidth={235} imageHeight={470.533} />
+                <SlideCourse slideCourses={carousel.data} slideView={4} imageWidth={235} imageHeight={470.533} />
               </div>
             </div>
           </div>
@@ -133,8 +136,8 @@ export async function getStaticPaths() {
 export async function getStaticProps({ params }: { params: CourseDetailParams }) {
   return {
     props: {
+      carousel: await carouselApi(),
       course: await coursesApi(params.courseId),
-      courses: await coursesAllApi(),
       singleCourse: await singleCourseApi(),
       annualPromotion: await annualPromotionApi(),
       review: await reviewApi(),

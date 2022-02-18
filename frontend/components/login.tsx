@@ -1,7 +1,5 @@
-import { useRouter } from "next/router";
 import { FormEvent, MouseEventHandler, useState } from "react";
-import { AuthApiProps, loginApi } from "../apiNest/authApi";
-import UserManager from "../auth/userManager";
+import { NextAuthResponse } from "../apiNest/authApi";
 import FormInput from "./formInput";
 import ShowError from "./showError";
 import Link from "next/link";
@@ -13,8 +11,6 @@ interface LoginProps {
 }
 
 export default function Login({ callbackButton }: LoginProps) {
-  const router = useRouter()
-  const userManager = new UserManager()
   const [formLogin, setFormLogin] = useState({
     email: "",
     password: "",
@@ -30,19 +26,15 @@ export default function Login({ callbackButton }: LoginProps) {
       isError: false,
       message: ""
     })
-    const formData: AuthApiProps = {
+    const data = await signIn("credentials", {
+      redirect: false,
       email: formLogin.email,
-      password: formLogin.password
-    }
-    const data = await loginApi(formData);
-    if (!data) return;
-    if (!data.message) {
-      userManager.saveToken(data.access_token)
-      router.replace("/library")
-    } else {
+      password: formLogin.password,
+    }) as unknown as NextAuthResponse;
+    if (data.error) {
       setErrorLogin({
         isError: true,
-        message: data.message,
+        message: data.error,
       })
     }
   }

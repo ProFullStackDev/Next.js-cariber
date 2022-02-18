@@ -1,25 +1,16 @@
-import Header from "../components/header"
-import Footer from "../components/footer"
-import {
-  PolicySection1,
-  PolicySection2,
-  PolicySection3,
-  PolicySection4,
-  PolicySection5,
-  PolicySection6,
-  PolicySection7,
-  PolicySection8,
-  PolicySection9,
-  PolicySection10,
-  PolicySection11,
-  PolicySection12,
-  PolicySection13,
-  PolicySection14,
-  PolicySection15,
-  PolicySection16
-} from "../components/privacyPolicy/policySection"
+import Header from "../components/header";
+import Footer from "../components/footer";
+import { PrivacyPolicyContent } from "../apiStrapi/models/contentType/privacyPolicy";
+import { ResponseData } from "../apiStrapi/models/data";
+import privacyPolicyApi from "../apiStrapi/privacyPolicyApi";
+import ReactMarkdown from "react-markdown";
 
-export default function PrivacyPolicy() {
+
+interface PrivacyPolicyProps {
+  privacyPolicy: ResponseData<PrivacyPolicyContent>;
+}
+
+export default function PrivacyPolicy({ privacyPolicy }: PrivacyPolicyProps) {
   return (
     <div>
       <Header />
@@ -31,48 +22,46 @@ export default function PrivacyPolicy() {
                 <h1>
                   <span className="color-grey">
                     <strong>
-                      นโยบายความเป็นส่วนตัว (Privacy Policy)
+                      {privacyPolicy.data?.title}
                     </strong>
                   </span>
                 </h1>
-                <br />
-                <PolicySection1 />
-                <PolicySection2 />
-                <PolicySection3 />
-                <PolicySection4 />
-                <PolicySection5 />
-                <PolicySection6 />
-                <PolicySection7 />
-                <PolicySection8 />
-                <PolicySection9 />
-                <PolicySection10 />
-                <PolicySection11 />
-                <PolicySection12 />
-                <PolicySection13 />
-                <PolicySection14 />
-                <PolicySection15 />
-                <PolicySection16 />
+                {privacyPolicy.data?.paragraph.map((value, index) => {
+                  return (
+                    <div key={index}>
+                      <br />
+                      <h2>
+                        {value.title}
+                      </h2>
+                      <h6>
+                        <ReactMarkdown>{value.description}</ReactMarkdown>
+                      </h6>
+                    </div>
+                  )
+                })}
                 <h2>
-                  นโยบายการขอคืนเงิน (Refund Policy)
+                  {privacyPolicy.data?.refund_policy?.title}
                 </h2>
-                <p>
-                  ทางบริษัท คาริเบอร์ จำกัด (เจ้าของเว็บไซต์ www.cariber.co) มีนโยบายการดูแลลูกค้าที่มีความประสงค์จะขอรับเงินคืน (Refund) โดยมีรายละเอียดดังนี้
-                </p>
-                <h2>
-                  เงื่อนไขในการขอคืนเงินค่าสินค้า
-                </h2>
-                <ul>
-                  <li>
-                    เงื่อนไขการยกเลิกและขอคืนเงินค่าสินค้า
-                  </li>
-                </ul>
-                <p>
-                  &nbsp;&nbsp;&nbsp;รายการที่สั่งซื้อและชำระเงินเรียบร้อยแล้วไม่สามารถยกเลิกได้ทุกกรณี
-                </p>
+                <h6>
+                  {privacyPolicy.data?.refund_policy?.description}
+                </h6>
+                {privacyPolicy.data?.refund_policy?.paragraph.map((value, index) => {
+                  return (
+                    <div key={index}>
+                      <br />
+                      <h2>
+                        {value.title}
+                      </h2>
+                      <h6>
+                        <ReactMarkdown>{value.description}</ReactMarkdown>
+                      </h6>
+                    </div>
+                  )
+                })}
                 <br />
                 <br />
                 <h2>
-                  ปรับปรุงครั้งล่าสุดวันที่ 2 กุมภาพันธ์ พ.ศ. 2564
+                  {privacyPolicy.data?.footer}
                 </h2>
               </div>
             </div>
@@ -83,3 +72,11 @@ export default function PrivacyPolicy() {
     </div>
   )
 }
+
+export async function getStaticProps() {
+  return {
+    props: {
+      privacyPolicy: await privacyPolicyApi(),
+    }
+  }
+} 

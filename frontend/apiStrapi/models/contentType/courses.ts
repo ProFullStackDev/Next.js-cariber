@@ -19,7 +19,6 @@ export interface CourseContent {
   order_image: OrderImage;
   contents: Contents[];
   episodes: Episode[];
-  carousel_image: Image;
 }
 
 export interface Contents{
