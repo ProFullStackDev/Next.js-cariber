@@ -51,7 +51,7 @@ export default function CustomLogin({ path, callbackButton }: CustomLoginProp) {
   }
 
   async function socialLogin(type?: string) {
-    await signIn(type, {callbackUrl: path});
+    await signIn(type);
   }
 
   return (
