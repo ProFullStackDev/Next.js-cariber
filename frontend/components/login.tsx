@@ -1,18 +1,16 @@
 import { FormEvent, MouseEventHandler, useState } from "react";
-import { loginApi, NextAuthResponse } from "../apiNest/authApi";
+import { NextAuthResponse } from "../apiNest/authApi";
 import FormInput from "./formInput";
 import ShowError from "./showError";
 import Link from "next/link";
 import Img from "./image";
 import { signIn } from 'next-auth/react';
-import UserManager from "../auth/userManager";
 
 interface LoginProps {
   callbackButton: MouseEventHandler<HTMLButtonElement>
 }
 
 export default function Login({ callbackButton }: LoginProps) {
-  const userManager = new UserManager();
   const [formLogin, setFormLogin] = useState({
     email: "",
     password: "",
@@ -33,9 +31,6 @@ export default function Login({ callbackButton }: LoginProps) {
       email: formLogin.email,
       password: formLogin.password,
     }) as unknown as NextAuthResponse;
-    const body = { username: formLogin.email, password: formLogin.password }
-    const dataLogin = await loginApi(body)
-    userManager.saveToken(dataLogin.access_token)  
     if (data.error) {
       setErrorLogin({
         isError: true,
