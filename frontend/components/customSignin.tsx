@@ -33,7 +33,6 @@ export default function CustomLogin({ path, callbackButton }: CustomLoginProp) {
       message: ""
     })
     if (userExits) {
-        const body: AuthApiProps = { username: formLogin.email, password: password  }
         const dataLogin = await signIn("credentials", {
             redirect: false,
             email: formLogin.email,
