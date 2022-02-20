@@ -14,16 +14,21 @@ export interface NextAuthResponse {
 }
 
 export async function loginApi(body: AuthApiProps) {
-  try {
-    const response = await fetch(NEST_API_URLS.auth, {
-      method: "POST",
-      headers: NEST_HEADERs.default,
-      body: JSON.stringify(body),
-    })
-    return await response.json() as Auth;
-  } catch (error) {
-    console.log(error)
-  }
+  const response = await fetch(NEST_API_URLS.auth, {
+    method: "POST",
+    headers: NEST_HEADERs.default,
+    body: JSON.stringify(body),
+  })
+  return await response.json() as Auth;
+}
+
+export async function loginOrCreateApi(body: any) {
+  const response = await fetch(NEST_API_URLS.checkExists, {
+    method: "POST",
+    headers: NEST_HEADERs.default,
+    body: JSON.stringify(body),
+  })
+  return await response.json() as any;
 }
 
 export async function getGoogleAuthToken(body: any): Promise<Auth> {

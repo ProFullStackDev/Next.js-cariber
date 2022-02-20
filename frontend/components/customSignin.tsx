@@ -1,47 +1,58 @@
 import { FormEvent, MouseEventHandler, useState } from "react";
-import { loginApi, NextAuthResponse } from "../apiNest/authApi";
+import { AuthApiProps, loginApi, loginOrCreateApi, NextAuthResponse } from "../apiNest/authApi";
 import FormInput from "./formInput";
 import ShowError from "./showError";
 import Link from "next/link";
 import Img from "./image";
 import { signIn } from 'next-auth/react';
 import UserManager from "../auth/userManager";
+import { useRouter } from "next/router";
 
-interface LoginProps {
-  callbackButton: MouseEventHandler<HTMLButtonElement>
-}
+interface CustomLoginProp {
+    path: string,
+    callbackButton: Function
+  }
 
-export default function Login({ callbackButton }: LoginProps) {
+
+export default function CustomLogin({ path, callbackButton }: CustomLoginProp) {
   const userManager = new UserManager();
+  const router = useRouter();
   const [formLogin, setFormLogin] = useState({
     email: "",
-    password: "",
   })
+  const [password, setPassword] = useState("")
   const [errorLogin, setErrorLogin] = useState({
     isError: false,
     message: "",
   })
-
+  const [userExits, setUserExits] = useState(false)
   async function loginRequest(event?: FormEvent) {
     event && event.preventDefault();
     setErrorLogin({
       isError: false,
       message: ""
     })
-    const data = await signIn("credentials", {
-      redirect: false,
-      email: formLogin.email,
-      password: formLogin.password,
-    }) as unknown as NextAuthResponse;
-    const body = { username: formLogin.email, password: formLogin.password }
-    const dataLogin = await loginApi(body)
-    userManager.saveToken(dataLogin.access_token)  
-    if (data.error) {
-      setErrorLogin({
-        isError: true,
-        message: data.error,
-      })
+    if (userExits) {
+        const body: AuthApiProps = { username: formLogin.email, password: password  }
+        const dataLogin = await signIn("credentials", {
+            redirect: false,
+            email: formLogin.email,
+            password: password,
+          }) as unknown as NextAuthResponse;
+          callbackButton(path)
+    } else {
+        const dataLogin = await loginOrCreateApi(formLogin)
+        setUserExits(dataLogin.is_exist)   
+        if(!dataLogin.is_exist){
+            userManager.saveToken(dataLogin?.access_token)
+            callbackButton(path)
+        }
     }
+    
+  }
+
+  async function socialLogin(type?: string) {
+    await signIn(type, {callbackUrl: path});
   }
 
   return (
@@ -52,7 +63,7 @@ export default function Login({ callbackButton }: LoginProps) {
       <div className="column-center">
         <button
           className="btn btn-icon btn-full m-b-5 m-x-0 background-color-facebook"
-          onClick={() => signIn('facebook')}>
+          onClick={() => socialLogin('facebook')}>
           <div className="icon-frame p-0">
             <Img src="/login/facebook-icon.png"
               width={25}
@@ -64,7 +75,7 @@ export default function Login({ callbackButton }: LoginProps) {
         </button>
         <button
           className="btn btn-icon btn-full m-b-10 m-x-0 background-color-google"
-          onClick={() => signIn('google')}>
+          onClick={() => socialLogin('google')}>
           <div className="icon-frame">
             <Img src="/login/google-icon.svg"
               width={25}
@@ -93,35 +104,26 @@ export default function Login({ callbackButton }: LoginProps) {
                     onChange={(e) => { formLogin.email = e.currentTarget.value; }}
                     minLength={0} />
                 </div>
-                <div className="form-group">
-                  <label className="label" form="member-email">
-                    รหัสผ่าน
-                  </label>
-                  <FormInput id={"password"}
-                    type={"password"}
-                    required={true}
-                    placeholder={""}
-                    onChange={(e) => { formLogin.password = e.currentTarget.value; }}
-                    minLength={8} />
-                </div>
+                { userExits ? (
+                    <div className="form-group">
+                    <label className="label" form="member-email">
+                        รหัสผ่าน
+                    </label>
+                    <FormInput id={"password"}
+                        type={"password"}
+                        required={true}
+                        placeholder={""}
+                        onChange={(e) => { setPassword(e.currentTarget.value); }}
+                        minLength={8} />
+                    </div>)
+                    : (
+                        <div></div>
+                    ) }
+                
                 <button id="form-button" className="btn btn-solid btn-full btn-small" type="submit">
                   เข้าสู่ระบบ
                 </button>
               </form>
-            </div>
-            <div className="login-bottom">
-              <div className="color-white row justify-content-center">
-                ไม่ได้เป็นสมาชิก?
-                &nbsp;
-                <button onClick={callbackButton} className="btn btn-small m-0 p-0 link-colorless color-white">
-                  คลิกเพื่อสร้างบัญชีผู้ใช้งานใหม่
-                </button>
-              </div>
-              <Link href={"/forgot-password"} passHref={true}>
-                <a className="btn btn-small m-t-20 m-0 p-0 link-colorless color-white">
-                  ลืมรหัสผ่าน?
-                </a>
-              </Link>
             </div>
           </div>
         </div>
