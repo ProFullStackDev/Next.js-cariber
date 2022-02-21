@@ -5,6 +5,7 @@ import Popup from "reactjs-popup"
 import { MouseEventHandler, useState, useRef } from "react";
 import SwitchSignInSignUp from "../switchSignInSignUp";
 import CustomLogin from "../customSignin";
+import { useSession } from "next-auth/react";
 
 
 export interface CourseDetailSaleProps {
@@ -22,12 +23,12 @@ export default function Sale({ yearlySubscriptionImage,
   singleCheckoutUrl }: CourseDetailSaleProps) {
   
   const router = useRouter();
-  const userManager = new UserManager();
+  const { data: session } = useSession();
   const [ ispopup, setIsPopup ] = useState(false)
   
   async function insterestCourse(link: string) {
     
-    if( userManager.isLoggedIn() ){
+    if( session !== undefined ) {
       router.push(link)
     } else {
       // popup login
@@ -38,7 +39,9 @@ export default function Sale({ yearlySubscriptionImage,
 
   async function setCallbackButtonFN(link: string) {
     setIsPopup(false)
-    router.push(link)
+    if( session !== undefined ) {
+      router.push(link)
+    }
   }
 
 
