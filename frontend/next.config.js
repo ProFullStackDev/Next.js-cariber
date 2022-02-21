@@ -3,8 +3,8 @@ require("dotenv").config();
 
 module.exports = {
   env: {
-    NEXTAUTH_URL: process.env.NEXT_PLUBLIC_NEXTAUTH_URL,
-    NEXTAUTH_SECRET: process.env.NEXT_PLUBLIC_NEXTAUTH_SECRET
+    NEXTAUTH_URL: process.env.NEXT_PUBLIC_NEXTAUTH_URL,
+    NEXTAUTH_SECRET: process.env.NEXT_PUBLIC_NEXTAUTH_SECRET
   },
   reactStrictMode: true,
   sassOptions: {
