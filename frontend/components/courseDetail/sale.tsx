@@ -1,4 +1,13 @@
+import { useRouter } from "next/router";
+import UserManager from "../../auth/userManager";
 import Img from "../image";
+import Popup from "reactjs-popup"
+import { MouseEventHandler, useState, useRef } from "react";
+import SwitchSignInSignUp from "../switchSignInSignUp";
+import CustomLogin from "../customSignin";
+import { useSession } from "next-auth/react";
+import userManager from "../../auth/userManager";
+
 
 export interface CourseDetailSaleProps {
   yearlySubscriptionImage: string,
@@ -13,6 +22,30 @@ export default function Sale({ yearlySubscriptionImage,
   yearlySubscriptionImageMobile,
   singleCoursePersonalImage,
   singleCheckoutUrl }: CourseDetailSaleProps) {
+  
+  const router = useRouter();
+  const userManager = new UserManager();
+  const [ ispopup, setIsPopup ] = useState(false)
+  
+  async function insterestCourse(link: string) {
+    
+    if( userManager.isLoggedIn() ){
+      router.push(link)
+    } else {
+      // popup login
+      setIsPopup(true)
+      
+    }
+  }
+
+  async function setCallbackButtonFN(link: string) {
+    setIsPopup(false)
+    if( userManager.isLoggedIn() ){
+      router.push(link)
+    }
+  }
+
+
   return (
     <div className="background-light">
       <div className="sizer p-b-0">
@@ -31,7 +64,8 @@ export default function Sale({ yearlySubscriptionImage,
             <div className="block-type-code text-left col-7">
               <div className="block box-shadow-none sm-none">
                 <div id="yearlybanner" className="feature column-center text-center">
-                  <a href={yearlySubscriptionCheckoutUrl}>
+                  <div
+                    onClick={()=>insterestCourse(yearlySubscriptionCheckoutUrl)}>
                     <Img id="block-yearly-img"
                       className="feature-image"
                       src={yearlySubscriptionImage}
@@ -39,17 +73,17 @@ export default function Sale({ yearlySubscriptionImage,
                       height={400}
                       alt="Cariber Yearly Subscription"
                     />
-                  </a>
-                  <a className="btn btn-medium btn-solid btn-auto background-dark"
-                    href={yearlySubscriptionCheckoutUrl}
+                  </div>
+                  <div className="btn btn-medium btn-solid btn-auto background-dark"
+                    onClick={()=>insterestCourse(yearlySubscriptionCheckoutUrl)}
                     id="block-yearly-button">
                     ซื้อแพ็กเกจรายปี
-                  </a>
+                  </div>
                 </div>
               </div>
               <div className="block box-shadow-none lg-none">
                 <div id="yearlybanner" className="feature column-center">
-                  <a href={yearlySubscriptionCheckoutUrl}>
+                  <a onClick={()=>insterestCourse(yearlySubscriptionCheckoutUrl)}>
                     <Img id="block-yearly-img"
                       className="feature-image"
                       src={yearlySubscriptionImageMobile}
@@ -60,7 +94,9 @@ export default function Sale({ yearlySubscriptionImage,
                   </a>
                   <a className="btn btn-medium btn-solid btn-auto background-dark"
                     href={yearlySubscriptionCheckoutUrl}
+                    onClick={()=>insterestCourse(yearlySubscriptionCheckoutUrl)}
                     id="block-yearly-button">
+                      
                     ซื้อแพ็กเกจรายปี
                   </a>
                 </div>
@@ -69,7 +105,7 @@ export default function Sale({ yearlySubscriptionImage,
             <div className="block-type-code text-left col-4">
               <div className="block box-shadow-none">
                 <div id="singlebanner" className="feature column-center">
-                  <a href={singleCheckoutUrl}>
+                  <a onClick={()=>insterestCourse(singleCheckoutUrl)}>
                     <Img id="block-single-img"
                       src={singleCoursePersonalImage}
                       className="feature-image"
@@ -80,13 +116,31 @@ export default function Sale({ yearlySubscriptionImage,
                   </a>
                   <a id="block-single-button"
                     className="btn btn-medium btn-solid btn-auto background-dark"
-                    href={singleCheckoutUrl}>
+                    onClick={()=>insterestCourse(singleCheckoutUrl)}>
                     ซื้อเฉพาะคอร์สนี้
                   </a>
                 </div>
               </div>
             </div>
           </div>
+          <Popup className="popup-auth"
+            open={ispopup}
+            modal
+            onClose={()=>setIsPopup(false)}
+            closeOnDocumentClick={false}>
+            {(close: MouseEventHandler<HTMLButtonElement>) => {
+              return (
+                <div className="pop-modal">
+                  <button className="close" onClick={close}>
+                    <p>
+                      &times;
+                    </p>
+                  </button>
+                  <CustomLogin path={yearlySubscriptionCheckoutUrl} callbackButton={setCallbackButtonFN} />
+                </div>
+              )
+            }}
+          </Popup>
         </div>
       </div>
     </div>

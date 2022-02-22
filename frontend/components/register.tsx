@@ -1,19 +1,18 @@
-import { useRouter } from "next/router";
 import { useState, FormEvent, MouseEventHandler } from "react";
-import UserManager from "../auth/userManager";
-import { AuthApiProps, loginApi } from "../apiNest/authApi";
-import registerApi, { RegisterApiProps } from "../apiStrapi/registerApi";
 import FormInput from "./formInput"
 import ShowError from "./showError";
 import Img from "./image";
+import registerApi, { RegisterApiProps } from "../apiNest/registerApi";
+import UserManager from "../auth/userManager";
+import { useRouter } from "next/router";
 
 interface RegisterProps {
   callbackButton: MouseEventHandler<HTMLButtonElement>
 }
 
 export default function Register({ callbackButton }: RegisterProps) {
-  const router = useRouter()
-  const userManager = new UserManager()
+  const userManager = new UserManager();
+  const router = useRouter();
   const [formRegister, setFormRegister] = useState({
     email: "",
     password: "",
@@ -33,25 +32,19 @@ export default function Register({ callbackButton }: RegisterProps) {
       })
       return
     }
-    const formData: RegisterApiProps ={
+    const formData: RegisterApiProps = {
       email: formRegister.email,
       password: formRegister.password
     }
-    const data = await registerApi(formData)
-    if (!data.error) {
-      const formLogin: AuthApiProps ={
-        username: formRegister.email,
-        password: formRegister.password
-      }
-      const dataLogin = await loginApi(formLogin)
-      if(!dataLogin) return;
-      userManager.saveToken(dataLogin.access_token)
-      router.replace("/library")
+    const data = await registerApi(formData);
+    if (!data.message) {
+      userManager.saveToken(data.access_token);
+      router.replace("/library");
     } else {
       setErrorRegister({
         isError: true,
-        message: data.error.message
-      })
+        message: data.message.toString(),
+      });
     }
   }
 
@@ -61,7 +54,7 @@ export default function Register({ callbackButton }: RegisterProps) {
         สร้างบัญชีผู้ใช้งาน
       </h2>
       <div className="column-center">
-      <button className="btn btn-icon btn-full m-b-5 m-x-0 background-color-facebook">
+        <button className="btn btn-icon btn-full m-b-5 m-x-0 background-color-facebook">
           <div className="icon-frame p-0">
             <Img src="/login/facebook-icon.png"
               width={25}
@@ -94,33 +87,33 @@ export default function Register({ callbackButton }: RegisterProps) {
                     อีเมล
                   </label>
                   <FormInput id={"email"}
-                  type={"email"}
-                  required={true}
-                  placeholder={""}
-                  onChange={(e) => { formRegister.email = e.currentTarget.value; } } 
-                  minLength={0} />
+                    type={"email"}
+                    required={true}
+                    placeholder={""}
+                    onChange={(e) => { formRegister.email = e.currentTarget.value; }}
+                    minLength={0} />
                 </div>
                 <div className="form-group">
                   <label className="label" form="member-email">
                     รหัสผ่าน
                   </label>
                   <FormInput id={"password"}
-                  type={"password"}
-                  required={true}
-                  placeholder={""}
-                  onChange={(e) => { formRegister.password = e.currentTarget.value; } } 
-                  minLength={8} />
+                    type={"password"}
+                    required={true}
+                    placeholder={""}
+                    onChange={(e) => { formRegister.password = e.currentTarget.value; }}
+                    minLength={8} />
                 </div>
                 <div className="form-group">
                   <label className="label" form="member-email">
                     ยืนยันรหัสผ่าน
                   </label>
                   <FormInput id={"confirm-password"}
-                  type={"password"}
-                  required={true}
-                  placeholder={""}
-                  onChange={(e) => { formRegister.confirmPassword = e.currentTarget.value; } } 
-                  minLength={8} />
+                    type={"password"}
+                    required={true}
+                    placeholder={""}
+                    onChange={(e) => { formRegister.confirmPassword = e.currentTarget.value; }}
+                    minLength={8} />
                 </div>
                 <button id="form-button" className="btn btn-solid btn-full btn-small" type="submit">
                   ลงทะเบียน

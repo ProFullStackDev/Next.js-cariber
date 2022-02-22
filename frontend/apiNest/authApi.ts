@@ -1,4 +1,4 @@
-import { NEST_HEADERs, NEST_API_URLS } from './models/contact';
+import { NEST_HEADERs, NEST_API_URLS, nestHeaderAuth } from './models/contact';
 import { Auth, ValidateAuth } from './models/content/auth';
 
 export interface AuthApiProps {
@@ -14,16 +14,21 @@ export interface NextAuthResponse {
 }
 
 export async function loginApi(body: AuthApiProps) {
-  try {
-    const response = await fetch(NEST_API_URLS.auth, {
-      method: "POST",
-      headers: NEST_HEADERs.default,
-      body: JSON.stringify(body),
-    })
-    return await response.json() as Auth;
-  } catch (error) {
-    console.log(error)
-  }
+  const response = await fetch(NEST_API_URLS.auth, {
+    method: "POST",
+    headers: NEST_HEADERs.default,
+    body: JSON.stringify(body),
+  })
+  return await response.json() as Auth;
+}
+
+export async function loginOrCreateApi(body: any) {
+  const response = await fetch(NEST_API_URLS.checkExists, {
+    method: "POST",
+    headers: NEST_HEADERs.default,
+    body: JSON.stringify(body),
+  })
+  return await response.json() as any;
 }
 
 export async function getGoogleAuthToken(body: any): Promise<Auth> {
@@ -48,7 +53,7 @@ export async function validateTokenApi() {
   try {
     const response = await fetch(NEST_API_URLS.auth, {
       method: "GET",
-      headers: NEST_HEADERs.auth,
+      headers: nestHeaderAuth(),
     })
     return await response.json() as ValidateAuth;
   } catch (error) {
