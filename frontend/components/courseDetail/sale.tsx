@@ -5,6 +5,8 @@ import Popup from "reactjs-popup"
 import { MouseEventHandler, useState, useRef } from "react";
 import SwitchSignInSignUp from "../switchSignInSignUp";
 import CustomLogin from "../customSignin";
+import { useSession } from "next-auth/react";
+import userManager from "../../auth/userManager";
 
 
 export interface CourseDetailSaleProps {
@@ -38,7 +40,9 @@ export default function Sale({ yearlySubscriptionImage,
 
   async function setCallbackButtonFN(link: string) {
     setIsPopup(false)
-    router.push(link)
+    if( userManager.isLoggedIn() ){
+      router.push(link)
+    }
   }
 
 

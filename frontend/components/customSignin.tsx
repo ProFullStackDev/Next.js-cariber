@@ -16,7 +16,6 @@ interface CustomLoginProp {
 
 export default function CustomLogin({ path, callbackButton }: CustomLoginProp) {
   const userManager = new UserManager();
-  const router = useRouter();
   const [formLogin, setFormLogin] = useState({
     email: "",
   })
