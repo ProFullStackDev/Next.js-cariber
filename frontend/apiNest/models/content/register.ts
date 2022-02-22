@@ -1,10 +1,6 @@
 export interface Register{
-  id: number;
-  email: string;
-  password: string;
-  google_id: string;
-  facebook_id: string;
+  access_token: string;
   statusCode: number;
-  message: string[];
+  message: string[] | string;
   error: string;
 }
