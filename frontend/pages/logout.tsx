@@ -1,14 +1,12 @@
-import { signOut } from "next-auth/react";
 import { useRouter } from "next/router";
-import { useEffect } from "react";
+import UserManager from "../auth/userManager";
 
 
 export default function Logout() {
   const router = useRouter();
-  useEffect(() => {
-    signOut();
-    router.push("/")
-  }, [])
+  const userManager = new UserManager();
+  userManager.destroyToken();
+  router.replace("/")
   return(
     <div></div>
   )

@@ -4,7 +4,6 @@ import Img from "./image"
 import Popup from "reactjs-popup";
 import FlashMessages, { FlashMessagesType } from "../functions/flashMessages";
 import SwitchSignInSignUp from "./switchSignInSignUp";
-import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import UserManager from "../auth/userManager";
 import CustomLogin from "./customSignin";
@@ -15,12 +14,9 @@ interface Menu {
 }
 
 export default function Header() {
-
-  const router = useRouter()
-  const { data: session } = useSession();
+  const router = useRouter();
   const userManager = new UserManager();
   const [ ispopup, setIsPopup ] = useState(false);
-
   const flashMessages = new FlashMessages()
   const [hamburgerOpened, setHamburgerOpened] = useState(false);
   const flashForgotPassword = flashMessages.getMessages(FlashMessagesType.forgotPasswordMessages)
@@ -105,7 +101,7 @@ export default function Header() {
             </Link>
             <div className="header-block header-switch-content header-block-menu media-body">
               <div className="link-list justify-content-right">
-                {session ? (
+                {userManager.isLoggedIn() ? (
                   <div>
                     {menuLogedIn.map((value, index) => {
                       return (
@@ -134,7 +130,7 @@ export default function Header() {
                 ซื้อแพ็กเกจรายปี
               </a>
             </div>
-            {session ? (
+            {userManager.isLoggedIn() ? (
               <div className="header-block header-switch-content header-block-user header-block-mr0">
                 <div className="user-avatar-block">
                   <Popup trigger={<div>
@@ -202,7 +198,7 @@ export default function Header() {
         </div>
         <div className={`header-content header-content-mobile background-dark ${hamburgerOpened ? "d-block" : "d-none"}`}>
           <div className="header-block header-switch-content header-block-menu">
-            {session ? (
+            {userManager.isLoggedIn() ? (
               <div className="link-list">
                 {menuLogedIn.map((value, index) => {
                   return (
@@ -229,7 +225,7 @@ export default function Header() {
                 ซื้อแพ็กเกจรายปี
               </a>
             </div>
-            {session ? (
+            {userManager.isLoggedIn() ? (
               <div className="header-block header-switch-content header-block-menu">
                 <span className="link-list">
                   {menuUserMobile.map((value, index) => {

@@ -1,4 +1,4 @@
-import { NEST_HEADERs, NEST_API_URLS } from './models/contact';
+import { NEST_HEADERs, NEST_API_URLS, nestHeaderAuth } from './models/contact';
 import { Auth, ValidateAuth } from './models/content/auth';
 
 export interface AuthApiProps {
@@ -53,7 +53,7 @@ export async function validateTokenApi() {
   try {
     const response = await fetch(NEST_API_URLS.auth, {
       method: "GET",
-      headers: NEST_HEADERs.auth,
+      headers: nestHeaderAuth(),
     })
     return await response.json() as ValidateAuth;
   } catch (error) {

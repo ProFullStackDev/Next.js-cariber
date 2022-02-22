@@ -1,16 +1,21 @@
 import { FormEvent, MouseEventHandler, useState } from "react";
-import { NextAuthResponse } from "../apiNest/authApi";
+import { AuthApiProps, getFacebookAuthToken, getGoogleAuthToken, loginApi } from "../apiNest/authApi";
 import FormInput from "./formInput";
 import ShowError from "./showError";
 import Link from "next/link";
 import Img from "./image";
-import { signIn } from 'next-auth/react';
+import GoogleLogin, { GoogleLoginResponse, GoogleLoginResponseOffline } from "react-google-login";
+import FacebookLogin, { ReactFacebookLoginInfo } from 'react-facebook-login-typed';
+import UserManager from "../auth/userManager";
+import router from "next/router";
+
 
 interface LoginProps {
   callbackButton: MouseEventHandler<HTMLButtonElement>
 }
 
 export default function Login({ callbackButton }: LoginProps) {
+  const userManager = new UserManager();
   const [formLogin, setFormLogin] = useState({
     email: "",
     password: "",
@@ -20,21 +25,48 @@ export default function Login({ callbackButton }: LoginProps) {
     message: "",
   })
 
+  const responseGoogle = async (response: GoogleLoginResponse | GoogleLoginResponseOffline) => {
+    response = response as GoogleLoginResponse
+    const data = await getGoogleAuthToken({
+      id_token: response.tokenObj.id_token
+    });
+    userManager.saveToken(data.access_token);
+    router.replace("/library");
+  }
+
+  const responseGoogleFailure = async (response: GoogleLoginResponse | GoogleLoginResponseOffline) => {
+    response = response as GoogleLoginResponse
+  }
+
+  const responseFacebook = async (response: ReactFacebookLoginInfo) => {
+    if (response.accessToken) {
+      const data = await getFacebookAuthToken({
+        access_token: response.accessToken as string
+      });
+      userManager.saveToken(data.access_token);
+      router.replace("/library");
+    }
+  }
+
   async function loginRequest(event?: FormEvent) {
     event && event.preventDefault();
     setErrorLogin({
       isError: false,
       message: ""
     })
-    const data = await signIn("credentials", {
-      redirect: false,
-      email: formLogin.email,
-      password: formLogin.password,
-    }) as unknown as NextAuthResponse;
-    if (data.error) {
+    const formData: AuthApiProps = {
+      username: formLogin.email,
+      password: formLogin.password
+    }
+    const data = await loginApi(formData);
+    if (!data) return;
+    if (!data.message) {
+      userManager.saveToken(data.access_token);
+      router.replace("/library");
+    } else {
       setErrorLogin({
         isError: true,
-        message: data.error,
+        message: data.message,
       })
     }
   }
@@ -45,30 +77,46 @@ export default function Login({ callbackButton }: LoginProps) {
         เข้าสู่ระบบ
       </h2>
       <div className="column-center">
-        <button
-          className="btn btn-icon btn-full m-b-5 m-x-0 background-color-facebook"
-          onClick={() => signIn('facebook')}>
-          <div className="icon-frame p-0">
-            <Img src="/login/facebook-icon.png"
-              width={25}
-              height={25}
-              alt="Facebook"
-            />
-          </div>
-          เข้าสู่ระบบด้วย Facebook
-        </button>
-        <button
-          className="btn btn-icon btn-full m-b-10 m-x-0 background-color-google"
-          onClick={() => signIn('google')}>
-          <div className="icon-frame">
-            <Img src="/login/google-icon.svg"
-              width={25}
-              height={25}
-              alt="Google"
-            />
-          </div>
-          เข้าสู่ระบบด้วย Google
-        </button>
+        <GoogleLogin
+          render={renderProps => (
+            <button className="btn btn-icon btn-full m-b-10 m-x-0 background-color-google"
+              onClick={renderProps.onClick}>
+              <div className="icon-frame">
+                <Img src="/login/google-icon.svg"
+                  width={25}
+                  height={25}
+                  alt="Google"
+                />
+              </div>
+              เข้าสู่ระบบด้วย Google
+            </button>
+          )
+          }
+          clientId={process.env.NEXT_PUBLIC_NEXTAUTH_GOOGLE_CLIENT_ID as string}
+          buttonText="Login"
+          onSuccess={responseGoogle}
+          onFailure={responseGoogleFailure}
+        />
+        <FacebookLogin
+          appId={process.env.NEXT_PUBLIC_NEXTAUTH_FACEBOOK_CLIENT_ID as string}
+          callback={responseFacebook}
+          render={(renderProps) => {
+            return (
+              <button
+                className="btn btn-icon btn-full m-b-5 m-x-0 background-color-facebook"
+                onClick={renderProps.onClick}>
+                <div className="icon-frame p-0">
+                  <Img src="/login/facebook-icon.png"
+                    width={25}
+                    height={25}
+                    alt="Facebook"
+                  />
+                </div>
+                เข้าสู่ระบบด้วย Facebook
+              </button>
+            )
+          }}
+        />
       </div>
       <hr />
       <div className="p-20">
