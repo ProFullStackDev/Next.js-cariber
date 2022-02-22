@@ -57,7 +57,6 @@ export default function GuardContact() {
             <div className="form-guard">
               <FormSelect id={"province"}
                 label="จังหวัด"
-                description="Dropdown List 77 จังหวัด"
                 required={true}
                 placeholder={""}
                 onChange={() => { }}
@@ -129,7 +128,6 @@ export default function GuardContact() {
               <div className="col-6 p-0 lg-p-r-15">
                 <FormSelect id={"career"}
                   label="อุตสาหกรรมของคุณ"
-                  description="Dropdown list"
                   required={true}
                   placeholder={""}
                   onChange={() => { }}
@@ -171,6 +169,10 @@ export default function GuardContact() {
                 />
                 <FormCheckbox id={"check-1"}
                   label="การสื่อสารและวัฒนธรรม"
+                  onChange={() => { }}
+                />
+                <FormCheckbox id={"check-1"}
+                  label="การพัฒนาตนเอง"
                   onChange={() => { }}
                 />
                 <div className="row">
