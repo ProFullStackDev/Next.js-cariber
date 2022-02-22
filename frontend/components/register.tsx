@@ -1,19 +1,15 @@
-import { useRouter } from "next/router";
 import { useState, FormEvent, MouseEventHandler } from "react";
-import UserManager from "../auth/userManager";
 import { AuthApiProps, loginApi } from "../apiNest/authApi";
-import registerApi, { RegisterApiProps } from "../apiStrapi/registerApi";
 import FormInput from "./formInput"
 import ShowError from "./showError";
 import Img from "./image";
+import registerApi, { RegisterApiProps } from "../apiNest/registerApi";
 
 interface RegisterProps {
   callbackButton: MouseEventHandler<HTMLButtonElement>
 }
 
 export default function Register({ callbackButton }: RegisterProps) {
-  const router = useRouter()
-  const userManager = new UserManager()
   const [formRegister, setFormRegister] = useState({
     email: "",
     password: "",
@@ -37,7 +33,7 @@ export default function Register({ callbackButton }: RegisterProps) {
       email: formRegister.email,
       password: formRegister.password
     }
-    const data = await registerApi(formData)
+    const data = await registerApi(formData);
     if (!data.error) {
       const formLogin: AuthApiProps ={
         username: formRegister.email,
@@ -45,13 +41,15 @@ export default function Register({ callbackButton }: RegisterProps) {
       }
       const dataLogin = await loginApi(formLogin)
       if(!dataLogin) return;
-      userManager.saveToken(dataLogin.access_token)
-      router.replace("/library")
+      setErrorRegister({
+        isError: true,
+        message: "Successful registration"
+      });
     } else {
       setErrorRegister({
         isError: true,
-        message: data.error.message
-      })
+        message: data.message.toString()
+      });
     }
   }
 

@@ -3,7 +3,6 @@ const BASE_API = BASE_URL + "/api";
 
 export const STRAPI_API_URLS = {
   auth: BASE_API+"/auth/local",
-  register: BASE_API+"/auth/local/register",
   forgotPassword: BASE_API+"/auth/forgot-password",
   password: BASE_API+"/auth/reset-password",
   getUserProfile: BASE_API+"/user/get-me",

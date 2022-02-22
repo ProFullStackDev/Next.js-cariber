@@ -11,6 +11,7 @@ export const NEST_API_URLS = {
   myCourse: BASE_API + "/users/my-course",
   checkExists: BASE_API + "/users/user-exists",
   password: BASE_API + "/users/reset-password",
+  register: BASE_API + "/users",
 }
 
 export const NEST_HEADERs = {
