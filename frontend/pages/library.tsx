@@ -10,7 +10,6 @@ import Img from "../components/image";
 import Pagination from "../components/pagination";
 
 export default function Library() {
-  const { data: session } = useSession();
   const router = useRouter();
   const [myCourse, setMyCourse] = useState({
     id: "",
@@ -30,7 +29,7 @@ export default function Library() {
   }, [])
 
   async function fetchData() {
-    const data = await myCourseApi(session!.accessToken as string);
+    const data = await myCourseApi();
     data && setMyCourse(data);
   }
 

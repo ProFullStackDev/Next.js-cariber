@@ -20,7 +20,7 @@ export default class UserManager {
     }
 
     destroyToken(): void {
-        removeCookies(this.tokenKey, {sameSite: "none", secure: true})
+        removeCookies(this.tokenKey, {sameSite: "none", secure: true});
     }
 
     isLoggedIn(): boolean {
