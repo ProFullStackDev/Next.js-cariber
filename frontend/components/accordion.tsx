@@ -27,7 +27,6 @@ interface AccordionProps {
 
 export default function Accordion({ title, description, col, icon, color, link, progress }: AccordionProps) {
   const [displayDescription, setDisplayDescription] = useState("d-none");
-  const descriptionLocal = description.split(/\r\n|\n\r|\n|\r/)
   function switchDisplay() {
     if (icon === Icon.lock) {
       return
@@ -60,16 +59,12 @@ export default function Accordion({ title, description, col, icon, color, link, 
       <div className={`accordion-collapse ${color} ${displayDescription}`}>
         <div className={`accordion accordion-body row`}>
           <div className={`${link ? ("col-9") : ("col-12")} `}>
-            {descriptionLocal.map((value, index) => {
-              return (
-                <h6 key={index} className="f-s-14">
+                <h6 className="f-s-14 white-space-pre">
                   <span>
-                    {value}
+                    {description}
                   </span>
                   <br />
                 </h6>
-              )
-            })}
           </div>
           {link && (
             <div className="accordion-right col-3">
