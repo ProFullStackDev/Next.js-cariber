@@ -3,9 +3,9 @@ import { CheckContactGuard } from './models/content/checkContactGuard';
 
 export async function checkContactGuardApi() {
   try {
-    const response = await fetch(NEST_API_URLS.myCourse, {
+    const response = await fetch(NEST_API_URLS.checkContactGuard, {
       method: "GET",
-      headers: nestHeaderAuth(""),
+      headers: nestHeaderAuth(),
     })
     return await response.json() as CheckContactGuard;
   } catch (error) {

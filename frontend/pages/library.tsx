@@ -1,7 +1,7 @@
-import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+import { checkContactGuardApi } from "../apiNest/checkContactGuardApi";
 import { myCourseApi } from "../apiNest/myCourseApi";
 import Footer from "../components/footer";
 import FooterBrand from "../components/footerBrand";
@@ -10,6 +10,7 @@ import Img from "../components/image";
 import Pagination from "../components/pagination";
 
 export default function Library() {
+  const checkContactGuard = checkContactGuardApi();
   const router = useRouter();
   const [myCourse, setMyCourse] = useState({
     id: "",
@@ -32,6 +33,15 @@ export default function Library() {
     const data = await myCourseApi();
     data && setMyCourse(data);
   }
+
+  checkContactGuard.then((value) =>{
+    if(value?.statusCode === 400){
+      router.replace("/guard-contact");
+      return(
+        <div></div>
+      )
+    }
+  })
 
   return (
     <div className="background-image library">

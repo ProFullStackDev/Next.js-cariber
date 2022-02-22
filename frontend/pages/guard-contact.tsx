@@ -9,12 +9,14 @@ import Popup from "reactjs-popup";
 import Moment from 'moment';
 import * as staticData from "../components/static/guardContact";
 import { handleChange } from "../functions/handleInput";
+import { postContactGuardApi } from "../apiNest/contactGuardApi";
+import { useRouter } from "next/router";
 
 export default function GuardContact() {
+  const router = useRouter();
   const [interestOtherChecked, setInterestOtherChecked] = useState(false);
   const [interestOther, setInterestOther] = useState("");
   const [personalInterest, setPersonalInterest] = useState([""]);
-  const [birthDay, setBirthDay] = useState(new Date());
   const [formData, setFormData] = useState({
     first_name: "",
     last_name: "",
@@ -22,13 +24,21 @@ export default function GuardContact() {
     address: "",
     province: "",
     post_code: "",
-    birth_day: "",
+    birth_day: new Date(),
     degree: "",
     occupation: "",
     current_position: "",
     business_type: "",
     personal_interest: ""
   });
+  const [errorCheckbox, setErrorCheckbox] = useState({
+    isError: false,
+    message: "",
+  });
+
+  function handleBirthDayChange(value: Date) {
+    setFormData(values => ({ ...values, birth_day: value }));
+  }
 
   function handleInterestChange(e: ChangeEvent<HTMLInputElement>) {
     if (e.target.checked && !personalInterest.find(element => element === e.target.value)) {
@@ -42,8 +52,12 @@ export default function GuardContact() {
     }
   }
 
-  function submit(event: FormEvent) {
+  async function submit(event: FormEvent) {
     event.preventDefault();
+    setErrorCheckbox({
+      isError: false,
+      message: ""
+    });
     const personalInterestOther = personalInterest.find(element => element.includes("Other:"))
     if (interestOtherChecked) {
       if (personalInterestOther) {
@@ -58,8 +72,17 @@ export default function GuardContact() {
       personalInterest.splice(index, 1);
     }
     formData.personal_interest = personalInterest.toString();
-    formData.birth_day = Moment(birthDay).format('DD/MM/YYYY');
-    console.log(formData)
+    if (!formData.personal_interest) {
+      setErrorCheckbox({
+        isError: true,
+        message: "กรุณาเลือก"
+      });
+      return
+    }
+    const data = await postContactGuardApi(formData);
+    if (data) {
+      router.replace("/library");
+    }
   }
 
   return (
@@ -137,14 +160,14 @@ export default function GuardContact() {
                     required={true}
                     type={"text"}
                     onChange={e => { handleChange(e, setFormData, formData) }}
-                    value={Moment(birthDay).format('DD/MM/YYYY')} />
+                    value={Moment(formData.birth_day).format('DD/MM/YYYY')} />
                 </div>}
                   position="top center"
                   on="click"
                   closeOnDocumentClick
                   contentStyle={{ padding: "0px", border: "none", width: "max-content" }}
                   arrow={false}>
-                  <Calendar onChange={setBirthDay} value={birthDay} />
+                  <Calendar onChange={handleBirthDayChange} value={formData.birth_day} />
                 </Popup>
               </div>
               <div className="form-guard">
@@ -215,6 +238,9 @@ export default function GuardContact() {
                 <label className="color-black">
                   หัวข้อการเรียนที่สนใจ <span className="color-red">*</span>
                 </label>
+                {errorCheckbox.isError && (
+                  <p className="color-red">{errorCheckbox.message}</p>
+                )}
                 <div className="m-t-10">
                   <FormCheckbox id={"check-1"}
                     label="ธุรกิจและการเงิน"

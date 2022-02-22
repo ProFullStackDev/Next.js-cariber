@@ -8,7 +8,7 @@ import GoogleLogin, { GoogleLoginResponse, GoogleLoginResponseOffline } from "re
 import FacebookLogin, { ReactFacebookLoginInfo } from 'react-facebook-login-typed';
 import UserManager from "../auth/userManager";
 import router from "next/router";
-
+import { Auth } from "../apiNest/models/content/auth";
 
 interface LoginProps {
   callbackButton: MouseEventHandler<HTMLButtonElement>
@@ -29,7 +29,7 @@ export default function Login({ callbackButton }: LoginProps) {
     response = response as GoogleLoginResponse
     const data = await getGoogleAuthToken({
       id_token: response.tokenObj.id_token
-    });
+    }) as Auth;
     userManager.saveToken(data.access_token);
     router.replace("/library");
   }
@@ -42,7 +42,7 @@ export default function Login({ callbackButton }: LoginProps) {
     if (response.accessToken) {
       const data = await getFacebookAuthToken({
         access_token: response.accessToken as string
-      });
+      }) as Auth;
       userManager.saveToken(data.access_token);
       router.replace("/library");
     }
