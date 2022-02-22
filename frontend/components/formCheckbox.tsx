@@ -18,6 +18,7 @@ export default function FormCheckbox({ id,
             type="checkbox"
             name={`name_${id}`}
             id={id}
+            value={label}
             onChange={onChange} />
           <span className="p-l-5 color-black">
             {label}

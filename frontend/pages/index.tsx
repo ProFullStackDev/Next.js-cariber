@@ -33,7 +33,7 @@ export default function Index({ carousel, home, review }: IndexProps) {
         <div className="sizer">
           <div className="row align-items-center justify-content-center">
             <div className="block-type-image text-center col-8">
-              <div className="block box-shadow-none">
+              <div className="box-shadow-none">
                 <h1>
                   <strong>
                     <span className="color-primary">

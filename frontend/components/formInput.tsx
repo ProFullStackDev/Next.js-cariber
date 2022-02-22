@@ -9,6 +9,7 @@ interface FormInputProps {
   placeholder: string;
   onChange: ChangeEventHandler<HTMLInputElement>;
   minLength: number;
+  value?: string | number;
 }
 
 export default function FormInput({ id,
@@ -18,7 +19,8 @@ export default function FormInput({ id,
   required,
   placeholder,
   onChange,
-  minLength }: FormInputProps) {
+  minLength,
+  value }: FormInputProps) {
 
   return (
     <div className={`${id}-field form-group`}>
@@ -34,11 +36,13 @@ export default function FormInput({ id,
       )}
       <input id={`form_submission_${id}`}
         className="form-control"
+        name={id}
         type={type}
         onChange={onChange}
         required={required}
         placeholder={placeholder}
-        minLength={minLength} />
+        minLength={minLength}
+        value={value} />
     </div>
   )
 }

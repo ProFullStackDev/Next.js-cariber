@@ -12,7 +12,7 @@ interface FormInputProps {
   required: boolean;
   placeholder: string;
   onChange: ChangeEventHandler<HTMLSelectElement>;
-  item: SelectItem[];
+  item: SelectItem[] | string[];
 }
 
 export default function FormSelect({ id,
@@ -33,13 +33,21 @@ export default function FormSelect({ id,
       </p>
       <select id={`form_submission_${id}`}
         className="form-control"
+        name={id}
         onChange={onChange}
         required={required}
         placeholder={placeholder}>
+        <option value="">เลือก</option>
         {item.map((value, index) => {
-          return (
-            <option key={index} value={value.value}>{value.text}</option>
-          )
+          if (typeof value === "string") {
+            return (
+              <option key={index} >{value}</option>
+            )
+          } else if (typeof value === "object") {
+            return (
+              <option key={index} value={value.value}>{value.text}</option>
+            )
+          }
         })}
       </select>
     </div>
