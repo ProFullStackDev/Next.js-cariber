@@ -6,9 +6,9 @@ interface FormInputProps {
   description?: string;
   type: HTMLInputTypeAttribute;
   required: boolean;
-  placeholder: string;
+  placeholder?: string;
   onChange: ChangeEventHandler<HTMLInputElement>;
-  minLength: number;
+  minLength?: number;
   value?: string | number;
 }
 

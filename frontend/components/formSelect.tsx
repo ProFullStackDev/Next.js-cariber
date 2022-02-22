@@ -10,7 +10,7 @@ interface FormInputProps {
   label?: string;
   description?: string;
   required: boolean;
-  placeholder: string;
+  placeholder?: string;
   onChange: ChangeEventHandler<HTMLSelectElement>;
   item: SelectItem[] | string[];
 }

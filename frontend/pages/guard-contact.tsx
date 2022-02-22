@@ -84,9 +84,7 @@ export default function GuardContact() {
                     description="ภาษาไทย หรือ ภาษาอังกฤษ"
                     type={"text"}
                     required={true}
-                    placeholder={""}
-                    onChange={e => { handleChange(e, setFormData, formData) }}
-                    minLength={0} />
+                    onChange={e => { handleChange(e, setFormData, formData) }} />
                 </div>
                 <div className="col-6 p-0 lg-p-l-15">
                   <FormInput id={"last_name"}
@@ -94,9 +92,7 @@ export default function GuardContact() {
                     description="ภาษาไทย หรือ ภาษาอังกฤษ"
                     type={"text"}
                     required={true}
-                    placeholder={""}
-                    onChange={e => { handleChange(e, setFormData, formData) }}
-                    minLength={0} />
+                    onChange={e => { handleChange(e, setFormData, formData) }} />
                 </div>
               </div>
               <div className="form-guard">
@@ -105,9 +101,7 @@ export default function GuardContact() {
                     label="เบอร์โทรศัพท์"
                     type={"text"}
                     required={true}
-                    placeholder={""}
-                    onChange={e => { handleChange(e, setFormData, formData) }}
-                    minLength={0} />
+                    onChange={e => { handleChange(e, setFormData, formData) }} />
                 </div>
               </div>
               <div className="form-guard">
@@ -116,16 +110,13 @@ export default function GuardContact() {
                   description="เลขที่ หมู่ ซอย ถนน แขวง/ตำบล เขต/อำเภอ"
                   type={"text"}
                   required={true}
-                  placeholder={""}
-                  onChange={e => { handleChange(e, setFormData, formData) }}
-                  minLength={0} />
+                  onChange={e => { handleChange(e, setFormData, formData) }} />
               </div>
               <div className="form-guard">
                 <div className="col-6 p-0 lg-p-r-15">
                   <FormSelect id={"province"}
                     label="จังหวัด"
                     required={true}
-                    placeholder={""}
                     onChange={e => { handleChange(e, setFormData, formData) }}
                     item={staticData.province} />
                 </div>
@@ -136,9 +127,7 @@ export default function GuardContact() {
                     label="รหัสไปรษณีย์"
                     type={"text"}
                     required={true}
-                    placeholder={""}
-                    onChange={e => { handleChange(e, setFormData, formData) }}
-                    minLength={0} />
+                    onChange={e => { handleChange(e, setFormData, formData) }} />
                 </div>
               </div>
               <div className="form-guard row">
@@ -146,10 +135,8 @@ export default function GuardContact() {
                   <FormInput id={"birth_day"}
                     label="วัน/ เดือน/ ปีเกิดของคุณ"
                     required={true}
-                    placeholder={""}
                     type={"text"}
                     onChange={e => { handleChange(e, setFormData, formData) }}
-                    minLength={0}
                     value={Moment(birthDay).format('DD/MM/YYYY')} />
                 </div>}
                   position="top center"
@@ -165,9 +152,18 @@ export default function GuardContact() {
                   <FormSelect id={"degree"}
                     label="ระดับการศึกษาสูงสุดของคุณ"
                     required={true}
-                    placeholder={""}
                     onChange={e => { handleChange(e, setFormData, formData) }}
                     item={staticData.educationLevel} />
+                  {(formData.degree === "อื่นๆ (โปรดระบุ)" ||
+                    !staticData.educationLevel.find(e => e === formData.degree) &&
+                    formData.degree) && (
+                      <FormInput id={"degree"}
+                        type={"text"}
+                        required={(formData.degree === "อื่นๆ (โปรดระบุ)" ||
+                          !staticData.educationLevel.find(e => e === formData.degree) &&
+                          Boolean(formData.degree))}
+                        onChange={e => { formData.degree = e.target.value }} />
+                    )}
                 </div>
               </div>
               <div className="form-guard">
@@ -175,9 +171,18 @@ export default function GuardContact() {
                   <FormSelect id={"occupation"}
                     label="อาชีพปัจจุบันของคุณ"
                     required={true}
-                    placeholder={""}
                     onChange={e => { handleChange(e, setFormData, formData) }}
                     item={staticData.career} />
+                  {(formData.occupation === "อื่นๆ (โปรดระบุ)" ||
+                    !staticData.career.find(e => e === formData.occupation) &&
+                    formData.occupation) && (
+                      <FormInput id={"occupation"}
+                        type={"text"}
+                        required={(formData.occupation === "อื่นๆ (โปรดระบุ)" ||
+                          !staticData.career.find(e => e === formData.occupation) &&
+                          Boolean(formData.occupation))}
+                        onChange={e => { formData.occupation = e.target.value }} />
+                    )}
                 </div>
               </div>
               <div className="form-guard">
@@ -185,18 +190,25 @@ export default function GuardContact() {
                   label="ตำแหน่งปัจจุบันของคุณ"
                   type={"text"}
                   required={true}
-                  placeholder={""}
-                  onChange={e => { handleChange(e, setFormData, formData) }}
-                  minLength={0} />
+                  onChange={e => { handleChange(e, setFormData, formData) }} />
               </div>
               <div className="form-guard">
                 <div className="col-6 p-0 lg-p-r-15">
                   <FormSelect id={"business_type"}
                     label="อุตสาหกรรมของคุณ"
                     required={true}
-                    placeholder={""}
                     onChange={e => { handleChange(e, setFormData, formData) }}
                     item={staticData.industry} />
+                  {(formData.business_type === "อื่นๆ (โปรดระบุ)" ||
+                    !staticData.industry.find(e => e === formData.business_type) &&
+                    formData.business_type) && (
+                      <FormInput id={"business_type"}
+                        type={"text"}
+                        required={(formData.business_type === "อื่นๆ (โปรดระบุ)" ||
+                          !staticData.industry.find(e => e === formData.business_type) &&
+                          Boolean(formData.business_type))}
+                        onChange={e => { formData.business_type = e.target.value }} />
+                    )}
                 </div>
               </div>
               <div className="form-guard">
@@ -250,9 +262,7 @@ export default function GuardContact() {
                     <FormInput id={"other_check"}
                       type={"text"}
                       required={interestOtherChecked}
-                      placeholder={""}
-                      onChange={(e) => { setInterestOther(e.target.value) }}
-                      minLength={0} />
+                      onChange={(e) => { setInterestOther(e.target.value) }} />
                   </div>
                 </div>
               </div>
