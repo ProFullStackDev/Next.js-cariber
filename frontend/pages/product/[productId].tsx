@@ -1,31 +1,79 @@
 import { useRouter } from "next/router";
-import Accordion, { Color } from "../../components/accordion";
+import { useEffect, useState } from "react";
+import { courseLmsApi } from "../../apiNest/courseLmsApi";
+import { episodeApi } from "../../apiNest/episodeApi";
+import { CourseLms, EpisodeLms } from "../../apiNest/models/content/courseLms";
+import Accordion, { Color, Icon } from "../../components/accordion";
 import Footer from "../../components/footer";
 import Header from "../../components/header";
 import Img from "../../components/image";
 import Pagination from "../../components/pagination";
 import ProductSale from "../../components/product/productSale";
 import ProductBlogs from "../../components/productBlogs";
-import { ProductEpisode } from "../../components/static/interface";
-import * as staticData from "../../components/static/product"
 import VideoPlayer from "../../components/videoPlayer";
+import cutCloudflareVideoId from "../../functions/cutCloudflareVideoId";
 
-interface ProductProp {
-  productRemark: string,
-  productImage: string,
-  productName: string,
-  fileUrl: string,
-  instructorImage: string,
-  instructorName: string,
-  instructorRemark: string,
-  episodes: ProductEpisode[]
-  videoId: string,
-}
+export default function Product() {
+  const [courseLms, setCourseLms] = useState({
+    id: 0,
+    speaker_name: "",
+    course_name: "",
+    description: "",
+    total_hours: "",
+    total_lessons: "",
+    order_link: "",
+    header: "",
+    thumbnail_image: "",
+    lms_id: 0,
+    createDate: "",
+    updateDate: "",
+    deletedAt: "",
+    episode: [{
+      id: 0,
+      episode_number: 0,
+      episode_name: "",
+      description: "",
+      link_video: "",
+      thumbnail_image: "",
+      lms_id: 0,
+      is_free_trial: false,
+      createDate: "",
+      updateDate: "",
+      deletedAt: "",
+    }],
+  });
+  const [episodeLms, setEpisodeLms] = useState({
+    id: 0,
+    episode_number: 0,
+    episode_name: "",
+    description: "",
+    link_video: "",
+    thumbnail_image: "",
+    lms_id: 0,
+    is_free_trial: false,
+    createDate: "",
+    updateDate: "",
+    deletedAt: "",
+  });
+  const router = useRouter();
+  const announcement = "ตอนนี้คุณกำลังอยู่ในโหมดทดลองเรียนฟรี เนื้อหาบางส่วนมีการถูกล็อกไว้\nคุณสามารถซื้อคอร์สนี้เพื่อดูเนื้อหาทั้งหมดในคอร์สเรียน";
+  const { productId } = router.query;
 
-export default function Product({ product }: { product: ProductProp }) {
-  const router = useRouter()
-  const announcement = "ตอนนี้คุณกำลังอยู่ในโหมดทดลองเรียนฟรี เนื้อหาบางส่วนมีการถูกล็อกไว้\nคุณสามารถซื้อคอร์สนี้เพื่อดูเนื้อหาทั้งหมดในคอร์สเรียน"
-  const episodeTitle = "EP01: รู้จักกับ “คุณเกียรติศักดิ์ เสนาเมือง”"
+  useEffect(() => {
+    if (!router.isReady) return;
+    fetchData();
+  }, [router.isReady]);
+
+  async function setEpisode(id: number) {
+    const data = await episodeApi(id.toString()) as EpisodeLms;
+    setEpisodeLms(data);
+  }
+
+  async function fetchData() {
+    const data = await courseLmsApi(productId!.toString()) as CourseLms;
+    setCourseLms(data);
+    setEpisode(data.episode[0].id);
+  }
 
   return (
     <div className="product">
@@ -35,10 +83,10 @@ export default function Product({ product }: { product: ProductProp }) {
           <div className="nev-product">
             <div className="left-nev-product">
               <h6 className="color-primary">
-                คอร์สเรียน : {product.productName}
+                คอร์สเรียน : {courseLms.course_name}
               </h6>
               <p className="f-s-14 m-b-0 color-black">
-                สอนโดย {product.instructorName}
+                สอนโดย {courseLms.speaker_name}
               </p>
             </div>
             <div className="right-nev-product sm-none">
@@ -67,16 +115,11 @@ export default function Product({ product }: { product: ProductProp }) {
                   </h5>
                 </button>
               </div>
-              <div className="col-12 row lg-flex-between">
+              <div className="col-12">
                 <div className="episode-title">
                   <h5 className="color-black m-0">
-                    {episodeTitle}
+                    {episodeLms.episode_name}
                   </h5>
-                </div>
-                <div>
-                  <a className="color-primary" href="#">
-                    ดูรายละเอียดคอร์สนี้เพิ่มเติม
-                  </a>
                 </div>
               </div>
               <div className="col-12">
@@ -92,7 +135,7 @@ export default function Product({ product }: { product: ProductProp }) {
               <div className="col-12 p-b-20">
                 <div className="player">
                   <div className="player-video">
-                    <VideoPlayer videoId={product.videoId} />
+                    {episodeLms.link_video && <VideoPlayer videoId={cutCloudflareVideoId(episodeLms.link_video)} />}
                   </div>
                   <div className="player-nav">
                     <div className="media">
@@ -120,39 +163,44 @@ export default function Product({ product }: { product: ProductProp }) {
                       <div className="playlist-title">
                         <div className="media">
                           <div className="media-body media-middle">
-                            <h2>{product.productName}</h2>
+                            <h2>{courseLms.course_name}</h2>
                           </div>
                           <div className="media-right">
-                            <h3>{product.episodes.length} บทเรียน</h3>
+                            <h3>{courseLms.episode.length} บทเรียน</h3>
                           </div>
                         </div>
                       </div>
                       <div className="playlist-body">
-                        <a className="media track" href="#">
-                          <div className="media-left media-middle">
-                            <p className="track-count active">
-                              <i className="fa fa-play color-primary"></i>
-                            </p>
-                          </div>
-                          <div className="media-left media-middle">
-                            <Img className="track-thumb"
-                              src={"/product/product-2.jpg"}
-                              width={70}
-                              height={39.3833}
-                              alt={"EP02: ศาสตร์ของการเป็นโค้ช"}
-                            />
-                          </div>
-                          <div className="media-body media-middle">
-                            <div className="track-title">
-                              {"EP02: ศาสตร์ของการเป็นโค้ช"}
-                            </div>
-                          </div>
-                        </a>
-                        <div className="playlist-button">
-                          <button>
-                            บทเรียนถัดไป
-                          </button>
-                        </div>
+                        {courseLms.episode.map((value, index) => {
+                          return (
+                            <a key={index} className="media track" onClick={async () => {await setEpisode(value.id)}}>
+                              <div className="media-left media-middle">
+                                {value.episode_number === episodeLms.episode_number ? (
+                                  <p className="track-count active">
+                                    <i className="fa fa-play color-primary"></i>
+                                  </p>
+                                ) : (
+                                  <p className="track-count">
+                                    {value.episode_number}
+                                  </p>
+                                )}
+                              </div>
+                              <div className="media-left media-middle">
+                                <Img className="track-thumb"
+                                  src={"/product/product-2.jpg"}
+                                  width={70}
+                                  height={39.3833}
+                                  alt={value.episode_name}
+                                />
+                              </div>
+                              <div className="media-body media-middle">
+                                <div className="track-title">
+                                  {value.episode_name}
+                                </div>
+                              </div>
+                            </a>
+                          )
+                        })}
                       </div>
                     </div>
                   </div>
@@ -166,26 +214,26 @@ export default function Product({ product }: { product: ProductProp }) {
                 </div>
               </div>
               <div className="col-8">
-                {product.episodes.map((value, index) => {
+                {courseLms.episode.map((value, index) => {
                   return (<Accordion key={index}
-                    title={value.title}
+                    title={value.episode_name}
                     description={value.description + "\n *หากผู้ใดละเมิดนำงานไปเผยแพร่ คัดลอก หรือดัดแปลงไม่ว่าบางส่วนหรือทั้งหมดจะถูกดำเนินคดีตามกฎหมาย"}
                     col={12}
-                    icon={value.icon}
+                    icon={Icon.play}
                     color={Color.light}
-                    link={{ linkUrl: "#", linkText: `${value.progress ? (`${value.progress < 100 ? ("ดูต่อ") : ("ดูอีกครั้ง")}`) : ("รับชมเนื้อหา")}` }}
-                    progress={value.progress}
+                    button={{ callback: () => { setEpisode(value.id) }, text: `${0 ? (`${0 < 100 ? ("ดูต่อ") : ("ดูอีกครั้ง")}`) : ("รับชมเนื้อหา")}` }}
+                    progress={0}
                   />)
                 })
                 }
                 <Pagination page={Number(router.query.page)} pageCount={2} />
               </div>
               <ProductBlogs progressBlog={true}
-                productImage={product.productImage}
-                productName={product.productName}
-                instructorImage={product.instructorImage}
-                instructorName={product.instructorName}
-                instructorRemark={product.instructorRemark} />
+                productImage={courseLms.thumbnail_image}
+                productName={courseLms.course_name}
+                instructorImage={courseLms.thumbnail_image}
+                instructorName={courseLms.speaker_name}
+                instructorRemark={courseLms.speaker_name} />
             </div>
           </div>
         </div>
@@ -193,31 +241,4 @@ export default function Product({ product }: { product: ProductProp }) {
       <Footer />
     </div>
   )
-}
-
-export async function getStaticPaths() {
-  return {
-    paths: [
-      { params: { productId: "the-art-of-football-tactics" } }
-    ],
-    fallback: false
-  };
-}
-
-export async function getStaticProps() {
-  return {
-    props: {
-      product: {
-        productRemark: "เกียรติศักดิ์ เสนาเมือง หรือ ‘ซิโก้’ อดีตนักฟุตบอลและหัวหน้าผู้ฝึกสอนทีมชาติไทย ศูนย์หน้าระดับตำนานผู้ทำประตูสูงสุดในนามทีมชาติอันดับ 16 ของโลก ด้วยจำนวน 71 ประตูใน 134 แมตช์ และโค้ชผู้นำพาทีมชาติไทยกู้ศรัทธาจากแฟนบอลจนสร้างประวัติศาสตร์คว้าแชมป์อาเซียนคัพ หรือ AFF ซูซูกิคัพ ได้ถึง 2 สมัย",
-        productImage: "/library/my-course-3.jpg",
-        productName: "The Art of Football Tactics",
-        videoId: "ba36e29c18b8c21b53589a403cd5b09b",
-        fileUrl: "https://www.cariber.co/resource_redirect/downloads/sites/163642/themes/2149288781/downloads/5kt5U0rKQeqyuJRSPSkL_Summary_Ep14.pdf",
-        instructorImage: "/product/instructor-image.jpg",
-        instructorName: "เกียรติศักดิ์ เสนาเมือง",
-        instructorRemark: "เพราะความสำเร็จของฟุตบอลเกิดจากทีมเวิร์ค และกว่าที่จะมาเป็นทีมได้ต้องมีกระบวนการสร้าง",
-        episodes: staticData.episodes,
-      }
-    }
-  };
 }

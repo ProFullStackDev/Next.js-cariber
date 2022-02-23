@@ -1,5 +1,4 @@
 import { Episode } from "../../apiStrapi/models/contentType/courses";
-import { Icon } from "../accordion";
 
 export interface TimeZone {
   value: string,
@@ -49,12 +48,4 @@ export interface CourseDetailEpisode {
   totalHours: string,
   totalEpisodes: string,
   episodes: Episode[],
-}
-
-export interface ProductEpisode {
-  image: string,
-  title: string,
-  description: string,
-  progress: number,
-  icon: Icon
 }

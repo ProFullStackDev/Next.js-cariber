@@ -11,4 +11,5 @@ export interface MyCourseItem {
   description: string;
   expires_date: string;
   course_name: string;
+  thumbnail_image: string;
 }

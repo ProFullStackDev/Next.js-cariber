@@ -10,6 +10,7 @@ import Img from "../components/image";
 import Pagination from "../components/pagination";
 
 export default function Library() {
+  const [loadingItem, setLoadingItem] = useState(true);
   const checkContactGuard = checkContactGuardApi();
   const router = useRouter();
   const [myCourse, setMyCourse] = useState({
@@ -22,6 +23,7 @@ export default function Library() {
       description: "",
       expires_date: "",
       course_name: "",
+      thumbnail_image: "",
     }]
   });
 
@@ -32,6 +34,7 @@ export default function Library() {
   async function fetchData() {
     const data = await myCourseApi();
     data && setMyCourse(data);
+    setLoadingItem(false);
   }
 
   checkContactGuard.then((value) =>{
@@ -92,15 +95,15 @@ export default function Library() {
               </div>
             </div>
             <div className="grid-container">
-              {myCourse?.course_list?.map((value, index) => {
+              {!loadingItem && myCourse?.course_list?.map((value, index) => {
                 return (
                   <div key={`mycourse ${index}`} className="col-12 products-col">
                     <div className="product product-4 box-shadow-medium  background-light h-max">
                       <div className="product-content h-max">
-                        <Link href={""}>
+                        <Link href={`/product/${value.id}`}>
                           <a>
                             <div className="product-image">
-                              <Img src={""}
+                              <Img src={value.thumbnail_image}
                                 width={700}
                                 height={400}
                                 alt={value.speaker_name}
@@ -108,9 +111,9 @@ export default function Library() {
                             </div>
                           </a>
                         </Link>
-                        <div className="p-30">
+                        <div className="frame-card">
                           <div className="product-info" >
-                            <Link href={""}>
+                            <Link href={`/product/${value.id}`}>
                               <a>
                                 <h4 className="product-title">
                                   <strong>
@@ -129,7 +132,7 @@ export default function Library() {
                             </p>
                           </div>
                           <div className="product-button">
-                            <Link href={""}>
+                            <Link href={`/product/${value.id}`}>
                               <a className="btn btn-box btn-solid btn-small btn-full">
                                 รับชมเลย
                               </a>

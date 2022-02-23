@@ -9,7 +9,6 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@cloudflare/stream-react": "^1.5.0",
     "@types/formidable": "^2.0.3",
     "@types/gtag.js": "^0.0.8",
     "axios": "^0.24.0",
@@ -18,7 +17,6 @@
     "formidable": "^2.0.1",
     "moment": "^2.29.1",
     "next": "^12.0.10",
-    "next-auth": "^4.2.1",
     "react": "17.0.2",
     "react-calendar": "^3.7.0",
     "react-dom": "17.0.2",

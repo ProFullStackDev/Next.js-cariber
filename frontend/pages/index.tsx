@@ -18,6 +18,11 @@ import { strapiImage } from '../apiStrapi/models/contact';
 import VideoPlayer from '../components/videoPlayer';
 import { CarouselContent } from '../apiStrapi/models/contentType/carousel';
 import carouselApi from '../apiStrapi/carouselApi';
+import { MouseEventHandler, useState } from 'react';
+import Popup from 'reactjs-popup';
+import CustomLogin from '../components/customLogin';
+import UserManager from '../auth/userManager';
+import router from 'next/router';
 
 interface IndexProps {
   carousel: ResponseDataList<CarouselContent>;
@@ -26,6 +31,24 @@ interface IndexProps {
 }
   
 export default function Index({ carousel, home, review }: IndexProps) {
+  const userManager = new UserManager();
+  const [isPopup, setIsPopup] = useState(false)
+
+  async function interestCourse(link: string) {
+    if (userManager.isLoggedIn()) {
+      link && router.push(link)
+    } else {
+      setIsPopup(true)
+    }
+  }
+
+  async function setCallbackButtonFN(link: string) {
+    setIsPopup(false)
+    if (userManager.isLoggedIn()) {
+      link && router.push(link)
+    }
+  }
+  
   return (
     <div className="index">
       <Header />
@@ -78,7 +101,7 @@ export default function Index({ carousel, home, review }: IndexProps) {
               <div className="block-type-feature text-center col-5">
                 <div className="block box-shadow-none">
                   <div className="feature column-center">
-                    <a href={home.data?.promotions?.url}>
+                    <a onClick={() => interestCourse(home.data?.promotions?.url)}>
                       <Img className="feature-image"
                         src={strapiImage(home.data?.promotions?.high_yearly_sub?.url)}
                         width={400}
@@ -86,9 +109,9 @@ export default function Index({ carousel, home, review }: IndexProps) {
                         alt="Yearly Subscription"
                       />
                     </a>
-                    <a className="btn btn-solid btn-medium btn-auto" href={home.data?.promotions?.url}>
+                    <button className="btn btn-solid btn-medium btn-auto" onClick={() => interestCourse(home.data?.promotions?.url)}>
                       สมัครเลย
-                    </a>
+                    </button>
                   </div>
                 </div>
               </div>
@@ -144,6 +167,24 @@ export default function Index({ carousel, home, review }: IndexProps) {
               )
             })}
           </div>
+          <Popup className="popup-auth"
+            open={isPopup}
+            modal
+            onClose={() => setIsPopup(false)}
+            closeOnDocumentClick={false}>
+            {(close: MouseEventHandler<HTMLButtonElement>) => {
+              return (
+                <div className="pop-modal">
+                  <button className="close" onClick={close}>
+                    <p>
+                      &times;
+                    </p>
+                  </button>
+                  <CustomLogin path={home.data?.promotions?.url} callbackButton={setCallbackButtonFN} />
+                </div>
+              )
+            }}
+          </Popup>
         </div>
       </div>
       <FooterBrand />
