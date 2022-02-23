@@ -9,9 +9,11 @@ export const NEST_API_URLS = {
   facebookAuth: BASE_API + "/facebook-auth",
   googleAuth: BASE_API + "/google-auth",
   myCourse: BASE_API + "/users/my-course",
+  checkContactGuard: BASE_API + "/users/contact-guard",
   checkExists: BASE_API + "/users/user-exists",
   password: BASE_API + "/users/reset-password",
   register: BASE_API + "/users",
+  contactGuard: BASE_API + "/contact",
 }
 
 export const NEST_HEADERs = {

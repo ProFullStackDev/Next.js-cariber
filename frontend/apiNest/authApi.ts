@@ -14,39 +14,55 @@ export interface NextAuthResponse {
 }
 
 export async function loginApi(body: AuthApiProps) {
-  const response = await fetch(NEST_API_URLS.auth, {
-    method: "POST",
-    headers: NEST_HEADERs.default,
-    body: JSON.stringify(body),
-  })
-  return await response.json() as Auth;
+  try {
+    const response = await fetch(NEST_API_URLS.auth, {
+      method: "POST",
+      headers: NEST_HEADERs.default,
+      body: JSON.stringify(body),
+    })
+    return await response.json() as Auth;
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 export async function loginOrCreateApi(body: any) {
-  const response = await fetch(NEST_API_URLS.checkExists, {
-    method: "POST",
-    headers: NEST_HEADERs.default,
-    body: JSON.stringify(body),
-  })
-  return await response.json() as any;
+  try {
+    const response = await fetch(NEST_API_URLS.checkExists, {
+      method: "POST",
+      headers: NEST_HEADERs.default,
+      body: JSON.stringify(body),
+    })
+    return await response.json() as any;
+  } catch (error) {
+    console.log(error);
+  }
 }
 
-export async function getGoogleAuthToken(body: any): Promise<Auth> {
-  const response = await fetch(NEST_API_URLS.googleAuth, {
-    method: 'POST',
-    headers: NEST_HEADERs.default,
-    body: JSON.stringify(body),
-  })
-  return await response.json() as Auth;
+export async function getGoogleAuthToken(body: any) {
+  try {
+    const response = await fetch(NEST_API_URLS.googleAuth, {
+      method: 'POST',
+      headers: NEST_HEADERs.default,
+      body: JSON.stringify(body),
+    })
+    return await response.json() as Auth;
+  } catch (error) {
+    console.log(error);
+  }
 }
 
-export async function getFacebookAuthToken(body: any): Promise<Auth> {
-  const response = await fetch(NEST_API_URLS.facebookAuth, {
-    method: 'POST',
-    headers: NEST_HEADERs.default,
-    body: JSON.stringify(body),
-  })
-  return await response.json() as Auth;
+export async function getFacebookAuthToken(body: any) {
+  try {
+    const response = await fetch(NEST_API_URLS.facebookAuth, {
+      method: 'POST',
+      headers: NEST_HEADERs.default,
+      body: JSON.stringify(body),
+    })
+    return await response.json() as Auth;
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 export async function validateTokenApi() {

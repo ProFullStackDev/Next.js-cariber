@@ -17,7 +17,9 @@
 @import "./pixel-helper.scss";
 @import "reactjs-popup/dist/index.css";
 @import "./especial/videoPlayer.module.scss";
+@import "./especial/guardContact.scss";
 @import "./especial/forgotPassword.module.scss";
+@import "react-calendar/dist/Calendar.css";
 
 $frequency: 0;
 $show-grid: false;
@@ -3627,7 +3629,7 @@ button {
   line-height: 1.5;
   display: block;
   width: 100%;
-  padding: 10.5px 10px;
+  padding: 7px 10px;
   -webkit-transition: all 0.2s;
   -o-transition: all 0.2s;
   transition: all 0.2s;
@@ -4856,6 +4858,10 @@ a .panel-sub-title {
   align-items: center !important;
 }
 
+.background-smooth {
+  background-color:#fbf5e4 !important;
+}
+
 .background-white {
   background-color: white;
 
@@ -5029,4 +5035,18 @@ a .panel-sub-title {
 
 .white-space-pre {
   white-space: pre-line;
+}
+
+.card-form {
+  background: #fff;
+  box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.05);
+  border-radius: 5px;
+}
+
+.color-red{
+  color: red;
+}
+
+.color-body{
+  color: $color-body;
 }

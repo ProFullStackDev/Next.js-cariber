@@ -1,4 +1,4 @@
-export interface Register{
+export interface RegisterContent{
   access_token: string;
   statusCode: number;
   message: string[] | string;

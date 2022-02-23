@@ -5,6 +5,7 @@ import Img from "./image";
 import registerApi, { RegisterApiProps } from "../apiNest/registerApi";
 import UserManager from "../auth/userManager";
 import { useRouter } from "next/router";
+import { RegisterContent } from '../apiNest/models/content/register';
 
 interface RegisterProps {
   callbackButton: MouseEventHandler<HTMLButtonElement>
@@ -36,7 +37,7 @@ export default function Register({ callbackButton }: RegisterProps) {
       email: formRegister.email,
       password: formRegister.password
     }
-    const data = await registerApi(formData);
+    const data = await registerApi(formData) as RegisterContent;
     if (!data.message) {
       userManager.saveToken(data.access_token);
       router.replace("/library");
