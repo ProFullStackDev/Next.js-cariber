@@ -15,6 +15,7 @@ export const NEST_API_URLS = {
   register: BASE_API + "/users",
   contactGuard: BASE_API + "/contact/create-contact",
   courseLms: BASE_API + "/course",
+  episode: BASE_API + "/episode",
 }
 
 export const NEST_HEADERs = {

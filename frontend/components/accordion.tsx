@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { MouseEventHandler, useState } from "react";
 
 export enum Icon {
   play = "fal fa-play-circle",
@@ -11,8 +11,8 @@ export enum Color {
 }
 
 interface AccordionLink {
-  linkUrl: string,
-  linkText: string
+  callback: MouseEventHandler<HTMLButtonElement>;
+  text: string;
 }
 
 interface AccordionProps {
@@ -21,11 +21,11 @@ interface AccordionProps {
   col: number,
   icon?: Icon,
   color: Color,
-  link?: AccordionLink,
+  button?: AccordionLink,
   progress?: number
 }
 
-export default function Accordion({ title, description, col, icon, color, link, progress }: AccordionProps) {
+export default function Accordion({ title, description, col, icon, color, button, progress }: AccordionProps) {
   const [displayDescription, setDisplayDescription] = useState("d-none");
   function switchDisplay() {
     if (icon === Icon.lock) {
@@ -58,7 +58,7 @@ export default function Accordion({ title, description, col, icon, color, link, 
       </div>
       <div className={`accordion-collapse ${color} ${displayDescription}`}>
         <div className={`accordion accordion-body row`}>
-          <div className={`${link ? ("col-9") : ("col-12")} `}>
+          <div className={`${button ? ("col-9") : ("col-12")} `}>
                 <h6 className="f-s-14 white-space-pre">
                   <span>
                     {description}
@@ -66,7 +66,7 @@ export default function Accordion({ title, description, col, icon, color, link, 
                   <br />
                 </h6>
           </div>
-          {link && (
+          {button && (
             <div className="accordion-right col-3">
               <div>
                 {(progress || progress === 0) && (<div>
@@ -79,7 +79,7 @@ export default function Accordion({ title, description, col, icon, color, link, 
                     </div>
                   </div>
                 </div>)}
-                <a href={link.linkUrl} className="btn btn-small btn-full">{link.linkText}</a>
+                <button onClick={button.callback} className="btn btn-small btn-full">{button.text}</button>
               </div>
             </div>
           )}

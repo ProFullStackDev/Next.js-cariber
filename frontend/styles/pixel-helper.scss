@@ -6,6 +6,10 @@ $maximum-pixel-percentage : 100;
   .p-w-#{$i} {
     width: $i+0% !important;
   }
+
+  .p-h-#{$i} {
+    width: $i+0% !important;
+  }
 }
 
 @for $i from 0 to $maximum-pixel-size {

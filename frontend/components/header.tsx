@@ -6,7 +6,7 @@ import FlashMessages, { FlashMessagesType } from "../functions/flashMessages";
 import SwitchSignInSignUp from "./switchSignInSignUp";
 import { useRouter } from "next/router";
 import UserManager from "../auth/userManager";
-import CustomLogin from "./customSignin";
+import CustomLogin from "./customLogin";
 
 interface Menu {
   url: string,
@@ -62,9 +62,7 @@ export default function Header() {
     if( userManager.isLoggedIn() ){
       router.push(link)
     } else {
-      // popup login
       setIsPopup(true)
-      
     }
   }
 

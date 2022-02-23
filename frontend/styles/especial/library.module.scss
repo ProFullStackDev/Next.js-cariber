@@ -1,6 +1,15 @@
 @import "../sizer.scss";
 
 .library {
+
+  .frame-card {
+    padding: 30px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
   .resume-course-image {
     @media (min-width: $mobile-size) {
       width: 175px;
