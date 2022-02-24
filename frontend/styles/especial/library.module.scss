@@ -1,4 +1,5 @@
 @import "../sizer.scss";
+@import "../color.scss";
 
 .library {
 
@@ -18,7 +19,7 @@
   }
 
   .product {
-    border: 1px ridge #e74e25;
+    border: 1px ridge $color-tiger;
     border-radius: 4px;
   }
 
@@ -50,16 +51,16 @@
 
   .resume-course-status,
   .products-title {
-    color: #e74e25;
+    color: $color-tiger;
   }
 
   .product-title,
   .resume-course-title {
-    color: #1e4397;
+    color: $color-blue;
   }
 
   .product-body {
-    color: #0e1b20;
+    color: $color-black;
     line-height: 1;
   }
 

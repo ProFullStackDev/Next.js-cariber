@@ -1,3 +1,5 @@
+@import "../color.scss";
+
 .accordion-outside {
 
   .accordion-progress {
@@ -19,7 +21,7 @@
   }
 
   .accordion {
-    border: 4px none #e74e25;
+    border: 4px none $color-tiger;
     border-radius: 4px;
     cursor: pointer;
   }

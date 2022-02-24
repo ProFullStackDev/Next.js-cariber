@@ -70,7 +70,7 @@ export default function Courses({ courses, annualPromotion }: CoursesProps) {
                               </a>
                             </Link>
                           </h5>
-                          <p className="f-s-12">
+                          <p>
                             <Link href={`/course/${value.id}`}>
                               <a className={`${!value.publishedAt && "disabled"}`}>
                                 {value.course_name}

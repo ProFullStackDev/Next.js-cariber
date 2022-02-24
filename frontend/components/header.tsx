@@ -7,6 +7,7 @@ import SwitchSignInSignUp from "./switchSignInSignUp";
 import { useRouter } from "next/router";
 import UserManager from "../auth/userManager";
 import CustomLogin from "./customLogin";
+import AnnouncementBar from "./announcementBar";
 
 interface Menu {
   url: string,
@@ -73,6 +74,7 @@ export default function Header() {
 
   return (
     <header className="header">
+      <AnnouncementBar/>
       {flashForgotPassword && (
         <div className="header-changed-password">
           <div className="row">

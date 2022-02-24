@@ -1,0 +1,18 @@
+{
+  "kind": "singleType",
+  "collectionName": "announcement_bars",
+  "info": {
+    "singularName": "announcement-bar",
+    "pluralName": "announcement-bars",
+    "displayName": "Announcement Bar"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "message": {
+      "type": "string"
+    }
+  }
+}
