@@ -10,6 +10,7 @@ export interface HomeContent {
   q_and_a: QAndA[];
   shopee_info: ShopeeInfo;
   shopee: Shopee[];
+  thumbnail_video: Image;
 }
 
 export interface Shopee {

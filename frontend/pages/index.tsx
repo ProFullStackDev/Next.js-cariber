@@ -74,7 +74,7 @@ export default function Index({ carousel, home, review }: IndexProps) {
                   </em>
                 </h4>
                 <br />
-                <VideoPlayer videoId={home.data?.video_id} />
+                <VideoPlayer videoId={home.data?.video_id} thumbnailImage={strapiImage(home.data?.thumbnail_video?.url)} />
               </div>
             </div>
           </div>

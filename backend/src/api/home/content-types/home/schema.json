@@ -64,6 +64,15 @@
       "type": "component",
       "repeatable": true,
       "component": "component-home.shopee"
+    },
+    "thumbnail_video": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos"
+      ],
+      "type": "media",
+      "multiple": false
     }
   }
 }
