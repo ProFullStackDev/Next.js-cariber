@@ -209,6 +209,11 @@ function VideoPlayer(props: VideoPlayerProps) {
         onEnded={handleEnded}
         onProgress={handleProgress}
         onDuration={handleDuration}
+        config={{
+          file: {
+            forceHLS: true
+          }
+        }}
       />
       <div className={`controls-wrapper ${controllerVisible ? "visible" : "hidden"} ${!videoStarted && "hidden"}`}>
         <div className="video-controller">
