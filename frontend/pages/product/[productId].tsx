@@ -135,7 +135,7 @@ export default function Product() {
               <div className="col-12 p-b-20">
                 <div className="player">
                   <div className="player-video">
-                    {episodeLms.link_video && <VideoPlayer videoId={cutCloudflareVideoId(episodeLms.link_video)} />}
+                    {episodeLms.link_video && <VideoPlayer videoId={cutCloudflareVideoId(episodeLms.link_video)} thumbnailImage={episodeLms.thumbnail_image}/>}
                   </div>
                   <div className="player-nav">
                     <div className="media">

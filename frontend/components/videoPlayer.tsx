@@ -5,6 +5,7 @@ import Img from './image';
 
 type VideoPlayerProps = {
   videoId: string;
+  thumbnailImage?: string;
   style?: React.CSSProperties;
 }
 
@@ -34,12 +35,13 @@ function VideoPlayer(props: VideoPlayerProps) {
   const [controllerVisible, setControllerVisible] = useState(false);
   const [optionsVisible, setOptionsVisible] = useState(false);
   const [volumeVisible, setVolumeVisible] = useState(false);
+  const [videoStarted, setVideoStarted] = useState(false);
   const [videoState, setVideoState] = useState<ReactVideoPlayerState>({
     url: `https://videodelivery.net/${props.videoId}/manifest/video.m3u8`,
     pip: false,
-    playing: false,
+    playing: true,
     controls: false,
-    light: `https://s.isanook.com/ca/0/ui/279/1396205/download20190701165129_1562561119.jpg`,
+    light: props.thumbnailImage || true,
     volume: 1,
     muted: false,
     played: 0,
@@ -174,6 +176,10 @@ function VideoPlayer(props: VideoPlayerProps) {
     setState(!visible)
   }
 
+  const handleStart = () => {
+    setVideoStarted(true);
+  }
+
   return (
     <div className="player-wrapper video-player"
       onMouseMove={() => { handleVisible(setControllerVisible) }}
@@ -181,11 +187,13 @@ function VideoPlayer(props: VideoPlayerProps) {
       ref={playerContainerRef}
       style={{ ...props.style }}>
       <ReactPlayer
+        className="react-player"
         width="100%"
         height="100%"
         ref={player}
         url={videoState.url}
         pip={videoState.pip}
+        light={videoState.light}
         playing={videoState.playing}
         controls={false}
         loop={videoState.loop}
@@ -193,6 +201,7 @@ function VideoPlayer(props: VideoPlayerProps) {
         volume={videoState.volume}
         muted={videoState.muted}
         onReady={handleReady}
+        onStart={handleStart}
         onPlay={handlePlay}
         onEnablePIP={handleEnablePIP}
         onDisablePIP={handleDisablePIP}
@@ -201,7 +210,7 @@ function VideoPlayer(props: VideoPlayerProps) {
         onProgress={handleProgress}
         onDuration={handleDuration}
       />
-      <div className={`controls-wrapper ${controllerVisible ? "visible" : "hidden"}`}>
+      <div className={`controls-wrapper ${controllerVisible ? "visible" : "hidden"} ${!videoStarted && "hidden"}`}>
         <div className="video-controller">
           <button className="control-button" onClick={handlePlayPause}>
             {videoState.playing ? (<Img src="/videoPlayer/pause-solid.svg"
