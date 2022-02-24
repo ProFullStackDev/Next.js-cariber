@@ -13,6 +13,18 @@ export interface CourseLms {
   updateDate: string;
   deletedAt: string;
   episode: EpisodeLms[];
+  instructor: Instructor;
+}
+
+interface Instructor{
+id: number;
+name: string;
+lms_id: number;
+idiom: string;
+profile_image: string;
+createDate:	string;
+updateDate:	string;
+deletedAt:	string;
 }
 
 export interface EpisodeLms {
