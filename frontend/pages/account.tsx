@@ -1,31 +1,65 @@
 import Link from "next/link";
-import { useRouter } from "next/router";
-import { ChangeEvent, FormEvent, useEffect, useRef, useState } from "react";
-import getUserProfileApi from "../apiStrapi/getUserProfileApi";
-import updateUserProfileApi from "../apiStrapi/updateUserProfileApi";
+import { FormEvent, useEffect, useRef, useState } from "react";
+import getUserProfileApi from "../apiNest/getUserProfileApi";
+import mySubscriptionApi from "../apiNest/mySubscriptionApi";
+import resetPasswordApi from "../apiNest/resetPasswordApi";
+import updateUserProfileApi from "../apiNest/updateUserProfileApi";
 import PurchasedCard from "../components/account/purchasedCard";
+import FormCheckbox from "../components/formCheckbox";
+import FormInput from "../components/formInput";
+import FormSelect from "../components/formSelect";
+import FormTextArea from "../components/formTextarea";
 import Img from "../components/image";
 import ShowError from "../components/showError";
 import * as staticData from "../components/static/account"
-import encodeBase64 from "../functions/encodeBase64";
+import { handleChange } from "../functions/handleInput";
 
 export default function Account() {
   const timeZone = staticData.timeZone
   const hiddenFileInput = useRef<HTMLInputElement>(null);
-  const router = useRouter()
-  const [formData, setFormData] = useState({
-    fullName: "",
+  const [id, setId] = useState(0)
+  const [mySubscription, setMySubscription] = useState([{
+    id: "",
+    subscription_date: "",
+    activate: "",
+    createDate: "",
+    updateDate: "",
+    access_group: {
+      id: 0,
+      name: "",
+      duration: "",
+      createDate: "",
+      updateDate: "",
+      regular_price: 0,
+      sku: "",
+      access_type: "",
+      deletedAt: "",
+    },
+  }]);
+  const [formAccount, setFormAccount] = useState({
+    id: 0,
     email: "",
+    bio: "",
+    createDate: "",
+    updateDate: "",
+    deletedAt: "",
+    contact: {
+      id: 0,
+      first_name: "",
+      last_name: "",
+      current_position: "",
+    }
+  });
+  const [formContact, setFormContact] = useState({
+    id: 0,
+    first_name: "",
+    last_name: "",
+    current_position: "",
+  });
+  const [formPassword, setFormPassword] = useState({
     currentPassword: "",
     newPassword: "",
     confirmPassword: "",
-    timeZone: "",
-    notifyUpdatesProducts: false,
-    notifyReplyMyPosts: false,
-    emailPromotions: false,
-    avatarUserBase64: "/default_avatar.webp",
-    bio: "",
-    location: ""
   })
   const [errorPassword, setErrorPassword] = useState({
     isError: false,
@@ -34,28 +68,15 @@ export default function Account() {
 
   useEffect(() => {
     fetchData();
-  }, [])
-
-  const handleChange = (event: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLSelectElement> | ChangeEvent<HTMLTextAreaElement>) => {
-    const name = event.target.name;
-    const value = event.target.value;
-    setFormData(values => ({ ...values, [name]: value }))
-  }
-
-  const handleChangeCheckbox = (event: ChangeEvent<HTMLInputElement>) => {
-    const name = event.target.name;
-    const value = event.target.checked;
-    setFormData(values => ({ ...values, [name]: value }))
-  }
+  }, []);
 
   async function fetchData() {
-    const data = await getUserProfileApi()
-    if (data.data) {
-      data.data.currentPassword = ""
-      data.data.newPassword = ""
-      data.data.confirmPassword = ""
-      setFormData(data.data)
-    }
+    const data = await getUserProfileApi();
+    const dataMySubscriptions = await mySubscriptionApi();
+    setFormAccount(data);
+    setId(data.id);
+    setFormContact(data.contact);
+    setMySubscription(dataMySubscriptions.filter(element => { return element.activate }));
   }
 
   async function saveAccount(event: FormEvent) {
@@ -63,46 +84,39 @@ export default function Account() {
     setErrorPassword({
       isError: false,
       message: ""
-    })
-    if (formData.newPassword !== formData.confirmPassword) {
+    });
+    if (formPassword.currentPassword) {
+      if (false) {
+        setErrorPassword({
+          isError: true,
+          message: "Incorrect password"
+        })
+        return false;
+      }
+    }
+    if (formPassword.newPassword !== formPassword.confirmPassword) {
       setErrorPassword({
         isError: true,
         message: "New passwords do not match"
       })
-      return
+      return false;
     }
-    const data = await updateUserProfileApi(formData)
-    if (!data.error) {
-      alert("แก้ไขสำเร็จ")
-    }else{
-      alert(data.error.message)
+    formAccount.contact = formContact;
+    const data = await updateUserProfileApi(formAccount, id);
+    if (data) {
+      alert("แก้ไขสำเร็จ");
+      if (formPassword.currentPassword &&
+        formPassword.newPassword === formPassword.confirmPassword &&
+        formPassword.newPassword &&
+        formPassword.confirmPassword) {
+        await resetPasswordApi({ password: formPassword.newPassword, passwordConfirmation: formPassword.confirmPassword });
+      }
     }
   }
 
   function handleClick() {
     hiddenFileInput.current && hiddenFileInput.current.click();
   };
-
-  async function handleChangeAvatar(event: ChangeEvent<HTMLInputElement>) {
-    if (event.currentTarget!.files![0]) {
-      await encodeBase64(event.currentTarget!.files![0]).then((result) => {
-        setFormData({
-          avatarUserBase64: String(result),
-          email: formData.email,
-          currentPassword: formData.currentPassword,
-          newPassword: formData.newPassword,
-          confirmPassword: formData.confirmPassword,
-          bio: formData.bio,
-          emailPromotions: formData.emailPromotions,
-          fullName: formData.fullName,
-          location: formData.location,
-          notifyReplyMyPosts: formData.notifyReplyMyPosts,
-          notifyUpdatesProducts: formData.notifyUpdatesProducts,
-          timeZone: formData.timeZone
-        })
-      })
-    }
-  }
 
   return (
     <div className="account">
@@ -138,86 +152,66 @@ export default function Account() {
               <div className="panel panel-default panel-form">
                 <div className="panel-body">
                   <div className="form-group">
-                    <label className="control-label string" htmlFor="member_name">
-                      Full Name
-                    </label>
-                    <input id="member_name"
-                      name="fullName"
-                      className="form-control string"
-                      type="text"
-                      value={formData.fullName}
-                      onChange={handleChange} />
+                    <FormInput
+                      label="First Name"
+                      id={"first_name"}
+                      value={formContact.first_name}
+                      type={"text"}
+                      required={false}
+                      onChange={e => handleChange(e, setFormContact, formContact)} />
                   </div>
                   <div className="form-group">
-                    <label className="control-label string" htmlFor="member_email">
-                      E-mail
-                    </label>
-                    <input id="member_email"
-                      name="email"
-                      className="form-control string"
-                      type="email"
-                      value={formData.email}
-                      required
-                      onChange={handleChange} />
+                    <FormInput
+                      label="Last Name"
+                      id={"last_name"}
+                      value={formContact.last_name}
+                      type={"text"}
+                      required={false}
+                      onChange={e => handleChange(e, setFormContact, formContact)} />
                   </div>
                   <div className="form-group">
-                    <label className="control-label string" htmlFor="member_time_zone">
-                      Time Zone
-                    </label>
-                    <select className="form-control time_zone optional"
-                      id="member_time_zone"
-                      name="timeZone"
-                      value={formData.timeZone}
-                      onChange={handleChange}>
-                      <option value=""></option>
-                      {timeZone.map((value, index) => {
-                        return (
-                          <option key={index} value={value.value}>{value.text}</option>
-                        )
-                      })}
-                    </select>
+                    <FormInput
+                      label="Email"
+                      value={formAccount.email}
+                      id={"email"}
+                      type={"email"}
+                      required={false}
+                      onChange={e => handleChange(e, setFormAccount, formAccount)} />
+                  </div>
+                  <div className="form-group">
+                    <FormSelect
+                      id={""}
+                      label="Time zone"
+                      required={false}
+                      onChange={e => { }}
+                      item={timeZone} />
                   </div>
                   <div className="form-group boolean optional">
                     <div className="checkbox">
-                      <label>
-                        <input className="boolean optional"
-                          type="checkbox"
-                          name="notifyUpdatesProducts"
-                          id="product_update_notification"
-                          checked={formData.notifyUpdatesProducts}
-                          onChange={handleChangeCheckbox} />
-                        Please notify me about updates to my products.
-                      </label>
+                      <FormCheckbox
+                        id={""}
+                        label="Please notify me about updates to my products."
+                        onChange={e => { }} />
                     </div>
                   </div>
                   <div className="form-group boolean optional">
                     <div className="checkbox">
-                      <label>
-                        <input className="boolean optional"
-                          type="checkbox"
-                          checked={formData.notifyReplyMyPosts}
-                          name="notifyReplyMyPosts"
-                          id="reply_comment_notification"
-                          onChange={handleChangeCheckbox} />
-                        Please notify me when a reply to one of my posts or comments is created.
-                      </label>
+                      <FormCheckbox
+                        id={""}
+                        label="Please notify me when a reply to one of my posts or comments is created."
+                        onChange={e => { }} />
                     </div>
                   </div>
                   <div className="form-group boolean optional">
                     <div className="checkbox">
-                      <label>
-                        <input className="boolean optional"
-                          type="checkbox"
-                          checked={formData.emailPromotions}
-                          name="emailPromotions"
-                          id="new_products_and_promotions"
-                          onChange={handleChangeCheckbox} />
-                        Please email me about new products and promotions.
-                      </label>
+                      <FormCheckbox
+                        id={""}
+                        label="Please email me about new products and promotions."
+                        onChange={e => { }} />
                     </div>
                   </div>
                   <div className="form-group">
-                    <label htmlFor="member_avatar">
+                    <label className="color-black" htmlFor="member_avatar">
                       Avatar
                     </label>
                     <div className="media">
@@ -225,7 +219,7 @@ export default function Account() {
                         <Img id="member-avatar-preview"
                           className="avatar img-circle media-object"
                           alt="Avatar"
-                          src={formData.avatarUserBase64}
+                          src={""}
                           width={64}
                           height={64} />
                       </div>
@@ -240,7 +234,7 @@ export default function Account() {
                           type="file"
                           accept="image/*"
                           ref={hiddenFileInput}
-                          onChange={handleChangeAvatar}
+                          onChange={e => { }}
                         />
                         <button type="button" onClick={handleClick} className="btn btn-primary btn-outline filepicker-btn fp-input">
                           Change Avatar
@@ -262,25 +256,21 @@ export default function Account() {
               <div className="panel panel-default panel-form">
                 <div className="panel-body">
                   <div className="form-group">
-                    <label className="control-label string" htmlFor="member_bio">
-                      Bio
-                    </label>
-                    <textarea id="member_bio"
-                      className="form-control string"
-                      name="bio"
-                      value={formData.bio}
-                      onChange={handleChange} />
+                    <FormTextArea
+                      id="bio"
+                      label="Bio"
+                      value={formAccount.bio}
+                      required={false}
+                      onChange={e => { handleChange(e, setFormAccount, formAccount) }} />
                   </div>
                   <div className="form-group">
-                    <label className="control-label string" htmlFor="member_location">
-                      Location
-                    </label>
-                    <input id="member_location"
-                      className="form-control string"
-                      type="text"
-                      name="location"
-                      value={formData.location}
-                      onChange={handleChange} />
+                    <FormInput
+                      id="current_position"
+                      label="Location"
+                      value={formContact.current_position}
+                      type={"text"}
+                      required={false}
+                      onChange={e => { handleChange(e, setFormContact, formContact) }} />
                   </div>
                 </div>
               </div>
@@ -298,14 +288,13 @@ export default function Account() {
                 <div className="panel-body">
                   {errorPassword.isError && (<ShowError message={errorPassword.message} />)}
                   <div className="form-group">
-                    <label className="control-label string" htmlFor="member_current_password">
-                      Current Password
-                    </label>
-                    <input id="member_current_password"
-                      className="form-control string"
-                      name="currentPassword"
-                      type="password"
-                      onChange={handleChange} />
+                    <FormInput
+                      id={"currentPassword"}
+                      label="Current Password"
+                      type={"password"}
+                      required={false}
+                      minLength={8}
+                      onChange={e => handleChange(e, setFormPassword, formPassword)} />
                     <p className="help-block">
                       <Link href="/forgot-password" passHref={true}>
                         <a>
@@ -315,24 +304,22 @@ export default function Account() {
                     </p>
                   </div>
                   <div className="form-group">
-                    <label className="control-label string" htmlFor="member_new_password">
-                      New Password
-                    </label>
-                    <input id="member_new_password"
-                      className="form-control string"
-                      name="newPassword"
-                      type="password"
-                      onChange={handleChange} />
+                    <FormInput
+                      id={"newPassword"}
+                      label="New Password"
+                      type={"password"}
+                      required={false}
+                      minLength={8}
+                      onChange={e => handleChange(e, setFormPassword, formPassword)} />
                   </div>
                   <div className="form-group">
-                    <label className="control-label string" htmlFor="member_verify_password">
-                      Verify Password
-                    </label>
-                    <input id="member_verify_password"
-                      className="form-control string"
-                      name="confirmPassword"
-                      type="password"
-                      onChange={handleChange} />
+                    <FormInput
+                      id={"confirmPassword"}
+                      label="Verify Password"
+                      type={"password"}
+                      required={false}
+                      minLength={8}
+                      onChange={e => handleChange(e, setFormPassword, formPassword)} />
                   </div>
                 </div>
               </div>
@@ -347,7 +334,15 @@ export default function Account() {
             <div className="col-8 card-form">
               <div className="panel panel-default panel-form">
                 <div className="panel-body">
-                  <PurchasedCard />
+                  {mySubscription.map((value, index) => {
+                    return (
+                      <PurchasedCard key={index}
+                        data={value.subscription_date}
+                        offer={value.access_group?.access_type}
+                        price={value.access_group?.regular_price?.toString()}
+                        product={value.access_group?.name} />
+                    )
+                  })}
                 </div>
               </div>
             </div>
