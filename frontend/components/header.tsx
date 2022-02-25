@@ -40,11 +40,13 @@ export default function Header() {
 
   const menuUser: Menu[] = [
     { url: "/library", name: "คอร์สของฉัน" },
+    { url: "/trial-library", name: "คอร์สเรียนฟรี" },
     { url: "/account", name: "การตั้งค่า" },
     { url: "/logout", name: "ออกจากระบบ" },
   ];
 
   const menuUserMobile: Menu[] = [
+    { url: "/trial-library", name: "คอร์สเรียนฟรี" },
     { url: "/account", name: "การตั้งค่า" },
     { url: "/logout", name: "ออกจากระบบ" },
   ];
