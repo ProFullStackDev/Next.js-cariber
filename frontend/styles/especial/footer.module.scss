@@ -1,7 +1,8 @@
 @import "../sizer.scss";
+@import "../color.scss";
 
 $text-color: #fbf5e3;
-$background-color: #0e1b20;
+$background-color: $color-black;
 $hide-on-desktop: false;
 $vertical-layout: false;
 $hide-on-mobile: false;

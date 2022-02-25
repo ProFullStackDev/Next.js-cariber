@@ -1,49 +1,48 @@
 @import "../sizer.scss";
+@import "../color.scss";
 
-$text-color: #e74e25;
-$background-color: #0e1b20;
+$background-color: $color-black;
 $hide-on-desktop: false;
 $position: overlay;
 $hide-on-mobile: false;
-$mobile-header-dropdown-color: #0e1b20;
+$mobile-header-dropdown-color: $color-black;
 $mobile-header-text-color: "";
 $mobile-text-alignment: center;
 $font-size-desktop: 18px;
 $font-size-ipad: 14px;
 $font-size-mobile: 16px;
 $logo-width: 120px;
-$btn-background-color: #e74e25;
 $btn-border-radius: 50px;
 
 .header {
   background-color: $background-color;
 
   a.link-list-link {
-    color: $text-color !important;
+    color: $color-tiger !important;
   }
 
   a.link-list-link:hover {
-    color: $text-color;
+    color: $color-tiger;
   }
 
   .dropdown-trigger {
-    color: $text-color !important;
+    color: $color-tiger !important;
   }
 
   .dropdown-trigger:hover {
-    color: $text-color;
+    color: $color-tiger;
   }
 
   .dropdown-item a {
-    color: $text-color;
+    color: $color-tiger;
   }
 
   .user-login a {
-    color: $text-color !important;
+    color: $color-tiger !important;
   }
 
   .hamburger-slice {
-    background-color: $text-color;
+    background-color: $color-tiger;
   }
 
   @media (min-width: $ipad-size) {
@@ -92,7 +91,7 @@ $btn-border-radius: 50px;
   }
 
   .logo-image {
-    background-color: #0e1b20;
+    background-color: $color-black;
     line-height: 1;
     display: block;
     width: $logo-width;
@@ -115,11 +114,11 @@ $btn-border-radius: 50px;
   display: flex;
   flex-direction: column;
   padding: 10px 0px;
-  background: #fbf5e4;
+  background: $color-buttermilk;
   border-radius: 4px;
 
   a {
-    color: #e74e25;
+    color: $color-tiger;
     font-size: 18px;
   }
 

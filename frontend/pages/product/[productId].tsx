@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import { courseLmsApi } from "../../apiNest/courseLmsApi";
+import { allCourseLmsApi, courseLmsApi } from "../../apiNest/courseLmsApi";
 import { episodeApi } from "../../apiNest/episodeApi";
 import { CourseLms, EpisodeLms } from "../../apiNest/models/content/courseLms";
 import Accordion, { Color, Icon } from "../../components/accordion";
@@ -41,6 +41,16 @@ export default function Product() {
       updateDate: "",
       deletedAt: "",
     }],
+    instructor: {
+      id: 0,
+      name: "",
+      lms_id: 0,
+      idiom: "",
+      profile_image: "",
+      createDate: "",
+      updateDate: "",
+      deletedAt: "",
+    }
   });
   const [episodeLms, setEpisodeLms] = useState({
     id: 0,
@@ -135,7 +145,7 @@ export default function Product() {
               <div className="col-12 p-b-20">
                 <div className="player">
                   <div className="player-video">
-                    {episodeLms.link_video && <VideoPlayer videoId={cutCloudflareVideoId(episodeLms.link_video)} />}
+                    {episodeLms.link_video && <VideoPlayer videoId={cutCloudflareVideoId(episodeLms.link_video)} thumbnailImage={episodeLms.thumbnail_image} />}
                   </div>
                   <div className="player-nav">
                     <div className="media">
@@ -173,7 +183,7 @@ export default function Product() {
                       <div className="playlist-body">
                         {courseLms.episode.map((value, index) => {
                           return (
-                            <a key={index} className="media track" onClick={async () => {await setEpisode(value.id)}}>
+                            <a key={index} className="media track" onClick={async () => { await setEpisode(value.id) }}>
                               <div className="media-left media-middle">
                                 {value.episode_number === episodeLms.episode_number ? (
                                   <p className="track-count active">
@@ -231,9 +241,9 @@ export default function Product() {
               <ProductBlogs progressBlog={true}
                 productImage={courseLms.thumbnail_image}
                 productName={courseLms.course_name}
-                instructorImage={courseLms.thumbnail_image}
+                instructorImage={courseLms.instructor?.profile_image}
                 instructorName={courseLms.speaker_name}
-                instructorRemark={courseLms.speaker_name} />
+                instructorRemark={courseLms.instructor?.idiom} />
             </div>
           </div>
         </div>
@@ -241,4 +251,27 @@ export default function Product() {
       <Footer />
     </div>
   )
+}
+
+export async function getStaticPaths() {
+  const data = await allCourseLmsApi() as CourseLms[]; 
+  console.log(data);
+  const paths = data.map((value) => {
+    return {
+      params: {
+        productId: value.id.toString(),
+      }
+    }
+  });
+  return {
+    paths: paths,
+    fallback: false,
+  };
+}
+
+export async function getStaticProps() {
+  return {
+    props: {
+    }
+  };
 }

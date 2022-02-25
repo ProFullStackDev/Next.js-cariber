@@ -1,6 +1,15 @@
-.video-player {
-  position: relative;
+.react-player {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
 
+.player-wrapper {
+  padding-top: 56.25%;
+  position: relative;
+}
+
+.video-player {
   .controls-wrapper {
     height: 100%;
     width: 100%;
@@ -103,7 +112,7 @@
     }
   }
 
-  .control-right-group{
+  .control-right-group {
     display: flex;
     flex-direction: row;
   }

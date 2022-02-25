@@ -11,11 +11,12 @@ export const NEST_API_URLS = {
   myCourse: BASE_API + "/users/my-course",
   checkContactGuard: BASE_API + "/users/contact-guard",
   checkExists: BASE_API + "/users/user-exists",
-  password: BASE_API + "/users/reset-password",
-  register: BASE_API + "/users",
+  resetPassword: BASE_API + "/users/reset-password",
+  users: BASE_API + "/users",
   contactGuard: BASE_API + "/contact/create-contact",
   courseLms: BASE_API + "/course",
   episode: BASE_API + "/episode",
+  mySubscription: BASE_API + "/subscriptions/my-subscription",
 }
 
 export const NEST_HEADERs = {

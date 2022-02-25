@@ -8,7 +8,7 @@ export interface RegisterApiProps {
 
 export default async function registerApi(body: RegisterApiProps) {
   try {
-    const response = await fetch(NEST_API_URLS.register, {
+    const response = await fetch(NEST_API_URLS.users, {
       method: "POST",
       headers: NEST_HEADERs.default,
       body: JSON.stringify(body),

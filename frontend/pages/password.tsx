@@ -1,6 +1,5 @@
 import { useRouter } from "next/router";
 import { FormEvent, useState } from "react";
-import passwordApi, { PasswordApiProps } from "../apiStrapi/passwordApi";
 import UserManager from "../auth/userManager";
 import Footer from "../components/footer";
 import FormInput from "../components/formInput";
@@ -30,21 +29,20 @@ export default function Password() {
       })
       return
     }
-    const formData: PasswordApiProps = {
+    const formData = {
       code: router.query.code?.toString(),
       password: formPassword.password,
       passwordConfirmation: formPassword.confirmPassword
     }
-    const data = await passwordApi(formData)
-    if (!data.error) {
-      userManager.saveToken(data.access_token)
+    if ("") {
+      userManager.saveToken("")
       flashMessages.setMessages(FlashMessagesType.forgotPasswordMessages,
         "Your password has been changed successfully. You are now signed in.")
       router.replace("/library")
     } else {
       setError({
         isError: true,
-        message: data.message
+        message: ""
       })
     }
   }

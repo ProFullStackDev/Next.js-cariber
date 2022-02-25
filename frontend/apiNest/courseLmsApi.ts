@@ -12,3 +12,15 @@ export async function courseLmsApi(id: string) {
     console.log(error);
   }
 } 
+
+export async function allCourseLmsApi() {
+  try {
+    const response = await fetch(NEST_API_URLS.courseLms, {
+      method: "GET",
+      headers: nestHeaderAuth(),
+    })
+    return await response.json() as CourseLms[];
+  } catch (error) {
+    console.log(error);
+  }
+} 

@@ -1,4 +1,5 @@
 @import "../sizer.scss";
+@import "../color.scss";
 
 .review {
   #block-titel .block {
@@ -26,7 +27,7 @@
   }
 
   #block-person-1 .block {
-    border: 4px solid #e74e25;
+    border: 4px solid $color-tiger;
     border-radius: 10px;
     background-color: #ffffff;
     padding: 30px;
@@ -97,7 +98,7 @@
 
   .section-feature-1 {
     .block {
-      border: 3px dotted #ed9081;
+      border: 3px dotted $color-pink;
       border-radius: 10px;
       background-color: #ffffff;
       padding: 30px;

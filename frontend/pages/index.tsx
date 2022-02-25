@@ -29,7 +29,7 @@ interface IndexProps {
   home: ResponseData<HomeContent>;
   review: ResponseData<ReviewContent>;
 }
-  
+
 export default function Index({ carousel, home, review }: IndexProps) {
   const userManager = new UserManager();
   const [isPopup, setIsPopup] = useState(false)
@@ -48,33 +48,35 @@ export default function Index({ carousel, home, review }: IndexProps) {
       link && router.push(link)
     }
   }
-  
+
   return (
     <div className="index">
       <Header />
       <div className="background-dark">
-        <div className="sizer">
+        <div className="sizer p-t-0">
           <div className="row align-items-center justify-content-center">
-            <div className="block-type-image text-center col-8">
-              <div className="box-shadow-none">
-                <h1>
+            <div className="text-center">
+              <h2 className="sm-f-s-24 sm-line-height sm-m-b-20">
+                <strong>
+                  <span className="color-primary">
+                    สูตรความสำเร็จกับ <br className="lg-none" />&quot;ที่สุด&quot; ของประเทศ
+                  </span>
+                </strong>
+              </h2>
+              <h5 className="sm-line-height">
+                <em>
                   <strong>
                     <span className="color-primary">
-                      สูตรความสำเร็จกับ &quot;ที่สุด&quot; ของประเทศ
+                      คอร์สออนไลน์กับผู้บริหาร ผู้นำทางความคิด <br className="lg-none" /> แบบที่ไม่เคยมีมาก่อน
                     </span>
                   </strong>
-                </h1>
-                <h4>
-                  <em>
-                    <strong>
-                      <span className="color-primary">
-                        คอร์สออนไลน์กับผู้บริหาร ผู้นำทางความคิด แบบที่ไม่เคยมีมาก่อน
-                      </span>
-                    </strong>
-                  </em>
-                </h4>
+                </em>
+              </h5>
+            </div>
+            <div className="block-type-image text-center col-8">
+              <div className="box-shadow-none">
                 <br />
-                <VideoPlayer videoId={home.data?.video_id} />
+                <VideoPlayer videoId={home.data?.video_id} thumbnailImage={strapiImage(home.data?.thumbnail_video?.url)} />
               </div>
             </div>
           </div>
@@ -88,9 +90,15 @@ export default function Index({ carousel, home, review }: IndexProps) {
                 <div className="block box-shadow-none">
                   <h2 className="text-center">
                     <strong>
-                      <span className="color-primary">
-                        ปีใหม่นี้ยกระดับให้คุณเป็นคนใหม่ เรียนรู้กับ &lsquo;ผู้นำตัวจริง&rsquo; จากทุกวงการ
+                      <span className="color-primary sm-f-s-24 sm-line-height">
+                        ปีใหม่นี้ยกระดับให้คุณเป็นคนใหม่
+                        <br className="lg-none"/>
+                        <span className="sm-f-s-18">
+                          เรียนรู้กับ &lsquo;ผู้นำตัวจริง&rsquo; จากทุกวงการ
+                        </span>
                         <br />
+                      </span>
+                      <span className="color-primary sm-none">
                         จ่ายครั้งเดียวเข้าชมผู้สอนได้กว่า 50 ท่านตลอดปี 2022
                         <br />
                       </span>

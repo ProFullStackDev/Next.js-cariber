@@ -18,7 +18,7 @@ export default function ReviewHeader({ reviewHeader }: { reviewHeader: ReviewHea
                 <div className="block-text">
                   <p className="m-b-14">
                     <strong>
-                      <span className="color-grey white-space-pre">
+                      <span className="color-black white-space-pre">
                         {reviewHeader?.description}
                       </span>
                     </strong>

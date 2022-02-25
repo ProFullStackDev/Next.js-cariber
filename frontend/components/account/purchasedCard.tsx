@@ -1,13 +1,22 @@
-export default function PurchasedCard() {
+import Moment from 'moment';
+
+interface PurchasedCardProps {
+  data: string;
+  offer: string;
+  price: string;
+  product: string;
+}
+
+export default function PurchasedCard({ data, offer, price, product }: PurchasedCardProps) {
   return (
-    <div className="well">
+    <div className="well m-b-20">
       <div className="row">
         <dl className="col-6">
           <dt>
             Purchased
           </dt>
           <dd>
-            January 05, 2022
+            {Moment(data).format('DD/MM/YYYY')}
           </dd>
         </dl>
         <dl className="col-6">
@@ -15,7 +24,7 @@ export default function PurchasedCard() {
             Offer
           </dt>
           <dd>
-            แพ็กเกจรายปี
+            {offer}
           </dd>
         </dl>
         <dl className="col-6">
@@ -23,7 +32,7 @@ export default function PurchasedCard() {
             Price
           </dt>
           <dd>
-            granted
+            {price}
           </dd>
         </dl>
         <dl className="col-6">
@@ -31,7 +40,7 @@ export default function PurchasedCard() {
             Product
           </dt>
           <dd>
-            Employee Survival Guide
+            {product}
           </dd>
         </dl>
       </div>
