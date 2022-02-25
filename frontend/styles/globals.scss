@@ -5077,19 +5077,17 @@ a .panel-sub-title {
   display: flex;
 }
 
-@media(max-width: $ipad-size) {
-  @media(min-width: $mobile-size) {
+@media(max-width: $ipad-size) and (min-width: $mobile-size) {
 
-    .ipad-none {
-      display: none;
-    }
+  .ipad-none {
+    display: none;
+  }
 
-    .ipad-line-height {
-      line-height: 1.1;
-    }
+  .ipad-line-height {
+    line-height: 1.1;
+  }
 
-    .ipad-min-line-height {
-      line-height: 0.8;
-    }
+  .ipad-min-line-height {
+    line-height: 0.8;
   }
 }

@@ -47,12 +47,12 @@ export default function Review({ carousel, review, annualPromotion }: ReviewProp
               <div id="block-titel" className="block-type-text text-center col-7 m-b-50">
                 <div className="block box-shadow-large background-unrecognized">
                   <h1>
-                    <span className="color-primary">
+                    <span className="color-primary ipad-f-s-48">
                       Wall of Love
                     </span>
                   </h1>
                   <h4>
-                    <span className="color-primary">
+                    <span className="color-primary sm-f-s-14">
                       ผู้เรียนมีความเห็นอย่างไรกับ Cariber
                     </span>
                   </h4>
@@ -90,14 +90,14 @@ export default function Review({ carousel, review, annualPromotion }: ReviewProp
             <div className="row align-items-center justify-content-center">
               <div className="block-type-text text-center col-12">
                 <div className="block box-shadow-none background-unrecognized">
-                  <p className="f-s-40 text-center">
+                  <p className="f-s-40 ipad-f-s-36 sm-f-s-26 text-center">
                     <strong>
                       <span className="color-primary">
                         สูตรความสำเร็จกับ &quot;ที่สุด&quot; ของประเทศ
                       </span>
                     </strong>
                   </p>
-                  <p className="f-s-20 text-center">
+                  <p className="f-s-20 text-center sm-f-s-18">
                     <em>
                       <strong>
                         <span className="color-primary">
