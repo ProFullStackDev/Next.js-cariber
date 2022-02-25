@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { FormEvent, useEffect, useRef, useState } from "react";
+import checkPasswordApi from "../apiNest/checkPasswordApi";
 import getUserProfileApi from "../apiNest/getUserProfileApi";
 import mySubscriptionApi from "../apiNest/mySubscriptionApi";
 import resetPasswordApi from "../apiNest/resetPasswordApi";
@@ -86,7 +87,8 @@ export default function Account() {
       message: ""
     });
     if (formPassword.currentPassword) {
-      if (false) {
+      const checkPasswort = await checkPasswordApi({ password: formPassword.currentPassword });
+      if (!checkPasswort?.match) {
         setErrorPassword({
           isError: true,
           message: "Incorrect password"
@@ -104,13 +106,13 @@ export default function Account() {
     formAccount.contact = formContact;
     const data = await updateUserProfileApi(formAccount, id);
     if (data) {
-      alert("แก้ไขสำเร็จ");
       if (formPassword.currentPassword &&
         formPassword.newPassword === formPassword.confirmPassword &&
         formPassword.newPassword &&
         formPassword.confirmPassword) {
         await resetPasswordApi({ password: formPassword.newPassword, passwordConfirmation: formPassword.confirmPassword });
       }
+      alert("แก้ไขสำเร็จ");
     }
   }
 
@@ -308,7 +310,7 @@ export default function Account() {
                       id={"newPassword"}
                       label="New Password"
                       type={"password"}
-                      required={false}
+                      required={Boolean(formPassword.currentPassword)}
                       minLength={8}
                       onChange={e => handleChange(e, setFormPassword, formPassword)} />
                   </div>
@@ -317,7 +319,7 @@ export default function Account() {
                       id={"confirmPassword"}
                       label="Verify Password"
                       type={"password"}
-                      required={false}
+                      required={Boolean(formPassword.currentPassword)}
                       minLength={8}
                       onChange={e => handleChange(e, setFormPassword, formPassword)} />
                   </div>
