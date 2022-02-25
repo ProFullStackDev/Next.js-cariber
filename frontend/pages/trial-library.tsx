@@ -42,43 +42,30 @@ export default function TrialLibrary() {
         <div className="container m-t-30">
           <div className="row products-list">
             <div className="col-12 products-col">
-              <div className="products-header">
-                <h4 className="products-title">
+              <div className="flex-column-center">
+                <h4 className="products-title m-b-40">
                   <strong>
-                    คอร์สของฉัน
+                    คอร์สเรียนของฉัน
                   </strong>
                 </h4>
-                <div className="resume-course box-shadow-none">
-                  <div className="resume-course-positioner">
-                    <a className="resume-course-content" href="#">
-                      <div className="resume-course-text sm-none">
-                        <h6 className="resume-course-status m-0">
-                          <strong>
-                            เรียนคอร์สต่อ
-                          </strong>
-                        </h6>
-                        <p className="resume-course-title m-0">
-                          Strategy to Win - EP02: กลยุทธ์ทางธุรกิจ
-                        </p>
-                      </div>
-                      <div className="resume-course-image">
-                        <Img src="/library/watch-continue.jpg"
-                          width={700}
-                          height={400}
-                          alt="กลยุทธ์ทางธุรกิจ"
-                        />
-                      </div>
-                      <div className="resume-course-text lg-none">
-                        <h6 className="resume-course-status m-0">
-                          <strong>
-                            เรียนคอร์สต่อ
-                          </strong>
-                        </h6>
-                        <p className="resume-course-title m-0">
-                          Strategy to Win - EP02: กลยุทธ์ทางธุรกิจ
-                        </p>
-                      </div>
-                    </a>
+                <div className="box-shadow-none align-self-start">
+                  <div>
+                    <p className="color-black m-0">
+                      เรียนฟรีได้ถึงวันที่ 10/01/65
+                      <span className="sm-none">
+                      &nbsp;
+                        &#9679;
+                      &nbsp;
+                      </span>
+                      <br className="lg-none" />
+                      เวลาจะหมดภายใน
+                      &nbsp;
+                      <span className="day-left-trial">
+                        2
+                      </span>
+                      &nbsp;
+                      วัน
+                    </p>
                   </div>
                 </div>
               </div>
@@ -93,17 +80,24 @@ export default function TrialLibrary() {
                           <Img className="feature-image"
                             src={value.thumbnail_image}
                             alt={value.speaker_name}
-                            width={262.5}
-                            height={147.65} />
+                            width={366}
+                            height={205.866} />
                         </a>
                       </Link>
                     </div>
-                    <div className="feature-text">
+                    <div className="feature-text h-120 p-t-15">
                       <div className="text-left">
-                        <h6 className="color-black">คอร์สเรียน: {value.course_name}</h6>
-                        <p>สอนโดย: {value.speaker_name}</p>
+                        <h6 className="color-black ipad-f-s-14">คอร์สเรียน: {value.course_name}</h6>
+                        <p className="f-s-14 ipad-f-s-12">สอนโดย {value.speaker_name}</p>
                       </div>
                     </div>
+                    <Link href={""}>
+                      <a className="btn btn-large">
+                        <h6 className="m-0 color-white  ipad-f-s-12">
+                          ทดลองเรียนฟรีเลย!
+                        </h6>
+                      </a>
+                    </Link>
                   </div>
                 </div>
               )

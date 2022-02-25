@@ -14,7 +14,7 @@ $maximum-pixel-percentage : 100;
 
 @for $i from 0 to $maximum-pixel-size {
   .f-s-#{$i} {
-    font-size: #{$i}px !important;
+    font-size: #{$i}px;
   }
 
   @media(max-width: $mobile-size) {
@@ -22,6 +22,13 @@ $maximum-pixel-percentage : 100;
       font-size: #{$i}px !important;
     }
   }
+
+  @media(max-width: $ipad-size) {
+    .ipad-f-s-#{$i} {
+      font-size: #{$i}px !important;
+    }
+  }
+
 
   .w-#{$i} {
     width: #{$i}px !important;
