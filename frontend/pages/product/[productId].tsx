@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import { courseLmsApi } from "../../apiNest/courseLmsApi";
+import { allCourseLmsApi, courseLmsApi } from "../../apiNest/courseLmsApi";
 import { episodeApi } from "../../apiNest/episodeApi";
 import { CourseLms, EpisodeLms } from "../../apiNest/models/content/courseLms";
 import Accordion, { Color, Icon } from "../../components/accordion";
@@ -251,4 +251,27 @@ export default function Product() {
       <Footer />
     </div>
   )
+}
+
+export async function getStaticPaths() {
+  const data = await allCourseLmsApi() as CourseLms[]; 
+  console.log(data);
+  const paths = data.map((value) => {
+    return {
+      params: {
+        productId: value.id.toString(),
+      }
+    }
+  });
+  return {
+    paths: paths,
+    fallback: false,
+  };
+}
+
+export async function getStaticProps() {
+  return {
+    props: {
+    }
+  };
 }
