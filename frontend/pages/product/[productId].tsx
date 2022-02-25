@@ -69,7 +69,7 @@ export default function Product() {
   const router = useRouter();
   const announcement = "ตอนนี้คุณกำลังอยู่ในโหมดทดลองเรียนฟรี เนื้อหาบางส่วนมีการถูกล็อกไว้\nคุณสามารถซื้อคอร์สนี้เพื่อดูเนื้อหาทั้งหมดในคอร์สเรียน";
   const { productId } = router.query;
-
+  
   useEffect(() => {
     if (!router.isReady) return;
     fetchData();
@@ -182,7 +182,7 @@ export default function Product() {
                         </div>
                       </div>
                       <div className="playlist-body">
-                        {courseLms.episode.map((value, index) => {
+                        {courseLms.episode?.map((value, index) => {
                           return (
                             <a key={index} className="media track" onClick={async () => { await setEpisode(value.id) }}>
                               <div className="media-left media-middle">
@@ -198,7 +198,7 @@ export default function Product() {
                               </div>
                               <div className="media-left media-middle">
                                 <Img className="track-thumb"
-                                  src={"/product/product-2.jpg"}
+                                  src={value.thumbnail_image}
                                   width={70}
                                   height={39.3833}
                                   alt={value.episode_name}
@@ -265,7 +265,7 @@ export async function getStaticPaths() {
   });
   return {
     paths: paths,
-    fallback: false,
+    fallback: true,
   };
 }
 

@@ -1,4 +1,4 @@
-import React, { ChangeEvent, Dispatch, SetStateAction, useRef, useState } from 'react';
+import React, { ChangeEvent, Dispatch, SetStateAction, useEffect, useRef, useState } from 'react';
 import ReactPlayer from 'react-player/lazy';
 import screenfull from 'screenfull';
 import Img from './image';
@@ -41,7 +41,7 @@ function VideoPlayer(props: VideoPlayerProps) {
     pip: false,
     playing: true,
     controls: false,
-    light: props.thumbnailImage || true,
+    light: props.thumbnailImage ? props.thumbnailImage : true,
     volume: 1,
     muted: false,
     played: 0,
@@ -179,6 +179,18 @@ function VideoPlayer(props: VideoPlayerProps) {
   const handleStart = () => {
     setVideoStarted(true);
   }
+
+  const changeProps = () => {
+    setVideoState({
+      ...videoState,
+      url: `https://videodelivery.net/${props.videoId}/manifest/video.m3u8`,
+      light: props.thumbnailImage ? props.thumbnailImage : true,
+    });
+  }
+
+  useEffect(() => {
+    changeProps();
+  }, [props])
 
   return (
     <div className="player-wrapper video-player"
