@@ -14,6 +14,7 @@ export interface CourseLms {
   deletedAt: string;
   episode: EpisodeLms[];
   instructor: Instructor;
+  asset_download: string;
 }
 
 interface Instructor{

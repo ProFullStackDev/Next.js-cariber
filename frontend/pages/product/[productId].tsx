@@ -28,6 +28,7 @@ export default function Product() {
     createDate: "",
     updateDate: "",
     deletedAt: "",
+    asset_download: "",
     episode: [{
       id: 0,
       episode_number: 0,
@@ -82,7 +83,7 @@ export default function Product() {
   async function fetchData() {
     const data = await courseLmsApi(productId!.toString()) as CourseLms;
     setCourseLms(data);
-    setEpisode(data.episode[0].id);
+    data.episode[0] && setEpisode(data.episode[0].id);
   }
 
   return (
@@ -218,7 +219,7 @@ export default function Product() {
                 <div className="col-12 link-file">
                   <i className="fal fa-file-download color-primary"></i>
                   &nbsp;&nbsp;
-                  <a href="">
+                  <a target="_blank" href={courseLms.asset_download} rel="noopener noreferrer">
                     ดาวน์โหลดเอกสารประกอบการเรียน
                   </a>
                 </div>
@@ -255,7 +256,6 @@ export default function Product() {
 
 export async function getStaticPaths() {
   const data = await allCourseLmsApi() as CourseLms[]; 
-  console.log(data);
   const paths = data.map((value) => {
     return {
       params: {
