@@ -21,8 +21,8 @@ export default function Specific({ specifics }: { specifics?: Information[] }) {
               </div>
             </div>
             <div className="block-type-text text-left col-8 p-0">
-              <div className="block box-shadow-none white-space-pre">
-                <h5>
+              <div className="block box-shadow-none white-space-pre text-center flex-align-center">
+                <h5 className="ipad-f-s-16">
                   <span>
                     {value.description}
                   </span>

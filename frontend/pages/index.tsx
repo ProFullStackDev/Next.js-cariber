@@ -46,7 +46,7 @@ export default function Index({ carousel, home, review }: IndexProps) {
                 <h5 className="sm-line-height">
                   <em>
                     <strong>
-                      <span className="color-primary">
+                      <span className="color-primary sm-f-s-16">
                         คอร์สออนไลน์กับผู้บริหาร ผู้นำทางความคิด <br className="lg-none" /> แบบที่ไม่เคยมีมาก่อน
                       </span>
                     </strong>
@@ -93,12 +93,12 @@ export default function Index({ carousel, home, review }: IndexProps) {
             <div className="row align-items-center justify-content-center">
               <div className="block-type-text text-left col-12">
                 <div className="block box-shadow-none">
-                  <h2 className="text-center">
+                  <h2 className="text-center ipad-line-height">
                     <strong>
-                      <span className="color-primary sm-f-s-24 sm-line-height">
+                      <span className="color-primary ipad-f-s-32 sm-f-s-22">
                         ปีใหม่นี้ยกระดับให้คุณเป็นคนใหม่
                         <br className="lg-none" />
-                        <span className="sm-f-s-18">
+                        <span className="ipad-f-s-24 sm-f-s-18">
                           เรียนรู้กับ &lsquo;ผู้นำตัวจริง&rsquo; จากทุกวงการ
                         </span>
                         <br />

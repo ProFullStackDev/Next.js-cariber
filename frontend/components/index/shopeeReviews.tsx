@@ -26,14 +26,14 @@ export default function ShopeeReviews({ shopeeInfo, shopee }: ShopeeReviewsProps
                   {shopeeInfo?.ratings} stars rating
                 </span>
               </h5>
-              <h5 className="text-center m-b-30">
+              <h5 className="text-center m-b-30 ipad-f-s-14">
                 <strong>
                   <span>
                     {"⭐️".repeat(Math.round(shopeeInfo?.ratings))}
                   </span>
                 </strong>
               </h5>
-              <h5>
+              <h5 className="ipad-f-s-16">
                 <span className="color-smooth">
                   จากทั้งหมด {shopeeInfo?.quantity_review} รีวิวใน Shopee
                 </span>
@@ -49,23 +49,23 @@ export default function ShopeeReviews({ shopeeInfo, shopee }: ShopeeReviewsProps
       </div>
       {shopee?.map((value, index) => {
         return (
-          <div key={index} className="block-type-feature text-center col-2">
+          <div key={index} className="block-type-feature text-center col-2 ipad-p-x-0">
             <div className="block box-shadow-none">
               <div className="feature">
                 <div className="feature-text">
-                  <h5 className="text-center">
+                  <h5 className="text-center ipad-f-s-14">
                     <strong>
                       <span>
                       {"⭐️".repeat(value.ratings)}
                       </span>
                     </strong>
                   </h5>
-                  <p className="text-center">
+                  <p className="text-center ipad-f-s-14 sm-f-s-14">
                     <span className="color-smooth">
                       &quot;{value.description}&quot;
                     </span>
                   </p>
-                  <h6 className="f-s-16 text-center">
+                  <h6 className="f-s-16 text-center ipad-f-s-12">
                     <em>
                       <span className="color-smooth">
                         <strong>

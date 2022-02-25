@@ -20,7 +20,7 @@ export default function StudentReviews({ reviewStudents }: { reviewStudents: Rev
           </div>
           {reviewStudents?.map((value, index) => {
             return (
-              <div key={index} className="block-type-feature text-center col-2">
+              <div key={index} className="block-type-feature text-center col-2 ipad-p-x-0">
                 <div className="block box-shadow-none">
                   <div className="feature">
                     <Img className="feature-image"
@@ -30,13 +30,13 @@ export default function StudentReviews({ reviewStudents }: { reviewStudents: Rev
                       alt={value.name}
                     />
                     <div className="feature-text">
-                      <p className="text-center">
+                      <p className="text-center ipad-f-s-14 sm-f-s-14">
                         <span className="color-smooth">
                           &quot;{value.description}&quot;
                         </span>
                       </p>
-                      <h4>
-                        <span className="color-secondary">
+                      <h4 className="ipad-min-line-height">
+                        <span className="color-secondary ipad-f-s-18">
                           {value.name}
                         </span>
                       </h4>
