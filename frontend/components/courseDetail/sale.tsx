@@ -1,9 +1,5 @@
-import { useRouter } from "next/router";
-import UserManager from "../../auth/userManager";
-import Img from "../image";
-import Popup from "reactjs-popup"
-import { MouseEventHandler, useState } from "react";
-import CustomLogin from "../customLogin";
+import ImagePartialLogin from "../imagePartialLogin";
+import ButtonPartialLogin from "../buttonPartialLogin";
 
 export interface CourseDetailSaleProps {
   yearlySubscriptionImage: string,
@@ -18,27 +14,6 @@ export default function Sale({ yearlySubscriptionImage,
   yearlySubscriptionImageMobile,
   singleCoursePersonalImage,
   singleCheckoutUrl }: CourseDetailSaleProps) {
-
-  const router = useRouter();
-  const userManager = new UserManager();
-  const [isPopup, setIsPopup] = useState(false);
-  const [currentLink, setCurrentLink] = useState("");
-
-  async function interestCourse(link: string) {
-    if (userManager.isLoggedIn()) {
-      link && router.push(link);
-    } else {
-      setIsPopup(true);
-      setCurrentLink(link);
-    }
-  }
-
-  async function setCallbackButtonFN(link: string) {
-    setIsPopup(false)
-    if (userManager.isLoggedIn()) {
-      link && router.push(link)
-    }
-  }
 
   return (
     <div className="background-light">
@@ -58,81 +33,50 @@ export default function Sale({ yearlySubscriptionImage,
             <div className="block-type-code text-left col-7">
               <div className="block box-shadow-none sm-none">
                 <div id="yearlybanner" className="feature column-center text-center">
-                  <div
-                    onClick={() => interestCourse(yearlySubscriptionCheckoutUrl)}>
-                    <Img id="block-yearly-img"
-                      className="feature-image"
-                      src={yearlySubscriptionImage}
-                      width={623.183}
-                      height={400}
-                      alt="Cariber Yearly Subscription"
-                    />
-                  </div>
-                  <div className="btn btn-medium btn-solid btn-auto background-dark"
-                    onClick={() => interestCourse(yearlySubscriptionCheckoutUrl)}
-                    id="block-yearly-button">
-                    ซื้อแพ็กเกจรายปี
-                  </div>
+                  <ImagePartialLogin
+                    url={yearlySubscriptionCheckoutUrl}
+                    src={yearlySubscriptionImage}
+                    width={623.183}
+                    height={400}
+                    alt={"Cariber Yearly Subscription"} />
+                  <ButtonPartialLogin
+                  text={'ซื้อแพ็คเกจรายปี'}
+                    class="btn btn-medium btn-solid btn-auto background-dark"
+                    url={yearlySubscriptionCheckoutUrl} />
                 </div>
               </div>
               <div className="block box-shadow-none lg-none">
                 <div id="yearlybanner" className="feature column-center">
-                  <a onClick={() => interestCourse(yearlySubscriptionCheckoutUrl)}>
-                    <Img id="block-yearly-img"
-                      className="feature-image"
-                      src={yearlySubscriptionImageMobile}
-                      width={400}
-                      height={400}
-                      alt="Cariber Yearly Subscription"
-                    />
-                  </a>
-                  <a className="btn btn-medium btn-solid btn-auto background-dark"
-                    onClick={() => interestCourse(yearlySubscriptionCheckoutUrl)}
-                    id="block-yearly-button">
-                    ซื้อแพ็กเกจรายปี
-                  </a>
+                  <ImagePartialLogin
+                    url={yearlySubscriptionCheckoutUrl}
+                    src={yearlySubscriptionImageMobile}
+                    width={400}
+                    height={400}
+                    alt={"Cariber Yearly Subscription"} />
+                  <ButtonPartialLogin
+                  text={'ซื้อแพ็คเกจรายปี'}
+                    class="btn btn-medium btn-solid btn-auto background-dark"
+                    url={yearlySubscriptionCheckoutUrl} />
                 </div>
               </div>
             </div>
             <div className="block-type-code text-left col-4">
               <div className="block box-shadow-none">
                 <div id="singlebanner" className="feature column-center">
-                  <a onClick={() => interestCourse(singleCheckoutUrl)}>
-                    <Img id="block-single-img"
-                      src={singleCoursePersonalImage}
-                      className="feature-image"
-                      width={400}
-                      height={400}
-                      alt="Cariber Single Subscription"
-                    />
-                  </a>
-                  <a id="block-single-button"
-                    className="btn btn-medium btn-solid btn-auto background-dark"
-                    onClick={() => interestCourse(singleCheckoutUrl)}>
-                    ซื้อเฉพาะคอร์สนี้
-                  </a>
+                  <ImagePartialLogin
+                    url={singleCheckoutUrl}
+                    src={singleCoursePersonalImage}
+                    width={400}
+                    height={400}
+                    alt={"Cariber Yearly Subscription"} />
+                  <ButtonPartialLogin
+                    class="btn btn-medium btn-solid btn-auto background-dark"
+                    text={'ซื้อแพ็คเกจรายปี'}
+                    url={singleCheckoutUrl} />
                 </div>
               </div>
             </div>
           </div>
-          <Popup className="popup-auth"
-            open={isPopup}
-            modal
-            onClose={() => setIsPopup(false)}
-            closeOnDocumentClick={false}>
-            {(close: MouseEventHandler<HTMLButtonElement>) => {
-              return (
-                <div className="pop-modal">
-                  <button className="close" onClick={close}>
-                    <p>
-                      &times;
-                    </p>
-                  </button>
-                  <CustomLogin path={currentLink} callbackButton={setCallbackButtonFN} />
-                </div>
-              )
-            }}
-          </Popup>
         </div>
       </div>
     </div>

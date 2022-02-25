@@ -1,6 +1,6 @@
 $maximum-pixel-space : 100;
 $maximum-pixel-size : 1000;
-$maximum-pixel-percentage : 100;
+$maximum-pixel-percentage : 101;
 
 @for $i from 0 to $maximum-pixel-percentage {
   .p-w-#{$i} {

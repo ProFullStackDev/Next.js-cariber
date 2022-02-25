@@ -45,7 +45,7 @@ export default function TrialLibrary() {
               <div className="flex-column-center">
                 <h4 className="products-title m-b-40">
                   <strong>
-                    คอร์สเรียนของฉัน
+                    คอร์สเรียนฟรีของฉัน
                   </strong>
                 </h4>
                 <div className="box-shadow-none align-self-start">
@@ -92,7 +92,7 @@ export default function TrialLibrary() {
                       </div>
                     </div>
                     <Link href={""}>
-                      <a className="btn btn-large">
+                      <a className="btn">
                         <h6 className="m-0 color-white  ipad-f-s-12">
                           ทดลองเรียนฟรีเลย!
                         </h6>
