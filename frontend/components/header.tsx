@@ -20,6 +20,8 @@ export default function Header() {
   const [ispopup, setIsPopup] = useState(false);
   const flashMessages = new FlashMessages()
   const [hamburgerOpened, setHamburgerOpened] = useState(false);
+  const [shopeeID, setShopeeID] = useState('');
+  const [hasShopeeID, setHasShopeeID] = useState(false);
   const flashForgotPassword = flashMessages.getMessages(FlashMessagesType.forgotPasswordMessages)
   const [formData, setFormData] = useState({
     avatarUserBase64: "/default_avatar.webp",
@@ -55,6 +57,15 @@ export default function Header() {
     window.addEventListener("resize", () => {
       setHamburgerOpened(false)
     });
+    const base64ID = window.location.search?.replace('?id=', '') || '';
+    if (base64ID) {
+      setHasShopeeID(true);
+      const shopeeID = new Buffer(base64ID, 'base64').toString('ascii');
+      setShopeeID(shopeeID);
+      return;
+    }
+    setHasShopeeID(false);
+    setShopeeID('');
   }, [])
 
   function switchHamburger() {
