@@ -9,7 +9,7 @@ export default function CoursesUpdate({ coursesSoon, coursesLatest }: { coursesS
       <div className="block-type-text text-center col-12">
         <div className="block box-shadow-none">
           <h1>
-            <span className="color-primary">
+            <span className="color-primary ipad-f-s-32 sm-f-s-28">
               คอร์สเปิดตัวล่าสุด
             </span>
           </h1>
@@ -42,7 +42,7 @@ export default function CoursesUpdate({ coursesSoon, coursesLatest }: { coursesS
       <div className="block-type-text text-center col-12">
         <div className="block box-shadow-none">
           <h1>
-            <span className="color-primary">
+            <span className="color-primary ipad-f-s-32 sm-f-s-28">
               คอร์สที่กำลังจะเปิดตัว
             </span>
           </h1>

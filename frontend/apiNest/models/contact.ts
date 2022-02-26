@@ -17,6 +17,7 @@ export const NEST_API_URLS = {
   courseLms: BASE_API + "/course",
   episode: BASE_API + "/episode",
   mySubscription: BASE_API + "/subscriptions/my-subscription",
+  checkPassword: BASE_API + "/users/check-password",
 }
 
 export const NEST_HEADERs = {

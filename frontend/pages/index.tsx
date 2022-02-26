@@ -1,7 +1,6 @@
 import Header from '../components/header';
 import Footer from '../components/footer';
 import Accordion, { Color } from '../components/accordion';
-import Img from '../components/image';
 import SlideCourse from '../components/slideCourse';
 import FooterBrand from '../components/footerBrand';
 import ShopeeReviews from '../components/index/shopeeReviews';
@@ -18,11 +17,8 @@ import { strapiImage } from '../apiStrapi/models/contact';
 import VideoPlayer from '../components/videoPlayer';
 import { CarouselContent } from '../apiStrapi/models/contentType/carousel';
 import carouselApi from '../apiStrapi/carouselApi';
-import { MouseEventHandler, useState } from 'react';
-import Popup from 'reactjs-popup';
-import CustomLogin from '../components/customLogin';
-import UserManager from '../auth/userManager';
-import router from 'next/router';
+import ImagePartialLogin from '../components/imagePartialLogin';
+import ButtonPartialLogin from '../components/buttonPartialLogin';
 
 interface IndexProps {
   carousel: ResponseDataList<CarouselContent>;
@@ -31,52 +27,61 @@ interface IndexProps {
 }
 
 export default function Index({ carousel, home, review }: IndexProps) {
-  const userManager = new UserManager();
-  const [isPopup, setIsPopup] = useState(false)
-
-  async function interestCourse(link: string) {
-    if (userManager.isLoggedIn()) {
-      link && router.push(link)
-    } else {
-      setIsPopup(true)
-    }
-  }
-
-  async function setCallbackButtonFN(link: string) {
-    setIsPopup(false)
-    if (userManager.isLoggedIn()) {
-      link && router.push(link)
-    }
-  }
 
   return (
     <div className="index">
       <Header />
       <div className="background-dark">
         <div className="sizer p-t-0">
-          <div className="row align-items-center justify-content-center">
-            <div className="text-center">
-              <h2 className="sm-f-s-24 sm-line-height sm-m-b-20">
-                <strong>
-                  <span className="color-primary">
-                    สูตรความสำเร็จกับ <br className="lg-none" />&quot;ที่สุด&quot; ของประเทศ
-                  </span>
-                </strong>
-              </h2>
-              <h5 className="sm-line-height">
-                <em>
+          <div className="container lg-p-x-0">
+            <div className="row align-items-center justify-content-center">
+              <div className="text-center col-12">
+                <h2 className="sm-f-s-24 sm-line-height sm-m-b-20">
                   <strong>
                     <span className="color-primary">
-                      คอร์สออนไลน์กับผู้บริหาร ผู้นำทางความคิด <br className="lg-none" /> แบบที่ไม่เคยมีมาก่อน
+                      สูตรความสำเร็จกับ <br className="lg-none" />&quot;ที่สุด&quot; ของประเทศ
                     </span>
                   </strong>
-                </em>
-              </h5>
-            </div>
-            <div className="block-type-image text-center col-8">
-              <div className="box-shadow-none">
-                <br />
-                <VideoPlayer videoId={home.data?.video_id} thumbnailImage={strapiImage(home.data?.thumbnail_video?.url)} />
+                </h2>
+                <h5 className="sm-line-height">
+                  <em>
+                    <strong>
+                      <span className="color-primary sm-f-s-16">
+                        คอร์สออนไลน์กับผู้บริหาร ผู้นำทางความคิด <br className="lg-none" /> แบบที่ไม่เคยมีมาก่อน
+                      </span>
+                    </strong>
+                  </em>
+                </h5>
+              </div>
+              <div className="block-type-feature text-center col-4">
+                <div className="block box-shadow-none">
+                  <div className="feature column-center">
+                    <ImagePartialLogin
+                      url={home.data?.promotions?.url}
+                      src={strapiImage(home.data?.promotions?.large_yearly_sub?.url)}
+                      width={416}
+                      height={267}
+                      alt={"Yearly Subscription"} />
+                    <div className='row p-w-100 justify-content-around'>
+                      <ButtonPartialLogin url={home.data?.promotions?.url}
+                        class={'btn btn-large'}
+                        text={' ซื้อแพ็คเกจรายปี '}
+                        classText="f-s-14" />
+                      <ButtonPartialLogin
+                        url={'/trial-library'}
+                        class={'btn btn-large btn-black-outlet'}
+                        text={'ทดลองเรียนฟรี'}
+                        classText="f-s-14"
+                        classIStart='fal fa-megaphone f-s-14 m-r-5' />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="block-type-image text-center col-8">
+                <div className="box-shadow-none">
+                  <br />
+                  <VideoPlayer videoId={home.data?.video_id} thumbnailImage={strapiImage(home.data?.thumbnail_video?.url)} />
+                </div>
               </div>
             </div>
           </div>
@@ -88,12 +93,12 @@ export default function Index({ carousel, home, review }: IndexProps) {
             <div className="row align-items-center justify-content-center">
               <div className="block-type-text text-left col-12">
                 <div className="block box-shadow-none">
-                  <h2 className="text-center">
+                  <h2 className="text-center ipad-line-height">
                     <strong>
-                      <span className="color-primary sm-f-s-24 sm-line-height">
+                      <span className="color-primary ipad-f-s-32 sm-f-s-22">
                         ปีใหม่นี้ยกระดับให้คุณเป็นคนใหม่
-                        <br className="lg-none"/>
-                        <span className="sm-f-s-18">
+                        <br className="lg-none" />
+                        <span className="ipad-f-s-24 sm-f-s-18">
                           เรียนรู้กับ &lsquo;ผู้นำตัวจริง&rsquo; จากทุกวงการ
                         </span>
                         <br />
@@ -109,17 +114,17 @@ export default function Index({ carousel, home, review }: IndexProps) {
               <div className="block-type-feature text-center col-5">
                 <div className="block box-shadow-none">
                   <div className="feature column-center">
-                    <a onClick={() => interestCourse(home.data?.promotions?.url)}>
-                      <Img className="feature-image"
-                        src={strapiImage(home.data?.promotions?.high_yearly_sub?.url)}
-                        width={400}
-                        height={400}
-                        alt="Yearly Subscription"
-                      />
-                    </a>
-                    <button className="btn btn-solid btn-medium btn-auto" onClick={() => interestCourse(home.data?.promotions?.url)}>
-                      สมัครเลย
-                    </button>
+                    <ImagePartialLogin
+                      url={'home.data?.promotions?.url'}
+                      src={strapiImage(home.data?.promotions?.high_yearly_sub?.url)}
+                      width={400}
+                      height={400}
+                      alt={'Yearly Subscription'} />
+                    <ButtonPartialLogin
+                      text={'ซื้อแพ็คเกจรายปี'}
+                      class='btn btn-solid btn-medium btn-auto'
+                      url={home.data?.promotions?.url}
+                    />
                   </div>
                 </div>
               </div>
@@ -175,24 +180,6 @@ export default function Index({ carousel, home, review }: IndexProps) {
               )
             })}
           </div>
-          <Popup className="popup-auth"
-            open={isPopup}
-            modal
-            onClose={() => setIsPopup(false)}
-            closeOnDocumentClick={false}>
-            {(close: MouseEventHandler<HTMLButtonElement>) => {
-              return (
-                <div className="pop-modal">
-                  <button className="close" onClick={close}>
-                    <p>
-                      &times;
-                    </p>
-                  </button>
-                  <CustomLogin path={home.data?.promotions?.url} callbackButton={setCallbackButtonFN} />
-                </div>
-              )
-            }}
-          </Popup>
         </div>
       </div>
       <FooterBrand />

@@ -1,4 +1,5 @@
 import Img from "../image";
+import ImagePartialLogin from "../imagePartialLogin";
 import VideoPlayer from "../videoPlayer";
 
 export interface CourseDetailCourseHeaderProps {
@@ -24,24 +25,20 @@ export default function CourseHeader({ yearlySubscriptionImage,
           <div className="block-type-code text-left col-3 sm-none p-0">
             <div className="block box-shadow-none">
               <div className="image">
-                <a href={yearlySubscriptionCheckoutUrl}>
-                  <Img className="image-image"
-                    src={yearlySubscriptionImage}
-                    width={384.6}
-                    height={246.85}
-                    alt="Cariber Yearly Subscription"
-                  />
-                </a>
+                <ImagePartialLogin
+                  url={yearlySubscriptionCheckoutUrl}
+                  src={yearlySubscriptionImage}
+                  width={384.6}
+                  height={246.85}
+                  alt={"Cariber Yearly Subscription"} />
               </div>
               <div className="image">
-                <a href={singleCheckoutUrl}>
-                  <Img className="image-image"
-                    src={singleCourseImage}
-                    width={384.6}
-                    height={246.85}
-                    alt="Cariber Single Subscription"
-                  />
-                </a>
+                <ImagePartialLogin
+                  url={singleCheckoutUrl}
+                  src={singleCourseImage}
+                  width={384.6}
+                  height={246.85}
+                  alt={"Cariber Single Subscription"} />
               </div>
             </div>
           </div>

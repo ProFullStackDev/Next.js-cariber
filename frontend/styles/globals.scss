@@ -3057,6 +3057,10 @@ strong {
   text-align: center;
 }
 
+.text-left {
+  text-align: left;
+}
+
 .align-items-start {
   -webkit-box-align: start;
   -ms-flex-align: start;
@@ -3301,6 +3305,7 @@ button {
   border: 2px solid;
   -webkit-box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+
   @media (max-width: $mobile-size) {
     font-size: 16px;
   }
@@ -4627,13 +4632,13 @@ a,
   width: 100%;
 }
 
-@media (min-width: $mobile-size) {
+@media (min-width: $ipad-size) {
   .lg-none {
     display: none !important;
   }
 }
 
-@media (max-width: $mobile-size) {
+@media (max-width: $ipad-size) {
   .sm-none {
     display: none !important;
   }
@@ -4642,8 +4647,12 @@ a,
 .background-image {
   background-image: url("/background-image.jpg");
   background-position: top;
-  background-size: contain;
-  background-attachment: fixed;
+  background-size: 70%;
+  background-attachment: unset;
+
+  @media (max-width: $mobile-size) {
+    background-size: 200%;
+  }
 }
 
 .none {
@@ -4844,7 +4853,7 @@ a .panel-sub-title {
 }
 
 .background-smooth {
-  background-color:$color-buttermilk !important;
+  background-color: $color-buttermilk !important;
 }
 
 .background-white {
@@ -4862,9 +4871,11 @@ a .panel-sub-title {
     color: $color-blue !important;
   }
 }
+
 .color-grey {
   color: $color-black;
 }
+
 .h-max {
   height: 100%;
 }
@@ -5026,16 +5037,57 @@ a .panel-sub-title {
   border-radius: 5px;
 }
 
-.color-red{
+.color-red {
   color: red;
 }
 
-.color-body{
+.color-body {
   color: $color-body;
 }
 
-.sm-line-height{
+.day-left-trial {
+  background-color: $color-tiger;
+  padding: 0px 20px;
+  border-radius: 5px;
+  color: $color-buttermilk;
+}
+
+.align-self-start {
+  align-self: start;
+}
+
+.btn-black-outlet {
+  border-color: white;
+  background-color: $color-black;
+  color: white;
+}
+
+.color-buttermilk {
+  color: $color-buttermilk;
+}
+
+.sm-line-height {
   @media(max-width: $mobile-size) {
     line-height: 1.1;
+  }
+}
+
+.flex-align-center {
+  align-items: center;
+  display: flex;
+}
+
+@media(max-width: $ipad-size) and (min-width: $mobile-size) {
+
+  .ipad-none {
+    display: none;
+  }
+
+  .ipad-line-height {
+    line-height: 1.1;
+  }
+
+  .ipad-min-line-height {
+    line-height: 0.8;
   }
 }

@@ -8,7 +8,7 @@ export default function ReviewHeader({ reviewHeader }: { reviewHeader: ReviewHea
       <div id="block-person-1">
         <div className="container">
           <div className="frame align-items-center justify-content-center">
-            <div className="block-type-image text-col-11">
+            <div className="block-type-image text-col-12">
               <div className="row block box-shadow-large background-light">
                 <Img className="image-image"
                   src={strapiImage(reviewHeader?.image?.url)}
