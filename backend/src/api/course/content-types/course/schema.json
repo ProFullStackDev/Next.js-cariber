@@ -12,7 +12,7 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "name": {
+    "speaker_name": {
       "type": "string"
     },
     "teaser": {
