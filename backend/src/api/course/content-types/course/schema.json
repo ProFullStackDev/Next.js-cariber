@@ -12,6 +12,9 @@
   },
   "pluginOptions": {},
   "attributes": {
+    "name": {
+      "type": "string"
+    },
     "teaser": {
       "type": "media",
       "multiple": false,
