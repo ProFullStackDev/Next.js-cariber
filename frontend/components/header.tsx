@@ -57,16 +57,21 @@ export default function Header() {
     window.addEventListener("resize", () => {
       setHamburgerOpened(false)
     });
+    checkShopeeCredentials();
+  }, [])
+
+  function checkShopeeCredentials(): void {
     const base64ID = window.location.search?.replace('?id=', '') || '';
     if (base64ID) {
       setHasShopeeID(true);
       const shopeeID = new Buffer(base64ID, 'base64').toString('ascii');
       setShopeeID(shopeeID);
+      userManager.isLoggedIn() && router.push('checkout-url');
       return;
     }
     setHasShopeeID(false);
     setShopeeID('');
-  }, [])
+  }
 
   function switchHamburger() {
     setHamburgerOpened(!hamburgerOpened)
@@ -175,13 +180,14 @@ export default function Header() {
                 <div className="user">
                   <span className="user-login">
                     <Popup className="popup-auth"
-                      trigger={
-                        <button className="btn btn-link btn-small color-primary" >
-                          เข้าสู่ระบบ
-                        </button>
-                      }
-                      modal
-                      closeOnDocumentClick={false}>
+                           open={shopeeID !== ''}
+                           trigger={
+                             <button className="btn btn-link btn-small color-primary" >
+                               เข้าสู่ระบบ
+                             </button>
+                           }
+                           modal
+                           closeOnDocumentClick={false}>
                       {(close: MouseEventHandler<HTMLButtonElement>) => {
                         return (
                           <div className="pop-modal">
@@ -190,7 +196,7 @@ export default function Header() {
                                 &times;
                               </p>
                             </button>
-                            <SwitchSignInSignUp />
+                            <SwitchSignInSignUp shopeeID={shopeeID} />
                           </div>
                         )
                       }}
@@ -201,10 +207,10 @@ export default function Header() {
             )}
             <div className={`hamburger hidden-desktop ${hamburgerOpened && "hamburger-opened"}`} onClick={switchHamburger}>
               <div className="hamburger-slices">
-                <div className="hamburger-slice hamburger-slice-1"></div>
-                <div className="hamburger-slice hamburger-slice-2"></div>
-                <div className="hamburger-slice hamburger-slice-3"></div>
-                <div className="hamburger-slice hamburger-slice-4"></div>
+                <div className="hamburger-slice hamburger-slice-1" />
+                <div className="hamburger-slice hamburger-slice-2" />
+                <div className="hamburger-slice hamburger-slice-3" />
+                <div className="hamburger-slice hamburger-slice-4" />
               </div>
             </div>
           </div>

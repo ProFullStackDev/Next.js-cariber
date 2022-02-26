@@ -7,7 +7,7 @@ enum SwitchPage {
   SignUp
 }
 
-export default function SwitchSignInSignUp() {
+export default function SwitchSignInSignUp( props: {shopeeID? : string | null}) {
   const [actualPage, setActualPage] = useState(SwitchPage.SignIn);
 
   function switchPage() {
@@ -16,7 +16,9 @@ export default function SwitchSignInSignUp() {
 
   return (
     <div>
-      {actualPage === SwitchPage.SignIn ? (<Login callbackButton={switchPage} />) : (<Register callbackButton={switchPage}/>)}
+      {actualPage === SwitchPage.SignIn
+        ? (<Login callbackButton={switchPage} shopeeID={props.shopeeID || null} />)
+        : (<Register callbackButton={switchPage} shopeeID={props.shopeeID || null}/>)}
     </div>
   )
 }

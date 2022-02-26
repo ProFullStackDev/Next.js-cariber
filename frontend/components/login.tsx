@@ -11,10 +11,11 @@ import router from "next/router";
 import { Auth } from "../apiNest/models/content/auth";
 
 interface LoginProps {
-  callbackButton: MouseEventHandler<HTMLButtonElement>
+  callbackButton: MouseEventHandler<HTMLButtonElement>,
+  shopeeID: string | null,
 }
 
-export default function Login({ callbackButton }: LoginProps) {
+export default function Login({ callbackButton, shopeeID }: LoginProps) {
   const userManager = new UserManager();
   const [formLogin, setFormLogin] = useState({
     email: "",
@@ -76,48 +77,50 @@ export default function Login({ callbackButton }: LoginProps) {
       <h2 className="color-white text-center">
         เข้าสู่ระบบ
       </h2>
-      <div className="column-center">
-        <GoogleLogin
-          render={renderProps => (
-            <button className="btn btn-icon btn-full m-b-10 m-x-0 background-color-google"
-              onClick={renderProps.onClick}>
-              <div className="icon-frame">
-                <Img src="/login/google-icon.svg"
-                  width={25}
-                  height={25}
-                  alt="Google"
-                />
-              </div>
-              เข้าสู่ระบบด้วย Google
-            </button>
-          )
-          }
-          clientId={process.env.NEXT_PUBLIC_NEXTAUTH_GOOGLE_CLIENT_ID as string}
-          buttonText="Login"
-          onSuccess={responseGoogle}
-          onFailure={responseGoogleFailure}
-        />
-        <FacebookLogin
-          appId={process.env.NEXT_PUBLIC_NEXTAUTH_FACEBOOK_CLIENT_ID as string}
-          callback={responseFacebook}
-          render={(renderProps) => {
-            return (
-              <button
-                className="btn btn-icon btn-full m-b-5 m-x-0 background-color-facebook"
-                onClick={renderProps.onClick}>
-                <div className="icon-frame p-0">
-                  <Img src="/login/facebook-icon.png"
-                    width={25}
-                    height={25}
-                    alt="Facebook"
-                  />
-                </div>
-                เข้าสู่ระบบด้วย Facebook
-              </button>
-            )
-          }}
-        />
-      </div>
+      { !shopeeID &&
+        <div className="column-center">
+          <GoogleLogin
+              render={renderProps => (
+                <button className="btn btn-icon btn-full m-b-10 m-x-0 background-color-google"
+                        onClick={renderProps.onClick}>
+                  <div className="icon-frame">
+                    <Img src="/login/google-icon.svg"
+                         width={25}
+                         height={25}
+                         alt="Google"
+                    />
+                  </div>
+                  เข้าสู่ระบบด้วย Google
+                </button>
+              )
+              }
+              clientId={process.env.NEXT_PUBLIC_NEXTAUTH_GOOGLE_CLIENT_ID as string}
+              buttonText="Login"
+              onSuccess={responseGoogle}
+              onFailure={responseGoogleFailure}
+          />
+          <FacebookLogin
+              appId={process.env.NEXT_PUBLIC_NEXTAUTH_FACEBOOK_CLIENT_ID as string}
+              callback={responseFacebook}
+              render={(renderProps) => {
+                return (
+                  <button
+                    className="btn btn-icon btn-full m-b-5 m-x-0 background-color-facebook"
+                    onClick={renderProps.onClick}>
+                    <div className="icon-frame p-0">
+                      <Img src="/login/facebook-icon.png"
+                           width={25}
+                           height={25}
+                           alt="Facebook"
+                      />
+                    </div>
+                    เข้าสู่ระบบด้วย Facebook
+                  </button>
+                )
+              }}
+          />
+        </div>
+      }
       <hr />
       <div className="p-20">
         <div className="block-type-form text-center">

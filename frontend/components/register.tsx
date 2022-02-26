@@ -8,10 +8,11 @@ import { useRouter } from "next/router";
 import { RegisterContent } from '../apiNest/models/content/register';
 
 interface RegisterProps {
-  callbackButton: MouseEventHandler<HTMLButtonElement>
+  callbackButton: MouseEventHandler<HTMLButtonElement>,
+  shopeeID: string | null,
 }
 
-export default function Register({ callbackButton }: RegisterProps) {
+export default function Register({ callbackButton, shopeeID }: RegisterProps) {
   const userManager = new UserManager();
   const router = useRouter();
   const [formRegister, setFormRegister] = useState({
@@ -54,28 +55,30 @@ export default function Register({ callbackButton }: RegisterProps) {
       <h2 className="color-white text-center">
         สร้างบัญชีผู้ใช้งาน
       </h2>
-      <div className="column-center">
-        <button className="btn btn-icon btn-full m-b-5 m-x-0 background-color-facebook">
-          <div className="icon-frame p-0">
-            <Img src="/login/facebook-icon.png"
-              width={25}
-              height={25}
-              alt="Facebook"
-            />
-          </div>
-          ลงทะเบียนด้วย Facebook
-        </button>
-        <button className="btn btn-icon btn-full m-b-10 m-x-0 background-color-google">
-          <div className="icon-frame">
-            <Img src="/login/google-icon.svg"
-              width={25}
-              height={25}
-              alt="Google"
-            />
-          </div>
-          ลงทะเบียนด้วย Google
-        </button>
-      </div>
+      { !shopeeID &&
+        <div className="column-center">
+          <button className="btn btn-icon btn-full m-b-5 m-x-0 background-color-facebook">
+            <div className="icon-frame p-0">
+              <Img src="/login/facebook-icon.png"
+                   width={25}
+                   height={25}
+                   alt="Facebook"
+              />
+            </div>
+            ลงทะเบียนด้วย Facebook
+          </button>
+          <button className="btn btn-icon btn-full m-b-10 m-x-0 background-color-google">
+            <div className="icon-frame">
+              <Img src="/login/google-icon.svg"
+                   width={25}
+                   height={25}
+                   alt="Google"
+              />
+            </div>
+            ลงทะเบียนด้วย Google
+          </button>
+        </div>
+      }
       <hr />
       <div className="p-20">
         <div className="block-type-form text-center">
