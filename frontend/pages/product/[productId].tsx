@@ -179,7 +179,7 @@ export default function Product() {
                       </>
                     : <>
                       <div className="quiz-session">
-                        <QuizSession quiz={quiz} />
+                        <QuizSession course={courseLms.id} quiz={quiz} />
                       </div>
                     </>
                   }

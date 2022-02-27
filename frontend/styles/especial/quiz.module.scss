@@ -76,6 +76,12 @@ $quiz-background: #f7f7f7;
         transition: background-color 0.25s ease;
       }
     }
+
+    .quiz-textarea {
+      width: 100%;
+      padding: 1rem;
+      border: 1px solid #dedede;
+    }
   }
 
   .quiz-footer {
@@ -84,7 +90,9 @@ $quiz-background: #f7f7f7;
     padding: 1rem;
 
     .quiz-submit {
+      width: 80px;
       color: white;
+      margin-left: 20px;
       background-color: #E74E25;
       border: none;
       padding: 0.5rem 1.5rem;
@@ -96,6 +104,29 @@ $quiz-background: #f7f7f7;
       &:hover {
         filter: brightness(0.8);
         transition: filter 0.2s ease;
+      }
+    }
+
+    .quiz-percentage {
+      display: flex;
+      align-items: center;
+      width: calc(100% - 100px);
+
+      .percentage-box {
+        width: 100%;
+        height: 10px;
+        border-radius: 5px;
+        background-color: lightgrey;
+        position: relative;
+
+        .progress {
+          position: absolute;
+          height: 10px;
+          border-radius: 5px;
+          background-color: #E74E25;
+          left: 0;
+          top: 0;
+        }
       }
     }
   }
