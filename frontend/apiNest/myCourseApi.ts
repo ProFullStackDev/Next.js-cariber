@@ -12,3 +12,16 @@ export async function myCourseApi() {
     console.log(error);
   }
 }
+
+export async function submitEvaluation(body: {score: number | null, feedback: string, course: number}) {
+  try {
+    const response = await fetch(NEST_API_URLS.courseEvaluation, {
+      method: "POST",
+      headers: nestHeaderAuth(),
+      body: JSON.stringify(body),
+    })
+    return await response.json();
+  } catch (error) {
+    console.log(error);
+  }
+}
