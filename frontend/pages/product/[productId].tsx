@@ -1,8 +1,7 @@
 import {useRouter} from "next/router";
 import {useEffect, useState} from "react";
 import {allCourseLmsApi, getEpisodesAndQuiz} from "../../apiNest/courseLmsApi";
-import {episodeApi} from "../../apiNest/episodeApi";
-import {CourseLMS, CourseLms, Episodes, Quiz, ShowingType,} from "../../apiNest/models/content/courseLms";
+import {CourseLMS, CourseLms, Episodes, Evaluation, Quiz, ShowingType,} from "../../apiNest/models/content/courseLms";
 import Accordion, {Color, Icon} from "../../components/accordion";
 import Footer from "../../components/footer";
 import Header from "../../components/header";
@@ -12,7 +11,9 @@ import ProductSale from "../../components/product/productSale";
 import ProductBlogs from "../../components/productBlogs";
 import VideoPlayer from "../../components/videoPlayer";
 import cutCloudflareVideoId from "../../functions/cutCloudflareVideoId";
+import CourseEvaluation from "../../components/courseEvaluation";
 import QuizSession from "../../components/quizSession";
+import {episodeApi} from "../../apiNest/episodeApi";
 
 export default function Product() {
   const [courseLms, setCourseLms] = useState<CourseLMS>({
@@ -67,15 +68,38 @@ export default function Product() {
     fetchData().then( () => {});
   }, [router.isReady]);
 
-  async function setEpisodeOrQuiz(passedData: Episodes | Quiz) {
+  async function setEpisodeOrQuiz(passedData: Episodes | Quiz | Evaluation) {
     setShowingType(passedData.type);
-    if (passedData.type === ShowingType.episode) {
-      const data = await episodeApi(passedData.id.toString()) as Episodes;
-      setEpisodeLms(data);
-      setQuiz(null);
-      return;
+    switch (passedData.type) {
+      case ShowingType.quiz:
+        setQuiz(passedData as Quiz);
+        break;
+      case ShowingType.episode:
+        const data = await episodeApi(passedData.id.toString()) as Episodes;
+        setEpisodeLms(data);
+        setQuiz(null);
+        break;
+      case ShowingType.courseEvaluation:
+        break;
     }
-    setQuiz(passedData as Quiz);
+  }
+
+  function getTrackName(value: Episodes | Quiz | Evaluation) {
+    let name = '';
+    switch (value.type) {
+      case ShowingType.episode:
+        const ep = value as Episodes;
+        name = ep.episode_name;
+        break;
+      case ShowingType.quiz:
+        const quiz = value as Quiz;
+        name = `Quiz For Episode ${quiz.episode_number}`;
+        break;
+      case ShowingType.courseEvaluation:
+        name = 'Post Course Evaluation';
+        break;
+    }
+    return name;
   }
 
   async function fetchData() {
@@ -84,6 +108,7 @@ export default function Product() {
       item.type = ("question" in item && item.question) ? ShowingType.quiz : ShowingType.episode;
       return item;
     });
+    data.episodes_list.push(new Evaluation());
     setCourseLms(data);
     data.episodes_list[0] && await setEpisodeOrQuiz(data.episodes_list[0]);
   }
@@ -152,18 +177,18 @@ export default function Product() {
               <div className="col-12 p-b-20">
                 <div className="player">
                   {
-                    showingType === ShowingType.episode
-                      ? <>
+                    showingType === ShowingType.episode &&
+                      <>
                         <div className="player-video">
                           {episodeLms?.link_video &&
                               <VideoPlayer videoId={cutCloudflareVideoId(episodeLms.link_video)}
-                                           thumbnailImage={episodeLms.thumbnail_image} />}
+                                           thumbnailImage={episodeLms.thumbnail_image}/>}
                         </div>
                         <div className="player-nav">
                           <div className="media">
                             <div className="media-left-under-player">
                               <a className="btn btn-box btn-small disabled" href="#">
-                                <i className="fa fa-chevron-left" aria-hidden="true" />
+                                <i className="fa fa-chevron-left" aria-hidden="true"/>
                                 บทเรียนก่อนหน้า
                               </a>
                             </div>
@@ -175,17 +200,27 @@ export default function Product() {
                             <div className="media-right">
                               <a className="btn btn-box btn-small" href="#">
                                 บทเรียนถัดไป
-                                <i className="fa fa-chevron-right" aria-hidden="true" />
+                                <i className="fa fa-chevron-right" aria-hidden="true"/>
                               </a>
                             </div>
                           </div>
                         </div>
                       </>
-                    : <>
+                  }
+                  {showingType === ShowingType.quiz &&
+                    <>
                       <div className="quiz-session">
                         <QuizSession course={courseLms}
                                      restart={restart}
                                      quiz={quiz} />
+                      </div>
+                    </>
+                  }
+                  {showingType === ShowingType.courseEvaluation &&
+                    <>
+                      <div className="quiz-session">
+                        <CourseEvaluation course={courseLms}
+                                          restart={restart}/>
                       </div>
                     </>
                   }
@@ -214,7 +249,7 @@ export default function Product() {
                                   </p>
                                 ) : (
                                   <p className="track-count">
-                                    {"episode_name" in value && value.episode_number}
+                                    { index + 1 }
                                   </p>
                                 )}
                               </div>
@@ -223,14 +258,12 @@ export default function Product() {
                                   src={"thumbnail_image" in value ? value.thumbnail_image : ''}
                                   width={70}
                                   height={39.3833}
-                                  alt={"episode_name" in value ? value.episode_name : "asdasd"}
+                                  alt={"episode_name" in value ? value.episode_name : "thumbnail image"}
                                 />
                               </div>
                               <div className="media-body media-middle">
                                 <div className="track-title">
-                                  {"episode_name" in value
-                                    ? value.episode_name
-                                    : `Quiz For Episode ${value.episode_number}`}
+                                  {getTrackName(value)}
                                 </div>
                               </div>
                             </a>
@@ -251,8 +284,10 @@ export default function Product() {
               <div className="col-8">
                 {courseLms.episodes_list?.map((value, index) => {
                   return (<Accordion key={index}
-                    title={"episode_name" in value ? value.episode_name : '' }
-                    description={"description" in value ? value.description + "\n *หากผู้ใดละเมิดนำงานไปเผยแพร่ คัดลอก หรือดัดแปลงไม่ว่าบางส่วนหรือทั้งหมดจะถูกดำเนินคดีตามกฎหมาย" : ''}
+                    title={getTrackName(value)}
+                    description={"description" in value
+                                  ? value.description + "\n *หากผู้ใดละเมิดนำงานไปเผยแพร่ คัดลอก หรือดัดแปลงไม่ว่าบางส่วนหรือทั้งหมดจะถูกดำเนินคดีตามกฎหมาย"
+                                  : ''}
                     col={12}
                     icon={Icon.play}
                     color={Color.light}

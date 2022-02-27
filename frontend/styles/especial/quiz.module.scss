@@ -77,6 +77,10 @@ $quiz-background: #f7f7f7;
       }
     }
 
+    &.m-h-700 {
+      height: unset;
+    }
+
     .quiz-textarea {
       width: 100%;
       padding: 1rem;
@@ -139,6 +143,11 @@ $quiz-background: #f7f7f7;
   transition: filter 0.2s ease;
 
   &:hover {
+    filter: brightness(0.8);
+    transition: filter 0.2s ease;
+  }
+
+  &:disabled {
     filter: brightness(0.8);
     transition: filter 0.2s ease;
   }
