@@ -220,7 +220,7 @@ export default function Product() {
                               </div>
                               <div className="media-left media-middle d-flex align-items-center">
                                 <Img className="track-thumb"
-                                  src={"thumbnail_image" in value ? value.thumbnail_image : null}
+                                  src={"thumbnail_image" in value ? value.thumbnail_image : ''}
                                   width={70}
                                   height={39.3833}
                                   alt={"episode_name" in value ? value.episode_name : "asdasd"}
