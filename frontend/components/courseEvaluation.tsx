@@ -71,8 +71,8 @@ export default function CourseEvaluation(props: QuizProps ){
             </p>
           </div>
 
-          <div className="quiz-body">
-            {feedbackType === TypeOfFeedBack.range
+          <div className="quiz-body m-h-700">
+            {feedbackType === TypeOfFeedBack.range 
               ? choices.map((eachChoice, index) => {
                 return <div key={index}
                             className={`choice-row ${selectedChoice === eachChoice.score && 'selected'}`}

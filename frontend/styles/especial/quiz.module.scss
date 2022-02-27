@@ -77,6 +77,10 @@ $quiz-background: #f7f7f7;
       }
     }
 
+    &.m-h-700 {
+      height: unset;
+    }
+
     .quiz-textarea {
       width: 100%;
       padding: 1rem;
