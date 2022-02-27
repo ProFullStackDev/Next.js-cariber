@@ -72,6 +72,7 @@ export default function Product() {
       const data = await episodeApi(passedData.id.toString()) as Episodes;
       setEpisodeLms(data);
       setQuiz(null);
+      return;
     }
     setQuiz(passedData as Quiz);
   }
