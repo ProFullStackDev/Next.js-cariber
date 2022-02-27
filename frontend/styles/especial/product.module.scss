@@ -200,6 +200,8 @@
 
   .playlist {
     font-size: 16px;
+    height: 100%;
+    background: #343434;
   }
 
   .playlist-title h3 {
@@ -218,6 +220,7 @@
 
   .playlist-title {
     padding: 20px 30px;
+    background-color: #252525;
   }
 
   .player {
@@ -226,7 +229,7 @@
     background: #252525;
   }
 
-  .player-video {
+  .player-video, .quiz-session {
     width: 70%;
     display: inline-block;
     vertical-align: top;

@@ -12,6 +12,7 @@ import ProductSale from "../../components/product/productSale";
 import ProductBlogs from "../../components/productBlogs";
 import VideoPlayer from "../../components/videoPlayer";
 import cutCloudflareVideoId from "../../functions/cutCloudflareVideoId";
+import QuizSession from "../../components/quizSession";
 
 export default function Product() {
   const [courseLms, setCourseLms] = useState<CourseLMS>({
@@ -146,32 +147,42 @@ export default function Product() {
               </div>
               <div className="col-12 p-b-20">
                 <div className="player">
-                  <div className="player-video">
-                    {episodeLms?.link_video &&
-                        <VideoPlayer videoId={cutCloudflareVideoId(episodeLms.link_video)}
-                                      thumbnailImage={episodeLms.thumbnail_image} />}
-                  </div>
-                  <div className="player-nav">
-                    <div className="media">
-                      <div className="media-left-under-player">
-                        <a className="btn btn-box btn-small disabled" href="#">
-                          <i className="fa fa-chevron-left" aria-hidden="true" />
-                          บทเรียนก่อนหน้า
-                        </a>
+                  {
+                    showingType === ShowingType.episode
+                      ? <>
+                        <div className="player-video">
+                          {episodeLms?.link_video &&
+                              <VideoPlayer videoId={cutCloudflareVideoId(episodeLms.link_video)}
+                                           thumbnailImage={episodeLms.thumbnail_image} />}
+                        </div>
+                        <div className="player-nav">
+                          <div className="media">
+                            <div className="media-left-under-player">
+                              <a className="btn btn-box btn-small disabled" href="#">
+                                <i className="fa fa-chevron-left" aria-hidden="true" />
+                                บทเรียนก่อนหน้า
+                              </a>
+                            </div>
+                            <div className="media-body media-middle">
+                              <p className="m-b-0 hidden-xs-down">
+                                บทเรียน 1 of 10
+                              </p>
+                            </div>
+                            <div className="media-right">
+                              <a className="btn btn-box btn-small" href="#">
+                                บทเรียนถัดไป
+                                <i className="fa fa-chevron-right" aria-hidden="true" />
+                              </a>
+                            </div>
+                          </div>
+                        </div>
+                      </>
+                    : <>
+                      <div className="quiz-session">
+                        <QuizSession />
                       </div>
-                      <div className="media-body media-middle">
-                        <p className="m-b-0 hidden-xs-down">
-                          บทเรียน 1 of 10
-                        </p>
-                      </div>
-                      <div className="media-right">
-                        <a className="btn btn-box btn-small" href="#">
-                          บทเรียนถัดไป
-                          <i className="fa fa-chevron-right" aria-hidden="true" />
-                        </a>
-                      </div>
-                    </div>
-                  </div>
+                    </>
+                  }
                   <div className="player-playlist">
                     <div className="playlist">
                       <div className="playlist-title">
@@ -197,11 +208,11 @@ export default function Product() {
                                   </p>
                                 ) : (
                                   <p className="track-count">
-                                    {value.episode_number}
+                                    {"episode_name" in value && value.episode_number}
                                   </p>
                                 )}
                               </div>
-                              <div className="media-left media-middle">
+                              <div className="media-left media-middle d-flex align-items-center">
                                 <Img className="track-thumb"
                                   src={"thumbnail_image" in value ? value.thumbnail_image : null}
                                   width={70}
@@ -211,7 +222,9 @@ export default function Product() {
                               </div>
                               <div className="media-body media-middle">
                                 <div className="track-title">
-                                  {"episode_name" in value ? value.episode_name : 'ddddd'}
+                                  {"episode_name" in value
+                                    ? value.episode_name
+                                    : `Quiz For Episode ${value.episode_number}`}
                                 </div>
                               </div>
                             </a>
