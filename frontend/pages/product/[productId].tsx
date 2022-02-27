@@ -88,6 +88,10 @@ export default function Product() {
     data.episodes_list[0] && await setEpisodeOrQuiz(data.episodes_list[0]);
   }
 
+  function restart() {
+    setEpisodeOrQuiz(courseLms.episodes_list[0]).then(() => {});
+  }
+
   return (
     <div className="product">
       <Header />
@@ -179,7 +183,9 @@ export default function Product() {
                       </>
                     : <>
                       <div className="quiz-session">
-                        <QuizSession course={courseLms.id} quiz={quiz} />
+                        <QuizSession course={courseLms}
+                                     restart={restart}
+                                     quiz={quiz} />
                       </div>
                     </>
                   }

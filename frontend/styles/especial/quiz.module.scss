@@ -89,24 +89,6 @@ $quiz-background: #f7f7f7;
     justify-content: flex-end;
     padding: 1rem;
 
-    .quiz-submit {
-      width: 80px;
-      color: white;
-      margin-left: 20px;
-      background-color: #E74E25;
-      border: none;
-      padding: 0.5rem 1.5rem;
-      cursor: pointer;
-      border-radius: 5px;
-      filter: brightness(1);
-      transition: filter 0.2s ease;
-
-      &:hover {
-        filter: brightness(0.8);
-        transition: filter 0.2s ease;
-      }
-    }
-
     .quiz-percentage {
       display: flex;
       align-items: center;
@@ -130,7 +112,36 @@ $quiz-background: #f7f7f7;
       }
     }
   }
+
+  .submitted {
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
 }
 
+.f-w-300 {
+  font-weight: 300;
+}
+
+.quiz-submit {
+  width: fit-content;
+  color: white;
+  margin-left: 20px;
+  background-color: #E74E25;
+  border: none;
+  padding: 0.5rem 1.5rem;
+  cursor: pointer;
+  border-radius: 5px;
+  filter: brightness(1);
+  transition: filter 0.2s ease;
+
+  &:hover {
+    filter: brightness(0.8);
+    transition: filter 0.2s ease;
+  }
+}
 
 
