@@ -12,6 +12,7 @@ import ProductSale from "../../components/product/productSale";
 import ProductBlogs from "../../components/productBlogs";
 import VideoPlayer from "../../components/videoPlayer";
 import cutCloudflareVideoId from "../../functions/cutCloudflareVideoId";
+import CourseEvaluation from "../../components/courseEvaluation";
 import QuizSession from "../../components/quizSession";
 
 export default function Product() {
@@ -183,6 +184,8 @@ export default function Product() {
                       </>
                     : <>
                       <div className="quiz-session">
+                        {/*<CourseEvaluation course={courseLms}*/}
+                        {/*                  restart={restart}/>*/}
                         <QuizSession course={courseLms}
                                      restart={restart}
                                      quiz={quiz} />

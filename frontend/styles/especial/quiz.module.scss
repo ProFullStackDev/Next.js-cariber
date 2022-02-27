@@ -142,6 +142,11 @@ $quiz-background: #f7f7f7;
     filter: brightness(0.8);
     transition: filter 0.2s ease;
   }
+
+  &:disabled {
+    filter: brightness(0.8);
+    transition: filter 0.2s ease;
+  }
 }
 
 
