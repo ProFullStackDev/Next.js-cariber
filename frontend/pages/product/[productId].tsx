@@ -179,7 +179,7 @@ export default function Product() {
                       </>
                     : <>
                       <div className="quiz-session">
-                        <QuizSession />
+                        <QuizSession quiz={quiz} />
                       </div>
                     </>
                   }
