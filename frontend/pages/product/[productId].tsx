@@ -1,9 +1,9 @@
-import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import {useRouter} from "next/router";
+import {useEffect, useState} from "react";
 import {allCourseLmsApi, getEpisodesAndQuiz} from "../../apiNest/courseLmsApi";
-import { episodeApi } from "../../apiNest/episodeApi";
-import {CourseLMS, CourseLms, EpisodeLms, type} from "../../apiNest/models/content/courseLms";
-import Accordion, { Color, Icon } from "../../components/accordion";
+import {episodeApi} from "../../apiNest/episodeApi";
+import {CourseLMS, CourseLms, Episodes, Quiz, ShowingType,} from "../../apiNest/models/content/courseLms";
+import Accordion, {Color, Icon} from "../../components/accordion";
 import Footer from "../../components/footer";
 import Header from "../../components/header";
 import Img from "../../components/image";
@@ -15,7 +15,6 @@ import cutCloudflareVideoId from "../../functions/cutCloudflareVideoId";
 
 export default function Product() {
   const [courseLms, setCourseLms] = useState<CourseLMS>({
-    epiodes_list: [],
     id: 0,
     speaker_name: "",
     course_name: "",
@@ -30,19 +29,7 @@ export default function Product() {
     updateDate: "",
     deletedAt: "",
     asset_download: "",
-    episode: [{
-      id: 0,
-      episode_number: 0,
-      episode_name: "",
-      description: "",
-      link_video: "",
-      thumbnail_image: "",
-      lms_id: 0,
-      is_free_trial: false,
-      createDate: "",
-      updateDate: "",
-      deletedAt: "",
-    }],
+    episodes_list: [],
     instructor: {
       id: 0,
       name: "",
@@ -54,7 +41,7 @@ export default function Product() {
       deletedAt: "",
     }
   });
-  const [episodeLms, setEpisodeLms] = useState({
+  const [episodeLms, setEpisodeLms] = useState<Episodes>({
     id: 0,
     episode_number: 0,
     episode_name: "",
@@ -66,7 +53,10 @@ export default function Product() {
     createDate: "",
     updateDate: "",
     deletedAt: "",
+    type: ShowingType.episode,
   });
+  const [showingType, setShowingType] = useState<ShowingType>(ShowingType.episode);
+  const [quiz, setQuiz] = useState<Quiz | null>(null);
   const router = useRouter();
   const announcement = "ตอนนี้คุณกำลังอยู่ในโหมดทดลองเรียนฟรี เนื้อหาบางส่วนมีการถูกล็อกไว้\nคุณสามารถซื้อคอร์สนี้เพื่อดูเนื้อหาทั้งหมดในคอร์สเรียน";
   const { productId } = router.query;
@@ -76,19 +66,24 @@ export default function Product() {
     fetchData().then( () => {});
   }, [router.isReady]);
 
-  async function setEpisode(id: number) {
-    const data = await episodeApi(id.toString()) as EpisodeLms;
-    setEpisodeLms(data);
+  async function setEpisodeOrQuiz(passedData: Episodes | Quiz) {
+    setShowingType(passedData.type);
+    if (passedData.type === ShowingType.episode) {
+      const data = await episodeApi(passedData.id.toString()) as Episodes;
+      setEpisodeLms(data);
+      setQuiz(null);
+    }
+    setQuiz(passedData as Quiz);
   }
 
   async function fetchData() {
     const data = await getEpisodesAndQuiz(productId!.toString()) as CourseLMS;
-    data.epiodes_list.map(item => {
-      item.type = ("question" in item && item.question) ? type.quiz : type.episode;
+    data.episodes_list.map(item => {
+      item.type = ("question" in item && item.question) ? ShowingType.quiz : ShowingType.episode;
       return item;
     });
     setCourseLms(data);
-    data.epiodes_list[0] && await setEpisode(data.epiodes_list[0].id);
+    data.episodes_list[0] && await setEpisodeOrQuiz(data.episodes_list[0]);
   }
 
   return (
@@ -134,7 +129,7 @@ export default function Product() {
               <div className="col-12">
                 <div className="episode-title">
                   <h5 className="color-black m-0">
-                    {episodeLms.episode_name}
+                    {episodeLms?.episode_name}
                   </h5>
                 </div>
               </div>
@@ -151,7 +146,9 @@ export default function Product() {
               <div className="col-12 p-b-20">
                 <div className="player">
                   <div className="player-video">
-                    {episodeLms.link_video && <VideoPlayer videoId={cutCloudflareVideoId(episodeLms.link_video)} thumbnailImage={episodeLms.thumbnail_image} />}
+                    {episodeLms?.link_video &&
+                        <VideoPlayer videoId={cutCloudflareVideoId(episodeLms.link_video)}
+                                      thumbnailImage={episodeLms.thumbnail_image} />}
                   </div>
                   <div className="player-nav">
                     <div className="media">
@@ -182,16 +179,18 @@ export default function Product() {
                             <h2>{courseLms.course_name}</h2>
                           </div>
                           <div className="media-right">
-                            <h3>{courseLms.epiodes_list?.length} บทเรียน</h3>
+                            <h3>{courseLms.episodes_list?.length} บทเรียน</h3>
                           </div>
                         </div>
                       </div>
                       <div className="playlist-body">
-                        {courseLms.epiodes_list?.map((value, index) => {
+                        {courseLms.episodes_list?.map((value, index) => {
                           return (
-                            <a key={index} className="media track" onClick={async () => { await setEpisode(value.id) }}>
+                            <a key={index}
+                               className="media track"
+                               onClick={async () => { await setEpisodeOrQuiz(value) }}>
                               <div className="media-left media-middle">
-                                {value.episode_number === episodeLms.episode_number ? (
+                                {value.episode_number === episodeLms?.episode_number ? (
                                   <p className="track-count active">
                                     <i className="fa fa-play color-primary" />
                                   </p>
@@ -230,14 +229,16 @@ export default function Product() {
                 </div>
               </div>
               <div className="col-8">
-                {courseLms.epiodes_list?.map((value, index) => {
+                {courseLms.episodes_list?.map((value, index) => {
                   return (<Accordion key={index}
                     title={"episode_name" in value ? value.episode_name : '' }
                     description={"description" in value ? value.description + "\n *หากผู้ใดละเมิดนำงานไปเผยแพร่ คัดลอก หรือดัดแปลงไม่ว่าบางส่วนหรือทั้งหมดจะถูกดำเนินคดีตามกฎหมาย" : ''}
                     col={12}
                     icon={Icon.play}
                     color={Color.light}
-                    button={{ callback: () => { setEpisode(value.id).then(() => {}) }, text: `${0 ? (`${0 < 100 ? ("ดูต่อ") : ("ดูอีกครั้ง")}`) : ("รับชมเนื้อหา")}` }}
+                    button={{ callback: () => {
+                      setEpisodeOrQuiz(value).then(() => {})
+                    }, text: `${0 ? (`${0 < 100 ? ("ดูต่อ") : ("ดูอีกครั้ง")}`) : ("รับชมเนื้อหา")}` }}
                     progress={0}
                   />)
                 })

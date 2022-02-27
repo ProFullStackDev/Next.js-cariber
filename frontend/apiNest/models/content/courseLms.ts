@@ -42,7 +42,7 @@ export interface EpisodeLms {
   deletedAt: string;
 }
 
-export enum type {
+export enum ShowingType {
 	episode = 'episode',
 	quiz = 'quiz',
 }
@@ -62,7 +62,7 @@ export interface CourseLMS {
 	createDate: string;
 	updateDate: string;
 	deletedAt?: any;
-	epiodes_list: EpisodesAndQuiz[];
+	episodes_list: EpisodesAndQuiz[];
 	instructor: Instructor;
 }
 
@@ -78,7 +78,7 @@ export interface Episodes {
 	createDate: string;
 	updateDate: string;
 	deletedAt?: string;
-	type: type.episode;
+	type: ShowingType;
 }
 
 export interface Quiz {
@@ -90,7 +90,7 @@ export interface Quiz {
 	updateDate: string;
 	deletedAt?: string;
 	choice: QuizChoice[];
-	type: type.quiz;
+	type: ShowingType;
 }
 
 export interface QuizChoice {
