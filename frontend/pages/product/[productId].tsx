@@ -284,8 +284,10 @@ export default function Product() {
               <div className="col-8">
                 {courseLms.episodes_list?.map((value, index) => {
                   return (<Accordion key={index}
-                    title={"episode_name" in value ? value.episode_name : '' }
-                    description={"description" in value ? value.description + "\n *หากผู้ใดละเมิดนำงานไปเผยแพร่ คัดลอก หรือดัดแปลงไม่ว่าบางส่วนหรือทั้งหมดจะถูกดำเนินคดีตามกฎหมาย" : ''}
+                    title={getTrackName(value)}
+                    description={"description" in value
+                                  ? value.description + "\n *หากผู้ใดละเมิดนำงานไปเผยแพร่ คัดลอก หรือดัดแปลงไม่ว่าบางส่วนหรือทั้งหมดจะถูกดำเนินคดีตามกฎหมาย"
+                                  : ''}
                     col={12}
                     icon={Icon.play}
                     color={Color.light}
