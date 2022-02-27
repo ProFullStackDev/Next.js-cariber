@@ -1,8 +1,8 @@
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import { allCourseLmsApi, courseLmsApi } from "../../apiNest/courseLmsApi";
+import {allCourseLmsApi, getEpisodesAndQuiz} from "../../apiNest/courseLmsApi";
 import { episodeApi } from "../../apiNest/episodeApi";
-import { CourseLms, EpisodeLms } from "../../apiNest/models/content/courseLms";
+import {CourseLMS, CourseLms, EpisodeLms, type} from "../../apiNest/models/content/courseLms";
 import Accordion, { Color, Icon } from "../../components/accordion";
 import Footer from "../../components/footer";
 import Header from "../../components/header";
@@ -14,7 +14,8 @@ import VideoPlayer from "../../components/videoPlayer";
 import cutCloudflareVideoId from "../../functions/cutCloudflareVideoId";
 
 export default function Product() {
-  const [courseLms, setCourseLms] = useState({
+  const [courseLms, setCourseLms] = useState<CourseLMS>({
+    epiodes_list: [],
     id: 0,
     speaker_name: "",
     course_name: "",
@@ -72,7 +73,7 @@ export default function Product() {
   
   useEffect(() => {
     if (!router.isReady) return;
-    fetchData();
+    fetchData().then( () => {});
   }, [router.isReady]);
 
   async function setEpisode(id: number) {
@@ -81,9 +82,13 @@ export default function Product() {
   }
 
   async function fetchData() {
-    const data = await courseLmsApi(productId!.toString()) as CourseLms;
+    const data = await getEpisodesAndQuiz(productId!.toString()) as CourseLMS;
+    data.epiodes_list.map(item => {
+      item.type = ("question" in item && item.question) ? type.quiz : type.episode;
+      return item;
+    });
     setCourseLms(data);
-    data.episode[0] && setEpisode(data.episode[0].id);
+    data.epiodes_list[0] && await setEpisode(data.epiodes_list[0].id);
   }
 
   return (
@@ -120,7 +125,7 @@ export default function Product() {
             <div className="row">
               <div className="col-12">
                 <button className="btn-link f-s-16 row" onClick={router.back}>
-                  <i className="fal fa-chevron-left m-r-7"></i>
+                  <i className="fal fa-chevron-left m-r-7" />
                   <h5 className="color-black m-b-0">
                     ย้อนกลับ
                   </h5>
@@ -135,7 +140,7 @@ export default function Product() {
               </div>
               <div className="col-12">
                 <div className="product-announcement">
-                  <i className="fal fa-megaphone p-t-5"></i>
+                  <i className="fal fa-megaphone p-t-5" />
                   <div className="p-l-10">
                     <span>
                       {announcement}
@@ -152,7 +157,7 @@ export default function Product() {
                     <div className="media">
                       <div className="media-left-under-player">
                         <a className="btn btn-box btn-small disabled" href="#">
-                          <i className="fa fa-chevron-left" aria-hidden="true"></i>
+                          <i className="fa fa-chevron-left" aria-hidden="true" />
                           บทเรียนก่อนหน้า
                         </a>
                       </div>
@@ -164,7 +169,7 @@ export default function Product() {
                       <div className="media-right">
                         <a className="btn btn-box btn-small" href="#">
                           บทเรียนถัดไป
-                          <i className="fa fa-chevron-right" aria-hidden="true"></i>
+                          <i className="fa fa-chevron-right" aria-hidden="true" />
                         </a>
                       </div>
                     </div>
@@ -177,18 +182,18 @@ export default function Product() {
                             <h2>{courseLms.course_name}</h2>
                           </div>
                           <div className="media-right">
-                            <h3>{courseLms.episode.length} บทเรียน</h3>
+                            <h3>{courseLms.epiodes_list?.length} บทเรียน</h3>
                           </div>
                         </div>
                       </div>
                       <div className="playlist-body">
-                        {courseLms.episode?.map((value, index) => {
+                        {courseLms.epiodes_list?.map((value, index) => {
                           return (
                             <a key={index} className="media track" onClick={async () => { await setEpisode(value.id) }}>
                               <div className="media-left media-middle">
                                 {value.episode_number === episodeLms.episode_number ? (
                                   <p className="track-count active">
-                                    <i className="fa fa-play color-primary"></i>
+                                    <i className="fa fa-play color-primary" />
                                   </p>
                                 ) : (
                                   <p className="track-count">
@@ -198,15 +203,15 @@ export default function Product() {
                               </div>
                               <div className="media-left media-middle">
                                 <Img className="track-thumb"
-                                  src={value.thumbnail_image}
+                                  src={"thumbnail_image" in value ? value.thumbnail_image : null}
                                   width={70}
                                   height={39.3833}
-                                  alt={value.episode_name}
+                                  alt={"episode_name" in value ? value.episode_name : "asdasd"}
                                 />
                               </div>
                               <div className="media-body media-middle">
                                 <div className="track-title">
-                                  {value.episode_name}
+                                  {"episode_name" in value ? value.episode_name : 'ddddd'}
                                 </div>
                               </div>
                             </a>
@@ -217,7 +222,7 @@ export default function Product() {
                   </div>
                 </div>
                 <div className="col-12 link-file">
-                  <i className="fal fa-file-download color-primary"></i>
+                  <i className="fal fa-file-download color-primary" />
                   &nbsp;&nbsp;
                   <a target="_blank" href={courseLms.asset_download} rel="noopener noreferrer">
                     ดาวน์โหลดเอกสารประกอบการเรียน
@@ -225,14 +230,14 @@ export default function Product() {
                 </div>
               </div>
               <div className="col-8">
-                {courseLms.episode.map((value, index) => {
+                {courseLms.epiodes_list?.map((value, index) => {
                   return (<Accordion key={index}
-                    title={value.episode_name}
-                    description={value.description + "\n *หากผู้ใดละเมิดนำงานไปเผยแพร่ คัดลอก หรือดัดแปลงไม่ว่าบางส่วนหรือทั้งหมดจะถูกดำเนินคดีตามกฎหมาย"}
+                    title={"episode_name" in value ? value.episode_name : '' }
+                    description={"description" in value ? value.description + "\n *หากผู้ใดละเมิดนำงานไปเผยแพร่ คัดลอก หรือดัดแปลงไม่ว่าบางส่วนหรือทั้งหมดจะถูกดำเนินคดีตามกฎหมาย" : ''}
                     col={12}
                     icon={Icon.play}
                     color={Color.light}
-                    button={{ callback: () => { setEpisode(value.id) }, text: `${0 ? (`${0 < 100 ? ("ดูต่อ") : ("ดูอีกครั้ง")}`) : ("รับชมเนื้อหา")}` }}
+                    button={{ callback: () => { setEpisode(value.id).then(() => {}) }, text: `${0 ? (`${0 < 100 ? ("ดูต่อ") : ("ดูอีกครั้ง")}`) : ("รับชมเนื้อหา")}` }}
                     progress={0}
                   />)
                 })
