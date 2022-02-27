@@ -6,6 +6,8 @@ import registerApi, { RegisterApiProps } from "../apiNest/registerApi";
 import UserManager from "../auth/userManager";
 import { useRouter } from "next/router";
 import { RegisterContent } from '../apiNest/models/content/register';
+import { WoocommerceCredentials } from "../apiNest/models/content/woocommerce";
+import { WoocommerceService } from "../services/WoocommerceService";
 
 interface RegisterProps {
   callbackButton: MouseEventHandler<HTMLButtonElement>,
@@ -41,6 +43,14 @@ export default function Register({ callbackButton, shopeeID }: RegisterProps) {
     const data = await registerApi(formData) as RegisterContent;
     if (!data.message) {
       userManager.saveToken(data.access_token);
+      if (shopeeID) {
+        const credentials: WoocommerceCredentials = {
+          email: formRegister.email,
+          shopee_id: shopeeID,
+        }
+        await WoocommerceService.checkClaimedOrNot(credentials);
+        return;
+      }
       router.replace("/library");
     } else {
       setErrorRegister({
