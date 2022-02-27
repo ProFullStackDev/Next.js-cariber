@@ -9,7 +9,8 @@ import FacebookLogin, { ReactFacebookLoginInfo } from 'react-facebook-login-type
 import UserManager from "../auth/userManager";
 import router from "next/router";
 import { Auth } from "../apiNest/models/content/auth";
-import checkClaimed, {WoocommerceCredentials} from "../apiNest/WoocommerceApi";
+import { WoocommerceService } from "../services/WoocommerceService";
+import { WoocommerceCredentials } from "../apiNest/models/content/woocommerce";
 
 interface LoginProps {
   callbackButton: MouseEventHandler<HTMLButtonElement>,
@@ -65,7 +66,11 @@ export default function Login({ callbackButton, shopeeID }: LoginProps) {
     if (!data.message) {
       userManager.saveToken(data.access_token);
       if (shopeeID) {
-        await checkClaimedOrNot(formLogin.email, shopeeID);
+        const credentials: WoocommerceCredentials = {
+          email: formLogin.email,
+          shopee_id: shopeeID,
+        }
+        await WoocommerceService.checkClaimedOrNot(credentials);
         return;
       }
       router.replace("/library");
@@ -75,14 +80,6 @@ export default function Login({ callbackButton, shopeeID }: LoginProps) {
         message: data.message,
       })
     }
-  }
-
-  async function checkClaimedOrNot(email: string, shopeeID: string) {
-    const credentials: WoocommerceCredentials = {
-      email: email,
-      shopee_id: shopeeID,
-    }
-    const claimed = await checkClaimed(credentials);
   }
 
   return (
