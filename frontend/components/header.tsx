@@ -7,6 +7,7 @@ import SwitchSignInSignUp from "./switchSignInSignUp";
 import UserManager from "../auth/userManager";
 import AnnouncementBar from "./announcementBar";
 import ButtonPartialLogin from "./buttonPartialLogin";
+import { WoocommerceService } from "../services/WoocommerceService";
 
 interface Menu {
   url: string,
@@ -17,7 +18,14 @@ export default function Header() {
   const userManager = new UserManager();
   const flashMessages = new FlashMessages();
   const [hamburgerOpened, setHamburgerOpened] = useState(false);
+
+  const [shopeeID, setShopeeID] = useState('');
+  const [hasShopeeID, setHasShopeeID] = useState(false);
   const flashForgotPassword = flashMessages.getMessages(FlashMessagesType.forgotPasswordMessages);
+  const [formData, setFormData] = useState({
+    avatarUserBase64: "/default_avatar.webp",
+  })
+
   const menuLogedIn: Menu[] = [
     { url: "/library", name: "คอร์สของฉัน" },
     { url: "/courses", name: "คอร์สทั้งหมด" },
@@ -48,7 +56,21 @@ export default function Header() {
     window.addEventListener("resize", () => {
       setHamburgerOpened(false)
     });
+    checkShopeeCredentials();
   }, [])
+
+  function checkShopeeCredentials(): void {
+    const base64ID = window.location.search?.replace('?id=', '') || '';
+    if (base64ID) {
+      setHasShopeeID(true);
+      const shopeeID = new Buffer(base64ID, 'base64').toString('ascii');
+      setShopeeID(shopeeID);
+      userManager.isLoggedIn() && WoocommerceService.claimOrderIDWithCurrentUser(shopeeID);
+      return;
+    }
+    setHasShopeeID(false);
+    setShopeeID('');
+  }
 
   function switchHamburger() {
     setHamburgerOpened(!hamburgerOpened)
@@ -144,13 +166,14 @@ export default function Header() {
                 <div className="user">
                   <span className="user-login">
                     <Popup className="popup-auth"
-                      trigger={
-                        <button className="btn btn-link btn-small color-primary" >
-                          เข้าสู่ระบบ
-                        </button>
-                      }
-                      modal
-                      closeOnDocumentClick={false}>
+                           open={shopeeID !== ''}
+                           trigger={
+                             <button className="btn btn-link btn-small color-primary" >
+                               เข้าสู่ระบบ
+                             </button>
+                           }
+                           modal
+                           closeOnDocumentClick={false}>
                       {(close: MouseEventHandler<HTMLButtonElement>) => {
                         return (
                           <div className="pop-modal">
@@ -159,7 +182,7 @@ export default function Header() {
                                 &times;
                               </p>
                             </button>
-                            <SwitchSignInSignUp />
+                            <SwitchSignInSignUp shopeeID={shopeeID} />
                           </div>
                         )
                       }}
@@ -170,10 +193,10 @@ export default function Header() {
             )}
             <div className={`hamburger hidden-desktop ${hamburgerOpened && "hamburger-opened"}`} onClick={switchHamburger}>
               <div className="hamburger-slices">
-                <div className="hamburger-slice hamburger-slice-1"></div>
-                <div className="hamburger-slice hamburger-slice-2"></div>
-                <div className="hamburger-slice hamburger-slice-3"></div>
-                <div className="hamburger-slice hamburger-slice-4"></div>
+                <div className="hamburger-slice hamburger-slice-1" />
+                <div className="hamburger-slice hamburger-slice-2" />
+                <div className="hamburger-slice hamburger-slice-3" />
+                <div className="hamburger-slice hamburger-slice-4" />
               </div>
             </div>
           </div>

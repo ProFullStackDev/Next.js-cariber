@@ -17,9 +17,13 @@ export default function ButtonPartialLogin(props: imagePartialLoginProps) {
   const userManager = new UserManager();
   const [isPopup, setIsPopup] = useState(false);
 
+  function getURl(url: string | null): string {
+    return url ? url + "&cid=" + userManager.getEncodedEmail() : '';
+  }
+
   async function interestCourse(link: string) {
     if (userManager.isLoggedIn()) {
-      link && router.push(link);
+      link && router.push(getURl(link));
     } else {
       setIsPopup(true);
     }
@@ -29,7 +33,7 @@ export default function ButtonPartialLogin(props: imagePartialLoginProps) {
     setIsPopup(false)
     if (userManager.isLoggedIn()) {
       userManager.updateProfileImage();
-      link && router.push(link)
+      link && router.push(getURl(link))
     }
   }
   return (

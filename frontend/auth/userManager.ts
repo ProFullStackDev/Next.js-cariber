@@ -22,7 +22,8 @@ export default class UserManager {
     }
 
     destroyToken(): void {
-        removeCookies(this.tokenKey, { sameSite: "none", secure: true });
+        removeCookies(this.tokenKey, {sameSite: "none", secure: true});
+        this.deleteEmail();
     }
 
     isLoggedIn(): boolean {
@@ -37,5 +38,24 @@ export default class UserManager {
 
     getProfileImage(): CookieValueTypes {
         return getCookie(this.profileImage, { sameSite: "none", secure: false });
+    }
+
+    saveEmail(email: string): void {
+        setCookies('email', email, {sameSite: "none", secure: true});
+        const encodedEmail = Buffer.from(email, 'utf8').toString('base64');
+        setCookies('encodedEmail', encodedEmail, {sameSite: "none", secure: true});
+    }
+
+    getEmail(): CookieValueTypes {
+        return getCookie('email', {sameSite: "none", secure: true});
+    }
+
+    getEncodedEmail(): CookieValueTypes {
+        return getCookie('encodedEmail', {sameSite: "none", secure: true});
+    }
+
+    deleteEmail(): void {
+        removeCookies('email', {sameSite: "none", secure: true});
+        removeCookies('encodedEmail', {sameSite: "none", secure: true});
     }
 }

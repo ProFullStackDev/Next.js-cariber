@@ -11,3 +11,4 @@ __pycache__
 *.log
 /.next/
 /out/
+frontend/next-env.d.ts

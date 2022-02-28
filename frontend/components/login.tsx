@@ -9,12 +9,14 @@ import FacebookLogin, { ReactFacebookLoginInfo } from 'react-facebook-login-type
 import UserManager from "../auth/userManager";
 import router from "next/router";
 import { Auth } from "../apiNest/models/content/auth";
+import { WoocommerceService } from "../services/WoocommerceService";
 
 interface LoginProps {
-  callbackButton: MouseEventHandler<HTMLButtonElement>
+  callbackButton: MouseEventHandler<HTMLButtonElement>,
+  shopeeID: string | null,
 }
 
-export default function Login({ callbackButton }: LoginProps) {
+export default function Login({ callbackButton, shopeeID }: LoginProps) {
   const userManager = new UserManager();
   const [formLogin, setFormLogin] = useState({
     email: "",
@@ -42,8 +44,16 @@ export default function Login({ callbackButton }: LoginProps) {
       return
     }
     userManager.saveToken(data.access_token);
-    router.replace("/library");
+    if (shopeeID && data.access_token) {
+      WoocommerceService.claimOrderIDWithCurrentUser(shopeeID);
+      return;
+    }
+    await router.replace("/library");
     userManager.updateProfileImage();
+  }
+
+  const responseGoogleFailure = async (response: GoogleLoginResponse | GoogleLoginResponseOffline) => {
+    response = response as GoogleLoginResponse
   }
 
   const responseFacebook = async (response: ReactFacebookLoginInfo) => {
@@ -63,7 +73,11 @@ export default function Login({ callbackButton }: LoginProps) {
         return
       }
       userManager.saveToken(data.access_token);
-      router.replace("/library");
+      if (shopeeID && data.access_token) {
+        WoocommerceService.claimOrderIDWithCurrentUser(shopeeID);
+        return;
+      }
+      await router.replace("/library");
       userManager.updateProfileImage();
     }
   }
@@ -88,8 +102,12 @@ export default function Login({ callbackButton }: LoginProps) {
     }
     if (!data.message) {
       userManager.saveToken(data.access_token);
-      router.replace("/library");
-      userManager.updateProfileImage();
+      userManager.saveEmail(formLogin.email);
+      if (shopeeID && data.access_token) {
+        WoocommerceService.claimOrderIDWithCurrentUser(shopeeID);
+        return;
+      }
+      await router.replace("/library");
     } else {
       setErrorLogin({
         isError: true,
@@ -124,24 +142,24 @@ export default function Login({ callbackButton }: LoginProps) {
           onSuccess={responseGoogle}
         />
         <FacebookLogin
-          appId={process.env.NEXT_PUBLIC_NEXTAUTH_FACEBOOK_CLIENT_ID as string}
-          callback={responseFacebook}
-          render={(renderProps) => {
-            return (
-              <button
-                className="btn btn-icon btn-full m-b-5 m-x-0 background-color-facebook"
-                onClick={renderProps.onClick}>
-                <div className="icon-frame p-0">
-                  <Img src="/login/facebook-icon.png"
-                    width={25}
-                    height={25}
-                    alt="Facebook"
-                  />
-                </div>
-                เข้าสู่ระบบด้วย Facebook
-              </button>
-            )
-          }}
+            appId={process.env.NEXT_PUBLIC_NEXTAUTH_FACEBOOK_CLIENT_ID as string}
+            callback={responseFacebook}
+            render={(renderProps) => {
+              return (
+                <button
+                  className="btn btn-icon btn-full m-b-5 m-x-0 background-color-facebook"
+                  onClick={renderProps.onClick}>
+                  <div className="icon-frame p-0">
+                    <Img src="/login/facebook-icon.png"
+                         width={25}
+                         height={25}
+                         alt="Facebook"
+                    />
+                  </div>
+                  เข้าสู่ระบบด้วย Facebook
+                </button>
+              )
+            }}
         />
       </div>
       <hr />
