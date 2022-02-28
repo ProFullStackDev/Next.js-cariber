@@ -7,17 +7,16 @@ export interface CourseContent {
   updatedAt: string;
   publishedAt: string;
   publish_date: string;
-  thumbnail_image: Thumbnail;
-  thumbnail_video: Thumbnail;
-  name: string;
   total_hours: string;
   total_lessons: string;
   order_link: string;
   header: string;
-  teaser: string;
   teaser_url: string;
-  order_image: OrderImage;
+  thumbnail_image: string;
+  speaker_name: string;
+  teaser: Image;
   contents: Contents[];
+  order_image: Image;
   episodes: Episode[];
 }
 
@@ -51,23 +50,13 @@ export interface Topics{
 
 export interface Image{
   id: number;
+  name: string;
   url: string;
 }
 
 export interface Item{
   id: number;
   label: string;
-}
-
-export interface OrderImage {
-  id: number;
-  url: string;
-}
-
-export interface Thumbnail {
-  id: number;
-  name: string;
-  url: string;
 }
 
 export interface Episode {

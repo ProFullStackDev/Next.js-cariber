@@ -33,3 +33,10 @@ export function nestHeaderAuth() {
     "Authorization": userManager.getJwtToken(),
   }
 }
+
+export function nestHeaderFormAuth() {
+  return {
+    "Content-Type": "multipart/form-data",
+    "Authorization": userManager.getJwtToken(),
+  }
+}

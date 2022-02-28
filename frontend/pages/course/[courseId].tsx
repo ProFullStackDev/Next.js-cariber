@@ -20,7 +20,7 @@ import { AnnualPromotionContent } from "../../apiStrapi/models/contentType/annua
 import EpisodeAccordion from "../../components/courseDetail/episodeAccordion"
 import { ReviewContent } from "../../apiStrapi/models/contentType/review"
 import reviewApi from "../../apiStrapi/reviewApi"
-import { coursesAllApi, coursesApi } from "../../apiStrapi/coursesApi"
+import { courseApi, coursesAllApi } from "../../apiStrapi/coursesApi"
 import carouselApi from "../../apiStrapi/carouselApi"
 import { CarouselContent } from "../../apiStrapi/models/contentType/carousel"
 
@@ -53,7 +53,7 @@ export default function CourseDetail({
         <CourseHeader yearlySubscriptionImage={strapiImage(annualPromotion.data?.attributes?.image?.data?.attributes?.url)}
           singleCourseImage={strapiImage(singleCourse.data?.attributes?.image?.data?.attributes?.url)}
           videoId={course.data?.teaser_url}
-          videoPoster={""}
+          videoPoster={strapiImage(course.data?.teaser?.url)}
           singleCheckoutUrl={course.data?.order_link}
           yearlySubscriptionCheckoutUrl={annualPromotion.data?.attributes?.url}
           yearlySubscriptionImageMobile={strapiImage(annualPromotion.data?.attributes?.image_mobile?.data?.attributes?.url)} />
@@ -63,7 +63,7 @@ export default function CourseDetail({
         {course.data?.contents?.map((value, index) => {
           if (value.__component === "components.speaker-detail-component") {
             return (
-              <IntroductionPersonal key={index} fullName={course.data?.name} speakerDetails={value?.speaker_detail} />
+              <IntroductionPersonal key={index} fullName={course.data?.speaker_name} speakerDetails={value?.speaker_detail} />
             )
           }
           if (value.__component === "components.topic-component") {
@@ -137,7 +137,7 @@ export async function getStaticProps({ params }: { params: CourseDetailParams })
   return {
     props: {
       carousel: await carouselApi(),
-      course: await coursesApi(params.courseId),
+      course: await courseApi(params.courseId),
       singleCourse: await singleCourseApi(),
       annualPromotion: await annualPromotionApi(),
       review: await reviewApi(),
