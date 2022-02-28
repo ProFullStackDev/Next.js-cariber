@@ -18,6 +18,7 @@ export const NEST_API_URLS = {
   episode: BASE_API + "/episode",
   mySubscription: BASE_API + "/subscriptions/my-subscription",
   checkPassword: BASE_API + "/users/check-password",
+  courseEvaluation: BASE_API + '/course-evaluation',
 }
 
 export const NEST_HEADERs = {
@@ -29,6 +30,13 @@ export const NEST_HEADERs = {
 export function nestHeaderAuth() {
   return {
     "Content-Type": "application/json; charset=utf-8",
+    "Authorization": userManager.getJwtToken(),
+  }
+}
+
+export function nestHeaderFormAuth() {
+  return {
+    "Content-Type": "multipart/form-data",
     "Authorization": userManager.getJwtToken(),
   }
 }

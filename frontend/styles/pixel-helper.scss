@@ -17,15 +17,27 @@ $maximum-pixel-percentage : 101;
     font-size: #{$i}px;
   }
 
+  .f-w-#{$i} {
+    font-weight: #{$i};
+  }
+
   @media(max-width: $mobile-size) {
     .sm-f-s-#{$i} {
       font-size: #{$i}px !important;
+    }
+
+    .sm-f-w-#{$i} {
+      font-weight: #{$i} !important;
     }
   }
 
   @media(max-width: $ipad-size) and (min-width: $mobile-size) {
     .ipad-f-s-#{$i} {
       font-size: #{$i}px !important;
+    }
+
+    .ipad-f-w-#{$i} {
+      font-weight: #{$i} !important;
     }
   }
 

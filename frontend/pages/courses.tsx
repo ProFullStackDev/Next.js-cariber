@@ -54,31 +54,27 @@ export default function Courses({ courses, annualPromotion }: CoursesProps) {
                         <Link href={`/course/${value?.id}`}>
                           <a className={`${!value?.publishedAt && "disabled"}`}>
                             <Img className="feature-image"
-                              src={strapiImage(value?.thumbnail_image?.url)}
-                              alt={value?.thumbnail_image?.name}
+                              src={value?.thumbnail_image}
+                              alt={value?.speaker_name}
                               width={262.5}
                               height={147.65} />
                           </a>
                         </Link>
                         <div className="feature-text">
-                          <h5>
-                            <Link href={`/course/${value?.id}`}>
-                              <a className={`${!value?.publishedAt && "disabled"}`}>
-                                <span className="color-darkblue">
-                                  <strong>
-                                    {value.name}
-                                  </strong>
-                                </span>
-                              </a>
-                            </Link>
-                          </h5>
-                          <p>
-                            <Link href={`/course/${value?.id}`}>
-                              <a className={`${!value?.publishedAt && "disabled"}`}>
+                          <Link href={`/course/${value?.id}`}>
+                            <a className={`${!value?.publishedAt && "disabled"}`}>
+                              <h5 className="color-darkblue f-w-500 m-0">
+                                {value.speaker_name}
+                              </h5>
+                            </a>
+                          </Link>
+                          <Link href={`/course/${value?.id}`}>
+                            <a className={`${!value?.publishedAt && "disabled"}`}>
+                              <p className="f-s-12 f-w-500 m-0">
                                 {value.course_name}
-                              </a>
-                            </Link>
-                          </p>
+                              </p>
+                            </a>
+                          </Link>
                         </div>
                       </div>
                     </div>

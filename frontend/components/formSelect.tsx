@@ -11,6 +11,7 @@ interface FormInputProps {
   description?: string;
   required: boolean;
   placeholder?: string;
+  value?: string;
   onChange: ChangeEventHandler<HTMLSelectElement>;
   item: SelectItem[] | string[];
 }
@@ -21,7 +22,8 @@ export default function FormSelect({ id,
   required,
   placeholder,
   onChange,
-  item }: FormInputProps) {
+  item,
+  value }: FormInputProps) {
 
   return (
     <div className={`${id}-field form-group`}>
@@ -34,6 +36,7 @@ export default function FormSelect({ id,
       <select id={`form_submission_${id}`}
         className="form-control"
         name={id}
+        value={value}
         onChange={onChange}
         required={required}
         placeholder={placeholder}>
