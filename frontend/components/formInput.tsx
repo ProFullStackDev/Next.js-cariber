@@ -35,7 +35,7 @@ export default function FormInput({ id,
         </p>
       )}
       <input id={`form_submission_${id}`}
-        className="form-control"
+        className="color-black form-control"
         name={id}
         type={type}
         onChange={onChange}

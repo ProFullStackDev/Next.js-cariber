@@ -8,6 +8,10 @@ import { useRouter } from "next/router";
 import UserManager from "../auth/userManager";
 import CustomLogin from "./customLogin";
 import AnnouncementBar from "./announcementBar";
+import {validateTokenApi} from "../apiNest/authApi";
+import {notification} from "antd";
+import {WoocommerceCredentials} from "../apiNest/models/content/woocommerce";
+import {WoocommerceService} from "../services/WoocommerceService";
 
 interface Menu {
   url: string,
@@ -66,7 +70,7 @@ export default function Header() {
       setHasShopeeID(true);
       const shopeeID = new Buffer(base64ID, 'base64').toString('ascii');
       setShopeeID(shopeeID);
-      userManager.isLoggedIn() && router.push('checkout-url');
+      userManager.isLoggedIn() && WoocommerceService.claimOrderIDWithCurrentUser(shopeeID);
       return;
     }
     setHasShopeeID(false);
