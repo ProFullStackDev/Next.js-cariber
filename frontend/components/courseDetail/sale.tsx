@@ -72,7 +72,7 @@ export default function Sale({ yearlySubscriptionImage,
                   <ButtonPartialLogin
                     class="btn btn-medium btn-solid btn-auto background-dark"
                     text={'ซื้อแพ็คเกจรายปี'}
-                    url={singleCheckoutUrl} />
+                    url={singleCheckoutUrl} /> 
                 </div>
               </div>
             </div>

@@ -37,6 +37,7 @@ export default function CustomLogin({ path, callbackButton }: CustomLoginProp) {
       }
       const data = await loginApi(formData) as Auth;
       userManager.saveToken(data.access_token);
+      userManager.saveEmail(formLogin.email);
       callbackButton(path)
     } else {
       const dataLogin = await loginOrCreateApi(formLogin);
