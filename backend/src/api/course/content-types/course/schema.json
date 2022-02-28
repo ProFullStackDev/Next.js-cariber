@@ -20,7 +20,7 @@
       "multiple": false,
       "required": false,
       "allowedTypes": [
-        "videos"
+        "images"
       ]
     },
     "contents": {

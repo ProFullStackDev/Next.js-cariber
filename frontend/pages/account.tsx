@@ -1,8 +1,9 @@
 import Link from "next/link";
-import { FormEvent, useEffect, useRef, useState } from "react";
+import { ChangeEvent, FormEvent, useEffect, useRef, useState } from "react";
 import checkPasswordApi from "../apiNest/checkPasswordApi";
 import getUserProfileApi from "../apiNest/getUserProfileApi";
 import mySubscriptionApi from "../apiNest/mySubscriptionApi";
+import ProfileImageApi from "../apiNest/profileImageApi";
 import resetPasswordApi from "../apiNest/resetPasswordApi";
 import updateUserProfileApi from "../apiNest/updateUserProfileApi";
 import PurchasedCard from "../components/account/purchasedCard";
@@ -13,7 +14,7 @@ import FormTextArea from "../components/formTextarea";
 import Img from "../components/image";
 import ShowError from "../components/showError";
 import * as staticData from "../components/static/account"
-import { handleChange } from "../functions/handleInput";
+import { handleChange, handleChangeCheckbox } from "../functions/handleInput";
 
 export default function Account() {
   const timeZone = staticData.timeZone
@@ -41,6 +42,11 @@ export default function Account() {
     id: 0,
     email: "",
     bio: "",
+    profile_image: "",
+    role: "",
+    notify_on_product: false,
+    notify_on_post: false,
+    notify_new_product: false,
     createDate: "",
     updateDate: "",
     deletedAt: "",
@@ -49,6 +55,7 @@ export default function Account() {
       first_name: "",
       last_name: "",
       current_position: "",
+      timezone: "",
     }
   });
   const [formContact, setFormContact] = useState({
@@ -56,16 +63,18 @@ export default function Account() {
     first_name: "",
     last_name: "",
     current_position: "",
+    timezone: "",
   });
   const [formPassword, setFormPassword] = useState({
     currentPassword: "",
     newPassword: "",
     confirmPassword: "",
-  })
+  });
   const [errorPassword, setErrorPassword] = useState({
     isError: false,
     message: "",
-  })
+  });
+  const [imageProfile, setImageProfile] = useState(new File([], ""))
 
   useEffect(() => {
     fetchData();
@@ -106,6 +115,9 @@ export default function Account() {
     formAccount.contact = formContact;
     const data = await updateUserProfileApi(formAccount, id);
     if (data) {
+      if (Boolean(imageProfile.size)) {
+        await ProfileImageApi(id, { profile_image: imageProfile })
+      }
       if (formPassword.currentPassword &&
         formPassword.newPassword === formPassword.confirmPassword &&
         formPassword.newPassword &&
@@ -119,6 +131,12 @@ export default function Account() {
   function handleClick() {
     hiddenFileInput.current && hiddenFileInput.current.click();
   };
+
+  async function handleChangeAvatar(event: ChangeEvent<HTMLInputElement>) {
+    if (event.currentTarget!.files![0]) {
+      setImageProfile(event.currentTarget!.files![0]);
+    }
+  }
 
   return (
     <div className="account">
@@ -182,34 +200,38 @@ export default function Account() {
                   </div>
                   <div className="form-group">
                     <FormSelect
-                      id={""}
+                      id={"timezone"}
                       label="Time zone"
+                      value={formContact.timezone}
                       required={false}
-                      onChange={e => { }}
+                      onChange={e => { handleChange(e, setFormContact, formContact) }}
                       item={timeZone} />
                   </div>
                   <div className="form-group boolean optional">
                     <div className="checkbox">
                       <FormCheckbox
-                        id={""}
+                        id={"notify_on_product"}
+                        checked={formAccount.notify_on_product}
                         label="Please notify me about updates to my products."
-                        onChange={e => { }} />
+                        onChange={e => { handleChangeCheckbox(e, setFormAccount, formAccount) }} />
                     </div>
                   </div>
                   <div className="form-group boolean optional">
                     <div className="checkbox">
                       <FormCheckbox
-                        id={""}
+                        id={"notify_on_post"}
+                        checked={formAccount.notify_on_post}
                         label="Please notify me when a reply to one of my posts or comments is created."
-                        onChange={e => { }} />
+                        onChange={e => { handleChangeCheckbox(e, setFormAccount, formAccount) }} />
                     </div>
                   </div>
                   <div className="form-group boolean optional">
                     <div className="checkbox">
                       <FormCheckbox
-                        id={""}
+                        id={"notify_new_product"}
+                        checked={formAccount.notify_new_product}
                         label="Please email me about new products and promotions."
-                        onChange={e => { }} />
+                        onChange={e => { handleChangeCheckbox(e, setFormAccount, formAccount) }} />
                     </div>
                   </div>
                   <div className="form-group">
@@ -221,7 +243,7 @@ export default function Account() {
                         <Img id="member-avatar-preview"
                           className="avatar img-circle media-object"
                           alt="Avatar"
-                          src={""}
+                          src={Boolean(imageProfile.size) ? URL.createObjectURL(imageProfile) : formAccount.profile_image}
                           width={64}
                           height={64} />
                       </div>
@@ -236,7 +258,7 @@ export default function Account() {
                           type="file"
                           accept="image/*"
                           ref={hiddenFileInput}
-                          onChange={e => { }}
+                          onChange={handleChangeAvatar}
                         />
                         <button type="button" onClick={handleClick} className="btn btn-primary btn-outline filepicker-btn fp-input">
                           Change Avatar

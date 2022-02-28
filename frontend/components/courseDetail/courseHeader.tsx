@@ -17,7 +17,8 @@ export default function CourseHeader({ yearlySubscriptionImage,
   yearlySubscriptionCheckoutUrl,
   singleCourseImage,
   videoId,
-  singleCheckoutUrl, }: CourseDetailCourseHeaderProps) {
+  singleCheckoutUrl,
+  videoPoster }: CourseDetailCourseHeaderProps) {
   return (
     <div className="background-dark">
       <div className="sizer p-t-0">
@@ -45,7 +46,7 @@ export default function CourseHeader({ yearlySubscriptionImage,
           <div className="block-type-video col-8">
             <div className="block box-shadow-none">
               <div className="video">
-                <VideoPlayer videoId={videoId} />
+                <VideoPlayer videoId={videoId} thumbnailImage={videoPoster} />
               </div>
             </div>
           </div>
