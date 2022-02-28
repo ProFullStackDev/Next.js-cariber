@@ -23,7 +23,12 @@ export default function CustomLogin({ path, callbackButton }: CustomLoginProp) {
     isError: false,
     message: "",
   });
-  const [userExits, setUserExits] = useState(false)
+  const [userExits, setUserExits] = useState(false);
+
+  function getURl(url: string | null): string {
+    return url ? url + "&cid=" + userManager.getEncodedEmail() : '';
+  }
+
   async function loginRequest(event?: FormEvent) {
     event && event.preventDefault();
     setErrorLogin({
@@ -38,14 +43,15 @@ export default function CustomLogin({ path, callbackButton }: CustomLoginProp) {
       const data = await loginApi(formData) as Auth;
       userManager.saveToken(data.access_token);
       userManager.saveEmail(formLogin.email);
-      callbackButton(path)
+      callbackButton(getURl(path))
     } else {
       const dataLogin = await loginOrCreateApi(formLogin);
       setUserExits(dataLogin.is_exist);
       if (!dataLogin.is_exist) {
         userManager.saveToken(dataLogin?.access_token);
+        userManager.saveEmail(formLogin.email);
         alert("ระบบได้ส่งรหัสไปยังอีเมลของคุณ")
-        callbackButton(path);
+        callbackButton(getURl(path));
       }
     }
   }
