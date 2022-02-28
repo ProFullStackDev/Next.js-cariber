@@ -4,11 +4,6 @@ const BASE_URL = process?.env?.NEXT_PUBLIC_NEST_API || "https://nestjs-dev.carib
 const BASE_API = BASE_URL + "/api";
 const userManager = new UserManager();
 
-export enum ContentType {
-  Json = "application/json; charset=utf-8",
-  FormData = "multipart/form-data"
-}
-
 export const NEST_API_URLS = {
   auth: BASE_API + "/auth",
   facebookAuth: BASE_API + "/facebook-auth",
@@ -32,10 +27,9 @@ export const NEST_HEADERs = {
   }
 }
 
-export function nestHeaderAuth(contactType?: ContentType) {
-  if (contactType) {
+export function nestHeaderAuth(onlyAuth?: Boolean): HeadersInit {
+  if (onlyAuth) {
     return {
-      "Content-Type": contactType,
       "Authorization": userManager.getJwtToken(),
     }
   }
