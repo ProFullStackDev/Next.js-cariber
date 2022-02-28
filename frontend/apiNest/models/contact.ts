@@ -2,7 +2,12 @@ import UserManager from "../../auth/userManager";
 
 const BASE_URL = process?.env?.NEXT_PUBLIC_NEST_API || "https://nestjs-dev.cariber.co";
 const BASE_API = BASE_URL + "/api";
-const userManager = new  UserManager();
+const userManager = new UserManager();
+
+export enum ContentType {
+  Json = "application/json; charset=utf-8",
+  FormData = "multipart/form-data"
+}
 
 export const NEST_API_URLS = {
   auth: BASE_API + "/auth",
@@ -27,16 +32,15 @@ export const NEST_HEADERs = {
   }
 }
 
-export function nestHeaderAuth() {
+export function nestHeaderAuth(contactType?: ContentType) {
+  if (contactType) {
+    return {
+      "Content-Type": contactType,
+      "Authorization": userManager.getJwtToken(),
+    }
+  }
   return {
     "Content-Type": "application/json; charset=utf-8",
-    "Authorization": userManager.getJwtToken(),
-  }
-}
-
-export function nestHeaderFormAuth() {
-  return {
-    "Content-Type": "multipart/form-data",
     "Authorization": userManager.getJwtToken(),
   }
 }
