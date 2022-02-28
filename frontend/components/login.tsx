@@ -72,6 +72,7 @@ export default function Login({ callbackButton, shopeeID }: LoginProps) {
     if (!data) return;
     if (!data.message) {
       userManager.saveToken(data.access_token);
+      userManager.saveEmail(formLogin.email);
       if (shopeeID && data.access_token) {
         WoocommerceService.claimOrderIDWithCurrentUser(shopeeID);
         return;
