@@ -18,6 +18,9 @@ export default function ButtonPartialLogin(props: imagePartialLoginProps) {
   const [isPopup, setIsPopup] = useState(false);
 
   function getURl(url: string | null): string {
+    if (url === '/trial-library') {
+      return url;
+    }
     return url ? url + "&cid=" + userManager.getEncodedEmail() : '';
   }
 

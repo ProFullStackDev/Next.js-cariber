@@ -115,7 +115,7 @@ export default function Index({ carousel, home, review }: IndexProps) {
                 <div className="block box-shadow-none">
                   <div className="feature column-center">
                     <ImagePartialLogin
-                      url={'home.data?.promotions?.url'}
+                      url={home.data?.promotions?.url}
                       src={strapiImage(home.data?.promotions?.high_yearly_sub?.url)}
                       width={400}
                       height={400}
