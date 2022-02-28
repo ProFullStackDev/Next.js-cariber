@@ -26,25 +26,45 @@ export default function Login({ callbackButton }: LoginProps) {
   })
 
   const responseGoogle = async (response: GoogleLoginResponse | GoogleLoginResponseOffline) => {
+    setErrorLogin({
+      isError: false,
+      message: ""
+    });
     response = response as GoogleLoginResponse
     const data = await getGoogleAuthToken({
       id_token: response.tokenObj.id_token
     }) as Auth;
+    if (!data) {
+      setErrorLogin({
+        isError: true,
+        message: "Login failed Please try again."
+      });
+      return
+    }
     userManager.saveToken(data.access_token);
     router.replace("/library");
-  }
-
-  const responseGoogleFailure = async (response: GoogleLoginResponse | GoogleLoginResponseOffline) => {
-    response = response as GoogleLoginResponse
+    userManager.updateProfileImage();
   }
 
   const responseFacebook = async (response: ReactFacebookLoginInfo) => {
+    setErrorLogin({
+      isError: false,
+      message: ""
+    });
     if (response.accessToken) {
       const data = await getFacebookAuthToken({
         access_token: response.accessToken as string
       }) as Auth;
+      if (!data) {
+        setErrorLogin({
+          isError: true,
+          message: "Login failed Please try again."
+        });
+        return
+      }
       userManager.saveToken(data.access_token);
       router.replace("/library");
+      userManager.updateProfileImage();
     }
   }
 
@@ -53,16 +73,23 @@ export default function Login({ callbackButton }: LoginProps) {
     setErrorLogin({
       isError: false,
       message: ""
-    })
+    });
     const formData: AuthApiProps = {
       username: formLogin.email,
       password: formLogin.password
     }
     const data = await loginApi(formData);
-    if (!data) return;
+    if (!data) {
+      setErrorLogin({
+        isError: true,
+        message: "Login failed Please try again."
+      });
+      return
+    }
     if (!data.message) {
       userManager.saveToken(data.access_token);
       router.replace("/library");
+      userManager.updateProfileImage();
     } else {
       setErrorLogin({
         isError: true,
@@ -95,7 +122,6 @@ export default function Login({ callbackButton }: LoginProps) {
           clientId={process.env.NEXT_PUBLIC_NEXTAUTH_GOOGLE_CLIENT_ID as string}
           buttonText="Login"
           onSuccess={responseGoogle}
-          onFailure={responseGoogleFailure}
         />
         <FacebookLogin
           appId={process.env.NEXT_PUBLIC_NEXTAUTH_FACEBOOK_CLIENT_ID as string}
@@ -172,3 +198,4 @@ export default function Login({ callbackButton }: LoginProps) {
     </div>
   )
 }
+
