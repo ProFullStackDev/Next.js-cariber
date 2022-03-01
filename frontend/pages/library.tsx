@@ -2,6 +2,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { checkContactGuardApi } from "../apiNest/checkContactGuardApi";
+import { MyCourseContent } from "../apiNest/models/content/myCourse";
 import { myCourseApi } from "../apiNest/myCourseApi";
 import Footer from "../components/footer";
 import FooterBrand from "../components/footerBrand";
@@ -13,19 +14,7 @@ export default function Library() {
   const [loadingItem, setLoadingItem] = useState(true);
   const checkContactGuard = checkContactGuardApi();
   const router = useRouter();
-  const [myCourse, setMyCourse] = useState({
-    id: "",
-    email: "",
-    status: "",
-    course_list: [{
-      id: 0,
-      speaker_name: "",
-      description: "",
-      expires_date: "",
-      course_name: "",
-      thumbnail_image: "",
-    }]
-  });
+  const [myCourse, setMyCourse] = useState({} as MyCourseContent);
 
   useEffect(() => {
     fetchData();
@@ -37,10 +26,10 @@ export default function Library() {
     setLoadingItem(false);
   }
 
-  checkContactGuard.then((value) =>{
-    if(value?.statusCode === 400){
+  checkContactGuard.then((value) => {
+    if (value?.statusCode === 400) {
       router.replace("/guard-contact");
-      return(
+      return (
         <div></div>
       )
     }

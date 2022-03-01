@@ -1,11 +1,14 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import announcementBarApi from "../apiStrapi/announcementBarApi";
 
 export default function AnnouncementBar() {
   const [text, setText] = useState("");
-  announcementBarApi().then((value) => {
-    setText(value.data?.attributes?.message)
-  })
+
+  useEffect(() => {
+    announcementBarApi().then((value) => {
+      setText(value.data?.attributes?.message)
+    })
+  }, [])
 
   return (
     <>
