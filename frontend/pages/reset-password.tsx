@@ -38,8 +38,8 @@ export default function Password() {
     const res = await resetPasswordWithEmail(formData)
     if (res) {
       flashMessages.setMessages(FlashMessagesType.forgotPasswordMessages,
-        "Your password has been changed successfully. You are now signed in.")
-      router.replace("")
+        "Your password has been changed successfully.")
+      router.replace("/")
     } else {
       setError({
         isError: true,
@@ -50,7 +50,6 @@ export default function Password() {
 
   return (
     <div className="background-image forgot-password">
-      <Header />
       <div className="sizer sizer-full">
         <div className="container">
           <div className="row align-items-center justify-content-center h-670">
