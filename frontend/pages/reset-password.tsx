@@ -1,5 +1,6 @@
 import { useRouter } from "next/router";
 import { FormEvent, useState } from "react";
+import { resetPasswordWithEmail } from "../apiNest/resetPasswordApi";
 import UserManager from "../auth/userManager";
 import Footer from "../components/footer";
 import FormInput from "../components/formInput";
@@ -34,11 +35,11 @@ export default function Password() {
       password: formPassword.password,
       passwordConfirmation: formPassword.confirmPassword
     }
-    if ("") {
-      userManager.saveToken("")
+    const res = await resetPasswordWithEmail(formData)
+    if (res) {
       flashMessages.setMessages(FlashMessagesType.forgotPasswordMessages,
         "Your password has been changed successfully. You are now signed in.")
-      router.replace("/library")
+      router.replace("")
     } else {
       setError({
         isError: true,
