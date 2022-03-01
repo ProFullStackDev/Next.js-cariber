@@ -1,6 +1,5 @@
 import { nestHeaderAuth, NEST_API_URLS } from './models/contact';
 import { RegisterContent } from './models/content/register';
-import { ResetPassword } from './models/content/resetPassword';
 
 export interface ResetPasswordProps {
   password: string;
