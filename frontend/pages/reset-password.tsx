@@ -41,12 +41,12 @@ export default function Password() {
       flashMessages.setMessages(FlashMessagesType.forgotPasswordMessages,
         "Your password has been changed successfully.")
       router.replace("/")
-    } else {
-      setError({
-        isError: true,
-        message: ""
-      })
+      return
     }
+    setError({
+      isError: true,
+      message: ""
+    })
   }
 
   return (
