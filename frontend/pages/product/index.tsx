@@ -61,7 +61,7 @@ export default function Product() {
   const [quiz, setQuiz] = useState<Quiz | null>(null);
   const router = useRouter();
   const announcement = "ตอนนี้คุณกำลังอยู่ในโหมดทดลองเรียนฟรี เนื้อหาบางส่วนมีการถูกล็อกไว้\nคุณสามารถซื้อคอร์สนี้เพื่อดูเนื้อหาทั้งหมดในคอร์สเรียน";
-  const { id } = router.query;
+  const { proId } = router.query;
 
   useEffect(() => {
     if (!router.isReady) return;
@@ -103,7 +103,7 @@ export default function Product() {
   }
 
   async function fetchData() {
-    const data = await getEpisodesAndQuiz(id!.toString()) as CourseLMS;
+    const data = await getEpisodesAndQuiz(proId!.toString()) as CourseLMS;
     data.episodes_list.map(item => {
       item.type = ("question" in item && item.question) ? ShowingType.quiz : ShowingType.episode;
       return item;
