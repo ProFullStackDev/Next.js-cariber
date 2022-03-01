@@ -1,8 +1,8 @@
-import {useRouter} from "next/router";
-import {useEffect, useState} from "react";
-import {allCourseLmsApi, getEpisodesAndQuiz} from "../../apiNest/courseLmsApi";
-import {CourseLMS, CourseLms, Episodes, Evaluation, Quiz, ShowingType,} from "../../apiNest/models/content/courseLms";
-import Accordion, {Color, Icon} from "../../components/accordion";
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
+import { getEpisodesAndQuiz } from "../../apiNest/courseLmsApi";
+import { CourseLMS, Episodes, Evaluation, Quiz, ShowingType, } from "../../apiNest/models/content/courseLms";
+import Accordion, { Color, Icon } from "../../components/accordion";
 import Footer from "../../components/footer";
 import Header from "../../components/header";
 import Img from "../../components/image";
@@ -13,7 +13,7 @@ import VideoPlayer from "../../components/videoPlayer";
 import cutCloudflareVideoId from "../../functions/cutCloudflareVideoId";
 import CourseEvaluation from "../../components/courseEvaluation";
 import QuizSession from "../../components/quizSession";
-import {episodeApi} from "../../apiNest/episodeApi";
+import { episodeApi } from "../../apiNest/episodeApi";
 
 export default function Product() {
   const [courseLms, setCourseLms] = useState<CourseLMS>({
@@ -61,11 +61,11 @@ export default function Product() {
   const [quiz, setQuiz] = useState<Quiz | null>(null);
   const router = useRouter();
   const announcement = "ตอนนี้คุณกำลังอยู่ในโหมดทดลองเรียนฟรี เนื้อหาบางส่วนมีการถูกล็อกไว้\nคุณสามารถซื้อคอร์สนี้เพื่อดูเนื้อหาทั้งหมดในคอร์สเรียน";
-  const { productId } = router.query;
-  
+  const { id } = router.query;
+
   useEffect(() => {
     if (!router.isReady) return;
-    fetchData().then( () => {});
+    fetchData().then(() => { });
   }, [router.isReady]);
 
   async function setEpisodeOrQuiz(passedData: Episodes | Quiz | Evaluation) {
@@ -103,7 +103,7 @@ export default function Product() {
   }
 
   async function fetchData() {
-    const data = await getEpisodesAndQuiz(productId!.toString()) as CourseLMS;
+    const data = await getEpisodesAndQuiz(id!.toString()) as CourseLMS;
     data.episodes_list.map(item => {
       item.type = ("question" in item && item.question) ? ShowingType.quiz : ShowingType.episode;
       return item;
@@ -114,7 +114,7 @@ export default function Product() {
   }
 
   function restart() {
-    setEpisodeOrQuiz(courseLms.episodes_list[0]).then(() => {});
+    setEpisodeOrQuiz(courseLms.episodes_list[0]).then(() => { });
   }
 
   return (
@@ -178,41 +178,41 @@ export default function Product() {
                 <div className="player">
                   {
                     showingType === ShowingType.episode &&
-                      <>
-                        <div className="player-video">
-                          {episodeLms?.link_video &&
-                              <VideoPlayer videoId={cutCloudflareVideoId(episodeLms.link_video)}
-                                           thumbnailImage={episodeLms.thumbnail_image}/>}
-                        </div>
-                        <div className="player-nav">
-                          <div className="media">
-                            <div className="media-left-under-player">
-                              <a className="btn btn-box btn-small disabled" href="#">
-                                <i className="fa fa-chevron-left" aria-hidden="true"/>
-                                บทเรียนก่อนหน้า
-                              </a>
-                            </div>
-                            <div className="media-body media-middle">
-                              <p className="m-b-0 hidden-xs-down">
-                                บทเรียน 1 of 10
-                              </p>
-                            </div>
-                            <div className="media-right">
-                              <a className="btn btn-box btn-small" href="#">
-                                บทเรียนถัดไป
-                                <i className="fa fa-chevron-right" aria-hidden="true"/>
-                              </a>
-                            </div>
+                    <>
+                      <div className="player-video">
+                        {episodeLms?.link_video &&
+                          <VideoPlayer videoId={cutCloudflareVideoId(episodeLms.link_video)}
+                            thumbnailImage={episodeLms.thumbnail_image} />}
+                      </div>
+                      <div className="player-nav">
+                        <div className="media">
+                          <div className="media-left-under-player">
+                            <a className="btn btn-box btn-small disabled" href="#">
+                              <i className="fa fa-chevron-left" aria-hidden="true" />
+                              บทเรียนก่อนหน้า
+                            </a>
+                          </div>
+                          <div className="media-body media-middle">
+                            <p className="m-b-0 hidden-xs-down">
+                              บทเรียน 1 of 10
+                            </p>
+                          </div>
+                          <div className="media-right">
+                            <a className="btn btn-box btn-small" href="#">
+                              บทเรียนถัดไป
+                              <i className="fa fa-chevron-right" aria-hidden="true" />
+                            </a>
                           </div>
                         </div>
-                      </>
+                      </div>
+                    </>
                   }
                   {showingType === ShowingType.quiz &&
                     <>
                       <div className="quiz-session">
                         <QuizSession course={courseLms}
-                                     restart={restart}
-                                     quiz={quiz} />
+                          restart={restart}
+                          quiz={quiz} />
                       </div>
                     </>
                   }
@@ -220,7 +220,7 @@ export default function Product() {
                     <>
                       <div className="quiz-session">
                         <CourseEvaluation course={courseLms}
-                                          restart={restart}/>
+                          restart={restart} />
                       </div>
                     </>
                   }
@@ -240,8 +240,8 @@ export default function Product() {
                         {courseLms.episodes_list?.map((value, index) => {
                           return (
                             <a key={index}
-                               className="media track"
-                               onClick={async () => { await setEpisodeOrQuiz(value) }}>
+                              className="media track"
+                              onClick={async () => { await setEpisodeOrQuiz(value) }}>
                               <div className="media-left media-middle">
                                 {value.episode_number === episodeLms?.episode_number ? (
                                   <p className="track-count active">
@@ -249,7 +249,7 @@ export default function Product() {
                                   </p>
                                 ) : (
                                   <p className="track-count">
-                                    { index + 1 }
+                                    {index + 1}
                                   </p>
                                 )}
                               </div>
@@ -286,14 +286,16 @@ export default function Product() {
                   return (<Accordion key={index}
                     title={getTrackName(value)}
                     description={"description" in value
-                                  ? value.description + "\n *หากผู้ใดละเมิดนำงานไปเผยแพร่ คัดลอก หรือดัดแปลงไม่ว่าบางส่วนหรือทั้งหมดจะถูกดำเนินคดีตามกฎหมาย"
-                                  : ''}
+                      ? value.description + "\n *หากผู้ใดละเมิดนำงานไปเผยแพร่ คัดลอก หรือดัดแปลงไม่ว่าบางส่วนหรือทั้งหมดจะถูกดำเนินคดีตามกฎหมาย"
+                      : ''}
                     col={12}
                     icon={Icon.play}
                     color={Color.light}
-                    button={{ callback: () => {
-                      setEpisodeOrQuiz(value).then(() => {})
-                    }, text: `${0 ? (`${0 < 100 ? ("ดูต่อ") : ("ดูอีกครั้ง")}`) : ("รับชมเนื้อหา")}` }}
+                    button={{
+                      callback: () => {
+                        setEpisodeOrQuiz(value).then(() => { })
+                      }, text: `${0 ? (`${0 < 100 ? ("ดูต่อ") : ("ดูอีกครั้ง")}`) : ("รับชมเนื้อหา")}`
+                    }}
                     progress={0}
                   />)
                 })
@@ -313,26 +315,4 @@ export default function Product() {
       <Footer />
     </div>
   )
-}
-
-export async function getStaticPaths() {
-  const data = await allCourseLmsApi() as CourseLms[]; 
-  const paths = data.map((value) => {
-    return {
-      params: {
-        productId: value.id.toString(),
-      }
-    }
-  });
-  return {
-    paths: paths,
-    fallback: 'blocking',
-  };
-}
-
-export async function getStaticProps() {
-  return {
-    props: {
-    }
-  };
 }
