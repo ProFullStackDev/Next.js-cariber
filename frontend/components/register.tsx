@@ -43,7 +43,6 @@ export default function Register({ callbackButton, shopeeID }: RegisterProps) {
     const data = await registerApi(formData) as RegisterContent;
     if (!data.message) {
       userManager.saveToken(data.access_token);
-      userManager.saveEmail(formRegister.email);
       if (shopeeID) {
         WoocommerceService.claimOrderIDWithCurrentUser(shopeeID);
         return;

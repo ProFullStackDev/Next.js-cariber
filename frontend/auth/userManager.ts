@@ -9,8 +9,10 @@ export default class UserManager {
 
     constructor() { }
 
-    saveToken(token: string): void {
-        setCookies(this.tokenKey, token, { sameSite: "none", secure: true });
+    async saveToken(token: string): Promise<void> {
+        await setCookies(this.tokenKey, token, { sameSite: "none", secure: true });
+        const user = await getUserProfileApi();
+        await this.saveEmail(user.email);
     }
 
     getToken(): CookieValueTypes {
@@ -24,6 +26,7 @@ export default class UserManager {
     destroyToken(): void {
         removeCookies(this.tokenKey, {sameSite: "none", secure: true});
         this.deleteEmail();
+        this.deleteProfileImage();
     }
 
     isLoggedIn(): boolean {
@@ -38,6 +41,10 @@ export default class UserManager {
 
     getProfileImage(): CookieValueTypes {
         return getCookie(this.profileImage, { sameSite: "none", secure: false });
+    }
+
+    deleteProfileImage(): void {
+        removeCookies(this.profileImage, { sameSite: "none", secure: false });
     }
 
     saveEmail(email: string): void {

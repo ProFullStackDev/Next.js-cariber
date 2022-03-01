@@ -9,7 +9,7 @@ import Link from "next/link"
 import annualPromotionApi from "../apiStrapi/annualPromotionApi"
 import { AnnualPromotionContent } from "../apiStrapi/models/contentType/annualPromotion"
 import { coursesAllApi } from "../apiStrapi/coursesApi"
-import UserManager from "../auth/userManager";
+import ImagePartialLogin from "../components/imagePartialLogin"
 
 interface CoursesProps {
   courses: ResponseDataList<CourseContent>;
@@ -17,12 +17,6 @@ interface CoursesProps {
 }
 
 export default function Courses({ courses, annualPromotion }: CoursesProps) {
-  const userManager = new UserManager();
-
-  function getURl(url: string | null): string {
-    return url ? url + "&cid=" + userManager.getEncodedEmail() : '';
-  }
-
   return (
     <div className="background-image courses">
       <Header />
@@ -33,13 +27,12 @@ export default function Courses({ courses, annualPromotion }: CoursesProps) {
               <div className="block-type-image text-col-12 m-b-0">
                 <div className="block box-shadow-none background-unrecognized">
                   <div className="image">
-                    <a href={getURl(annualPromotion?.data?.attributes?.url)}>
-                      <Img className="image-image"
-                        src={strapiImage(annualPromotion?.data?.attributes?.image_header?.data?.attributes?.url)}
-                        alt="Promotion"
-                        width={1260}
-                        height={282.017} />
-                    </a>
+                    <ImagePartialLogin
+                      url={annualPromotion?.data?.attributes?.url}
+                      src={strapiImage(annualPromotion?.data?.attributes?.image_header?.data?.attributes?.url)}
+                      width={1260}
+                      height={282.017}
+                      alt={"Promotion"} />
                   </div>
                 </div>
               </div>

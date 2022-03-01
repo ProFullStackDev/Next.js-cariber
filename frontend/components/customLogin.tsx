@@ -25,10 +25,6 @@ export default function CustomLogin({ path, callbackButton }: CustomLoginProp) {
   });
   const [userExits, setUserExits] = useState(false);
 
-  function getURl(url: string | null): string {
-    return url ? url + "&cid=" + userManager.getEncodedEmail() : '';
-  }
-
   async function loginRequest(event?: FormEvent) {
     event && event.preventDefault();
     setErrorLogin({
@@ -41,17 +37,15 @@ export default function CustomLogin({ path, callbackButton }: CustomLoginProp) {
         password: password
       }
       const data = await loginApi(formData) as Auth;
-      userManager.saveToken(data.access_token);
-      userManager.saveEmail(formLogin.email);
-      callbackButton(getURl(path))
+      await userManager.saveToken(data.access_token);
+      callbackButton(path)
     } else {
       const dataLogin = await loginOrCreateApi(formLogin);
       setUserExits(dataLogin.is_exist);
       if (!dataLogin.is_exist) {
-        userManager.saveToken(dataLogin?.access_token);
-        userManager.saveEmail(formLogin.email);
+        await userManager.saveToken(dataLogin?.access_token);
         alert("ระบบได้ส่งรหัสไปยังอีเมลของคุณ")
-        callbackButton(getURl(path));
+        callbackButton(path);
       }
     }
   }
@@ -61,7 +55,7 @@ export default function CustomLogin({ path, callbackButton }: CustomLoginProp) {
     const data = await getGoogleAuthToken({
       id_token: response.tokenObj.id_token
     }) as Auth;
-    userManager.saveToken(data.access_token);
+    await userManager.saveToken(data.access_token);
     callbackButton(path);
   }
 
@@ -70,7 +64,7 @@ export default function CustomLogin({ path, callbackButton }: CustomLoginProp) {
       const data = await getFacebookAuthToken({
         access_token: response.accessToken as string
       }) as Auth;
-      userManager.saveToken(data.access_token);
+      await userManager.saveToken(data.access_token);
       callbackButton(path);
     }
   }

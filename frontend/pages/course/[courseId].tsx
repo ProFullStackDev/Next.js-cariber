@@ -23,7 +23,6 @@ import reviewApi from "../../apiStrapi/reviewApi"
 import { courseApi, coursesAllApi } from "../../apiStrapi/coursesApi"
 import carouselApi from "../../apiStrapi/carouselApi"
 import { CarouselContent } from "../../apiStrapi/models/contentType/carousel"
-import UserManager from "../../auth/userManager";
 
 interface CourseDetailParams {
   courseId: string;
@@ -44,15 +43,9 @@ export default function CourseDetail({
   annualPromotion,
   review }: CourseDetailProps) {
 
-  const userManager = new UserManager();
-
   const youtubeEPItems = course.data?.contents?.find((value) => {
     return value.__component === "components.special-ep-component"
   }) as Contents;
-
-  function getURl(url: string | null): string {
-    return url ? url + "&cid=" + userManager.getEncodedEmail() : '';
-  }
 
   return (
     <div className="course-detail">
@@ -96,7 +89,7 @@ export default function CourseDetail({
         yearlySubscriptionImage={strapiImage(annualPromotion.data?.attributes?.image?.data?.attributes?.url)}
         yearlySubscriptionImageMobile={strapiImage(annualPromotion.data?.attributes?.image_mobile?.data?.attributes?.url)}
         singleCheckoutUrl={course.data?.order_link}
-        yearlySubscriptionCheckoutUrl={getURl(annualPromotion.data?.attributes?.url)} />
+        yearlySubscriptionCheckoutUrl={annualPromotion.data?.attributes?.url} />
       <div className="background-light">
         <div className="sizer">
           <div className="container">
