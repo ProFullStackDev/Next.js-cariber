@@ -361,7 +361,7 @@ export default function Account() {
                   {mySubscription.map((value, index) => {
                     return (
                       <PurchasedCard key={index}
-                        data={value.subscription_date}
+                        date={value.subscription_date}
                         offer={value.access_group?.access_type}
                         price={value.access_group?.regular_price?.toString()}
                         product={value.access_group?.name} />
