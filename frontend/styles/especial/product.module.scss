@@ -2,6 +2,14 @@
 @import "../color.scss";
 
 .product {
+  .accordion {
+    @media(max-width: $ipad-size) {
+      h5 {
+        font-size: 14px;
+      }
+    }
+  }
+
   .playlist-button {
     padding-top: 1rem;
     display: flex;
@@ -37,12 +45,6 @@
   .md-3cm {
     @media (max-width: $mobile-size) {
       width: 3cm;
-    }
-  }
-
-  [class*="col-"] {
-    @media (max-width: $mobile-size) {
-      padding: 0px;
     }
   }
 
@@ -229,7 +231,8 @@
     background: #252525;
   }
 
-  .player-video, .quiz-session {
+  .player-video,
+  .quiz-session {
     width: 70%;
     display: inline-block;
     vertical-align: top;

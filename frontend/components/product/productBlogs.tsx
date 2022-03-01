@@ -1,5 +1,5 @@
 import Link from "next/link";
-import Img from "./image";
+import Img from "../image";
 
 interface ProductBlogsProps {
   progressBlog: boolean,
@@ -48,7 +48,7 @@ export default function ProductBlogs({ productImage,
               />
             </div>
             <div className="media-body media-middle">
-              <h5 className="instructor-name">
+              <h5 className="instructor-name ipad-f-s-16">
                 คุณ{instructorName}
               </h5>
               <h6 className="instructor-title">
@@ -79,8 +79,10 @@ export default function ProductBlogs({ productImage,
             </p>
           </div>
           <Link href="/next-instructor-form" passHref={true}>
-            <a className="btn btn-box f-s-12" href="#">
-              คลิกเพื่อแสดงความคิดเห็น
+            <a className="btn btn-box" href="#">
+              <p className="f-s-14 ipad-f-s-12 m-0">
+                คลิกเพื่อแสดงความคิดเห็น
+              </p>
             </a>
           </Link>
         </div>
