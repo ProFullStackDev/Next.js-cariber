@@ -7,7 +7,7 @@ export interface ResetPasswordProps {
 }
 
 export interface EmailPasswordApiProps {
-  code: any;
+  code: string;
   password: string;
   passwordConfirmation: string;
 }

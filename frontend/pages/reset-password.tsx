@@ -22,6 +22,7 @@ export default function Password() {
   });
 
   async function passwordRequest(event: FormEvent) {
+    const { code } = router.query
     event.preventDefault();
     if (formPassword.password !== formPassword.confirmPassword) {
       setError({
@@ -31,7 +32,7 @@ export default function Password() {
       return
     }
     const formData = {
-      code: router.query.code?.toString(),
+      code: code as string,
       password: formPassword.password,
       passwordConfirmation: formPassword.confirmPassword
     }
