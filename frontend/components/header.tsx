@@ -4,14 +4,11 @@ import Img from "./image"
 import Popup from "reactjs-popup";
 import FlashMessages, { FlashMessagesType } from "../functions/flashMessages";
 import SwitchSignInSignUp from "./switchSignInSignUp";
-import { useRouter } from "next/router";
 import UserManager from "../auth/userManager";
-import CustomLogin from "./customLogin";
 import AnnouncementBar from "./announcementBar";
-import {validateTokenApi} from "../apiNest/authApi";
-import {notification} from "antd";
-import {WoocommerceCredentials} from "../apiNest/models/content/woocommerce";
-import {WoocommerceService} from "../services/WoocommerceService";
+import ButtonPartialLogin from "./buttonPartialLogin";
+import { WoocommerceService } from "../services/WoocommerceService";
+import annualPromotionApi from "../apiStrapi/annualPromotionApi";
 
 interface Menu {
   url: string,
@@ -19,14 +16,13 @@ interface Menu {
 }
 
 export default function Header() {
-  const router = useRouter();
   const userManager = new UserManager();
-  const [ispopup, setIsPopup] = useState(false);
-  const flashMessages = new FlashMessages()
+  const flashMessages = new FlashMessages();
   const [hamburgerOpened, setHamburgerOpened] = useState(false);
+  const [annualUrl, setAnnualUrl] = useState("");
   const [shopeeID, setShopeeID] = useState('');
   const [hasShopeeID, setHasShopeeID] = useState(false);
-  const flashForgotPassword = flashMessages.getMessages(FlashMessagesType.forgotPasswordMessages)
+  const flashForgotPassword = flashMessages.getMessages(FlashMessagesType.forgotPasswordMessages);
   const [formData, setFormData] = useState({
     avatarUserBase64: "/default_avatar.webp",
   })
@@ -62,7 +58,13 @@ export default function Header() {
       setHamburgerOpened(false)
     });
     checkShopeeCredentials();
-  }, [])
+    fetchData();
+  }, []);
+
+  async function fetchData(){
+    const data = await annualPromotionApi();
+    setAnnualUrl(data.data.attributes.url);
+  }
 
   function checkShopeeCredentials(): void {
     const base64ID = window.location.search?.replace('?id=', '') || '';
@@ -79,19 +81,6 @@ export default function Header() {
 
   function switchHamburger() {
     setHamburgerOpened(!hamburgerOpened)
-  }
-
-  async function buyingYearlyPackage(link: string) {
-    if (userManager.isLoggedIn()) {
-      router.push(link)
-    } else {
-      setIsPopup(true)
-    }
-  }
-
-  async function setCallbackButtonFN(link: string) {
-    setIsPopup(false)
-    router.push(link)
   }
 
   return (
@@ -147,17 +136,17 @@ export default function Header() {
               </div>
             </div>
             <div className="header-block header-switch-content header-block-cta">
-              <a className="btn btn-small btn-full"
-                onClick={() => buyingYearlyPackage("https://checkout.cariber.co?add-to-cart=685&cfp=eWVhcmx5YmFubm5lcl9kZXNrdG9wX0M6L1VzZXJzL2luemVlL09uZURyaXZlJTIwLSUyMFVuaXZlcnNpdHklMjBvZiUyMFBoYXlhby9DYXJpYmVyJTIwZG91Y3VtZW50L3NhdmUlMjBwYWdlLyVFMCVCOCU4NCVFMCVCOCVBRCVFMCVCOCVBMyVFMCVCOSU4QyVFMCVCOCVBQSVFMCVCOCVBRCVFMCVCOCVBRCVFMCVCOCU5OSVFMCVCOSU4NCVFMCVCOCVBNSVFMCVCOCU5OSVFMCVCOSU4QyVFMCVCOCU4MSVFMCVCOCVCMSVFMCVCOCU5QSVFMCVCOCU4QiVFMCVCOCVCNCVFMCVCOSU4MiVFMCVCOCU4MSVFMCVCOSU4OSUyMCVFMCVCOSU4MCVFMCVCOCU4MSVFMCVCOCVCNSVFMCVCOCVBMiVFMCVCOCVBMyVFMCVCOCU5NSVFMCVCOCVCNCVFMCVCOCVBOCVFMCVCOCVCMSVFMCVCOCU4MSVFMCVCOCU5NCVFMCVCOCVCNCVFMCVCOSU4QyUyMCVFMCVCOSU4MCVFMCVCOCVBQSVFMCVCOCU5OSVFMCVCOCVCMiVFMCVCOSU4MCVFMCVCOCVBMSVFMCVCOCVCNyVFMCVCOCVBRCVFMCVCOCU4NyUyMEtpYXRpc3VrJTIwU2VuYW11YW5nLmh0bWw=")}>
-                ซื้อแพ็กเกจรายปี
-              </a>
+              <ButtonPartialLogin
+                url={annualUrl}
+                class={"btn btn-small btn-full"}
+                text={"ซื้อแพ็กเกจรายปี"} />
             </div>
             {userManager.isLoggedIn() ? (
               <div className="header-block header-switch-content header-block-user header-block-mr0">
                 <div className="user-avatar-block">
                   <Popup trigger={<div>
                     <Img className="user-avatar"
-                      src={formData.avatarUserBase64}
+                      src={userManager.getProfileImage() as string || "/default_avatar.webp"}
                       width={40}
                       height={40}
                       alt="default_avatar.webp" />
@@ -184,14 +173,14 @@ export default function Header() {
                 <div className="user">
                   <span className="user-login">
                     <Popup className="popup-auth"
-                           open={shopeeID !== ''}
-                           trigger={
-                             <button className="btn btn-link btn-small color-primary" >
-                               เข้าสู่ระบบ
-                             </button>
-                           }
-                           modal
-                           closeOnDocumentClick={false}>
+                      open={shopeeID !== ''}
+                      trigger={
+                        <button className="btn btn-link btn-small color-primary" >
+                          เข้าสู่ระบบ
+                        </button>
+                      }
+                      modal
+                      closeOnDocumentClick={false}>
                       {(close: MouseEventHandler<HTMLButtonElement>) => {
                         return (
                           <div className="pop-modal">
@@ -243,10 +232,10 @@ export default function Header() {
               </div>
             )}
             <div className="header-block header-switch-content header-block-cta">
-              <a className="btn btn-small btn-full"
-                onClick={() => buyingYearlyPackage("https://checkout.cariber.co?add-to-cart=685&cfp=eWVhcmx5YmFubm5lcl9kZXNrdG9wX0M6L1VzZXJzL2luemVlL09uZURyaXZlJTIwLSUyMFVuaXZlcnNpdHklMjBvZiUyMFBoYXlhby9DYXJpYmVyJTIwZG91Y3VtZW50L3NhdmUlMjBwYWdlLyVFMCVCOCU4NCVFMCVCOCVBRCVFMCVCOCVBMyVFMCVCOSU4QyVFMCVCOCVBQSVFMCVCOCVBRCVFMCVCOCVBRCVFMCVCOCU5OSVFMCVCOSU4NCVFMCVCOCVBNSVFMCVCOCU5OSVFMCVCOSU4QyVFMCVCOCU4MSVFMCVCOCVCMSVFMCVCOCU5QSVFMCVCOCU4QiVFMCVCOCVCNCVFMCVCOSU4MiVFMCVCOCU4MSVFMCVCOSU4OSUyMCVFMCVCOSU4MCVFMCVCOCU4MSVFMCVCOCVCNSVFMCVCOCVBMiVFMCVCOCVBMyVFMCVCOCU5NSVFMCVCOCVCNCVFMCVCOCVBOCVFMCVCOCVCMSVFMCVCOCU4MSVFMCVCOCU5NCVFMCVCOCVCNCVFMCVCOSU4QyUyMCVFMCVCOSU4MCVFMCVCOCVBQSVFMCVCOCU5OSVFMCVCOCVCMiVFMCVCOSU4MCVFMCVCOCVBMSVFMCVCOCVCNyVFMCVCOCVBRCVFMCVCOCU4NyUyMEtpYXRpc3VrJTIwU2VuYW11YW5nLmh0bWw=")}>
-                ซื้อแพ็กเกจรายปี
-              </a>
+              <ButtonPartialLogin
+                url={annualUrl}
+                class={"btn btn-small btn-full"}
+                text={"ซื้อแพ็กเกจรายปี"} />
             </div>
             {userManager.isLoggedIn() ? (
               <div className="header-block header-switch-content header-block-menu">
@@ -290,24 +279,6 @@ export default function Header() {
           </div>
         </div>
       </div>
-      <Popup className="popup-auth"
-        open={ispopup}
-        modal
-        onClose={() => setIsPopup(false)}
-        closeOnDocumentClick={false}>
-        {(close: MouseEventHandler<HTMLButtonElement>) => {
-          return (
-            <div className="pop-modal">
-              <button className="close" onClick={close}>
-                <p>
-                  &times;
-                </p>
-              </button>
-              <CustomLogin path={"https://checkout.cariber.co?add-to-cart=685&cfp=eWVhcmx5YmFubm5lcl9kZXNrdG9wX0M6L1VzZXJzL2luemVlL09uZURyaXZlJTIwLSUyMFVuaXZlcnNpdHklMjBvZiUyMFBoYXlhby9DYXJpYmVyJTIwZG91Y3VtZW50L3NhdmUlMjBwYWdlLyVFMCVCOCU4NCVFMCVCOCVBRCVFMCVCOCVBMyVFMCVCOSU4QyVFMCVCOCVBQSVFMCVCOCVBRCVFMCVCOCVBRCVFMCVCOCU5OSVFMCVCOSU4NCVFMCVCOCVBNSVFMCVCOCU5OSVFMCVCOSU4QyVFMCVCOCU4MSVFMCVCOCVCMSVFMCVCOCU5QSVFMCVCOCU4QiVFMCVCOCVCNCVFMCVCOSU4MiVFMCVCOCU4MSVFMCVCOSU4OSUyMCVFMCVCOSU4MCVFMCVCOCU4MSVFMCVCOCVCNSVFMCVCOCVBMiVFMCVCOCVBMyVFMCVCOCU5NSVFMCVCOCVCNCVFMCVCOCVBOCVFMCVCOCVCMSVFMCVCOCU4MSVFMCVCOCU5NCVFMCVCOCVCNCVFMCVCOSU4QyUyMCVFMCVCOSU4MCVFMCVCOCVBQSVFMCVCOCU5OSVFMCVCOCVCMiVFMCVCOSU4MCVFMCVCOCVBMSVFMCVCOCVCNyVFMCVCOCVBRCVFMCVCOCU4NyUyMEtpYXRpc3VrJTIwU2VuYW11YW5nLmh0bWw="} callbackButton={setCallbackButtonFN} />
-            </div>
-          )
-        }}
-      </Popup>
     </header >
   )
 }
