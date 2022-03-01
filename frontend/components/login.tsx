@@ -28,16 +28,28 @@ export default function Login({ callbackButton, shopeeID }: LoginProps) {
   })
 
   const responseGoogle = async (response: GoogleLoginResponse | GoogleLoginResponseOffline) => {
+    setErrorLogin({
+      isError: false,
+      message: ""
+    });
     response = response as GoogleLoginResponse
     const data = await getGoogleAuthToken({
       id_token: response.tokenObj.id_token
     }) as Auth;
+    if (!data) {
+      setErrorLogin({
+        isError: true,
+        message: "Login failed Please try again."
+      });
+      return
+    }
     userManager.saveToken(data.access_token);
     if (shopeeID && data.access_token) {
       WoocommerceService.claimOrderIDWithCurrentUser(shopeeID);
       return;
     }
     await router.replace("/library");
+    userManager.updateProfileImage();
   }
 
   const responseGoogleFailure = async (response: GoogleLoginResponse | GoogleLoginResponseOffline) => {
@@ -45,16 +57,28 @@ export default function Login({ callbackButton, shopeeID }: LoginProps) {
   }
 
   const responseFacebook = async (response: ReactFacebookLoginInfo) => {
+    setErrorLogin({
+      isError: false,
+      message: ""
+    });
     if (response.accessToken) {
       const data = await getFacebookAuthToken({
         access_token: response.accessToken as string
       }) as Auth;
+      if (!data) {
+        setErrorLogin({
+          isError: true,
+          message: "Login failed Please try again."
+        });
+        return
+      }
       userManager.saveToken(data.access_token);
       if (shopeeID && data.access_token) {
         WoocommerceService.claimOrderIDWithCurrentUser(shopeeID);
         return;
       }
       await router.replace("/library");
+      userManager.updateProfileImage();
     }
   }
 
@@ -63,13 +87,19 @@ export default function Login({ callbackButton, shopeeID }: LoginProps) {
     setErrorLogin({
       isError: false,
       message: ""
-    })
+    });
     const formData: AuthApiProps = {
       username: formLogin.email,
       password: formLogin.password
     }
     const data = await loginApi(formData);
-    if (!data) return;
+    if (!data) {
+      setErrorLogin({
+        isError: true,
+        message: "Login failed Please try again."
+      });
+      return
+    }
     if (!data.message) {
       userManager.saveToken(data.access_token);
       userManager.saveEmail(formLogin.email);
@@ -93,24 +123,23 @@ export default function Login({ callbackButton, shopeeID }: LoginProps) {
       </h2>
       <div className="column-center">
         <GoogleLogin
-            render={renderProps => (
-              <button className="btn btn-icon btn-full m-b-10 m-x-0 background-color-google"
-                      onClick={renderProps.onClick}>
-                <div className="icon-frame">
-                  <Img src="/login/google-icon.svg"
-                       width={25}
-                       height={25}
-                       alt="Google"
-                  />
-                </div>
-                เข้าสู่ระบบด้วย Google
-              </button>
-            )
-            }
-            clientId={process.env.NEXT_PUBLIC_NEXTAUTH_GOOGLE_CLIENT_ID as string}
-            buttonText="Login"
-            onSuccess={responseGoogle}
-            onFailure={responseGoogleFailure}
+          render={renderProps => (
+            <button className="btn btn-icon btn-full m-b-10 m-x-0 background-color-google"
+              onClick={renderProps.onClick}>
+              <div className="icon-frame">
+                <Img src="/login/google-icon.svg"
+                  width={25}
+                  height={25}
+                  alt="Google"
+                />
+              </div>
+              เข้าสู่ระบบด้วย Google
+            </button>
+          )
+          }
+          clientId={process.env.NEXT_PUBLIC_NEXTAUTH_GOOGLE_CLIENT_ID as string}
+          buttonText="Login"
+          onSuccess={responseGoogle}
         />
         <FacebookLogin
             appId={process.env.NEXT_PUBLIC_NEXTAUTH_FACEBOOK_CLIENT_ID as string}
@@ -187,3 +216,4 @@ export default function Login({ callbackButton, shopeeID }: LoginProps) {
     </div>
   )
 }
+

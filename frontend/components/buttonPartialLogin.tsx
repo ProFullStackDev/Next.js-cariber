@@ -35,6 +35,7 @@ export default function ButtonPartialLogin(props: imagePartialLoginProps) {
   async function setCallbackButtonFN(link: string) {
     setIsPopup(false)
     if (userManager.isLoggedIn()) {
+      userManager.updateProfileImage();
       link && router.push(getURl(link))
     }
   }
