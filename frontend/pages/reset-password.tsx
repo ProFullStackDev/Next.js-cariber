@@ -1,5 +1,6 @@
 import { useRouter } from "next/router";
 import { FormEvent, useState } from "react";
+import { resetPasswordWithEmail } from "../apiNest/resetPasswordApi";
 import UserManager from "../auth/userManager";
 import Footer from "../components/footer";
 import FormInput from "../components/formInput";
@@ -21,6 +22,7 @@ export default function Password() {
   });
 
   async function passwordRequest(event: FormEvent) {
+    const { code } = router.query
     event.preventDefault();
     if (formPassword.password !== formPassword.confirmPassword) {
       setError({
@@ -30,26 +32,25 @@ export default function Password() {
       return
     }
     const formData = {
-      code: router.query.code?.toString(),
+      code: code as string,
       password: formPassword.password,
       passwordConfirmation: formPassword.confirmPassword
     }
-    if ("") {
-      userManager.saveToken("")
+    const res = await resetPasswordWithEmail(formData)
+    if (res) {
       flashMessages.setMessages(FlashMessagesType.forgotPasswordMessages,
-        "Your password has been changed successfully. You are now signed in.")
-      router.replace("/library")
-    } else {
-      setError({
-        isError: true,
-        message: ""
-      })
+        "Your password has been changed successfully.")
+      router.replace("/")
+      return
     }
+    setError({
+      isError: true,
+      message: ""
+    })
   }
 
   return (
     <div className="background-image forgot-password">
-      <Header />
       <div className="sizer sizer-full">
         <div className="container">
           <div className="row align-items-center justify-content-center h-670">
