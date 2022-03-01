@@ -67,7 +67,11 @@ export default function Header() {
   }
 
   function checkShopeeCredentials(): void {
-    const base64ID = window.location.search?.replace('?id=', '') || '';
+    const url = window.location.search || '';
+    if (url?.indexOf('?id=') === -1) {
+      return;
+    }
+    const base64ID = url?.replace('?id=', '') || '';
     if (base64ID) {
       setHasShopeeID(true);
       const shopeeID = new Buffer(base64ID, 'base64').toString('ascii');
