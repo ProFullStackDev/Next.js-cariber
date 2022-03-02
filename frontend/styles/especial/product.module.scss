@@ -2,6 +2,11 @@
 @import "../color.scss";
 
 .product {
+
+  a.media:hover {
+    color: #ffffff;
+  }
+
   .accordion {
     @media(max-width: $ipad-size) {
       h5 {
