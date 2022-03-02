@@ -146,27 +146,6 @@ export default function Product() {
                           <VideoPlayer videoId={cutCloudflareVideoId(episodeLms.link_video)}
                             thumbnailImage={episodeLms.thumbnail_image} />}
                       </div>
-                      <div className="player-nav">
-                        <div className="media">
-                          <div className="media-left-under-player">
-                            <a className="btn btn-box btn-small disabled" href="#">
-                              <i className="fa fa-chevron-left" aria-hidden="true" />
-                              บทเรียนก่อนหน้า
-                            </a>
-                          </div>
-                          <div className="media-body media-middle">
-                            <p className="m-b-0 hidden-xs-down">
-                              บทเรียน 1 of 10
-                            </p>
-                          </div>
-                          <div className="media-right">
-                            <a className="btn btn-box btn-small" href="#">
-                              บทเรียนถัดไป
-                              <i className="fa fa-chevron-right" aria-hidden="true" />
-                            </a>
-                          </div>
-                        </div>
-                      </div>
                     </>
                   }
                   {showingType === ShowingType.quiz &&
@@ -186,6 +165,31 @@ export default function Product() {
                       </div>
                     </>
                   }
+                  <div className="player-nav">
+                    <div className="media">
+                      <div className="media-left-under-player">
+                        <button className="btn btn-box btn-small"
+                          disabled={indexEpisodesOrQuiz === 0}
+                          onClick={async () => { await setEpisodeOrQuiz(courseLms?.episodes_list[indexEpisodesOrQuiz - 1], indexEpisodesOrQuiz - 1) }}>
+                          <i className="fa fa-chevron-left" aria-hidden="true" />
+                          บทเรียนก่อนหน้า
+                        </button>
+                      </div>
+                      <div className="media-body media-middle">
+                        <p className="m-b-0 hidden-xs-down">
+                          บทเรียน {indexEpisodesOrQuiz + 1} of {courseLms?.episodes_list?.length}
+                        </p>
+                      </div>
+                      <div className="media-right">
+                        <button className="btn btn-box btn-small"
+                          disabled={indexEpisodesOrQuiz === courseLms?.episodes_list?.length - 1}
+                          onClick={async () => { await setEpisodeOrQuiz(courseLms?.episodes_list[indexEpisodesOrQuiz + 1], indexEpisodesOrQuiz + 1) }}>
+                          บทเรียนถัดไป
+                          <i className="fa fa-chevron-right" aria-hidden="true" />
+                        </button>
+                      </div>
+                    </div>
+                  </div>
                   <div className="player-playlist">
                     <div className="playlist">
                       <div className="playlist-title">

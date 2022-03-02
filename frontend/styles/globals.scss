@@ -5099,3 +5099,8 @@ a .panel-sub-title {
     color: $color-black;
   }
 }
+
+button:disabled{
+  cursor: default;
+  opacity: 0.5;
+}
