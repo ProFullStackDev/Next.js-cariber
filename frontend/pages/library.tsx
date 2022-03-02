@@ -85,6 +85,9 @@ export default function Library() {
             </div>
             <div className="grid-container">
               {!loadingItem && myCourse?.course_list?.map((value, index) => {
+                let cutDescription = "";
+                cutDescription = value.description.slice(0, 280);
+                if (value.description.length > 280) cutDescription = cutDescription + "...";
                 return (
                   <div key={`mycourse ${index}`} className="col-12 products-col">
                     <div className="product product-4 box-shadow-medium  background-light h-max">
@@ -117,7 +120,7 @@ export default function Library() {
                               </div>
                             </div>
                             <p className="product-body">
-                              {value.description}
+                              {cutDescription}
                             </p>
                           </div>
                           <div className="product-button">
