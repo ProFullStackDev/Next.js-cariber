@@ -28,7 +28,7 @@
       "type": "string"
     },
     "description": {
-      "type": "text"
+      "type": "richtext"
     },
     "publish_date": {
       "type": "datetime"
