@@ -26,7 +26,7 @@ export default function EpisodeAccordion({ totalHours, totalEpisodes, episodes }
           </div>
           {episodes && episodes.map((value, index) => {
             return (
-              <Accordion key={index} title={`EP${index + 1}: ${value.episode_name}`} description={value.episode_descriptions} col={4} color={Color.dark} />
+              <Accordion key={index} title={`EP${index + 1}: ${value.episode_name}`} description={value.description} col={4} color={Color.dark} />
             )
           })}
         </div>
