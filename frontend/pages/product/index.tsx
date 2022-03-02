@@ -15,52 +15,13 @@ import QuizSession from "../../components/quizSession";
 import { episodeApi } from "../../apiNest/episodeApi";
 
 export default function Product() {
-  const [courseLms, setCourseLms] = useState<CourseLMS>({
-    id: 0,
-    speaker_name: "",
-    course_name: "",
-    description: "",
-    total_hours: "",
-    total_lessons: "",
-    order_link: "",
-    header: "",
-    thumbnail_image: "",
-    lms_id: 0,
-    createDate: "",
-    updateDate: "",
-    deletedAt: "",
-    asset_download: "",
-    episodes_list: [],
-    instructor: {
-      id: 0,
-      name: "",
-      lms_id: 0,
-      idiom: "",
-      profile_image: "",
-      createDate: "",
-      updateDate: "",
-      deletedAt: "",
-    }
-  });
-  const [episodeLms, setEpisodeLms] = useState<Episodes>({
-    id: 0,
-    episode_number: 0,
-    episode_name: "",
-    description: "",
-    link_video: "",
-    thumbnail_image: "",
-    lms_id: 0,
-    is_free_trial: false,
-    createDate: "",
-    updateDate: "",
-    deletedAt: "",
-    type: ShowingType.episode,
-  });
+  const [courseLms, setCourseLms] = useState<CourseLMS>({} as CourseLMS);
+  const [episodeLms, setEpisodeLms] = useState<Episodes>({} as Episodes);
   const [showingType, setShowingType] = useState<ShowingType>(ShowingType.episode);
   const [quiz, setQuiz] = useState<Quiz | null>(null);
   const router = useRouter();
   const announcement = "ตอนนี้คุณกำลังอยู่ในโหมดทดลองเรียนฟรี เนื้อหาบางส่วนมีการถูกล็อกไว้\nคุณสามารถซื้อคอร์สนี้เพื่อดูเนื้อหาทั้งหมดในคอร์สเรียน";
-  const { productId } = router.query;
+  const { proId } = router.query;
 
   useEffect(() => {
     if (!router.isReady) return;
@@ -102,7 +63,7 @@ export default function Product() {
   }
 
   async function fetchData() {
-    const data = await getEpisodesAndQuiz(productId!.toString()) as CourseLMS;
+    const data = await getEpisodesAndQuiz(proId!.toString()) as CourseLMS;
     data.episodes_list.map(item => {
       item.type = ("question" in item && item.question) ? ShowingType.quiz : ShowingType.episode;
       return item;
@@ -313,26 +274,4 @@ export default function Product() {
       <Footer />
     </div>
   )
-}
-
-export async function getStaticPaths() {
-  const data = await allCourseLmsApi() as CourseLms[];
-  const paths = data.map((value) => {
-    return {
-      params: {
-        productId: value.id.toString(),
-      }
-    }
-  });
-  return {
-    paths: paths,
-    fallback: true,
-  };
-}
-
-export async function getStaticProps() {
-  return {
-    props: {
-    }
-  };
 }

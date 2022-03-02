@@ -89,7 +89,7 @@ export default function Library() {
                   <div key={`mycourse ${index}`} className="col-12 products-col">
                     <div className="product product-4 box-shadow-medium  background-light h-max">
                       <div className="product-content h-max">
-                        <Link href={`/product/${value.id}`}>
+                        <Link href={`/product?proId=${value.id}`}>
                           <a>
                             <div className="product-image">
                               <Img src={value.thumbnail_image}
@@ -102,7 +102,7 @@ export default function Library() {
                         </Link>
                         <div className="frame-card">
                           <div className="product-info" >
-                            <Link href={`/product/${value.id}`}>
+                            <Link href={`/product?proId=${value.id}`}>
                               <a>
                                 <h4 className="product-title">
                                   <strong>
@@ -121,7 +121,7 @@ export default function Library() {
                             </p>
                           </div>
                           <div className="product-button">
-                            <Link href={`/product/${value.id}`}>
+                            <Link href={`/product?proId=${value.id}`}>
                               <a className="btn btn-box btn-solid btn-small btn-full">
                                 รับชมเลย
                               </a>

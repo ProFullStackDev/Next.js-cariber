@@ -6,6 +6,7 @@ import mySubscriptionApi from "../apiNest/mySubscriptionApi";
 import ProfileImageApi from "../apiNest/profileImageApi";
 import resetPasswordApi from "../apiNest/resetPasswordApi";
 import updateUserProfileApi from "../apiNest/updateUserProfileApi";
+import UserManager from "../auth/userManager";
 import PurchasedCard from "../components/account/purchasedCard";
 import FormCheckbox from "../components/formCheckbox";
 import FormInput from "../components/formInput";
@@ -17,7 +18,8 @@ import * as staticData from "../components/static/account"
 import { handleChange, handleChangeCheckbox } from "../functions/handleInput";
 
 export default function Account() {
-  const timeZone = staticData.timeZone
+  const userManager = new UserManager();
+  const timeZone = staticData.timeZone;
   const hiddenFileInput = useRef<HTMLInputElement>(null);
   const [id, setId] = useState(0)
   const [mySubscription, setMySubscription] = useState([{
@@ -116,7 +118,8 @@ export default function Account() {
     const data = await updateUserProfileApi(formAccount, id);
     if (data) {
       if (Boolean(imageProfile.size)) {
-        await ProfileImageApi(id, { profile_image: imageProfile })
+        await ProfileImageApi(id, { profile_image: imageProfile });
+        userManager.updateProfileImage();
       }
       if (formPassword.currentPassword &&
         formPassword.newPassword === formPassword.confirmPassword &&
