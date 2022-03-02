@@ -27,7 +27,7 @@
     "episode_name": {
       "type": "string"
     },
-    "episode_descriptions": {
+    "description": {
       "type": "text"
     },
     "publish_date": {
