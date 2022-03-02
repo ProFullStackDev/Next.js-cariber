@@ -1,13 +1,13 @@
 import Moment from 'moment';
 
 interface PurchasedCardProps {
-  data: string;
+  date: string;
   offer: string;
   price: string;
   product: string;
 }
 
-export default function PurchasedCard({ data, offer, price, product }: PurchasedCardProps) {
+export default function PurchasedCard({ date, offer, price, product }: PurchasedCardProps) {
   return (
     <div className="well m-b-20">
       <div className="row">
@@ -16,7 +16,7 @@ export default function PurchasedCard({ data, offer, price, product }: Purchased
             Purchased
           </dt>
           <dd>
-            {Moment(data).format('DD/MM/YYYY')}
+            {Moment(date).format('DD/MM/YYYY')}
           </dd>
         </dl>
         <dl className="col-6">

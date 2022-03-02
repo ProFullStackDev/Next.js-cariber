@@ -29,11 +29,22 @@ type ReactVideoPlayerState = {
 }
 
 function VideoPlayer(props: VideoPlayerProps) {
+  const [playbackOptions, setPlaybackOptions] = useState<number[]>([
+    0.25,
+    0.5,
+    0.75,
+    1,
+    1.25,
+    1.5,
+    1.75,
+    2
+  ]);
   const [progressCount, setProgressCount] = useState(0);
   const player = useRef<ReactPlayer>(null);
   const playerContainerRef = useRef(null);
   const [controllerVisible, setControllerVisible] = useState(false);
   const [optionsVisible, setOptionsVisible] = useState(false);
+  const [playbackVisible, setPlaybackVisible] = useState(false);
   const [volumeVisible, setVolumeVisible] = useState(false);
   const [videoStarted, setVideoStarted] = useState(false);
   const [videoState, setVideoState] = useState<ReactVideoPlayerState>({
@@ -101,8 +112,8 @@ function VideoPlayer(props: VideoPlayerProps) {
     setVideoState({ ...videoState, playbackRate: parseFloat(e.target.value) })
   }
 
-  const handleOnPlaybackRateChange = (speed: string) => {
-    setVideoState({ ...videoState, playbackRate: parseFloat(speed) })
+  const handleOnPlaybackRateChange = (speed: number) => {
+    setVideoState({ ...videoState, playbackRate: speed })
   }
 
   const handleTogglePIP = () => {
@@ -287,6 +298,21 @@ function VideoPlayer(props: VideoPlayerProps) {
                   width={20}
                   height={20}
                   className="filter-white" />
+              </div>
+            </div>
+            <div className="flex-column-center"
+              onClick={() => { handleSwitchVisible(playbackVisible, setPlaybackVisible) }}>
+              <div className={`options-item ${playbackVisible ? "visible" : "hidden"}`}>
+                <div className="option-resolutions">
+                  {playbackOptions.map((item: any, index: number) => {
+                    return <button className={`option-resolutions sm-f-s-10 ${index === videoState.currentResolution && "resolutions-active"}`}
+                      key={index}
+                      onClick={() => handleOnPlaybackRateChange(item)}>{item}x</button>
+                  })}
+                </div>
+              </div>
+              <div className="control-button flex-column-center sm-f-s-10 cursor-default lg-w-50 color-white">
+                {videoState.playbackRate}x
               </div>
             </div>
             <div className="video-full-screen control-button" onClick={handleClickFullscreen}>

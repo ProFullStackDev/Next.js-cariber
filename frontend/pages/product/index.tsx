@@ -6,9 +6,8 @@ import Accordion, { Color, Icon } from "../../components/accordion";
 import Footer from "../../components/footer";
 import Header from "../../components/header";
 import Img from "../../components/image";
-import Pagination from "../../components/pagination";
 import ProductSale from "../../components/product/productSale";
-import ProductBlogs from "../../components/productBlogs";
+import ProductBlogs from "../../components/product/productBlogs";
 import VideoPlayer from "../../components/videoPlayer";
 import cutCloudflareVideoId from "../../functions/cutCloudflareVideoId";
 import CourseEvaluation from "../../components/courseEvaluation";
@@ -16,47 +15,9 @@ import QuizSession from "../../components/quizSession";
 import { episodeApi } from "../../apiNest/episodeApi";
 
 export default function Product() {
-  const [courseLms, setCourseLms] = useState<CourseLMS>({
-    id: 0,
-    speaker_name: "",
-    course_name: "",
-    description: "",
-    total_hours: "",
-    total_lessons: "",
-    order_link: "",
-    header: "",
-    thumbnail_image: "",
-    lms_id: 0,
-    createDate: "",
-    updateDate: "",
-    deletedAt: "",
-    asset_download: "",
-    episodes_list: [],
-    instructor: {
-      id: 0,
-      name: "",
-      lms_id: 0,
-      idiom: "",
-      profile_image: "",
-      createDate: "",
-      updateDate: "",
-      deletedAt: "",
-    }
-  });
-  const [episodeLms, setEpisodeLms] = useState<Episodes>({
-    id: 0,
-    episode_number: 0,
-    episode_name: "",
-    description: "",
-    link_video: "",
-    thumbnail_image: "",
-    lms_id: 0,
-    is_free_trial: false,
-    createDate: "",
-    updateDate: "",
-    deletedAt: "",
-    type: ShowingType.episode,
-  });
+  const [indexEpisodesOrQuiz, setIndexEpisodesOrQuiz] = useState<number>(0);
+  const [courseLms, setCourseLms] = useState<CourseLMS>({} as CourseLMS);
+  const [episodeLms, setEpisodeLms] = useState<Episodes>({} as Episodes);
   const [showingType, setShowingType] = useState<ShowingType>(ShowingType.episode);
   const [quiz, setQuiz] = useState<Quiz | null>(null);
   const router = useRouter();
@@ -68,7 +29,8 @@ export default function Product() {
     fetchData().then(() => { });
   }, [router.isReady]);
 
-  async function setEpisodeOrQuiz(passedData: Episodes | Quiz | Evaluation) {
+  async function setEpisodeOrQuiz(passedData: Episodes | Quiz | Evaluation, index: number) {
+    setIndexEpisodesOrQuiz(index);
     setShowingType(passedData.type);
     switch (passedData.type) {
       case ShowingType.quiz:
@@ -110,11 +72,11 @@ export default function Product() {
     });
     data.episodes_list.push(new Evaluation());
     setCourseLms(data);
-    data.episodes_list[0] && await setEpisodeOrQuiz(data.episodes_list[0]);
+    data.episodes_list[0] && await setEpisodeOrQuiz(data.episodes_list[0], 0);
   }
 
   function restart() {
-    setEpisodeOrQuiz(courseLms.episodes_list[0]).then(() => { });
+    setEpisodeOrQuiz(courseLms.episodes_list[0], 0).then(() => { });
   }
 
   return (
@@ -184,27 +146,6 @@ export default function Product() {
                           <VideoPlayer videoId={cutCloudflareVideoId(episodeLms.link_video)}
                             thumbnailImage={episodeLms.thumbnail_image} />}
                       </div>
-                      <div className="player-nav">
-                        <div className="media">
-                          <div className="media-left-under-player">
-                            <a className="btn btn-box btn-small disabled" href="#">
-                              <i className="fa fa-chevron-left" aria-hidden="true" />
-                              บทเรียนก่อนหน้า
-                            </a>
-                          </div>
-                          <div className="media-body media-middle">
-                            <p className="m-b-0 hidden-xs-down">
-                              บทเรียน 1 of 10
-                            </p>
-                          </div>
-                          <div className="media-right">
-                            <a className="btn btn-box btn-small" href="#">
-                              บทเรียนถัดไป
-                              <i className="fa fa-chevron-right" aria-hidden="true" />
-                            </a>
-                          </div>
-                        </div>
-                      </div>
                     </>
                   }
                   {showingType === ShowingType.quiz &&
@@ -224,6 +165,31 @@ export default function Product() {
                       </div>
                     </>
                   }
+                  <div className="player-nav">
+                    <div className="media">
+                      <div className="media-left-under-player">
+                        <button className="btn btn-box btn-small"
+                          disabled={indexEpisodesOrQuiz === 0}
+                          onClick={async () => { await setEpisodeOrQuiz(courseLms?.episodes_list[indexEpisodesOrQuiz - 1], indexEpisodesOrQuiz - 1) }}>
+                          <i className="fa fa-chevron-left" aria-hidden="true" />
+                          บทเรียนก่อนหน้า
+                        </button>
+                      </div>
+                      <div className="media-body media-middle">
+                        <p className="m-b-0 hidden-xs-down">
+                          บทเรียน {indexEpisodesOrQuiz + 1} of {courseLms?.episodes_list?.length}
+                        </p>
+                      </div>
+                      <div className="media-right">
+                        <button className="btn btn-box btn-small"
+                          disabled={indexEpisodesOrQuiz === courseLms?.episodes_list?.length - 1}
+                          onClick={async () => { await setEpisodeOrQuiz(courseLms?.episodes_list[indexEpisodesOrQuiz + 1], indexEpisodesOrQuiz + 1) }}>
+                          บทเรียนถัดไป
+                          <i className="fa fa-chevron-right" aria-hidden="true" />
+                        </button>
+                      </div>
+                    </div>
+                  </div>
                   <div className="player-playlist">
                     <div className="playlist">
                       <div className="playlist-title">
@@ -241,9 +207,9 @@ export default function Product() {
                           return (
                             <a key={index}
                               className="media track"
-                              onClick={async () => { await setEpisodeOrQuiz(value) }}>
+                              onClick={async () => { await setEpisodeOrQuiz(value, index) }}>
                               <div className="media-left media-middle">
-                                {value.episode_number === episodeLms?.episode_number ? (
+                                {index === indexEpisodesOrQuiz ? (
                                   <p className="track-count active">
                                     <i className="fa fa-play color-primary" />
                                   </p>
@@ -283,24 +249,29 @@ export default function Product() {
               </div>
               <div className="col-8">
                 {courseLms.episodes_list?.map((value, index) => {
-                  return (<Accordion key={index}
-                    title={getTrackName(value)}
-                    description={"description" in value
-                      ? value.description + "\n *หากผู้ใดละเมิดนำงานไปเผยแพร่ คัดลอก หรือดัดแปลงไม่ว่าบางส่วนหรือทั้งหมดจะถูกดำเนินคดีตามกฎหมาย"
-                      : ''}
-                    col={12}
-                    icon={Icon.play}
-                    color={Color.light}
-                    button={{
-                      callback: () => {
-                        setEpisodeOrQuiz(value).then(() => { })
-                      }, text: `${0 ? (`${0 < 100 ? ("ดูต่อ") : ("ดูอีกครั้ง")}`) : ("รับชมเนื้อหา")}`
-                    }}
-                    progress={0}
-                  />)
+                  return (
+                    <div key={index}>
+                    {value.type === ShowingType.episode && (
+                        <Accordion
+                        title={getTrackName(value)}
+                          description={"description" in value
+                            ? value.description + "\n *หากผู้ใดละเมิดนำงานไปเผยแพร่ คัดลอก หรือดัดแปลงไม่ว่าบางส่วนหรือทั้งหมดจะถูกดำเนินคดีตามกฎหมาย"
+                            : ''}
+                            col={12}
+                            icon={Icon.play}
+                            color={Color.light}
+                            button={{
+                              callback: () => {
+                              setEpisodeOrQuiz(value, index).then(() => { })
+                            }, text: `${0 ? (`${0 < 100 ? ("ดูต่อ") : ("ดูอีกครั้ง")}`) : ("รับชมเนื้อหา")}`
+                          }}
+                          progress={0}
+                          />
+                        )}
+                    </div>
+                  )
                 })
                 }
-                <Pagination page={Number(router.query.page)} pageCount={2} />
               </div>
               <ProductBlogs progressBlog={true}
                 productImage={courseLms.thumbnail_image}

@@ -18,6 +18,9 @@ $btn-border-radius: 50px;
   background-color: $background-color;
 
   a.link-list-link {
+    @media (max-width: $ipad-size) {
+      margin: 0px 5px;
+    }
     color: $color-tiger !important;
   }
 

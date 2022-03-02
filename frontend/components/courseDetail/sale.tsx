@@ -71,7 +71,7 @@ export default function Sale({ yearlySubscriptionImage,
                     alt={"Cariber Yearly Subscription"} />
                   <ButtonPartialLogin
                     class="btn btn-medium btn-solid btn-auto background-dark"
-                    text={'ซื้อแพ็คเกจรายปี'}
+                    text={'ซื้อเฉพาะคอร์สนี้'}
                     url={singleCheckoutUrl} /> 
                 </div>
               </div>

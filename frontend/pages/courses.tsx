@@ -51,46 +51,47 @@ export default function Courses({ courses, annualPromotion }: CoursesProps) {
                 </h2>
               </div>
             </div>
-            <div className="block-break"></div>
-            {courses ? courses.data.map((value) => {
-              return (
-                <div key={value?.id} className="block-type-feature text-center col-3">
-                  <div className="block box-shadow-large background-white p-12 b-r-4">
-                    <div>
-                      <div className="feature">
-                        <Link href={`/course/${value?.id}`}>
-                          <a className={`${!value?.publishedAt && "disabled"}`}>
-                            <Img className="feature-image"
-                              src={value?.thumbnail_image}
-                              alt={value?.speaker_name}
-                              width={262.5}
-                              height={147.65} />
-                          </a>
-                        </Link>
-                        <div className="feature-text">
+            <div className="grid-container col-12 p-0">
+              {courses ? courses.data.map((value) => {
+                return (
+                  <div key={value?.id} className="block-type-feature text-center p-10">
+                    <div className="block box-shadow-large background-white p-12 b-r-4">
+                      <div>
+                        <div className="feature">
                           <Link href={`/course/${value?.id}`}>
                             <a className={`${!value?.publishedAt && "disabled"}`}>
-                              <h5 className="color-darkblue f-w-500 m-0">
-                                {value.speaker_name}
-                              </h5>
+                              <Img className="feature-image"
+                                src={value?.thumbnail_image}
+                                alt={value?.speaker_name}
+                                width={262.5}
+                                height={147.65} />
                             </a>
                           </Link>
-                          <Link href={`/course/${value?.id}`}>
-                            <a className={`${!value?.publishedAt && "disabled"}`}>
-                              <p className="f-s-12 f-w-500 m-0">
-                                {value.course_name}
-                              </p>
-                            </a>
-                          </Link>
+                          <div className="feature-text">
+                            <Link href={`/course/${value?.id}`}>
+                              <a className={`${!value?.publishedAt && "disabled"}`}>
+                                <h5 className="color-darkblue f-w-500 m-0">
+                                  {value.speaker_name}
+                                </h5>
+                              </a>
+                            </Link>
+                            <Link href={`/course/${value?.id}`}>
+                              <a className={`${!value?.publishedAt && "disabled"}`}>
+                                <p className="f-s-12 f-w-500 m-0">
+                                  {value.course_name}
+                                </p>
+                              </a>
+                            </Link>
+                          </div>
                         </div>
                       </div>
                     </div>
                   </div>
-                </div>
-              )
-            }) : (
-              <div className="text-center w-100">ไม่พบคอร์ส</div>
-            )}
+                )
+              }) : (
+                <div className="text-center w-100">ไม่พบคอร์ส</div>
+              )}
+            </div>
           </div>
         </div>
       </div>
