@@ -311,7 +311,7 @@ function VideoPlayer(props: VideoPlayerProps) {
                   })}
                 </div>
               </div>
-              <div className="control-button flex-column-center sm-f-s-10 cursor-default lg-w-50">
+              <div className="control-button flex-column-center sm-f-s-10 cursor-default lg-w-50 color-white">
                 {videoState.playbackRate}x
               </div>
             </div>
