@@ -1,7 +1,9 @@
-import React, { ChangeEvent, Dispatch, SetStateAction, useEffect, useRef, useState } from 'react';
+import React, { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react';
 import ReactPlayer from 'react-player/lazy';
 import screenfull from 'screenfull';
 import Img from './image';
+import { getTrackBackground, Range } from 'react-range';
+import { Direction, IRenderThumbParams, IRenderTrackParams } from 'react-range/lib/types';
 
 type VideoPlayerProps = {
   videoId: string;
@@ -26,6 +28,11 @@ type ReactVideoPlayerState = {
   resolutions: any;
   currentResolution: number;
   fullscreen: boolean;
+}
+
+enum Directions {
+  Horizontal,
+  Vertical
 }
 
 function VideoPlayer(props: VideoPlayerProps) {
@@ -100,8 +107,8 @@ function VideoPlayer(props: VideoPlayerProps) {
     setVideoState({ ...videoState, loop: !videoState.loop });
   }
 
-  const handleVolumeChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setVideoState({ ...videoState, volume: parseFloat(e.target.value) })
+  const handleVolumeChange = (value: number) => {
+    setVideoState({ ...videoState, volume: value });
   }
 
   const handleToggleMuted = () => {
@@ -136,17 +143,9 @@ function VideoPlayer(props: VideoPlayerProps) {
     setVideoState({ ...videoState, playing: false })
   }
 
-  const handleSeekMouseDown = (e: any) => {
-    setVideoState({ ...videoState, seeking: true })
-  }
-
-  const handleSeekChange = (e: any) => {
-    setVideoState({ ...videoState, played: parseFloat(e.target.value) })
-  }
-
-  const handleSeekMouseUp = (e: any) => {
-    setVideoState({ ...videoState, seeking: false })
-    player.current?.seekTo(parseFloat(e.target.value))
+  const handleSeekChange = (value: number) => {
+    setVideoState({ ...videoState, played: value });
+    player.current?.seekTo(value);
   }
 
   const handleProgress = (state: any) => {
@@ -201,7 +200,94 @@ function VideoPlayer(props: VideoPlayerProps) {
 
   useEffect(() => {
     changeProps();
-  }, [props])
+  }, [props]);
+
+
+
+  const renderTrack = ({
+    iRenderTrackParams,
+    value,
+    directions }: {
+      iRenderTrackParams: IRenderTrackParams,
+      value: number,
+      directions: Directions
+    }) => {
+    let directionProps = {
+      width: "",
+      outerHeight: "",
+      innerHeight: "",
+      direction: Direction.Right
+    }
+
+    switch (directions) {
+      case Directions.Horizontal:
+        directionProps = {
+          width: "100%",
+          outerHeight: "auto",
+          innerHeight: "6px",
+          direction: Direction.Right
+        }
+        break;
+      case Directions.Vertical:
+        directionProps = {
+          width: "6px",
+          outerHeight: "100%",
+          innerHeight: "100%",
+          direction: Direction.Up
+        }
+        break;
+    }
+
+    return (
+      <div
+        onMouseDown={iRenderTrackParams.props.onMouseDown}
+        onTouchStart={iRenderTrackParams.props.onTouchStart}
+        style={{
+          ...iRenderTrackParams.props.style,
+          height: directionProps.outerHeight,
+          display: "flex",
+          width: directionProps.width
+        }}
+      >
+        <div
+          ref={iRenderTrackParams.props.ref}
+          style={{
+            height: directionProps.innerHeight,
+            width: directionProps.width,
+            borderRadius: "4px",
+            background: getTrackBackground({
+              values: [value * 100],
+              colors: ["#E74E25", "#ccc"],
+              min: 0,
+              max: 100,
+              direction: directionProps.direction,
+            }),
+            alignSelf: "center"
+          }}
+        >
+          {iRenderTrackParams.children}
+        </div>
+      </div>
+    )
+  }
+
+  const renderThumb = ({ props }: IRenderThumbParams) => (
+    <div
+      {...props}
+      style={{
+        ...props.style,
+        height: "13px",
+        width: "13px",
+        borderRadius: "50px",
+        backgroundColor: "#FFF",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        boxShadow: "0px 2px 6px #AAA"
+      }}
+    >
+    </div>
+  )
 
   return (
     <div className="player-wrapper video-player"
@@ -250,13 +336,14 @@ function VideoPlayer(props: VideoPlayerProps) {
                 className="filter-white" />)}
           </button>
           <div className="video-progress">
-            <input
-              className="input-progress"
-              type='range' min={0} max={0.999999} step='any'
-              value={videoState.played}
-              onMouseDown={handleSeekMouseDown}
-              onChange={handleSeekChange}
-              onMouseUp={handleSeekMouseUp}
+            <Range
+              values={[videoState.played]}
+              step={0.00001}
+              min={0}
+              max={0.99999}
+              onChange={(values) => { handleSeekChange(values[0]) }}
+              renderTrack={(params) => { return renderTrack({ iRenderTrackParams: params, value: videoState.played, directions: Directions.Horizontal }) }}
+              renderThumb={renderThumb}
             />
           </div>
           <div className="control-right-group">
@@ -264,7 +351,18 @@ function VideoPlayer(props: VideoPlayerProps) {
               onMouseEnter={() => { handleVisible(setVolumeVisible) }}
               onMouseLeave={() => { handleHidden(setVolumeVisible) }}>
               <div className={`volume-progress flex-column-center ${volumeVisible ? "visible" : "hidden"}`}>
-                <input className="input-progress" type='range' min={0} max={1} step='any' value={videoState.volume} onChange={handleVolumeChange} />
+                <Range
+                  values={[videoState.volume]}
+                  step={0.00001}
+                  min={0}
+                  max={1}
+                  onChange={(values) => { handleVolumeChange(values[0]) }}
+                  renderTrack={(params) => {
+                    return renderTrack({ iRenderTrackParams: params, value: videoState.volume, directions: Directions.Vertical })
+                  }}
+                  renderThumb={renderThumb}
+                  direction={Direction.Up}
+                />
               </div>
               <div className="flex-column-center control-button" onClick={handleToggleMuted}>
                 {!videoState.muted ? (
