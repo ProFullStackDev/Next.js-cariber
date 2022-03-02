@@ -64,6 +64,31 @@ $maximum-pixel-percentage : 101;
   .min-h-#{$i} {
     min-height: #{$i}px !important;
   }
+  @media(min-width: $ipad-size) {
+    .lg-w-#{$i} {
+      width: #{$i}px !important;
+    }
+
+    .lg-h-#{$i} {
+      height: #{$i}px !important;
+    }
+
+    .lg-max-w-#{$i} {
+      max-width: #{$i}px !important;
+    }
+
+    .lg-max-h-#{$i} {
+      max-height: #{$i}px !important;
+    }
+
+    .lg-min-w-#{$i} {
+      min-width: #{$i}px !important;
+    }
+
+    .lg-min-h-#{$i} {
+      min-height: #{$i}px !important;
+    }
+  }
 
   @media(max-width: $mobile-size) {
     .sm-w-#{$i} {
