@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import { allCourseLmsApi, getEpisodesAndQuiz } from "../../apiNest/courseLmsApi";
-import { CourseLMS, CourseLms, Episodes, Evaluation, Quiz, ShowingType, } from "../../apiNest/models/content/courseLms";
+import { getEpisodesAndQuiz } from "../../apiNest/courseLmsApi";
+import { CourseLMS, Episodes, Evaluation, Quiz, ShowingType, } from "../../apiNest/models/content/courseLms";
 import Accordion, { Color, Icon } from "../../components/accordion";
 import Footer from "../../components/footer";
 import Header from "../../components/header";
@@ -15,6 +15,7 @@ import QuizSession from "../../components/quizSession";
 import { episodeApi } from "../../apiNest/episodeApi";
 
 export default function Product() {
+  const [indexEpisodesOrQuiz, setIndexEpisodesOrQuiz] = useState<number>(0);
   const [courseLms, setCourseLms] = useState<CourseLMS>({} as CourseLMS);
   const [episodeLms, setEpisodeLms] = useState<Episodes>({} as Episodes);
   const [showingType, setShowingType] = useState<ShowingType>(ShowingType.episode);
@@ -28,7 +29,8 @@ export default function Product() {
     fetchData().then(() => { });
   }, [router.isReady]);
 
-  async function setEpisodeOrQuiz(passedData: Episodes | Quiz | Evaluation) {
+  async function setEpisodeOrQuiz(passedData: Episodes | Quiz | Evaluation, index: number) {
+    setIndexEpisodesOrQuiz(index);
     setShowingType(passedData.type);
     switch (passedData.type) {
       case ShowingType.quiz:
@@ -70,11 +72,11 @@ export default function Product() {
     });
     data.episodes_list.push(new Evaluation());
     setCourseLms(data);
-    data.episodes_list[0] && await setEpisodeOrQuiz(data.episodes_list[0]);
+    data.episodes_list[0] && await setEpisodeOrQuiz(data.episodes_list[0], 0);
   }
 
   function restart() {
-    setEpisodeOrQuiz(courseLms.episodes_list[0]).then(() => { });
+    setEpisodeOrQuiz(courseLms.episodes_list[0], 0).then(() => { });
   }
 
   return (
@@ -201,9 +203,9 @@ export default function Product() {
                           return (
                             <a key={index}
                               className="media track"
-                              onClick={async () => { await setEpisodeOrQuiz(value) }}>
+                              onClick={async () => { await setEpisodeOrQuiz(value, index) }}>
                               <div className="media-left media-middle">
-                                {value.episode_number === episodeLms?.episode_number ? (
+                                {index === indexEpisodesOrQuiz ? (
                                   <p className="track-count active">
                                     <i className="fa fa-play color-primary" />
                                   </p>
@@ -253,7 +255,7 @@ export default function Product() {
                     color={Color.light}
                     button={{
                       callback: () => {
-                        setEpisodeOrQuiz(value).then(() => { })
+                        setEpisodeOrQuiz(value, index).then(() => { })
                       }, text: `${0 ? (`${0 < 100 ? ("ดูต่อ") : ("ดูอีกครั้ง")}`) : ("รับชมเนื้อหา")}`
                     }}
                     progress={0}

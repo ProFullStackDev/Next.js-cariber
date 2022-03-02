@@ -1,5 +1,5 @@
-import { EpisodeLms } from './models/content/courseLms';
 import { nestHeaderAuth, NEST_API_URLS } from "./models/contact";
+import { Episodes } from "./models/content/courseLms";
 
 export async function episodeApi(id: string) {
   try {
@@ -7,7 +7,7 @@ export async function episodeApi(id: string) {
       method: "GET",
       headers: nestHeaderAuth(),
     })
-    return await response.json() as EpisodeLms;
+    return await response.json() as Episodes;
   } catch (error) {
     console.log(error);
   }
