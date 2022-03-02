@@ -92,12 +92,16 @@ export default function Account() {
   }
 
   async function saveAccount(event: FormEvent) {
+   const checkChangePassword = formPassword.currentPassword &&
+                    formPassword.newPassword === formPassword.confirmPassword &&
+                    formPassword.newPassword &&
+                    formPassword.confirmPassword; 
     event.preventDefault();
     setErrorPassword({
       isError: false,
       message: ""
     });
-    if (formPassword.currentPassword) {
+    if (checkChangePassword) {
       const checkPasswort = await checkPasswordApi({ password: formPassword.currentPassword });
       if (!checkPasswort?.match) {
         setErrorPassword({
@@ -121,10 +125,7 @@ export default function Account() {
         await ProfileImageApi(id, { profile_image: imageProfile });
         userManager.updateProfileImage();
       }
-      if (formPassword.currentPassword &&
-        formPassword.newPassword === formPassword.confirmPassword &&
-        formPassword.newPassword &&
-        formPassword.confirmPassword) {
+      if (checkChangePassword) {
         await resetPasswordApi({ password: formPassword.newPassword, passwordConfirmation: formPassword.confirmPassword });
       }
       alert("แก้ไขสำเร็จ");
@@ -335,7 +336,7 @@ export default function Account() {
                       id={"newPassword"}
                       label="New Password"
                       type={"password"}
-                      required={Boolean(formPassword.currentPassword)}
+                      required={false}
                       minLength={8}
                       onChange={e => handleChange(e, setFormPassword, formPassword)} />
                   </div>
@@ -344,7 +345,7 @@ export default function Account() {
                       id={"confirmPassword"}
                       label="Verify Password"
                       type={"password"}
-                      required={Boolean(formPassword.currentPassword)}
+                      required={false}
                       minLength={8}
                       onChange={e => handleChange(e, setFormPassword, formPassword)} />
                   </div>
