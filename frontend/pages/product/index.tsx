@@ -249,21 +249,27 @@ export default function Product() {
               </div>
               <div className="col-8">
                 {courseLms.episodes_list?.map((value, index) => {
-                  return (<Accordion key={index}
-                    title={getTrackName(value)}
-                    description={"description" in value
-                      ? value.description + "\n *หากผู้ใดละเมิดนำงานไปเผยแพร่ คัดลอก หรือดัดแปลงไม่ว่าบางส่วนหรือทั้งหมดจะถูกดำเนินคดีตามกฎหมาย"
-                      : ''}
-                    col={12}
-                    icon={Icon.play}
-                    color={Color.light}
-                    button={{
-                      callback: () => {
-                        setEpisodeOrQuiz(value, index).then(() => { })
-                      }, text: `${0 ? (`${0 < 100 ? ("ดูต่อ") : ("ดูอีกครั้ง")}`) : ("รับชมเนื้อหา")}`
-                    }}
-                    progress={0}
-                  />)
+                  return (
+                    <>
+                    {value.type === ShowingType.episode && (
+                        <Accordion key={index}
+                        title={getTrackName(value)}
+                          description={"description" in value
+                            ? value.description + "\n *หากผู้ใดละเมิดนำงานไปเผยแพร่ คัดลอก หรือดัดแปลงไม่ว่าบางส่วนหรือทั้งหมดจะถูกดำเนินคดีตามกฎหมาย"
+                            : ''}
+                            col={12}
+                            icon={Icon.play}
+                            color={Color.light}
+                            button={{
+                              callback: () => {
+                              setEpisodeOrQuiz(value, index).then(() => { })
+                            }, text: `${0 ? (`${0 < 100 ? ("ดูต่อ") : ("ดูอีกครั้ง")}`) : ("รับชมเนื้อหา")}`
+                          }}
+                          progress={0}
+                          />
+                        )}
+                    </>
+                  )
                 })
                 }
               </div>
