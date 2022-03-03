@@ -14,6 +14,7 @@ import { CarouselContent } from "../apiStrapi/models/contentType/carousel";
 import { carouselApi, reviewApi, seasonalPromotionApi } from "../apiStrapi/StrapiApiService";
 import { SeasonalPromotionContent } from "../apiStrapi/models/contentType/seasonalPromotion";
 import UserManager from "../auth/userManager";
+import ImagePartialLogin from "../components/imagePartialLogin";
 
 interface ReviewProps {
   carousel: ResponseDataList<CarouselContent>;
@@ -25,10 +26,6 @@ interface ReviewProps {
 export default function Review({ carousel, review, seasonalPromotion }: ReviewProps) {
   const userManager = new UserManager();
 
-  function getURl(url: string | null): string {
-    return url ? url + "&cid=" + userManager.getEncodedEmail() : '';
-  }
-  
   return (
     <div className="background-primary-color review">
       <Header />
@@ -39,15 +36,12 @@ export default function Review({ carousel, review, seasonalPromotion }: ReviewPr
               {seasonalPromotion.data?.attributes?.display && (
                 <div className="block-type-image text-col-12 m-b-0">
                   <div className="block box-shadow-none background-unrecognized">
-                    <div className="image">
-                      <a href={getURl(seasonalPromotion.data?.attributes?.url)}>
-                        <Img className="image-image"
-                          src={strapiImage(seasonalPromotion.data?.attributes?.image?.data?.attributes?.url)}
-                          alt="Promotion"
-                          width={1260}
-                          height={282.017} />
-                      </a>
-                    </div>
+                    <ImagePartialLogin
+                      url={seasonalPromotion.data?.attributes?.url}
+                      src={strapiImage(seasonalPromotion.data?.attributes?.image?.data?.attributes?.url)}
+                      width={1260}
+                      height={282.017}
+                      alt={"Promotion"} />
                   </div>
                 </div>
               )}
