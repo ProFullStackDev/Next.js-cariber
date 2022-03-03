@@ -150,7 +150,8 @@ export default function GuardContact() {
                     label="รหัสไปรษณีย์"
                     type={"text"}
                     required={true}
-                    onChange={e => { handleChange(e, setFormData, formData) }} />
+                    maxLength={5}
+                    onChange={e => { handleChange(e, setFormData, formData) }}/>
                 </div>
               </div>
               <div className="form-guard row">
