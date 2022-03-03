@@ -36,7 +36,7 @@ export default function Accordion({ title, description, col, icon, color, button
 
   return (
     <div className={`accordion-outside m-0 col-${col}`}>
-      <div className={`accordion-frame box-shadow-medium block-type-accordion text-left ${color}`}
+      <div className={`accordion-frame box-shadow-medium block-type-accordion text-left ${color} ${displayDescription === "d-block" && ("accordion-frame-active")}`}
         onClick={switchDisplay}>
         <div className={`${icon === Icon.lock && ("accordion-non-focus")} ${displayDescription === "d-block" && ("accordion-active")}`}>
           <div className="accordion">
@@ -59,12 +59,12 @@ export default function Accordion({ title, description, col, icon, color, button
       <div className={`accordion-collapse ${color} ${displayDescription}`}>
         <div className={`accordion accordion-body row`}>
           <div className={`${button ? ("col-9") : ("col-12")} `}>
-                <h6 className="f-s-14 white-space-pre">
-                  <span>
-                    {description}
-                  </span>
-                  <br />
-                </h6>
+            <h6 className="f-s-14 white-space-pre">
+              <span>
+                {description}
+              </span>
+              <br />
+            </h6>
           </div>
           {button && (
             <div className="accordion-right col-3">

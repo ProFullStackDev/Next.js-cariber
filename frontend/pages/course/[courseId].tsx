@@ -13,17 +13,13 @@ import { CourseContent, Contents } from "../../apiStrapi/models/contentType/cour
 import { strapiImage } from "../../apiStrapi/models/contact"
 import YoutubeEP from "../../components/courseDetail/youtubeEP"
 import CourseHeader from "../../components/courseDetail/courseHeader"
-import singleCourseApi from "../../apiStrapi/singleCouresApi"
 import { SingleCourse } from "../../apiStrapi/models/contentType/singleCourse"
-import annualPromotionApi from "../../apiStrapi/annualPromotionApi"
 import { AnnualPromotionContent } from "../../apiStrapi/models/contentType/annualPromotion"
 import EpisodeAccordion from "../../components/courseDetail/episodeAccordion"
 import { ReviewContent } from "../../apiStrapi/models/contentType/review"
-import reviewApi from "../../apiStrapi/reviewApi"
-import { courseApi, coursesAllApi } from "../../apiStrapi/coursesApi"
-import carouselApi from "../../apiStrapi/carouselApi"
 import { CarouselContent } from "../../apiStrapi/models/contentType/carousel"
 import UserManager from "../../auth/userManager";
+import { coursesAllApi, carouselApi, courseApi, singleCourseApi, annualPromotionApi, reviewApi } from "../../apiStrapi/StrapiApiService"
 
 interface CourseDetailParams {
   courseId: string;
@@ -45,7 +41,6 @@ export default function CourseDetail({
   review }: CourseDetailProps) {
 
   const userManager = new UserManager();
-
   const youtubeEPItems = course.data?.contents?.find((value) => {
     return value.__component === "components.special-ep-component"
   }) as Contents;

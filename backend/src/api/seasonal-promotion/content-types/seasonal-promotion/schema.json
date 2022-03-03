@@ -1,0 +1,34 @@
+{
+  "kind": "singleType",
+  "collectionName": "seasonal_promotions",
+  "info": {
+    "singularName": "seasonal-promotion",
+    "pluralName": "seasonal-promotions",
+    "displayName": "Seasonal Promotion ",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos"
+      ]
+    },
+    "url": {
+      "type": "text"
+    },
+    "display": {
+      "type": "boolean",
+      "default": true,
+      "required": false
+    }
+  }
+}

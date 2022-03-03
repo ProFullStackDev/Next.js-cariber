@@ -1,3 +1,5 @@
+import { VideoComponent } from "../component/video";
+
 export interface HomeContent {
   id: number;
   video_id: string;
@@ -11,6 +13,7 @@ export interface HomeContent {
   shopee_info: ShopeeInfo;
   shopee: Shopee[];
   thumbnail_video: Image;
+  home_video: VideoComponent;
 }
 
 export interface Shopee {

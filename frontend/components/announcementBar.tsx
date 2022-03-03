@@ -1,22 +1,25 @@
 import { useEffect, useState } from "react"
-import announcementBarApi from "../apiStrapi/announcementBarApi";
+import { AnnouncementBarContent } from "../apiStrapi/models/contentType/announcementBar";
+import { announcementBarApi } from "../apiStrapi/StrapiApiService";
 
 export default function AnnouncementBar() {
-  const [text, setText] = useState("");
+  const [announcementBar, setAnnouncementBar] = useState<AnnouncementBarContent>({} as AnnouncementBarContent);
 
   useEffect(() => {
     announcementBarApi().then((value) => {
-      setText(value.data?.attributes?.message)
+      setAnnouncementBar(value.data);
     })
   }, [])
 
   return (
     <>
-      {text
+      {announcementBar.attributes?.message
         ? <div className="announcement-bar text-center">
-          <p className="p-4 m-0">
-            {text}
-          </p>
+          <a href={announcementBar.attributes?.url}>
+            <p className="p-4 m-0 color-white">
+              {announcementBar.attributes?.message}
+            </p>
+          </a>
         </div>
         : <div />
       }

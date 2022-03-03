@@ -13,6 +13,7 @@ import cutCloudflareVideoId from "../../functions/cutCloudflareVideoId";
 import CourseEvaluation from "../../components/courseEvaluation";
 import QuizSession from "../../components/quizSession";
 import { episodeApi } from "../../apiNest/episodeApi";
+import { VideoComponent } from "../../apiStrapi/models/component/video";
 
 export default function Product() {
   const [indexEpisodesOrQuiz, setIndexEpisodesOrQuiz] = useState<number>(0);
@@ -143,8 +144,11 @@ export default function Product() {
                     <>
                       <div className="player-video">
                         {episodeLms?.link_video &&
-                          <VideoPlayer videoId={cutCloudflareVideoId(episodeLms.link_video)}
-                            thumbnailImage={episodeLms.thumbnail_image} />}
+                          <VideoPlayer props={{
+                            video_id: cutCloudflareVideoId(episodeLms.link_video),
+                            video_thumbnail: { url: episodeLms.thumbnail_image }
+                          }} />
+                        }
                       </div>
                     </>
                   }
@@ -251,23 +255,23 @@ export default function Product() {
                 {courseLms.episodes_list?.map((value, index) => {
                   return (
                     <div key={index}>
-                    {value.type === ShowingType.episode && (
+                      {value.type === ShowingType.episode && (
                         <Accordion
-                        title={getTrackName(value)}
+                          title={getTrackName(value)}
                           description={"description" in value
                             ? value.description + "\n *หากผู้ใดละเมิดนำงานไปเผยแพร่ คัดลอก หรือดัดแปลงไม่ว่าบางส่วนหรือทั้งหมดจะถูกดำเนินคดีตามกฎหมาย"
                             : ''}
-                            col={12}
-                            icon={Icon.play}
-                            color={Color.light}
-                            button={{
-                              callback: () => {
+                          col={12}
+                          icon={Icon.play}
+                          color={Color.light}
+                          button={{
+                            callback: () => {
                               setEpisodeOrQuiz(value, index).then(() => { })
                             }, text: `${0 ? (`${0 < 100 ? ("ดูต่อ") : ("ดูอีกครั้ง")}`) : ("รับชมเนื้อหา")}`
                           }}
                           progress={0}
-                          />
-                        )}
+                        />
+                      )}
                     </div>
                   )
                 })

@@ -1,5 +1,5 @@
 import { FormEvent, useState } from "react";
-import forgotPasswordApi, { ForgotPasswordApiProps } from "../apiStrapi/forgotPasswordApi";
+import { forgotPasswordApi } from "../apiNest/forgotPasswordApi";
 import Footer from "../components/footer";
 import FormInput from "../components/formInput";
 import Header from "../components/header";
@@ -20,10 +20,7 @@ export default function ForgotPassword() {
       isError: false,
       message: "",
     })
-    const formData: ForgotPasswordApiProps = {
-      email: formForgotPassword.email
-    }
-    await forgotPasswordApi(formData)
+    await forgotPasswordApi(formForgotPassword)
     setError({
       isError: true,
       message: "If your email address exists in our database, you will receive a password recovery link at your email address in a few minutes.",

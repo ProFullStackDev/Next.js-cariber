@@ -1,46 +1,39 @@
-import Img from "../components/image"
-import Footer from "../components/footer"
-import Header from "../components/header"
-import FooterBrand from "../components/footerBrand"
-import { strapiImage } from "../apiStrapi/models/contact"
-import { CourseContent } from "../apiStrapi/models/contentType/courses"
-import { ResponseData, ResponseDataList } from "../apiStrapi/models/data"
-import Link from "next/link"
-import annualPromotionApi from "../apiStrapi/annualPromotionApi"
-import { AnnualPromotionContent } from "../apiStrapi/models/contentType/annualPromotion"
-import { coursesAllApi } from "../apiStrapi/coursesApi"
-import UserManager from "../auth/userManager";
+import Img from "../components/image";
+import Footer from "../components/footer";
+import Header from "../components/header";
+import FooterBrand from "../components/footerBrand";
+import { strapiImage } from "../apiStrapi/models/contact";
+import { CourseContent } from "../apiStrapi/models/contentType/courses";
+import { ResponseData, ResponseDataList } from "../apiStrapi/models/data";
+import Link from "next/link";
+import UserManager from "../auth/userManager";;
+import { coursesAllApi, seasonalPromotionApi } from "../apiStrapi/StrapiApiService";
+import { SeasonalPromotionContent } from "../apiStrapi/models/contentType/seasonalPromotion";
+import ImagePartialLogin from "../components/imagePartialLogin";
 
 interface CoursesProps {
   courses: ResponseDataList<CourseContent>;
-  annualPromotion: ResponseData<AnnualPromotionContent>;
+  seasonalPromotion: ResponseData<SeasonalPromotionContent>;
 }
 
-export default function Courses({ courses, annualPromotion }: CoursesProps) {
+export default function Courses({ courses, seasonalPromotion }: CoursesProps) {
   const userManager = new UserManager();
-
-  function getURl(url: string | null): string {
-    return url ? url + "&cid=" + userManager.getEncodedEmail() : '';
-  }
-
+  
   return (
     <div className="background-image courses">
       <Header />
       <div className="sizer">
         <div className="container">
           <div className="row align-items-center">
-            {annualPromotion?.data?.attributes?.image_header?.data?.attributes?.url && (
+            {seasonalPromotion.data?.attributes?.display && (
               <div className="block-type-image text-col-12 m-b-0">
                 <div className="block box-shadow-none background-unrecognized">
-                  <div className="image">
-                    <a href={getURl(annualPromotion?.data?.attributes?.url)}>
-                      <Img className="image-image"
-                        src={strapiImage(annualPromotion?.data?.attributes?.image_header?.data?.attributes?.url)}
-                        alt="Promotion"
-                        width={1260}
-                        height={282.017} />
-                    </a>
-                  </div>
+                  <ImagePartialLogin
+                    url={seasonalPromotion.data?.attributes?.url}
+                    src={strapiImage(seasonalPromotion.data?.attributes?.image?.data?.attributes?.url)}
+                    width={1260}
+                    height={282.017}
+                    alt={"Promotion"} />
                 </div>
               </div>
             )}
@@ -52,7 +45,7 @@ export default function Courses({ courses, annualPromotion }: CoursesProps) {
               </div>
             </div>
             <div className="grid-container col-12 p-0">
-              {courses ? courses.data.map((value) => {
+              {courses ? courses.data?.map((value) => {
                 return (
                   <div key={value?.id} className="block-type-feature text-center p-10">
                     <div className="block box-shadow-large background-white p-12 b-r-4">
@@ -106,7 +99,7 @@ export async function getStaticProps() {
     return {
       props: {
         courses: await coursesAllApi(),
-        annualPromotion: await annualPromotionApi(),
+        seasonalPromotion: await seasonalPromotionApi(),
       }
     }
   } catch (error) {

@@ -25,6 +25,7 @@
     "react-google-login": "^5.2.2",
     "react-markdown": "^8.0.0",
     "react-player": "^2.9.0",
+    "react-range": "^1.8.12",
     "reactjs-popup": "^2.0.5",
     "sass": "^1.45.1",
     "screenfull": "^5.2.0",

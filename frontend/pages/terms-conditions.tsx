@@ -1,9 +1,9 @@
 import { TermsConditionsContent } from "../apiStrapi/models/contentType/termsConditions";
 import { ResponseData } from "../apiStrapi/models/data";
-import termsConditionsApi from "../apiStrapi/termsConditionsApi";
 import Footer from "../components/footer";
 import Header from "../components/header";
 import ReactMarkdown from "react-markdown";
+import { termsConditionsApi } from "../apiStrapi/StrapiApiService";
 
 interface TermsConditionsProps {
   termsConditions: ResponseData<TermsConditionsContent>;

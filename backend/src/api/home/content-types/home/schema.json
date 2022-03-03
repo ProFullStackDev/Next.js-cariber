@@ -66,13 +66,19 @@
       "component": "component-home.shopee"
     },
     "thumbnail_video": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
       "allowedTypes": [
         "images",
         "files",
         "videos"
-      ],
-      "type": "media",
-      "multiple": false
+      ]
+    },
+    "home_video": {
+      "type": "component",
+      "repeatable": false,
+      "component": "components.video"
     }
   }
 }
