@@ -28,7 +28,8 @@
       "type": "string"
     },
     "duration": {
-      "type": "float"
+      "type": "float",
+      "default": 0.00
     },
     "description": {
       "type": "richtext"
