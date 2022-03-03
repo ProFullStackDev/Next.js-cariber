@@ -23,9 +23,6 @@ export default function Header() {
   const [shopeeID, setShopeeID] = useState('');
   const [hasShopeeID, setHasShopeeID] = useState(false);
   const flashForgotPassword = flashMessages.getMessages(FlashMessagesType.forgotPasswordMessages);
-  const [formData, setFormData] = useState({
-    avatarUserBase64: "/default_avatar.webp",
-  })
 
   const menuLogedIn: Menu[] = [
     { url: "/library", name: "คอร์สของฉัน" },

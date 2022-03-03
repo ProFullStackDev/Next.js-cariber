@@ -15,12 +15,17 @@ $logo-width: 120px;
 $btn-border-radius: 50px;
 
 .header {
+  button.color-primary:hover {
+    color: $color-tiger;
+  }
+
   background-color: $background-color;
 
   a.link-list-link {
     @media (max-width: $ipad-size) {
       margin: 0px 5px;
     }
+
     color: $color-tiger !important;
   }
 
@@ -137,7 +142,8 @@ $btn-border-radius: 50px;
   color: #04696C;
   display: flex;
   justify-content: center;
-  .row{
+
+  .row {
     align-items: center;
   }
 }
