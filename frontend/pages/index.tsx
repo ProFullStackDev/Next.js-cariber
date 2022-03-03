@@ -10,15 +10,13 @@ import CoursesUpdate from '../components/index/coursesUpdate';
 import StudentReviews from '../components/studentReviews';
 import { ResponseData, ResponseDataList } from '../apiStrapi/models/data';
 import { ReviewContent } from '../apiStrapi/models/contentType/review';
-import reviewApi from '../apiStrapi/reviewApi';
-import homeApi from '../apiStrapi/homeApi';
 import { HomeContent } from '../apiStrapi/models/contentType/home';
 import { strapiImage } from '../apiStrapi/models/contact';
 import VideoPlayer from '../components/videoPlayer';
 import { CarouselContent } from '../apiStrapi/models/contentType/carousel';
-import carouselApi from '../apiStrapi/carouselApi';
 import ImagePartialLogin from '../components/imagePartialLogin';
 import ButtonPartialLogin from '../components/buttonPartialLogin';
+import { carouselApi, homeApi, reviewApi } from '../apiStrapi/StrapiApiService';
 
 interface IndexProps {
   carousel: ResponseDataList<CarouselContent>;
@@ -27,7 +25,6 @@ interface IndexProps {
 }
 
 export default function Index({ carousel, home, review }: IndexProps) {
-
   return (
     <div className="index">
       <Header />
@@ -80,7 +77,7 @@ export default function Index({ carousel, home, review }: IndexProps) {
               <div className="block-type-image text-center col-8">
                 <div className="box-shadow-none">
                   <br />
-                  <VideoPlayer videoId={home.data?.video_id} thumbnailImage={strapiImage(home.data?.thumbnail_video?.url)} />
+                  <VideoPlayer props={{...home.data?.home_video}} imageStrapi={true} />
                 </div>
               </div>
             </div>

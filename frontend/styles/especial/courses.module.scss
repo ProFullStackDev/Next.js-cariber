@@ -3,6 +3,18 @@ $image-width: 300px;
 $feature-height: 272.05px;
 
 .courses {
+  .grid-container {
+    @media (min-width: $ipad-size) {
+      display: grid !important;
+      grid-template-columns: 25.6% 25.6% 25.6% 25.6% !important;
+    }
+
+    @media (min-width: $mobile-size) and (max-width: $ipad-size) {
+      display: grid !important;
+      grid-template-columns: 33% 33% 33% !important;
+    }
+  }
+
   .feature-image {
     width: $image-width;
     border-radius: $image-border-radius;

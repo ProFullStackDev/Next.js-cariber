@@ -8,7 +8,7 @@ import UserManager from "../auth/userManager";
 import AnnouncementBar from "./announcementBar";
 import ButtonPartialLogin from "./buttonPartialLogin";
 import { WoocommerceService } from "../services/WoocommerceService";
-import annualPromotionApi from "../apiStrapi/annualPromotionApi";
+import { annualPromotionApi } from "../apiStrapi/StrapiApiService";
 
 interface Menu {
   url: string,
@@ -23,9 +23,6 @@ export default function Header() {
   const [shopeeID, setShopeeID] = useState('');
   const [hasShopeeID, setHasShopeeID] = useState(false);
   const flashForgotPassword = flashMessages.getMessages(FlashMessagesType.forgotPasswordMessages);
-  const [formData, setFormData] = useState({
-    avatarUserBase64: "/default_avatar.webp",
-  })
 
   const menuLogedIn: Menu[] = [
     { url: "/library", name: "คอร์สของฉัน" },
@@ -63,11 +60,15 @@ export default function Header() {
 
   async function fetchData(){
     const data = await annualPromotionApi();
-    setAnnualUrl(data.data.attributes.url);
+    setAnnualUrl(data.data?.attributes?.url);
   }
 
   function checkShopeeCredentials(): void {
-    const base64ID = window.location.search?.replace('?id=', '') || '';
+    const url = window.location.search || '';
+    if (url?.indexOf('?id=') === -1) {
+      return;
+    }
+    const base64ID = url?.replace('?id=', '') || '';
     if (base64ID) {
       setHasShopeeID(true);
       const shopeeID = new Buffer(base64ID, 'base64').toString('ascii');
