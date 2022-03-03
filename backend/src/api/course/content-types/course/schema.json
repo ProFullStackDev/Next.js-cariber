@@ -34,10 +34,12 @@
       ]
     },
     "total_hours": {
-      "type": "string"
+      "type": "decimal",
+      "default": 0.00
     },
     "total_lessons": {
-      "type": "string"
+      "type": "decimal",
+      "default": 0.00
     },
     "order_image": {
       "type": "media",
