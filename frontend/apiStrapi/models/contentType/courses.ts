@@ -61,6 +61,7 @@ export interface Item{
 
 export interface Episode {
   id: number;
+  episode_number: number;
   episode_name: string;
   description: string;
   link_video: string;

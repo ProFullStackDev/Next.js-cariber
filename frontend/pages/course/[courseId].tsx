@@ -41,7 +41,6 @@ export default function CourseDetail({
   review }: CourseDetailProps) {
 
   const userManager = new UserManager();
-
   const youtubeEPItems = course.data?.contents?.find((value) => {
     return value.__component === "components.special-ep-component"
   }) as Contents;
