@@ -1,3 +1,4 @@
+import { CourseContent } from './courses';
 import { VideoComponent } from "../component/video";
 
 export interface HomeContent {
@@ -49,7 +50,7 @@ export interface CoursesLatest {
   id: number;
   name: string;
   image: Image;
-  speaker_id: string;
+  course: CourseContent;
 }
 
 export interface CoursesSoon {
