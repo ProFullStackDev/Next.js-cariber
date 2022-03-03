@@ -1,3 +1,4 @@
+import { VideoComponent } from "../../apiStrapi/models/component/video";
 import Img from "../image";
 import ImagePartialLogin from "../imagePartialLogin";
 import VideoPlayer from "../videoPlayer";
@@ -47,7 +48,7 @@ export default function CourseHeader({ yearlySubscriptionImage,
             <div className="block-type-video col-8">
               <div className="block box-shadow-none">
                 <div className="video">
-                  <VideoPlayer videoId={videoId} thumbnailImage={videoPoster} />
+                  <VideoPlayer props={{ video_id: videoId, video_thumbnail: { url: videoPoster } } as VideoComponent} />
                 </div>
               </div>
             </div>

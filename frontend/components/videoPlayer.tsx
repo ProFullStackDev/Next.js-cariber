@@ -4,12 +4,8 @@ import screenfull from 'screenfull';
 import Img from './image';
 import { getTrackBackground, Range } from 'react-range';
 import { Direction, IRenderThumbParams, IRenderTrackParams } from 'react-range/lib/types';
-
-type VideoPlayerProps = {
-  videoId: string;
-  thumbnailImage?: string;
-  style?: React.CSSProperties;
-}
+import { VideoComponent } from '../apiStrapi/models/component/video';
+import { strapiImage } from '../apiStrapi/models/contact';
 
 type ReactVideoPlayerState = {
   url: string;
@@ -35,7 +31,7 @@ enum Directions {
   Vertical
 }
 
-function VideoPlayer(props: VideoPlayerProps) {
+function VideoPlayer({ props, imageStrapi }: { props: VideoComponent, imageStrapi?: boolean }) {
   const [playbackOptions, setPlaybackOptions] = useState<number[]>([
     0.25,
     0.5,
@@ -55,18 +51,18 @@ function VideoPlayer(props: VideoPlayerProps) {
   const [volumeVisible, setVolumeVisible] = useState(false);
   const [videoStarted, setVideoStarted] = useState(false);
   const [videoState, setVideoState] = useState<ReactVideoPlayerState>({
-    url: `https://videodelivery.net/${props.videoId}/manifest/video.m3u8`,
+    url: `https://videodelivery.net/${props.video_id}/manifest/video.m3u8`,
     pip: false,
     playing: true,
-    controls: false,
-    light: props.thumbnailImage ? props.thumbnailImage : true,
+    controls: props.control || true,
+    light: props.autoplay ? false : props.video_thumbnail?.url ? props.video_thumbnail?.url : true,
     volume: 1,
-    muted: false,
+    muted: props.muted || false,
     played: 0,
     loaded: 0,
     duration: 0,
     playbackRate: 1.0,
-    loop: false,
+    loop: props.loop || false,
     seeking: false,
     resolutions: [],
     currentResolution: -1,
@@ -193,8 +189,8 @@ function VideoPlayer(props: VideoPlayerProps) {
   const changeProps = () => {
     setVideoState({
       ...videoState,
-      url: `https://videodelivery.net/${props.videoId}/manifest/video.m3u8`,
-      light: props.thumbnailImage ? props.thumbnailImage : true,
+      url: `https://videodelivery.net/${props.video_id}/manifest/video.m3u8`,
+      light: props.autoplay ? false : props.video_thumbnail?.url ? props.video_thumbnail?.url : true,
     });
   }
 
@@ -293,8 +289,7 @@ function VideoPlayer(props: VideoPlayerProps) {
     <div className="player-wrapper video-player"
       onMouseMove={() => { handleVisible(setControllerVisible) }}
       onMouseLeave={() => { handleHidden(setControllerVisible) }}
-      ref={playerContainerRef}
-      style={{ ...props.style }}>
+      ref={playerContainerRef}>
       <ReactPlayer
         className="react-player"
         width="100%"
@@ -302,7 +297,7 @@ function VideoPlayer(props: VideoPlayerProps) {
         ref={player}
         url={videoState.url}
         pip={videoState.pip}
-        light={videoState.light}
+        light={imageStrapi ? strapiImage(videoState.light as string) : videoState.light}
         playing={videoState.playing}
         controls={false}
         loop={videoState.loop}
@@ -325,7 +320,9 @@ function VideoPlayer(props: VideoPlayerProps) {
         }}
       />
       <div className={`controls-wrapper ${controllerVisible ? "visible" : "hidden"} ${!videoStarted && "hidden"}`}>
-        <div className="video-controller">
+        <div className="p-h-100" onClick={handlePlayPause}>
+        </div>
+        <div className={`video-controller ${!videoState.controls && "hidden"}`}>
           <button className="control-button" onClick={handlePlayPause}>
             {videoState.playing ? (<Img src="/videoPlayer/pause-solid.svg"
               width={20}

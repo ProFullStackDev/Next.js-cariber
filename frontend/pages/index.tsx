@@ -25,7 +25,6 @@ interface IndexProps {
 }
 
 export default function Index({ carousel, home, review }: IndexProps) {
-
   return (
     <div className="index">
       <Header />
@@ -78,7 +77,7 @@ export default function Index({ carousel, home, review }: IndexProps) {
               <div className="block-type-image text-center col-8">
                 <div className="box-shadow-none">
                   <br />
-                  <VideoPlayer videoId={home.data?.video_id} thumbnailImage={strapiImage(home.data?.thumbnail_video?.url)} />
+                  <VideoPlayer props={{...home.data?.home_video}} imageStrapi={true} />
                 </div>
               </div>
             </div>

@@ -8,7 +8,7 @@ $maximum-pixel-percentage : 101;
   }
 
   .p-h-#{$i} {
-    width: $i+0% !important;
+    height: $i+0% !important;
   }
 }
 

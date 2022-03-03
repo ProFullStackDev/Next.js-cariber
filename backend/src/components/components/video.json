@@ -1,0 +1,46 @@
+{
+  "collectionName": "components_components_videos",
+  "info": {
+    "displayName": "Video",
+    "icon": "step-forward"
+  },
+  "options": {},
+  "attributes": {
+    "video_id": {
+      "type": "string",
+      "required": true
+    },
+    "video_thumbnail": {
+      "allowedTypes": [
+        "images"
+      ],
+      "type": "media",
+      "multiple": false
+    },
+    "loop": {
+      "type": "boolean",
+      "default": false,
+      "required": true
+    },
+    "autoplay": {
+      "type": "boolean",
+      "default": false,
+      "required": true
+    },
+    "preload": {
+      "type": "boolean",
+      "default": false,
+      "required": true
+    },
+    "control": {
+      "type": "boolean",
+      "default": false,
+      "required": true
+    },
+    "muted": {
+      "type": "boolean",
+      "default": false,
+      "required": true
+    }
+  }
+}
