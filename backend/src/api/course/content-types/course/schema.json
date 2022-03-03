@@ -34,10 +34,10 @@
       ]
     },
     "total_hours": {
-      "type": "string"
+      "type": "float"
     },
     "total_lessons": {
-      "type": "string"
+      "type": "float"
     },
     "order_image": {
       "type": "media",
