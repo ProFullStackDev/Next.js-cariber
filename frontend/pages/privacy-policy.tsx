@@ -3,6 +3,7 @@ import Footer from "../components/footer";
 import { PrivacyPolicyContent } from "../apiStrapi/models/contentType/privacyPolicy";
 import { ResponseData } from "../apiStrapi/models/data";
 import ReactMarkdown from "react-markdown";
+import { privacyPolicyApi } from "../apiStrapi/StrapiApiService";
 
 
 interface PrivacyPolicyProps {
@@ -79,7 +80,3 @@ export async function getStaticProps() {
     }
   }
 } 
-
-function privacyPolicyApi() {
-  throw new Error("Function not implemented.");
-}

@@ -17,7 +17,7 @@ export async function annualPromotionApi() {
   return await fetchData(STRAPI_API_URLS.annualPromotion) as ResponseData<AnnualPromotionContent>;
 }
 
-export async function carouselApi(){
+export async function carouselApi() {
   return await fetchData(STRAPI_API_URLS.carousels) as ResponseDataList<CarouselContent>;
 }
 
@@ -29,7 +29,7 @@ export async function courseApi(id: string) {
   return await fetchData(STRAPI_API_URLS.courses + `/${id}`) as ResponseData<CourseContent>;
 }
 
-export async function homeApi(){
+export async function homeApi() {
   return await fetchData(STRAPI_API_URLS.home) as ResponseData<HomeContent>;
 }
 
@@ -37,7 +37,7 @@ export async function privacyPolicyApi() {
   return await fetchData(STRAPI_API_URLS.privacyPolicy) as ResponseData<TermsConditionsContent>;
 }
 
-export async function reviewApi(){
+export async function reviewApi() {
   return await fetchData(STRAPI_API_URLS.review) as ResponseData<ReviewContent>;
 }
 
@@ -46,5 +46,5 @@ export async function singleCourseApi() {
 }
 
 export async function termsConditionsApi() {
-  const response = await fetchData(STRAPI_API_URLS.termsConditions) as ResponseData<TermsConditionsContent>;
+  return await fetchData(STRAPI_API_URLS.termsConditions) as ResponseData<TermsConditionsContent>;
 }

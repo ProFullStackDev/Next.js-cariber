@@ -4,7 +4,6 @@ import { resetPasswordWithEmail } from "../apiNest/resetPasswordApi";
 import UserManager from "../auth/userManager";
 import Footer from "../components/footer";
 import FormInput from "../components/formInput";
-import Header from "../components/header";
 import ShowError from "../components/showError";
 import FlashMessages, { FlashMessagesType } from "../functions/flashMessages";
 
