@@ -27,8 +27,8 @@
     "episode_name": {
       "type": "string"
     },
-    "episode_descriptions": {
-      "type": "text"
+    "description": {
+      "type": "richtext"
     },
     "publish_date": {
       "type": "datetime"
