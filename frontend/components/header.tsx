@@ -8,7 +8,7 @@ import UserManager from "../auth/userManager";
 import AnnouncementBar from "./announcementBar";
 import ButtonPartialLogin from "./buttonPartialLogin";
 import { WoocommerceService } from "../services/WoocommerceService";
-import annualPromotionApi from "../apiStrapi/annualPromotionApi";
+import { annualPromotionApi } from "../apiStrapi/StrapiApiService";
 
 interface Menu {
   url: string,
@@ -63,7 +63,7 @@ export default function Header() {
 
   async function fetchData(){
     const data = await annualPromotionApi();
-    setAnnualUrl(data.data.attributes.url);
+    setAnnualUrl(data.data?.attributes?.url);
   }
 
   function checkShopeeCredentials(): void {

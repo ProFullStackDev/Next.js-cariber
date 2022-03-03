@@ -7,14 +7,12 @@ import { ResponseData, ResponseDataList } from "../apiStrapi/models/data";
 import { strapiImage } from "../apiStrapi/models/contact";
 import { ReviewContent } from "../apiStrapi/models/contentType/review";
 import { AnnualPromotionContent } from "../apiStrapi/models/contentType/annualPromotion";
-import reviewApi from "../apiStrapi/reviewApi";
-import annualPromotionApi from "../apiStrapi/annualPromotionApi";
 import ReviewHeader from "../components/reviews/reviewHeader";
 import ReviewStudents from "../components/reviews/reviewStudents";
 import ReviewCaribers from "../components/reviews/reviewCaribers";
 import ReviewShopee from "../components/reviews/reviewShopee";
 import { CarouselContent } from "../apiStrapi/models/contentType/carousel";
-import carouselApi from "../apiStrapi/carouselApi";
+import { carouselApi, reviewApi, annualPromotionApi } from "../apiStrapi/StrapiApiService";
 
 interface ReviewProps {
   carousel: ResponseDataList<CarouselContent>;

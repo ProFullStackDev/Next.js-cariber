@@ -6,10 +6,9 @@ import { strapiImage } from "../apiStrapi/models/contact"
 import { CourseContent } from "../apiStrapi/models/contentType/courses"
 import { ResponseData, ResponseDataList } from "../apiStrapi/models/data"
 import Link from "next/link"
-import annualPromotionApi from "../apiStrapi/annualPromotionApi"
 import { AnnualPromotionContent } from "../apiStrapi/models/contentType/annualPromotion"
-import { coursesAllApi } from "../apiStrapi/coursesApi"
 import UserManager from "../auth/userManager";
+import { coursesAllApi, annualPromotionApi } from "../apiStrapi/StrapiApiService"
 
 interface CoursesProps {
   courses: ResponseDataList<CourseContent>;
@@ -52,7 +51,7 @@ export default function Courses({ courses, annualPromotion }: CoursesProps) {
               </div>
             </div>
             <div className="grid-container col-12 p-0">
-              {courses ? courses.data.map((value) => {
+              {courses ? courses.data?.map((value) => {
                 return (
                   <div key={value?.id} className="block-type-feature text-center p-10">
                     <div className="block box-shadow-large background-white p-12 b-r-4">

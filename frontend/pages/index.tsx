@@ -10,15 +10,13 @@ import CoursesUpdate from '../components/index/coursesUpdate';
 import StudentReviews from '../components/studentReviews';
 import { ResponseData, ResponseDataList } from '../apiStrapi/models/data';
 import { ReviewContent } from '../apiStrapi/models/contentType/review';
-import reviewApi from '../apiStrapi/reviewApi';
-import homeApi from '../apiStrapi/homeApi';
 import { HomeContent } from '../apiStrapi/models/contentType/home';
 import { strapiImage } from '../apiStrapi/models/contact';
 import VideoPlayer from '../components/videoPlayer';
 import { CarouselContent } from '../apiStrapi/models/contentType/carousel';
-import carouselApi from '../apiStrapi/carouselApi';
 import ImagePartialLogin from '../components/imagePartialLogin';
 import ButtonPartialLogin from '../components/buttonPartialLogin';
+import { carouselApi, homeApi, reviewApi } from '../apiStrapi/StrapiApiService';
 
 interface IndexProps {
   carousel: ResponseDataList<CarouselContent>;

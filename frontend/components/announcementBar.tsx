@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import announcementBarApi from "../apiStrapi/announcementBarApi";
+import { announcementBarApi } from "../apiStrapi/StrapiApiService";
 
 export default function AnnouncementBar() {
   const [text, setText] = useState("");
