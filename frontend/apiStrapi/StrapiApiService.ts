@@ -8,6 +8,11 @@ import { HomeContent } from './models/contentType/home';
 import { ReviewContent } from './models/contentType/review';
 import { SingleCourse } from './models/contentType/singleCourse';
 import { TermsConditionsContent } from './models/contentType/termsConditions';
+import { SeasonalPromotionContent } from './models/contentType/seasonalPromotion';
+
+export async function seasonalPromotionApi() {
+  return await fetchData(STRAPI_API_URLS.seasonalPromotion) as ResponseData<SeasonalPromotionContent>;
+}
 
 export async function announcementBarApi() {
   return await fetchData(STRAPI_API_URLS.announcementBar) as ResponseData<AnnouncementBarContent>;

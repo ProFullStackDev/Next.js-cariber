@@ -6,22 +6,29 @@ import SlideCourse from "../components/slideCourse";
 import { ResponseData, ResponseDataList } from "../apiStrapi/models/data";
 import { strapiImage } from "../apiStrapi/models/contact";
 import { ReviewContent } from "../apiStrapi/models/contentType/review";
-import { AnnualPromotionContent } from "../apiStrapi/models/contentType/annualPromotion";
 import ReviewHeader from "../components/reviews/reviewHeader";
 import ReviewStudents from "../components/reviews/reviewStudents";
 import ReviewCaribers from "../components/reviews/reviewCaribers";
 import ReviewShopee from "../components/reviews/reviewShopee";
 import { CarouselContent } from "../apiStrapi/models/contentType/carousel";
-import { carouselApi, reviewApi, annualPromotionApi } from "../apiStrapi/StrapiApiService";
+import { carouselApi, reviewApi, seasonalPromotionApi } from "../apiStrapi/StrapiApiService";
+import { SeasonalPromotionContent } from "../apiStrapi/models/contentType/seasonalPromotion";
+import UserManager from "../auth/userManager";
 
 interface ReviewProps {
   carousel: ResponseDataList<CarouselContent>;
   review: ResponseData<ReviewContent>;
-  annualPromotion: ResponseData<AnnualPromotionContent>;
+  seasonalPromotion: ResponseData<SeasonalPromotionContent>;
 }
 
 
-export default function Review({ carousel, review, annualPromotion }: ReviewProps) {
+export default function Review({ carousel, review, seasonalPromotion }: ReviewProps) {
+  const userManager = new UserManager();
+
+  function getURl(url: string | null): string {
+    return url ? url + "&cid=" + userManager.getEncodedEmail() : '';
+  }
+  
   return (
     <div className="background-primary-color review">
       <Header />
@@ -29,19 +36,21 @@ export default function Review({ carousel, review, annualPromotion }: ReviewProp
         <div className="sizer">
           <div className="container">
             <div className="row align-items-center justify-content-center">
-              <div className="block-type-image text-col-12 m-b-40">
-                <div className="block box-shadow-none background-unrecognized">
-                  <div className="image">
-                    <a href={annualPromotion.data.attributes.url}>
-                      <Img className="image-image"
-                        src={strapiImage(annualPromotion.data.attributes.image_header?.data.attributes.url)}
-                        alt="Promotion"
-                        width={1260}
-                        height={282.017} />
-                    </a>
+              {seasonalPromotion.data?.attributes?.display && (
+                <div className="block-type-image text-col-12 m-b-0">
+                  <div className="block box-shadow-none background-unrecognized">
+                    <div className="image">
+                      <a href={getURl(seasonalPromotion.data?.attributes?.url)}>
+                        <Img className="image-image"
+                          src={strapiImage(seasonalPromotion.data?.attributes?.image?.data?.attributes?.url)}
+                          alt="Promotion"
+                          width={1260}
+                          height={282.017} />
+                      </a>
+                    </div>
                   </div>
                 </div>
-              </div>
+              )}
               <div id="block-titel" className="block-type-text text-center col-7 m-b-50">
                 <div className="block box-shadow-large background-unrecognized">
                   <h1>
@@ -76,7 +85,7 @@ export default function Review({ carousel, review, annualPromotion }: ReviewProp
             })}
             {review.data?.shopee.map((value, index) => {
               return (
-                <ReviewShopee key={index} reviewShopee={value}/>
+                <ReviewShopee key={index} reviewShopee={value} />
               )
             })}
           </div>
@@ -124,7 +133,7 @@ export async function getStaticProps() {
     props: {
       carousel: await carouselApi(),
       review: await reviewApi(),
-      annualPromotion: await annualPromotionApi(),
+      seasonalPromotion: await seasonalPromotionApi(),
     }
   }
 };

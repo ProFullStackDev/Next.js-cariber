@@ -13,7 +13,7 @@ export default function AnnouncementBar() {
 
   return (
     <>
-      {announcementBar
+      {announcementBar.attributes?.message
         ? <div className="announcement-bar text-center">
           <a href={announcementBar.attributes?.url}>
             <p className="p-4 m-0 color-white">

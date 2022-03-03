@@ -6,16 +6,16 @@ import { strapiImage } from "../apiStrapi/models/contact"
 import { CourseContent } from "../apiStrapi/models/contentType/courses"
 import { ResponseData, ResponseDataList } from "../apiStrapi/models/data"
 import Link from "next/link"
-import { AnnualPromotionContent } from "../apiStrapi/models/contentType/annualPromotion"
 import UserManager from "../auth/userManager";
-import { coursesAllApi, annualPromotionApi } from "../apiStrapi/StrapiApiService"
+import { coursesAllApi, seasonalPromotionApi } from "../apiStrapi/StrapiApiService"
+import { SeasonalPromotionContent } from "../apiStrapi/models/contentType/seasonalPromotion"
 
 interface CoursesProps {
   courses: ResponseDataList<CourseContent>;
-  annualPromotion: ResponseData<AnnualPromotionContent>;
+  seasonalPromotion: ResponseData<SeasonalPromotionContent>;
 }
 
-export default function Courses({ courses, annualPromotion }: CoursesProps) {
+export default function Courses({ courses, seasonalPromotion }: CoursesProps) {
   const userManager = new UserManager();
 
   function getURl(url: string | null): string {
@@ -28,13 +28,13 @@ export default function Courses({ courses, annualPromotion }: CoursesProps) {
       <div className="sizer">
         <div className="container">
           <div className="row align-items-center">
-            {annualPromotion?.data?.attributes?.image_header?.data?.attributes?.url && (
+            {seasonalPromotion.data?.attributes?.display && (
               <div className="block-type-image text-col-12 m-b-0">
                 <div className="block box-shadow-none background-unrecognized">
                   <div className="image">
-                    <a href={getURl(annualPromotion?.data?.attributes?.url)}>
+                    <a href={getURl(seasonalPromotion.data?.attributes?.url)}>
                       <Img className="image-image"
-                        src={strapiImage(annualPromotion?.data?.attributes?.image_header?.data?.attributes?.url)}
+                        src={strapiImage(seasonalPromotion.data?.attributes?.image?.data?.attributes?.url)}
                         alt="Promotion"
                         width={1260}
                         height={282.017} />
@@ -105,7 +105,7 @@ export async function getStaticProps() {
     return {
       props: {
         courses: await coursesAllApi(),
-        annualPromotion: await annualPromotionApi(),
+        seasonalPromotion: await seasonalPromotionApi(),
       }
     }
   } catch (error) {
