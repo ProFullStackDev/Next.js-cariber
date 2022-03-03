@@ -48,7 +48,10 @@ export default function CourseHeader({ yearlySubscriptionImage,
             <div className="block-type-video col-8">
               <div className="block box-shadow-none">
                 <div className="video">
-                  <VideoPlayer props={{ video_id: videoId, video_thumbnail: { url: videoPoster } } as VideoComponent} />
+                  <VideoPlayer props={{
+                    video_id: videoId,
+                    video_thumbnail: { url: videoPoster }
+                  }} />
                 </div>
               </div>
             </div>

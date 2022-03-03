@@ -144,7 +144,10 @@ export default function Product() {
                     <>
                       <div className="player-video">
                         {episodeLms?.link_video &&
-                          <VideoPlayer props={{ video_id: cutCloudflareVideoId(episodeLms.link_video), video_thumbnail: { url: episodeLms.thumbnail_image } } as VideoComponent} />
+                          <VideoPlayer props={{
+                            video_id: cutCloudflareVideoId(episodeLms.link_video),
+                            video_thumbnail: { url: episodeLms.thumbnail_image }
+                          }} />
                         }
                       </div>
                     </>
