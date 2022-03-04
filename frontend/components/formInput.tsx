@@ -9,6 +9,7 @@ interface FormInputProps {
   placeholder?: string;
   onChange: ChangeEventHandler<HTMLInputElement>;
   minLength?: number;
+  maxLength?: number;
   value?: string | number;
 }
 
@@ -20,6 +21,7 @@ export default function FormInput({ id,
   placeholder,
   onChange,
   minLength,
+  maxLength,
   value }: FormInputProps) {
 
   return (
@@ -42,6 +44,7 @@ export default function FormInput({ id,
         required={required}
         placeholder={placeholder}
         minLength={minLength}
+        maxLength={maxLength}
         value={value} />
     </div>
   )

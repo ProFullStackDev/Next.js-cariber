@@ -45,10 +45,6 @@ export default function CourseDetail({
     return value.__component === "components.special-ep-component"
   }) as Contents;
 
-  function getURl(url: string | null): string {
-    return url ? url + "&cid=" + userManager.getEncodedEmail() : '';
-  }
-
   return (
     <div className="course-detail">
       <Header />
@@ -91,7 +87,7 @@ export default function CourseDetail({
         yearlySubscriptionImage={strapiImage(annualPromotion.data?.attributes?.image?.data?.attributes?.url)}
         yearlySubscriptionImageMobile={strapiImage(annualPromotion.data?.attributes?.image_mobile?.data?.attributes?.url)}
         singleCheckoutUrl={course.data?.order_link}
-        yearlySubscriptionCheckoutUrl={getURl(annualPromotion.data?.attributes?.url)} />
+        yearlySubscriptionCheckoutUrl={annualPromotion.data?.attributes?.url} />
       <div className="background-light">
         <div className="sizer">
           <div className="container">
