@@ -29,7 +29,7 @@
     },
     "duration": {
       "type": "float",
-      "default": 0.00
+      "default": 0
     },
     "description": {
       "type": "richtext"

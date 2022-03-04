@@ -29,7 +29,7 @@ export default function Courses({ courses, seasonalPromotion }: CoursesProps) {
               <div className="block-type-image text-col-12 m-b-0">
                 <div className="block box-shadow-none background-unrecognized">
                   <ImagePartialLogin
-                    url={seasonalPromotion.data?.attributes?.url}
+                    sku={seasonalPromotion.data?.attributes?.url}
                     src={strapiImage(seasonalPromotion.data?.attributes?.image?.data?.attributes?.url)}
                     width={1260}
                     height={282.017}
@@ -54,10 +54,10 @@ export default function Courses({ courses, seasonalPromotion }: CoursesProps) {
                           <Link href={`/course/${value?.id}`}>
                             <a className={`${!value?.publishedAt && "disabled"}`}>
                               <Img className="feature-image"
-                                src={value?.thumbnail_image}
+                                src={value?.speaker_image}
                                 alt={value?.speaker_name}
-                                width={262.5}
-                                height={147.65} />
+                                width={500}
+                                height={281.238095} />
                             </a>
                           </Link>
                           <div className="feature-text">

@@ -54,10 +54,9 @@ export default function CourseDetail({
         )}
         <CourseHeader yearlySubscriptionImage={strapiImage(annualPromotion.data?.attributes?.image?.data?.attributes?.url)}
           singleCourseImage={strapiImage(singleCourse.data?.attributes?.image?.data?.attributes?.url)}
-          videoId={course.data?.teaser_url}
-          videoPoster={strapiImage(course.data?.teaser?.url)}
-          singleCheckoutUrl={course.data?.order_link}
-          yearlySubscriptionCheckoutUrl={annualPromotion.data?.attributes?.url}
+          teaserVideo={course.data?.teaser_video}
+          singleCheckoutSku={course.data?.order_sku}
+          yearlySubscriptionCheckoutSku={annualPromotion.data?.attributes?.sku}
           yearlySubscriptionImageMobile={strapiImage(annualPromotion.data?.attributes?.image_mobile?.data?.attributes?.url)} />
         {youtubeEPItems?.special_ep?.length > 0 && (
           <YoutubeEP YoutubeEPItems={youtubeEPItems.special_ep} />
@@ -86,8 +85,8 @@ export default function CourseDetail({
       <Sale singleCoursePersonalImage={strapiImage(course.data?.order_image?.url)}
         yearlySubscriptionImage={strapiImage(annualPromotion.data?.attributes?.image?.data?.attributes?.url)}
         yearlySubscriptionImageMobile={strapiImage(annualPromotion.data?.attributes?.image_mobile?.data?.attributes?.url)}
-        singleCheckoutUrl={course.data?.order_link}
-        yearlySubscriptionCheckoutUrl={annualPromotion.data?.attributes?.url} />
+        singleCheckoutSku={course.data?.order_sku}
+        yearlySubscriptionCheckoutSku={annualPromotion.data?.attributes?.sku} />
       <div className="background-light">
         <div className="sizer">
           <div className="container">

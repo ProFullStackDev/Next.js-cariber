@@ -1,25 +1,23 @@
 import { VideoComponent } from "../../apiStrapi/models/component/video";
-import Img from "../image";
+import ButtonPartialLogin from "../buttonPartialLogin";
 import ImagePartialLogin from "../imagePartialLogin";
 import VideoPlayer from "../videoPlayer";
 
 export interface CourseDetailCourseHeaderProps {
   yearlySubscriptionImage: string;
-  yearlySubscriptionCheckoutUrl: string;
+  yearlySubscriptionCheckoutSku: string;
   yearlySubscriptionImageMobile: string,
   singleCourseImage: string;
-  videoId: string;
-  videoPoster: string;
-  singleCheckoutUrl: string;
+  teaserVideo: VideoComponent;
+  singleCheckoutSku: string;
 }
 
 export default function CourseHeader({ yearlySubscriptionImage,
   yearlySubscriptionImageMobile,
-  yearlySubscriptionCheckoutUrl,
+  yearlySubscriptionCheckoutSku,
   singleCourseImage,
-  videoId,
-  singleCheckoutUrl,
-  videoPoster }: CourseDetailCourseHeaderProps) {
+  teaserVideo,
+  singleCheckoutSku }: CourseDetailCourseHeaderProps) {
   return (
     <div className="background-dark">
       <div className="sizer p-t-0">
@@ -29,7 +27,7 @@ export default function CourseHeader({ yearlySubscriptionImage,
               <div className="block box-shadow-none">
                 <div className="image">
                   <ImagePartialLogin
-                    url={yearlySubscriptionCheckoutUrl}
+                    sku={yearlySubscriptionCheckoutSku}
                     src={yearlySubscriptionImage}
                     width={384.6}
                     height={246.85}
@@ -37,7 +35,7 @@ export default function CourseHeader({ yearlySubscriptionImage,
                 </div>
                 <div className="image">
                   <ImagePartialLogin
-                    url={singleCheckoutUrl}
+                    sku={singleCheckoutSku}
                     src={singleCourseImage}
                     width={384.6}
                     height={246.85}
@@ -48,27 +46,23 @@ export default function CourseHeader({ yearlySubscriptionImage,
             <div className="block-type-video col-8">
               <div className="block box-shadow-none">
                 <div className="video">
-                  <VideoPlayer props={{
-                    video_id: videoId,
-                    video_thumbnail: { url: videoPoster }
-                  }} />
+                  {teaserVideo && <VideoPlayer props={teaserVideo} imageStrapi={true} />}
                 </div>
               </div>
             </div>
             <div className="block-type-video col-8 lg-none">
               <div className="block box-shadow-none">
                 <div className="image text-center column-center">
-                  <a href={yearlySubscriptionCheckoutUrl}>
-                    <Img className="feature-image"
-                      src={yearlySubscriptionImageMobile}
-                      width={400}
-                      height={400}
-                      alt="Cariber Yearly Subscription"
-                    />
-                  </a>
-                  <a className="btn btn-medium btn-solid btn-auto background-dark" href={yearlySubscriptionCheckoutUrl} >
-                    ซื้อแพ็กเกจรายปี
-                  </a>
+                  <ImagePartialLogin
+                    sku={yearlySubscriptionCheckoutSku}
+                    src={yearlySubscriptionImageMobile}
+                    width={400}
+                    height={400}
+                    alt={"Cariber Yearly Subscription"} />
+                  <ButtonPartialLogin
+                    sku={yearlySubscriptionCheckoutSku}
+                    class={"btn btn-medium btn-solid btn-auto background-dark"}
+                    text={"ซื้อแพ็กเกจรายปี"} />
                 </div>
               </div>
             </div>

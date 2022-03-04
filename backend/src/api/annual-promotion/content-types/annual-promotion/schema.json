@@ -12,7 +12,7 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "url": {
+    "sku": {
       "type": "text",
       "required": true
     },
@@ -24,31 +24,15 @@
         "images"
       ]
     },
-    "image_with_button": {
+    "image_mobile": {
       "type": "media",
       "multiple": false,
       "required": false,
       "allowedTypes": [
-        "images"
+        "images",
+        "files",
+        "videos"
       ]
-    },
-    "image_mobile": {
-      "allowedTypes": [
-        "images",
-        "files",
-        "videos"
-      ],
-      "type": "media",
-      "multiple": false
-    },
-    "image_header": {
-      "allowedTypes": [
-        "images",
-        "files",
-        "videos"
-      ],
-      "type": "media",
-      "multiple": false
     }
   }
 }

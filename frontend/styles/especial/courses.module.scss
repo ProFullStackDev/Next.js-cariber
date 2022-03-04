@@ -1,6 +1,3 @@
-$image-border-radius: 4px;
-$image-width: 300px;
-$feature-height: 272.05px;
 
 .courses {
   .grid-container {
@@ -16,8 +13,7 @@ $feature-height: 272.05px;
   }
 
   .feature-image {
-    width: $image-width;
-    border-radius: $image-border-radius;
+    border-radius: 4px;
   }
 
   .feature-text {
@@ -25,7 +21,6 @@ $feature-height: 272.05px;
   }
 
   .block-type-feature {
-    height: $feature-height;
     margin-bottom: 30px !important;
   }
 }

@@ -5,7 +5,7 @@ import UserManager from "../auth/userManager";
 import CustomLogin from "./customLogin";
 
 interface imagePartialLoginProps {
-  url: string;
+  sku: string;
   class: string;
   text: string;
   classText?: string;
@@ -13,43 +13,38 @@ interface imagePartialLoginProps {
 }
 
 export default function ButtonPartialLogin(props: imagePartialLoginProps) {
-  const router = useRouter();
   const userManager = new UserManager();
+  const router = useRouter();
   const [isPopup, setIsPopup] = useState(false);
 
-  function getURl(url: string | null): string {
-    if (url === '/trial-library') {
-      return url;
-    }
-    return url ? url + "&cid=" + userManager.getEncodedEmail() : '';
-  }
-
-  async function interestCourse(link: string) {
+  async function interestCourse(sku: string) {
     if (userManager.isLoggedIn()) {
-      link && router.push(getURl(link));
+      sku && userManager.redirectCheckout(router, sku);
     } else {
       setIsPopup(true);
     }
   }
 
-  async function setCallbackButtonFN(link: string) {
+  async function setCallbackButtonFN(sku: string) {
     setIsPopup(false)
     if (userManager.isLoggedIn()) {
-      userManager.updateProfileImage();
-      link && router.push(getURl(link))
+      sku && userManager.redirectCheckout(router, sku);
     }
   }
+
   return (
     <>
-      <a className={props.class}
-        onClick={() => interestCourse(props.url)}
+      <a
+        className={props.class}
+        onClick={() => interestCourse(props.sku)}
         id="block-yearly-button">
         {props.classIStart && (<i className={props.classIStart} />)}
         <span className={props.classText}>
           {props.text}
         </span>
       </a>
-      <Popup className="popup-auth"
+      <Popup
+        className="popup-auth"
         open={isPopup}
         modal
         onClose={() => setIsPopup(false)}
@@ -62,7 +57,7 @@ export default function ButtonPartialLogin(props: imagePartialLoginProps) {
                   &times;
                 </p>
               </button>
-              <CustomLogin path={props.url} callbackButton={setCallbackButtonFN} />
+              <CustomLogin path={props.sku} callbackButton={setCallbackButtonFN} />
             </div>
           )
         }}
