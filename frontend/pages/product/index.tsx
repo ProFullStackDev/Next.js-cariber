@@ -13,6 +13,7 @@ import cutCloudflareVideoId from "../../functions/cutCloudflareVideoId";
 import CourseEvaluation from "../../components/courseEvaluation";
 import QuizSession from "../../components/quizSession";
 import { episodeApi } from "../../apiNest/episodeApi";
+import ButtonPartialLogin from "../../components/buttonPartialLogin";
 
 export default function Product() {
   const [indexEpisodesOrQuiz, setIndexEpisodesOrQuiz] = useState<number>(0);
@@ -100,15 +101,18 @@ export default function Product() {
               </p>
             </div>
             <div className="right-nev-product sm-none">
-              {!saleHeader.owned && <a className="btn btn-not-focus btn-small m-t-0" href="">
-                ซื้อคอร์สนี้
-              </a>}
-              {!saleHeader.yearlySubscripted && <a className="btn btn-small m-t-0" href="">
-                ซื้อแพ็คเกจรายปี
-              </a>}
-              {saleHeader.yearlySubscripted && <a className="btn btn-small m-t-0" href="">
-                ต่อสมาชิกแพ็คเกจรายปี
-              </a>}
+              {!saleHeader.owned && <ButtonPartialLogin
+                sku={""}
+                class={"btn btn-not-focus btn-small m-t-0"}
+                text={"ซื้อคอร์สนี้"} />}
+              {!saleHeader.yearlySubscripted && <ButtonPartialLogin
+                sku={""}
+                class={"btn btn-small m-t-0"}
+                text={"ซื้อแพ็คเกจรายปี"} />}
+              {saleHeader.yearlySubscripted && <ButtonPartialLogin
+                sku={""}
+                class={"btn btn-small m-t-0"}
+                text={"ต่อสมาชิกแพ็คเกจรายปี"} />}
             </div>
             <div className="right-nev-product ipad-none lg-none">
               <ProductSale {...saleHeader} />
