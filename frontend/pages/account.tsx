@@ -123,7 +123,7 @@ export default function Account() {
     if (data) {
       if (Boolean(imageProfile.size)) {
         await ProfileImageApi(id, { profile_image: imageProfile });
-        userManager.updateProfileImage();
+        userManager.saveProfileImage();
       }
       if (checkChangePassword) {
         await resetPasswordApi({ password: formPassword.newPassword, passwordConfirmation: formPassword.confirmPassword });

@@ -1,4 +1,4 @@
-import { NextRouter, useRouter } from 'next/router';
+import { NextRouter } from 'next/router';
 import { setCookies, getCookie, removeCookies, checkCookies } from 'cookies-next';
 import { CookieValueTypes } from 'cookies-next/lib/types';
 import getUserProfileApi from '../apiNest/getUserProfileApi';
@@ -7,13 +7,13 @@ export default class UserManager {
     tokenKey: string = "token";
     profileImage: string = "img-profile";
     userId: string = "uid";
-    router: NextRouter = useRouter();
 
     constructor() { }
 
     async saveToken(token: string): Promise<void> {
         await setCookies(this.tokenKey, token, { sameSite: "none", secure: true });
         const user = await getUserProfileApi();
+        await this.saveProfileImage();
         await this.saveUserId(user.id);
     }
 
@@ -26,8 +26,8 @@ export default class UserManager {
     }
 
     destroyToken(): void {
-        removeCookies(this.tokenKey, {sameSite: "none", secure: true});
-        this.deleteEmail();
+        removeCookies(this.tokenKey, { sameSite: "none", secure: true });
+        this.deleteUserId();
         this.deleteProfileImage();
     }
 
@@ -35,7 +35,7 @@ export default class UserManager {
         return checkCookies(this.tokenKey);
     }
 
-    updateProfileImage(): void {
+    saveProfileImage(): void {
         getUserProfileApi().then((value) => {
             setCookies(this.profileImage, value.profile_image, { sameSite: "none", secure: false });
         })
@@ -50,23 +50,19 @@ export default class UserManager {
     }
 
     saveUserId(id: number): void {
-        setCookies(this.userId, id, {sameSite: "none", secure: true});
+        setCookies(this.userId, id, { sameSite: "none", secure: true });
     }
 
     getUserId(): CookieValueTypes {
-        return getCookie(this.userId, {sameSite: "none", secure: true});
+        return getCookie(this.userId, { sameSite: "none", secure: true });
     }
 
-    getEncodedEmail(): CookieValueTypes {
-        return getCookie('encodedEmail', {sameSite: "none", secure: true});
+    deleteUserId(): void {
+        removeCookies(this.userId, { sameSite: "none", secure: true });
     }
 
-    deleteEmail(): void {
-        removeCookies(this.userId, {sameSite: "none", secure: true});
-    }
-
-    redirectCheckout(sku: string): void{
+    redirectCheckout(router: NextRouter, sku: string): void {
         const userID = this.getUserId();
-        this.router.push(`https://careerfact.wpcomstaging.com/?add-sku=${sku}&cid=${userID}`)
+        router.push(`https://careerfact.wpcomstaging.com/?add-sku=${sku}&cid=${userID}`)
     }
 }

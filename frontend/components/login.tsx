@@ -49,7 +49,6 @@ export default function Login({ callbackButton, shopeeID }: LoginProps) {
       return;
     }
     await router.replace("/library");
-    userManager.updateProfileImage();
   }
 
   const responseFacebook = async (response: ReactFacebookLoginInfo) => {
@@ -74,7 +73,6 @@ export default function Login({ callbackButton, shopeeID }: LoginProps) {
         return;
       }
       await router.replace("/library");
-      userManager.updateProfileImage();
     }
   }
 
