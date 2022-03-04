@@ -1,4 +1,4 @@
-
+import { NextRouter, useRouter } from 'next/router';
 import { setCookies, getCookie, removeCookies, checkCookies } from 'cookies-next';
 import { CookieValueTypes } from 'cookies-next/lib/types';
 import getUserProfileApi from '../apiNest/getUserProfileApi';
@@ -6,13 +6,15 @@ import getUserProfileApi from '../apiNest/getUserProfileApi';
 export default class UserManager {
     tokenKey: string = "token";
     profileImage: string = "img-profile";
+    userId: string = "uid";
+    router: NextRouter = useRouter();
 
     constructor() { }
 
     async saveToken(token: string): Promise<void> {
         await setCookies(this.tokenKey, token, { sameSite: "none", secure: true });
         const user = await getUserProfileApi();
-        await this.saveEmail(user.email);
+        await this.saveUserId(user.id);
     }
 
     getToken(): CookieValueTypes {
@@ -47,14 +49,12 @@ export default class UserManager {
         removeCookies(this.profileImage, { sameSite: "none", secure: false });
     }
 
-    saveEmail(email: string): void {
-        setCookies('email', email, {sameSite: "none", secure: true});
-        const encodedEmail = Buffer.from(email, 'utf8').toString('base64');
-        setCookies('encodedEmail', encodedEmail, {sameSite: "none", secure: true});
+    saveUserId(id: number): void {
+        setCookies(this.userId, id, {sameSite: "none", secure: true});
     }
 
-    getEmail(): CookieValueTypes {
-        return getCookie('email', {sameSite: "none", secure: true});
+    getUserId(): CookieValueTypes {
+        return getCookie(this.userId, {sameSite: "none", secure: true});
     }
 
     getEncodedEmail(): CookieValueTypes {
@@ -62,7 +62,11 @@ export default class UserManager {
     }
 
     deleteEmail(): void {
-        removeCookies('email', {sameSite: "none", secure: true});
-        removeCookies('encodedEmail', {sameSite: "none", secure: true});
+        removeCookies(this.userId, {sameSite: "none", secure: true});
+    }
+
+    redirectCheckout(sku: string): void{
+        const userID = this.getUserId();
+        this.router.push(`https://careerfact.wpcomstaging.com/?add-sku=${sku}&cid=${userID}`)
     }
 }

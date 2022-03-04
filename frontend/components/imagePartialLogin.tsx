@@ -1,4 +1,3 @@
-import { useRouter } from "next/router";
 import { MouseEventHandler, useState } from "react";
 import Popup from "reactjs-popup";
 import UserManager from "../auth/userManager";
@@ -14,29 +13,25 @@ interface imagePartialLoginProps {
 }
 
 export default function ImagePartialLogin(props: imagePartialLoginProps) {
-  const router = useRouter();
   const userManager = new UserManager();
   const [isPopup, setIsPopup] = useState(false);
 
-  function getURl(url: string | null): string {
-    return url ? url + "&cid=" + userManager.getEncodedEmail() : '';
-  }
-
-  async function interestCourse(link: string) {
+  async function interestCourse(sku: string) {
     if (userManager.isLoggedIn()) {
-      link && router.push(getURl(link));
+      sku && userManager.redirectCheckout(sku);
     } else {
       setIsPopup(true);
     }
   }
 
-  async function setCallbackButtonFN(link: string) {
+  async function setCallbackButtonFN(sku: string) {
     setIsPopup(false)
     if (userManager.isLoggedIn()) {
       userManager.updateProfileImage();
-      link && router.push(getURl(link));
+      sku && userManager.redirectCheckout(sku);
     }
   }
+
   return (
     <>
       <a

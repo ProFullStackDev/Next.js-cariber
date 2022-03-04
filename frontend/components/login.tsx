@@ -52,10 +52,6 @@ export default function Login({ callbackButton, shopeeID }: LoginProps) {
     userManager.updateProfileImage();
   }
 
-  const responseGoogleFailure = async (response: GoogleLoginResponse | GoogleLoginResponseOffline) => {
-    response = response as GoogleLoginResponse
-  }
-
   const responseFacebook = async (response: ReactFacebookLoginInfo) => {
     setErrorLogin({
       isError: false,
