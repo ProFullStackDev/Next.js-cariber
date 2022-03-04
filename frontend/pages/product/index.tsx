@@ -13,7 +13,6 @@ import cutCloudflareVideoId from "../../functions/cutCloudflareVideoId";
 import CourseEvaluation from "../../components/courseEvaluation";
 import QuizSession from "../../components/quizSession";
 import { episodeApi } from "../../apiNest/episodeApi";
-import { VideoComponent } from "../../apiStrapi/models/component/video";
 
 export default function Product() {
   const [indexEpisodesOrQuiz, setIndexEpisodesOrQuiz] = useState<number>(0);
@@ -23,6 +22,12 @@ export default function Product() {
   const [quiz, setQuiz] = useState<Quiz | null>(null);
   const router = useRouter();
   const announcement = "ตอนนี้คุณกำลังอยู่ในโหมดทดลองเรียนฟรี เนื้อหาบางส่วนมีการถูกล็อกไว้\nคุณสามารถซื้อคอร์สนี้เพื่อดูเนื้อหาทั้งหมดในคอร์สเรียน";
+  const [saleHeader, setSaleHeader] = useState(
+    {
+      owned: false,
+      yearlySubscripted: false,
+    }
+  );
   const { proId } = router.query;
 
   useEffect(() => {
@@ -95,15 +100,18 @@ export default function Product() {
               </p>
             </div>
             <div className="right-nev-product sm-none">
-              <a className="btn btn-not-focus btn-small m-t-0" href="">
+              {!saleHeader.owned && <a className="btn btn-not-focus btn-small m-t-0" href="">
                 ซื้อคอร์สนี้
-              </a>
-              <a className="btn btn-small m-t-0" href="">
+              </a>}
+              {!saleHeader.yearlySubscripted && <a className="btn btn-small m-t-0" href="">
                 ซื้อแพ็คเกจรายปี
-              </a>
+              </a>}
+              {saleHeader.yearlySubscripted && <a className="btn btn-small m-t-0" href="">
+                ต่อสมาชิกแพ็คเกจรายปี
+              </a>}
             </div>
-            <div className="right-nev-product lg-none">
-              <ProductSale />
+            <div className="right-nev-product ipad-none lg-none">
+              <ProductSale {...saleHeader} />
             </div>
           </div>
         </div>

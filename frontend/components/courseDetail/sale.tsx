@@ -45,7 +45,7 @@ export default function Sale({ yearlySubscriptionImage,
                     sku={yearlySubscriptionCheckoutSku} />
                 </div>
               </div>
-              <div className="block box-shadow-none lg-none">
+              <div className="block box-shadow-none ipad-none lg-none">
                 <div id="yearlybanner" className="feature column-center">
                   <ImagePartialLogin
                     sku={yearlySubscriptionCheckoutSku}
@@ -70,7 +70,7 @@ export default function Sale({ yearlySubscriptionImage,
                     height={400}
                     alt={"Cariber Yearly Subscription"} />
                   <ButtonPartialLogin
-                    class="btn btn-medium btn-solid btn-auto background-dark"
+                    class="btn btn-medium btn-solid btn-auto background-dark btn-not-focus"
                     text={'ซื้อเฉพาะคอร์สนี้'}
                     sku={singleCheckoutSku} /> 
                 </div>
