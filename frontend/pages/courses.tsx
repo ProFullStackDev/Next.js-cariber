@@ -6,7 +6,6 @@ import { strapiImage } from "../apiStrapi/models/contact";
 import { CourseContent } from "../apiStrapi/models/contentType/courses";
 import { ResponseData, ResponseDataList } from "../apiStrapi/models/data";
 import Link from "next/link";
-import UserManager from "../auth/userManager";;
 import { coursesAllApi, seasonalPromotionApi } from "../apiStrapi/StrapiApiService";
 import { SeasonalPromotionContent } from "../apiStrapi/models/contentType/seasonalPromotion";
 import ImagePartialLogin from "../components/imagePartialLogin";
@@ -17,8 +16,6 @@ interface CoursesProps {
 }
 
 export default function Courses({ courses, seasonalPromotion }: CoursesProps) {
-  const userManager = new UserManager();
-  
   return (
     <div className="background-image courses">
       <Header />
@@ -29,7 +26,7 @@ export default function Courses({ courses, seasonalPromotion }: CoursesProps) {
               <div className="block-type-image text-col-12 m-b-0">
                 <div className="block box-shadow-none background-unrecognized">
                   <ImagePartialLogin
-                    sku={seasonalPromotion.data?.attributes?.url}
+                    sku={seasonalPromotion.data?.attributes?.sku}
                     src={strapiImage(seasonalPromotion.data?.attributes?.image?.data?.attributes?.url)}
                     width={1260}
                     height={282.017}

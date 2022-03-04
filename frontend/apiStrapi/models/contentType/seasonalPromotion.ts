@@ -4,7 +4,7 @@ export interface SeasonalPromotionContent {
 }
 
 interface Attributes {
-  url: string;
+  sku: string;
   image: Image;
   display: boolean;
 }

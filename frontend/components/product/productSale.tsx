@@ -1,8 +1,16 @@
 import { MouseEventHandler } from "react"
 import Popup from "reactjs-popup"
+import ButtonPartialLogin from "../buttonPartialLogin"
 import Img from "../image"
+import ImagePartialLogin from "../imagePartialLogin"
 
-export default function ProductSale() {
+export default function ProductSale({
+  owned,
+  yearlySubscripted,
+}: {
+  owned: boolean,
+  yearlySubscripted: boolean,
+}) {
   return (
     <Popup className="popup-product-sale"
       trigger={
@@ -28,38 +36,48 @@ export default function ProductSale() {
                 <h6>
                   กรุณาเลือกแพ็คเกจที่คุณต้องการ
                 </h6>
-                <div id="singlebanner" className="feature column-center text-center m-b-40">
-                  <a href="https://checkout.cariber.co?add-to-cart=685&cfp=eWVhcmx5YmFubm5lcl9kZXNrdG9wX0M6L1VzZXJzL2luemVlL09uZURyaXZlJTIwLSUyMFVuaXZlcnNpdHklMjBvZiUyMFBoYXlhby9DYXJpYmVyJTIwZG91Y3VtZW50L3NhdmUlMjBwYWdlLyVFMCVCOCU4NCVFMCVCOCVBRCVFMCVCOCVBMyVFMCVCOSU4QyVFMCVCOCVBQSVFMCVCOCVBRCVFMCVCOCVBRCVFMCVCOCU5OSVFMCVCOSU4NCVFMCVCOCVBNSVFMCVCOCU5OSVFMCVCOSU4QyVFMCVCOCU4MSVFMCVCOCVCMSVFMCVCOCU5QSVFMCVCOCU4QiVFMCVCOCVCNCVFMCVCOSU4MiVFMCVCOCU4MSVFMCVCOSU4OSUyMCVFMCVCOSU4MCVFMCVCOCU4MSVFMCVCOCVCNSVFMCVCOCVBMiVFMCVCOCVBMyVFMCVCOCU5NSVFMCVCOCVCNCVFMCVCOCVBOCVFMCVCOCVCMSVFMCVCOCU4MSVFMCVCOCU5NCVFMCVCOCVCNCVFMCVCOSU4QyUyMCVFMCVCOSU4MCVFMCVCOCVBQSVFMCVCOCU5OSVFMCVCOCVCMiVFMCVCOSU4MCVFMCVCOCVBMSVFMCVCOCVCNyVFMCVCOCVBRCVFMCVCOCU4NyUyMEtpYXRpc3VrJTIwU2VuYW11YW5nLmh0bWw=">
-                    <Img id="block-single-img"
-                      className="feature-image"
+                {!owned &&
+                  <div id="singlebanner" className="feature column-center text-center m-b-40">
+                    <ImagePartialLogin
+                      sku={""}
                       src={"/courseDetail/single-course.jpg"}
                       width={623.183}
                       height={400}
-                      alt="Cariber single Subscription"
-                    />
-                  </a>
-                  <a className="btn btn-not-focus btn-small m-t-10"
-                    href="https://checkout.cariber.co?add-to-cart=685&amp;cfp=eWVhcmx5YmFubm5lcl9kZXNrdG9wX0M6L1VzZXJzL2luemVlL09uZURyaXZlJTIwLSUyMFVuaXZlcnNpdHklMjBvZiUyMFBoYXlhby9DYXJpYmVyJTIwZG91Y3VtZW50L3NhdmUlMjBwYWdlLyVFMCVCOCU4NCVFMCVCOCVBRCVFMCVCOCVBMyVFMCVCOSU4QyVFMCVCOCVBQSVFMCVCOCVBRCVFMCVCOCVBRCVFMCVCOCU5OSVFMCVCOSU4NCVFMCVCOCVBNSVFMCVCOCU5OSVFMCVCOSU4QyVFMCVCOCU4MSVFMCVCOCVCMSVFMCVCOCU5QSVFMCVCOCU4QiVFMCVCOCVCNCVFMCVCOSU4MiVFMCVCOCU4MSVFMCVCOSU4OSUyMCVFMCVCOSU4MCVFMCVCOCU4MSVFMCVCOCVCNSVFMCVCOCVBMiVFMCVCOCVBMyVFMCVCOCU5NSVFMCVCOCVCNCVFMCVCOCVBOCVFMCVCOCVCMSVFMCVCOCU4MSVFMCVCOCU5NCVFMCVCOCVCNCVFMCVCOSU4QyUyMCVFMCVCOSU4MCVFMCVCOCVBQSVFMCVCOCU5OSVFMCVCOCVCMiVFMCVCOSU4MCVFMCVCOCVBMSVFMCVCOCVCNyVFMCVCOCVBRCVFMCVCOCU4NyUyMEtpYXRpc3VrJTIwU2VuYW11YW5nLmh0bWw="
-                    id="block-single-button">
-                    ซื้อเฉพาะคอร์สนี้
-                  </a>
-                </div>
-                <div id="yearlybanner" className="feature column-center text-center m-b-20">
-                  <a href="https://checkout.cariber.co?add-to-cart=685&cfp=eWVhcmx5YmFubm5lcl9kZXNrdG9wX0M6L1VzZXJzL2luemVlL09uZURyaXZlJTIwLSUyMFVuaXZlcnNpdHklMjBvZiUyMFBoYXlhby9DYXJpYmVyJTIwZG91Y3VtZW50L3NhdmUlMjBwYWdlLyVFMCVCOCU4NCVFMCVCOCVBRCVFMCVCOCVBMyVFMCVCOSU4QyVFMCVCOCVBQSVFMCVCOCVBRCVFMCVCOCVBRCVFMCVCOCU5OSVFMCVCOSU4NCVFMCVCOCVBNSVFMCVCOCU5OSVFMCVCOSU4QyVFMCVCOCU4MSVFMCVCOCVCMSVFMCVCOCU5QSVFMCVCOCU4QiVFMCVCOCVCNCVFMCVCOSU4MiVFMCVCOCU4MSVFMCVCOSU4OSUyMCVFMCVCOSU4MCVFMCVCOCU4MSVFMCVCOCVCNSVFMCVCOCVBMiVFMCVCOCVBMyVFMCVCOCU5NSVFMCVCOCVCNCVFMCVCOCVBOCVFMCVCOCVCMSVFMCVCOCU4MSVFMCVCOCU5NCVFMCVCOCVCNCVFMCVCOSU4QyUyMCVFMCVCOSU4MCVFMCVCOCVBQSVFMCVCOCU5OSVFMCVCOCVCMiVFMCVCOSU4MCVFMCVCOCVBMSVFMCVCOCVCNyVFMCVCOCVBRCVFMCVCOCU4NyUyMEtpYXRpc3VrJTIwU2VuYW11YW5nLmh0bWw=">
-                    <Img id="block-yearly-img"
-                      className="feature-image"
+                      alt={"Cariber single Subscription"} />
+                    <ButtonPartialLogin
+                      sku={""}
+                      class={"btn btn-not-focus btn-small m-t-10"}
+                      text={"ซื้อเฉพาะคอร์สนี้"} />
+                  </div>
+                }
+                {!yearlySubscripted &&
+                  <div id="yearlybanner" className="feature column-center text-center m-b-20">
+                    <ImagePartialLogin
+                      sku={""}
                       src={"/courseDetail/yearly-sucscription-lg.png"}
                       width={623.183}
                       height={400}
-                      alt="Cariber Yearly Subscription"
-                    />
-                  </a>
-                  <a className="btn btn-small m-t-10"
-                    href="https://checkout.cariber.co?add-to-cart=685&amp;cfp=eWVhcmx5YmFubm5lcl9kZXNrdG9wX0M6L1VzZXJzL2luemVlL09uZURyaXZlJTIwLSUyMFVuaXZlcnNpdHklMjBvZiUyMFBoYXlhby9DYXJpYmVyJTIwZG91Y3VtZW50L3NhdmUlMjBwYWdlLyVFMCVCOCU4NCVFMCVCOCVBRCVFMCVCOCVBMyVFMCVCOSU4QyVFMCVCOCVBQSVFMCVCOCVBRCVFMCVCOCVBRCVFMCVCOCU5OSVFMCVCOSU4NCVFMCVCOCVBNSVFMCVCOCU5OSVFMCVCOSU4QyVFMCVCOCU4MSVFMCVCOCVCMSVFMCVCOCU5QSVFMCVCOCU4QiVFMCVCOCVCNCVFMCVCOSU4MiVFMCVCOCU4MSVFMCVCOSU4OSUyMCVFMCVCOSU4MCVFMCVCOCU4MSVFMCVCOCVCNSVFMCVCOCVBMiVFMCVCOCVBMyVFMCVCOCU5NSVFMCVCOCVCNCVFMCVCOCVBOCVFMCVCOCVCMSVFMCVCOCU4MSVFMCVCOCU5NCVFMCVCOCVCNCVFMCVCOSU4QyUyMCVFMCVCOSU4MCVFMCVCOCVBQSVFMCVCOCU5OSVFMCVCOCVCMiVFMCVCOSU4MCVFMCVCOCVBMSVFMCVCOCVCNyVFMCVCOCVBRCVFMCVCOCU4NyUyMEtpYXRpc3VrJTIwU2VuYW11YW5nLmh0bWw="
-                    id="block-yearly-button">
-                    ซื้อแพ็กเกจรายปี
-                  </a>
-                </div>
+                      alt={"Cariber Yearly Subscription"} />
+                    <ButtonPartialLogin
+                      sku={""}
+                      class={"btn btn-small m-t-10"}
+                      text={"ซื้อแพ็คเกจรายปี"} />
+                  </div>
+                }
+                {yearlySubscripted &&
+                  <div id="yearlybanner" className="feature column-center text-center m-b-20">
+                    <ImagePartialLogin
+                      sku={""}
+                      src={"/courseDetail/yearly-sucscription-lg.png"}
+                      width={623.183}
+                      height={400}
+                      alt={"Cariber Yearly Subscription"} />
+                    <ButtonPartialLogin
+                      sku={""}
+                      class={"btn btn-small m-t-10"}
+                      text={"ต่อสมาชิกแพ็คเกจรายปี"} />
+                  </div>
+                }
               </div>
             </div>
           </div>

@@ -52,7 +52,7 @@ export default function TrialLibrary() {
                   <div>
                     <p className="color-black m-0">
                       เรียนฟรีได้ถึงวันที่ 10/01/65
-                      <span className="sm-none">
+                      <span className="sm-none ipad-none">
                       &nbsp;
                         &#9679;
                       &nbsp;

@@ -4641,7 +4641,13 @@ a,
   }
 }
 
-@media (max-width: $ipad-size) {
+@media (max-width: $ipad-size) and (min-width: $mobile-size) {
+  .ipad-none {
+    display: none !important;
+  }
+}
+
+@media (max-width: $mobile-size) {
   .sm-none {
     display: none !important;
   }
@@ -4900,7 +4906,8 @@ a .panel-sub-title {
 }
 
 .btn-not-focus {
-  opacity: 0.7;
+  background-color: $color-pink;
+  border-color: $color-pink;
 }
 
 .hidden-xs-down {
@@ -5124,6 +5131,6 @@ body.modal-open {
   height: 100%;
 }
 
-html{
+html {
   overflow-y: hidden;
 }

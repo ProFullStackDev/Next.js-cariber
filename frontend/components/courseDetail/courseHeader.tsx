@@ -50,7 +50,7 @@ export default function CourseHeader({ yearlySubscriptionImage,
                 </div>
               </div>
             </div>
-            <div className="block-type-video col-8 lg-none">
+            <div className="block-type-video col-8 ipad-none lg-none">
               <div className="block box-shadow-none">
                 <div className="image text-center column-center">
                   <ImagePartialLogin
