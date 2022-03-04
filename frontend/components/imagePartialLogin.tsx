@@ -6,7 +6,7 @@ import CustomLogin from "./customLogin";
 import Img from "./image";
 
 interface imagePartialLoginProps {
-  url: string;
+  sku: string;
   src: string;
   width: number;
   height: number;
@@ -36,7 +36,7 @@ export default function ImagePartialLogin(props: imagePartialLoginProps) {
   return (
     <>
       <a
-        onClick={() => interestCourse(props.url)}>
+        onClick={() => interestCourse(props.sku)}>
         <Img id="block-yearly-img"
           className="feature-image"
           src={props.src}
@@ -58,7 +58,7 @@ export default function ImagePartialLogin(props: imagePartialLoginProps) {
                   &times;
                 </p>
               </button>
-              <CustomLogin path={props.url} callbackButton={setCallbackButtonFN} />
+              <CustomLogin path={props.sku} callbackButton={setCallbackButtonFN} />
             </div>
           )
         }}

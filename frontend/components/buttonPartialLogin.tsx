@@ -5,7 +5,7 @@ import UserManager from "../auth/userManager";
 import CustomLogin from "./customLogin";
 
 interface imagePartialLoginProps {
-  url: string;
+  sku: string;
   class: string;
   text: string;
   classText?: string;
@@ -34,15 +34,17 @@ export default function ButtonPartialLogin(props: imagePartialLoginProps) {
 
   return (
     <>
-      <a className={props.class}
-        onClick={() => interestCourse(props.url)}
+      <a
+        className={props.class}
+        onClick={() => interestCourse(props.sku)}
         id="block-yearly-button">
         {props.classIStart && (<i className={props.classIStart} />)}
         <span className={props.classText}>
           {props.text}
         </span>
       </a>
-      <Popup className="popup-auth"
+      <Popup
+        className="popup-auth"
         open={isPopup}
         modal
         onClose={() => setIsPopup(false)}
@@ -55,7 +57,7 @@ export default function ButtonPartialLogin(props: imagePartialLoginProps) {
                   &times;
                 </p>
               </button>
-              <CustomLogin path={props.url} callbackButton={setCallbackButtonFN} />
+              <CustomLogin path={props.sku} callbackButton={setCallbackButtonFN} />
             </div>
           )
         }}

@@ -138,7 +138,7 @@ export default function Header() {
             </div>
             <div className="header-block header-switch-content header-block-cta">
               <ButtonPartialLogin
-                url={annualUrl}
+                sku={annualUrl}
                 class={"btn btn-small btn-full"}
                 text={"ซื้อแพ็กเกจรายปี"} />
             </div>
@@ -234,7 +234,7 @@ export default function Header() {
             )}
             <div className="header-block header-switch-content header-block-cta">
               <ButtonPartialLogin
-                url={annualUrl}
+                sku={annualUrl}
                 class={"btn btn-small btn-full"}
                 text={"ซื้อแพ็กเกจรายปี"} />
             </div>

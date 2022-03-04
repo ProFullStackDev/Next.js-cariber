@@ -29,7 +29,7 @@ export default function CourseHeader({ yearlySubscriptionImage,
               <div className="block box-shadow-none">
                 <div className="image">
                   <ImagePartialLogin
-                    url={yearlySubscriptionCheckoutUrl}
+                    sku={yearlySubscriptionCheckoutUrl}
                     src={yearlySubscriptionImage}
                     width={384.6}
                     height={246.85}
@@ -37,7 +37,7 @@ export default function CourseHeader({ yearlySubscriptionImage,
                 </div>
                 <div className="image">
                   <ImagePartialLogin
-                    url={singleCheckoutUrl}
+                    sku={singleCheckoutUrl}
                     src={singleCourseImage}
                     width={384.6}
                     height={246.85}

@@ -16,15 +16,17 @@ import VideoPlayer from '../components/videoPlayer';
 import { CarouselContent } from '../apiStrapi/models/contentType/carousel';
 import ImagePartialLogin from '../components/imagePartialLogin';
 import ButtonPartialLogin from '../components/buttonPartialLogin';
-import { carouselApi, homeApi, reviewApi } from '../apiStrapi/StrapiApiService';
+import { annualPromotionApi, carouselApi, homeApi, reviewApi } from '../apiStrapi/StrapiApiService';
+import { AnnualPromotionContent } from '../apiStrapi/models/contentType/annualPromotion';
 
 interface IndexProps {
   carousel: ResponseDataList<CarouselContent>;
   home: ResponseData<HomeContent>;
   review: ResponseData<ReviewContent>;
+  annualPromotion: ResponseData<AnnualPromotionContent>
 }
 
-export default function Index({ carousel, home, review }: IndexProps) {
+export default function Index({ carousel, home, review, annualPromotion }: IndexProps) {
   return (
     <div className="index">
       <Header />
@@ -54,18 +56,19 @@ export default function Index({ carousel, home, review }: IndexProps) {
                 <div className="block box-shadow-none">
                   <div className="feature column-center">
                     <ImagePartialLogin
-                      url={home.data?.promotions?.url}
-                      src={strapiImage(home.data?.promotions?.large_yearly_sub?.url)}
+                      sku={annualPromotion.data?.attributes?.url}
+                      src={strapiImage(annualPromotion.data?.attributes?.image?.data?.attributes?.url)}
                       width={416}
                       height={267}
                       alt={"Yearly Subscription"} />
                     <div className='row p-w-100 justify-content-around'>
-                      <ButtonPartialLogin url={home.data?.promotions?.url}
+                      <ButtonPartialLogin
+                        sku={annualPromotion.data?.attributes?.url}
                         class={'btn btn-large'}
                         text={' ซื้อแพ็คเกจรายปี '}
                         classText="f-s-14" />
                       <ButtonPartialLogin
-                        url={'/trial-library'}
+                        sku={'/trial-library'}
                         class={'btn btn-large btn-black-outlet'}
                         text={'ทดลองเรียนฟรี'}
                         classText="f-s-14"
@@ -77,7 +80,7 @@ export default function Index({ carousel, home, review }: IndexProps) {
               <div className="block-type-image text-center col-8">
                 <div className="box-shadow-none">
                   <br />
-                  <VideoPlayer props={{...home.data?.home_video}} imageStrapi={true} />
+                  <VideoPlayer props={{ ...home.data?.home_video }} imageStrapi={true} />
                 </div>
               </div>
             </div>
@@ -112,15 +115,15 @@ export default function Index({ carousel, home, review }: IndexProps) {
                 <div className="block box-shadow-none">
                   <div className="feature column-center">
                     <ImagePartialLogin
-                      url={home.data?.promotions?.url}
-                      src={strapiImage(home.data?.promotions?.high_yearly_sub?.url)}
+                      sku={annualPromotion.data?.attributes?.url}
+                      src={strapiImage(annualPromotion.data?.attributes?.image?.data?.attributes?.url)}
                       width={400}
                       height={400}
                       alt={'Yearly Subscription'} />
                     <ButtonPartialLogin
                       text={'ซื้อแพ็คเกจรายปี'}
                       class='btn btn-solid btn-medium btn-auto'
-                      url={home.data?.promotions?.url}
+                      sku={annualPromotion.data?.attributes?.url}
                     />
                   </div>
                 </div>
@@ -191,6 +194,7 @@ export async function getStaticProps() {
       carousel: await carouselApi(),
       home: await homeApi(),
       review: await reviewApi(),
+      annualPromotion: await annualPromotionApi(),
     }
   };
 }
