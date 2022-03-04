@@ -6,7 +6,6 @@ import { strapiImage } from "../apiStrapi/models/contact";
 import { CourseContent } from "../apiStrapi/models/contentType/courses";
 import { ResponseData, ResponseDataList } from "../apiStrapi/models/data";
 import Link from "next/link";
-import UserManager from "../auth/userManager";;
 import { coursesAllApi, seasonalPromotionApi } from "../apiStrapi/StrapiApiService";
 import { SeasonalPromotionContent } from "../apiStrapi/models/contentType/seasonalPromotion";
 import ImagePartialLogin from "../components/imagePartialLogin";
@@ -17,8 +16,6 @@ interface CoursesProps {
 }
 
 export default function Courses({ courses, seasonalPromotion }: CoursesProps) {
-  const userManager = new UserManager();
-  
   return (
     <div className="background-image courses">
       <Header />
