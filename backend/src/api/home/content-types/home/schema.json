@@ -22,11 +22,6 @@
         "videos"
       ]
     },
-    "promotions": {
-      "type": "component",
-      "repeatable": false,
-      "component": "component-home.home-promotions"
-    },
     "information": {
       "type": "component",
       "repeatable": true,

@@ -4,7 +4,7 @@ export interface AnnualPromotionContent {
 }
 
 interface Attributes {
-  url: string;
+  sku: string;
   image: Image;
   image_mobile: Image;
   image_header: Image;

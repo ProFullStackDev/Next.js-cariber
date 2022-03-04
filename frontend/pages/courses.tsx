@@ -54,7 +54,7 @@ export default function Courses({ courses, seasonalPromotion }: CoursesProps) {
                           <Link href={`/course/${value?.id}`}>
                             <a className={`${!value?.publishedAt && "disabled"}`}>
                               <Img className="feature-image"
-                                src={value?.thumbnail_image}
+                                src={value?.speaker_image}
                                 alt={value?.speaker_name}
                                 width={500}
                                 height={281.238095} />

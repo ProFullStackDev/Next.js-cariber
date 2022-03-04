@@ -1,3 +1,4 @@
+import { VideoComponent } from './../component/video';
 export interface CourseContent {
   id: number;
   course_name: string;
@@ -9,15 +10,15 @@ export interface CourseContent {
   publish_date: string;
   total_hours: string;
   total_lessons: string;
-  order_link: string;
+  order_sku: string;
   header: string;
   teaser_url: string;
-  thumbnail_image: string;
+  speaker_image: string;
   speaker_name: string;
-  teaser: Image;
   contents: Contents[];
   order_image: Image;
   episodes: Episode[];
+  teaser_video: VideoComponent;
 }
 
 export interface Contents{

@@ -20,9 +20,6 @@
         "videos"
       ]
     },
-    "speaker_id": {
-      "type": "string"
-    },
     "course": {
       "type": "relation",
       "relation": "oneToOne",

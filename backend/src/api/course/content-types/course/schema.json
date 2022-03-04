@@ -15,14 +15,6 @@
     "speaker_name": {
       "type": "string"
     },
-    "teaser": {
-      "type": "media",
-      "multiple": false,
-      "required": false,
-      "allowedTypes": [
-        "images"
-      ]
-    },
     "contents": {
       "type": "dynamiczone",
       "components": [
@@ -35,11 +27,11 @@
     },
     "total_hours": {
       "type": "decimal",
-      "default": 0.00
+      "default": 0
     },
     "total_lessons": {
       "type": "decimal",
-      "default": 0.00
+      "default": 0
     },
     "order_image": {
       "type": "media",
@@ -49,14 +41,11 @@
         "images"
       ]
     },
-    "order_link": {
-      "type": "string"
+    "order_sku": {
+      "type": "text"
     },
     "header": {
       "type": "text"
-    },
-    "teaser_url": {
-      "type": "string"
     },
     "course_name": {
       "type": "string"
@@ -64,7 +53,7 @@
     "asset_download": {
       "type": "string"
     },
-    "thumbnail_image": {
+    "speaker_image": {
       "type": "string"
     },
     "publish_date": {
@@ -84,6 +73,11 @@
     },
     "description": {
       "type": "richtext"
+    },
+    "teaser_video": {
+      "type": "component",
+      "repeatable": false,
+      "component": "components.video"
     }
   }
 }

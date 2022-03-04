@@ -3,17 +3,17 @@ import ButtonPartialLogin from "../buttonPartialLogin";
 
 export interface CourseDetailSaleProps {
   yearlySubscriptionImage: string,
-  yearlySubscriptionCheckoutUrl: string;
+  yearlySubscriptionCheckoutSku: string;
   yearlySubscriptionImageMobile: string,
   singleCoursePersonalImage: string,
-  singleCheckoutUrl: string,
+  singleCheckoutSku: string,
 }
 
 export default function Sale({ yearlySubscriptionImage,
-  yearlySubscriptionCheckoutUrl,
+  yearlySubscriptionCheckoutSku,
   yearlySubscriptionImageMobile,
   singleCoursePersonalImage,
-  singleCheckoutUrl }: CourseDetailSaleProps) {
+  singleCheckoutSku }: CourseDetailSaleProps) {
 
   return (
     <div className="background-light">
@@ -34,7 +34,7 @@ export default function Sale({ yearlySubscriptionImage,
               <div className="block box-shadow-none sm-none">
                 <div id="yearlybanner" className="feature column-center text-center">
                   <ImagePartialLogin
-                    sku={yearlySubscriptionCheckoutUrl}
+                    sku={yearlySubscriptionCheckoutSku}
                     src={yearlySubscriptionImage}
                     width={623.183}
                     height={400}
@@ -42,13 +42,13 @@ export default function Sale({ yearlySubscriptionImage,
                   <ButtonPartialLogin
                   text={'ซื้อแพ็คเกจรายปี'}
                     class="btn btn-medium btn-solid btn-auto background-dark"
-                    sku={yearlySubscriptionCheckoutUrl} />
+                    sku={yearlySubscriptionCheckoutSku} />
                 </div>
               </div>
               <div className="block box-shadow-none lg-none">
                 <div id="yearlybanner" className="feature column-center">
                   <ImagePartialLogin
-                    sku={yearlySubscriptionCheckoutUrl}
+                    sku={yearlySubscriptionCheckoutSku}
                     src={yearlySubscriptionImageMobile}
                     width={400}
                     height={400}
@@ -56,7 +56,7 @@ export default function Sale({ yearlySubscriptionImage,
                   <ButtonPartialLogin
                   text={'ซื้อแพ็คเกจรายปี'}
                     class="btn btn-medium btn-solid btn-auto background-dark"
-                    sku={yearlySubscriptionCheckoutUrl} />
+                    sku={yearlySubscriptionCheckoutSku} />
                 </div>
               </div>
             </div>
@@ -64,7 +64,7 @@ export default function Sale({ yearlySubscriptionImage,
               <div className="block box-shadow-none">
                 <div id="singlebanner" className="feature column-center">
                   <ImagePartialLogin
-                    sku={singleCheckoutUrl}
+                    sku={singleCheckoutSku}
                     src={singleCoursePersonalImage}
                     width={400}
                     height={400}
@@ -72,7 +72,7 @@ export default function Sale({ yearlySubscriptionImage,
                   <ButtonPartialLogin
                     class="btn btn-medium btn-solid btn-auto background-dark"
                     text={'ซื้อเฉพาะคอร์สนี้'}
-                    sku={singleCheckoutUrl} /> 
+                    sku={singleCheckoutSku} /> 
                 </div>
               </div>
             </div>

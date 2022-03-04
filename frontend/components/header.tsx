@@ -19,7 +19,7 @@ export default function Header() {
   const userManager = new UserManager();
   const flashMessages = new FlashMessages();
   const [hamburgerOpened, setHamburgerOpened] = useState(false);
-  const [annualUrl, setAnnualUrl] = useState("");
+  const [annualSku, setAnnualSku] = useState("");
   const [shopeeID, setShopeeID] = useState('');
   const [hasShopeeID, setHasShopeeID] = useState(false);
   const flashForgotPassword = flashMessages.getMessages(FlashMessagesType.forgotPasswordMessages);
@@ -60,7 +60,7 @@ export default function Header() {
 
   async function fetchData(){
     const data = await annualPromotionApi();
-    setAnnualUrl(data.data?.attributes?.url);
+    setAnnualSku(data.data?.attributes?.sku);
   }
 
   function checkShopeeCredentials(): void {
@@ -138,7 +138,7 @@ export default function Header() {
             </div>
             <div className="header-block header-switch-content header-block-cta">
               <ButtonPartialLogin
-                sku={annualUrl}
+                sku={annualSku}
                 class={"btn btn-small btn-full"}
                 text={"ซื้อแพ็กเกจรายปี"} />
             </div>
@@ -234,7 +234,7 @@ export default function Header() {
             )}
             <div className="header-block header-switch-content header-block-cta">
               <ButtonPartialLogin
-                sku={annualUrl}
+                sku={annualSku}
                 class={"btn btn-small btn-full"}
                 text={"ซื้อแพ็กเกจรายปี"} />
             </div>

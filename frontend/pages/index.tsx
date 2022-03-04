@@ -56,14 +56,14 @@ export default function Index({ carousel, home, review, annualPromotion }: Index
                 <div className="block box-shadow-none">
                   <div className="feature column-center">
                     <ImagePartialLogin
-                      sku={annualPromotion.data?.attributes?.url}
+                      sku={annualPromotion.data?.attributes?.sku}
                       src={strapiImage(annualPromotion.data?.attributes?.image?.data?.attributes?.url)}
                       width={416}
                       height={267}
                       alt={"Yearly Subscription"} />
                     <div className='row p-w-100 justify-content-around'>
                       <ButtonPartialLogin
-                        sku={annualPromotion.data?.attributes?.url}
+                        sku={annualPromotion.data?.attributes?.sku}
                         class={'btn btn-large'}
                         text={' ซื้อแพ็คเกจรายปี '}
                         classText="f-s-14" />
@@ -115,7 +115,7 @@ export default function Index({ carousel, home, review, annualPromotion }: Index
                 <div className="block box-shadow-none">
                   <div className="feature column-center">
                     <ImagePartialLogin
-                      sku={annualPromotion.data?.attributes?.url}
+                      sku={annualPromotion.data?.attributes?.sku}
                       src={strapiImage(annualPromotion.data?.attributes?.image?.data?.attributes?.url)}
                       width={400}
                       height={400}
@@ -123,7 +123,7 @@ export default function Index({ carousel, home, review, annualPromotion }: Index
                     <ButtonPartialLogin
                       text={'ซื้อแพ็คเกจรายปี'}
                       class='btn btn-solid btn-medium btn-auto'
-                      sku={annualPromotion.data?.attributes?.url}
+                      sku={annualPromotion.data?.attributes?.sku}
                     />
                   </div>
                 </div>
