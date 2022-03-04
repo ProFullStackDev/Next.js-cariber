@@ -56,8 +56,8 @@ export default function Courses({ courses, seasonalPromotion }: CoursesProps) {
                               <Img className="feature-image"
                                 src={value?.thumbnail_image}
                                 alt={value?.speaker_name}
-                                width={262.5}
-                                height={147.65} />
+                                width={500}
+                                height={281.238095} />
                             </a>
                           </Link>
                           <div className="feature-text">
