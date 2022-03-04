@@ -22,13 +22,13 @@
         "videos"
       ]
     },
-    "url": {
-      "type": "text"
-    },
     "display": {
       "type": "boolean",
       "default": true,
       "required": false
+    },
+    "sku": {
+      "type": "text"
     }
   }
 }

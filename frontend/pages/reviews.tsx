@@ -37,7 +37,7 @@ export default function Review({ carousel, review, seasonalPromotion }: ReviewPr
                 <div className="block-type-image text-col-12 m-b-0">
                   <div className="block box-shadow-none background-unrecognized">
                     <ImagePartialLogin
-                      sku={seasonalPromotion.data?.attributes?.url}
+                      sku={seasonalPromotion.data?.attributes?.sku}
                       src={strapiImage(seasonalPromotion.data?.attributes?.image?.data?.attributes?.url)}
                       width={1260}
                       height={282.017}
