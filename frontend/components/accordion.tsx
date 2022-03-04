@@ -46,7 +46,7 @@ export default function Accordion({ title, description, col, icon, color, button
                   <i className={icon}></i>
                 </div>
               )}
-              <h5 className="media-body f-s-16">
+              <h5 className="media-body text-title f-s-16 ">
                 {title}
               </h5>
               {displayDescription === "d-none" ?

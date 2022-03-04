@@ -28,7 +28,17 @@
   }
 
   .accordion-frame {
-    min-height: 71.2px;
+    width: 100%;
+  }
+
+  .accordion-outside{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+  }
+
+  .accordion-collapse{
+    width: 100%;
   }
 
   .grid-container {

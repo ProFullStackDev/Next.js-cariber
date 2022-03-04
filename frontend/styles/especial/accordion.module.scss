@@ -2,6 +2,10 @@
 
 .accordion-outside {
 
+  .text-title{
+    line-height: 1.1;
+  }
+  
   .accordion-progress {
     display: flex;
     justify-content: flex-end;
@@ -17,7 +21,7 @@
   }
 
   .block-type-accordion {
-    padding: 10px 15px 10px 15px;
+    padding: 15px;
   }
 
   .accordion {
