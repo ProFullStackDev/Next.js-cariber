@@ -23,9 +23,7 @@
     .text-coming {
       position: absolute;
       color: white;
-      @media(max-width: $mobile-size){
-        font-size: 18px;
-      }
+      font-size: 20px;
     }
   }
 
