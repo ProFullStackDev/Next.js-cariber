@@ -49,12 +49,13 @@ export default function Courses({ courses, seasonalPromotion }: CoursesProps) {
                       <div>
                         <div className="feature">
                           <Link href={`/course/${value?.id}`}>
-                            <a className={`${!value?.publishedAt && "disabled"}`}>
+                            <a className={`${!value?.publishedAt && "disabled"} course-image`}>
                               <Img className="feature-image"
                                 src={value?.speaker_image}
                                 alt={value?.speaker_name}
                                 width={500}
                                 height={281.238095} />
+                              {!value?.publishedAt && <p className="text-coming">Coming soon</p>}
                             </a>
                           </Link>
                           <div className="feature-text">

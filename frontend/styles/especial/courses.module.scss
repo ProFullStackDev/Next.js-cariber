@@ -1,4 +1,3 @@
-
 .courses {
   .grid-container {
     @media (min-width: $ipad-size) {
@@ -9,6 +8,24 @@
     @media (min-width: $mobile-size) and (max-width: $ipad-size) {
       display: grid !important;
       grid-template-columns: 33% 33% 33% !important;
+    }
+
+    .feature {
+      position: relative;
+    }
+
+    .course-image{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .text-coming {
+      position: absolute;
+      color: white;
+      @media(max-width: $mobile-size){
+        font-size: 18px;
+      }
     }
   }
 
