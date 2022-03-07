@@ -32,6 +32,7 @@ export interface CourseLMS {
 	deletedAt?: any;
 	episodes_list: EpisodesAndQuiz[];
 	instructor: Instructor;
+	statusCode: number;
 }
 
 export interface Episodes {
