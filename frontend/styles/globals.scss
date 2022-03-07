@@ -4847,7 +4847,7 @@ a .panel-sub-title {
 }
 
 .color-primary {
-  color: $color-tiger;
+  color: $color-tiger !important;
 }
 
 .color-black {
@@ -5133,4 +5133,11 @@ body.modal-open {
 
 html {
   overflow-y: hidden;
+}
+
+.header-text{
+  @media(max-width: $mobile-size) {
+    font-size: 22px;
+    line-height: 1.2;
+  }
 }

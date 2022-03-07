@@ -22,10 +22,13 @@ export default function Sale({ yearlySubscriptionImage,
           <div className="row align-items-center justify-content-center">
             <div className="block-type-text text-left col-12">
               <div className="block box-shadow-none">
-                <h2 className="text-center">
-                  <span className="color-primary">ปีใหม่นี้ยกระดับให้คุณเป็นคนใหม่ เรียนรู้กับ &lsquo;ผู้นำตัวจริง&rsquo; จากทุกวงการ
-                    <br />
-                    แพ็กเกจรายปี ที่คุณจ่ายครั้งเดียว เข้าชมผู้สอนได้ทุกท่าน
+                <h2 className="text-center color-primary header-text">
+                  ปีใหม่นี้ยกระดับให้คุณเป็นคนใหม่
+                  <br className="lg-none" />
+                  <span className="sm-f-s-16">
+                  เรียนรู้กับ &lsquo;ผู้นำตัวจริง&rsquo; จากทุกวงการ
+                  <br className="sm-none" />
+                  แพ็กเกจรายปี ที่คุณจ่ายครั้งเดียว เข้าชมผู้สอนได้ทุกท่าน
                   </span>
                 </h2>
               </div>
@@ -40,7 +43,7 @@ export default function Sale({ yearlySubscriptionImage,
                     height={400}
                     alt={"Cariber Yearly Subscription"} />
                   <ButtonPartialLogin
-                  text={'ซื้อแพ็คเกจรายปี'}
+                    text={'ซื้อแพ็คเกจรายปี'}
                     class="btn btn-medium btn-solid btn-auto background-dark"
                     sku={yearlySubscriptionCheckoutSku} />
                 </div>
@@ -54,7 +57,7 @@ export default function Sale({ yearlySubscriptionImage,
                     height={400}
                     alt={"Cariber Yearly Subscription"} />
                   <ButtonPartialLogin
-                  text={'ซื้อแพ็คเกจรายปี'}
+                    text={'ซื้อแพ็คเกจรายปี'}
                     class="btn btn-medium btn-solid btn-auto background-dark"
                     sku={yearlySubscriptionCheckoutSku} />
                 </div>
@@ -72,7 +75,7 @@ export default function Sale({ yearlySubscriptionImage,
                   <ButtonPartialLogin
                     class="btn btn-medium btn-solid btn-auto background-dark btn-not-focus"
                     text={'ซื้อเฉพาะคอร์สนี้'}
-                    sku={singleCheckoutSku} /> 
+                    sku={singleCheckoutSku} />
                 </div>
               </div>
             </div>
