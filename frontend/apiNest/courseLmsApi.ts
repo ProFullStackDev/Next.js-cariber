@@ -24,3 +24,19 @@ export async function getEpisodesAndQuiz(id: string) {
     console.log(error);
   }
 }
+
+export async function getTrackRecord(courseID: number | null): Promise<number[]> {
+  if (!courseID) {
+    return [];
+  }
+  try {
+    const response = await fetch(NEST_API_URLS.trackRecord + `?course=${courseID}` , {
+      method: "GET",
+      headers: nestHeaderAuth(),
+    })
+    return await response.json() as number[];
+  } catch (error) {
+    console.log(error);
+    return [];
+  }
+}

@@ -18,7 +18,8 @@ export const NEST_API_URLS = {
   mySubscription: BASE_API + "/subscriptions/my-subscription",
   checkPassword: BASE_API + "/users/check-password",
   courseEvaluation: BASE_API + '/course-evaluation',
-  forgotPassword: BASE_API + "/users/forgot-password"
+  forgotPassword: BASE_API + "/users/forgot-password",
+  trackRecord: BASE_API + '/users/track-record',
 }
 
 export const NEST_HEADERs = {

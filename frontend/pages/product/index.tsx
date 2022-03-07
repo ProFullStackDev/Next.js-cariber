@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import { getEpisodesAndQuiz } from "../../apiNest/courseLmsApi";
+import {getEpisodesAndQuiz, getTrackRecord} from "../../apiNest/courseLmsApi";
 import { CourseLMS, Episodes, Evaluation, Quiz, ShowingType, } from "../../apiNest/models/content/courseLms";
 import Accordion, { Color, Icon } from "../../components/accordion";
 import Footer from "../../components/footer";
@@ -14,12 +14,14 @@ import CourseEvaluation from "../../components/courseEvaluation";
 import QuizSession from "../../components/quizSession";
 import { episodeApi } from "../../apiNest/episodeApi";
 import ButtonPartialLogin from "../../components/buttonPartialLogin";
+import {notification} from "antd";
 
 export default function Product() {
   const [indexEpisodesOrQuiz, setIndexEpisodesOrQuiz] = useState<number>(0);
   const [courseLms, setCourseLms] = useState<CourseLMS>({} as CourseLMS);
   const [episodeLms, setEpisodeLms] = useState<Episodes>({} as Episodes);
   const [showingType, setShowingType] = useState<ShowingType>(ShowingType.episode);
+  const [watchedEpisodes, setWatchedEpisodes] = useState<number[]>([]);
   const [quiz, setQuiz] = useState<Quiz | null>(null);
   const router = useRouter();
   const announcement = "ตอนนี้คุณกำลังอยู่ในโหมดทดลองเรียนฟรี เนื้อหาบางส่วนมีการถูกล็อกไว้\nคุณสามารถซื้อคอร์สนี้เพื่อดูเนื้อหาทั้งหมดในคอร์สเรียน";
@@ -33,7 +35,8 @@ export default function Product() {
 
   useEffect(() => {
     if (!router.isReady) return;
-    fetchData().then(() => { });
+    fetchData().then(() => {});
+    getWatchedEpList().then(() => {});
   }, [router.isReady]);
 
   async function setEpisodeOrQuiz(passedData: Episodes | Quiz | Evaluation, index: number) {
@@ -51,6 +54,16 @@ export default function Product() {
       case ShowingType.courseEvaluation:
         break;
     }
+  }
+
+  async function getWatchedEpList(): Promise<void> {
+    if(!proId) {
+      notification['error']({ message: 'Course Record Not Found' })
+      return;
+    }
+    const courseID = +proId || null;
+    const watchedEpisodes = await getTrackRecord(courseID);
+    setWatchedEpisodes(watchedEpisodes);
   }
 
   function getTrackName(value: Episodes | Quiz | Evaluation) {
