@@ -40,3 +40,15 @@ export async function getTrackRecord(courseID: number | null): Promise<number[]>
     return [];
   }
 }
+
+export async function createNewTrack(data: {courseID: number, episodeID: number}): Promise<void> {
+  try {
+    await fetch(NEST_API_URLS.trackRecord, {
+      method: "POST",
+      headers: nestHeaderAuth(),
+      body: JSON.stringify(data)
+    })
+  } catch (error) {
+    console.log(error);
+  }
+}

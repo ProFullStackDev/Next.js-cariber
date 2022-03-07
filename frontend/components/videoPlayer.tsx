@@ -158,7 +158,8 @@ function VideoPlayer({ props, imageStrapi }: { props: VideoComponent, imageStrap
   }
 
   const handleEnded = () => {
-    setVideoState({ ...videoState, playing: videoState.loop })
+    setVideoState({ ...videoState, playing: videoState.loop });
+    props.handleEnded();
   }
 
   const handleDuration = (duration: number) => {

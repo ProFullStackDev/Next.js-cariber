@@ -9,4 +9,5 @@ export interface VideoComponent {
   preload?: boolean;
   control?: boolean;
   muted?: boolean;
+  handleEnded: Function;
 }

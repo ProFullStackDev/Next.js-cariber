@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import {getEpisodesAndQuiz, getTrackRecord} from "../../apiNest/courseLmsApi";
+import {createNewTrack, getEpisodesAndQuiz, getTrackRecord} from "../../apiNest/courseLmsApi";
 import { CourseLMS, Episodes, Evaluation, Quiz, ShowingType, } from "../../apiNest/models/content/courseLms";
 import Accordion, { Color, Icon } from "../../components/accordion";
 import Footer from "../../components/footer";
@@ -68,6 +68,18 @@ export default function Product() {
 
   function isWatched(id:number): boolean {
     return watchedEpisodes.indexOf(id) !== -1;
+  }
+
+  function createNewRecord() {
+    if(!proId) {
+      notification['error']({ message: 'Course Record Not Found' })
+      return;
+    }
+    const data = {
+      courseID: +proId,
+      episodeID: indexEpisodesOrQuiz,
+    }
+    createNewTrack(data).then(() => {});
   }
 
   function getTrackName(value: Episodes | Quiz | Evaluation) {
@@ -179,7 +191,8 @@ export default function Product() {
                         {episodeLms?.link_video &&
                           <VideoPlayer props={{
                             video_id: cutCloudflareVideoId(episodeLms.link_video),
-                            video_thumbnail: { url: episodeLms.thumbnail_image }
+                            video_thumbnail: { url: episodeLms.thumbnail_image },
+                            handleEnded: () => createNewRecord(),
                           }} />
                         }
                       </div>
@@ -252,7 +265,7 @@ export default function Product() {
                                   </p>
                                 ) : (
                                   <p className="track-count m-b-0">
-                                    { value.episode_number }
+                                    { index + 1 }
                                   </p>
                                 )}
                               </div>
