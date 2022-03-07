@@ -1,4 +1,14 @@
 .courses {
+  .form-group {
+    margin: 0px;
+  }
+
+  .form-search {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+  }
+
   .grid-container {
     @media (min-width: $ipad-size) {
       display: grid !important;
@@ -14,7 +24,7 @@
       position: relative;
     }
 
-    .course-image{
+    .course-image {
       display: flex;
       justify-content: center;
       align-items: center;

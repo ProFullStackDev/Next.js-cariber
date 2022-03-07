@@ -9,6 +9,9 @@ import Link from "next/link";
 import { coursesAllApi, seasonalPromotionApi } from "../apiStrapi/StrapiApiService";
 import { SeasonalPromotionContent } from "../apiStrapi/models/contentType/seasonalPromotion";
 import ImagePartialLogin from "../components/imagePartialLogin";
+import FormInput from "../components/formInput";
+import { FormEvent, useEffect, useState } from "react";
+import { handleChange } from "../functions/handleInput";
 
 interface CoursesProps {
   courses: ResponseDataList<CourseContent>;
@@ -16,6 +19,23 @@ interface CoursesProps {
 }
 
 export default function Courses({ courses, seasonalPromotion }: CoursesProps) {
+  const [localCourses, setLocalCourses] = useState<CourseContent[]>([{} as CourseContent]);
+  const [filterProps, setFilterCourses] = useState({
+    search: "",
+    sort: ""
+  });
+  const search = (event: FormEvent) => {
+    event.preventDefault();
+    const filterCourses = courses.data?.filter(course =>
+      course.speaker_name.toLowerCase().includes(filterProps.search.toLowerCase()) ||
+      course.course_name.toLowerCase().includes(filterProps.search.toLowerCase()));
+    setLocalCourses(filterCourses);
+  }
+
+  useEffect(() => {
+    setLocalCourses(courses.data);
+  }, []);
+
   return (
     <div className="background-image courses">
       <Header />
@@ -41,8 +61,23 @@ export default function Courses({ courses, seasonalPromotion }: CoursesProps) {
                 </h2>
               </div>
             </div>
+            <div className="search-zone col-5">
+              <form className="row" onSubmit={search}>
+                <div className="form-search">
+                  <FormInput
+                    id={"search"}
+                    type={"text"}
+                    placeholder="ค้นหาบทเรียน"
+                    required={false}
+                    onChange={e => handleChange(e, setFilterCourses, filterProps)} />
+                  <button type="submit" className="btn btn-box btn-small m-t-0 m-l-15 p-10">
+                    ค้นหา
+                  </button>
+                </div>
+              </form>
+            </div>
             <div className="grid-container col-12 p-0">
-              {courses ? courses.data?.map((value) => {
+              {Boolean(localCourses.length) && localCourses?.map((value) => {
                 return (
                   <div key={value?.id} className="block-type-feature text-center p-10">
                     <div className="block box-shadow-large background-white p-12 b-r-4">
@@ -79,10 +114,9 @@ export default function Courses({ courses, seasonalPromotion }: CoursesProps) {
                     </div>
                   </div>
                 )
-              }) : (
-                <div className="text-center w-100">ไม่พบคอร์ส</div>
-              )}
+              })}
             </div>
+            {!localCourses.length && <div className="text-center w-100">ไม่พบคอร์ส</div>}
           </div>
         </div>
       </div>
