@@ -23,7 +23,7 @@ interface SortProps {
   functionSort: (a: CourseContent, b: CourseContent) => 1 | -1
 }
 
-const sortList = [
+const sortList: SortProps[] = [
   { text: "ไม่เรียงลำดับ", functionSort: (a: CourseContent, b: CourseContent) => a.id > b.id ? 1 : -1 },
   { text: "ชื่อผู้สอน มากไปน้อย", functionSort: (a: CourseContent, b: CourseContent) => a.speaker_name < b.speaker_name ? 1 : -1 },
   { text: "ชื่อผู้สอน น้อยไปมาก", functionSort: (a: CourseContent, b: CourseContent) => a.speaker_name > b.speaker_name ? 1 : -1 },
