@@ -1,5 +1,34 @@
-
 .courses {
+  .sort-container {
+    position: relative;
+  }
+
+  .sort-item {
+    position: absolute;
+    z-index: 1;
+    background-color: #fff;
+
+    .button-sort {
+      border-top: 0.5px solid gray;
+      border-bottom: none;
+      border-left: none;
+      border-right: none;
+      background-color: $color-buttermilk;
+      color: $color-tiger;
+      width: 100%;
+      padding: 5px 0px;
+      cursor: pointer;
+    }
+
+    .button-sort:hover {
+      filter: brightness(105%);
+    }
+  }
+
+  .form-group {
+    margin: 0px;
+  }
+
   .grid-container {
     @media (min-width: $ipad-size) {
       display: grid !important;
@@ -9,6 +38,22 @@
     @media (min-width: $mobile-size) and (max-width: $ipad-size) {
       display: grid !important;
       grid-template-columns: 33% 33% 33% !important;
+    }
+
+    .feature {
+      position: relative;
+    }
+
+    .course-image {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .text-coming {
+      position: absolute;
+      color: white;
+      font-size: 20px;
     }
   }
 

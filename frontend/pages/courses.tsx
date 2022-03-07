@@ -9,13 +9,53 @@ import Link from "next/link";
 import { coursesAllApi, seasonalPromotionApi } from "../apiStrapi/StrapiApiService";
 import { SeasonalPromotionContent } from "../apiStrapi/models/contentType/seasonalPromotion";
 import ImagePartialLogin from "../components/imagePartialLogin";
+import FormInput from "../components/formInput";
+import { FormEvent, useEffect, useState } from "react";
+import { handleChange } from "../functions/handleInput";
 
 interface CoursesProps {
   courses: ResponseDataList<CourseContent>;
   seasonalPromotion: ResponseData<SeasonalPromotionContent>;
 }
 
+interface SortProps {
+  text: string,
+  functionSort: (a: CourseContent, b: CourseContent) => 1 | -1
+}
+
+const sortList: SortProps[] = [
+  { text: "ไม่เรียงลำดับ", functionSort: (a: CourseContent, b: CourseContent) => a.id > b.id ? 1 : -1 },
+  { text: "ชื่อผู้สอน มากไปน้อย", functionSort: (a: CourseContent, b: CourseContent) => a.speaker_name < b.speaker_name ? 1 : -1 },
+  { text: "ชื่อผู้สอน น้อยไปมาก", functionSort: (a: CourseContent, b: CourseContent) => a.speaker_name > b.speaker_name ? 1 : -1 },
+  { text: "ชื่อคอร์ส มากไปน้อย", functionSort: (a: CourseContent, b: CourseContent) => a.course_name < b.course_name ? 1 : -1 },
+  { text: "ชื่อคอร์ส น้อยไปมาก", functionSort: (a: CourseContent, b: CourseContent) => a.course_name > b.course_name ? 1 : -1 },
+]
+
 export default function Courses({ courses, seasonalPromotion }: CoursesProps) {
+  const [localCourses, setLocalCourses] = useState<CourseContent[]>([{} as CourseContent]);
+  const [sortPopup, setSortPopup] = useState<boolean>(false);
+  const [filterProps, setFilterCourses] = useState({
+    search: "",
+    sortText: "ไม่เรียงลำดับ",
+    functionSort: (a: CourseContent, b: CourseContent) => a.id > b.id ? 1 : -1
+  });
+
+  const search = (event: FormEvent) => {
+    event.preventDefault();
+    const filterCourses = courses.data?.filter(course =>
+      course.speaker_name.toLowerCase().includes(filterProps.search.toLowerCase()) ||
+      course.course_name.toLowerCase().includes(filterProps.search.toLowerCase()));
+    setLocalCourses(filterCourses);
+  }
+
+  const sort = (sort: SortProps) => {
+    setFilterCourses({ ...filterProps, functionSort: sort.functionSort, sortText: sort.text })
+  }
+
+  useEffect(() => {
+    setLocalCourses(courses.data);
+  }, []);
+
   return (
     <div className="background-image courses">
       <Header />
@@ -41,20 +81,51 @@ export default function Courses({ courses, seasonalPromotion }: CoursesProps) {
                 </h2>
               </div>
             </div>
+            <div className="search-zone col-12">
+              <form className="row" onSubmit={search}>
+                <div className="m-l-15 m-t-8 col-4 p-0">
+                  <FormInput
+                    id={"search"}
+                    type={"text"}
+                    placeholder="ค้นหาบทเรียน"
+                    required={false}
+                    onChange={e => handleChange(e, setFilterCourses, filterProps)} />
+                </div>
+                <button type="submit" className="btn btn-box btn-small m-l-15 p-10">
+                  ค้นหา
+                </button>
+                <div className="sort-container">
+                  <button className="btn btn-box btn-small m-x-0 p-10"
+                  onClick={() => setSortPopup(!sortPopup)}>
+                    เรียงลำดับ : {filterProps.sortText}
+                  </button>
+                  <div className={`sort-item ${!sortPopup && "none"}`}>
+                    {sortList.map((value, index) => {
+                      return (
+                        <button key={index} className="button-sort" onClick={() => sort(value)}>
+                          {value.text}
+                        </button>
+                      )
+                    })}
+                  </div>
+                </div>
+              </form>
+            </div>
             <div className="grid-container col-12 p-0">
-              {courses ? courses.data?.map((value) => {
+              {Boolean(localCourses.length) && localCourses?.sort(filterProps.functionSort).map((value, index) => {
                 return (
-                  <div key={value?.id} className="block-type-feature text-center p-10">
+                  <div key={index} className="block-type-feature text-center p-10">
                     <div className="block box-shadow-large background-white p-12 b-r-4">
                       <div>
                         <div className="feature">
                           <Link href={`/course/${value?.id}`}>
-                            <a className={`${!value?.publishedAt && "disabled"}`}>
+                            <a className={`${!value?.publishedAt && "disabled"} course-image`}>
                               <Img className="feature-image"
                                 src={value?.speaker_image}
                                 alt={value?.speaker_name}
                                 width={500}
                                 height={281.238095} />
+                              {!value?.publishedAt && <p className="text-coming">Coming soon</p>}
                             </a>
                           </Link>
                           <div className="feature-text">
@@ -78,10 +149,9 @@ export default function Courses({ courses, seasonalPromotion }: CoursesProps) {
                     </div>
                   </div>
                 )
-              }) : (
-                <div className="text-center w-100">ไม่พบคอร์ส</div>
-              )}
+              })}
             </div>
+            {!localCourses.length && <div className="text-center w-100">ไม่พบคอร์ส</div>}
           </div>
         </div>
       </div>

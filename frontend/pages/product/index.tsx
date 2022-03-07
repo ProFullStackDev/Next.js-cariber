@@ -73,6 +73,10 @@ export default function Product() {
 
   async function fetchData() {
     const data = await getEpisodesAndQuiz(proId!.toString()) as CourseLMS;
+    if(data.statusCode && data.statusCode === 500){
+      router.replace("/404")
+      return
+    }
     data.episodes_list.map(item => {
       item.type = ("question" in item && item.question) ? ShowingType.quiz : ShowingType.episode;
       return item;
