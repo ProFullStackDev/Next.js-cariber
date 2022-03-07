@@ -62,8 +62,12 @@ export default function Product() {
       return;
     }
     const courseID = +proId || null;
-    const watchedEpisodes = await getTrackRecord(courseID);
-    setWatchedEpisodes(watchedEpisodes);
+    const watchedEpisodesList = await getTrackRecord(courseID);
+    setWatchedEpisodes( [193, 23, 194]); // will change after deployed BE api
+  }
+
+  function isWatched(id:number): boolean {
+    return watchedEpisodes.indexOf(id) !== -1;
   }
 
   function getTrackName(value: Episodes | Quiz | Evaluation) {
@@ -239,20 +243,20 @@ export default function Product() {
                         {courseLms.episodes_list?.map((value, index) => {
                           return (
                             <a key={index}
-                              className="media track"
+                              className="media track align-items-center"
                               onClick={async () => { await setEpisodeOrQuiz(value, index) }}>
                               <div className="media-left media-middle">
                                 {index === indexEpisodesOrQuiz ? (
-                                  <p className="track-count active">
+                                  <p className="track-count active m-b-0">
                                     <i className="fa fa-play color-primary" />
                                   </p>
                                 ) : (
-                                  <p className="track-count">
-                                    {index + 1}
+                                  <p className="track-count m-b-0">
+                                    { value.episode_number }
                                   </p>
                                 )}
                               </div>
-                              <div className="media-left media-middle d-flex align-items-center">
+                              <div className="media-left media-middle">
                                 <Img className="track-thumb"
                                   src={"thumbnail_image" in value ? value.thumbnail_image : ''}
                                   width={70}
@@ -265,6 +269,12 @@ export default function Product() {
                                   {getTrackName(value)}
                                 </div>
                               </div>
+
+                              {
+                                isWatched(value.id) &&
+                                <i className="fa fa-check color-primary p-l-5"
+                                   aria-hidden="true" />
+                              }
                             </a>
                           )
                         })}
