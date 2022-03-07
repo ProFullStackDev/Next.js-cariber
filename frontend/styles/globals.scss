@@ -5008,7 +5008,7 @@ a .panel-sub-title {
 }
 
 .d-flex {
-  display: flex;
+  display: flex !important;
 }
 
 .btn-icon {
@@ -5186,4 +5186,8 @@ html {
 
 .btn-min-w-fit{
   min-width: fit-content;
+}
+
+.border-none{
+  border: none;
 }
