@@ -5141,3 +5141,49 @@ html {
     line-height: 1.2;
   }
 }
+
+.search-zone {
+  width: 100%;
+}
+
+.search-row{
+  display: flex;
+  @media(min-width: $mobile-size) {
+    justify-content: center;
+  }
+}
+
+.sort-container {
+  display: none;
+  position: relative;
+}
+
+.sort-item {
+  position: absolute;
+  z-index: 1;
+  background-color: #fff;
+
+  .button-sort {
+    border-top: 0.5px solid gray;
+    border-bottom: none;
+    border-left: none;
+    border-right: none;
+    background-color: $color-buttermilk;
+    color: $color-tiger;
+    width: 100%;
+    padding: 5px 0px;
+    cursor: pointer;
+  }
+
+  .button-sort:hover {
+    filter: brightness(105%);
+  }
+}
+
+.search-field{ 
+  margin-bottom: 0px;
+}
+
+.btn-min-w-fit{
+  min-width: fit-content;
+}
