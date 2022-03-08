@@ -61,7 +61,7 @@ export default function Courses({ courses, seasonalPromotion }: CoursesProps) {
       <Header />
       <div className="sizer">
         <div className="container">
-          <div className="row align-items-center">
+          <div className="row align-items-center justify-content-center">
             {seasonalPromotion.data?.attributes?.display && (
               <div className="block-type-image text-col-12 m-b-0">
                 <div className="block box-shadow-none background-unrecognized">
