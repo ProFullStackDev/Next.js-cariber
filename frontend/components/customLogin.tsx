@@ -37,7 +37,7 @@ export default function CustomLogin({ path, callbackButton }: CustomLoginProp) {
         password: password
       }
       const data = await loginApi(formData) as Auth;
-      if (data.error){
+      if (data.message){
         setErrorLogin({
           isError: true,
           message: "ชื่อผู้ใช้งานหรือรหัสผ่านไม่ถูกต้อง"
