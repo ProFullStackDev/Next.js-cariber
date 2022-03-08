@@ -18,7 +18,6 @@ import { AnnualPromotionContent } from "../../apiStrapi/models/contentType/annua
 import EpisodeAccordion from "../../components/courseDetail/episodeAccordion"
 import { ReviewContent } from "../../apiStrapi/models/contentType/review"
 import { CarouselContent } from "../../apiStrapi/models/contentType/carousel"
-import UserManager from "../../auth/userManager";
 import { coursesAllApi, carouselApi, courseApi, singleCourseApi, annualPromotionApi, reviewApi } from "../../apiStrapi/StrapiApiService"
 
 interface CourseDetailParams {
@@ -33,14 +32,12 @@ interface CourseDetailProps {
   review: ResponseData<ReviewContent>;
 }
 
-export default function CourseDetail({ 
+export default function CourseDetail({
   carousel,
   course,
   singleCourse,
   annualPromotion,
   review }: CourseDetailProps) {
-
-  const userManager = new UserManager();
   const youtubeEPItems = course.data?.contents?.find((value) => {
     return value.__component === "components.special-ep-component"
   }) as Contents;
@@ -93,10 +90,10 @@ export default function CourseDetail({
             <div className="row align-items-center justify-content-center">
               <div className="block-type-text text-center col-12 p-0 m-t-0">
                 <div className="block box-shadow-none">
-                  <h2 className="font-md-20 text-center">
-                    <span className="color-primary">
-                      คอร์สอื่น ๆ จาก &quot;ที่สุด&quot; ของประเทศอีกมากมาย
-                    </span>
+                  <h2 className="text-center header-text color-primary">
+                    คอร์สอื่น ๆ จาก &quot;ที่สุด&quot;
+                    <br className="lg-none"/>
+                    ของประเทศอีกมากมาย
                   </h2>
                 </div>
               </div>
@@ -117,7 +114,7 @@ export default function CourseDetail({
 }
 
 export async function getStaticPaths() {
-  const data = await coursesAllApi(); 
+  const data = await coursesAllApi();
   const dataFilter = (data.data.filter((value) => {
     return value
   }));

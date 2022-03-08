@@ -82,8 +82,8 @@ export default function Courses({ courses, seasonalPromotion }: CoursesProps) {
               </div>
             </div>
             <div className="search-zone col-12">
-              <form className="row" onSubmit={search}>
-                <div className="m-l-15 m-t-8 col-4 p-0">
+              <form className="search-row" onSubmit={search}>
+              <div className="m-l-15 m-b-0 m-t-8 col-4 p-0">
                   <FormInput
                     id={"search"}
                     type={"text"}
@@ -91,7 +91,7 @@ export default function Courses({ courses, seasonalPromotion }: CoursesProps) {
                     required={false}
                     onChange={e => handleChange(e, setFilterCourses, filterProps)} />
                 </div>
-                <button type="submit" className="btn btn-box btn-small m-l-15 p-10">
+                <button type="submit" className="btn btn-box btn-small m-l-15 p-10 btn-min-w-fit">
                   ค้นหา
                 </button>
                 <div className="sort-container">

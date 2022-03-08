@@ -116,7 +116,7 @@ export default function Index({ carousel, home, review, annualPromotion }: Index
                   <div className="feature column-center">
                     <ImagePartialLogin
                       sku={annualPromotion.data?.attributes?.sku}
-                      src={strapiImage(annualPromotion.data?.attributes?.image?.data?.attributes?.url)}
+                      src={strapiImage(annualPromotion.data?.attributes?.image_mobile?.data?.attributes?.url)}
                       width={400}
                       height={400}
                       alt={'Yearly Subscription'} />
