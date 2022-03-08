@@ -15,6 +15,7 @@ import QuizSession from "../../components/quizSession";
 import { episodeApi } from "../../apiNest/episodeApi";
 import ButtonPartialLogin from "../../components/buttonPartialLogin";
 import {notification} from "antd";
+import EventDetector from "./eventDetector";
 
 export default function Product() {
   const [indexEpisodesOrQuiz, setIndexEpisodesOrQuiz] = useState<number>(0);
@@ -120,226 +121,228 @@ export default function Product() {
   }
 
   return (
-    <div className="product">
-      <Header />
-      <div className="col-12 m-0">
-        <div className="container sm-p-x-0">
-          <div className="nev-product">
-            <div className="left-nev-product">
-              <h6 className="color-primary">
-                คอร์สเรียน : {courseLms.course_name}
-              </h6>
-              <p className="f-s-14 m-b-0 color-black">
-                สอนโดย {courseLms.speaker_name}
-              </p>
-            </div>
-            <div className="right-nev-product sm-none">
-              {!saleHeader.owned && <ButtonPartialLogin
-                sku={""}
-                class={"btn btn-not-focus btn-small m-t-0"}
-                text={"ซื้อคอร์สนี้"} />}
-              {!saleHeader.yearlySubscripted && <ButtonPartialLogin
-                sku={""}
-                class={"btn btn-small m-t-0"}
-                text={"ซื้อแพ็คเกจรายปี"} />}
-              {saleHeader.yearlySubscripted && <ButtonPartialLogin
-                sku={""}
-                class={"btn btn-small m-t-0"}
-                text={"ต่อสมาชิกแพ็คเกจรายปี"} />}
-            </div>
-            <div className="right-nev-product ipad-none lg-none">
-              <ProductSale {...saleHeader} />
+    <EventDetector>
+      <div className="product">
+        <Header />
+        <div className="col-12 m-0">
+          <div className="container sm-p-x-0">
+            <div className="nev-product">
+              <div className="left-nev-product">
+                <h6 className="color-primary">
+                  คอร์สเรียน : {courseLms.course_name}
+                </h6>
+                <p className="f-s-14 m-b-0 color-black">
+                  สอนโดย {courseLms.speaker_name}
+                </p>
+              </div>
+              <div className="right-nev-product sm-none">
+                {!saleHeader.owned && <ButtonPartialLogin
+                    sku={""}
+                    class={"btn btn-not-focus btn-small m-t-0"}
+                    text={"ซื้อคอร์สนี้"} />}
+                {!saleHeader.yearlySubscripted && <ButtonPartialLogin
+                    sku={""}
+                    class={"btn btn-small m-t-0"}
+                    text={"ซื้อแพ็คเกจรายปี"} />}
+                {saleHeader.yearlySubscripted && <ButtonPartialLogin
+                    sku={""}
+                    class={"btn btn-small m-t-0"}
+                    text={"ต่อสมาชิกแพ็คเกจรายปี"} />}
+              </div>
+              <div className="right-nev-product ipad-none lg-none">
+                <ProductSale {...saleHeader} />
+              </div>
             </div>
           </div>
         </div>
-      </div>
-      <div className="background-image">
-        <div className="sizer">
-          <div className="container">
-            <div className="row">
-              <div className="col-12">
-                <button className="btn-link f-s-16 row" onClick={router.back}>
-                  <i className="fal fa-chevron-left m-r-7" />
-                  <h5 className="color-black m-b-0">
-                    ย้อนกลับ
-                  </h5>
-                </button>
-              </div>
-              <div className="col-12">
-                <div className="episode-title">
-                  <h5 className="color-black m-0">
-                    {episodeLms?.episode_name}
-                  </h5>
+        <div className="background-image">
+          <div className="sizer">
+            <div className="container">
+              <div className="row">
+                <div className="col-12">
+                  <button className="btn-link f-s-16 row" onClick={router.back}>
+                    <i className="fal fa-chevron-left m-r-7" />
+                    <h5 className="color-black m-b-0">
+                      ย้อนกลับ
+                    </h5>
+                  </button>
                 </div>
-              </div>
-              <div className="col-12">
-                <div className="product-announcement">
-                  <i className="fal fa-megaphone p-t-5" />
-                  <div className="p-l-10">
+                <div className="col-12">
+                  <div className="episode-title">
+                    <h5 className="color-black m-0">
+                      {episodeLms?.episode_name}
+                    </h5>
+                  </div>
+                </div>
+                <div className="col-12">
+                  <div className="product-announcement">
+                    <i className="fal fa-megaphone p-t-5" />
+                    <div className="p-l-10">
                     <span>
                       {announcement}
                     </span>
-                  </div>
-                </div>
-              </div>
-              <div className="col-12 p-b-20">
-                <div className="player">
-                  {
-                    showingType === ShowingType.episode &&
-                    <>
-                      <div className="player-video">
-                        {episodeLms?.link_video &&
-                          <VideoPlayer props={{
-                            video_id: cutCloudflareVideoId(episodeLms.link_video),
-                            video_thumbnail: { url: episodeLms.thumbnail_image },
-                            handleEnded: () => createNewRecord(),
-                          }} />
-                        }
-                      </div>
-                    </>
-                  }
-                  {showingType === ShowingType.quiz &&
-                    <>
-                      <div className="quiz-session">
-                        <QuizSession course={courseLms}
-                          restart={restart}
-                          quiz={quiz} />
-                      </div>
-                    </>
-                  }
-                  {showingType === ShowingType.courseEvaluation &&
-                    <>
-                      <div className="quiz-session">
-                        <CourseEvaluation course={courseLms}
-                          restart={restart} />
-                      </div>
-                    </>
-                  }
-                  <div className="player-nav">
-                    <div className="media">
-                      <div className="media-left-under-player">
-                        <button className="btn btn-box btn-small"
-                          disabled={indexEpisodesOrQuiz === 0}
-                          onClick={async () => { await setEpisodeOrQuiz(courseLms?.episodes_list[indexEpisodesOrQuiz - 1], indexEpisodesOrQuiz - 1) }}>
-                          <i className="fa fa-chevron-left" aria-hidden="true" />
-                          บทเรียนก่อนหน้า
-                        </button>
-                      </div>
-                      <div className="media-body media-middle">
-                        <p className="m-b-0 hidden-xs-down">
-                          บทเรียน {indexEpisodesOrQuiz + 1} of {courseLms?.episodes_list?.length}
-                        </p>
-                      </div>
-                      <div className="media-right">
-                        <button className="btn btn-box btn-small"
-                          disabled={indexEpisodesOrQuiz === courseLms?.episodes_list?.length - 1}
-                          onClick={async () => { await setEpisodeOrQuiz(courseLms?.episodes_list[indexEpisodesOrQuiz + 1], indexEpisodesOrQuiz + 1) }}>
-                          บทเรียนถัดไป
-                          <i className="fa fa-chevron-right" aria-hidden="true" />
-                        </button>
-                      </div>
                     </div>
                   </div>
-                  <div className="player-playlist">
-                    <div className="playlist">
-                      <div className="playlist-title">
-                        <div className="media">
-                          <div className="media-body media-middle">
-                            <h2>{courseLms.course_name}</h2>
+                </div>
+                <div className="col-12 p-b-20">
+                  <div className="player">
+                    {
+                      showingType === ShowingType.episode &&
+                        <>
+                          <div className="player-video">
+                            {episodeLms?.link_video &&
+                                <VideoPlayer props={{
+                                  video_id: cutCloudflareVideoId(episodeLms.link_video),
+                                  video_thumbnail: { url: episodeLms.thumbnail_image },
+                                  handleEnded: () => createNewRecord(),
+                                }} />
+                            }
                           </div>
-                          <div className="media-right">
-                            <h3>{courseLms.episodes_list?.length} บทเรียน</h3>
+                        </>
+                    }
+                    {showingType === ShowingType.quiz &&
+                        <>
+                          <div className="quiz-session">
+                            <QuizSession course={courseLms}
+                                         restart={restart}
+                                         quiz={quiz} />
                           </div>
+                        </>
+                    }
+                    {showingType === ShowingType.courseEvaluation &&
+                        <>
+                          <div className="quiz-session">
+                            <CourseEvaluation course={courseLms}
+                                              restart={restart} />
+                          </div>
+                        </>
+                    }
+                    <div className="player-nav">
+                      <div className="media">
+                        <div className="media-left-under-player">
+                          <button className="btn btn-box btn-small"
+                                  disabled={indexEpisodesOrQuiz === 0}
+                                  onClick={async () => { await setEpisodeOrQuiz(courseLms?.episodes_list[indexEpisodesOrQuiz - 1], indexEpisodesOrQuiz - 1) }}>
+                            <i className="fa fa-chevron-left" aria-hidden="true" />
+                            บทเรียนก่อนหน้า
+                          </button>
+                        </div>
+                        <div className="media-body media-middle">
+                          <p className="m-b-0 hidden-xs-down">
+                            บทเรียน {indexEpisodesOrQuiz + 1} of {courseLms?.episodes_list?.length}
+                          </p>
+                        </div>
+                        <div className="media-right">
+                          <button className="btn btn-box btn-small"
+                                  disabled={indexEpisodesOrQuiz === courseLms?.episodes_list?.length - 1}
+                                  onClick={async () => { await setEpisodeOrQuiz(courseLms?.episodes_list[indexEpisodesOrQuiz + 1], indexEpisodesOrQuiz + 1) }}>
+                            บทเรียนถัดไป
+                            <i className="fa fa-chevron-right" aria-hidden="true" />
+                          </button>
                         </div>
                       </div>
-                      <div className="playlist-body">
-                        {courseLms.episodes_list?.map((value, index) => {
-                          return (
-                            <a key={index}
-                              className="media track align-items-center"
-                              onClick={async () => { await setEpisodeOrQuiz(value, index) }}>
-                              <div className="media-left media-middle">
-                                {index === indexEpisodesOrQuiz ? (
-                                  <p className="track-count active m-b-0">
-                                    <i className="fa fa-play color-primary" />
-                                  </p>
-                                ) : (
-                                  <p className="track-count m-b-0">
-                                    { index + 1 }
-                                  </p>
-                                )}
-                              </div>
-                              <div className="media-left media-middle">
-                                <Img className="track-thumb"
-                                  src={"thumbnail_image" in value ? value.thumbnail_image : ''}
-                                  width={70}
-                                  height={39.3833}
-                                  alt={"episode_name" in value ? value.episode_name : "thumbnail image"}
-                                />
-                              </div>
-                              <div className="media-body media-middle">
-                                <div className="track-title">
-                                  {getTrackName(value)}
+                    </div>
+                    <div className="player-playlist">
+                      <div className="playlist">
+                        <div className="playlist-title">
+                          <div className="media">
+                            <div className="media-body media-middle">
+                              <h2>{courseLms.course_name}</h2>
+                            </div>
+                            <div className="media-right">
+                              <h3>{courseLms.episodes_list?.length} บทเรียน</h3>
+                            </div>
+                          </div>
+                        </div>
+                        <div className="playlist-body">
+                          {courseLms.episodes_list?.map((value, index) => {
+                            return (
+                              <a key={index}
+                                 className="media track align-items-center"
+                                 onClick={async () => { await setEpisodeOrQuiz(value, index) }}>
+                                <div className="media-left media-middle">
+                                  {index === indexEpisodesOrQuiz ? (
+                                    <p className="track-count active m-b-0">
+                                      <i className="fa fa-play color-primary" />
+                                    </p>
+                                  ) : (
+                                    <p className="track-count m-b-0">
+                                      { index + 1 }
+                                    </p>
+                                  )}
                                 </div>
-                              </div>
+                                <div className="media-left media-middle">
+                                  <Img className="track-thumb"
+                                       src={"thumbnail_image" in value ? value.thumbnail_image : ''}
+                                       width={70}
+                                       height={39.3833}
+                                       alt={"episode_name" in value ? value.episode_name : "thumbnail image"}
+                                  />
+                                </div>
+                                <div className="media-body media-middle">
+                                  <div className="track-title">
+                                    {getTrackName(value)}
+                                  </div>
+                                </div>
 
-                              {
-                                isWatched(value.id) &&
-                                <i className="fa fa-check color-primary p-l-5"
-                                   aria-hidden="true" />
-                              }
-                            </a>
-                          )
-                        })}
+                                {
+                                  isWatched(value.id) &&
+                                    <i className="fa fa-check color-primary p-l-5"
+                                       aria-hidden="true" />
+                                }
+                              </a>
+                            )
+                          })}
+                        </div>
                       </div>
                     </div>
                   </div>
+                  <div className="col-12 link-file">
+                    <i className="fal fa-file-download color-primary" />
+                    &nbsp;&nbsp;
+                    <a target="_blank" href={courseLms.asset_download} rel="noopener noreferrer">
+                      ดาวน์โหลดเอกสารประกอบการเรียน
+                    </a>
+                  </div>
                 </div>
-                <div className="col-12 link-file">
-                  <i className="fal fa-file-download color-primary" />
-                  &nbsp;&nbsp;
-                  <a target="_blank" href={courseLms.asset_download} rel="noopener noreferrer">
-                    ดาวน์โหลดเอกสารประกอบการเรียน
-                  </a>
+                <div className="col-8">
+                  {courseLms.episodes_list?.map((value, index) => {
+                    return (
+                      <div key={index}>
+                        {value.type === ShowingType.episode && (
+                          <Accordion
+                            title={getTrackName(value)}
+                            description={"description" in value
+                              ? value.description + "\n *หากผู้ใดละเมิดนำงานไปเผยแพร่ คัดลอก หรือดัดแปลงไม่ว่าบางส่วนหรือทั้งหมดจะถูกดำเนินคดีตามกฎหมาย"
+                              : ''}
+                            col={12}
+                            icon={Icon.play}
+                            color={Color.light}
+                            button={{
+                              callback: () => {
+                                setEpisodeOrQuiz(value, index).then(() => { })
+                              }, text: `${0 ? (`${0 < 100 ? ("ดูต่อ") : ("ดูอีกครั้ง")}`) : ("รับชมเนื้อหา")}`
+                            }}
+                            progress={0}
+                          />
+                        )}
+                      </div>
+                    )
+                  })
+                  }
                 </div>
+                <ProductBlogs progressBlog={true}
+                              productImage={courseLms.thumbnail_image}
+                              productName={courseLms.course_name}
+                              instructorImage={courseLms.instructor?.profile_image}
+                              instructorName={courseLms.speaker_name}
+                              instructorRemark={courseLms.instructor?.idiom} />
               </div>
-              <div className="col-8">
-                {courseLms.episodes_list?.map((value, index) => {
-                  return (
-                    <div key={index}>
-                      {value.type === ShowingType.episode && (
-                        <Accordion
-                          title={getTrackName(value)}
-                          description={"description" in value
-                            ? value.description + "\n *หากผู้ใดละเมิดนำงานไปเผยแพร่ คัดลอก หรือดัดแปลงไม่ว่าบางส่วนหรือทั้งหมดจะถูกดำเนินคดีตามกฎหมาย"
-                            : ''}
-                          col={12}
-                          icon={Icon.play}
-                          color={Color.light}
-                          button={{
-                            callback: () => {
-                              setEpisodeOrQuiz(value, index).then(() => { })
-                            }, text: `${0 ? (`${0 < 100 ? ("ดูต่อ") : ("ดูอีกครั้ง")}`) : ("รับชมเนื้อหา")}`
-                          }}
-                          progress={0}
-                        />
-                      )}
-                    </div>
-                  )
-                })
-                }
-              </div>
-              <ProductBlogs progressBlog={true}
-                productImage={courseLms.thumbnail_image}
-                productName={courseLms.course_name}
-                instructorImage={courseLms.instructor?.profile_image}
-                instructorName={courseLms.speaker_name}
-                instructorRemark={courseLms.instructor?.idiom} />
             </div>
           </div>
         </div>
+        <Footer />
       </div>
-      <Footer />
-    </div>
+    </EventDetector>
   )
 }
