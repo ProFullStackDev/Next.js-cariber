@@ -83,7 +83,7 @@ export default function Courses({ courses, seasonalPromotion }: CoursesProps) {
             </div>
             <div className="search-zone col-12">
               <form className="search-row" onSubmit={search}>
-              <div className="m-l-15 m-b-0 m-t-8 col-4 p-0">
+                <div className="m-l-15 m-b-0 m-t-8 col-4 p-0">
                   <FormInput
                     id={"search"}
                     type={"text"}
@@ -96,7 +96,7 @@ export default function Courses({ courses, seasonalPromotion }: CoursesProps) {
                 </button>
                 <div className="sort-container">
                   <button className="btn btn-box btn-small m-x-0 p-10"
-                  onClick={() => setSortPopup(!sortPopup)}>
+                    onClick={() => setSortPopup(!sortPopup)}>
                     เรียงลำดับ : {filterProps.sortText}
                   </button>
                   <div className={`sort-item ${!sortPopup && "none"}`}>
@@ -112,7 +112,7 @@ export default function Courses({ courses, seasonalPromotion }: CoursesProps) {
               </form>
             </div>
             <div className="grid-container col-12 p-0">
-              {Boolean(localCourses.length) && localCourses?.sort(filterProps.functionSort).map((value, index) => {
+              {localCourses && localCourses?.sort(filterProps.functionSort).map((value, index) => {
                 return (
                   <div key={index} className="block-type-feature text-center p-10">
                     <div className="block box-shadow-large background-white p-12 b-r-4">
@@ -151,7 +151,7 @@ export default function Courses({ courses, seasonalPromotion }: CoursesProps) {
                 )
               })}
             </div>
-            {!localCourses.length && <div className="text-center w-100">ไม่พบคอร์ส</div>}
+            {!localCourses && <div className="text-center w-100">ไม่พบคอร์ส</div>}
           </div>
         </div>
       </div>
