@@ -20,6 +20,12 @@
       "relation": "oneToMany",
       "target": "api::course.course",
       "mappedBy": "instructor"
+    },
+    "profile_image": {
+      "type": "text"
+    },
+    "idiom": {
+      "type": "text"
     }
   }
 }
