@@ -53,7 +53,7 @@
     "asset_download": {
       "type": "string"
     },
-    "speaker_image": {
+    "thumbnail_image": {
       "type": "string"
     },
     "publish_date": {
