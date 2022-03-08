@@ -20,10 +20,16 @@
     flex-direction: row;
     padding: 10px 20px;
     border-bottom: 2px dashed saddlebrown;
+    @media (max-width: $mobile-size) {
+      flex-direction: column;
+    }
   }
 
   .speaker-description {
     text-align: left;
+    @media (min-width: $mobile-size) {
+      white-space: pre-line;
+    }
     padding: 20px 10px;
   }
 

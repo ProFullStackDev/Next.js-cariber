@@ -1,30 +1,4 @@
 .courses {
-  .sort-container {
-    position: relative;
-  }
-
-  .sort-item {
-    position: absolute;
-    z-index: 1;
-    background-color: #fff;
-
-    .button-sort {
-      border-top: 0.5px solid gray;
-      border-bottom: none;
-      border-left: none;
-      border-right: none;
-      background-color: $color-buttermilk;
-      color: $color-tiger;
-      width: 100%;
-      padding: 5px 0px;
-      cursor: pointer;
-    }
-
-    .button-sort:hover {
-      filter: brightness(105%);
-    }
-  }
-
   .form-group {
     margin: 0px;
   }

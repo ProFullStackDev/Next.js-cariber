@@ -82,7 +82,7 @@ export default function SlideCourse({ slideCourses, slideView, imageWidth, image
             <div id="news-slider" className="owl-carousel owl-theme">
               <div className="owl-wrapper-outer">
                 <div className="owl-wrapper" style={{ transform: `translate3d(${-slideShowIndex * (itemFrameWidth) - 10}px, 0px, 0px)` }}>
-                  {slideCourses?.map((value, index) => {
+                  {slideCourses?.sort((a: CarouselContent, b: CarouselContent) => a.id < b.id ? 1 : -1).map((value, index) => {
                     return (
                       <div key={index} className="owl-item" ref={refItemFrame}>
                         <div className="news-grid">
