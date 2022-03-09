@@ -1,4 +1,4 @@
-import {CourseLMS} from './models/content/courseLms';
+import {CourseLMS, OnGoingEpisodes} from './models/content/courseLms';
 import { nestHeaderAuth, NEST_API_URLS } from './models/contact';
 
 export interface WatchedEpisodeResponse {
@@ -92,5 +92,18 @@ export function saveLastSecondOfEpisode(): void {
     )
   } catch (error) {
     console.log(error);
+  }
+}
+
+export async function getOnGoingEpisodesForCourse(courseID: number): Promise<OnGoingEpisodes[]> {
+  try {
+    const response = await fetch(NEST_API_URLS.onGoingEpisode + `?course=${courseID}` , {
+      method: "GET",
+      headers: nestHeaderAuth(),
+    })
+    return await response.json() as OnGoingEpisodes[];
+  } catch (error) {
+    console.log(error);
+    return [];
   }
 }

@@ -22,64 +22,74 @@ interface AccordionProps {
   icon?: Icon,
   color: Color,
   button?: AccordionLink,
-  progress?: number
+  progress?: number,
+  percentage: number,
 }
 
-export default function Accordion({ title, description, col, icon, color, button, progress }: AccordionProps) {
+export default function Accordion( props: AccordionProps) {
   const [displayDescription, setDisplayDescription] = useState("d-none");
   function switchDisplay() {
-    if (icon === Icon.lock) {
+    if (props.icon === Icon.lock) {
       return
     }
-    displayDescription === "d-none" ? setDisplayDescription("d-block") : setDisplayDescription("d-none")
+    displayDescription === "d-none"
+      ? setDisplayDescription("d-block")
+      : setDisplayDescription("d-none")
   }
 
+  console.warn(props.percentage);
+
   return (
-    <div className={`accordion-outside m-0 col-${col}`}>
-      <div className={`accordion-frame box-shadow-medium block-type-accordion text-left ${color} ${displayDescription === "d-block" && ("accordion-frame-active")}`}
+    <div className={`accordion-outside m-0 col-${props.col}`}>
+      <div className={`accordion-frame box-shadow-medium block-type-accordion
+                        text-left ${props.color}
+                        ${displayDescription === "d-block" && ("accordion-frame-active")}`}
         onClick={switchDisplay}>
-        <div className={`${icon === Icon.lock && ("accordion-non-focus")} ${displayDescription === "d-block" && ("accordion-active")}`}>
+        <div className={`${props.icon === Icon.lock && ("accordion-non-focus")}
+                          ${displayDescription === "d-block" && ("accordion-active")}`}>
           <div className="accordion">
             <div className="accordion-title media align-items-center collapsed">
-              {icon && (
+              {props.icon && (
                 <div className="m-r-10">
-                  <i className={icon}></i>
+                  <i className={props.icon} />
                 </div>
               )}
               <h5 className="media-body text-title f-s-16 ">
-                {title}
+                {props.title}
               </h5>
               {displayDescription === "d-none" ?
-                (<i className="fas fa-chevron-right"></i>) :
-                (<i className="fas fa-chevron-up"></i>)}
+                (<i className="fas fa-chevron-right" />) :
+                (<i className="fas fa-chevron-up" />)}
             </div>
           </div>
         </div>
       </div>
-      <div className={`accordion-collapse ${color} ${displayDescription}`}>
+      <div className={`accordion-collapse ${props.color} ${displayDescription}`}>
         <div className={`accordion accordion-body row`}>
-          <div className={`${button ? ("col-9") : ("col-12")} `}>
+          <div className={`${props.button ? ("col-9") : ("col-12")} `}>
             <h6 className="f-s-14 white-space-pre">
               <span>
-                {description}
+                {props.description}
               </span>
               <br />
             </h6>
           </div>
-          {button && (
+          {props.button && (
             <div className="accordion-right col-3">
               <div>
-                {(progress || progress === 0) && (<div>
+                {(props.progress || props.progress === 0) && (<div>
                   <p className="f-s-12">
-                    รับชมแล้ว {progress / 10} นาทีจาก 10นาที
+                    รับชมแล้ว {props.progress / 10} นาทีจาก 10นาที
                   </p>
                   <div className="player-progress full">
                     <div className="progress-outer">
-                      <div className={`progress-inner p-w-${Math.round(progress)}`} />
+                      <div className={`progress-inner p-w-${props.percentage}`} />
                     </div>
                   </div>
                 </div>)}
-                <button onClick={button.callback} className="btn btn-small btn-full">{button.text}</button>
+                <button onClick={props.button.callback} className="btn btn-small btn-full">
+                  {props.button.text}
+                </button>
               </div>
             </div>
           )}

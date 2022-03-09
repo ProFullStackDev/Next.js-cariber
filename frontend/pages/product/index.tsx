@@ -1,7 +1,20 @@
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import {saveWatchedEpisode, getEpisodesAndQuiz, getWatchedEpisodes, saveLastSecondOfEpisode} from "../../apiNest/courseLmsApi";
-import { CourseLMS, Episodes, Evaluation, Quiz, ShowingType, } from "../../apiNest/models/content/courseLms";
+import {
+  saveWatchedEpisode,
+  getEpisodesAndQuiz,
+  getWatchedEpisodes,
+  saveLastSecondOfEpisode,
+  getOnGoingEpisodesForCourse,
+} from "../../apiNest/courseLmsApi";
+import {
+  CourseLMS,
+  Episodes,
+  Evaluation,
+  OnGoingEpisodes,
+  Quiz,
+  ShowingType,
+} from "../../apiNest/models/content/courseLms";
 import Accordion, { Color, Icon } from "../../components/accordion";
 import Footer from "../../components/footer";
 import Header from "../../components/header";
@@ -31,6 +44,7 @@ export default function Product() {
       yearlySubscripted: false,
     }
   );
+  const [onGoingEpisodes, setOnGoingEpisodes] = useState<OnGoingEpisodes[]>([]);
   const { proId } = router.query;
 
   useEffect(() => {
@@ -45,6 +59,7 @@ export default function Product() {
   function componentMounted(): void {
     fetchData().then(() => {});
     getWatchedEpList().then(() => {});
+    getOnGoingEpisodes().then(() => {});
   }
 
   function componentUnmounted(): void {
@@ -133,6 +148,19 @@ export default function Product() {
     data.episodes_list.push(new Evaluation());
     setCourseLms(data);
     data.episodes_list[0] && await setEpisodeOrQuiz(data.episodes_list[0], 0);
+  }
+
+  async function getOnGoingEpisodes(): Promise<void> {
+    const onGoingEpisodes = await getOnGoingEpisodesForCourse(+proId!);
+    setOnGoingEpisodes(onGoingEpisodes);
+  }
+
+  function getPercentage(value : Episodes | Quiz | Evaluation): number {
+    if (!value.duration || value.duration <= 0 ) {
+      return 0;
+    }
+    const lastSecond = +(onGoingEpisodes.filter(item => item.episodeID === value.id)[0]?.lastSecond || 0);
+    return Math.round((lastSecond/value.duration) * 100);
   }
 
   function restart() {
@@ -335,6 +363,7 @@ export default function Product() {
                             : ''}
                           col={12}
                           icon={Icon.play}
+                          percentage={getPercentage(value)}
                           color={Color.light}
                           button={{
                             callback: () => {
