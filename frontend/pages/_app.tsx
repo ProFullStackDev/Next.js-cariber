@@ -1,10 +1,11 @@
-import '../styles/globals.scss'
-import type { AppProps } from 'next/app'
-import React, { useEffect } from 'react'
-import Script from 'next/script'
-import Head from 'next/head'
-import { useRouter } from 'next/router'
-import UserManager from '../auth/userManager'
+import '../styles/globals.scss';
+import type { AppProps } from 'next/app';
+import React, { useEffect, useState } from 'react';
+import Script from 'next/script';
+import Head from 'next/head';
+import { useRouter } from 'next/router';
+import UserManager from '../auth/userManager';
+import { headerScriptsApi } from '../apiStrapi/StrapiApiService';
 
 function SafeHydrate({ children }: { children: React.ReactNode }) {
   return (
@@ -15,6 +16,14 @@ function SafeHydrate({ children }: { children: React.ReactNode }) {
 }
 
 function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
+  useEffect(() => {
+    headerScriptsApi().then((value) => {
+      const inlineScripts = value.data?.attributes?.scripts.replace(/\n/g, '');
+      if(!document.head.innerHTML.includes(inlineScripts) && inlineScripts){
+        document.head.innerHTML = inlineScripts + document.head.innerHTML;
+      }
+    });
+  }, []);
   return (
     <React.Fragment>
       <Script src="https://kit.fontawesome.com/bce3f035e8.js" crossOrigin="anonymous" />

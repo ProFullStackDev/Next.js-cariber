@@ -9,6 +9,11 @@ import { ReviewContent } from './models/contentType/review';
 import { SingleCourse } from './models/contentType/singleCourse';
 import { TermsConditionsContent } from './models/contentType/termsConditions';
 import { SeasonalPromotionContent } from './models/contentType/seasonalPromotion';
+import { HeaderScripts } from './models/contentType/headerScripts';
+
+export async function headerScriptsApi() {
+  return await fetchData(STRAPI_API_URLS.headerScripts) as ResponseData<HeaderScripts>;
+}
 
 export async function seasonalPromotionApi() {
   return await fetchData(STRAPI_API_URLS.seasonalPromotion) as ResponseData<SeasonalPromotionContent>;
