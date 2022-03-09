@@ -50,7 +50,6 @@ export default function Product() {
   useEffect(() => {
     if (!router.isReady) return;
     componentMounted();
-    localStorage.setItem('courseID',  proId?.toString() || '');
     return () => {
       componentUnmounted();
     };
@@ -60,6 +59,12 @@ export default function Product() {
     fetchData().then(() => {});
     getWatchedEpList().then(() => {});
     getOnGoingEpisodes().then(() => {});
+    localStorage.setItem('courseID',  proId?.toString() || '');
+    window.addEventListener("beforeunload", (ev) => {
+      ev.preventDefault();
+      saveLastSecondOfEpisode();
+      return ev.returnValue = 'Are you sure you want to close?';
+    });
   }
 
   function componentUnmounted(): void {
