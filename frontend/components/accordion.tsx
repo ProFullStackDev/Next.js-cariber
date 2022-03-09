@@ -37,8 +37,6 @@ export default function Accordion( props: AccordionProps) {
       : setDisplayDescription("d-none")
   }
 
-  console.warn(props.percentage);
-
   return (
     <div className={`accordion-outside m-0 col-${props.col}`}>
       <div className={`accordion-frame box-shadow-medium block-type-accordion
