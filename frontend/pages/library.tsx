@@ -49,7 +49,7 @@ export default function Library() {
   }
 
   useEffect(() => {
-    fetchData();
+    fetchData().then(() => {});
   }, [])
 
   async function fetchData() {
@@ -63,12 +63,16 @@ export default function Library() {
 
   checkContactGuard.then((value) => {
     if (value?.statusCode === 400) {
-      router.replace("/guard-contact");
+      router.replace("/guard-contact").then(() => {});
       return (
-        <div></div>
+        <div />
       )
     }
-  })
+  });
+
+  function getPercentage(value: MyCourseItem): number {
+    return Math.round(((value.watchedEpisodes[0]?.numberOfWatchedEpisode || 0) / (value.episode?.length || 0)) * 100);
+  }
 
   return (
     <div className="background-image library">
@@ -181,7 +185,7 @@ export default function Library() {
                             </Link>
                             <div className="progress">
                               <div className="progress-outer">
-                                <div className={`progress-inner p-w-${Math.round(0)}`} />
+                                <div className={`progress-inner p-w-${getPercentage(value)}`} />
                               </div>
                             </div>
                             <p className="product-body">
