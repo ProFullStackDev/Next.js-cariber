@@ -14,6 +14,8 @@ import CourseEvaluation from "../../components/courseEvaluation";
 import QuizSession from "../../components/quizSession";
 import { episodeApi } from "../../apiNest/episodeApi";
 import ButtonPartialLogin from "../../components/buttonPartialLogin";
+import checkCoursePurchasedApi from "../../apiNest/checkCoursePurchasedApi";
+import { annualPromotionApi } from "../../apiStrapi/StrapiApiService";
 
 export default function Product() {
   const [indexEpisodesOrQuiz, setIndexEpisodesOrQuiz] = useState<number>(0);
@@ -25,10 +27,16 @@ export default function Product() {
   const announcement = "ตอนนี้คุณกำลังอยู่ในโหมดทดลองเรียนฟรี เนื้อหาบางส่วนมีการถูกล็อกไว้\nคุณสามารถซื้อคอร์สนี้เพื่อดูเนื้อหาทั้งหมดในคอร์สเรียน";
   const [saleHeader, setSaleHeader] = useState(
     {
-      owned: false,
-      yearlySubscripted: false,
+      is_purchased: false,
+      has_annual: false,
     }
   );
+  const [saleSku, setSaleSku] = useState(
+    {
+      courseSku: "",
+      annualSku: ""
+    }
+  )
   const { proId } = router.query;
 
   useEffect(() => {
@@ -73,7 +81,7 @@ export default function Product() {
 
   async function fetchData() {
     const data = await getEpisodesAndQuiz(proId!.toString()) as CourseLMS;
-    if(data.statusCode && data.statusCode === 500){
+    if (data.statusCode && data.statusCode === 500) {
       router.replace("/404")
       return
     }
@@ -82,8 +90,18 @@ export default function Product() {
       return item;
     });
     data.episodes_list.push(new Evaluation());
-    setCourseLms(data);
     data.episodes_list[0] && await setEpisodeOrQuiz(data.episodes_list[0], 0);
+    await setCourseLms(data);
+    await checkCoursePurchased(data.id);
+    annualPromotionApi().then((value) =>{
+      setSaleSku({...saleSku, annualSku: value.data?.attributes?.sku})
+    })
+  }
+
+  const checkCoursePurchased = async (id: number) => {
+    checkCoursePurchasedApi(id).then((value) => {
+      setSaleHeader(value!);
+    });
   }
 
   function restart() {
@@ -105,21 +123,21 @@ export default function Product() {
               </p>
             </div>
             <div className="right-nev-product sm-none">
-              {!saleHeader.owned && <ButtonPartialLogin
-                sku={""}
+              {!saleHeader.is_purchased && <ButtonPartialLogin
+                sku={saleSku.courseSku}
                 class={"btn btn-not-focus btn-small m-t-0"}
                 text={"ซื้อคอร์สนี้"} />}
-              {!saleHeader.yearlySubscripted && <ButtonPartialLogin
-                sku={""}
+              {!saleHeader.has_annual && <ButtonPartialLogin
+                sku={saleSku.annualSku}
                 class={"btn btn-small m-t-0"}
                 text={"ซื้อแพ็คเกจรายปี"} />}
-              {saleHeader.yearlySubscripted && <ButtonPartialLogin
-                sku={""}
+              {saleHeader.has_annual && <ButtonPartialLogin
+                sku={saleSku.annualSku}
                 class={"btn btn-small m-t-0"}
                 text={"ต่อสมาชิกแพ็คเกจรายปี"} />}
             </div>
             <div className="right-nev-product ipad-none lg-none">
-              <ProductSale {...saleHeader} />
+              <ProductSale saleHeader={saleHeader} saleSku={saleSku} />
             </div>
           </div>
         </div>

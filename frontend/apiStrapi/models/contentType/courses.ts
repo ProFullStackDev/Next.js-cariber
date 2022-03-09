@@ -13,12 +13,13 @@ export interface CourseContent {
   order_sku: string;
   header: string;
   teaser_url: string;
-  speaker_image: string;
   speaker_name: string;
+  thumbnail_image: string;
   contents: Contents[];
   order_image: Image;
   episodes: Episode[];
   teaser_video: VideoComponent;
+  speaker_image: Image;
 }
 
 export interface Contents{

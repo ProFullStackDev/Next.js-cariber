@@ -78,6 +78,13 @@
       "type": "component",
       "repeatable": false,
       "component": "components.video"
+    },
+    "speaker_image": {
+      "allowedTypes": [
+        "images"
+      ],
+      "type": "media",
+      "multiple": false
     }
   }
 }
