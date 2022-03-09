@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import {createNewTrack, getEpisodesAndQuiz, getTrackRecord} from "../../apiNest/courseLmsApi";
+import { saveWatchedEpisode, getEpisodesAndQuiz, getWatchedEpisodes} from "../../apiNest/courseLmsApi";
 import { CourseLMS, Episodes, Evaluation, Quiz, ShowingType, } from "../../apiNest/models/content/courseLms";
 import Accordion, { Color, Icon } from "../../components/accordion";
 import Footer from "../../components/footer";
@@ -39,7 +39,7 @@ export default function Product() {
     return () => {
       componentUnmounted();
     };
-  }, []);
+  }, [router.isReady]);
 
   function componentMounted(): void {
     fetchData().then(() => {});
@@ -78,8 +78,8 @@ export default function Product() {
       return;
     }
     const courseID = +proId || null;
-    const watchedEpisodesList = await getTrackRecord(courseID);
-    setWatchedEpisodes( [193, 23, 194]); // will change after deployed BE api
+    const watchedEpisodesList = await getWatchedEpisodes(courseID);
+    setWatchedEpisodes(watchedEpisodesList.watchedEpisode);
   }
 
   function isWatched(id:number): boolean {
@@ -92,10 +92,10 @@ export default function Product() {
       return;
     }
     const data = {
-      courseID: +proId,
-      episodeID: indexEpisodesOrQuiz,
+      course_id: +proId,
+      episode_id: episodeLms.id,
     }
-    createNewTrack(data).then(() => {});
+    saveWatchedEpisode(data).then(() => {});
   }
 
   function getTrackName(value: Episodes | Quiz | Evaluation) {
@@ -119,7 +119,7 @@ export default function Product() {
   async function fetchData() {
     const data = await getEpisodesAndQuiz(proId!.toString()) as CourseLMS;
     if(data.statusCode && data.statusCode === 500){
-      router.replace("/404")
+      router.replace("/404").then(() => {});
       return
     }
     data.episodes_list.map(item => {

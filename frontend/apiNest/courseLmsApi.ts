@@ -1,6 +1,10 @@
 import {CourseLMS} from './models/content/courseLms';
 import { nestHeaderAuth, NEST_API_URLS } from './models/contact';
 
+export interface WatchedEpisodeResponse {
+  watchedEpisode: number[];
+}
+
 export async function allCourseLmsApi() {
   try {
     const response = await fetch(NEST_API_URLS.courseLms, {
@@ -25,25 +29,26 @@ export async function getEpisodesAndQuiz(id: string) {
   }
 }
 
-export async function getTrackRecord(courseID: number | null): Promise<number[]> {
+export async function getWatchedEpisodes(courseID: number | null): Promise<WatchedEpisodeResponse> {
+  const blankResponse = { watchedEpisode: [] };
   if (!courseID) {
-    return [];
+    return blankResponse;
   }
   try {
-    const response = await fetch(NEST_API_URLS.trackRecord + `?course=${courseID}` , {
+    const response = await fetch(NEST_API_URLS.watchedEpisode + `?course=${courseID}` , {
       method: "GET",
       headers: nestHeaderAuth(),
     })
-    return await response.json() as number[];
+    return await response.json() as WatchedEpisodeResponse;
   } catch (error) {
     console.log(error);
-    return [];
+    return blankResponse;
   }
 }
 
-export async function createNewTrack(data: {courseID: number, episodeID: number}): Promise<void> {
+export async function saveWatchedEpisode(data: {course_id: number, episode_id: number}): Promise<void> {
   try {
-    await fetch(NEST_API_URLS.trackRecord, {
+    await fetch(NEST_API_URLS.watchedEpisode, {
       method: "POST",
       headers: nestHeaderAuth(),
       body: JSON.stringify(data)
