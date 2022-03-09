@@ -121,7 +121,7 @@ export default function Courses({ courses, seasonalPromotion }: CoursesProps) {
                           <Link href={`/course/${value?.id}`}>
                             <a className={`${!value?.publishedAt && "disabled"} course-image`}>
                               <Img className="feature-image"
-                                src={value?.speaker_image}
+                                src={strapiImage(value?.speaker_image?.url)}
                                 alt={value?.speaker_name}
                                 width={500}
                                 height={281.238095} />
