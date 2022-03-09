@@ -100,7 +100,7 @@ export default function Courses({ courses, seasonalPromotion }: CoursesProps) {
                     เรียงลำดับ : {filterProps.sortText}
                   </button>
                   <div className={`sort-item ${!sortPopup && "none"}`}>
-                    {sortList.map((value, index) => {
+                    {sortList?.map((value, index) => {
                       return (
                         <button key={index} className="button-sort" onClick={() => sort(value)}>
                           {value.text}

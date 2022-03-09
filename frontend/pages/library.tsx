@@ -140,7 +140,7 @@ export default function Library() {
                     เรียงลำดับ : {filterProps.sortText}
                   </button>
                   <div className={`sort-item ${!sortPopup && "none"}`}>
-                    {sortList.map((value, index) => {
+                    {sortList?.map((value, index) => {
                       return (
                         <button key={index} className="button-sort" onClick={() => sort(value)}>
                           {value.text}
@@ -152,7 +152,7 @@ export default function Library() {
               </form>
             </div>
             <div className="grid-container">
-              {!loadingItem && myCourseList.map((value, index) => {
+              {!loadingItem && myCourseList?.map((value, index) => {
                 let cutDescription = "";
                 cutDescription = value.description?.slice(0, 280);
                 if (value.description?.length > 280) cutDescription = cutDescription + "...";
