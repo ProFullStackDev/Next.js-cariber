@@ -74,10 +74,14 @@ export default function Product() {
         setQuiz(passedData as Quiz);
         break;
       case ShowingType.episode:
-        const data = await episodeApi(passedData.id.toString()) as Episodes;
-        setEpisodeLms(data);
-        setQuiz(null);
-        localStorage.setItem('episodeID', passedData.id.toString());
+        saveLastSecondOfEpisode();
+        setTimeout(async() => { // just for clearance
+          const data = await episodeApi(passedData.id.toString()) as Episodes;
+          setEpisodeLms(data);
+          setQuiz(null);
+          localStorage.setItem('courseID', proId?.toString() || '');
+          localStorage.setItem('episodeID', passedData.id.toString());
+        }, 500);
         break;
       case ShowingType.courseEvaluation:
         break;
