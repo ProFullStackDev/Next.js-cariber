@@ -346,6 +346,8 @@ export default function Product() {
                 }
               </div>
               <ProductBlogs progressBlog={true}
+                            watchedEps={watchedEpisodes.length}
+                            fullEps={courseLms?.episodes_list?.filter(item => item.type === 'episode').length || 0}
                             productImage={courseLms.thumbnail_image}
                             productName={courseLms.course_name}
                             instructorImage={courseLms.instructor?.profile_image}
