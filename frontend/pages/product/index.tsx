@@ -72,6 +72,8 @@ export default function Product() {
     switch (passedData.type) {
       case ShowingType.quiz:
         setQuiz(passedData as Quiz);
+        await saveLastSecondOfEpisode();
+        await getOnGoingEpisodes().then(() => {});
         break;
       case ShowingType.episode:
         saveLastSecondOfEpisode();
@@ -81,6 +83,7 @@ export default function Product() {
           setQuiz(null);
           localStorage.setItem('courseID', proId?.toString() || '');
           localStorage.setItem('episodeID', passedData.id.toString());
+          getOnGoingEpisodes().then(() => {});
         }, 500);
         break;
       case ShowingType.courseEvaluation:
