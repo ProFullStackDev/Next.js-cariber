@@ -57,3 +57,40 @@ export async function saveWatchedEpisode(data: {course_id: number, episode_id: n
     console.log(error);
   }
 }
+
+export function saveLastSecondOfEpisode(): void {
+  const courseID = localStorage.getItem('courseID');
+  const episodeID = localStorage.getItem('episodeID');
+  const lastSecond = localStorage.getItem('lastSecond');
+  if (!courseID || !episodeID || !lastSecond) {
+    console.log('Cannot Save Last Second');
+    !courseID && console.log('Course ID is Missing');
+    !episodeID && console.log('Episode ID is Missing');
+    !lastSecond && console.log('Last Second is Missing');
+    return;
+  }
+  const data = {
+    course_id: +courseID,
+    episode_id: +episodeID,
+    last_second: lastSecond,
+  }
+  try {
+    fetch(NEST_API_URLS.onGoingEpisode, {
+      method: "POST",
+      headers: nestHeaderAuth(),
+      body: JSON.stringify(data)
+    }).then(
+      () => {
+        localStorage.removeItem('courseID');
+        localStorage.removeItem('episodeID');
+        localStorage.removeItem('lastSecond');
+        console.log('Can Save Successfully');
+      },
+      (err) => {
+        console.error(err);
+      }
+    )
+  } catch (error) {
+    console.log(error);
+  }
+}

@@ -4,7 +4,7 @@ import screenfull from 'screenfull';
 import Img from './image';
 import { getTrackBackground, Range } from 'react-range';
 import { Direction, IRenderThumbParams, IRenderTrackParams } from 'react-range/lib/types';
-import { VideoComponent } from '../apiStrapi/models/component/video';
+import {VideoComponent, VideoPlayingState} from '../apiStrapi/models/component/video';
 import { strapiImage } from '../apiStrapi/models/contact';
 
 type ReactVideoPlayerState = {
@@ -144,7 +144,7 @@ function VideoPlayer({ props, imageStrapi }: { props: VideoComponent, imageStrap
     player.current?.seekTo(value);
   }
 
-  const handleProgress = (state: any) => {
+  const handleProgress = (state: VideoPlayingState) => {
     if (!videoState.seeking) {
       setVideoState({ ...videoState, ...state });
     }
@@ -155,6 +155,7 @@ function VideoPlayer({ props, imageStrapi }: { props: VideoComponent, imageStrap
     if (controllerVisible) {
       setProgressCount(progressCount + 1);
     }
+    localStorage.setItem('lastSecond', state.playedSeconds.toString());
   }
 
   const handleEnded = () => {

@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import { saveWatchedEpisode, getEpisodesAndQuiz, getWatchedEpisodes} from "../../apiNest/courseLmsApi";
+import {saveWatchedEpisode, getEpisodesAndQuiz, getWatchedEpisodes, saveLastSecondOfEpisode} from "../../apiNest/courseLmsApi";
 import { CourseLMS, Episodes, Evaluation, Quiz, ShowingType, } from "../../apiNest/models/content/courseLms";
 import Accordion, { Color, Icon } from "../../components/accordion";
 import Footer from "../../components/footer";
@@ -36,6 +36,7 @@ export default function Product() {
   useEffect(() => {
     if (!router.isReady) return;
     componentMounted();
+    localStorage.setItem('courseID',  proId?.toString() || '');
     return () => {
       componentUnmounted();
     };
@@ -47,12 +48,7 @@ export default function Product() {
   }
 
   function componentUnmounted(): void {
-    saveLastSecond();
-  }
-
-  function saveLastSecond() {
-    console.warn('make api call');
-    // make api call to save last second
+    saveLastSecondOfEpisode();
   }
 
   async function setEpisodeOrQuiz(passedData: Episodes | Quiz | Evaluation, index: number) {
@@ -66,6 +62,7 @@ export default function Product() {
         const data = await episodeApi(passedData.id.toString()) as Episodes;
         setEpisodeLms(data);
         setQuiz(null);
+        localStorage.setItem('episodeID', passedData.id.toString());
         break;
       case ShowingType.courseEvaluation:
         break;

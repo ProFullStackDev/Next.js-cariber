@@ -11,3 +11,10 @@ export interface VideoComponent {
   muted?: boolean;
   handleEnded: Function;
 }
+
+export interface VideoPlayingState {
+  playedSeconds: number;
+  played: number;
+  loadedSeconds: number;
+  loaded: number;
+}
