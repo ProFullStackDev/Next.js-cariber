@@ -149,7 +149,7 @@ export default function Library() {
               </form>
             </div>
             <div className="grid-container">
-              {!loadingItem && myCourseList.map((value, index) => {
+              {!loadingItem && myCourseList?.map((value, index) => {
                 let cutDescription = "";
                 cutDescription = value.description?.slice(0, 280);
                 if (value.description?.length > 280) cutDescription = cutDescription + "...";
