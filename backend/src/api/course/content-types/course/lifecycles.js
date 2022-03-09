@@ -1,12 +1,19 @@
 module.exports = {
     afterUpdate(event) {
-      const { data, where } = event.params;
-        delete data.updatedBy
-        delete data.updatedAt
+        const { data, where } = event.params;
+        const body = {
+            "speaker_name": data.speaker_name,
+            "course_name": data.course_name,
+            "course_name_th": data.course_name,
+            "description": data.description,
+            "header": data.header,
+            "asset_download": data.asset_download? data.asset_download:"",
+            "thumbnail_image": data.thumbnail_image
+        }
         if ( 'publishedAt' in data ) {
             strapi.services['api::lms.nestjs'].syncData(data, where.id , 'publish')
         } else {
-            strapi.services['api::lms.nestjs'].syncData(data, where.id , 'update')
+            strapi.services['api::lms.nestjs'].syncData(body, where.id , 'update')
         }
     },
     afterCreate(event) {
@@ -20,7 +27,7 @@ module.exports = {
             "asset_download": result.asset_download? result.asset_download:"",
             "thumbnail_image": result.thumbnail_image
           }
-        strapi.services['api::lms.nestjs'].syncData(body, params, 'create')
+        strapi.services['api::lms.nestjs'].syncData(body, result.id, 'create')
     },
     beforeDelete(event) {
         const { where } = event.params;
