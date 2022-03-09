@@ -95,7 +95,14 @@ export default function Product() {
       course_id: +proId,
       episode_id: episodeLms.id,
     }
-    saveWatchedEpisode(data).then(() => {});
+    if (watchedEpisodes.indexOf(episodeLms.id) === -1) {
+      saveWatchedEpisode(data).then(
+        (res) => {
+          setWatchedEpisodes([...watchedEpisodes, episodeLms.id])
+        },
+        (err) => console.warn(err),
+      );
+    }
   }
 
   function getTrackName(value: Episodes | Quiz | Evaluation) {
