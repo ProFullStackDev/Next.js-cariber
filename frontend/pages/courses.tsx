@@ -61,7 +61,7 @@ export default function Courses({ courses, seasonalPromotion }: CoursesProps) {
       <Header />
       <div className="sizer">
         <div className="container">
-          <div className="row align-items-center">
+          <div className="row align-items-center justify-content-center">
             {seasonalPromotion.data?.attributes?.display && (
               <div className="block-type-image text-col-12 m-b-0">
                 <div className="block box-shadow-none background-unrecognized">
@@ -83,7 +83,7 @@ export default function Courses({ courses, seasonalPromotion }: CoursesProps) {
             </div>
             <div className="search-zone col-12">
               <form className="search-row" onSubmit={search}>
-              <div className="m-l-15 m-b-0 m-t-8 col-4 p-0">
+                <div className="m-l-15 m-b-0 m-t-8 col-4 p-0">
                   <FormInput
                     id={"search"}
                     type={"text"}
@@ -96,11 +96,11 @@ export default function Courses({ courses, seasonalPromotion }: CoursesProps) {
                 </button>
                 <div className="sort-container">
                   <button className="btn btn-box btn-small m-x-0 p-10"
-                  onClick={() => setSortPopup(!sortPopup)}>
+                    onClick={() => setSortPopup(!sortPopup)}>
                     เรียงลำดับ : {filterProps.sortText}
                   </button>
                   <div className={`sort-item ${!sortPopup && "none"}`}>
-                    {sortList.map((value, index) => {
+                    {sortList?.map((value, index) => {
                       return (
                         <button key={index} className="button-sort" onClick={() => sort(value)}>
                           {value.text}
@@ -112,7 +112,7 @@ export default function Courses({ courses, seasonalPromotion }: CoursesProps) {
               </form>
             </div>
             <div className="grid-container col-12 p-0">
-              {Boolean(localCourses.length) && localCourses?.sort(filterProps.functionSort).map((value, index) => {
+              {localCourses && localCourses?.sort(filterProps.functionSort).map((value, index) => {
                 return (
                   <div key={index} className="block-type-feature text-center p-10">
                     <div className="block box-shadow-large background-white p-12 b-r-4">
@@ -121,7 +121,7 @@ export default function Courses({ courses, seasonalPromotion }: CoursesProps) {
                           <Link href={`/course/${value?.id}`}>
                             <a className={`${!value?.publishedAt && "disabled"} course-image`}>
                               <Img className="feature-image"
-                                src={value?.speaker_image}
+                                src={strapiImage(value?.speaker_image?.url)}
                                 alt={value?.speaker_name}
                                 width={500}
                                 height={281.238095} />
@@ -151,7 +151,7 @@ export default function Courses({ courses, seasonalPromotion }: CoursesProps) {
                 )
               })}
             </div>
-            {!localCourses.length && <div className="text-center w-100">ไม่พบคอร์ส</div>}
+            {!localCourses && <div className="text-center w-100">ไม่พบคอร์ส</div>}
           </div>
         </div>
       </div>

@@ -21,6 +21,7 @@ export const NEST_API_URLS = {
   forgotPassword: BASE_API + "/users/forgot-password",
   watchedEpisode: BASE_API + '/users/watched-episode',
   onGoingEpisode: BASE_API + '/users/on-going-episode',
+  checkCoursePurchased: BASE_API + "/users/check/course",
 }
 
 export const NEST_HEADERs = {

@@ -25,8 +25,8 @@ const sortList: SortProps[] = [
 
 export default function Library() {
   const [loadingItem, setLoadingItem] = useState(true);
-  const checkContactGuard = checkContactGuardApi();
   const [sortPopup, setSortPopup] = useState<boolean>(false);
+  const [checkedContactGuard, setCheckedContactGuard] = useState<boolean>(false);
   const router = useRouter();
   const [myCourse, setMyCourse] = useState({} as MyCourseContent);
   const [myCourseList, setMyCourseList] = useState<MyCourseItem[]>([{} as MyCourseItem]);
@@ -41,7 +41,7 @@ export default function Library() {
     const filterCourseList = myCourse.course_list.filter(course =>
       course.course_name.toLowerCase().includes(filterProps.search.toLowerCase()) ||
       course.description.toLowerCase().includes(filterProps.search.toLowerCase()));
-      setMyCourseList(filterCourseList);
+    setMyCourseList(filterCourseList);
   }
 
   const sort = (sort: SortProps) => {
@@ -54,24 +54,27 @@ export default function Library() {
 
   async function fetchData() {
     const data = await myCourseApi();
-    if(data){
+    if (data) {
       setMyCourse(data);
       myCourseList && setMyCourseList(data.course_list);
     }
     setLoadingItem(false);
   }
 
-  checkContactGuard.then((value) => {
-    if (value?.statusCode === 400) {
-      router.replace("/guard-contact").then(() => {});
-      return (
-        <div />
-      )
-    }
-  });
-
   function getPercentage(value: MyCourseItem): number {
     return Math.round(((value.watchedEpisodes[0]?.numberOfWatchedEpisode || 0) / (value.episode?.length || 0)) * 100);
+  }
+
+  if (!checkedContactGuard) {
+    checkContactGuardApi().then((value) => {
+      if (value?.statusCode === 400) {
+        router.replace("/guard-contact");
+        return (
+          <div></div>
+        )
+      }
+    });
+    setCheckedContactGuard(true);
   }
 
   return (
@@ -137,11 +140,11 @@ export default function Library() {
                 </button>
                 <div className="sort-container">
                   <button className="btn btn-box btn-small m-x-0 p-10"
-                  onClick={() => setSortPopup(!sortPopup)}>
+                    onClick={() => setSortPopup(!sortPopup)}>
                     เรียงลำดับ : {filterProps.sortText}
                   </button>
                   <div className={`sort-item ${!sortPopup && "none"}`}>
-                    {sortList.map((value, index) => {
+                    {sortList?.map((value, index) => {
                       return (
                         <button key={index} className="button-sort" onClick={() => sort(value)}>
                           {value.text}
