@@ -16,7 +16,8 @@ export const STRAPI_API_URLS = {
   privacyPolicy: BASE_API + "/privacy-policy",
   carousels: BASE_API + "/carousels?populate=*",
   announcementBar: BASE_API + "/announcement-bar",
-  seasonalPromotion: BASE_API + "/seasonal-promotion?populate=*"
+  seasonalPromotion: BASE_API + "/seasonal-promotion?populate=*",
+  headerScripts: BASE_API + "/header-script",
 }
 
 export function strapiImage(url: string) {

@@ -1,0 +1,19 @@
+{
+  "kind": "singleType",
+  "collectionName": "header_scripts",
+  "info": {
+    "singularName": "header-script",
+    "pluralName": "header-scripts",
+    "displayName": "Header Scripts",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "scripts": {
+      "type": "text"
+    }
+  }
+}
