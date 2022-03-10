@@ -8,13 +8,22 @@ interface ProductBlogsProps {
   instructorImage: string,
   instructorName: string,
   instructorRemark: string,
+  watchedEps: number;
+  fullEps: number;
 }
 
 export default function ProductBlogs({ productImage,
   progressBlog,
   instructorImage,
   instructorName,
+  watchedEps,
+  fullEps,
   instructorRemark }: ProductBlogsProps) {
+
+  function getPercentage(): number {
+    return (Math.round((watchedEps/fullEps) * 100)) || 0;
+  }
+
   return (
     <div className="products col-4">
       {progressBlog && (
@@ -26,11 +35,13 @@ export default function ProductBlogs({ productImage,
           />
           <div className="panel-card-body">
             <h6 className="panel-heading" >
-              0 of 11 คอร์สรับชมเสร็จสิ้น
+              {watchedEps} of {fullEps} คอร์สรับชมเสร็จสิ้น
             </h6>
             <div className="progress">
               <div className="progress-outer">
-                <div className="progress-inner w-0" />
+                { (watchedEps && fullEps) &&
+                    <div className={`progress-inner p-w-${getPercentage()}`} />
+                }
               </div>
             </div>
           </div>

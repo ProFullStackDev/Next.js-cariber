@@ -19,7 +19,10 @@ export const NEST_API_URLS = {
   checkPassword: BASE_API + "/users/check-password",
   courseEvaluation: BASE_API + '/course-evaluation',
   forgotPassword: BASE_API + "/users/forgot-password",
+  watchedEpisode: BASE_API + '/users/watched-episode',
+  onGoingEpisode: BASE_API + '/users/on-going-episode',
   checkCoursePurchased: BASE_API + "/users/check/course",
+  lastWatchedEpisode: BASE_API + "/users/last-watched-episode",
 }
 
 export const NEST_HEADERs = {

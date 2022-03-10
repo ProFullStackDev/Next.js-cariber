@@ -9,6 +9,7 @@ import AnnouncementBar from "./announcementBar";
 import ButtonPartialLogin from "./buttonPartialLogin";
 import { WoocommerceService } from "../services/WoocommerceService";
 import { annualPromotionApi } from "../apiStrapi/StrapiApiService";
+import router from "next/router"; 
 
 interface Menu {
   url: string,
@@ -61,6 +62,10 @@ export default function Header() {
   async function fetchData(){
     const data = await annualPromotionApi();
     setAnnualSku(data.data?.attributes?.sku);
+  }
+
+  function redirect(url: string) {
+    router.push(url);
   }
 
   function checkShopeeCredentials(): void {
@@ -117,7 +122,10 @@ export default function Header() {
                   <div>
                     {menuLogedIn.map((value, index) => {
                       return (
-                        <a key={index} className="link-list-link" href={value.url}>
+                        <a key={index} className="link-list-link"
+                           onClick={ () => {
+                             redirect(value.url)
+                           }}>
                           {value.name}
                         </a>
                       )
@@ -126,7 +134,11 @@ export default function Header() {
                   <div>
                     {menu.map((value, index) => {
                       return (
-                        <a key={index} className="link-list-link" href={value.url}>
+                        <a key={index}
+                           className="link-list-link"
+                           onClick={ () => {
+                             redirect(value.url)
+                           }}>
                           {value.name}
                         </a>
                       )
@@ -160,7 +172,9 @@ export default function Header() {
                     <div className="menu">
                       {menuUser.map((value, index) => {
                         return (
-                          <a key={index} href={value.url} className="menu-item">
+                          <a key={index}
+                            onClick={() => { redirect(value.url)}}
+                             className="menu-item">
                             {value.name}
                           </a>
                         )
@@ -215,7 +229,10 @@ export default function Header() {
               <div className="link-list">
                 {menuLogedIn.map((value, index) => {
                   return (
-                    <a key={index} className="link-list-link" href={value.url}>
+                    <a key={index} className="link-list-link"
+                       onClick={ () => {
+                         redirect(value.url)
+                       }}>
                       {value.name}
                     </a>
                   )
@@ -225,7 +242,10 @@ export default function Header() {
               <div className="link-list">
                 {menu.map((value, index) => {
                   return (
-                    <a key={index} className="link-list-link" href={value.url}>
+                    <a key={index} className="link-list-link"
+                       onClick={ () => {
+                         redirect(value.url)
+                       }}>
                       {value.name}
                     </a>
                   )
@@ -243,7 +263,10 @@ export default function Header() {
                 <span className="link-list">
                   {menuUserMobile.map((value, index) => {
                     return (
-                      <a key={index} className="link-list-link" href={value.url}>
+                      <a key={index} className="link-list-link"
+                         onClick={ () => {
+                           redirect(value.url)
+                         }}>
                         {value.name}
                       </a>
                     )

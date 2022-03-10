@@ -1,7 +1,20 @@
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import { getEpisodesAndQuiz } from "../../apiNest/courseLmsApi";
-import { CourseLMS, Episodes, Evaluation, Quiz, ShowingType, } from "../../apiNest/models/content/courseLms";
+import {
+  saveWatchedEpisode,
+  getEpisodesAndQuiz,
+  getWatchedEpisodes,
+  saveLastSecondOfEpisode,
+  getOnGoingEpisodesForCourse,
+} from "../../apiNest/courseLmsApi";
+import {
+  CourseLMS,
+  Episodes,
+  Evaluation,
+  OnGoingEpisodes,
+  Quiz,
+  ShowingType,
+} from "../../apiNest/models/content/courseLms";
 import Accordion, { Color, Icon } from "../../components/accordion";
 import Footer from "../../components/footer";
 import Header from "../../components/header";
@@ -14,6 +27,7 @@ import CourseEvaluation from "../../components/courseEvaluation";
 import QuizSession from "../../components/quizSession";
 import { episodeApi } from "../../apiNest/episodeApi";
 import ButtonPartialLogin from "../../components/buttonPartialLogin";
+import {notification} from "antd";
 import checkCoursePurchasedApi from "../../apiNest/checkCoursePurchasedApi";
 import { annualPromotionApi, courseApi } from "../../apiStrapi/StrapiApiService";
 
@@ -22,6 +36,7 @@ export default function Product() {
   const [courseLms, setCourseLms] = useState<CourseLMS>({} as CourseLMS);
   const [episodeLms, setEpisodeLms] = useState<Episodes>({} as Episodes);
   const [showingType, setShowingType] = useState<ShowingType>(ShowingType.episode);
+  const [watchedEpisodes, setWatchedEpisodes] = useState<number[]>([]);
   const [quiz, setQuiz] = useState<Quiz | null>(null);
   const router = useRouter();
   const announcement = "ตอนนี้คุณกำลังอยู่ในโหมดทดลองเรียนฟรี เนื้อหาบางส่วนมีการถูกล็อกไว้\nคุณสามารถซื้อคอร์สนี้เพื่อดูเนื้อหาทั้งหมดในคอร์สเรียน";
@@ -31,6 +46,7 @@ export default function Product() {
       has_annual: false,
     }
   );
+  const [onGoingEpisodes, setOnGoingEpisodes] = useState<OnGoingEpisodes[]>([]);
   const [saleSku, setSaleSku] = useState(
     {
       courseSku: "",
@@ -40,9 +56,32 @@ export default function Product() {
   const { proId } = router.query;
 
   useEffect(() => {
+    localStorage.setItem('lastSecond', '');
     if (!router.isReady) return;
-    fetchData().then(() => { });
+    componentMounted();
+    return () => {
+      componentUnmounted();
+      window.removeEventListener("beforeunload", saveLastSecond);
+    };
   }, [router.isReady]);
+
+  function componentMounted(): void {
+    fetchData().then(() => {});
+    getWatchedEpList().then(() => {});
+    getOnGoingEpisodes().then(() => {});
+    localStorage.setItem('courseID',  proId?.toString() || '');
+    window.addEventListener("beforeunload", saveLastSecond);
+  }
+
+  function componentUnmounted(): void {
+    saveLastSecondOfEpisode();
+  }
+
+  function saveLastSecond(e: BeforeUnloadEvent) {
+    e.preventDefault();
+    saveLastSecondOfEpisode();
+    return e.returnValue = 'Are you sure you want to close?';
+  }
 
   async function setEpisodeOrQuiz(passedData: Episodes | Quiz | Evaluation, index: number) {
     setIndexEpisodesOrQuiz(index);
@@ -50,14 +89,56 @@ export default function Product() {
     switch (passedData.type) {
       case ShowingType.quiz:
         setQuiz(passedData as Quiz);
+        await saveLastSecondOfEpisode();
+        await getOnGoingEpisodes().then(() => {});
         break;
       case ShowingType.episode:
-        const data = await episodeApi(passedData.id.toString()) as Episodes;
-        setEpisodeLms(data);
-        setQuiz(null);
+        saveLastSecondOfEpisode();
+        setTimeout(async() => { // just for clearance
+          const data = await episodeApi(passedData.id.toString()) as Episodes;
+          setEpisodeLms(data);
+          setQuiz(null);
+          localStorage.setItem('courseID', proId?.toString() || '');
+          localStorage.setItem('episodeID', passedData.id.toString());
+          localStorage.setItem('lastSecond', '');
+          getOnGoingEpisodes().then(() => {});
+        }, 500);
         break;
       case ShowingType.courseEvaluation:
         break;
+    }
+  }
+
+  async function getWatchedEpList(): Promise<void> {
+    if(!proId) {
+      notification['error']({ message: 'Course Record Not Found' })
+      return;
+    }
+    const courseID = +proId || null;
+    const watchedEpisodesList = await getWatchedEpisodes(courseID);
+    setWatchedEpisodes(watchedEpisodesList.watchedEpisode);
+  }
+
+  function isWatched(id:number): boolean {
+    return watchedEpisodes.indexOf(id) !== -1;
+  }
+
+  function createNewRecord() {
+    if(!proId) {
+      notification['error']({ message: 'Course Record Not Found' })
+      return;
+    }
+    const data = {
+      course_id: +proId,
+      episode_id: episodeLms.id,
+    }
+    if (watchedEpisodes.indexOf(episodeLms.id) === -1) {
+      saveWatchedEpisode(data).then(
+        (res) => {
+          setWatchedEpisodes([...watchedEpisodes, episodeLms.id])
+        },
+        (err) => console.warn(err),
+      );
     }
   }
 
@@ -81,8 +162,8 @@ export default function Product() {
 
   async function fetchData() {
     const data = await getEpisodesAndQuiz(proId!.toString()) as CourseLMS;
-    if (data.statusCode && data.statusCode === 500) {
-      router.replace("/404")
+    if(data.statusCode && data.statusCode === 500){
+      router.replace("/404").then(() => {});
       return
     }
     data.episodes_list.map(item => {
@@ -106,6 +187,19 @@ export default function Product() {
     checkCoursePurchasedApi(id).then((value) => {
       setSaleHeader(value!);
     });
+  }
+
+  async function getOnGoingEpisodes(): Promise<void> {
+    const onGoingEpisodes = await getOnGoingEpisodesForCourse(+proId!);
+    setOnGoingEpisodes(onGoingEpisodes);
+  }
+
+  function getPercentage(value : Episodes | Quiz | Evaluation): number {
+    if (!value.duration || value.duration <= 0 ) {
+      return 0;
+    }
+    const lastSecond = +(onGoingEpisodes.filter(item => item.episodeID === value.id)[0]?.lastSecond || 0);
+    return Math.round((lastSecond/value.duration) * 100);
   }
 
   function restart() {
@@ -169,9 +263,9 @@ export default function Product() {
                 <div className="product-announcement">
                   <i className="fal fa-megaphone p-t-5" />
                   <div className="p-l-10">
-                    <span>
-                      {announcement}
-                    </span>
+                  <span>
+                    {announcement}
+                  </span>
                   </div>
                 </div>
               </div>
@@ -179,40 +273,41 @@ export default function Product() {
                 <div className="player">
                   {
                     showingType === ShowingType.episode &&
-                    <>
-                      <div className="player-video">
-                        {episodeLms?.link_video &&
-                          <VideoPlayer props={{
-                            video_id: cutCloudflareVideoId(episodeLms.link_video),
-                            video_thumbnail: { url: episodeLms.thumbnail_image }
-                          }} />
-                        }
-                      </div>
-                    </>
+                      <>
+                        <div className="player-video">
+                          {episodeLms?.link_video &&
+                              <VideoPlayer props={{
+                                video_id: cutCloudflareVideoId(episodeLms.link_video),
+                                video_thumbnail: { url: episodeLms.thumbnail_image },
+                                handleEnded: () => createNewRecord(),
+                              }} />
+                          }
+                        </div>
+                      </>
                   }
                   {showingType === ShowingType.quiz &&
-                    <>
-                      <div className="quiz-session">
-                        <QuizSession course={courseLms}
-                          restart={restart}
-                          quiz={quiz} />
-                      </div>
-                    </>
+                      <>
+                        <div className="quiz-session">
+                          <QuizSession course={courseLms}
+                                       restart={restart}
+                                       quiz={quiz} />
+                        </div>
+                      </>
                   }
                   {showingType === ShowingType.courseEvaluation &&
-                    <>
-                      <div className="quiz-session">
-                        <CourseEvaluation course={courseLms}
-                          restart={restart} />
-                      </div>
-                    </>
+                      <>
+                        <div className="quiz-session">
+                          <CourseEvaluation course={courseLms}
+                                            restart={restart} />
+                        </div>
+                      </>
                   }
                   <div className="player-nav">
                     <div className="media">
                       <div className="media-left-under-player">
                         <button className="btn btn-box btn-small"
-                          disabled={indexEpisodesOrQuiz === 0}
-                          onClick={async () => { await setEpisodeOrQuiz(courseLms?.episodes_list[indexEpisodesOrQuiz - 1], indexEpisodesOrQuiz - 1) }}>
+                                disabled={indexEpisodesOrQuiz === 0}
+                                onClick={async () => { await setEpisodeOrQuiz(courseLms?.episodes_list[indexEpisodesOrQuiz - 1], indexEpisodesOrQuiz - 1) }}>
                           <i className="fa fa-chevron-left" aria-hidden="true" />
                           บทเรียนก่อนหน้า
                         </button>
@@ -224,8 +319,8 @@ export default function Product() {
                       </div>
                       <div className="media-right">
                         <button className="btn btn-box btn-small"
-                          disabled={indexEpisodesOrQuiz === courseLms?.episodes_list?.length - 1}
-                          onClick={async () => { await setEpisodeOrQuiz(courseLms?.episodes_list[indexEpisodesOrQuiz + 1], indexEpisodesOrQuiz + 1) }}>
+                                disabled={indexEpisodesOrQuiz === courseLms?.episodes_list?.length - 1}
+                                onClick={async () => { await setEpisodeOrQuiz(courseLms?.episodes_list[indexEpisodesOrQuiz + 1], indexEpisodesOrQuiz + 1) }}>
                           บทเรียนถัดไป
                           <i className="fa fa-chevron-right" aria-hidden="true" />
                         </button>
@@ -248,25 +343,25 @@ export default function Product() {
                         {courseLms.episodes_list?.map((value, index) => {
                           return (
                             <a key={index}
-                              className="media track"
-                              onClick={async () => { await setEpisodeOrQuiz(value, index) }}>
+                               className="media track align-items-center"
+                               onClick={async () => { await setEpisodeOrQuiz(value, index) }}>
                               <div className="media-left media-middle">
                                 {index === indexEpisodesOrQuiz ? (
-                                  <p className="track-count active">
+                                  <p className="track-count active m-b-0">
                                     <i className="fa fa-play color-primary" />
                                   </p>
                                 ) : (
-                                  <p className="track-count">
-                                    {index + 1}
+                                  <p className="track-count m-b-0">
+                                    { index + 1 }
                                   </p>
                                 )}
                               </div>
-                              <div className="media-left media-middle d-flex align-items-center">
+                              <div className="media-left media-middle">
                                 <Img className="track-thumb"
-                                  src={"thumbnail_image" in value ? value.thumbnail_image : ''}
-                                  width={70}
-                                  height={39.3833}
-                                  alt={"episode_name" in value ? value.episode_name : "thumbnail image"}
+                                     src={"thumbnail_image" in value ? value.thumbnail_image : ''}
+                                     width={70}
+                                     height={39.3833}
+                                     alt={"episode_name" in value ? value.episode_name : "thumbnail image"}
                                 />
                               </div>
                               <div className="media-body media-middle">
@@ -274,6 +369,12 @@ export default function Product() {
                                   {getTrackName(value)}
                                 </div>
                               </div>
+
+                              {
+                                isWatched(value.id) &&
+                                  <i className="fa fa-check color-primary p-l-5"
+                                     aria-hidden="true" />
+                              }
                             </a>
                           )
                         })}
@@ -301,6 +402,7 @@ export default function Product() {
                             : ''}
                           col={12}
                           icon={Icon.play}
+                          percentage={getPercentage(value)}
                           color={Color.light}
                           button={{
                             callback: () => {
@@ -316,11 +418,13 @@ export default function Product() {
                 }
               </div>
               <ProductBlogs progressBlog={true}
-                productImage={courseLms.thumbnail_image}
-                productName={courseLms.course_name}
-                instructorImage={courseLms.instructor?.profile_image}
-                instructorName={courseLms.speaker_name}
-                instructorRemark={courseLms.instructor?.idiom} />
+                            watchedEps={watchedEpisodes.length}
+                            fullEps={courseLms?.episodes_list?.filter(item => item.type === 'episode').length || 0}
+                            productImage={courseLms.thumbnail_image}
+                            productName={courseLms.course_name}
+                            instructorImage={courseLms.instructor?.profile_image}
+                            instructorName={courseLms.speaker_name}
+                            instructorRemark={courseLms.instructor?.idiom} />
             </div>
           </div>
         </div>
