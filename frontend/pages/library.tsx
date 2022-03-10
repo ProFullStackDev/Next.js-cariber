@@ -56,7 +56,7 @@ export default function Library() {
     const data = await myCourseApi();
     if (data) {
       setMyCourse(data);
-      myCourseList && setMyCourseList(data.course_list);
+      data.course_list && setMyCourseList(data.course_list);
     }
     setLoadingItem(false);
   }

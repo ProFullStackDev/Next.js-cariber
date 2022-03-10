@@ -6,6 +6,7 @@ import { getTrackBackground, Range } from 'react-range';
 import { Direction, IRenderThumbParams, IRenderTrackParams } from 'react-range/lib/types';
 import { VideoComponent } from '../apiStrapi/models/component/video';
 import { strapiImage } from '../apiStrapi/models/contact';
+import moment from 'moment';
 
 type ReactVideoPlayerState = {
   url: string;
@@ -332,6 +333,10 @@ function VideoPlayer({ props, imageStrapi }: { props: VideoComponent, imageStrap
                 height={20}
                 className="filter-white" />)}
           </button>
+          <div className="d-flex align-items-center f-s-12 color-white">
+            {moment("2015-01-01").seconds(player.current?.getCurrentTime() || 0).format("mm:ss")}/
+            {moment("2015-01-01").seconds(player.current?.getDuration() || 0).format("mm:ss")}
+          </div>
           <div className="video-progress">
             <Range
               values={[videoState.played]}
