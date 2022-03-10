@@ -64,7 +64,7 @@ export default function Library() {
   }
 
   async function getLastWatchedEp(): Promise<void> {
-    const lastEpisode = await getLastWatchedEpisode(); 
+    const lastEpisode = await getLastWatchedEpisode();
     lastEpisode && setLastWatchedEP(lastEpisode);
   }
 
@@ -109,7 +109,8 @@ export default function Library() {
                 </h4>
                 <div className="resume-course box-shadow-none">
                   <div className="resume-course-positioner">
-                    <a className="resume-course-content" href="#">
+                    <a className="resume-course-content"
+                       href={ '/product?proId=' + lastWatchedEp?.courseID?.id.toString() || myCourseList[0]?.id.toString() || '' }>
                       <div className="resume-course-text sm-none ipad-none">
                         <h6 className="resume-course-status m-0">
                           <strong>
