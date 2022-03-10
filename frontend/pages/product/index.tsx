@@ -96,6 +96,7 @@ export default function Product() {
           setQuiz(null);
           localStorage.setItem('courseID', proId?.toString() || '');
           localStorage.setItem('episodeID', passedData.id.toString());
+          localStorage.setItem('lastSecond', '');
           getOnGoingEpisodes().then(() => {});
         }, 500);
         break;
