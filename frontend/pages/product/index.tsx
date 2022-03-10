@@ -56,10 +56,12 @@ export default function Product() {
   const { proId } = router.query;
 
   useEffect(() => {
+    localStorage.setItem('lastSecond', '');
     if (!router.isReady) return;
     componentMounted();
     return () => {
       componentUnmounted();
+      window.removeEventListener("beforeunload", saveLastSecond);
     };
   }, [router.isReady]);
 
@@ -68,15 +70,17 @@ export default function Product() {
     getWatchedEpList().then(() => {});
     getOnGoingEpisodes().then(() => {});
     localStorage.setItem('courseID',  proId?.toString() || '');
-    window.addEventListener("beforeunload", (ev) => {
-      ev.preventDefault();
-      saveLastSecondOfEpisode();
-      return ev.returnValue = 'Are you sure you want to close?';
-    });
+    window.addEventListener("beforeunload", saveLastSecond);
   }
 
   function componentUnmounted(): void {
     saveLastSecondOfEpisode();
+  }
+
+  function saveLastSecond(e: BeforeUnloadEvent) {
+    e.preventDefault();
+    saveLastSecondOfEpisode();
+    return e.returnValue = 'Are you sure you want to close?';
   }
 
   async function setEpisodeOrQuiz(passedData: Episodes | Quiz | Evaluation, index: number) {
