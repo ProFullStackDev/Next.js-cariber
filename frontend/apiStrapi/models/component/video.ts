@@ -9,4 +9,12 @@ export interface VideoComponent {
   preload?: boolean;
   control?: boolean;
   muted?: boolean;
+  handleEnded: Function;
+}
+
+export interface VideoPlayingState {
+  playedSeconds: number;
+  played: number;
+  loadedSeconds: number;
+  loaded: number;
 }

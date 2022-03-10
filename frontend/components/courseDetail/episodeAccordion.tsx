@@ -29,7 +29,10 @@ export default function EpisodeAccordion({ totalHours, totalEpisodes, episodes }
           <div className="grid-container">
           {localEpisodes && localEpisodes.map((value, index) => {
             return (
-              <Accordion key={index} title={value.episode_name} description={value.description} col={12} color={Color.dark} />
+              <Accordion key={index}
+                         title={value.episode_name}
+                         description={value.description}
+                         col={12} color={Color.dark} />
               )
             })}
             </div>

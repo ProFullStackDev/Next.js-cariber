@@ -48,6 +48,7 @@ export interface Episodes {
 	updateDate: string;
 	deletedAt?: string;
 	type: ShowingType;
+	duration?: number;
 }
 
 export interface Quiz {
@@ -60,6 +61,7 @@ export interface Quiz {
 	deletedAt?: string;
 	choice: QuizChoice[];
 	type: ShowingType;
+	duration?: number;
 }
 
 export interface QuizChoice {
@@ -69,6 +71,7 @@ export interface QuizChoice {
 	createDate: string;
 	updateDate: string;
 	deletedAt?: string;
+	duration?: number;
 }
 
 export class Evaluation {
@@ -77,6 +80,7 @@ export class Evaluation {
 	thumbnails?: string;
 	type: ShowingType;
 	episode_number: number;
+	duration?: number;
 
 	constructor() {
 		this.id = 0;
@@ -86,5 +90,11 @@ export class Evaluation {
 		this.episode_number = 0;
 	}
 }
+
+export interface OnGoingEpisodes {
+	episodeID: number,
+	lastSecond: string,
+}
+
 
 type EpisodesAndQuiz = Episodes | Quiz | Evaluation;
