@@ -23,7 +23,7 @@ interface AccordionProps {
   color: Color,
   button?: AccordionLink,
   progress?: number,
-  percentage: number,
+  percentage?: number,
 }
 
 export default function Accordion( props: AccordionProps) {
