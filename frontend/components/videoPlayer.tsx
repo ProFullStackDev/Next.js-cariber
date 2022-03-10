@@ -6,6 +6,7 @@ import { getTrackBackground, Range } from 'react-range';
 import { Direction, IRenderThumbParams, IRenderTrackParams } from 'react-range/lib/types';
 import {VideoComponent, VideoPlayingState} from '../apiStrapi/models/component/video';
 import { strapiImage } from '../apiStrapi/models/contact';
+import moment from 'moment';
 
 type ReactVideoPlayerState = {
   url: string;
@@ -325,15 +326,21 @@ function VideoPlayer({ props, imageStrapi }: { props: VideoComponent, imageStrap
         <div className="p-h-100" onClick={handlePlayPause}>
         </div>
         <div className={`video-controller ${!videoState.controls && "hidden"}`}>
-          <button className="control-button" onClick={handlePlayPause}>
-            {videoState.playing ? (<Img src="/videoPlayer/pause-solid.svg"
-              width={20}
-              height={20}
-              className="filter-white" />) : (<Img src="/videoPlayer/play-solid.svg"
+          <div className="flex-column-center">
+            <button className="control-button" onClick={handlePlayPause}>
+              {videoState.playing ? (<Img src="/videoPlayer/pause-solid.svg"
                 width={20}
                 height={20}
-                className="filter-white" />)}
-          </button>
+                className="filter-white" />) : (<Img src="/videoPlayer/play-solid.svg"
+                  width={20}
+                  height={20}
+                  className="filter-white" />)}
+            </button>
+          </div>
+          <div className="d-flex align-items-center f-s-12 sm-f-s-8 color-white">
+            {moment("2015-01-01").seconds(player.current?.getCurrentTime() || 0).format("mm:ss")}/
+            {moment("2015-01-01").seconds(player.current?.getDuration() || 0).format("mm:ss")}
+          </div>
           <div className="video-progress">
             <Range
               values={[videoState.played]}
@@ -412,11 +419,13 @@ function VideoPlayer({ props, imageStrapi }: { props: VideoComponent, imageStrap
                 {videoState.playbackRate}x
               </div>
             </div>
-            <div className="video-full-screen control-button" onClick={handleClickFullscreen}>
-              <Img src="/videoPlayer/expand-wide-solid.svg"
-                width={20}
-                height={20}
-                className="filter-white" />
+            <div className="flex-column-center">
+              <div className="video-full-screen control-button" onClick={handleClickFullscreen}>
+                <Img src="/videoPlayer/expand-wide-solid.svg"
+                  width={20}
+                  height={20}
+                  className="filter-white" />
+              </div>
             </div>
           </div>
         </div>

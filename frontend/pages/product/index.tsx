@@ -29,7 +29,7 @@ import { episodeApi } from "../../apiNest/episodeApi";
 import ButtonPartialLogin from "../../components/buttonPartialLogin";
 import {notification} from "antd";
 import checkCoursePurchasedApi from "../../apiNest/checkCoursePurchasedApi";
-import { annualPromotionApi } from "../../apiStrapi/StrapiApiService";
+import { annualPromotionApi, courseApi } from "../../apiStrapi/StrapiApiService";
 
 export default function Product() {
   const [indexEpisodesOrQuiz, setIndexEpisodesOrQuiz] = useState<number>(0);
@@ -174,9 +174,13 @@ export default function Product() {
     data.episodes_list[0] && await setEpisodeOrQuiz(data.episodes_list[0], 0);
     await setCourseLms(data);
     await checkCoursePurchased(data.id);
-    annualPromotionApi().then((value) =>{
-      setSaleSku({...saleSku, annualSku: value.data?.attributes?.sku})
-    })
+    await setSku(data.lms_id);
+  }
+
+  const setSku = async (lms_id: number) => {
+    const annual = await annualPromotionApi();
+    const course = await courseApi(lms_id.toString());
+    setSaleSku({ courseSku: course?.data?.order_sku || "", annualSku: annual?.data?.attributes?.sku || "" });
   }
 
   const checkCoursePurchased = async (id: number) => {
