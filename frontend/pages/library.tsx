@@ -2,8 +2,8 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { FormEvent, useEffect, useState } from "react";
 import { checkContactGuardApi } from "../apiNest/checkContactGuardApi";
-import { MyCourseContent, MyCourseItem } from "../apiNest/models/content/myCourse";
-import { myCourseApi } from "../apiNest/myCourseApi";
+import {LastWatchedEp, MyCourseContent, MyCourseItem} from "../apiNest/models/content/myCourse";
+import {getLastWatchedEpisode, myCourseApi} from "../apiNest/myCourseApi";
 import Footer from "../components/footer";
 import FooterBrand from "../components/footerBrand";
 import FormInput from "../components/formInput";
@@ -35,6 +35,7 @@ export default function Library() {
     sortText: "ไม่เรียงลำดับ",
     functionSort: (a: MyCourseItem, b: MyCourseItem) => a.id > b.id ? 1 : -1
   });
+  const [lastWatchedEp, setLastWatchedEP] = useState<LastWatchedEp | null>(null);
 
   const search = (event: FormEvent) => {
     event.preventDefault();
@@ -50,19 +51,35 @@ export default function Library() {
 
   useEffect(() => {
     fetchData().then(() => {});
+    getLastWatchedEp().then(() => {});
   }, [])
 
   async function fetchData() {
     const data = await myCourseApi();
     if (data) {
       setMyCourse(data);
-      myCourseList && setMyCourseList(data.course_list);
+      data.course_list && setMyCourseList(data.course_list);
     }
     setLoadingItem(false);
   }
 
+  async function getLastWatchedEp(): Promise<void> {
+    const lastEpisode = await getLastWatchedEpisode(); 
+    lastEpisode && setLastWatchedEP(lastEpisode);
+  }
+
   function getPercentage(value: MyCourseItem): number {
     return Math.round(((value.watchedEpisodes[0]?.numberOfWatchedEpisode || 0) / (value.episode?.length || 0)) * 100);
+  }
+
+  function getName(): string {
+    if (lastWatchedEp) {
+      return ((lastWatchedEp?.courseID?.course_name || '') + ' - ' + (lastWatchedEp?.episodeID?.episode_name || ''));
+    }
+    if (myCourseList.length) {
+      return (myCourseList[0]?.course_name || '') + ' - ' + (myCourseList[0]?.episode[0]?.episode_name || '');
+    }
+    return '';
   }
 
   if (!checkedContactGuard) {
@@ -100,15 +117,23 @@ export default function Library() {
                           </strong>
                         </h6>
                         <p className="resume-course-title m-0">
-                          Strategy to Win - EP02: กลยุทธ์ทางธุรกิจ
+                          { !loadingItem && getName() }
                         </p>
                       </div>
                       <div className="resume-course-image">
-                        <Img src="/library/watch-continue.jpg"
-                          width={700}
-                          height={400}
-                          alt="กลยุทธ์ทางธุรกิจ"
-                        />
+                        {
+                          (lastWatchedEp && lastWatchedEp.episodeID.thumbnail_image)
+                            ? <Img src={lastWatchedEp.episodeID.thumbnail_image}
+                                   width={700}
+                                   height={400}
+                                   alt="กลยุทธ์ทางธุรกิจ"
+                              />
+                            : <Img src={myCourseList[0]?.thumbnail_image}
+                                   width={700}
+                                   height={400}
+                                   alt="กลยุทธ์ทางธุรกิจ"
+                               />
+                        }
                       </div>
                       <div className="resume-course-text lg-none">
                         <h6 className="resume-course-status m-0">
@@ -117,7 +142,7 @@ export default function Library() {
                           </strong>
                         </h6>
                         <p className="resume-course-title m-0">
-                          Strategy to Win - EP02: กลยุทธ์ทางธุรกิจ
+                          { !loadingItem && getName() }
                         </p>
                       </div>
                     </a>

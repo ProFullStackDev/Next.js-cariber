@@ -35,3 +35,31 @@ export interface Episode {
 	updateDate: string;
 	deletedAt?: string;
 }
+
+export interface LastWatchedEp {
+	id: number;
+	lastSecond: string;
+	createdDate: string;
+	updatedDate: string;
+	courseID: Course;
+	episodeID: Episode;
+}
+
+export interface Course {
+	id: number;
+	speaker_name: string;
+	course_name: string;
+	course_name_th: string;
+	description: string;
+	total_hours: number;
+	total_lessons: number;
+	order_link: string;
+	header: string;
+	asset_download: string;
+	thumbnail_image: string;
+	lms_id: number;
+	published: boolean;
+	createDate: string;
+	updateDate: string;
+	deletedAt?: string;
+}

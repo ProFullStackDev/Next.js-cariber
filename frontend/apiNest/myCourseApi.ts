@@ -1,5 +1,5 @@
 import { nestHeaderAuth, NEST_API_URLS } from './models/contact';
-import { MyCourseContent } from "./models/content/myCourse";
+import {LastWatchedEp, MyCourseContent} from "./models/content/myCourse";
 
 export async function myCourseApi() {
   try {
@@ -23,5 +23,18 @@ export async function submitEvaluation(body: {score: number | null, feedback: st
     return await response.json();
   } catch (error) {
     console.log(error);
+  }
+}
+
+export async function getLastWatchedEpisode(): Promise<LastWatchedEp | null> {
+  try {
+    const response = await fetch(NEST_API_URLS.lastWatchedEpisode, {
+      method: "GET",
+      headers: nestHeaderAuth(),
+    })
+    return await response.json() as LastWatchedEp;
+  } catch (error) {
+    console.log(error);
+    return null;
   }
 }
