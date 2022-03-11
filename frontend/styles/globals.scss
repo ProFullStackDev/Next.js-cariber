@@ -5135,7 +5135,7 @@ html {
   overflow-y: hidden;
 }
 
-.header-text{
+.header-text {
   @media(max-width: $mobile-size) {
     font-size: 22px;
     line-height: 1.2;
@@ -5147,8 +5147,9 @@ html {
   width: 100%;
 }
 
-.search-row{
+.search-row {
   display: flex;
+
   @media(min-width: $mobile-size) {
     justify-content: center;
   }
@@ -5180,14 +5181,27 @@ html {
   }
 }
 
-.search-field{ 
+.search-field {
   margin-bottom: 0px;
 }
 
-.btn-min-w-fit{
+.btn-min-w-fit {
   min-width: fit-content;
 }
 
-.border-none{
+.border-none {
   border: none;
+}
+
+.w-woo {
+  padding: 0px 10px;
+  width: 65%;
+
+  @media(max-width: $ipad-size) and (min-width: $mobile-size) {
+    width: 90%;
+  }
+
+  @media(max-width: $mobile-size) {
+    width: 100%;
+  }
 }
