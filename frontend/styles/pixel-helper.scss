@@ -10,6 +10,10 @@ $maximum-pixel-percentage : 101;
   .p-h-#{$i} {
     height: $i+0% !important;
   }
+
+  .h-vh-#{$i} {
+    height: #{$i}vh !important;
+  }
 }
 
 @for $i from 0 to $maximum-pixel-size {
