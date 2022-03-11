@@ -1,6 +1,6 @@
 import {CourseLMS, Quiz} from "../apiNest/models/content/courseLms";
 import React, { useState } from "react";
-import {submitEvaluation} from "../apiNest/myCourseApi";
+import {GetCertificate, submitEvaluation} from "../apiNest/myCourseApi";
 import Img from "./image";
 
 export enum TypeOfFeedBack {
@@ -44,6 +44,13 @@ export default function CourseEvaluation(props: QuizProps ){
     const submitResponse = await submitEvaluation(data);
     if (submitResponse.id) {
       setSubmitted(true);
+      const certificate = await GetCertificate(props.course.id)
+      const pdf = new Blob([certificate], { type: 'application/pdf' });
+      const url = URL.createObjectURL(pdf);
+      var a = document.createElement("a");
+      a.href = url;
+      a.download = `${props.course.course_name.split(" ").join("-")}-Certificate-${new Date().toISOString().slice(0,10)}`;
+      a.click();
     }
   }
 
