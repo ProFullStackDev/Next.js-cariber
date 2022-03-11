@@ -20,7 +20,7 @@ export default function ImagePartialLogin(props: imagePartialLoginProps) {
 
   async function interestCourse(sku: string) {
     if (userManager.isLoggedIn()) {
-      sku && userManager.redirectCheckout(router, sku);
+      sku && await userManager.redirectCheckout(router, sku);
     } else {
       setIsPopup(true);
     }
@@ -29,7 +29,7 @@ export default function ImagePartialLogin(props: imagePartialLoginProps) {
   async function setCallbackButtonFN(sku: string) {
     setIsPopup(false)
     if (userManager.isLoggedIn()) {
-      sku && userManager.redirectCheckout(router, sku);
+      sku && await userManager.redirectCheckout(router, sku);
     }
   }
 

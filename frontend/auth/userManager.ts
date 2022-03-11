@@ -61,8 +61,8 @@ export default class UserManager {
         removeCookies(this.userId, { sameSite: "none", secure: true });
     }
 
-    redirectCheckout(router: NextRouter, sku: string): void {
-        const userID = this.getUserId();
-        router.push(`https://careerfact.wpcomstaging.com/?add-sku=${sku}&cid=${userID}`)
+    async redirectCheckout(router: NextRouter, sku: string) {
+        const userID = Buffer.from(this.getUserId()?.toString() || "", 'utf8').toString('base64');
+        router.push(`https://careerfact.wpcomstaging.com/?add-sku=${sku}&cid=${userID}`);
     }
 }
