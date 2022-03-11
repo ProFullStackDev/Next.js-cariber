@@ -29,6 +29,14 @@ interface IndexProps {
 export default function Index({ carousel, home, review, annualPromotion }: IndexProps) {
   return (
     <div className="index">
+      <button
+        type="button"
+        onClick={() => {
+          throw new Error("Sentry Frontend Error");
+        }}
+      >
+        Throw error
+      </button>
       <Header />
       <div className="background-dark">
         <div className="sizer p-t-0">
