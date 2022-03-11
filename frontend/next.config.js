@@ -17,7 +17,10 @@ const moduleExports = {
 };
 
 const sentryWebpackPluginOptions = {
+  authToken: process.env.NEXT_PUBLIC_SENTRY_AUTH_TOKEN || "7c1da6903aea47e893dd30962e9b717c8fa246449e804163bdc9805a212ebb72",
   silent: true,
+  include: ".",
+  ignore: ["node_modules", "webpack.config.js"],
 };
 
 module.exports = withSentryConfig(moduleExports, sentryWebpackPluginOptions);
