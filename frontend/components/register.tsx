@@ -10,7 +10,7 @@ import { WoocommerceCredentials } from "../apiNest/models/content/woocommerce";
 import { WoocommerceService } from "../services/WoocommerceService";
 
 interface RegisterProps {
-  callbackButton: MouseEventHandler<HTMLButtonElement>,
+  callbackButton?: MouseEventHandler<HTMLButtonElement>,
   shopeeID: string | null,
 }
 
@@ -128,15 +128,17 @@ export default function Register({ callbackButton, shopeeID }: RegisterProps) {
                 </button>
               </form>
             </div>
-            <div className="login-bottom">
-              <div className="color-white row justify-content-center">
-                เป็นสมาชิกแล้ว?
-                &nbsp;
-                <button onClick={callbackButton} className="btn btn-small m-0 p-0 link-colorless color-white">
-                  คลิกเพื่อเข้าสู่ระบบ
-                </button>
+            {callbackButton && (
+              <div className="login-bottom">
+                <div className="color-white row justify-content-center">
+                  เป็นสมาชิกแล้ว?
+                  &nbsp;
+                  <button onClick={callbackButton} className="btn btn-small m-0 p-0 link-colorless color-white">
+                    คลิกเพื่อเข้าสู่ระบบ
+                  </button>
+                </div>
               </div>
-            </div>
+            )}
           </div>
         </div>
       </div>

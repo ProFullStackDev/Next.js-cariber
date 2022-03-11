@@ -1,8 +1,11 @@
 import Link from "next/link";
+import { MouseEventHandler } from "react";
+import Popup from "reactjs-popup";
 import Footer from "../components/footer";
 import FormInput from "../components/formInput";
 import Header from "../components/header";
 import Img from "../components/image";
+import Register from "../components/register";
 
 export default function ShopeeLogin() {
   return (
@@ -40,11 +43,11 @@ export default function ShopeeLogin() {
                   </form>
                   <div className="form-group p-t-15 p-x-0 p-n-5">
                     <label className="justify-content-right d-flex">
-                        <Link href="/forgot-password" passHref={true}>
-                          <a className="link-colorful">
-                            ลืมรหัสผ่าน
-                          </a>
-                        </Link>
+                      <Link href="/forgot-password" passHref={true}>
+                        <a className="link-colorful">
+                          ลืมรหัสผ่าน
+                        </a>
+                      </Link>
                     </label>
                   </div>
                 </div>
@@ -84,6 +87,32 @@ export default function ShopeeLogin() {
                       </p>
                     </div>
                   </a>
+                </div>
+                <div className="m-t-30">
+                  <span className="color-black">
+                    ไม่ได้เป็นสมาชิก?
+                  </span>
+                  <Popup className="popup-auth"
+                    trigger={
+                      <button className="link-colorless" >
+                        คลิกเพื่อสร้างบัญชีผู้ใช้งานใหม่
+                      </button>
+                    }
+                    modal
+                    closeOnDocumentClick={false}>
+                    {(close: MouseEventHandler<HTMLButtonElement>) => {
+                      return (
+                        <div className="pop-modal">
+                          <button className="close" onClick={close}>
+                            <p>
+                              &times;
+                            </p>
+                          </button>
+                          <Register shopeeID={null} />
+                        </div>
+                      )
+                    }}
+                  </Popup>
                 </div>
               </div>
             </div>
