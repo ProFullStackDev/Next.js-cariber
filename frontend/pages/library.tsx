@@ -107,48 +107,53 @@ export default function Library() {
                     คอร์สของฉัน
                   </strong>
                 </h4>
-                <div className="resume-course box-shadow-none">
-                  <div className="resume-course-positioner">
-                    <a className="resume-course-content"
-                       href={ '/product?proId=' + lastWatchedEp?.courseID?.id.toString() || myCourseList[0]?.id.toString() || '' }>
-                      <div className="resume-course-text sm-none ipad-none">
-                        <h6 className="resume-course-status m-0">
-                          <strong>
-                            เรียนคอร์สต่อ
-                          </strong>
-                        </h6>
-                        <p className="resume-course-title m-0">
-                          { !loadingItem && getName() }
-                        </p>
+                {(!loadingItem && (lastWatchedEp?.id || myCourseList.length))
+                  ?
+                    <div className="resume-course box-shadow-none">
+                      <div className="resume-course-positioner">
+                        <a className="resume-course-content"
+                           href={'/product?proId=' + lastWatchedEp?.courseID?.id.toString() || myCourseList[0]?.id.toString() || ''}>
+                          <div className="resume-course-text sm-none ipad-none">
+                            <h6 className="resume-course-status m-0">
+                              <strong>
+                                เรียนคอร์สต่อ
+                              </strong>
+                            </h6>
+                            <p className="resume-course-title m-0">
+                              {!loadingItem && getName()}
+                            </p>
+                          </div>
+                          <div className="resume-course-image">
+                            {
+                              (lastWatchedEp && lastWatchedEp.episodeID.thumbnail_image)
+                                ? <Img src={lastWatchedEp.episodeID.thumbnail_image}
+                                       width={700}
+                                       height={400}
+                                       alt="กลยุทธ์ทางธุรกิจ"
+                                />
+                                : <Img src={myCourseList[0]?.thumbnail_image}
+                                       width={700}
+                                       height={400}
+                                       alt="กลยุทธ์ทางธุรกิจ"
+                                />
+                            }
+                          </div>
+                          <div className="resume-course-text lg-none">
+                            <h6 className="resume-course-status m-0">
+                              <strong>
+                                เรียนคอร์สต่อ
+                              </strong>
+                            </h6>
+                            <p className="resume-course-title m-0">
+                              {!loadingItem && getName()}
+                            </p>
+                          </div>
+                        </a>
                       </div>
-                      <div className="resume-course-image">
-                        {
-                          (lastWatchedEp && lastWatchedEp.episodeID.thumbnail_image)
-                            ? <Img src={lastWatchedEp.episodeID.thumbnail_image}
-                                   width={700}
-                                   height={400}
-                                   alt="กลยุทธ์ทางธุรกิจ"
-                              />
-                            : <Img src={myCourseList[0]?.thumbnail_image}
-                                   width={700}
-                                   height={400}
-                                   alt="กลยุทธ์ทางธุรกิจ"
-                               />
-                        }
-                      </div>
-                      <div className="resume-course-text lg-none">
-                        <h6 className="resume-course-status m-0">
-                          <strong>
-                            เรียนคอร์สต่อ
-                          </strong>
-                        </h6>
-                        <p className="resume-course-title m-0">
-                          { !loadingItem && getName() }
-                        </p>
-                      </div>
-                    </a>
-                  </div>
-                </div>
+                    </div>
+                  :
+                    <></>
+                }
               </div>
             </div>
             <div className="search-zone">
