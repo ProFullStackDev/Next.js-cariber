@@ -3,6 +3,9 @@ require("dotenv").config();
 const { withSentryConfig } = require('@sentry/nextjs');
 
 const moduleExports = {
+  sentry: {
+    disableServerWebpackPlugin: true,
+  },
   reactStrictMode: true,
   sassOptions: {
     includePaths: [path.join(__dirname, 'styles')],
