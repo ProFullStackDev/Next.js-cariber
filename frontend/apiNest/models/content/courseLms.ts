@@ -95,7 +95,7 @@ export class Evaluation {
 export class Certificate {
 	id: number;
 	name: string;
-	thumbnails?: string;
+	thumbnail_image: string;
 	type: ShowingType;
 	episode_number: number;
 	duration?: number;
@@ -103,7 +103,7 @@ export class Certificate {
 	constructor() {
 		this.id = 0;
 		this.name = 'Download Certificate';
-		this.thumbnails = '';
+		this.thumbnail_image = '';
 		this.type = ShowingType.certificate;
 		this.episode_number = 0;
 	}
