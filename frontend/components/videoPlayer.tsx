@@ -7,6 +7,7 @@ import { Direction, IRenderThumbParams, IRenderTrackParams } from 'react-range/l
 import {VideoComponent, VideoPlayingState} from '../apiStrapi/models/component/video';
 import { strapiImage } from '../apiStrapi/models/contact';
 import moment from 'moment';
+import axios from 'axios';
 
 type ReactVideoPlayerState = {
   url: string;
@@ -189,16 +190,24 @@ function VideoPlayer({ props, imageStrapi }: { props: VideoComponent, imageStrap
     setVideoStarted(true);
   }
 
-  const changeProps = () => {
-    setVideoState({
-      ...videoState,
-      url: `https://videodelivery.net/${props.video_id}/manifest/video.m3u8`,
-      light: props.autoplay ? false : props.video_thumbnail?.url ? props.video_thumbnail?.url : true,
-    });
+  const getSignedToken = () => {
+    axios({
+      method: 'POST',
+      url: `https://api.cloudflare.com/client/v4/accounts/${process.env.NEXT_PUBLIC_CLOUDFLARE_ACOOUNT}/stream/${props.video_id}/token`,
+      headers: {
+        "Authorization": `Bearer ${process.env.NEXT_PUBLIC_CLOUDFLARE_TOKEN}`
+      }
+    }).then(res=>{
+      setVideoState({
+        ...videoState,
+        url: `https://videodelivery.net/${res.data.result.token}/manifest/video.m3u8`,
+        light: props.autoplay ? false : props.video_thumbnail?.url ? props.video_thumbnail?.url : true,
+      });
+    })
   }
 
   useEffect(() => {
-    changeProps();
+    getSignedToken();
   }, [props]);
 
 

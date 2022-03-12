@@ -7,7 +7,7 @@ import UserManager from "../auth/userManager";
 import GoogleLogin, { GoogleLoginResponse, GoogleLoginResponseOffline } from "react-google-login";
 import FacebookLogin, { ReactFacebookLoginInfo } from 'react-facebook-login-typed';
 import { Auth } from "../apiNest/models/content/auth";
-
+import Link from "next/link";
 interface CustomLoginProp {
   path: string,
   callbackButton: Function
@@ -160,6 +160,13 @@ export default function CustomLogin({ path, callbackButton }: CustomLoginProp) {
                   เข้าสู่ระบบ
                 </button>
               </form>
+            </div>
+            <div className="login-bottom">
+              <Link href={"/forgot-password"} passHref={true}>
+                <a className="btn btn-small m-t-20 m-0 p-0 link-colorless color-white">
+                  ลืมรหัสผ่าน?
+                </a>
+              </Link>
             </div>
           </div>
         </div>

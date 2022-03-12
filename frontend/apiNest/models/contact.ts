@@ -23,6 +23,7 @@ export const NEST_API_URLS = {
   onGoingEpisode: BASE_API + '/users/on-going-episode',
   checkCoursePurchased: BASE_API + "/users/check/course",
   lastWatchedEpisode: BASE_API + "/users/last-watched-episode",
+  getCertificate: BASE_API + "/media/get-certificate"
 }
 
 export const NEST_HEADERs = {

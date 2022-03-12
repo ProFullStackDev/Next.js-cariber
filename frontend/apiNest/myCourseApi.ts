@@ -38,3 +38,19 @@ export async function getLastWatchedEpisode(): Promise<LastWatchedEp | null> {
     return null;
   }
 }
+
+export async function GetCertificate(id: number): Promise<any> {
+  try {
+    const response = await fetch(`${NEST_API_URLS.getCertificate}/${id}`, {
+        method: "GET",
+        headers: nestHeaderAuth(),
+      })
+        .then(async (res)=>{  
+          return await res.blob();})
+        .catch((err)=>err)
+    return await response
+  } catch(err) {
+    console.log(err);
+    return null
+  }
+}
