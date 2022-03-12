@@ -167,6 +167,10 @@ export default function Product() {
   }
 
   async function fetchData() {
+    if(!proId) {
+      notification['error']({ message: 'Course Record Not Found' })
+      return;
+    }
     const data = await getEpisodesAndQuiz(proId!.toString()) as CourseLMS;
     if(data.statusCode && data.statusCode === 500){
       router.replace("/404").then(() => {});

@@ -192,55 +192,42 @@ export default function Library() {
                 cutDescription = value.description?.slice(0, 280);
                 if (value.description?.length > 280) cutDescription = cutDescription + "...";
                 return (
-                  <div key={`mycourse ${index}`} className="col-12 products-col">
-                    <div className="product product-4 box-shadow-medium  background-light h-max">
-                      <div className="product-content h-max">
-                        <Link href={`/product?proId=${value.id}`}>
-                          <a>
-                            <div className="product-image">
-                              <Img src={value.thumbnail_image}
-                                width={700}
-                                height={400}
-                                alt={value.speaker_name}
-                              />
-                            </div>
-                          </a>
-                        </Link>
-                        <div className="frame-card">
-                          <div className="product-info" >
-                            <Link href={`/product?proId=${value.id}`}>
-                              <a>
-                                <h4 className="product-title">
-                                  <strong>
-                                    {value.course_name}
-                                  </strong>
-                                </h4>
-                              </a>
-                            </Link>
-                            <div className="progress">
-                              <div className="progress-outer">
-                                <div className={`progress-inner p-w-${getPercentage(value)}`} />
-                              </div>
-                            </div>
-                            <p className="product-body">
-                              {cutDescription}
-                            </p>
-                          </div>
-                          <div className="product-button">
-                            <Link href={`/product?proId=${value.id}`}>
-                              <a className="btn btn-box btn-solid btn-small btn-full">
-                                รับชมเลย
-                              </a>
-                            </Link>
-                          </div>
+                  <div key={index} className="block-type-feature text-center col-12">
+                  <div className="block box-shadow-large background-white p-12 b-r-4">
+                    <div className="feature">
+                      <Link href={`/product?proId=${value.id}`}>
+                        <a>
+                          <Img className="feature-image"
+                            src={value.thumbnail_image}
+                            alt={value.speaker_name}
+                            width={700}
+                            height={400} />
+                        </a>
+                      </Link>
+                    </div>
+                      <div className="progress">
+                        <div className="progress-outer">
+                          <div className={`progress-inner p-w-${getPercentage(value)}`} />
                         </div>
                       </div>
+                    <div className="feature-text h-100 p-t-15">
+                      <div className="text-left">
+                        <h6 className="color-black ipad-f-s-14">คอร์สเรียน: {value.course_name}</h6>
+                        <p className="f-s-14 ipad-f-s-12">สอนโดย {value.speaker_name}</p>
+                      </div>
                     </div>
+                    <Link href={""}>
+                      <a className="btn">
+                          <h6 className="m-0 color-white  ipad-f-s-12">
+                            รับชมเลย
+                          </h6>
+                      </a>
+                    </Link>
                   </div>
+                </div>
                 )
               })}
             </div>
-            <Pagination page={Number(router.query.page)} pageCount={1} />
           </div>
         </div>
       </div>
