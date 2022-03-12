@@ -78,7 +78,7 @@ export interface QuizChoice {
 export class Evaluation {
 	id: number;
 	name: string;
-	thumbnail_image?: string;
+	thumbnail_image: string;
 	type: ShowingType;
 	episode_number: number;
 	duration?: number;
