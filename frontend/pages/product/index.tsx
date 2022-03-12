@@ -281,6 +281,9 @@ export default function Product() {
                                 video_id: cutCloudflareVideoId(episodeLms.link_video),
                                 video_thumbnail: { url: episodeLms.thumbnail_image },
                                 handleEnded: () => createNewRecord(),
+                                lastSecond: onGoingEpisodes?.filter(item =>
+                                    item.episodeID === episodeLms.id
+                                )[0]?.lastSecond || undefined,
                               }} />
                           }
                         </div>
