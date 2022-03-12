@@ -33,6 +33,7 @@ import checkCoursePurchasedApi from "../../apiNest/checkCoursePurchasedApi";
 import { annualPromotionApi, courseApi } from "../../apiStrapi/StrapiApiService";
 import Popup from "reactjs-popup";
 import CourseCertificate from "../../components/courseCertificate";
+import { getCertificate } from "../../apiNest/myCourseApi";
 
 export default function Product() {
   const [indexEpisodesOrQuiz, setIndexEpisodesOrQuiz] = useState<number>(0);
@@ -42,7 +43,7 @@ export default function Product() {
   const [watchedEpisodes, setWatchedEpisodes] = useState<number[]>([]);
   const [quiz, setQuiz] = useState<Quiz | null>(null);
   const router = useRouter();
-  const [ showCertificate, setShowCertificate ] = useState<boolean>(false);
+  const [showCertificate, setShowCertificate] = useState<boolean>(false);
   const announcement = "ตอนนี้คุณกำลังอยู่ในโหมดทดลองเรียนฟรี เนื้อหาบางส่วนมีการถูกล็อกไว้\nคุณสามารถซื้อคอร์สนี้เพื่อดูเนื้อหาทั้งหมดในคอร์สเรียน";
   const [saleHeader, setSaleHeader] = useState(
     {
@@ -227,6 +228,16 @@ export default function Product() {
 
   function restart() {
     setEpisodeOrQuiz(courseLms.episodes_list[0], 0).then(() => { });
+  }
+
+  const downloadCertificate = async () =>{
+    const certificate = await getCertificate(courseLms.id)
+    const pdf = new Blob([certificate], { type: 'application/pdf' });
+    const url = URL.createObjectURL(pdf);
+    var a = document.createElement("a");
+    a.href = url;
+    a.download = `${courseLms.course_name.split(" ").join("-")}-Certificate-${new Date().toISOString().slice(0,10)}`;
+    a.click();
   }
 
   return (
@@ -502,9 +513,9 @@ export default function Product() {
                   <br className="sm-none" />
                   หวังว่าคุณจะสนุกไปกับคอร์สเรียนของเรา
                 </p>
-                <a href="" className="btn btn-small btn-box">
+                <button className="btn btn-small btn-box" onClick={downloadCertificate}>
                   ดาวน์โหลด Certificate
-                </a>
+                </button>
               </div>
             </div>
           )

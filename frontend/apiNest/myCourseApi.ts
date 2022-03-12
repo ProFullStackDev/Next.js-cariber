@@ -39,7 +39,7 @@ export async function getLastWatchedEpisode(): Promise<LastWatchedEp | null> {
   }
 }
 
-export async function GetCertificate(id: number): Promise<any> {
+export async function getCertificate(id: number): Promise<any> {
   try {
     const response = await fetch(`${NEST_API_URLS.getCertificate}/${id}`, {
         method: "GET",

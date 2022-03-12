@@ -1,6 +1,6 @@
 import {CourseLMS, Quiz} from "../apiNest/models/content/courseLms";
 import React, { useState } from "react";
-import {GetCertificate, submitEvaluation} from "../apiNest/myCourseApi";
+import {getCertificate, submitEvaluation} from "../apiNest/myCourseApi";
 import Img from "./image";
 
 export interface QuizProps {
@@ -11,7 +11,7 @@ export interface QuizProps {
 export default function CourseCertificate(props: QuizProps ){
 
   async function downloadCertificate() {
-    const certificate = await GetCertificate(props.course.id)
+    const certificate = await getCertificate(props.course.id)
     const pdf = new Blob([certificate], { type: 'application/pdf' });
     const url = URL.createObjectURL(pdf);
     var a = document.createElement("a");

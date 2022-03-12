@@ -240,6 +240,7 @@ function VideoPlayer({
   }
 
   useEffect(() => {
+    setContinueVisible(false);
     getSignedToken();
   }, [props]);
 
