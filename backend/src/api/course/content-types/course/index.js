@@ -3,8 +3,8 @@
 const schema = require('./schema.json')
 
 const files = [{
-  url: "https://strapi-dev.cariber.co/api/courses?populate=*",
-  headers: { Origin: "https://nextjs-dev.cariber.co" }
+  url: `${process.env.STRAPI_API_URL}/api/courses?populate=*`,
+  headers: { Origin: process.env.NEXT_HOME_URL }
 }];
 
 module.exports = {
