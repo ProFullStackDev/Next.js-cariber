@@ -1,7 +1,7 @@
 'use strict';
 
 const axios = require('axios');
-const BASE_URL = 'https://nestjs-dev.cariber.co/api/course/lms-course/'
+const BASE_URL = `${process.env.NESTJS_API}/api/course/lms-course/`
 axios.defaults.headers.common['Content-Type'] = 'application/json';
 axios.defaults.headers.common['Accept'] = 'application/json';
 

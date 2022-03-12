@@ -379,3 +379,20 @@
     }
   }
 }
+
+.popup-certificate-content{
+  text-align: center;
+  padding: 25px;
+  display: flex;
+  justify-content: center;
+  width: 30%;
+  background-color: $color-buttermilk;
+
+  @media (max-width: $mobile-size) {
+    width: 90%;
+  }
+
+  @media(max-width: $ipad-size) and (min-width: $mobile-size) {
+    width: 60%;
+  }
+}
