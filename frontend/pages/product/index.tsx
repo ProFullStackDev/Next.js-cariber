@@ -259,16 +259,17 @@ export default function Product() {
                   </h5>
                 </div>
               </div>
-              <div className="col-12">
-                <div className="product-announcement">
-                  <i className="fal fa-megaphone p-t-5" />
-                  <div className="p-l-10">
-                  <span>
-                    {announcement}
-                  </span>
-                  </div>
-                </div>
-              </div>
+              {/*     WILL BE ADDED BACK WHEN free trial FEATURE IS CONFIRMED   */}
+              {/*<div className="col-12">*/}
+              {/*  <div className="product-announcement">*/}
+              {/*    <i className="fal fa-megaphone p-t-5" />*/}
+              {/*    <div className="p-l-10">*/}
+              {/*    <span>*/}
+              {/*      {announcement}*/}
+              {/*    </span>*/}
+              {/*    </div>*/}
+              {/*  </div>*/}
+              {/*</div>*/}
               <div className="col-12 p-b-20">
                 <div className="player">
                   {
