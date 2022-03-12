@@ -10,6 +10,51 @@
 }
 
 .video-player {
+  .continue-wrapper {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    background-color: rgba(0, 0, 0, 0.6);
+
+    .continue-block {
+      padding-top: 10%;
+      color: white !important;
+      display: flex;
+      flex-direction: column;
+      max-height: 100%;
+      height: 100%;
+
+      @media(max-width: $ipad-size) {
+        padding-top: 3%;
+      }
+
+      .child-block {
+        text-align: center;
+      }
+
+      .image-block {
+        @media(min-width: $mobile-size) and (max-width: $ipad-size) {
+          padding: 0px 170px;
+        }
+
+        @media(max-width: $mobile-size) {
+          padding: 0px 120px;
+        }
+      }
+
+      .button-block {
+        margin: auto;
+        justify-content: center;
+        display: flex;
+        flex-direction: column;
+      }
+    }
+  }
+
   .controls-wrapper {
     height: 100%;
     width: 100%;

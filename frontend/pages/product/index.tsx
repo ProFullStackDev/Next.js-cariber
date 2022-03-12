@@ -83,6 +83,10 @@ export default function Product() {
     return e.returnValue = 'Are you sure you want to close?';
   }
 
+  const videoContinue = async () => {
+    await setEpisodeOrQuiz(courseLms?.episodes_list[indexEpisodesOrQuiz + 1], indexEpisodesOrQuiz + 1);
+  }
+
   async function setEpisodeOrQuiz(passedData: Episodes | Quiz | Evaluation, index: number) {
     setIndexEpisodesOrQuiz(index);
     setShowingType(passedData.type);
@@ -280,6 +284,10 @@ export default function Product() {
                                 video_id: cutCloudflareVideoId(episodeLms.link_video),
                                 video_thumbnail: { url: episodeLms.thumbnail_image },
                                 handleEnded: () => createNewRecord(),
+                              }}
+                              videoContinue={{
+                                episodeOrQuiz: courseLms.episodes_list[indexEpisodesOrQuiz+1] as Episodes,
+                                callBackContinue: videoContinue,
                               }} />
                           }
                         </div>

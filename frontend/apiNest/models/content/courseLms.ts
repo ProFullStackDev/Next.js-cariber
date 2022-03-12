@@ -97,4 +97,4 @@ export interface OnGoingEpisodes {
 }
 
 
-type EpisodesAndQuiz = Episodes | Quiz | Evaluation;
+export type EpisodesAndQuiz = Episodes | Quiz | Evaluation;
