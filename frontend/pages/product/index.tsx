@@ -105,8 +105,7 @@ export default function Product() {
         saveLastSecondOfEpisode();
         setTimeout(async() => { // just for clearance
           const data = await episodeApi(passedData.id.toString()) as Episodes;
-          setEpisodeLms(data);
-          setQuiz(null);
+          showingType === ShowingType.episode && setEpisodeLms(data);
           localStorage.setItem('courseID', proId?.toString() || '');
           localStorage.setItem('episodeID', passedData.id.toString());
           localStorage.setItem('lastSecond', '');
