@@ -141,7 +141,7 @@ export default function Product() {
         (res) => {
           setWatchedEpisodes([...watchedEpisodes, episodeLms.id])
           getWatchedEpList().then(()=>{
-            if ( parseInt(courseLms.total_lessons) === episodeLms.episode_number && watchedEpisodes.length === parseInt(courseLms.total_lessons) -1 ){
+            if ( watchedEpisodes.length === parseInt(courseLms.total_lessons)){
               alert('Congratulation You have successfully All Course')
             }
           })
