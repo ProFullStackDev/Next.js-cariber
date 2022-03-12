@@ -213,15 +213,6 @@ function VideoPlayer({
   const handleStart = () => {
     setVideoStarted(true);
   }
-
-  const changeProps = () => {
-    setContinueVisible(false);
-    setVideoState({
-      ...videoState,
-      url: `https://videodelivery.net/${props.video_id}/manifest/video.m3u8`,
-      light: props.autoplay ? false : props.video_thumbnail?.url ? props.video_thumbnail?.url : true,
-    });
-  }
     
   const getSignedToken = () => {
     axios({
