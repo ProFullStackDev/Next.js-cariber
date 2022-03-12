@@ -458,8 +458,22 @@ export default function Product() {
                 </p>
               </button>
               <div>
-                <button className="btn btn-small">
-                    ดาวน์โหลด Certificate
+                <h5 className="color-black">
+                  Congratulations!
+                </h5>
+                <p className="color-black f-s-14">
+                  คุณรับชมคอร์ส
+                  <br className="lg-none ipad-none" />
+                  &nbsp;
+                  &quot;{courseLms.course_name}&quot;
+                  &nbsp;
+                  <br className="lg-none ipad-none" />
+                  จบแล้ว
+                  <br className="sm-none" />
+                  หวังว่าคุณจะสนุกไปกับคอร์สเรียนของเรา
+                </p>
+                <button className="btn btn-small btn-box">
+                  ดาวน์โหลด Certificate
                 </button>
               </div>
             </div>
