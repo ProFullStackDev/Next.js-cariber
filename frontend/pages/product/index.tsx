@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { MouseEventHandler, useEffect, useState } from "react";
 import {
   saveWatchedEpisode,
   getEpisodesAndQuiz,
@@ -30,6 +30,7 @@ import ButtonPartialLogin from "../../components/buttonPartialLogin";
 import {notification} from "antd";
 import checkCoursePurchasedApi from "../../apiNest/checkCoursePurchasedApi";
 import { annualPromotionApi, courseApi } from "../../apiStrapi/StrapiApiService";
+import Popup from "reactjs-popup";
 
 export default function Product() {
   const [indexEpisodesOrQuiz, setIndexEpisodesOrQuiz] = useState<number>(0);
@@ -39,6 +40,7 @@ export default function Product() {
   const [watchedEpisodes, setWatchedEpisodes] = useState<number[]>([]);
   const [quiz, setQuiz] = useState<Quiz | null>(null);
   const router = useRouter();
+  const [ showCertificate, setShowCertificate ] = useState<boolean>(false);
   const announcement = "ตอนนี้คุณกำลังอยู่ในโหมดทดลองเรียนฟรี เนื้อหาบางส่วนมีการถูกล็อกไว้\nคุณสามารถซื้อคอร์สนี้เพื่อดูเนื้อหาทั้งหมดในคอร์สเรียน";
   const [saleHeader, setSaleHeader] = useState(
     {
@@ -437,6 +439,29 @@ export default function Product() {
           </div>
         </div>
       </div>
+      <Popup
+        open={showCertificate}
+        className="popup-certificate"
+        modal
+        onClose={() => setShowCertificate(false)}
+        closeOnDocumentClick={false}>
+        {(close: MouseEventHandler<HTMLButtonElement>) => {
+          return (
+            <div className="pop-modal">
+              <button className="close" onClick={close}>
+                <p>
+                  &times;
+                </p>
+              </button>
+              <div>
+                <button className="btn btn-small">
+                    ดาวน์โหลด Certificate
+                </button>
+              </div>
+            </div>
+          )
+        }}
+      </Popup>
       <Footer />
     </div>
   )
