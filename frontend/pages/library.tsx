@@ -130,8 +130,8 @@ export default function Library() {
                           </div>
                           <div className="resume-course-image">
                             {
-                              (lastWatchedEp && lastWatchedEp.episodeID.thumbnail_image)
-                                ? <Img src={lastWatchedEp.episodeID.thumbnail_image}
+                              (lastWatchedEp && lastWatchedEp.episodeID?.thumbnail_image)
+                                ? <Img src={lastWatchedEp.episodeID?.thumbnail_image}
                                        width={700}
                                        height={400}
                                        alt="กลยุทธ์ทางธุรกิจ"
