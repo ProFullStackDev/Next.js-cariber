@@ -9,6 +9,7 @@ import { strapiImage } from '../apiStrapi/models/contact';
 import moment from 'moment';
 import { Episodes, EpisodesAndQuiz, Evaluation, Quiz, ShowingType } from '../apiNest/models/content/courseLms';
 import Countdown, { CountdownRenderProps } from 'react-countdown';
+import axios from 'axios';
 
 interface VideoContinue {
   episodeOrQuiz: EpisodesAndQuiz,
@@ -221,12 +222,26 @@ function VideoPlayer({
       light: props.autoplay ? false : props.video_thumbnail?.url ? props.video_thumbnail?.url : true,
     });
   }
+    
+  const getSignedToken = () => {
+    axios({
+      method: 'POST',
+      url: `https://api.cloudflare.com/client/v4/accounts/${process.env.NEXT_PUBLIC_CLOUDFLARE_ACOOUNT}/stream/${props.video_id}/token`,
+      headers: {
+        "Authorization": `Bearer ${process.env.NEXT_PUBLIC_CLOUDFLARE_TOKEN}`
+      }
+    }).then(res=>{
+      setVideoState({
+        ...videoState,
+        url: `https://videodelivery.net/${res.data.result.token}/manifest/video.m3u8`,
+        light: props.autoplay ? false : props.video_thumbnail?.url ? props.video_thumbnail?.url : true,
+      });
+    })
+  }
 
   useEffect(() => {
-    changeProps();
+    getSignedToken();
   }, [props]);
-
-
 
   const renderTrack = ({
     iRenderTrackParams,

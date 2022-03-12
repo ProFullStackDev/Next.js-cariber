@@ -8,6 +8,7 @@ import {
   getOnGoingEpisodesForCourse,
 } from "../../apiNest/courseLmsApi";
 import {
+  Certificate,
   CourseLMS,
   Episodes,
   Evaluation,
@@ -31,6 +32,7 @@ import {notification} from "antd";
 import checkCoursePurchasedApi from "../../apiNest/checkCoursePurchasedApi";
 import { annualPromotionApi, courseApi } from "../../apiStrapi/StrapiApiService";
 import Popup from "reactjs-popup";
+import CourseCertificate from "../../components/courseCertificate";
 
 export default function Product() {
   const [indexEpisodesOrQuiz, setIndexEpisodesOrQuiz] = useState<number>(0);
@@ -112,6 +114,8 @@ export default function Product() {
         break;
       case ShowingType.courseEvaluation:
         break;
+      case ShowingType.certificate:
+        break;
     }
   }
 
@@ -142,6 +146,12 @@ export default function Product() {
       saveWatchedEpisode(data).then(
         (res) => {
           setWatchedEpisodes([...watchedEpisodes, episodeLms.id])
+          getWatchedEpList().then(()=>{
+            if ( watchedEpisodes.length === parseInt(courseLms.total_lessons)){
+              setShowCertificate(true);
+            }
+          })
+          
         },
         (err) => console.warn(err),
       );
@@ -162,6 +172,8 @@ export default function Product() {
       case ShowingType.courseEvaluation:
         name = 'Post Course Evaluation';
         break;
+      case ShowingType.certificate:
+        name = 'Download Certificate';
     }
     return name;
   }
@@ -181,6 +193,7 @@ export default function Product() {
       return item;
     });
     data.episodes_list.push(new Evaluation());
+    data.episodes_list.push(new Certificate());
     data.episodes_list[0] && await setEpisodeOrQuiz(data.episodes_list[0], 0);
     await setCourseLms(data);
     await checkCoursePurchased(data.id);
@@ -316,6 +329,14 @@ export default function Product() {
                         </div>
                       </>
                   }
+                  {showingType === ShowingType.certificate &&
+                    <>
+                      <div className="quiz-session">
+                        <CourseCertificate course={courseLms}
+                                          restart={restart} />
+                      </div>
+                    </>
+                  }
                   <div className="player-nav">
                     <div className="media">
                       <div className="media-left-under-player">
@@ -359,36 +380,45 @@ export default function Product() {
                             <a key={index}
                                className="media track align-items-center"
                                onClick={async () => { await setEpisodeOrQuiz(value, index) }}>
-                              <div className="media-left media-middle">
-                                {index === indexEpisodesOrQuiz ? (
-                                  <p className="track-count active m-b-0">
-                                    <i className="fa fa-play color-primary" />
-                                  </p>
-                                ) : (
-                                  <p className="track-count m-b-0">
-                                    { index + 1 }
-                                  </p>
-                                )}
-                              </div>
-                              <div className="media-left media-middle">
-                                <Img className="track-thumb"
-                                     src={"thumbnail_image" in value ? value.thumbnail_image : ''}
-                                     width={70}
-                                     height={39.3833}
-                                     alt={"episode_name" in value ? value.episode_name : "thumbnail image"}
-                                />
-                              </div>
-                              <div className="media-body media-middle">
-                                <div className="track-title">
-                                  {getTrackName(value)}
-                                </div>
-                              </div>
+                              { value.type === ShowingType.certificate && courseLms?.episodes_list?.filter(item => item.type === 'episode').length !== watchedEpisodes.length ?
+                                (
+                                  <></>
+                                ):
+                                (
+                                  <>
+                                    <div className="media-left media-middle">
+                                      {index === indexEpisodesOrQuiz ? (
+                                        <p className="track-count active m-b-0">
+                                          <i className="fa fa-play color-primary" />
+                                        </p>
+                                      ) : (
+                                        <p className="track-count m-b-0">
+                                          { index + 1 }
+                                        </p>
+                                      )}
+                                    </div>
+                                    <div className="media-left media-middle">
+                                      <Img className="track-thumb"
+                                          src={"thumbnail_image" in value ? value.thumbnail_image : ''}
+                                          width={70}
+                                          height={39.3833}
+                                          alt={"episode_name" in value ? value.episode_name : "thumbnail image"}
+                                      />
+                                    </div>
+                                    <div className="media-body media-middle">
+                                      <div className="track-title">
+                                        {getTrackName(value)}
+                                      </div>
+                                    </div>
 
-                              {
-                                isWatched(value.id) &&
-                                  <i className="fa fa-check color-primary p-l-5"
-                                     aria-hidden="true" />
-                              }
+                                    {
+                                      isWatched(value.id) &&
+                                        <i className="fa fa-check color-primary p-l-5"
+                                          aria-hidden="true" />
+                                    }
+                                  </>
+                                )                       
+                              }      
                             </a>
                           )
                         })}
@@ -472,9 +502,9 @@ export default function Product() {
                   <br className="sm-none" />
                   หวังว่าคุณจะสนุกไปกับคอร์สเรียนของเรา
                 </p>
-                <button className="btn btn-small btn-box">
+                <a href="" className="btn btn-small btn-box">
                   ดาวน์โหลด Certificate
-                </button>
+                </a>
               </div>
             </div>
           )
