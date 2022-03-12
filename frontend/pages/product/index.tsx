@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { MouseEventHandler, useEffect, useState } from "react";
 import {
   saveWatchedEpisode,
   getEpisodesAndQuiz,
@@ -8,6 +8,7 @@ import {
   getOnGoingEpisodesForCourse,
 } from "../../apiNest/courseLmsApi";
 import {
+  Certificate,
   CourseLMS,
   Episodes,
   Evaluation,
@@ -30,6 +31,9 @@ import ButtonPartialLogin from "../../components/buttonPartialLogin";
 import {notification} from "antd";
 import checkCoursePurchasedApi from "../../apiNest/checkCoursePurchasedApi";
 import { annualPromotionApi, courseApi } from "../../apiStrapi/StrapiApiService";
+import Popup from "reactjs-popup";
+import CourseCertificate from "../../components/courseCertificate";
+import { getCertificate } from "../../apiNest/myCourseApi";
 
 export default function Product() {
   const [indexEpisodesOrQuiz, setIndexEpisodesOrQuiz] = useState<number>(0);
@@ -39,6 +43,7 @@ export default function Product() {
   const [watchedEpisodes, setWatchedEpisodes] = useState<number[]>([]);
   const [quiz, setQuiz] = useState<Quiz | null>(null);
   const router = useRouter();
+  const [showCertificate, setShowCertificate] = useState<boolean>(false);
   const announcement = "ตอนนี้คุณกำลังอยู่ในโหมดทดลองเรียนฟรี เนื้อหาบางส่วนมีการถูกล็อกไว้\nคุณสามารถซื้อคอร์สนี้เพื่อดูเนื้อหาทั้งหมดในคอร์สเรียน";
   const [saleHeader, setSaleHeader] = useState(
     {
@@ -83,6 +88,10 @@ export default function Product() {
     return e.returnValue = 'Are you sure you want to close?';
   }
 
+  const videoContinue = async () => {
+    await setEpisodeOrQuiz(courseLms?.episodes_list[indexEpisodesOrQuiz + 1], indexEpisodesOrQuiz + 1);
+  }
+
   async function setEpisodeOrQuiz(passedData: Episodes | Quiz | Evaluation, index: number) {
     setIndexEpisodesOrQuiz(index);
     setShowingType(passedData.type);
@@ -105,6 +114,8 @@ export default function Product() {
         }, 500);
         break;
       case ShowingType.courseEvaluation:
+        break;
+      case ShowingType.certificate:
         break;
     }
   }
@@ -136,6 +147,12 @@ export default function Product() {
       saveWatchedEpisode(data).then(
         (res) => {
           setWatchedEpisodes([...watchedEpisodes, episodeLms.id])
+          getWatchedEpList().then(()=>{
+            if ( watchedEpisodes.length === parseInt(courseLms.total_lessons)){
+              setShowCertificate(true);
+            }
+          })
+          
         },
         (err) => console.warn(err),
       );
@@ -156,11 +173,17 @@ export default function Product() {
       case ShowingType.courseEvaluation:
         name = 'Post Course Evaluation';
         break;
+      case ShowingType.certificate:
+        name = 'Download Certificate';
     }
     return name;
   }
 
   async function fetchData() {
+    if(!proId) {
+      notification['error']({ message: 'Course Record Not Found' })
+      return;
+    }
     const data = await getEpisodesAndQuiz(proId!.toString()) as CourseLMS;
     if(data.statusCode && data.statusCode === 500){
       router.replace("/404").then(() => {});
@@ -171,11 +194,10 @@ export default function Product() {
       return item;
     });
     data.episodes_list.push(new Evaluation());
-    if (data.episodes_list.length) {
-      const index = epID ? data.episodes_list.findIndex(ep => ep.id === +epID) : 0;
-      const selectingEP = data.episodes_list[index];
-      await setEpisodeOrQuiz(selectingEP, index);
-    }
+    data.episodes_list.push(new Certificate());
+    const index = epID ? data.episodes_list.findIndex(ep => ep.id === +epID) : 0;
+    const selectingEP = data.episodes_list[index];
+    await setEpisodeOrQuiz(selectingEP, index);
     await setCourseLms(data);
     await checkCoursePurchased(data.id);
     await setSku(data.lms_id);
@@ -208,6 +230,16 @@ export default function Product() {
 
   function restart() {
     setEpisodeOrQuiz(courseLms.episodes_list[0], 0).then(() => { });
+  }
+
+  const downloadCertificate = async () =>{
+    const certificate = await getCertificate(courseLms.id)
+    const pdf = new Blob([certificate], { type: 'application/pdf' });
+    const url = URL.createObjectURL(pdf);
+    var a = document.createElement("a");
+    a.href = url;
+    a.download = `${courseLms.course_name.split(" ").join("-")}-Certificate-${new Date().toISOString().slice(0,10)}`;
+    a.click();
   }
 
   return (
@@ -288,7 +320,11 @@ export default function Product() {
                                 lastSecond: onGoingEpisodes?.filter(item =>
                                     item.episodeID === episodeLms.id
                                 )[0]?.lastSecond || undefined,
-                              }} />
+                                }}
+                                videoContinue={{
+                                  episodeOrQuiz: courseLms.episodes_list[indexEpisodesOrQuiz+1] as Episodes,
+                                  callBackContinue: videoContinue,
+                                }} />
                           }
                         </div>
                       </>
@@ -309,6 +345,14 @@ export default function Product() {
                                             restart={restart} />
                         </div>
                       </>
+                  }
+                  {showingType === ShowingType.certificate &&
+                    <>
+                      <div className="quiz-session">
+                        <CourseCertificate course={courseLms}
+                                          restart={restart} />
+                      </div>
+                    </>
                   }
                   <div className="player-nav">
                     <div className="media">
@@ -353,36 +397,45 @@ export default function Product() {
                             <a key={index}
                                className="media track align-items-center"
                                onClick={async () => { await setEpisodeOrQuiz(value, index) }}>
-                              <div className="media-left media-middle">
-                                {index === indexEpisodesOrQuiz ? (
-                                  <p className="track-count active m-b-0">
-                                    <i className="fa fa-play color-primary" />
-                                  </p>
-                                ) : (
-                                  <p className="track-count m-b-0">
-                                    { index + 1 }
-                                  </p>
-                                )}
-                              </div>
-                              <div className="media-left media-middle">
-                                <Img className="track-thumb"
-                                     src={"thumbnail_image" in value ? value.thumbnail_image : ''}
-                                     width={70}
-                                     height={39.3833}
-                                     alt={"episode_name" in value ? value.episode_name : "thumbnail image"}
-                                />
-                              </div>
-                              <div className="media-body media-middle">
-                                <div className="track-title">
-                                  {getTrackName(value)}
-                                </div>
-                              </div>
+                              { value.type === ShowingType.certificate && courseLms?.episodes_list?.filter(item => item.type === 'episode').length !== watchedEpisodes.length ?
+                                (
+                                  <></>
+                                ):
+                                (
+                                  <>
+                                    <div className="media-left media-middle">
+                                      {index === indexEpisodesOrQuiz ? (
+                                        <p className="track-count active m-b-0">
+                                          <i className="fa fa-play color-primary" />
+                                        </p>
+                                      ) : (
+                                        <p className="track-count m-b-0">
+                                          { index + 1 }
+                                        </p>
+                                      )}
+                                    </div>
+                                    <div className="media-left media-middle">
+                                      <Img className="track-thumb"
+                                          src={"thumbnail_image" in value ? value.thumbnail_image : ''}
+                                          width={70}
+                                          height={39.3833}
+                                          alt={"episode_name" in value ? value.episode_name : "thumbnail image"}
+                                      />
+                                    </div>
+                                    <div className="media-body media-middle">
+                                      <div className="track-title">
+                                        {getTrackName(value)}
+                                      </div>
+                                    </div>
 
-                              {
-                                isWatched(value.id) &&
-                                  <i className="fa fa-check color-primary p-l-5"
-                                     aria-hidden="true" />
-                              }
+                                    {
+                                      isWatched(value.id) &&
+                                        <i className="fa fa-check color-primary p-l-5"
+                                          aria-hidden="true" />
+                                    }
+                                  </>
+                                )                       
+                              }      
                             </a>
                           )
                         })}
@@ -437,6 +490,43 @@ export default function Product() {
           </div>
         </div>
       </div>
+      <Popup
+        open={showCertificate}
+        className="popup-certificate"
+        modal
+        onClose={() => setShowCertificate(false)}
+        closeOnDocumentClick={false}>
+        {(close: MouseEventHandler<HTMLButtonElement>) => {
+          return (
+            <div className="pop-modal">
+              <button className="close" onClick={close}>
+                <p>
+                  &times;
+                </p>
+              </button>
+              <div>
+                <h5 className="color-black">
+                  Congratulations!
+                </h5>
+                <p className="color-black f-s-14">
+                  คุณรับชมคอร์ส
+                  <br className="lg-none ipad-none" />
+                  &nbsp;
+                  &quot;{courseLms.course_name}&quot;
+                  &nbsp;
+                  <br className="lg-none ipad-none" />
+                  จบแล้ว
+                  <br className="sm-none" />
+                  หวังว่าคุณจะสนุกไปกับคอร์สเรียนของเรา
+                </p>
+                <button className="btn btn-small btn-box" onClick={downloadCertificate}>
+                  ดาวน์โหลด Certificate
+                </button>
+              </div>
+            </div>
+          )
+        }}
+      </Popup>
       <Footer />
     </div>
   )

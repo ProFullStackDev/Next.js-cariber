@@ -4,10 +4,17 @@ import screenfull from 'screenfull';
 import Img from './image';
 import { getTrackBackground, Range } from 'react-range';
 import { Direction, IRenderThumbParams, IRenderTrackParams } from 'react-range/lib/types';
-import {VideoComponent, VideoPlayingState} from '../apiStrapi/models/component/video';
+import { VideoComponent, VideoPlayingState } from '../apiStrapi/models/component/video';
 import { strapiImage } from '../apiStrapi/models/contact';
 import moment from 'moment';
+import { Episodes, EpisodesAndQuiz, Evaluation, Quiz, ShowingType } from '../apiNest/models/content/courseLms';
+import Countdown, { CountdownRenderProps } from 'react-countdown';
 import axios from 'axios';
+
+interface VideoContinue {
+  episodeOrQuiz: EpisodesAndQuiz,
+  callBackContinue: () => void,
+}
 
 type ReactVideoPlayerState = {
   url: string;
@@ -33,7 +40,16 @@ enum Directions {
   Vertical
 }
 
-function VideoPlayer({ props, imageStrapi }: { props: VideoComponent, imageStrapi?: boolean }) {
+function VideoPlayer({
+  props,
+  imageStrapi,
+  videoContinue }: {
+    props: VideoComponent,
+    imageStrapi?: boolean,
+    videoContinue?: VideoContinue
+  }) {
+  const [counterKey, setCounterKey] = useState<number>(0);
+  const [continueTime, setContinue] = useState<number>(5);
   const [playbackOptions, setPlaybackOptions] = useState<number[]>([
     0.25,
     0.5,
@@ -44,6 +60,7 @@ function VideoPlayer({ props, imageStrapi }: { props: VideoComponent, imageStrap
     1.75,
     2
   ]);
+  const [continueVisible, setContinueVisible] = useState(false);
   const [progressCount, setProgressCount] = useState(0);
   const player = useRef<ReactPlayer>(null);
   const playerContainerRef = useRef(null);
@@ -164,8 +181,15 @@ function VideoPlayer({ props, imageStrapi }: { props: VideoComponent, imageStrap
   }
 
   const handleEnded = () => {
+    setContinueVisible(true);
+    setCounterKey(counterKey + 1);
     setVideoState({ ...videoState, playing: videoState.loop });
     props.handleEnded();
+  }
+
+  const handleContinue = () => {
+    if (!continueVisible) return;
+    videoContinue?.callBackContinue();
   }
 
   const handleDuration = (duration: number) => {
@@ -192,7 +216,7 @@ function VideoPlayer({ props, imageStrapi }: { props: VideoComponent, imageStrap
   const handleStart = () => {
     setVideoStarted(true);
   }
-
+    
   const getSignedToken = () => {
     axios({
       method: 'POST',
@@ -210,10 +234,9 @@ function VideoPlayer({ props, imageStrapi }: { props: VideoComponent, imageStrap
   }
 
   useEffect(() => {
+    setContinueVisible(false);
     getSignedToken();
   }, [props]);
-
-
 
   const renderTrack = ({
     iRenderTrackParams,
@@ -300,6 +323,28 @@ function VideoPlayer({ props, imageStrapi }: { props: VideoComponent, imageStrap
     </div>
   )
 
+  const counterRenderer = ({ seconds }: CountdownRenderProps) => {
+    return <span>{seconds}</span>;
+  };
+
+  function getTrackName(value: Episodes | Quiz | Evaluation) {
+    let name = '';
+    switch (value.type) {
+      case ShowingType.episode:
+        const ep = value as Episodes;
+        name = ep.episode_name;
+        break;
+      case ShowingType.quiz:
+        const quiz = value as Quiz;
+        name = `Quiz For Episode ${quiz.episode_number}`;
+        break;
+      case ShowingType.courseEvaluation:
+        name = 'Post Course Evaluation';
+        break;
+    }
+    return name;
+  }
+
   return (
     <div className="player-wrapper video-player"
       onMouseMove={() => { handleVisible(setControllerVisible) }}
@@ -334,7 +379,48 @@ function VideoPlayer({ props, imageStrapi }: { props: VideoComponent, imageStrap
           }
         }}
       />
-      <div className={`controls-wrapper ${controllerVisible ? "visible" : "hidden"} ${!videoStarted && "hidden"}`}>
+      {(videoContinue) && (
+        <div className={`continue-wrapper  ${continueVisible ? "visible" : "hidden"}`}>
+          <div className="continue-block">
+            <div className="child-block">
+              <h5 className="color-white sm-f-s-14 ipad-f-s-16 sm-m-0">
+                {getTrackName(videoContinue.episodeOrQuiz)}
+              </h5>
+              <p className="text-center sm-m-b-5 ipad-m-b-5">
+                เริ่มบทเรียนใน
+                <span className="color-primary">
+                  &nbsp;
+                  <Countdown
+                    renderer={counterRenderer}
+                    key={counterKey}
+                    date={Date.now() + continueTime * 1000}
+                    onComplete={handleContinue} /> วินาที
+                </span>
+              </p>
+            </div>
+            <div className="child-block image-block">
+              <Img
+                src={"thumbnail_image" in videoContinue?.episodeOrQuiz ? videoContinue?.episodeOrQuiz?.thumbnail_image : ''}
+                width={280}
+                height={160} />
+            </div>
+            <div className="child-block button-block">
+              <button
+                className="btn btn-box sm-f-s-12 btn-small m-t-0 m-r-0  lg-m-b-10"
+                onClick={() => videoContinue.callBackContinue()}>
+                เริ่มเรียนทันที
+              </button>
+              <br />
+              <button
+                className='btn-link m-0'
+                onClick={() => setContinueVisible(false)}>
+                ออกจากบทเรียน
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+      <div className={`controls-wrapper ${(controllerVisible && !continueVisible) ? "visible" : "hidden"} ${!videoStarted && "hidden"}`}>
         <div className="p-h-100" onClick={handlePlayPause}>
         </div>
         <div className={`video-controller ${!videoState.controls && "hidden"}`}>

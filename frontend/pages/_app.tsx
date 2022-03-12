@@ -16,14 +16,6 @@ function SafeHydrate({ children }: { children: React.ReactNode }) {
 }
 
 function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
-  useEffect(() => {
-    headerScriptsApi().then((value) => {
-      const inlineScripts = value.data?.attributes?.scripts.replace(/\n/g, '');
-      if(!document.head.innerHTML.includes(inlineScripts) && inlineScripts){
-        document.head.innerHTML = inlineScripts + document.head.innerHTML;
-      }
-    });
-  }, []);
   return (
     <React.Fragment>
       <Script src="https://kit.fontawesome.com/bce3f035e8.js" crossOrigin="anonymous" />
@@ -51,6 +43,12 @@ function Auth({ children }: { children: JSX.Element }) {
     if (!userManager.isLoggedIn() && Boolean(protectPath.find(value => { return value === window.location.pathname }))) {
       router.replace("/");
     }
+    headerScriptsApi().then((value) => {
+      const inlineScripts = value.data?.attributes?.scripts.replace(/\n/g, '');
+      if(!document.head.innerHTML.includes(inlineScripts) && inlineScripts){
+        document.head.innerHTML = inlineScripts + document.head.innerHTML;
+      }
+    });
   })
   if (!userManager.isLoggedIn() && Boolean(protectPath.find(value => { return value === window.location.pathname }))) {
     return <div></div>;
