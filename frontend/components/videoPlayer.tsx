@@ -91,6 +91,9 @@ function VideoPlayer({
   const handleReady = () => {
     const hlsPlayer = player.current?.getInternalPlayer('hls');
     if (!hlsPlayer) return;
+    if (props.lastSecond) {
+      player.current?.seekTo(+props.lastSecond, 'seconds');
+    }
     setVideoState({ ...videoState, resolutions: hlsPlayer.levels });
   }
 

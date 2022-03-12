@@ -58,7 +58,7 @@ export default function Product() {
       annualSku: ""
     }
   )
-  const { proId } = router.query;
+  const { proId, epID } = router.query;
 
   useEffect(() => {
     localStorage.setItem('lastSecond', '');
@@ -105,8 +105,7 @@ export default function Product() {
         saveLastSecondOfEpisode();
         setTimeout(async() => { // just for clearance
           const data = await episodeApi(passedData.id.toString()) as Episodes;
-          setEpisodeLms(data);
-          setQuiz(null);
+          showingType === ShowingType.episode && setEpisodeLms(data);
           localStorage.setItem('courseID', proId?.toString() || '');
           localStorage.setItem('episodeID', passedData.id.toString());
           localStorage.setItem('lastSecond', '');
@@ -195,7 +194,9 @@ export default function Product() {
     });
     data.episodes_list.push(new Evaluation());
     data.episodes_list.push(new Certificate());
-    data.episodes_list[0] && await setEpisodeOrQuiz(data.episodes_list[0], 0);
+    const index = epID ? data.episodes_list.findIndex(ep => ep.id === +epID) : 0;
+    const selectingEP = data.episodes_list[index];
+    await setEpisodeOrQuiz(selectingEP, index);
     await setCourseLms(data);
     await checkCoursePurchased(data.id);
     await setSku(data.lms_id);
@@ -221,6 +222,9 @@ export default function Product() {
   function getPercentage(value : Episodes | Quiz | Evaluation): number {
     if (!value.duration || value.duration <= 0 ) {
       return 0;
+    }
+    if (watchedEpisodes.indexOf(value.id) !== -1 ) {
+      return 100;
     }
     const lastSecond = +(onGoingEpisodes.filter(item => item.episodeID === value.id)[0]?.lastSecond || 0);
     return Math.round((lastSecond/value.duration) * 100);
@@ -293,16 +297,17 @@ export default function Product() {
                   </h5>
                 </div>
               </div>
-              <div className="col-12">
-                <div className="product-announcement">
-                  <i className="fal fa-megaphone p-t-5" />
-                  <div className="p-l-10">
-                  <span>
-                    {announcement}
-                  </span>
-                  </div>
-                </div>
-              </div>
+              {/*     WILL BE ADDED BACK WHEN free trial FEATURE IS CONFIRMED   */}
+              {/*<div className="col-12">*/}
+              {/*  <div className="product-announcement">*/}
+              {/*    <i className="fal fa-megaphone p-t-5" />*/}
+              {/*    <div className="p-l-10">*/}
+              {/*    <span>*/}
+              {/*      {announcement}*/}
+              {/*    </span>*/}
+              {/*    </div>*/}
+              {/*  </div>*/}
+              {/*</div>*/}
               <div className="col-12 p-b-20">
                 <div className="player">
                   {
@@ -314,11 +319,14 @@ export default function Product() {
                                 video_id: cutCloudflareVideoId(episodeLms.link_video),
                                 video_thumbnail: { url: episodeLms.thumbnail_image },
                                 handleEnded: () => createNewRecord(),
-                              }}
-                              videoContinue={{
-                                episodeOrQuiz: courseLms.episodes_list[indexEpisodesOrQuiz+1] as Episodes,
-                                callBackContinue: videoContinue,
-                              }} />
+                                lastSecond: onGoingEpisodes?.filter(item =>
+                                    item.episodeID === episodeLms.id
+                                )[0]?.lastSecond || undefined,
+                                }}
+                                videoContinue={{
+                                  episodeOrQuiz: courseLms.episodes_list[indexEpisodesOrQuiz+1] as Episodes,
+                                  callBackContinue: videoContinue,
+                                }} />
                           }
                         </div>
                       </>

@@ -10,6 +10,7 @@ export interface VideoComponent {
   control?: boolean;
   muted?: boolean;
   handleEnded: Function;
+  lastSecond?: string,
 }
 
 export interface VideoPlayingState {
