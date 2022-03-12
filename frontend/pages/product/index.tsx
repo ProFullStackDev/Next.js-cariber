@@ -223,6 +223,9 @@ export default function Product() {
     if (!value.duration || value.duration <= 0 ) {
       return 0;
     }
+    if (watchedEpisodes.indexOf(value.id) !== -1 ) {
+      return 100;
+    }
     const lastSecond = +(onGoingEpisodes.filter(item => item.episodeID === value.id)[0]?.lastSecond || 0);
     return Math.round((lastSecond/value.duration) * 100);
   }
