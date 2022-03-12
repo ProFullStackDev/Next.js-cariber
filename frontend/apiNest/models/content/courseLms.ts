@@ -78,7 +78,7 @@ export interface QuizChoice {
 export class Evaluation {
 	id: number;
 	name: string;
-	thumbnails?: string;
+	thumbnail_image?: string;
 	type: ShowingType;
 	episode_number: number;
 	duration?: number;
@@ -86,7 +86,7 @@ export class Evaluation {
 	constructor() {
 		this.id = 0;
 		this.name = 'Post Course Evaluation';
-		this.thumbnails = 'https://kajabi-storefronts-production.kajabi-cdn.com/kajabi-storefronts-production//site/163642/products/kT3DcuQ96w0cDdw8xHAy_XZhAghO1QNa8YL1cQtDe_EqIBRqYhQjClS06NZN4c_SeaTalk_IMG_1622212691.jpg';
+		this.thumbnail_image = 'https://kajabi-storefronts-production.kajabi-cdn.com/kajabi-storefronts-production//site/163642/products/kT3DcuQ96w0cDdw8xHAy_XZhAghO1QNa8YL1cQtDe_EqIBRqYhQjClS06NZN4c_SeaTalk_IMG_1622212691.jpg';
 		this.type = ShowingType.courseEvaluation;
 		this.episode_number = 0;
 	}
