@@ -53,7 +53,7 @@ export default function Product() {
       annualSku: ""
     }
   )
-  const { proId } = router.query;
+  const { proId, epID } = router.query;
 
   useEffect(() => {
     localStorage.setItem('lastSecond', '');
@@ -171,7 +171,11 @@ export default function Product() {
       return item;
     });
     data.episodes_list.push(new Evaluation());
-    data.episodes_list[0] && await setEpisodeOrQuiz(data.episodes_list[0], 0);
+    if (data.episodes_list.length) {
+      const index = epID ? data.episodes_list.findIndex(ep => ep.id === +epID) : 0;
+      const selectingEP = data.episodes_list[index];
+      await setEpisodeOrQuiz(selectingEP, index);
+    }
     await setCourseLms(data);
     await checkCoursePurchased(data.id);
     await setSku(data.lms_id);

@@ -43,6 +43,7 @@ export interface LastWatchedEp {
 	updatedDate: string;
 	courseID: Course;
 	episodeID: Episode;
+	url?: string;
 }
 
 export interface Course {
