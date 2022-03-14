@@ -60,7 +60,7 @@ export default function ProductBlogs({ productImage,
             </div>
             <div className="media-body media-middle">
               <h5 className="instructor-name ipad-f-s-16">
-                คุณ{instructorName}
+                {instructorName}
               </h5>
               <h6 className="instructor-title">
                 Instructor
