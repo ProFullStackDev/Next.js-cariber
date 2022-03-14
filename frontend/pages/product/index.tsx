@@ -26,7 +26,6 @@ import VideoPlayer from "../../components/videoPlayer";
 import cutCloudflareVideoId from "../../functions/cutCloudflareVideoId";
 import CourseEvaluation from "../../components/courseEvaluation";
 import QuizSession from "../../components/quizSession";
-import { episodeApi } from "../../apiNest/episodeApi";
 import ButtonPartialLogin from "../../components/buttonPartialLogin";
 import {notification} from "antd";
 import checkCoursePurchasedApi from "../../apiNest/checkCoursePurchasedApi";
@@ -51,7 +50,7 @@ export default function Product() {
       has_annual: false,
     }
   );
-  const [onGoingEpisodes, setOnGoingEpisodes] = useState<OnGoingEpisodes[]>([]);
+  let [onGoingEpisodes, setOnGoingEpisodes] = useState<OnGoingEpisodes[]>([]);
   const [saleSku, setSaleSku] = useState(
     {
       courseSku: "",
@@ -103,10 +102,9 @@ export default function Product() {
         break;
       case ShowingType.episode:
         saveLastSecondOfEpisode();
+        setEpisodeLms(passedData as Episodes);
+        setQuiz(null);
         setTimeout(async() => { // just for clearance
-          const data = await episodeApi(passedData.id.toString()) as Episodes;
-          setEpisodeLms(data);
-          setQuiz(null);
           localStorage.setItem('courseID', proId?.toString() || '');
           localStorage.setItem('episodeID', passedData.id.toString());
           localStorage.setItem('lastSecond', '');
@@ -214,8 +212,8 @@ export default function Product() {
   }
 
   async function getOnGoingEpisodes(): Promise<void> {
-    const onGoingEpisodes = await getOnGoingEpisodesForCourse(+proId!);
-    setOnGoingEpisodes(onGoingEpisodes);
+    const data = await getOnGoingEpisodesForCourse(+proId!);
+    onGoingEpisodes = data;
   }
 
   function getPercentage(value : Episodes | Quiz | Evaluation): number {
@@ -316,7 +314,7 @@ export default function Product() {
                                 handleEnded: () => createNewRecord(),
                               }}
                               videoContinue={{
-                                episodeOrQuiz: courseLms.episodes_list[indexEpisodesOrQuiz+1] as Episodes,
+                                episodeOrQuiz: courseLms.episodes_list ? courseLms.episodes_list[indexEpisodesOrQuiz+1] as Episodes : {} as Episodes,
                                 callBackContinue: videoContinue,
                               }} />
                           }
