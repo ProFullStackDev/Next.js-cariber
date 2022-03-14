@@ -92,7 +92,7 @@ export default function Account() {
     setFormAccount(data);
     setId(data?.id);
     data?.contact && setFormContact(data?.contact);
-    setMySubscription(dataMySubscriptions?.filter(element => { return element.activate }));
+    dataMySubscriptions && setMySubscription(dataMySubscriptions?.filter(element => { return element.activate }));
   }
 
   async function saveAccount(event: FormEvent) {
