@@ -15,7 +15,7 @@ export class WoocommerceService {
           return
         }
         const credentials: WoocommerceCredentials = {
-          user_id: res.id,
+          user_id: res?.id?.toString() || '',
           shopee_id: shopeeID,
         }
         this.checkClaimedOrNot(credentials).then(() => {});

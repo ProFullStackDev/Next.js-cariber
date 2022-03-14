@@ -1,5 +1,7 @@
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { ChangeEvent, FormEvent, useEffect, useRef, useState } from "react";
+import { checkContactGuardApi } from "../apiNest/checkContactGuardApi";
 import checkPasswordApi from "../apiNest/checkPasswordApi";
 import getUserProfileApi from "../apiNest/getUserProfileApi";
 import mySubscriptionApi from "../apiNest/mySubscriptionApi";
@@ -19,9 +21,11 @@ import { handleChange, handleChangeCheckbox } from "../functions/handleInput";
 
 export default function Account() {
   const userManager = new UserManager();
+  const router = useRouter();
   const timeZone = staticData.timeZone;
   const hiddenFileInput = useRef<HTMLInputElement>(null);
-  const [id, setId] = useState(0)
+  const [id, setId] = useState(0);
+  const [checkedContactGuard, setCheckedContactGuard] = useState<boolean>(false);
   const [mySubscription, setMySubscription] = useState([{
     id: "",
     subscription_date: "",
@@ -86,9 +90,9 @@ export default function Account() {
     const data = await getUserProfileApi();
     const dataMySubscriptions = await mySubscriptionApi();
     setFormAccount(data);
-    setId(data.id);
-    setFormContact(data.contact);
-    setMySubscription(dataMySubscriptions.filter(element => { return element.activate }));
+    setId(data?.id);
+    data?.contact && setFormContact(data?.contact);
+    dataMySubscriptions && setMySubscription(dataMySubscriptions?.filter(element => { return element.activate }));
   }
 
   async function saveAccount(event: FormEvent) {
@@ -140,6 +144,18 @@ export default function Account() {
     if (event.currentTarget!.files![0]) {
       setImageProfile(event.currentTarget!.files![0]);
     }
+  }
+
+  if (!checkedContactGuard) {
+    checkContactGuardApi().then((value) => {
+      if (value?.statusCode === 400) {
+        router.replace("/guard-contact?redirect=account");
+        return (
+          <div></div>
+        )
+      }
+    });
+    setCheckedContactGuard(true);
   }
 
   return (

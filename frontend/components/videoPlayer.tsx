@@ -229,6 +229,7 @@ function VideoPlayer({
         ...videoState,
         url: `https://videodelivery.net/${res.data.result.token}/manifest/video.m3u8`,
         light: props.autoplay ? false : props.video_thumbnail?.url ? props.video_thumbnail?.url : true,
+        playing: true,
       });
     })
   }
@@ -379,8 +380,8 @@ function VideoPlayer({
           }
         }}
       />
-      {(videoContinue) && (
-        <div className={`continue-wrapper  ${continueVisible ? "visible" : "hidden"}`}>
+      {(videoContinue && continueVisible) && (
+        <div className={`continue-wrapper`}>
           <div className="continue-block">
             <div className="child-block">
               <h5 className="color-white sm-f-s-14 ipad-f-s-16 sm-m-0">

@@ -24,25 +24,25 @@ export default function StudentReviews({ reviewStudents }: { reviewStudents: Rev
                 <div className="block box-shadow-none">
                   <div className="feature">
                     <Img className="feature-image"
-                      src={strapiImage(value.image.url)}
+                      src={strapiImage(value?.image?.url)}
                       width={175}
                       height={185.917}
-                      alt={value.name}
+                      alt={value?.name}
                     />
                     <div className="feature-text">
                       <p className="text-center ipad-f-s-14 sm-f-s-14">
                         <span className="color-smooth">
-                          &quot;{value.description}&quot;
+                          &quot;{value?.description}&quot;
                         </span>
                       </p>
                       <h4 className="ipad-min-line-height">
                         <span className="color-secondary ipad-f-s-18">
-                          {value.name}
+                          {value?.name}
                         </span>
                       </h4>
                       <span className="color-primary">
                         <em>
-                          {value.career}
+                          {value?.career}
                         </em>
                       </span>
                     </div>

@@ -1,4 +1,4 @@
 export interface WoocommerceCredentials {
-  user_id: number,
+  user_id: string,
   shopee_id: string,
 }

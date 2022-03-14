@@ -35,6 +35,7 @@ export default function GuardContact() {
     isError: false,
     message: "",
   });
+  const { redirect } = router.query
 
   function handleBirthDayChange(value: Date) {
     setFormData(values => ({ ...values, birth_day: value }));
@@ -81,7 +82,7 @@ export default function GuardContact() {
     }
     const data = await postContactGuardApi(formData);
     if (data) {
-      router.replace("/library");
+      router.replace(`/${redirect || "library"}`);
     }
   }
 
