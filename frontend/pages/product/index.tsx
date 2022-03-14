@@ -215,7 +215,7 @@ export default function Product() {
 
   async function getOnGoingEpisodes(): Promise<void> {
     const data = await getOnGoingEpisodesForCourse(+proId!);
-    onGoingEpisodes = data;
+    setOnGoingEpisodes(data);
   }
 
   function getPercentage(value : Episodes | Quiz | Evaluation): number {
