@@ -10,6 +10,7 @@ import FormInput from "../components/formInput";
 import Header from "../components/header";
 import Img from "../components/image";
 import { handleChange } from "../functions/handleInput";
+import {getOnGoingEpisodesForCourse} from "../apiNest/courseLmsApi";
 
 interface SortProps {
   text: string,
@@ -65,11 +66,21 @@ export default function Library() {
   async function getLastWatchedEp(): Promise<void> {
     const lastEpisode = await getLastWatchedEpisode();
     if (lastEpisode) {
-      let url = lastEpisode?.courseID?.id ? `/product?proId=${lastEpisode.courseID.id}` : '';
-      url = url.concat(lastEpisode?.episodeID?.id ? `&epID=${lastEpisode.episodeID.id}` : '');
-      lastEpisode.url = url;
+      lastEpisode.url = getURL(lastEpisode.courseID?.id, lastEpisode.episodeID?.id);
       setLastWatchedEP(lastEpisode);
     }
+  }
+
+  function getURL(courseID: number | null, epID: number | null ): string {
+    let url = courseID ? `/product?proId=${courseID}` : '';
+    return url.concat(epID ? `&epID=${epID}` : '');
+  }
+
+  async function getLastEpForEachCourse(course: MyCourseItem): Promise<void> {
+    const courseID = +course.id!;
+    const data = await getOnGoingEpisodesForCourse(courseID);
+    const lastEPID = data[data.length - 1]?.episodeID || null;
+    router.push(getURL(courseID, lastEPID)).then(() => {});
   }
 
   function getPercentage(value: MyCourseItem): number {
@@ -221,13 +232,13 @@ export default function Library() {
                           <p className="f-s-14 ipad-f-s-12">สอนโดย {value.speaker_name}</p>
                         </div>
                       </div>
-                      <Link href={""}>
+                      <div onClick={ () => getLastEpForEachCourse(value)}>
                         <a className="btn">
                             <h6 className="m-0 color-white  ipad-f-s-12">
                               รับชมเลย
                             </h6>
                         </a>
-                      </Link>
+                      </div>
                     </div>
                   </div>
                   )
