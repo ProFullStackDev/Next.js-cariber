@@ -485,7 +485,7 @@ export default function Product() {
                             productImage={courseLms.thumbnail_image}
                             productName={courseLms.course_name}
                             instructorImage={courseLms.instructor?.profile_image}
-                            instructorName={courseLms.speaker_name}
+                            instructorName={courseLms.instructor?.name}
                             instructorRemark={courseLms.instructor?.idiom} />
             </div>
           </div>
