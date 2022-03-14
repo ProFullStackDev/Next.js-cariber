@@ -64,7 +64,12 @@ export default function Library() {
 
   async function getLastWatchedEp(): Promise<void> {
     const lastEpisode = await getLastWatchedEpisode();
-    lastEpisode && setLastWatchedEP(lastEpisode);
+    if (lastEpisode) {
+      let url = lastEpisode?.courseID?.id ? `/product?proId=${lastEpisode.courseID.id}` : '';
+      url = url.concat(lastEpisode?.episodeID?.id ? `&epID=${lastEpisode.episodeID.id}` : '');
+      lastEpisode.url = url;
+      setLastWatchedEP(lastEpisode);
+    }
   }
 
   function getPercentage(value: MyCourseItem): number {
@@ -111,7 +116,7 @@ export default function Library() {
                     <div className="resume-course box-shadow-none">
                       <div className="resume-course-positioner">
                         <a className="resume-course-content"
-                           href={'/product?proId=' + lastWatchedEp?.courseID?.id?.toString() || myCourseList[0]?.id?.toString() || ''}>
+                           href={ lastWatchedEp?.url || myCourseList[0]?.id.toString() || ''}>
                           <div className="resume-course-text sm-none ipad-none">
                             <h6 className="resume-course-status m-0">
                               <strong>
@@ -124,8 +129,8 @@ export default function Library() {
                           </div>
                           <div className="resume-course-image">
                             {
-                              (lastWatchedEp?.episodeID && lastWatchedEp?.episodeID?.thumbnail_image)
-                                ? <Img src={lastWatchedEp?.episodeID?.thumbnail_image}
+                              (lastWatchedEp && lastWatchedEp.episodeID?.thumbnail_image)
+                                ? <Img src={lastWatchedEp.episodeID?.thumbnail_image}
                                        width={700}
                                        height={400}
                                        alt="Continue Watch"
