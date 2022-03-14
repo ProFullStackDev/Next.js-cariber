@@ -129,7 +129,7 @@ export default function Product() {
   }
 
   function isWatched(id:number): boolean {
-    return watchedEpisodes.indexOf(id) !== -1;
+    return watchedEpisodes?.indexOf(id) !== -1;
   }
 
   function createNewRecord() {
@@ -141,12 +141,12 @@ export default function Product() {
       course_id: +proId,
       episode_id: episodeLms.id,
     }
-    if (watchedEpisodes.indexOf(episodeLms.id) === -1) {
+    if (watchedEpisodes?.indexOf(episodeLms.id) === -1) {
       saveWatchedEpisode(data).then(
         (res) => {
           setWatchedEpisodes([...watchedEpisodes, episodeLms.id])
           getWatchedEpList().then(()=>{
-            if ( watchedEpisodes.length === parseInt(courseLms.total_lessons)){
+            if ( watchedEpisodes?.length === parseInt(courseLms.total_lessons)){
               setShowCertificate(true);
             }
           })
@@ -222,7 +222,7 @@ export default function Product() {
     if (!value.duration || value.duration <= 0 ) {
       return 0;
     }
-    if (watchedEpisodes.indexOf(value.id) !== -1 ) {
+    if (watchedEpisodes?.indexOf(value.id) !== -1 ) {
       return 100;
     }
     const lastSecond = +(onGoingEpisodes.filter(item => item.episodeID === value.id)[0]?.lastSecond || 0);
@@ -398,7 +398,7 @@ export default function Product() {
                             <a key={index}
                                className="media track align-items-center"
                                onClick={async () => { await setEpisodeOrQuiz(value, index) }}>
-                              { value.type === ShowingType.certificate && courseLms?.episodes_list?.filter(item => item.type === 'episode').length !== watchedEpisodes.length ?
+                              { value.type === ShowingType.certificate && courseLms?.episodes_list?.filter(item => item.type === 'episode').length !== watchedEpisodes?.length ?
                                 (
                                   <></>
                                 ):
@@ -480,7 +480,7 @@ export default function Product() {
                 }
               </div>
               <ProductBlogs progressBlog={true}
-                            watchedEps={watchedEpisodes.length}
+                            watchedEps={watchedEpisodes?.length}
                             fullEps={courseLms?.episodes_list?.filter(item => item.type === 'episode').length || 0}
                             productImage={courseLms.thumbnail_image}
                             productName={courseLms.course_name}
