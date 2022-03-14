@@ -9,7 +9,6 @@ import FooterBrand from "../components/footerBrand";
 import FormInput from "../components/formInput";
 import Header from "../components/header";
 import Img from "../components/image";
-import Pagination from "../components/pagination";
 import { handleChange } from "../functions/handleInput";
 
 interface SortProps {
@@ -69,7 +68,7 @@ export default function Library() {
   }
 
   function getPercentage(value: MyCourseItem): number {
-    return Math.round(((value.watchedEpisodes[0]?.numberOfWatchedEpisode || 0) / (value.episode?.length || 0)) * 100);
+    return Math.round(((value.watchedEpisodes && value.watchedEpisodes[0]?.numberOfWatchedEpisode || 0) / (value.episode?.length || 0)) * 100);
   }
 
   function getName(): string {
@@ -77,7 +76,7 @@ export default function Library() {
       return ((lastWatchedEp?.courseID?.course_name || '') + ' - ' + (lastWatchedEp?.episodeID?.episode_name || ''));
     }
     if (myCourseList.length) {
-      return (myCourseList[0]?.course_name || '') + ' - ' + (myCourseList[0]?.episode[0]?.episode_name || '');
+      return (myCourseList[0]?.course_name || '') + ' - ' + (myCourseList[0]?.episode && myCourseList[0]?.episode[0]?.episode_name || '');
     }
     return '';
   }
@@ -125,8 +124,8 @@ export default function Library() {
                           </div>
                           <div className="resume-course-image">
                             {
-                              (lastWatchedEp && lastWatchedEp.episodeID.thumbnail_image)
-                                ? <Img src={lastWatchedEp.episodeID.thumbnail_image}
+                              (lastWatchedEp?.episodeID && lastWatchedEp?.episodeID?.thumbnail_image)
+                                ? <Img src={lastWatchedEp?.episodeID?.thumbnail_image}
                                        width={700}
                                        height={400}
                                        alt="กลยุทธ์ทางธุรกิจ"
@@ -191,41 +190,43 @@ export default function Library() {
                 let cutDescription = "";
                 cutDescription = value.description?.slice(0, 280);
                 if (value.description?.length > 280) cutDescription = cutDescription + "...";
-                return (
-                  <div key={index} className="block-type-feature text-center col-12">
-                  <div className="block box-shadow-large background-white p-12 b-r-4">
-                    <div className="feature">
-                      <Link href={`/product?proId=${value.id}`}>
-                        <a>
-                          <Img className="feature-image"
-                            src={value.thumbnail_image}
-                            alt={value.speaker_name}
-                            width={700}
-                            height={400} />
+                if (value?.id){
+                  return (
+                    <div key={index} className="block-type-feature text-center col-12">
+                    <div className="block box-shadow-large background-white p-12 b-r-4">
+                      <div className="feature">
+                        <Link href={`/product?proId=${value.id}`}>
+                          <a>
+                            <Img className="feature-image"
+                              src={value.thumbnail_image}
+                              alt={value.speaker_name}
+                              width={700}
+                              height={400} />
+                          </a>
+                        </Link>
+                      </div>
+                        <div className="progress">
+                          <div className="progress-outer">
+                            <div className={`progress-inner p-w-${getPercentage(value)}`} />
+                          </div>
+                        </div>
+                      <div className="feature-text h-100 p-t-15">
+                        <div className="text-left">
+                          <h6 className="color-black ipad-f-s-14">คอร์สเรียน: {value.course_name}</h6>
+                          <p className="f-s-14 ipad-f-s-12">สอนโดย {value.speaker_name}</p>
+                        </div>
+                      </div>
+                      <Link href={""}>
+                        <a className="btn">
+                            <h6 className="m-0 color-white  ipad-f-s-12">
+                              รับชมเลย
+                            </h6>
                         </a>
                       </Link>
                     </div>
-                      <div className="progress">
-                        <div className="progress-outer">
-                          <div className={`progress-inner p-w-${getPercentage(value)}`} />
-                        </div>
-                      </div>
-                    <div className="feature-text h-100 p-t-15">
-                      <div className="text-left">
-                        <h6 className="color-black ipad-f-s-14">คอร์สเรียน: {value.course_name}</h6>
-                        <p className="f-s-14 ipad-f-s-12">สอนโดย {value.speaker_name}</p>
-                      </div>
-                    </div>
-                    <Link href={""}>
-                      <a className="btn">
-                          <h6 className="m-0 color-white  ipad-f-s-12">
-                            รับชมเลย
-                          </h6>
-                      </a>
-                    </Link>
                   </div>
-                </div>
-                )
+                  )
+                }
               })}
             </div>
           </div>
