@@ -35,7 +35,7 @@ export default function ProductBlogs({ productImage,
           />
           <div className="panel-card-body">
             <h6 className="panel-heading" >
-              {watchedEps} of {fullEps} คอร์สรับชมเสร็จสิ้น
+              {watchedEps > fullEps ? fullEps : watchedEps} of {fullEps} คอร์สรับชมเสร็จสิ้น
             </h6>
             <div className="progress">
               <div className="progress-outer">
