@@ -106,7 +106,7 @@ export default function Library() {
                     คอร์สของฉัน
                   </strong>
                 </h4>
-                {(!loadingItem && (lastWatchedEp?.id || myCourseList.length))
+                {(!loadingItem && lastWatchedEp?.id)
                   ?
                     <div className="resume-course box-shadow-none">
                       <div className="resume-course-positioner">
@@ -128,12 +128,12 @@ export default function Library() {
                                 ? <Img src={lastWatchedEp?.episodeID?.thumbnail_image}
                                        width={700}
                                        height={400}
-                                       alt="กลยุทธ์ทางธุรกิจ"
+                                       alt="Continue Watch"
                                 />
                                 : <Img src={myCourseList[0]?.thumbnail_image}
                                        width={700}
                                        height={400}
-                                       alt="กลยุทธ์ทางธุรกิจ"
+                                       alt="Continue Watch"
                                 />
                             }
                           </div>
