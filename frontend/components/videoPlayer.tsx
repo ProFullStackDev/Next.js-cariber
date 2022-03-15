@@ -8,8 +8,8 @@ import { VideoComponent, VideoPlayingState } from '../apiStrapi/models/component
 import { strapiImage } from '../apiStrapi/models/contact';
 import moment from 'moment';
 import { Episodes, EpisodesAndQuiz, Evaluation, Quiz, ShowingType } from '../apiNest/models/content/courseLms';
-import Countdown, { CountdownRenderProps } from 'react-countdown';
 import axios from 'axios';
+import Countdown from './countdown';
 
 interface VideoContinue {
   episodeOrQuiz: EpisodesAndQuiz,
@@ -48,8 +48,7 @@ function VideoPlayer({
     imageStrapi?: boolean,
     videoContinue?: VideoContinue
   }) {
-  const [counterKey, setCounterKey] = useState<number>(0);
-  const [continueTime, setContinue] = useState<number>(5);
+
   const [playbackOptions, setPlaybackOptions] = useState<number[]>([
     0.25,
     0.5,
@@ -182,7 +181,6 @@ function VideoPlayer({
 
   const handleEnded = () => {
     setContinueVisible(true);
-    setCounterKey(counterKey + 1);
     setVideoState({ ...videoState, playing: videoState.loop });
     props.handleEnded();
   }
@@ -216,7 +214,7 @@ function VideoPlayer({
   const handleStart = () => {
     setVideoStarted(true);
   }
-    
+
   const getSignedToken = () => {
     axios({
       method: 'POST',
@@ -224,7 +222,7 @@ function VideoPlayer({
       headers: {
         "Authorization": `Bearer ${process.env.NEXT_PUBLIC_CLOUDFLARE_TOKEN}`
       }
-    }).then(res=>{
+    }).then(res => {
       setVideoState({
         ...videoState,
         url: `https://videodelivery.net/${res.data.result.token}/manifest/video.m3u8`,
@@ -324,10 +322,6 @@ function VideoPlayer({
     </div>
   )
 
-  const counterRenderer = ({ seconds }: CountdownRenderProps) => {
-    return <span>{seconds}</span>;
-  };
-
   function getTrackName(value: Episodes | Quiz | Evaluation) {
     let name = '';
     switch (value.type) {
@@ -391,11 +385,7 @@ function VideoPlayer({
                 เริ่มบทเรียนใน
                 <span className="color-primary">
                   &nbsp;
-                  <Countdown
-                    renderer={counterRenderer}
-                    key={counterKey}
-                    date={Date.now() + continueTime * 1000}
-                    onComplete={handleContinue} /> วินาที
+                  <Countdown second={5} callback={handleContinue}/> วินาที
                 </span>
               </p>
             </div>

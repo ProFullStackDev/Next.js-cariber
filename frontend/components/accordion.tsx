@@ -56,8 +56,8 @@ export default function Accordion( props: AccordionProps) {
                 {props.title}
               </h5>
               {displayDescription === "d-none" ?
-                (<i className="fas fa-chevron-right" />) :
-                (<i className="fas fa-chevron-up" />)}
+                (<i className="fas fa-chevron-right color-primary" />) :
+                (<i className="fas fa-chevron-down color-primary" />)}
             </div>
           </div>
         </div>
