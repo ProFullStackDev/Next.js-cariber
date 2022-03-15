@@ -7,7 +7,7 @@ module.exports = ({ env }) => ({
     auth: {
       secret: env('ADMIN_JWT_SECRET', '96fafee3e6b52849fca86cdcd7c16294'),
     },
-    url: env('STRAPI_ADMIN_URL', 'http://localhost:1337/admin'),
+    url: env('STRAPI_ADMIN_URL', 'http://localhost:1337/admin'), 
   },
   cron: {
     enabled: true,
