@@ -6,17 +6,19 @@ export default function Countdown({ second, callback }: { second: number, callba
   const interval = 1000;
   const [timeLeft, { start, pause, resume, reset }] = useCountDown(initialTime, interval);
   const [isStart, setIsStart] = useState(false);
-  const [isCallback, setIsCallback] = useState(false);
 
   useEffect(() => {
-    start();
-    setIsStart(true);
-  }, []);
+    if (!isStart) {
+      start();
+      setIsStart(true);
+    }
+    if (timeLeft === 0 && isStart) {
+      callback();
+    }
+  }, [timeLeft]);
 
-  if (timeLeft === 0 && isStart && !isCallback) {
-    setIsCallback(true);
-    callback();
-    return(<></>)
+  if (timeLeft === 0 && isStart) {
+    return (<></>)
   }
 
   return (
