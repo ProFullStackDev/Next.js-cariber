@@ -19,16 +19,18 @@ The Strapi repo is https://gitlab.com/C0D1UM/cariber/cariber-backend
 
 The NestJs repo is https://gitlab.com/C0D1UM/cariber/cariber-admin-backend
 
-###In order to connect to Local NestJS Backend,
+### In order to connect to Local NestJS Backend,
 please change from
 https://nestjs-dev.cariber.co
 to 
 http://localhost:3000 (or wherever the NestJs Backend is running) 
 
-in _root/apiNest/models/contact.ts_
+in _/apiNest/models/contact.ts_
 
-###In order to connect to Local Strapi Backend,
+### In order to connect to Local Strapi Backend,
 please change from
 https://strapi.cariber.co
 to
 http://localhost:1337 (or wherever the Strapi Backend is running)
+
+in _/apiStrapi/models/contact.ts_
