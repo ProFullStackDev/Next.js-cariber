@@ -7,18 +7,6 @@
    2. `npm run dev` or `yarn dev` to run the project
    3. open browser and go to `http://localhost:3000`
 
-
-## About the project
-
-This is the Cariber public website. It has two backends.
-
-   - strapi
-   - nestjs
-   
-The Strapi repo is https://gitlab.com/C0D1UM/cariber/cariber-backend
-
-The NestJs repo is https://gitlab.com/C0D1UM/cariber/cariber-admin-backend
-
 ### In order to connect to Local NestJS Backend,
 please change from
 https://nestjs-dev.cariber.co
